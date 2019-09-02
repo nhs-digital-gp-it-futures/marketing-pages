@@ -1,0 +1,114 @@
+// Task list pattern
+
+.app-task-list {
+  list-style-type: none;
+  padding-left: 0;
+  margin-top: 40px;
+  margin-bottom: 76px;
+}
+
+.app-task-list__section {
+  display: table;
+  font-size: 24px;
+  font-weight: 700;
+  margin-top: 40px;
+}
+
+.app-task-list__section-number {
+  display: table-cell;
+
+  @media (min-width: 40.0625em) {
+    min-width: 30px;
+    padding-right: 0;
+  }
+}
+
+.app-task-list__items {
+  font-size: 19px;
+  margin-bottom: 0;
+  list-style: none;
+  padding-left: 0;
+  @media (min-width: 40.0625em) {
+    padding-left: 30px;
+  }
+  .nhsuk-inset-text {
+    margin-top: 20px;
+    max-width: 100%;
+    padding: 0;
+
+    .app-task-list__item:first-child {
+        border-top: none;
+    }
+    .app-task-list__item:last-child {
+        border-bottom: none;
+    }
+    .nhsuk-grid-column-one-half {
+      width: 47%;
+    }
+
+    .app-task-list__items {
+      padding-left: 0;
+    }
+  }
+}
+
+.app-task-list__item {
+  border-bottom: 1px solid #b1b4b6;
+  margin-bottom: 0 !important;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.app-task-list__item:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.app-task-list__item:first-child {
+  border-top: 1px solid #b1b4b6;
+}
+
+.app-task-list__task-name {
+  display: block;
+  @media (min-width: 28.125em) {
+    float: left;
+  }
+
+  p {
+    margin-bottom: 0;
+  }
+}
+
+.app-task-list__task-completed {
+  margin-top: 10px;
+  margin-bottom: 5px;
+
+  @media (min-width: 28.125em) {
+    float: right;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+.govuk-tag {
+    display: inline-block;
+    outline: 2px solid transparent;
+    outline-offset: -2px;
+    color: #ffffff;
+    background-color: #1d70b8;
+    letter-spacing: 1px;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-family: "GDS Transport", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: 700;
+    font-size: 14px;
+    font-size: 0.875rem;
+    line-height: 1;
+    padding-top: 5px;
+    padding-right: 8px;
+    padding-bottom: 4px;
+    padding-left: 8px;
+}
