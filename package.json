@@ -1,8 +1,8 @@
 {
-  "name": "nodejs-boilerplate",
+  "name": "marketing-pages",
   "version": "1.0.0",
-  "description": "Nodejs boilerplate with express, nunjucks, webpack and browsersync.",
-  "main": "app.js",
+  "description": "Nodejs express app for Buying Catalogue - Marketing Pages",
+  "main": "server.js",
   "scripts": {
     "babel": "babel --presets es2015 app/scripts/main.js -o public/js/main.bundle.js",
     "build": "npm run build:css && npm run build:js && npm run build:assets",
@@ -15,7 +15,7 @@
     "lint:css": "sass-lint 'app/**/*.scss' -v -q",
     "nuke": "npm run clean && rm -rf node_modules/",
     "postinstall": "npm run build",
-    "start": "node app",
+    "start": "babel-node server",
     "test": "mocha --require @babel/register test/**/*.spec.js && npm run lint",
     "prewatch": "npm run build:css",
     "watch": "concurrently \"npm run watch:scss\" \"npm run watch:js\" \"npm run watch:assets\"  \"npm start\"",
@@ -24,13 +24,14 @@
     "watch:assets": "npm run build:assets -- -w",
     "webpack": "webpack"
   },
-  "author": "https://github.com/AdamChrimes",
+  "author": "Fawad Ali",
   "repository": {
     "type": "git",
-    "url": "https://github.com/AdamChrimes/nodejs-boilerplate.git"
+    "url": "https://github.com/nhs-digital-gp-it-futures/marketing-pages"
   },
   "license": "MIT",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "browser-sync": "^2.26.7",
     "compression": "^1.7.4",
     "express": "^4.16.4",
@@ -39,6 +40,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",
+    "@babel/node": "^7.4.4",
     "@babel/preset-env": "^7.4.4",
     "@babel/register": "^7.4.4",
     "babel-loader": "^8.0.5",

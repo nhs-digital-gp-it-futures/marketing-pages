@@ -2,63 +2,56 @@
 const path = require('path');
 
 // External dependencies
-const browserSync = require('browser-sync');
 const compression = require('compression');
 const express = require('express');
 const nunjucks = require('nunjucks');
+const bodyParser = require('body-parser');
 
 // Local dependencies
 const config = require('./app/config');
 const locals = require('./app/locals');
-const routes = require('./app/routes');
 
-// Initialise application
-const app = express();
+class App {
+  constructor() {
+    // Initialise application
+    this.app = express();
+  }
 
-// Use gzip compression to decrease the size of
-// the response body and increase the speed of web app
-app.use(compression());
+  createApp() {
+    // Use gzip compression to decrease the size of
+    // the response body and increase the speed of web app
+    this.app.use(compression());
 
-// Middleware to serve static assets
-app.use(express.static(path.join(__dirname, 'public/')));
-app.use('/nhsuk-frontend', express.static(path.join(__dirname, '/node_modules/nhsuk-frontend/packages')));
+    this.app.use(bodyParser.urlencoded({ extended: true }));
 
-// View engine (Nunjucks)
-app.set('view engine', 'njk');
+    this.app.use(express.json());
 
-// Use local variables
-app.use(locals(config));
+    // Middleware to serve static assets
+    this.app.use(express.static(path.join(__dirname, 'public/')));
+    this.app.use('/nhsuk-frontend', express.static(path.join(__dirname, '/node_modules/nhsuk-frontend/packages')));
 
-// Nunjucks configuration
-const appViews = [
-  path.join(__dirname, '/app/views/'),
-  path.join(__dirname, '/node_modules/nhsuk-frontend/packages/'),
-];
+    // View engine (Nunjucks)
+    this.app.set('view engine', 'njk');
 
-nunjucks.configure(appViews, {
-  autoescape: true,
-  express: app,
-  noCache: true,
-  watch: true,
-});
+    // Use local variables
+    this.app.use(locals(config));
 
-// Routes
-app.use('/', routes);
+    // Nunjucks configuration
+    const appViews = [
+      path.join(__dirname, 'app/views/'),
+      path.join(__dirname, 'node_modules/nhsuk-frontend/packages/'),
+    ];
 
-// Run application on configured port
-if (config.env === 'development') {
-  app.listen(config.port - 50, () => {
-    browserSync({
-      files: ['app/views/**/*.*', 'public/**/*.*'],
-      notify: true,
-      open: false,
-      port: config.port,
-      proxy: `localhost:${config.port - 50}`,
-      ui: false,
+    const env = nunjucks.configure(appViews, {
+      autoescape: true,
+      express: this.app,
+      noCache: true,
     });
-  });
-} else {
-  app.listen(config.port);
+
+    env.addFilter('isArray', value => Array.isArray(value))
+
+    return this.app;
+  }
 }
 
-module.exports = app;
+module.exports = { App };
