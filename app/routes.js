@@ -1,11 +1,14 @@
-// External dependencies
-const express = require('express');
+import express from 'express';
+import {
+  getMarketingPageDashboardContext,
+} from './controller';
 
-// Initialise router
 const router = express.Router();
 
-router.get('/', (req, res) => {
-  res.render('index');
+router.get('/', async (req, res) => {
+  const context = await getMarketingPageDashboardContext();
+
+  res.render('index', context);
 });
 
 module.exports = router;
