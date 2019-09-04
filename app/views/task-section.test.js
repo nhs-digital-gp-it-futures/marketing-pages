@@ -63,4 +63,19 @@ describe('task-section', () => {
         done();
       });
   });
+
+  it('should render a task list of 2 if the section group contains 2 tasks', (done) => {
+    const aSectionWithOneTask = aSectionGroupContext([aTaskContext('Some First Task'), aTaskContext('Some Second Task')]);
+    const dummyApp = createDummyApp(aSectionWithOneTask);
+
+    request(dummyApp)
+      .get('/')
+      .then((res) => {
+        const $ = cheerio.load(res.text);
+
+        expect($('.app-task-list__item').length).toEqual(2);
+
+        done();
+      });
+  });
 });
