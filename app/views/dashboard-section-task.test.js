@@ -44,7 +44,7 @@ describe('dashboard-section-task', () => {
       });
   });
 
-  it('should render status of the task', (done) => {
+  it('should render status of the task as INCOMPLETE', (done) => {
     const dummyApp = createDummyApp(aTaskContext('Some Task Title'));
     request(dummyApp)
       .get('/')
@@ -52,6 +52,19 @@ describe('dashboard-section-task', () => {
         const $ = cheerio.load(res.text);
 
         expect($('[data-test-id="dashboard-section-task-status"]').text().trim()).toEqual('INCOMPLETE');
+
+        done();
+      });
+  });
+
+  it('should render status of the task as COMPLETE', (done) => {
+    const dummyApp = createDummyApp(aTaskContext('Some Task Title', 'COMPLETE'));
+    request(dummyApp)
+      .get('/')
+      .then((res) => {
+        const $ = cheerio.load(res.text);
+
+        expect($('[data-test-id="dashboard-section-task-status"]').text().trim()).toEqual('COMPLETE');
 
         done();
       });
