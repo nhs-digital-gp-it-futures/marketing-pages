@@ -1,5 +1,5 @@
 {% extends 'includes/layout.njk' %}
-{% from './task-section.njk' import taskSection %}
+{% from './dashboard-section.njk' import dashboardSection %}
 
 {% block body %}
 <div class="nhsuk-grid-row">
@@ -7,7 +7,7 @@
 
     <h1>Marketing Page - Dashboard</h1>
     {% for section in sections %}
-      {{ taskSection(section) }}
+      {{ dashboardSection(section) }}
     {% endfor %}
   </div>
 </div>

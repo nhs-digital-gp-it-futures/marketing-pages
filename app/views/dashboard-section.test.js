@@ -22,8 +22,8 @@ const createDummyApp = (context) => {
 
   const router = express.Router();
   const dummyRouter = router.get('/', (req, res) => {
-    const macroWrapper = `{% from './task-section.njk' import taskSection %}
-                            {{ taskSection(section) }}`;
+    const macroWrapper = `{% from './dashboard-section.njk' import dashboardSection %}
+                            {{ dashboardSection(section) }}`;
 
     const viewToTest = nunjucks.renderString(macroWrapper, context);
 

@@ -8,19 +8,5 @@ export const getMarketingPageDashboardContext = async () => {
   // generate context from manifest
   const context = createMarketingDashboardContext(dashboardManifest);
 
-  // const context = {
-  //   section: {
-  //     id: 'about-your-solution',
-  //     name: 'About your Solution',
-  //     task: [
-  //       {
-  //         URL: 'features',
-  //         title: 'Features',
-  //         requirement: 'Optional',
-  //         status: 'complete',
-  //       },
-  //     ],
-  //   },
-  // };
   return context;
 };
