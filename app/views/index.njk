@@ -6,9 +6,9 @@
   <div class="nhsuk-grid-column-full">
 
     <h1>Marketing Page - Dashboard</h1>
-
-    {{ taskSection(section) }}
-
+    {% for section in sections %}
+      {{ taskSection(section) }}
+    {% endfor %}
   </div>
 </div>
 {% endblock %}

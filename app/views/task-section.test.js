@@ -9,11 +9,11 @@ const aTaskContext = title => ({
   title,
 });
 
-const aSectionGroupContext = (task = []) => ({
+const aSectionGroupContext = (tasks = []) => ({
   section: {
     id: 'some-section-group-id',
-    name: 'Section Group Title',
-    task,
+    title: 'Section Group Title',
+    tasks,
   },
 });
 
