@@ -1,7 +1,7 @@
 {% macro dashboardSectionTask(task) %}
   <li class="app-task-list__item">
     <div class="nhsuk-grid-column-one-half" >
-      <span class="app-task-list__task-name">
+      <span data-test-id="dashboard-section-task-title" class="app-task-list__task-name">
         <a href="{{ item.URL }}" aria-describedby="eligibility-completed">
           {{ task.title }}
         </a>
@@ -11,7 +11,9 @@
       <span class="app-task-list__task-name">
         <p>blah</p>
       </span>
-      <strong class="govuk-tag app-task-list__task-completed" id="eligibility-completed">INCOMPLETE</strong>
+      <strong class="govuk-tag app-task-list__task-completed" id="eligibility-completed">
+        INCOMPLETE
+      </strong>
     </div>
   </li>
 {% endmacro %}

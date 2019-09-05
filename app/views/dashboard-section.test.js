@@ -35,7 +35,7 @@ const createDummyApp = (context) => {
   return app;
 };
 
-describe('task-section', () => {
+describe('dashboard-section', () => {
   it('should render the title of the section group', (done) => {
     const dummyApp = createDummyApp(aSectionGroupContext());
     request(dummyApp)
