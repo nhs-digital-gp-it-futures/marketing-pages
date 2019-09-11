@@ -4,10 +4,11 @@ import nunjucks from 'nunjucks';
 import cheerio from 'cheerio';
 import { App } from '../../app';
 
-const aTaskContext = (title, status = 'INCOMPLETE') => ({
+const aTaskContext = (title, requirement = 'Mandatory', status = 'INCOMPLETE') => ({
   task: {
     URL: 'someUrl',
     title,
+    requirement,
     status,
   },
 });
@@ -44,6 +45,19 @@ describe('dashboard-section-task', () => {
       });
   });
 
+  it('should render the requirement of the task', (done) => {
+    const dummyApp = createDummyApp(aTaskContext('Some Task Title'));
+    request(dummyApp)
+      .get('/')
+      .then((res) => {
+        const $ = cheerio.load(res.text);
+
+        expect($('[data-test-id="dashboard-section-task-requirement"]').text().trim()).toEqual('Mandatory');
+
+        done();
+      });
+  });
+
   it('should render status of the task as INCOMPLETE', (done) => {
     const dummyApp = createDummyApp(aTaskContext('Some Task Title'));
     request(dummyApp)
@@ -58,7 +72,7 @@ describe('dashboard-section-task', () => {
   });
 
   it('should render status of the task as COMPLETE', (done) => {
-    const dummyApp = createDummyApp(aTaskContext('Some Task Title', 'COMPLETE'));
+    const dummyApp = createDummyApp(aTaskContext('Some Task Title', 'Mandatory', 'COMPLETE'));
     request(dummyApp)
       .get('/')
       .then((res) => {

@@ -1,7 +1,7 @@
 import { createMarketingDashboardContext } from './contextCreator';
 
 describe('createMarketingDashboardContext', () => {
-  it('should create a context from the manifest', () => {
+  it('should create a context from the manifest and the marketingData', () => {
     const expectedContext = {
       sections: [
         {
@@ -11,6 +11,8 @@ describe('createMarketingDashboardContext', () => {
             {
               URL: 'features',
               title: 'Features',
+              requirement: 'Mandatory',
+              status: 'INCOMPLETE',
             },
           ],
         },
@@ -27,13 +29,24 @@ describe('createMarketingDashboardContext', () => {
             {
               id: 'features',
               title: 'Features',
+              requirement: 'Mandatory',
             },
           ],
         },
       ],
     };
 
-    const context = createMarketingDashboardContext(dashboardManifest);
+    const marketingData = {
+      tasks: [
+        {
+          id: 'features',
+          data: {},
+          status: 'INCOMPLETE',
+        },
+      ],
+    };
+
+    const context = createMarketingDashboardContext(dashboardManifest, marketingData);
 
     expect(context).toEqual(expectedContext);
   });

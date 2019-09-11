@@ -1,4 +1,4 @@
-export const createMarketingDashboardContext = (dashboardManifest) => {
+export const createMarketingDashboardContext = (dashboardManifest, marketingData) => {
   const context = {};
   const sections = [];
 
@@ -13,6 +13,12 @@ export const createMarketingDashboardContext = (dashboardManifest) => {
       const task = {};
       task.URL = manifestTask.id;
       task.title = manifestTask.title;
+      task.requirement = manifestTask.requirement;
+
+      const { status } = marketingData.tasks
+        .find(marketingDataTask => marketingDataTask.id === manifestTask.id);
+      task.status = status;
+
       tasks.push(task);
     });
 

@@ -7,7 +7,13 @@
       "tasks": [
         {
           "id": "features",
-          "title": "Features"
+          "title": "Features",
+          "requirement": "Mandatory"
+        },
+        {
+          "id": "summary",
+          "title": "Summary",
+          "requirement": "Optional"
         }
       ]
     }
