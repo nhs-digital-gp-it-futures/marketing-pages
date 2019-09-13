@@ -9,11 +9,6 @@
           "id": "features",
           "title": "Features",
           "requirement": "Mandatory"
-        },
-        {
-          "id": "summary",
-          "title": "Summary",
-          "requirement": "Optional"
         }
       ]
     }

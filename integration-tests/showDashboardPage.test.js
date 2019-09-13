@@ -1,21 +1,28 @@
 import nock from 'nock';
 import { Selector } from 'testcafe';
 import aSolutionFixture from './fixtures/aSolution.json';
+import aSolutionWithMarketingDataFixture from './fixtures/aSolutionWithMarketingData.json';
 import { ManifestProvider } from '../app/forms/manifestProvider';
 
 
-const mocks = () => {
-  nock('http://localhost:5000')
-    .get('/api/v1/solution/S100000-001')
-    .reply(200, aSolutionFixture);
+const mocks = (isFirstLoad) => {
+  if (isFirstLoad) {
+    nock('http://localhost:5000')
+      .get('/api/v1/solution/S100000-001')
+      .reply(200, aSolutionFixture);
 
-  nock('http://localhost:5000')
-    .post('/api/v1/solution/S100000-001')
-    .reply(200, {});
+    nock('http://localhost:5000')
+      .post('/api/v1/solution/S100000-001')
+      .reply(200, {});
+  } else {
+    nock('http://localhost:5000')
+      .get('/api/v1/solution/S100000-001')
+      .reply(200, aSolutionWithMarketingDataFixture);
+  }
 };
 
-const pageSetup = async (t) => {
-  mocks();
+const pageSetup = async (t, isFirstLoad = true) => {
+  mocks(isFirstLoad);
   await t.navigateTo('http://localhost:1234/');
 };
 
@@ -63,6 +70,30 @@ test('should render all the tasks for sections', async (t) => {
         .eql(task.requirement)
         .expect(theTask.find('[data-test-id="dashboard-section-task-status"]').innerText)
         .eql('INCOMPLETE');
+    }));
+  }));
+});
+
+test('should render the correct status for a solution with marketing data and status', async (t) => {
+  pageSetup(t, false);
+
+  const dashboardManifest = new ManifestProvider().getDashboardManifest();
+  const dashboardSections = dashboardManifest.sections;
+
+  await Promise.all(dashboardSections.map(async (dashboardSection, idx) => {
+    const theSection = Selector(`[data-test-id="dashboard-section-${idx + 1}"]`);
+
+    await Promise.all(dashboardSection.tasks.map(async (task, taskIdx) => {
+      const theTask = theSection.find(`[data-test-id="dashboard-section-task-${taskIdx + 1}"]`);
+
+      await t
+        .expect(theTask.count).eql(1)
+        .expect(theTask.find('[data-test-id="dashboard-section-task-title"]').innerText)
+        .eql(task.title)
+        .expect(theTask.find('[data-test-id="dashboard-section-task-requirement"]').innerText)
+        .eql(task.requirement)
+        .expect(theTask.find('[data-test-id="dashboard-section-task-status"]').innerText)
+        .eql('COMPLETE');
     }));
   }));
 });
