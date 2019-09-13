@@ -9,15 +9,15 @@ export const getMarketingPageDashboardContext = async () => {
 
   // Get marketing data
   const solutionData = await axios.get('http://localhost:5000/api/v1/solution/S100000-001');
-  const solution = solutionData.data;
+  const { solution } = solutionData.data;
 
   const { marketingData } = solution;
 
-  // if marketing data is empty for the solution id. 
+  // if marketing data is empty for the solution id.
   // Submit some json with all the tasks with the status as incomplete.
   if (!marketingData) {
     solution.marketingData = createInitialMarketingData(dashboardManifest);
-    // await axios.post('http://localhost:5000/api/v1/solution/S100000-001', solution);
+    await axios.post('http://localhost:5000/api/v1/solution/S100000-001', solution);
   }
 
   // generate context from manifest

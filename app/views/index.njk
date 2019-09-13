@@ -7,7 +7,7 @@
 
     <h1>Marketing Page - Dashboard</h1>
     {% for section in sections %}
-      {{ dashboardSection(section) }}
+      {{ dashboardSection(section, loop.index) }}
     {% endfor %}
   </div>
 </div>

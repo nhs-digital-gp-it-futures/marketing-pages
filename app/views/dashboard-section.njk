@@ -1,12 +1,14 @@
 {% from './dashboard-section-task.njk' import dashboardSectionTask %}
 
-{% macro dashboardSection(section) %}
-  <h2 class="app-task-list__section">
-    {{ section.title }}
-  </h2>
-  <ul class="app-task-list__items">
-    {% for task in section.tasks %}
-      {{ dashboardSectionTask(task) }}
-    {% endfor %}
-  </ul>
+{% macro dashboardSection(section, index) %}
+  <div data-test-id="dashboard-section-{{index}}">
+    <h2 class="app-task-list__section">
+      {{ section.title }}
+    </h2>
+    <ul class="app-task-list__items">
+      {% for task in section.tasks %}
+        {{ dashboardSectionTask(task, loop.index) }}
+      {% endfor %}
+    </ul>
+  </div>
 {% endmacro %}
