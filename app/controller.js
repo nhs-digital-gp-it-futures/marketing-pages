@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { ManifestProvider } from './forms/manifestProvider';
-import { createMarketingDashboardContext } from './contextCreator';
+import { createMarketingDashboardContext, createTaskPageContext } from './contextCreator';
 import { createMarketingDataIfRequired } from './helpers';
 
 export const getMarketingPageDashboardContext = async (solutionId) => {
@@ -16,15 +16,13 @@ export const getMarketingPageDashboardContext = async (solutionId) => {
   await axios.post(`http://localhost:5000/api/v1/solution/${solutionId}`, solution);
 
   // generate context from manifest
-  const context = createMarketingDashboardContext(dashboardManifest, solution.marketingData);
+  const context = createMarketingDashboardContext(solutionId, dashboardManifest, solution.marketingData);
 
   return context;
 };
 
 export const getTaskPageContext = async (solutionId, taskId) => {
-  const context = {
-    title: 'Features',
-  };
+  const context = createTaskPageContext();
 
   return context;
 };

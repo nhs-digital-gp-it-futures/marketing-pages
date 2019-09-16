@@ -17,7 +17,7 @@ router.get('/:solutionId/task/:taskId', async (req, res) => {
   const { solutionId, taskId } = req.params;
   const context = await getTaskPageContext(solutionId, taskId);
 
-  res.render('task', context);
+  res.render('task-page', context);
 });
 
 module.exports = router;

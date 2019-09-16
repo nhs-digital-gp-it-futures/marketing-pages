@@ -1,4 +1,4 @@
-export const createMarketingDashboardContext = (dashboardManifest, marketingData) => {
+export const createMarketingDashboardContext = (solutionId, dashboardManifest, marketingData) => {
   const context = {};
   const sections = [];
 
@@ -11,7 +11,7 @@ export const createMarketingDashboardContext = (dashboardManifest, marketingData
 
     manifestSection.tasks.map((manifestTask) => {
       const task = {};
-      task.URL = manifestTask.id;
+      task.URL = `/${solutionId}/task/${manifestTask.id}`;
       task.title = manifestTask.title;
       task.requirement = manifestTask.requirement;
 
@@ -27,6 +27,14 @@ export const createMarketingDashboardContext = (dashboardManifest, marketingData
   });
 
   context.sections = sections;
+
+  return context;
+};
+
+export const createTaskPageContext = () => {
+  const context = {
+    title: 'Features',
+  };
 
   return context;
 };

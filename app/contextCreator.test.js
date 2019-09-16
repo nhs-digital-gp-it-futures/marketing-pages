@@ -9,7 +9,7 @@ describe('createMarketingDashboardContext', () => {
           title: 'About your Solution',
           tasks: [
             {
-              URL: 'features',
+              URL: '/some-solution-id/task/features',
               title: 'Features',
               requirement: 'Mandatory',
               status: 'INCOMPLETE',
@@ -46,7 +46,7 @@ describe('createMarketingDashboardContext', () => {
       ],
     };
 
-    const context = createMarketingDashboardContext(dashboardManifest, marketingData);
+    const context = createMarketingDashboardContext('some-solution-id', dashboardManifest, marketingData);
 
     expect(context).toEqual(expectedContext);
   });
