@@ -20,3 +20,11 @@ export const getMarketingPageDashboardContext = async (solutionId) => {
 
   return context;
 };
+
+export const getTaskPageContext = async (solutionId, taskId) => {
+  const context = {
+    title: 'Features',
+  };
+
+  return context;
+};
