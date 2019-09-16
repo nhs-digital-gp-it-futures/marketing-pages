@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { ManifestProvider } from './forms/manifestProvider';
 import { createMarketingDashboardContext } from './contextCreator';
-import { createInitialMarketingData } from './helpers';
+import { createMarketingDataIfRequired } from './helpers';
 
 export const getMarketingPageDashboardContext = async () => {
   // Get manifest
@@ -16,7 +16,7 @@ export const getMarketingPageDashboardContext = async () => {
   // if marketing data is empty for the solution id.
   // Submit some json with all the tasks with the status as incomplete.
   if (!marketingData) {
-    solution.marketingData = createInitialMarketingData(dashboardManifest);
+    solution.marketingData = createMarketingDataIfRequired(dashboardManifest);
     await axios.post('http://localhost:5000/api/v1/solution/S100000-001', solution);
   }
 

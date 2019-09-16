@@ -1,4 +1,4 @@
-export const createInitialMarketingData = (dashboardManifest) => {
+export const createMarketingDataIfRequired = (dashboardManifest) => {
   const marketingData = {};
   const tasks = [];
 
