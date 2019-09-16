@@ -10,15 +10,15 @@ const mocks = (isFirstLoad) => {
     nock('http://localhost:5000')
       .get('/api/v1/solution/S100000-001')
       .reply(200, aSolutionFixture);
-
-    nock('http://localhost:5000')
-      .post('/api/v1/solution/S100000-001')
-      .reply(200, {});
   } else {
     nock('http://localhost:5000')
       .get('/api/v1/solution/S100000-001')
       .reply(200, aSolutionWithMarketingDataFixture);
   }
+
+  nock('http://localhost:5000')
+    .post('/api/v1/solution/S100000-001')
+    .reply(200, {});
 };
 
 const pageSetup = async (t, isFirstLoad = true) => {

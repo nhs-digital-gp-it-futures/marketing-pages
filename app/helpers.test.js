@@ -114,4 +114,86 @@ describe('createMarketingDataIfRequired', () => {
       expect(initialMarketingData).toEqual(expectedInitialMarketingData);
     });
   });
+
+  describe('when there is existing marketing data', () => {
+    it('should return the existing marketing data for the task', () => {
+      const expectedMarketingData = {
+        tasks: [
+          {
+            id: 'first-task',
+            data: {},
+            status: 'COMPLETE',
+          },
+        ],
+      };
+
+      const existingMarketingData = {
+        tasks: [
+          {
+            id: 'first-task',
+            data: {},
+            status: 'COMPLETE',
+          },
+        ],
+      };
+
+      const dashboardManifest = createDashboardManifest(
+        [
+          createSection('first-section', 'The first section',
+            [
+              createTask('first-task', 'The first task'),
+            ]),
+        ],
+      );
+
+      const initialMarketingData = createMarketingDataIfRequired(
+        dashboardManifest, existingMarketingData,
+      );
+
+      expect(initialMarketingData).toEqual(expectedMarketingData);
+    });
+
+    it('should return the existing marketing data for the task and initial marketing data for a task that does not exist', () => {
+      const expectedMarketingData = {
+        tasks: [
+          {
+            id: 'first-task',
+            data: {},
+            status: 'COMPLETE',
+          },
+          {
+            id: 'second-task',
+            data: {},
+            status: 'INCOMPLETE',
+          },
+        ],
+      };
+
+      const existingMarketingData = {
+        tasks: [
+          {
+            id: 'first-task',
+            data: {},
+            status: 'COMPLETE',
+          },
+        ],
+      };
+
+      const dashboardManifest = createDashboardManifest(
+        [
+          createSection('first-section', 'The first section',
+            [
+              createTask('first-task', 'The first task'),
+              createTask('second-task', 'The second task'),
+            ]),
+        ],
+      );
+
+      const initialMarketingData = createMarketingDataIfRequired(
+        dashboardManifest, existingMarketingData,
+      );
+
+      expect(initialMarketingData).toEqual(expectedMarketingData);
+    });
+  });
 });
