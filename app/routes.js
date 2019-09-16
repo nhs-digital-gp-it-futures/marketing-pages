@@ -5,8 +5,9 @@ import {
 
 const router = express.Router();
 
-router.get('/', async (req, res) => {
-  const context = await getMarketingPageDashboardContext();
+router.get('/:solutionId', async (req, res) => {
+  const { solutionId } = req.params;
+  const context = await getMarketingPageDashboardContext(solutionId);
 
   res.render('index', context);
 });

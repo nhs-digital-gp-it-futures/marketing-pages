@@ -23,7 +23,7 @@ const mocks = (isFirstLoad) => {
 
 const pageSetup = async (t, isFirstLoad = true) => {
   mocks(isFirstLoad);
-  await t.navigateTo('http://localhost:1234/');
+  await t.navigateTo('http://localhost:1234/S100000-001');
 };
 
 fixture('Show marketing dashboard page');
