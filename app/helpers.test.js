@@ -1,6 +1,22 @@
 import { createMarketingDataIfRequired } from './helpers';
 
 describe('createMarketingDataIfRequired', () => {
+  const createDashboardManifest = sections => ({
+    id: 'marketing-page-dashboard',
+    sections,
+  });
+
+  const createSection = (id, title, tasks) => ({
+    id,
+    title,
+    tasks,
+  });
+
+  const createTask = (id, title) => ({
+    id,
+    title,
+  });
+
   describe('when initial load and no marketing data exists', () => {
     it('should create the inital marketing data for 1 task', () => {
       const expectedInitialMarketingData = {
@@ -13,21 +29,14 @@ describe('createMarketingDataIfRequired', () => {
         ],
       };
 
-      const dashboardManifest = {
-        id: 'marketing-page-dashboard',
-        sections: [
-          {
-            id: 'first-section',
-            title: 'The first section',
-            tasks: [
-              {
-                id: 'first-task',
-                title: 'The first task',
-              },
-            ],
-          },
+      const dashboardManifest = createDashboardManifest(
+        [
+          createSection('first-section', 'The first section',
+            [
+              createTask('first-task', 'The first task'),
+            ]),
         ],
-      };
+      );
 
       const initialMarketingData = createMarketingDataIfRequired(dashboardManifest);
 
@@ -50,25 +59,15 @@ describe('createMarketingDataIfRequired', () => {
         ],
       };
 
-      const dashboardManifest = {
-        id: 'marketing-page-dashboard',
-        sections: [
-          {
-            id: 'first-section',
-            title: 'The first section',
-            tasks: [
-              {
-                id: 'first-task',
-                title: 'The first task',
-              },
-              {
-                id: 'second-task',
-                title: 'The second task',
-              },
-            ],
-          },
+      const dashboardManifest = createDashboardManifest(
+        [
+          createSection('first-section', 'The first section',
+            [
+              createTask('first-task', 'The first task'),
+              createTask('second-task', 'The second task'),
+            ]),
         ],
-      };
+      );
 
       const initialMarketingData = createMarketingDataIfRequired(dashboardManifest);
 
@@ -96,35 +95,19 @@ describe('createMarketingDataIfRequired', () => {
         ],
       };
 
-      const dashboardManifest = {
-        id: 'marketing-page-dashboard',
-        sections: [
-          {
-            id: 'first-section',
-            title: 'The first section',
-            tasks: [
-              {
-                id: 'first-task',
-                title: 'The first task',
-              },
-              {
-                id: 'second-task',
-                title: 'The second task',
-              },
-            ],
-          },
-          {
-            id: 'second-section',
-            title: 'The second section',
-            tasks: [
-              {
-                id: 'third-task',
-                title: 'The third task',
-              },
-            ],
-          },
+      const dashboardManifest = createDashboardManifest(
+        [
+          createSection('first-section', 'The first section',
+            [
+              createTask('first-task', 'The first task'),
+              createTask('second-task', 'The second task'),
+            ]),
+          createSection('second-section', 'The second section',
+            [
+              createTask('third-task', 'The third task'),
+            ]),
         ],
-      };
+      );
 
       const initialMarketingData = createMarketingDataIfRequired(dashboardManifest);
 
