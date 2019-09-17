@@ -33,4 +33,22 @@ describe('task page', () => {
         done();
       });
   });
+
+  it('should render all the questions for the task', (done) => {
+    const context = {
+      title: 'Title of the task',
+      questions: [{}, {}, {}],
+    };
+
+    const dummyApp = createDummyApp(context);
+    request(dummyApp)
+      .get('/')
+      .then((res) => {
+        const $ = cheerio.load(res.text);
+
+        expect($('[data-test-id="task-question"]').length).toEqual(3);
+
+        done();
+      });
+  });
 });
