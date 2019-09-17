@@ -10,7 +10,7 @@ router.get('/:solutionId', async (req, res) => {
   const { solutionId } = req.params;
   const context = await getMarketingPageDashboardContext(solutionId);
 
-  res.render('index', context);
+  res.render('dashboard-page', context);
 });
 
 router.get('/:solutionId/task/:taskId', async (req, res) => {

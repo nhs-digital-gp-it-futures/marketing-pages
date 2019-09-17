@@ -8,7 +8,7 @@ const createDummyApp = (context) => {
 
   const router = express.Router();
   const dummyRouter = router.get('/', (req, res) => {
-    res.render('task-page.njk', context);
+    res.render('dashboard-page.njk', context);
   });
 
   app.use(dummyRouter);
@@ -16,11 +16,9 @@ const createDummyApp = (context) => {
   return app;
 };
 
-describe('task page', () => {
-  it('should render the title of the task', (done) => {
-    const context = {
-      title: 'Title of the task',
-    };
+describe('dashboard page', () => {
+  it('should render the title of the dashboard page', (done) => {
+    const context = {};
 
     const dummyApp = createDummyApp(context);
     request(dummyApp)
@@ -28,7 +26,7 @@ describe('task page', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        expect($('h1').text().trim()).toEqual('Title of the task');
+        expect($('h1').text().trim()).toEqual('Marketing Page - Dashboard');
 
         done();
       });
