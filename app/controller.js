@@ -16,7 +16,9 @@ export const getMarketingPageDashboardContext = async (solutionId) => {
   await axios.post(`http://localhost:5000/api/v1/solution/${solutionId}`, solution);
 
   // generate context from manifest
-  const context = createMarketingDashboardContext(solutionId, dashboardManifest, solution.marketingData);
+  const context = createMarketingDashboardContext(
+    solutionId, dashboardManifest, solution.marketingData,
+  );
 
   return context;
 };

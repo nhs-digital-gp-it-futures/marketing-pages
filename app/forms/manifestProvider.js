@@ -8,4 +8,12 @@ export class ManifestProvider {
 
     return this.dashboardManifest;
   }
+
+  getTaskManifest(taskName) {
+    this.taskManifestRaw = fs.readFileSync(`./app/forms/tasks/${taskName}.json`);
+
+    this.taskManifest = JSON.parse(this.taskManifestRaw);
+
+    return this.taskManifest;
+  }
 }

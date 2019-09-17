@@ -34,6 +34,16 @@ export const createMarketingDashboardContext = (solutionId, dashboardManifest, m
 export const createTaskPageContext = () => {
   const context = {
     title: 'Features',
+    questions: [
+      {
+        mainAdvice: 'Add up to 10 features that describe your Solution.',
+        additionalAdvice: [
+          'Each feature will be displayed as a bulleted list item. For example:',
+          '- Create and change appointment entries',
+          'You can enter up to 100 characters per feature',
+        ],
+      },
+    ],
   };
 
   return context;

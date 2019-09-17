@@ -1,4 +1,5 @@
 import { Selector } from 'testcafe';
+import { ManifestProvider } from '../app/forms/manifestProvider';
 
 const mocks = () => {
 };
@@ -17,4 +18,25 @@ test('should render the Features page title', async (t) => {
 
   await t
     .expect(title.innerText).eql('Features');
+});
+
+test('should render main advice of question', async (t) => {
+  pageSetup(t);
+
+  const mainAdvice = Selector('[data-test-id="task-question-main-advice"]');
+
+  await t
+    .expect(mainAdvice.innerText).eql('Add up to 10 features that describe your Solution.');
+});
+
+test('should render all the advice of question', async (t) => {
+  pageSetup(t);
+
+  const taskManifest = new ManifestProvider().getTaskManifest('features');
+  const expectedAdditionalAdvice = taskManifest.questions[0].additionalAdvice.join('\n');
+
+  const additionalAdvice = Selector('[data-test-id="task-question-additional-advice"]');
+
+  await t
+    .expect(additionalAdvice.innerText).eql(expectedAdditionalAdvice);
 });
