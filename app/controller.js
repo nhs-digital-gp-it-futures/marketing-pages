@@ -24,7 +24,9 @@ export const getMarketingPageDashboardContext = async (solutionId) => {
 };
 
 export const getTaskPageContext = async (solutionId, taskId) => {
-  const context = createTaskPageContext();
+  const taskManifest = new ManifestProvider().getTaskManifest(taskId);
+
+  const context = createTaskPageContext(taskManifest);
 
   return context;
 };

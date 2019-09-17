@@ -1,4 +1,4 @@
-import { createMarketingDashboardContext } from './contextCreator';
+import { createMarketingDashboardContext, createTaskPageContext } from './contextCreator';
 
 describe('createMarketingDashboardContext', () => {
   it('should create a context from the manifest and the marketingData', () => {
@@ -47,6 +47,44 @@ describe('createMarketingDashboardContext', () => {
     };
 
     const context = createMarketingDashboardContext('some-solution-id', dashboardManifest, marketingData);
+
+    expect(context).toEqual(expectedContext);
+  });
+});
+
+describe('createTaskPageContext', () => {
+  it('should create a context from the task manifest', () => {
+    const expectedContext = {
+      title: 'Features',
+      questions: [
+        {
+          mainAdvice: 'Add up to 10 features that describe your Solution.',
+          additionalAdvice: [
+            'Each feature will be displayed as a bulleted list item. For example:',
+            '- Create and change appointment entries',
+            'You can enter up to 100 characters per feature',
+          ],
+        },
+      ],
+    };
+
+    const taskManifest = {
+      id: 'features',
+      title: 'Features',
+      questions: [
+        {
+          id: 'features-listing',
+          mainAdvice: 'Add up to 10 features that describe your Solution.',
+          additionalAdvice: [
+            'Each feature will be displayed as a bulleted list item. For example:',
+            '- Create and change appointment entries',
+            'You can enter up to 100 characters per feature',
+          ],
+        },
+      ],
+    };
+
+    const context = createTaskPageContext(taskManifest);
 
     expect(context).toEqual(expectedContext);
   });
