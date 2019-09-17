@@ -31,4 +31,26 @@ describe('dashboard page', () => {
         done();
       });
   });
+
+  it('should render the sections on the dashboard page', (done) => {
+    const context = {
+      sections: [
+        {
+          title: 'Some section title',
+          tasks: [],
+        },
+      ],
+    };
+
+    const dummyApp = createDummyApp(context);
+    request(dummyApp)
+      .get('/')
+      .then((res) => {
+        const $ = cheerio.load(res.text);
+
+        expect($('[data-test-id="dashboard-section-1"]').length).toEqual(1);
+
+        done();
+      });
+  });
 });
