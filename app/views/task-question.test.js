@@ -67,4 +67,33 @@ describe('task-question', () => {
         done();
       });
   });
+
+  describe('when question type is bulletpoint-list', () => {
+    it('should render the bullepoint-list component', (done) => {
+      const context = {
+        question: {
+          mainAdvice: 'main advice for question',
+          additionalAdvice: [
+            'first additional advice',
+            'second additional advice',
+            'third additional advice',
+          ],
+          type: 'bulletpoint-list',
+        },
+      };
+
+      const dummyApp = createDummyApp(context);
+      request(dummyApp)
+        .get('/')
+        .then((res) => {
+          const $ = cheerio.load(res.text);
+
+          const additionalAdvice = $('[data-test-id="task-question-additional-advice"]');
+
+          expect(additionalAdvice.find('.nhsuk-label').length).toEqual(3);
+
+          done();
+        });
+    });
+  });
 });

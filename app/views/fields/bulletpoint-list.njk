@@ -1,0 +1,16 @@
+{% from 'components/input/macro.njk' import input %}
+
+{% macro bulletpointList(question) %}
+  <div data-test-id="bulletpoint-list">
+
+  {% for field in question.fields %}
+    <div data-test-id="{{ field.id }}">
+      {{ input({
+        "id": field.id,
+        "name": "test-name"
+      }) }}
+    </div>
+  {% endfor %}
+
+  </div>
+{% endmacro %}
