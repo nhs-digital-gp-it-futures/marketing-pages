@@ -7,7 +7,9 @@
     <div data-test-id="{{ field.id }}">
       {{ input({
         "id": field.id,
-        "name": "test-name"
+        "name": field.id,
+        "value": field.data,
+        "classes": "nhsuk-input--width-30"
       }) }}
     </div>
   {% endfor %}

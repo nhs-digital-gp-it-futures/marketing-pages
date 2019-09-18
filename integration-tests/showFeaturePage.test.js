@@ -40,3 +40,13 @@ test('should render all the advice of question', async (t) => {
   await t
     .expect(additionalAdvice.innerText).eql(expectedAdditionalAdvice);
 });
+
+test('should render 10 text fields', async (t) => {
+  pageSetup(t);
+
+  await Promise.all(Array(10).fill().map(async (_, i) => {
+    const theField = Selector(`[data-test-id="features-listing-${i + 1}"]`);
+    await t
+      .expect(theField.find('input').count).eql(1);
+  }));
+});

@@ -31,6 +31,19 @@ export const createMarketingDashboardContext = (solutionId, dashboardManifest, m
   return context;
 };
 
+const generateFields = (question) => {
+  const fields = [];
+
+  Array(question.maxItems).fill().map((_, i) => {
+    const field = {};
+    field.id = `${question.id}-${i + 1}`;
+    field.data = '';
+    fields.push(field);
+  });
+
+  return fields;
+};
+
 export const createTaskPageContext = (taskManifest) => {
   const context = {};
   const questions = [];
@@ -39,8 +52,14 @@ export const createTaskPageContext = (taskManifest) => {
 
   taskManifest.questions.map((taskManifestQuestion) => {
     const question = {};
+    question.id = taskManifestQuestion.id;
+    question.type = taskManifestQuestion.type;
     question.mainAdvice = taskManifestQuestion.mainAdvice;
     question.additionalAdvice = taskManifestQuestion.additionalAdvice;
+
+    if (taskManifestQuestion.type === 'bulletpoint-list') {
+      question.fields = generateFields(taskManifestQuestion);
+    }
 
     questions.push(question);
   });

@@ -58,6 +58,7 @@ describe('createTaskPageContext', () => {
       title: 'Features',
       questions: [
         {
+          id: 'features-listing',
           mainAdvice: 'Add up to 10 features that describe your Solution.',
           additionalAdvice: [
             'Each feature will be displayed as a bulleted list item. For example:',
@@ -80,6 +81,45 @@ describe('createTaskPageContext', () => {
             '- Create and change appointment entries',
             'You can enter up to 100 characters per feature',
           ],
+        },
+      ],
+    };
+
+    const context = createTaskPageContext(taskManifest);
+
+    expect(context).toEqual(expectedContext);
+  });
+
+  it('should create a context for bulletpoint-list type question', () => {
+    const expectedContext = {
+      questions: [
+        {
+          id: 'fieldId',
+          type: 'bulletpoint-list',
+          fields: [
+            {
+              id: 'fieldId-1',
+              data: '',
+            },
+            {
+              id: 'fieldId-2',
+              data: '',
+            },
+            {
+              id: 'fieldId-3',
+              data: '',
+            },
+          ],
+        },
+      ],
+    };
+
+    const taskManifest = {
+      questions: [
+        {
+          id: 'fieldId',
+          type: 'bulletpoint-list',
+          maxItems: 3,
         },
       ],
     };

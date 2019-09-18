@@ -9,7 +9,9 @@
         "Each feature will be displayed as a bulleted list item. For example:",
         "- Create and change appointment entries",
         "You can enter up to 100 characters per feature"
-      ]
+      ],
+      "type": "bulletpoint-list",
+      "maxItems": 10
     }
   ]
 }
