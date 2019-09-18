@@ -56,6 +56,7 @@ describe('createTaskPageContext', () => {
   it('should create a context from the task manifest', () => {
     const expectedContext = {
       title: 'Features',
+      submitActionUrl: '/some-solution-id/task/features',
       questions: [
         {
           id: 'features-listing',
@@ -85,13 +86,14 @@ describe('createTaskPageContext', () => {
       ],
     };
 
-    const context = createTaskPageContext(taskManifest);
+    const context = createTaskPageContext('some-solution-id', taskManifest);
 
     expect(context).toEqual(expectedContext);
   });
 
   it('should create a context for bulletpoint-list type question', () => {
     const expectedContext = {
+      submitActionUrl: '/some-solution-id/task/some-task-id',
       questions: [
         {
           id: 'fieldId',
@@ -115,6 +117,7 @@ describe('createTaskPageContext', () => {
     };
 
     const taskManifest = {
+      id: 'some-task-id',
       questions: [
         {
           id: 'fieldId',
@@ -124,7 +127,7 @@ describe('createTaskPageContext', () => {
       ],
     };
 
-    const context = createTaskPageContext(taskManifest);
+    const context = createTaskPageContext('some-solution-id', taskManifest);
 
     expect(context).toEqual(expectedContext);
   });

@@ -26,7 +26,18 @@ export const getMarketingPageDashboardContext = async (solutionId) => {
 export const getTaskPageContext = async (solutionId, taskId) => {
   const taskManifest = new ManifestProvider().getTaskManifest(taskId);
 
-  const context = createTaskPageContext(taskManifest);
+  const context = createTaskPageContext(solutionId, taskManifest);
 
   return context;
+};
+
+export const postTask = async (solutionId, taskId, taskData) => {
+  // const solutionData = await axios.get(`http://localhost:5000/api/v1/solution/${solutionId}`);
+  // const existingSolutionData = solutionData.data.solution;
+
+  // const updatedSolutionData = createUpdatedSolutionData(existingSolutionData, taskId, taskData);
+
+  // await axios.post(`http://localhost:5000/api/v1/solution/${solutionId}`, updatedSolutionData);
+
+  return null;
 };

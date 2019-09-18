@@ -44,11 +44,12 @@ const generateFields = (question) => {
   return fields;
 };
 
-export const createTaskPageContext = (taskManifest) => {
+export const createTaskPageContext = (solutionId, taskManifest) => {
   const context = {};
   const questions = [];
 
   context.title = taskManifest.title;
+  context.submitActionUrl = `/${solutionId}/task/${taskManifest.id}`;
 
   taskManifest.questions.map((taskManifestQuestion) => {
     const question = {};

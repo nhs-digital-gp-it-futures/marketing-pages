@@ -7,7 +7,7 @@
   <div class="nhsuk-grid-column-full">
 
     <h1>{{ title }}</h1>
-    <form method="post" action="/{{solutionId}}/task/{{taskId}}">
+    <form method="post" action="{{ submitActionUrl }}">
 
       {% for question in questions%}
         {{ taskQuestion(question) }}
