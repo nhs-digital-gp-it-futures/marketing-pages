@@ -51,4 +51,21 @@ describe('task page', () => {
         done();
       });
   });
+
+  it('should render a button to submit the form', (done) => {
+    const context = {
+      title: 'Title of the task',
+    };
+
+    const dummyApp = createDummyApp(context);
+    request(dummyApp)
+      .get('/')
+      .then((res) => {
+        const $ = cheerio.load(res.text);
+
+        expect($('[data-test-id="task-submit-button"] button').length).toEqual(1);
+
+        done();
+      });
+  });
 });

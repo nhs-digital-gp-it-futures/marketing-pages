@@ -1,4 +1,5 @@
 {% extends 'includes/layout.njk' %}
+{% from 'components/button/macro.njk' import button %}
 {% from './task-question.njk' import taskQuestion %}
 
 {% block body %}
@@ -6,10 +7,18 @@
   <div class="nhsuk-grid-column-full">
 
     <h1>{{ title }}</h1>
+    <form method="post" action="/{{solutionId}}/task/{{taskId}}">
 
-    {% for question in questions%}
-      {{ taskQuestion(question) }}
-    {% endfor %}
+      {% for question in questions%}
+        {{ taskQuestion(question) }}
+      {% endfor %}
+      
+      <div data-test-id="task-submit-button">
+        {{ button({
+          "text": "Save and return to all sections"
+        }) }}
+      </div>
+    </form>
 
   </div>
 </div>

@@ -50,3 +50,12 @@ test('should render 10 text fields', async (t) => {
       .expect(theField.find('input').count).eql(1);
   }));
 });
+
+test('should render 10 text fields', async (t) => {
+  pageSetup(t);
+
+  const submitButton = Selector('[data-test-id="task-submit-button"]');
+
+  await t
+    .expect(submitButton.find('button').count).eql(1);
+});
