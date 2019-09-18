@@ -72,12 +72,6 @@ describe('task-question', () => {
     it('should render the bullepoint-list component', (done) => {
       const context = {
         question: {
-          mainAdvice: 'main advice for question',
-          additionalAdvice: [
-            'first additional advice',
-            'second additional advice',
-            'third additional advice',
-          ],
           type: 'bulletpoint-list',
         },
       };
@@ -88,9 +82,9 @@ describe('task-question', () => {
         .then((res) => {
           const $ = cheerio.load(res.text);
 
-          const additionalAdvice = $('[data-test-id="task-question-additional-advice"]');
+          const bulletpointList = $('[data-test-id="bulletpoint-list"]');
 
-          expect(additionalAdvice.find('.nhsuk-label').length).toEqual(3);
+          expect(bulletpointList.length).toEqual(1);
 
           done();
         });
