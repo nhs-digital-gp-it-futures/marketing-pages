@@ -22,15 +22,12 @@ router.get('/:solutionId/task/:taskId', async (req, res) => {
 });
 
 router.post('/:solutionId/task/:taskId', async (req, res) => {
-  console.log(`ABOUT TO POST SOME STUFF`);
   const { solutionId, taskId } = req.params;
   const taskPostData = req.body;
 
-  console.log(`taskPostData ${JSON.stringify(taskPostData)}`);
+  const response = await postTask(solutionId, taskId, taskPostData);
 
-  const context = await postTask(solutionId, taskId, taskPostData);
-
-  res.render('task-page', context);
+  res.redirect(`../../${solutionId}`);
 });
 
 module.exports = router;

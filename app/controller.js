@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { ManifestProvider } from './forms/manifestProvider';
 import { createMarketingDashboardContext, createTaskPageContext } from './contextCreator';
-import { createMarketingDataIfRequired } from './helpers';
+import { createMarketingDataIfRequired, createUpdatedSolutionData } from './helpers';
 
 export const getMarketingPageDashboardContext = async (solutionId) => {
   // Get manifest
@@ -32,12 +32,12 @@ export const getTaskPageContext = async (solutionId, taskId) => {
 };
 
 export const postTask = async (solutionId, taskId, taskData) => {
-  // const solutionData = await axios.get(`http://localhost:5000/api/v1/solution/${solutionId}`);
-  // const existingSolutionData = solutionData.data.solution;
+  const solutionData = await axios.get(`http://localhost:5000/api/v1/solution/${solutionId}`);
+  const existingSolutionData = solutionData.data.solution;
 
-  // const updatedSolutionData = createUpdatedSolutionData(existingSolutionData, taskId, taskData);
+  const updatedSolutionData = createUpdatedSolutionData(taskId, existingSolutionData, taskData);
 
-  // await axios.post(`http://localhost:5000/api/v1/solution/${solutionId}`, updatedSolutionData);
+  await axios.post(`http://localhost:5000/api/v1/solution/${solutionId}`, updatedSolutionData);
 
-  return null;
+  return true;
 };
