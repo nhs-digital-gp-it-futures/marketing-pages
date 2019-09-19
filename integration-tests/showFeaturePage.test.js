@@ -51,7 +51,7 @@ test('should render 10 text fields', async (t) => {
   }));
 });
 
-test('should render 10 text fields', async (t) => {
+test('should render the submit button', async (t) => {
   pageSetup(t);
 
   const submitButton = Selector('[data-test-id="task-submit-button"]');
