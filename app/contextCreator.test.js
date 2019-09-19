@@ -101,15 +101,12 @@ describe('createTaskPageContext', () => {
           fields: [
             {
               id: 'fieldId-1',
-              data: '',
             },
             {
               id: 'fieldId-2',
-              data: '',
             },
             {
               id: 'fieldId-3',
-              data: '',
             },
           ],
         },
@@ -128,6 +125,65 @@ describe('createTaskPageContext', () => {
     };
 
     const context = createTaskPageContext('some-solution-id', taskManifest);
+
+    expect(context).toEqual(expectedContext);
+  });
+
+  it('should create a context for bulletpoint-list type question with existing data populated', () => {
+    const expectedContext = {
+      submitActionUrl: '/some-solution-id/task/some-task-id',
+      questions: [
+        {
+          id: 'fieldId',
+          type: 'bulletpoint-list',
+          fields: [
+            {
+              id: 'fieldId-1',
+              data: 'Field A',
+            },
+            {
+              id: 'fieldId-2',
+              data: 'Field B',
+            },
+            {
+              id: 'fieldId-3',
+              data: 'Field C',
+            },
+          ],
+        },
+      ],
+    };
+
+    const existingSolutionData = {
+      id: 'some-solution-id',
+      marketingData: {
+        tasks: [
+          {
+            id: 'some-task-id',
+            data: {
+              fieldId: [
+                'Field A',
+                'Field B',
+                'Field C',
+              ],
+            },
+            status: 'COMPLETE',
+          },
+        ],
+      },
+    };
+    const taskManifest = {
+      id: 'some-task-id',
+      questions: [
+        {
+          id: 'fieldId',
+          type: 'bulletpoint-list',
+          maxItems: 3,
+        },
+      ],
+    };
+
+    const context = createTaskPageContext('some-solution-id', taskManifest, existingSolutionData);
 
     expect(context).toEqual(expectedContext);
   });

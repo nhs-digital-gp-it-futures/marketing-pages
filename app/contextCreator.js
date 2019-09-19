@@ -31,20 +31,36 @@ export const createMarketingDashboardContext = (solutionId, dashboardManifest, m
   return context;
 };
 
-const generateFields = (question) => {
+const getExistingDataIfAvailable = (exisitingDataForTask, questionId, index) => (
+  exisitingDataForTask
+  && exisitingDataForTask.data
+  && exisitingDataForTask.data[questionId]
+  && exisitingDataForTask.data[questionId][index]
+    ? exisitingDataForTask.data[questionId][index] : undefined
+);
+
+
+const generateFields = (question, exisitingDataForTask) => {
   const fields = [];
 
   Array(question.maxItems).fill().map((_, i) => {
     const field = {};
     field.id = `${question.id}-${i + 1}`;
-    field.data = '';
+    field.data = getExistingDataIfAvailable(exisitingDataForTask, question.id, i);
     fields.push(field);
   });
 
   return fields;
 };
 
-export const createTaskPageContext = (solutionId, taskManifest) => {
+const findExistingMarketingDataForTask = (existingSolutionData, taskId) => (
+  existingSolutionData
+  && existingSolutionData.marketingData
+  && existingSolutionData.marketingData.tasks
+    .find(t => t.id === taskId)
+);
+
+export const createTaskPageContext = (solutionId, taskManifest, existingSolutionData) => {
   const context = {};
   const questions = [];
 
@@ -59,7 +75,10 @@ export const createTaskPageContext = (solutionId, taskManifest) => {
     question.additionalAdvice = taskManifestQuestion.additionalAdvice;
 
     if (taskManifestQuestion.type === 'bulletpoint-list') {
-      question.fields = generateFields(taskManifestQuestion);
+      const exisitingDataForTask = findExistingMarketingDataForTask(
+        existingSolutionData, taskManifest.id,
+      );
+      question.fields = generateFields(taskManifestQuestion, exisitingDataForTask);
     }
 
     questions.push(question);

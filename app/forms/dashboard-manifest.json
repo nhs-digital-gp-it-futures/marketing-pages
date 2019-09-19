@@ -8,7 +8,7 @@
         {
           "id": "features",
           "title": "Features",
-          "requirement": "Mandatory"
+          "requirement": "Optional"
         }
       ]
     }
