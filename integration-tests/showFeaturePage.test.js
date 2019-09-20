@@ -1,7 +1,12 @@
+import nock from 'nock';
 import { Selector } from 'testcafe';
 import { ManifestProvider } from '../app/forms/manifestProvider';
+import aSolutionFixture from './fixtures/aSolution.json';
 
 const mocks = () => {
+  nock('http://localhost:5000')
+    .get('/api/v1/solution/S100000-001')
+    .reply(200, aSolutionFixture);
 };
 
 const pageSetup = async (t) => {
