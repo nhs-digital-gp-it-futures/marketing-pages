@@ -1,5 +1,5 @@
 import { generateFields } from './generateFields';
-import { findExistingMarketingDataForTask } from './findExistingMarketingDataForTask';
+import { findExistingMarketingDataForTask } from '../helpers/findExistingMarketingDataForTask';
 
 export const createTaskPageContext = (solutionId, taskManifest, existingSolutionData) => {
   const context = {};

@@ -1,4 +1,4 @@
-import { findExistingMarketingDataForTask } from '../contextCreators/findExistingMarketingDataForTask';
+import { findExistingMarketingDataForTask } from './findExistingMarketingDataForTask';
 
 export const createMarketingDataIfRequired = (dashboardManifest, exisingSolutionData) => {
   const marketingData = {};
