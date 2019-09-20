@@ -2,15 +2,23 @@ import nock from 'nock';
 import { Selector } from 'testcafe';
 import { ManifestProvider } from '../app/forms/manifestProvider';
 import aSolutionFixture from './fixtures/aSolution.json';
+import aSolutionWithMarketingDataFixture from './fixtures/aSolutionWithMarketingData.json';
 
-const mocks = () => {
-  nock('http://localhost:5000')
-    .get('/api/v1/solution/S100000-001')
-    .reply(200, aSolutionFixture);
+
+const mocks = (withMarketingData) => {
+  if (withMarketingData) {
+    nock('http://localhost:5000')
+      .get('/api/v1/solution/S100000-001')
+      .reply(200, aSolutionWithMarketingDataFixture);
+  } else {
+    nock('http://localhost:5000')
+      .get('/api/v1/solution/S100000-001')
+      .reply(200, aSolutionFixture);
+  }
 };
 
-const pageSetup = async (t) => {
-  mocks();
+const pageSetup = async (t, withMarketingData = false) => {
+  mocks(withMarketingData);
   await t.navigateTo('http://localhost:1234/S100000-001/task/features');
 };
 
@@ -53,6 +61,18 @@ test('should render 10 text fields', async (t) => {
     const theField = Selector(`[data-test-id="features-listing-${i + 1}"]`);
     await t
       .expect(theField.find('input').count).eql(1);
+  }));
+});
+
+test('should render populate the text fields with existing data', async (t) => {
+  pageSetup(t, true);
+
+  const existingFeatures = aSolutionWithMarketingDataFixture.solution.marketingData.tasks[0].data['features-listing'];
+
+  await Promise.all(existingFeatures.map(async (existingFeature, i) => {
+    const theField = Selector(`[data-test-id="features-listing-${i + 1}"]`);
+    await t
+      .expect(theField.find('input').value).eql(existingFeature);
   }));
 });
 

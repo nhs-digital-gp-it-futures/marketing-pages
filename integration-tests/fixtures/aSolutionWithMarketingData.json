@@ -13,7 +13,13 @@
       "tasks":[
         {
           "id":"features",
-          "data":{},
+          "data":{
+            "features-listing": [
+              "Feature A",
+              "Feature B",
+              "Feature C"
+            ]
+          },
           "status":"COMPLETE"
         }
       ]
