@@ -1,24 +1,4 @@
-const getExistingDataIfAvailable = (exisitingDataForTask, questionId, index) => (
-  exisitingDataForTask
-  && exisitingDataForTask.data
-  && exisitingDataForTask.data[questionId]
-  && exisitingDataForTask.data[questionId][index]
-    ? exisitingDataForTask.data[questionId][index] : undefined
-);
-
-
-const generateFields = (question, exisitingDataForTask) => {
-  const fields = [];
-
-  Array(question.maxItems).fill().map((_, i) => {
-    const field = {};
-    field.id = `${question.id}-${i + 1}`;
-    field.data = getExistingDataIfAvailable(exisitingDataForTask, question.id, i);
-    fields.push(field);
-  });
-
-  return fields;
-};
+import { generateFields } from './contextCreator/generateFields';
 
 const findExistingMarketingDataForTask = (existingSolutionData, taskId) => (
   existingSolutionData
