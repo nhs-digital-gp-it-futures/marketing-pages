@@ -1,4 +1,4 @@
-import { createUpdatedSolutionData } from './helpers';
+import { createUpdatedSolutionData } from './createUpdatedSolutionData';
 
 describe('createUpdatedSolutionData', () => {
   it('should return updated solution data', () => {

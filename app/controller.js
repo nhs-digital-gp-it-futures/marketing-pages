@@ -3,7 +3,7 @@ import { ManifestProvider } from './forms/manifestProvider';
 import { createTaskPageContext } from './contextCreators/createTaskPageContext';
 import { createMarketingDashboardContext } from './contextCreators/createMarketingDashboardContext';
 import { createMarketingDataIfRequired } from './helpers/createMarketingDataIfRequired';
-import { createUpdatedSolutionData } from './helpers';
+import { createUpdatedSolutionData } from './helpers/createUpdatedSolutionData';
 
 export const getMarketingPageDashboardContext = async (solutionId) => {
   // Get manifest
