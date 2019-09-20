@@ -1,4 +1,6 @@
-export const createMarketingDataIfRequired = (dashboardManifest, exisingMarketingData = {}) => {
+import { findExistingMarketingDataForTask } from '../contextCreators/findExistingMarketingDataForTask';
+
+export const createMarketingDataIfRequired = (dashboardManifest, exisingSolutionData) => {
   const marketingData = {};
   const tasks = [];
 
@@ -6,8 +8,7 @@ export const createMarketingDataIfRequired = (dashboardManifest, exisingMarketin
     section.tasks.map((task) => {
       let marketingDataTask = {};
 
-      const existingMarketingDataForTask = exisingMarketingData.tasks && exisingMarketingData.tasks
-        .find(existingTask => existingTask.id === task.id);
+      const existingMarketingDataForTask = findExistingMarketingDataForTask(exisingSolutionData, task.id);
 
       if (existingMarketingDataForTask) {
         marketingDataTask = existingMarketingDataForTask;

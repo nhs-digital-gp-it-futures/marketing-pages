@@ -39,7 +39,11 @@ describe('createMarketingDataIfRequired', () => {
         ],
       );
 
-      const initialMarketingData = createMarketingDataIfRequired(dashboardManifest);
+      const existingSolutionData = {};
+
+      const initialMarketingData = createMarketingDataIfRequired(
+        dashboardManifest, existingSolutionData,
+      );
 
       expect(initialMarketingData).toEqual(expectedInitialMarketingData);
     });
@@ -70,7 +74,11 @@ describe('createMarketingDataIfRequired', () => {
         ],
       );
 
-      const initialMarketingData = createMarketingDataIfRequired(dashboardManifest);
+      const existingSolutionData = {};
+
+      const initialMarketingData = createMarketingDataIfRequired(
+        dashboardManifest, existingSolutionData,
+      );
 
       expect(initialMarketingData).toEqual(expectedInitialMarketingData);
     });
@@ -110,7 +118,11 @@ describe('createMarketingDataIfRequired', () => {
         ],
       );
 
-      const initialMarketingData = createMarketingDataIfRequired(dashboardManifest);
+      const existingSolutionData = {};
+
+      const initialMarketingData = createMarketingDataIfRequired(
+        dashboardManifest, existingSolutionData,
+      );
 
       expect(initialMarketingData).toEqual(expectedInitialMarketingData);
     });
@@ -128,14 +140,16 @@ describe('createMarketingDataIfRequired', () => {
         ],
       };
 
-      const existingMarketingData = {
-        tasks: [
-          {
-            id: 'first-task',
-            data: {},
-            status: 'COMPLETE',
-          },
-        ],
+      const existingSolutionData = {
+        marketingData: {
+          tasks: [
+            {
+              id: 'first-task',
+              data: {},
+              status: 'COMPLETE',
+            },
+          ],
+        },
       };
 
       const dashboardManifest = createDashboardManifest(
@@ -148,7 +162,7 @@ describe('createMarketingDataIfRequired', () => {
       );
 
       const initialMarketingData = createMarketingDataIfRequired(
-        dashboardManifest, existingMarketingData,
+        dashboardManifest, existingSolutionData,
       );
 
       expect(initialMarketingData).toEqual(expectedMarketingData);
@@ -170,14 +184,16 @@ describe('createMarketingDataIfRequired', () => {
         ],
       };
 
-      const existingMarketingData = {
-        tasks: [
-          {
-            id: 'first-task',
-            data: {},
-            status: 'COMPLETE',
-          },
-        ],
+      const existingSolutionData = {
+        marketingData: {
+          tasks: [
+            {
+              id: 'first-task',
+              data: {},
+              status: 'COMPLETE',
+            },
+          ],
+        },
       };
 
       const dashboardManifest = createDashboardManifest(
@@ -191,7 +207,7 @@ describe('createMarketingDataIfRequired', () => {
       );
 
       const initialMarketingData = createMarketingDataIfRequired(
-        dashboardManifest, existingMarketingData,
+        dashboardManifest, existingSolutionData,
       );
 
       expect(initialMarketingData).toEqual(expectedMarketingData);

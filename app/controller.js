@@ -12,9 +12,8 @@ export const getMarketingPageDashboardContext = async (solutionId) => {
   // Get marketing data
   const solutionData = await axios.get(`http://localhost:5000/api/v1/solution/${solutionId}`);
   const { solution } = solutionData.data;
-  const { marketingData } = solution;
 
-  solution.marketingData = createMarketingDataIfRequired(dashboardManifest, marketingData);
+  solution.marketingData = createMarketingDataIfRequired(dashboardManifest, solution);
   await axios.post(`http://localhost:5000/api/v1/solution/${solutionId}`, solution);
 
   // generate context from manifest
