@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { ManifestProvider } from './forms/manifestProvider';
-import { createMarketingDashboardContext, createTaskPageContext } from './contextCreator';
+import { createTaskPageContext } from './contextCreator';
+import { createMarketingDashboardContext } from './contextCreator/createMarketingDashboardContext';
 import { createMarketingDataIfRequired, createUpdatedSolutionData } from './helpers';
 
 export const getMarketingPageDashboardContext = async (solutionId) => {

@@ -64,7 +64,7 @@ test('should render 10 text fields', async (t) => {
   }));
 });
 
-test('should render populate the text fields with existing data', async (t) => {
+test('should populate the text fields with existing data', async (t) => {
   pageSetup(t, true);
 
   const existingFeatures = aSolutionWithMarketingDataFixture.solution.marketingData.tasks[0].data['features-listing'];
