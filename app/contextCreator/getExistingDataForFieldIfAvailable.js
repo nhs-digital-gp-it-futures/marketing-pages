@@ -1,4 +1,4 @@
-export const getExistingDataIfAvailable = (exisitingDataForTask, questionId, index) => (
+export const getExistingDataForFieldIfAvailable = (exisitingDataForTask, questionId, index) => (
   exisitingDataForTask
     && exisitingDataForTask.data
     && exisitingDataForTask.data[questionId]
