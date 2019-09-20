@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { ManifestProvider } from './forms/manifestProvider';
-import { createTaskPageContext } from './contextCreator';
+import { createTaskPageContext } from './contextCreator/createTaskPageContext';
 import { createMarketingDashboardContext } from './contextCreator/createMarketingDashboardContext';
 import { createMarketingDataIfRequired, createUpdatedSolutionData } from './helpers';
 

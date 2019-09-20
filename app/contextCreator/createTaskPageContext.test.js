@@ -1,4 +1,4 @@
-import { createMarketingDashboardContext, createTaskPageContext } from './contextCreator';
+import { createTaskPageContext } from './createTaskPageContext';
 
 describe('createTaskPageContext', () => {
   it('should create a context from the task manifest', () => {
