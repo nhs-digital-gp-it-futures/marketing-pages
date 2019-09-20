@@ -4,8 +4,12 @@ export const createUpdatedSolutionData = (taskId, existingSolutionData, taskData
   const updatedSolutionData = { ...existingSolutionData };
 
   const taskToUpdate = findExistingMarketingDataForTask(updatedSolutionData, taskId);
-  taskToUpdate.data = taskData;
-  taskToUpdate.status = 'COMPLETE';
+  if (taskToUpdate) {
+    taskToUpdate.data = taskData;
+    taskToUpdate.status = 'COMPLETE';
 
-  return updatedSolutionData;
+    return updatedSolutionData;
+  }
+
+  return existingSolutionData;
 };
