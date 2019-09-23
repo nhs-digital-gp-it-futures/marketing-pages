@@ -6,17 +6,14 @@ import { createMarketingDataIfRequired } from './helpers/createMarketingDataIfRe
 import { createUpdatedSolutionData } from './helpers/createUpdatedSolutionData';
 
 export const getMarketingPageDashboardContext = async (solutionId) => {
-  // Get manifest
   const dashboardManifest = new ManifestProvider().getDashboardManifest();
 
-  // Get marketing data
   const solutionData = await axios.get(`http://localhost:5000/api/v1/solution/${solutionId}`);
   const { solution } = solutionData.data;
 
   solution.marketingData = createMarketingDataIfRequired(dashboardManifest, solution);
   await axios.post(`http://localhost:5000/api/v1/solution/${solutionId}`, solution);
 
-  // generate context from manifest
   const context = createMarketingDashboardContext(
     solutionId, dashboardManifest, solution.marketingData,
   );
