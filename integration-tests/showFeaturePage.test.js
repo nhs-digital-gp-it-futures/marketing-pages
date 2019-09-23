@@ -1,5 +1,5 @@
 import nock from 'nock';
-import { Selector } from 'testcafe';
+import { Selector, ClientFunction } from 'testcafe';
 import { ManifestProvider } from '../app/forms/manifestProvider';
 import aSolutionFixture from './fixtures/aSolution.json';
 import aSolutionWithMarketingDataFixture from './fixtures/aSolutionWithMarketingData.json';
@@ -83,4 +83,33 @@ test('should render the submit button', async (t) => {
 
   await t
     .expect(submitButton.find('button').count).eql(1);
+});
+
+test('should allow posting an empty form and navigate back to the dashboard when clicking the submit button', async (t) => {
+  pageSetup(t);
+
+  nock('http://localhost:5000')
+    .get('/api/v1/solution/S100000-001')
+    .twice()
+    .reply(200, aSolutionFixture);
+
+  nock('http://localhost:5000')
+    .post('/api/v1/solution/S100000-001')
+    .twice()
+    .reply(200, {});
+
+  const getLocation = ClientFunction(() => document.location.href);
+
+  const submitButton = Selector('[data-test-id="task-submit-button"]');
+
+  await Promise.all(Array(10).fill().map(async (_, i) => {
+    const theField = Selector(`[data-test-id="features-listing-${i + 1}"]`);
+    await t
+      .expect(theField.find('input').value).eql('');
+  }));
+
+  await t
+    .click(submitButton.find('button'))
+    .expect(getLocation()).notContains('task')
+    .expect(getLocation()).contains('S100000-001');
 });
