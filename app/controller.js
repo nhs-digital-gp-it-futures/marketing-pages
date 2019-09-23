@@ -4,6 +4,7 @@ import { createTaskPageContext } from './contextCreators/createTaskPageContext';
 import { createMarketingDashboardContext } from './contextCreators/createMarketingDashboardContext';
 import { createMarketingDataIfRequired } from './helpers/createMarketingDataIfRequired';
 import { createUpdatedSolutionData } from './helpers/createUpdatedSolutionData';
+import { validateTaskData } from './helpers/validateTaskData';
 
 export const getMarketingPageDashboardContext = async (solutionId) => {
   const dashboardManifest = new ManifestProvider().getDashboardManifest();
@@ -30,6 +31,19 @@ export const getTaskPageContext = async (solutionId, taskId) => {
   const context = createTaskPageContext(solutionId, taskManifest, existingSolutionData);
 
   return context;
+};
+
+export const getTaskPageErrorContext = async (solutionId, taskId, taskData, validationErrors) => {
+  const taskManifest = new ManifestProvider().getTaskManifest(taskId);
+
+  const context = createTaskPageErrorContext(solutionId, taskManifest, taskData, validationErrors);
+
+  return context;
+};
+
+export const validateTask = (taskId, taskData) => {
+  const taskManifest = new ManifestProvider().getTaskManifest(taskId);
+  return validateTaskData(taskManifest, taskData);
 };
 
 export const postTask = async (solutionId, taskId, taskData) => {

@@ -84,4 +84,42 @@ describe('bulletpoint-list', () => {
         done();
       });
   });
+
+  it('should render the text field as error if the context contains an error for the field', (done) => {
+    const context = {
+      question: {
+        id: 'fieldId',
+        fields: [
+          {
+            id: 'fieldId-1',
+            data: 'good',
+          },
+          {
+            id: 'fieldId-2',
+            data: 'This is not good',
+            error: {
+              message: 'some error message',
+            },
+          },
+          {
+            id: 'fieldId-3',
+            data: 'good',
+          },
+        ],
+      },
+    };
+
+    const dummyApp = createDummyApp(context);
+    request(dummyApp)
+      .get('/')
+      .then((res) => {
+        const $ = cheerio.load(res.text);
+
+        expect($('[data-test-id="fieldId-1"]').find('.nhsuk-input').length).toEqual(1);
+        expect($('[data-test-id="fieldId-2"]').find('.nhsuk-form-group--error').length).toEqual(1);
+        expect($('[data-test-id="fieldId-3"]').find('.nhsuk-input').length).toEqual(1);
+
+        done();
+      });
+  });
 });

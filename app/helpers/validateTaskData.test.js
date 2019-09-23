@@ -34,7 +34,7 @@ describe('validateTaskData', () => {
       const expectedValidationError = [
         {
           questionId: 'question-one',
-          fieldId: 0,
+          fieldId: 'question-one-1',
         },
       ];
 
@@ -68,11 +68,11 @@ describe('validateTaskData', () => {
       const expectedValidationError = [
         {
           questionId: 'question-one',
-          fieldId: 0,
+          fieldId: 'question-one-1',
         },
         {
           questionId: 'question-one',
-          fieldId: 1,
+          fieldId: 'question-one-2',
         },
       ];
 
@@ -106,7 +106,7 @@ describe('validateTaskData', () => {
       const expectedValidationError = [
         {
           questionId: 'question-one',
-          fieldId: 1,
+          fieldId: 'question-one-2',
         },
       ];
 

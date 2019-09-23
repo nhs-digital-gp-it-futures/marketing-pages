@@ -2,6 +2,7 @@ import express from 'express';
 import {
   getMarketingPageDashboardContext,
   getTaskPageContext,
+  validateTask,
   postTask,
 } from './controller';
 
@@ -25,9 +26,17 @@ router.post('/:solutionId/task/:taskId', async (req, res) => {
   const { solutionId, taskId } = req.params;
   const taskPostData = req.body;
 
-  const response = await postTask(solutionId, taskId, taskPostData);
+  const validationErrors = validateTask(taskId, taskPostData);
 
-  res.redirect(`../../${solutionId}`);
+  if (validationErrors && validationErrors.length > 0) {
+    const context = await getTaskPageContext(solutionId, taskId);
+
+    res.render('task-page', context);
+  } else {
+    const response = await postTask(solutionId, taskId, taskPostData);
+
+    res.redirect(`../../${solutionId}`);
+  }
 });
 
 module.exports = router;
