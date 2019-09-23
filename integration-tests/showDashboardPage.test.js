@@ -1,5 +1,5 @@
 import nock from 'nock';
-import { Selector } from 'testcafe';
+import { Selector, ClientFunction } from 'testcafe';
 import aSolutionFixture from './fixtures/aSolution.json';
 import aSolutionWithMarketingDataFixture from './fixtures/aSolutionWithMarketingData.json';
 import { ManifestProvider } from '../app/forms/manifestProvider';
@@ -94,6 +94,31 @@ test('should render the correct status for a solution with marketing data and st
         .eql(task.requirement)
         .expect(theTask.find('[data-test-id="dashboard-section-task-status"]').innerText)
         .eql('COMPLETE');
+    }));
+  }));
+});
+
+test('clicking on the task link should navigate the user to the task page', async (t) => {
+  pageSetup(t);
+
+  nock('http://localhost:5000')
+    .get('/api/v1/solution/S100000-001')
+    .reply(200, aSolutionFixture);
+
+  const getLocation = ClientFunction(() => document.location.href);
+
+  const dashboardManifest = new ManifestProvider().getDashboardManifest();
+  const dashboardSections = dashboardManifest.sections;
+
+  await Promise.all(dashboardSections.map(async (dashboardSection, idx) => {
+    const theSection = Selector(`[data-test-id="dashboard-section-${idx + 1}"]`);
+
+    await Promise.all(dashboardSection.tasks.map(async (task, taskIdx) => {
+      const theTask = theSection.find(`[data-test-id="dashboard-section-task-${taskIdx + 1}"]`);
+
+      await t
+        .click(theTask.find('a'))
+        .expect(getLocation()).contains(`S100000-001/task/${task.id}`);
     }));
   }));
 });
