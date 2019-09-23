@@ -101,5 +101,39 @@ describe('validateTaskData', () => {
 
       expect(validationErrors).toEqual(expectedValidationError);
     });
+
+    it('return an array of 1 validation errors when only 1 field does not meet validation requirements', () => {
+      const expectedValidationError = [
+        {
+          questionId: 'question-one',
+          fieldId: 1,
+        },
+      ];
+
+      const taskManifest = {
+        id: 'task-one',
+        questions: [
+          {
+            id: 'question-one',
+            type: 'bulletpoint-list',
+            saveValidations: [
+              {
+                type: 'maxLength',
+                maxLength: 10,
+                message: 'some validation error message',
+              },
+            ],
+          },
+        ],
+      };
+
+      const taskData = {
+        'question-one': ['all good', 'this one not good'],
+      };
+
+      const validationErrors = validateTaskData(taskManifest, taskData);
+
+      expect(validationErrors).toEqual(expectedValidationError);
+    });
   });
 });
