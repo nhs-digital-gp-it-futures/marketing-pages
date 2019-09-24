@@ -1,5 +1,10 @@
 import { generateFields } from './generateFields';
-import { findExistingMarketingDataForTask } from '../helpers/findExistingMarketingDataForTask';
+
+const transformTaskDataShape = taskData => ({
+  data: {
+    ...taskData,
+  },
+});
 
 export const createTaskPageErrorContext = (
   solutionId, taskManifest, taskData, validationErrors,
@@ -18,10 +23,9 @@ export const createTaskPageErrorContext = (
     question.additionalAdvice = taskManifestQuestion.additionalAdvice;
 
     if (taskManifestQuestion.type === 'bulletpoint-list') {
-      const exisitingDataForTask = findExistingMarketingDataForTask(
-        existingSolutionData, taskManifest.id,
+      question.fields = generateFields(
+        taskManifestQuestion, transformTaskDataShape(taskData), validationErrors,
       );
-      question.fields = generateFields(taskManifestQuestion, exisitingDataForTask);
     }
 
     questions.push(question);

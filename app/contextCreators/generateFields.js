@@ -1,6 +1,6 @@
 import { getExistingDataForFieldIfAvailable } from './getExistingDataForFieldIfAvailable';
 
-export const generateFields = (question, exisitingDataForTask) => {
+export const generateFields = (question, exisitingDataForTask, validationErrors) => {
   if (question && question.maxItems && question.maxItems > 0) {
     const fields = [];
 
@@ -8,6 +8,16 @@ export const generateFields = (question, exisitingDataForTask) => {
       const field = {};
       field.id = `${question.id}-${i + 1}`;
       field.data = getExistingDataForFieldIfAvailable(exisitingDataForTask, question.id, i);
+
+      const validationErrorForField = validationErrors && validationErrors
+        .find(validationError => validationError.fieldId === field.id);
+
+      if (validationErrorForField) {
+        const error = {};
+        error.message = validationErrorForField.message;
+        field.error = error;
+      }
+
       fields.push(field);
     });
 

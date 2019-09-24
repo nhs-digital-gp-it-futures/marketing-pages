@@ -1,7 +1,7 @@
 import { createTaskPageErrorContext } from './createTaskPageErrorContext';
 
 describe('createTaskPageErrorContext', () => {
-  it.skip('should create a context for bulletpoint-list type question with existing data populated', () => {
+  it('should create a context for bulletpoint-list type question with existing data populated', () => {
     const expectedContext = {
       submitActionUrl: '/some-solution-id/task/some-task-id',
       questions: [
@@ -15,7 +15,10 @@ describe('createTaskPageErrorContext', () => {
             },
             {
               id: 'fieldId-2',
-              data: 'Field B',
+              data: 'Field B is too big',
+              error: {
+                message: 'some really helpful error message',
+              },
             },
             {
               id: 'fieldId-3',
@@ -26,9 +29,21 @@ describe('createTaskPageErrorContext', () => {
       ],
     };
 
-    const taskData = {};
+    const taskData = {
+      fieldId: [
+        'Field A',
+        'Field B is too big',
+        'Field C',
+      ],
+    };
 
-    const validationErrors = {};
+    const validationErrors = [
+      {
+        questionId: 'fieldId',
+        fieldId: 'fieldId-2',
+        message: 'some really helpful error message',
+      },
+    ];
 
     const taskManifest = {
       id: 'some-task-id',
@@ -37,6 +52,13 @@ describe('createTaskPageErrorContext', () => {
           id: 'fieldId',
           type: 'bulletpoint-list',
           maxItems: 3,
+          saveValidations: [
+            {
+              type: 'maxLength',
+              maxLength: 10,
+              message: 'some really helpful error message',
+            },
+          ],
         },
       ],
     };

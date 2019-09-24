@@ -108,4 +108,49 @@ describe('generateFields', () => {
 
     expect(fields).toEqual(expectedGeneratedFields);
   });
+
+  it('should add the validation error message to the field', () => {
+    const expectedGeneratedFields = [
+      {
+        id: 'some-question-id-1',
+        data: 'some-data-1',
+      },
+      {
+        id: 'some-question-id-2',
+        data: 'some-really-large-data-2',
+        error: {
+          message: 'some really helpful error message',
+        },
+      },
+      {
+        id: 'some-question-id-3',
+        data: 'some-data-3',
+      },
+    ];
+
+    const question = {
+      id: 'some-question-id',
+      maxItems: 3,
+    };
+
+    const validationErrors = [
+      {
+        questionId: 'some-question-id',
+        fieldId: 'some-question-id-2',
+        message: 'some really helpful error message',
+      },
+    ];
+
+    const exisitingDataForTask = {
+      data: {
+        'some-question-id': [
+          'some-data-1', 'some-really-large-data-2', 'some-data-3',
+        ],
+      },
+    };
+
+    const fields = generateFields(question, exisitingDataForTask, validationErrors);
+
+    expect(fields).toEqual(expectedGeneratedFields);
+  });
 });

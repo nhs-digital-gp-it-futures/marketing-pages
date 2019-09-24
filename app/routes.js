@@ -2,6 +2,7 @@ import express from 'express';
 import {
   getMarketingPageDashboardContext,
   getTaskPageContext,
+  getTaskPageErrorContext,
   validateTask,
   postTask,
 } from './controller';
@@ -29,7 +30,9 @@ router.post('/:solutionId/task/:taskId', async (req, res) => {
   const validationErrors = validateTask(taskId, taskPostData);
 
   if (validationErrors && validationErrors.length > 0) {
-    const context = await getTaskPageContext(solutionId, taskId);
+    const context = await getTaskPageErrorContext(
+      solutionId, taskId, taskPostData, validationErrors,
+    );
 
     res.render('task-page', context);
   } else {

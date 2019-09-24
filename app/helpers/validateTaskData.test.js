@@ -35,6 +35,7 @@ describe('validateTaskData', () => {
         {
           questionId: 'question-one',
           fieldId: 'question-one-1',
+          message: 'some validation error message',
         },
       ];
 
@@ -69,10 +70,12 @@ describe('validateTaskData', () => {
         {
           questionId: 'question-one',
           fieldId: 'question-one-1',
+          message: 'some validation error message',
         },
         {
           questionId: 'question-one',
           fieldId: 'question-one-2',
+          message: 'some validation error message',
         },
       ];
 
@@ -107,6 +110,7 @@ describe('validateTaskData', () => {
         {
           questionId: 'question-one',
           fieldId: 'question-one-2',
+          message: 'some validation error message',
         },
       ];
 

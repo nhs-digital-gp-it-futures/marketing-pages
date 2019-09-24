@@ -10,6 +10,7 @@ export const validateTaskData = (taskManifest, taskData) => {
             if (taskDataField.length > saveValidation.maxLength) {
               error.questionId = taskQuestion.id;
               error.fieldId = `${taskQuestion.id}-${taskDataFieldId + 1}`;
+              error.message = saveValidation.message;
 
               validationErrors.push(error);
             }
