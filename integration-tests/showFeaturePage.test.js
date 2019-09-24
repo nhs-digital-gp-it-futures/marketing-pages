@@ -130,5 +130,6 @@ test('should show validation for fields exceeding the maxLength', async (t) => {
     .click(submitButton.find('button'))
     .expect(firstField.find('.nhsuk-form-group--error').exists).notOk()
     .expect(secondField.find('.nhsuk-form-group--error').exists).notOk()
-    .expect(thirdField.find('.nhsuk-form-group--error').exists).ok();
+    .expect(thirdField.find('.nhsuk-form-group--error').exists).ok()
+    .expect(thirdField.find('.nhsuk-error-message').innerText).eql('Error:\nsome validation error message');
 });
