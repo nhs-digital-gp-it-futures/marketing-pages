@@ -5,7 +5,7 @@ import { createMarketingDashboardContext } from './contextCreators/createMarketi
 import { createMarketingDataIfRequired } from './helpers/createMarketingDataIfRequired';
 import { createUpdatedSolutionData } from './helpers/createUpdatedSolutionData';
 import { validateTaskData } from './helpers/validateTaskData';
-import { createTaskPageErrorContext } from './contextCreators/createTaskPageErrorContext';
+import { findExistingMarketingDataForTask } from './helpers/findExistingMarketingDataForTask';
 
 export const getMarketingPageDashboardContext = async (solutionId) => {
   const dashboardManifest = new ManifestProvider().getDashboardManifest();
@@ -29,15 +29,24 @@ export const getTaskPageContext = async (solutionId, taskId) => {
   const solutionData = await axios.get(`http://localhost:5000/api/v1/solution/${solutionId}`);
   const existingSolutionData = solutionData.data.solution;
 
-  const context = createTaskPageContext(solutionId, taskManifest, existingSolutionData);
+  const formData = findExistingMarketingDataForTask(existingSolutionData, taskManifest.id);
+
+  const context = createTaskPageContext(solutionId, taskManifest, formData);
 
   return context;
 };
 
+const convertToFormData = taskData => ({
+  data: {
+    ...taskData,
+  },
+});
+
 export const getTaskPageErrorContext = async (solutionId, taskId, taskData, validationErrors) => {
   const taskManifest = new ManifestProvider().getTaskManifest(taskId);
 
-  const context = createTaskPageErrorContext(solutionId, taskManifest, taskData, validationErrors);
+  const formData = convertToFormData(taskData);
+  const context = createTaskPageContext(solutionId, taskManifest, formData, validationErrors);
 
   return context;
 };
