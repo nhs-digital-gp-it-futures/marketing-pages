@@ -2,7 +2,7 @@ export const validateTaskData = (taskManifest, taskData) => {
   const validationErrors = [];
 
   taskManifest.questions.map((taskQuestion) => {
-    if (taskData[taskQuestion.id]) {
+    if (taskData[taskQuestion.id] && taskQuestion.saveValidations) {
       taskQuestion.saveValidations.map((saveValidation) => {
         if (saveValidation.type === 'maxLength') {
           taskData[taskQuestion.id].map((taskDataField, taskDataFieldId) => {

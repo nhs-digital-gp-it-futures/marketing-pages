@@ -1,0 +1,27 @@
+{
+  "id":"marketing-page-dashboard",
+  "sections": [
+    {
+      "id": "about-your-solution",
+      "title": "About your Solution",
+      "tasks": [
+        {
+          "id": "features",
+          "title": "Features",
+          "requirement": "Optional"
+        }
+      ]
+    },
+    {
+      "id": "about-your-self",
+      "title": "About yourself",
+      "tasks": [
+        {
+          "id": "your-features",
+          "title": "Your Features",
+          "requirement": "Mandatory"
+        }
+      ]
+    }
+  ]
+}

@@ -3,6 +3,26 @@ import { validateTaskData } from './validateTaskData';
 
 describe('validateTaskData', () => {
   describe('when the task contains just a single question', () => {
+    it('return an empty array if there are no validation requirments for the question', () => {
+      const taskManifest = {
+        id: 'task-one',
+        questions: [
+          {
+            id: 'question-one',
+            type: 'bulletpoint-list',
+          },
+        ],
+      };
+
+      const taskData = {
+        'question-one': ['all good regardless'],
+      };
+
+      const validationErrors = validateTaskData(taskManifest, taskData);
+
+      expect(validationErrors).toEqual([]);
+    });
+
     it('return an empty array if there are no validation errors', () => {
       const taskManifest = {
         id: 'task-one',
