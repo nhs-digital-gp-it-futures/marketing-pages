@@ -113,3 +113,22 @@ test('should allow posting an empty form and navigate back to the dashboard when
     .expect(getLocation()).notContains('task')
     .expect(getLocation()).contains('S100000-001');
 });
+
+test('should show validation for fields exceeding the maxLength', async (t) => {
+  pageSetup(t);
+
+  const submitButton = Selector('[data-test-id="task-submit-button"]');
+
+  const firstField = Selector('[data-test-id="features-listing-1"]');
+  const secondField = Selector('[data-test-id="features-listing-2"]');
+  const thirdField = Selector('[data-test-id="features-listing-3"]');
+
+  await t
+    .typeText(firstField.find('input'), 'good')
+    .typeText(secondField.find('input'), 'good')
+    .typeText(thirdField.find('input'), 'a'.repeat(101))
+    .click(submitButton.find('button'))
+    .expect(firstField.find('.nhsuk-form-group--error').exists).notOk()
+    .expect(secondField.find('.nhsuk-form-group--error').exists).notOk()
+    .expect(thirdField.find('.nhsuk-form-group--error').exists).ok();
+});
