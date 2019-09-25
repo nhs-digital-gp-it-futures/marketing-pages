@@ -1,21 +1,37 @@
+const validationRules = {
+  maxLength: {
+    rule: (taskDataField, saveValidation) => {
+      if (taskDataField.length > saveValidation.maxLength) {
+        return true;
+      }
+      return false;
+    },
+  },
+};
+
+const createErrorForField = (questionId, fieldId, message) => {
+  const error = {};
+  error.questionId = questionId;
+  error.fieldId = `${questionId}-${fieldId + 1}`;
+  error.message = message;
+
+  return error;
+};
+
 export const validateTaskData = (taskManifest, taskData) => {
   const validationErrors = [];
 
   taskManifest.questions.map((taskQuestion) => {
     if (taskData[taskQuestion.id] && taskQuestion.saveValidations) {
       taskQuestion.saveValidations.map((saveValidation) => {
-        if (saveValidation.type === 'maxLength') {
-          taskData[taskQuestion.id].map((taskDataField, taskDataFieldId) => {
-            const error = {};
-            if (taskDataField.length > saveValidation.maxLength) {
-              error.questionId = taskQuestion.id;
-              error.fieldId = `${taskQuestion.id}-${taskDataFieldId + 1}`;
-              error.message = saveValidation.message;
-
-              validationErrors.push(error);
-            }
-          });
-        }
+        taskData[taskQuestion.id].map((taskDataField, taskDataFieldId) => {
+          if (validationRules[saveValidation.type].rule(taskDataField, saveValidation)) {
+            const error = createErrorForField(
+              taskQuestion.id, taskDataFieldId, saveValidation.message,
+            );
+            validationErrors.push(error);
+          }
+        });
       });
     }
   });
