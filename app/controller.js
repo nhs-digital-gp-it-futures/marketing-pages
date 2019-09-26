@@ -10,11 +10,11 @@ import { findExistingMarketingDataForTask } from './helpers/findExistingMarketin
 export const getMarketingPageDashboardContext = async (solutionId) => {
   const dashboardManifest = new ManifestProvider().getDashboardManifest();
 
-  const solutionData = await axios.get(`http://localhost:5000/api/v1/solution/${solutionId}`);
+  const solutionData = await axios.get(`http://localhost:8080/api/v1/Solutions/${solutionId}`);
   const { solution } = solutionData.data;
 
   solution.marketingData = createMarketingDataIfRequired(dashboardManifest, solution);
-  await axios.post(`http://localhost:5000/api/v1/solution/${solutionId}`, solution);
+  await axios.put(`http://localhost:8080/api/v1/Solutions/${solutionId}`, solution);
 
   const context = createMarketingDashboardContext(
     solutionId, dashboardManifest, solution.marketingData,
@@ -26,7 +26,7 @@ export const getMarketingPageDashboardContext = async (solutionId) => {
 export const getTaskPageContext = async (solutionId, taskId) => {
   const taskManifest = new ManifestProvider().getTaskManifest(taskId);
 
-  const solutionData = await axios.get(`http://localhost:5000/api/v1/solution/${solutionId}`);
+  const solutionData = await axios.get(`http://localhost:8080/api/v1/Solutions/${solutionId}`);
   const existingSolutionData = solutionData.data.solution;
 
   const formData = findExistingMarketingDataForTask(existingSolutionData, taskManifest.id);
@@ -57,12 +57,12 @@ export const validateTask = (taskId, taskData) => {
 };
 
 export const postTask = async (solutionId, taskId, taskData) => {
-  const solutionData = await axios.get(`http://localhost:5000/api/v1/solution/${solutionId}`);
+  const solutionData = await axios.get(`http://localhost:8080/api/v1/Solutions/${solutionId}`);
   const existingSolutionData = solutionData.data.solution;
 
   const updatedSolutionData = createUpdatedSolutionData(taskId, existingSolutionData, taskData);
 
-  await axios.post(`http://localhost:5000/api/v1/solution/${solutionId}`, updatedSolutionData);
+  await axios.put(`http://localhost:8080/api/v1/Solutions/${solutionId}`, updatedSolutionData);
 
   return true;
 };
