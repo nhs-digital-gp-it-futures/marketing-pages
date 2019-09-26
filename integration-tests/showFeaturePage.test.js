@@ -7,12 +7,12 @@ import aSolutionWithMarketingDataFixture from './fixtures/aSolutionWithMarketing
 
 const mocks = (withMarketingData) => {
   if (withMarketingData) {
-    nock('http://localhost:5000')
-      .get('/api/v1/solution/S100000-001')
+    nock('http://localhost:8080')
+      .get('/api/v1/Solutions/S100000-001')
       .reply(200, aSolutionWithMarketingDataFixture);
   } else {
-    nock('http://localhost:5000')
-      .get('/api/v1/solution/S100000-001')
+    nock('http://localhost:8080')
+      .get('/api/v1/Solutions/S100000-001')
       .reply(200, aSolutionFixture);
   }
 };
@@ -88,13 +88,13 @@ test('should render the submit button', async (t) => {
 test('should allow posting an empty form and navigate back to the dashboard when clicking the submit button', async (t) => {
   pageSetup(t);
 
-  nock('http://localhost:5000')
-    .get('/api/v1/solution/S100000-001')
+  nock('http://localhost:8080')
+    .get('/api/v1/Solutions/S100000-001')
     .twice()
     .reply(200, aSolutionFixture);
 
-  nock('http://localhost:5000')
-    .post('/api/v1/solution/S100000-001')
+  nock('http://localhost:8080')
+    .put('/api/v1/Solutions/S100000-001')
     .twice()
     .reply(200, {});
 

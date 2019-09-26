@@ -7,17 +7,17 @@ import { ManifestProvider } from '../app/forms/manifestProvider';
 
 const mocks = (isFirstLoad) => {
   if (isFirstLoad) {
-    nock('http://localhost:5000')
-      .get('/api/v1/solution/S100000-001')
+    nock('http://localhost:8080')
+      .get('/api/v1/Solutions/S100000-001')
       .reply(200, aSolutionFixture);
   } else {
-    nock('http://localhost:5000')
-      .get('/api/v1/solution/S100000-001')
+    nock('http://localhost:8080')
+      .get('/api/v1/Solutions/S100000-001')
       .reply(200, aSolutionWithMarketingDataFixture);
   }
 
-  nock('http://localhost:5000')
-    .post('/api/v1/solution/S100000-001')
+  nock('http://localhost:8080')
+    .put('/api/v1/Solutions/S100000-001')
     .reply(200, {});
 };
 
@@ -101,8 +101,8 @@ test('should render the correct status for a solution with marketing data and st
 test('clicking on the task link should navigate the user to the task page', async (t) => {
   pageSetup(t);
 
-  nock('http://localhost:5000')
-    .get('/api/v1/solution/S100000-001')
+  nock('http://localhost:8080')
+    .get('/api/v1/Solutions/S100000-001')
     .reply(200, aSolutionFixture);
 
   const getLocation = ClientFunction(() => document.location.href);
