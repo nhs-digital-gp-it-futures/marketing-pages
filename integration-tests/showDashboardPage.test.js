@@ -61,14 +61,14 @@ test('should render all the sections for sectionGroups', async (t) => {
     const theSectionGroup = Selector(`[data-test-id="dashboard-sectionGroup-${idx + 1}"]`);
 
     await Promise.all(dashboardSectionGroup.sections.map(async (section, sectionIdx) => {
-      const theSection = theSectionGroup.find(`[data-test-id="dashboard-sectionGroup-section-${sectionIdx + 1}"]`);
+      const theSection = theSectionGroup.find(`[data-test-id="dashboard-section-${sectionIdx + 1}"]`);
       await t
         .expect(theSection.count).eql(1)
-        .expect(theSection.find('[data-test-id="dashboard-sectionGroup-section-title"]').innerText)
+        .expect(theSection.find('[data-test-id="dashboard-section-title"]').innerText)
         .eql(section.title)
-        .expect(theSection.find('[data-test-id="dashboard-sectionGroup-section-requirement"]').innerText)
+        .expect(theSection.find('[data-test-id="dashboard-section-requirement"]').innerText)
         .eql(section.requirement)
-        .expect(theSection.find('[data-test-id="dashboard-sectionGroup-section-status"]').innerText)
+        .expect(theSection.find('[data-test-id="dashboard-section-status"]').innerText)
         .eql('INCOMPLETE');
     }));
   }));
@@ -84,15 +84,15 @@ test('should render the correct status for a solution with marketing data and st
     const theSectionGroup = Selector(`[data-test-id="dashboard-sectionGroup-${idx + 1}"]`);
 
     await Promise.all(dashboardSectionGroup.sections.map(async (section, sectionIdx) => {
-      const theSection = theSectionGroup.find(`[data-test-id="dashboard-sectionGroup-section-${sectionIdx + 1}"]`);
+      const theSection = theSectionGroup.find(`[data-test-id="dashboard-section-${sectionIdx + 1}"]`);
 
       await t
         .expect(theSection.count).eql(1)
-        .expect(theSection.find('[data-test-id="dashboard-sectionGroup-section-title"]').innerText)
+        .expect(theSection.find('[data-test-id="dashboard-section-title"]').innerText)
         .eql(section.title)
-        .expect(theSection.find('[data-test-id="dashboard-sectionGroup-section-requirement"]').innerText)
+        .expect(theSection.find('[data-test-id="dashboard-section-requirement"]').innerText)
         .eql(section.requirement)
-        .expect(theSection.find('[data-test-id="dashboard-sectionGroup-section-status"]').innerText)
+        .expect(theSection.find('[data-test-id="dashboard-section-status"]').innerText)
         .eql('COMPLETE');
     }));
   }));
@@ -114,7 +114,7 @@ test('clicking on the section link should navigate the user to the section page'
     const theSectionGroup = Selector(`[data-test-id="dashboard-sectionGroup-${idx + 1}"]`);
 
     await Promise.all(dashboardSectionGroup.sections.map(async (section, sectionIdx) => {
-      const theSection = theSectionGroup.find(`[data-test-id="dashboard-sectionGroup-section-${sectionIdx + 1}"]`);
+      const theSection = theSectionGroup.find(`[data-test-id="dashboard-section-${sectionIdx + 1}"]`);
 
       await t
         .click(theSection.find('a'))

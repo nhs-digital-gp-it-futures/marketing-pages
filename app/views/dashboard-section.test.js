@@ -31,7 +31,7 @@ const createDummyApp = (context) => {
   return app;
 };
 
-describe('dashboard-sectionGroup-section', () => {
+describe('dashboard-section', () => {
   it('should render the section title', (done) => {
     const dummyApp = createDummyApp(aSectionContext('Some section Title'));
     request(dummyApp)
@@ -39,7 +39,7 @@ describe('dashboard-sectionGroup-section', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        expect($('[data-test-id="dashboard-sectionGroup-section-title"]').text().trim()).toEqual('Some section Title');
+        expect($('[data-test-id="dashboard-section-title"]').text().trim()).toEqual('Some section Title');
 
         done();
       });
@@ -52,7 +52,7 @@ describe('dashboard-sectionGroup-section', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        expect($('[data-test-id="dashboard-sectionGroup-section-requirement"]').text().trim()).toEqual('Mandatory');
+        expect($('[data-test-id="dashboard-section-requirement"]').text().trim()).toEqual('Mandatory');
 
         done();
       });
@@ -65,7 +65,7 @@ describe('dashboard-sectionGroup-section', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        expect($('[data-test-id="dashboard-sectionGroup-section-status"]').text().trim()).toEqual('INCOMPLETE');
+        expect($('[data-test-id="dashboard-section-status"]').text().trim()).toEqual('INCOMPLETE');
 
         done();
       });
@@ -78,7 +78,7 @@ describe('dashboard-sectionGroup-section', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        expect($('[data-test-id="dashboard-sectionGroup-section-status"]').text().trim()).toEqual('COMPLETE');
+        expect($('[data-test-id="dashboard-section-status"]').text().trim()).toEqual('COMPLETE');
 
         done();
       });

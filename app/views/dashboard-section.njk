@@ -1,17 +1,17 @@
 {% macro dashboardSection(section, index) %}
-  <li data-test-id="dashboard-sectionGroup-section-{{index}}" class="app-section-list__item">
+  <li data-test-id="dashboard-section-{{index}}" class="app-section-list__item">
     <div class="nhsuk-grid-column-one-half" >
-      <span data-test-id="dashboard-sectionGroup-section-title" class="app-section-list__task-name">
+      <span data-test-id="dashboard-section-title" class="app-section-list__task-name">
         <a href="{{ section.URL }}" aria-describedby="eligibility-completed">
           {{ section.title }}
         </a>
       </span>
     </div>
     <div class="nhsuk-grid-column-two-quarters">
-      <span data-test-id="dashboard-sectionGroup-section-requirement" class="app-section-list__task-name">
+      <span data-test-id="dashboard-section-requirement" class="app-section-list__task-name">
         <p>{{ section.requirement }}</p>
       </span>
-      <strong data-test-id="dashboard-sectionGroup-section-status" class="govuk-tag app-section-list__task-completed" id="eligibility-completed">
+      <strong data-test-id="dashboard-section-status" class="govuk-tag app-section-list__task-completed" id="eligibility-completed">
         {{ section.status }}
       </strong>
     </div>
