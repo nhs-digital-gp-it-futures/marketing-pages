@@ -4,8 +4,8 @@ export const createMarketingDataIfRequired = (dashboardManifest, exisingSolution
   const marketingData = {};
   const tasks = [];
 
-  dashboardManifest.sectionGroups.map((section) => {
-    section.tasks.map((task) => {
+  dashboardManifest.sectionGroups.map((sectionGroup) => {
+    sectionGroup.tasks.map((task) => {
       let marketingDataTask = {};
 
       const existingMarketingDataForTask = findExistingMarketingDataForTask(exisingSolutionData, task.id);

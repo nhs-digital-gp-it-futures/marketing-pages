@@ -32,7 +32,7 @@ describe('createMarketingDataIfRequired', () => {
 
       const dashboardManifest = createDashboardManifest(
         [
-          createSection('first-section', 'The first section',
+          createSection('first-section-group', 'The first section group',
             [
               createTask('first-task', 'The first task'),
             ]),
@@ -66,7 +66,7 @@ describe('createMarketingDataIfRequired', () => {
 
       const dashboardManifest = createDashboardManifest(
         [
-          createSection('first-section', 'The first section',
+          createSection('first-section-group', 'The first section group',
             [
               createTask('first-task', 'The first task'),
               createTask('second-task', 'The second task'),
@@ -106,12 +106,12 @@ describe('createMarketingDataIfRequired', () => {
 
       const dashboardManifest = createDashboardManifest(
         [
-          createSection('first-section', 'The first section',
+          createSection('first-section-group', 'The first section group',
             [
               createTask('first-task', 'The first task'),
               createTask('second-task', 'The second task'),
             ]),
-          createSection('second-section', 'The second section',
+          createSection('second-section-group', 'The second section group',
             [
               createTask('third-task', 'The third task'),
             ]),
@@ -154,7 +154,7 @@ describe('createMarketingDataIfRequired', () => {
 
       const dashboardManifest = createDashboardManifest(
         [
-          createSection('first-section', 'The first section',
+          createSection('first-section-group', 'The first section-group',
             [
               createTask('first-task', 'The first task'),
             ]),
@@ -198,7 +198,7 @@ describe('createMarketingDataIfRequired', () => {
 
       const dashboardManifest = createDashboardManifest(
         [
-          createSection('first-section', 'The first section',
+          createSection('first-section-group', 'The first section-group',
             [
               createTask('first-task', 'The first task'),
               createTask('second-task', 'The second task'),

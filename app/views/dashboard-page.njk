@@ -1,13 +1,13 @@
 {% extends 'includes/layout.njk' %}
-{% from './dashboard-section.njk' import dashboardSection %}
+{% from './dashboard-sectionGroup.njk' import dashboardSectionGroup %}
 
 {% block body %}
 <div class="nhsuk-grid-row">
   <div class="nhsuk-grid-column-full">
 
     <h1>Marketing Page - Dashboard</h1>
-    {% for section in sectionGroups %}
-      {{ dashboardSection(section, loop.index) }}
+    {% for sectionGroup in sectionGroups %}
+      {{ dashboardSectionGroup(sectionGroup, loop.index) }}
     {% endfor %}
   </div>
 </div>

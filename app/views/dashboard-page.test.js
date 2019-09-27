@@ -36,7 +36,7 @@ describe('dashboard page', () => {
     const context = {
       sectionGroups: [
         {
-          title: 'Some section title',
+          title: 'Some section group title',
           tasks: [],
         },
       ],
@@ -48,7 +48,7 @@ describe('dashboard page', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        expect($('[data-test-id="dashboard-section-1"]').length).toEqual(1);
+        expect($('[data-test-id="dashboard-sectionGroup-1"]').length).toEqual(1);
 
         done();
       });

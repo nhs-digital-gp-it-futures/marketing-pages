@@ -10,9 +10,9 @@ const aTaskContext = title => ({
 });
 
 const aSectionGroupContext = (tasks = []) => ({
-  section: {
-    id: 'some-section-group-id',
-    title: 'Section Group Title',
+  sectionGroup: {
+    id: 'some-sectionGroup-group-id',
+    title: 'sectionGroup Group Title',
     tasks,
   },
 });
@@ -22,8 +22,8 @@ const createDummyApp = (context) => {
 
   const router = express.Router();
   const dummyRouter = router.get('/', (req, res) => {
-    const macroWrapper = `{% from './dashboard-section.njk' import dashboardSection %}
-                            {{ dashboardSection(section) }}`;
+    const macroWrapper = `{% from './dashboard-sectionGroup.njk' import dashboardSectionGroup %}
+                            {{ dashboardSectionGroup(sectionGroup) }}`;
 
     const viewToTest = nunjucks.renderString(macroWrapper, context);
 
@@ -35,21 +35,21 @@ const createDummyApp = (context) => {
   return app;
 };
 
-describe('dashboard-section', () => {
-  it('should render the title of the section group', (done) => {
+describe('dashboard-sectionGroup', () => {
+  it('should render the title of the sectionGroup group', (done) => {
     const dummyApp = createDummyApp(aSectionGroupContext());
     request(dummyApp)
       .get('/')
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        expect($('h2').text().trim()).toEqual('Section Group Title');
+        expect($('h2').text().trim()).toEqual('sectionGroup Group Title');
 
         done();
       });
   });
 
-  it('should render a task list of 1 if the section group only contains the 1 task', (done) => {
+  it('should render a task list of 1 if the sectionGroup group only contains the 1 task', (done) => {
     const aSectionWithOneTask = aSectionGroupContext([aTaskContext('Some Task')]);
     const dummyApp = createDummyApp(aSectionWithOneTask);
 
@@ -64,7 +64,7 @@ describe('dashboard-section', () => {
       });
   });
 
-  it('should render a task list of 2 if the section group contains 2 tasks', (done) => {
+  it('should render a task list of 2 if the sectionGroup group contains 2 tasks', (done) => {
     const aSectionWithOneTask = aSectionGroupContext([aTaskContext('Some First Task'), aTaskContext('Some Second Task')]);
     const dummyApp = createDummyApp(aSectionWithOneTask);
 

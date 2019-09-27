@@ -44,7 +44,7 @@ test('should render the sectionGroups configured in the dashboard manifest', asy
   const dashboardsectionGroups = dashboardManifest.sectionGroups;
 
   await Promise.all(dashboardsectionGroups.map(async (dashboardSection, idx) => {
-    const theSection = Selector(`[data-test-id="dashboard-section-${idx + 1}"]`);
+    const theSection = Selector(`[data-test-id="dashboard-sectionGroup-${idx + 1}"]`);
     await t
       .expect(theSection.count).eql(1)
       .expect(theSection.find('h2').innerText).eql(dashboardSection.title);
@@ -58,17 +58,17 @@ test('should render all the tasks for sectionGroups', async (t) => {
   const dashboardsectionGroups = dashboardManifest.sectionGroups;
 
   await Promise.all(dashboardsectionGroups.map(async (dashboardSection, idx) => {
-    const theSection = Selector(`[data-test-id="dashboard-section-${idx + 1}"]`);
+    const theSection = Selector(`[data-test-id="dashboard-sectionGroup-${idx + 1}"]`);
 
     await Promise.all(dashboardSection.tasks.map(async (task, taskIdx) => {
-      const theTask = theSection.find(`[data-test-id="dashboard-section-task-${taskIdx + 1}"]`);
+      const theTask = theSection.find(`[data-test-id="dashboard-sectionGroup-task-${taskIdx + 1}"]`);
       await t
         .expect(theTask.count).eql(1)
-        .expect(theTask.find('[data-test-id="dashboard-section-task-title"]').innerText)
+        .expect(theTask.find('[data-test-id="dashboard-sectionGroup-task-title"]').innerText)
         .eql(task.title)
-        .expect(theTask.find('[data-test-id="dashboard-section-task-requirement"]').innerText)
+        .expect(theTask.find('[data-test-id="dashboard-sectionGroup-task-requirement"]').innerText)
         .eql(task.requirement)
-        .expect(theTask.find('[data-test-id="dashboard-section-task-status"]').innerText)
+        .expect(theTask.find('[data-test-id="dashboard-sectionGroup-task-status"]').innerText)
         .eql('INCOMPLETE');
     }));
   }));
@@ -81,18 +81,18 @@ test('should render the correct status for a solution with marketing data and st
   const dashboardsectionGroups = dashboardManifest.sectionGroups;
 
   await Promise.all(dashboardsectionGroups.map(async (dashboardSection, idx) => {
-    const theSection = Selector(`[data-test-id="dashboard-section-${idx + 1}"]`);
+    const theSection = Selector(`[data-test-id="dashboard-sectionGroup-${idx + 1}"]`);
 
     await Promise.all(dashboardSection.tasks.map(async (task, taskIdx) => {
-      const theTask = theSection.find(`[data-test-id="dashboard-section-task-${taskIdx + 1}"]`);
+      const theTask = theSection.find(`[data-test-id="dashboard-sectionGroup-task-${taskIdx + 1}"]`);
 
       await t
         .expect(theTask.count).eql(1)
-        .expect(theTask.find('[data-test-id="dashboard-section-task-title"]').innerText)
+        .expect(theTask.find('[data-test-id="dashboard-sectionGroup-task-title"]').innerText)
         .eql(task.title)
-        .expect(theTask.find('[data-test-id="dashboard-section-task-requirement"]').innerText)
+        .expect(theTask.find('[data-test-id="dashboard-sectionGroup-task-requirement"]').innerText)
         .eql(task.requirement)
-        .expect(theTask.find('[data-test-id="dashboard-section-task-status"]').innerText)
+        .expect(theTask.find('[data-test-id="dashboard-sectionGroup-task-status"]').innerText)
         .eql('COMPLETE');
     }));
   }));
@@ -111,10 +111,10 @@ test('clicking on the task link should navigate the user to the task page', asyn
   const dashboardsectionGroups = dashboardManifest.sectionGroups;
 
   await Promise.all(dashboardsectionGroups.map(async (dashboardSection, idx) => {
-    const theSection = Selector(`[data-test-id="dashboard-section-${idx + 1}"]`);
+    const theSection = Selector(`[data-test-id="dashboard-sectionGroup-${idx + 1}"]`);
 
     await Promise.all(dashboardSection.tasks.map(async (task, taskIdx) => {
-      const theTask = theSection.find(`[data-test-id="dashboard-section-task-${taskIdx + 1}"]`);
+      const theTask = theSection.find(`[data-test-id="dashboard-sectionGroup-task-${taskIdx + 1}"]`);
 
       await t
         .click(theTask.find('a'))

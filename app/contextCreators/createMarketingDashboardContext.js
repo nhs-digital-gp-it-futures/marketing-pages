@@ -3,11 +3,11 @@ export const createMarketingDashboardContext = (solutionId, dashboardManifest, m
   const sectionGroups = [];
 
   dashboardManifest.sectionGroups.map((manifestSection) => {
-    const section = {};
+    const sectionGroup = {};
     const tasks = [];
 
-    section.id = manifestSection.id;
-    section.title = manifestSection.title;
+    sectionGroup.id = manifestSection.id;
+    sectionGroup.title = manifestSection.title;
 
     manifestSection.tasks.map((manifestTask) => {
       const task = {};
@@ -22,8 +22,8 @@ export const createMarketingDashboardContext = (solutionId, dashboardManifest, m
       tasks.push(task);
     });
 
-    section.tasks = tasks;
-    sectionGroups.push(section);
+    sectionGroup.tasks = tasks;
+    sectionGroups.push(sectionGroup);
   });
 
   context.sectionGroups = sectionGroups;

@@ -18,8 +18,8 @@ const createDummyApp = (context) => {
 
   const router = express.Router();
   const dummyRouter = router.get('/', (req, res) => {
-    const macroWrapper = `{% from './dashboard-section-task.njk' import dashboardSectionTask %}
-                            {{ dashboardSectionTask(task) }}`;
+    const macroWrapper = `{% from './dashboard-sectionGroup-task.njk' import dashboardSectionGroupTask %}
+                            {{ dashboardSectionGroupTask(task) }}`;
 
     const viewToTest = nunjucks.renderString(macroWrapper, context);
 
@@ -31,7 +31,7 @@ const createDummyApp = (context) => {
   return app;
 };
 
-describe('dashboard-section-task', () => {
+describe('dashboard-sectionGroup-task', () => {
   it('should render the task title', (done) => {
     const dummyApp = createDummyApp(aTaskContext('Some Task Title'));
     request(dummyApp)
@@ -39,7 +39,7 @@ describe('dashboard-section-task', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        expect($('[data-test-id="dashboard-section-task-title"]').text().trim()).toEqual('Some Task Title');
+        expect($('[data-test-id="dashboard-sectionGroup-task-title"]').text().trim()).toEqual('Some Task Title');
 
         done();
       });
@@ -52,7 +52,7 @@ describe('dashboard-section-task', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        expect($('[data-test-id="dashboard-section-task-requirement"]').text().trim()).toEqual('Mandatory');
+        expect($('[data-test-id="dashboard-sectionGroup-task-requirement"]').text().trim()).toEqual('Mandatory');
 
         done();
       });
@@ -65,7 +65,7 @@ describe('dashboard-section-task', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        expect($('[data-test-id="dashboard-section-task-status"]').text().trim()).toEqual('INCOMPLETE');
+        expect($('[data-test-id="dashboard-sectionGroup-task-status"]').text().trim()).toEqual('INCOMPLETE');
 
         done();
       });
@@ -78,7 +78,7 @@ describe('dashboard-section-task', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        expect($('[data-test-id="dashboard-section-task-status"]').text().trim()).toEqual('COMPLETE');
+        expect($('[data-test-id="dashboard-sectionGroup-task-status"]').text().trim()).toEqual('COMPLETE');
 
         done();
       });

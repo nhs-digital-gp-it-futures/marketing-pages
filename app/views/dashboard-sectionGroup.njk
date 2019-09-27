@@ -1,0 +1,14 @@
+{% from './dashboard-sectionGroup-task.njk' import dashboardSectionGroupTask %}
+
+{% macro dashboardSectionGroup(sectionGroup, index) %}
+  <div data-test-id="dashboard-sectionGroup-{{index}}">
+    <h2 class="app-task-list__section">
+      {{ sectionGroup.title }}
+    </h2>
+    <ul class="app-task-list__items">
+      {% for task in sectionGroup.tasks %}
+        {{ dashboardSectionGroupTask(task, loop.index) }}
+      {% endfor %}
+    </ul>
+  </div>
+{% endmacro %}
