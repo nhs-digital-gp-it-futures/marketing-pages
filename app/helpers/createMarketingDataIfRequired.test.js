@@ -2,28 +2,28 @@ import { createMarketingDataIfRequired } from './createMarketingDataIfRequired';
 
 
 describe('createMarketingDataIfRequired', () => {
-  const createDashboardManifest = sections => ({
+  const createDashboardManifest = sectionGroups => ({
     id: 'marketing-page-dashboard',
+    sectionGroups,
+  });
+
+  const createSectionGroup = (id, title, sections) => ({
+    id,
+    title,
     sections,
   });
 
-  const createSection = (id, title, tasks) => ({
-    id,
-    title,
-    tasks,
-  });
-
-  const createTask = (id, title) => ({
+  const createSection = (id, title) => ({
     id,
     title,
   });
 
   describe('when initial load and no marketing data exists', () => {
-    it('should create the inital marketing data for 1 task', () => {
+    it('should create the inital marketing data for 1 section', () => {
       const expectedInitialMarketingData = {
-        tasks: [
+        sections: [
           {
-            id: 'first-task',
+            id: 'first-section',
             data: {},
             status: 'INCOMPLETE',
           },
@@ -32,9 +32,9 @@ describe('createMarketingDataIfRequired', () => {
 
       const dashboardManifest = createDashboardManifest(
         [
-          createSection('first-section', 'The first section',
+          createSectionGroup('first-section-group', 'The first section group',
             [
-              createTask('first-task', 'The first task'),
+              createSection('first-section', 'The first section'),
             ]),
         ],
       );
@@ -48,16 +48,16 @@ describe('createMarketingDataIfRequired', () => {
       expect(initialMarketingData).toEqual(expectedInitialMarketingData);
     });
 
-    it('should create the inital marketing data for 2 tasks', () => {
+    it('should create the inital marketing data for 2 sections', () => {
       const expectedInitialMarketingData = {
-        tasks: [
+        sections: [
           {
-            id: 'first-task',
+            id: 'first-section',
             data: {},
             status: 'INCOMPLETE',
           },
           {
-            id: 'second-task',
+            id: 'second-section',
             data: {},
             status: 'INCOMPLETE',
           },
@@ -66,10 +66,10 @@ describe('createMarketingDataIfRequired', () => {
 
       const dashboardManifest = createDashboardManifest(
         [
-          createSection('first-section', 'The first section',
+          createSectionGroup('first-section-group', 'The first section group',
             [
-              createTask('first-task', 'The first task'),
-              createTask('second-task', 'The second task'),
+              createSection('first-section', 'The first section'),
+              createSection('second-section', 'The second section'),
             ]),
         ],
       );
@@ -83,21 +83,21 @@ describe('createMarketingDataIfRequired', () => {
       expect(initialMarketingData).toEqual(expectedInitialMarketingData);
     });
 
-    it('should create the inital marketing data for tasks with multiple sections', () => {
+    it('should create the inital marketing data for sections with multiple sectionGroups', () => {
       const expectedInitialMarketingData = {
-        tasks: [
+        sections: [
           {
-            id: 'first-task',
+            id: 'first-section',
             data: {},
             status: 'INCOMPLETE',
           },
           {
-            id: 'second-task',
+            id: 'second-section',
             data: {},
             status: 'INCOMPLETE',
           },
           {
-            id: 'third-task',
+            id: 'third-section',
             data: {},
             status: 'INCOMPLETE',
           },
@@ -106,14 +106,14 @@ describe('createMarketingDataIfRequired', () => {
 
       const dashboardManifest = createDashboardManifest(
         [
-          createSection('first-section', 'The first section',
+          createSectionGroup('first-section-group', 'The first section group',
             [
-              createTask('first-task', 'The first task'),
-              createTask('second-task', 'The second task'),
+              createSection('first-section', 'The first section'),
+              createSection('second-section', 'The second section'),
             ]),
-          createSection('second-section', 'The second section',
+          createSectionGroup('second-section-group', 'The second section group',
             [
-              createTask('third-task', 'The third task'),
+              createSection('third-section', 'The third section'),
             ]),
         ],
       );
@@ -129,11 +129,11 @@ describe('createMarketingDataIfRequired', () => {
   });
 
   describe('when there is existing marketing data', () => {
-    it('should return the existing marketing data for the task', () => {
+    it('should return the existing marketing data for the section', () => {
       const expectedMarketingData = {
-        tasks: [
+        sections: [
           {
-            id: 'first-task',
+            id: 'first-section',
             data: {},
             status: 'COMPLETE',
           },
@@ -142,9 +142,9 @@ describe('createMarketingDataIfRequired', () => {
 
       const existingSolutionData = {
         marketingData: {
-          tasks: [
+          sections: [
             {
-              id: 'first-task',
+              id: 'first-section',
               data: {},
               status: 'COMPLETE',
             },
@@ -154,9 +154,9 @@ describe('createMarketingDataIfRequired', () => {
 
       const dashboardManifest = createDashboardManifest(
         [
-          createSection('first-section', 'The first section',
+          createSectionGroup('first-section-group', 'The first section-group',
             [
-              createTask('first-task', 'The first task'),
+              createSection('first-section', 'The first section'),
             ]),
         ],
       );
@@ -168,16 +168,16 @@ describe('createMarketingDataIfRequired', () => {
       expect(initialMarketingData).toEqual(expectedMarketingData);
     });
 
-    it('should return the existing marketing data for the task and initial marketing data for a task that does not exist', () => {
+    it('should return the existing marketing data for the section and initial marketing data for a section that does not exist', () => {
       const expectedMarketingData = {
-        tasks: [
+        sections: [
           {
-            id: 'first-task',
+            id: 'first-section',
             data: {},
             status: 'COMPLETE',
           },
           {
-            id: 'second-task',
+            id: 'second-section',
             data: {},
             status: 'INCOMPLETE',
           },
@@ -186,9 +186,9 @@ describe('createMarketingDataIfRequired', () => {
 
       const existingSolutionData = {
         marketingData: {
-          tasks: [
+          sections: [
             {
-              id: 'first-task',
+              id: 'first-section',
               data: {},
               status: 'COMPLETE',
             },
@@ -198,10 +198,10 @@ describe('createMarketingDataIfRequired', () => {
 
       const dashboardManifest = createDashboardManifest(
         [
-          createSection('first-section', 'The first section',
+          createSectionGroup('first-section-group', 'The first section-group',
             [
-              createTask('first-task', 'The first task'),
-              createTask('second-task', 'The second task'),
+              createSection('first-section', 'The first section'),
+              createSection('second-section', 'The second section'),
             ]),
         ],
       );

@@ -9,8 +9,8 @@ const createDummyApp = (context) => {
 
   const router = express.Router();
   const dummyRouter = router.get('/', (req, res) => {
-    const macroWrapper = `{% from './task-question.njk' import taskQuestion %}
-                            {{ taskQuestion(question) }}`;
+    const macroWrapper = `{% from './section-question.njk' import sectionQuestion %}
+                            {{ sectionQuestion(question) }}`;
 
     const viewToTest = nunjucks.renderString(macroWrapper, context);
 
@@ -22,7 +22,7 @@ const createDummyApp = (context) => {
   return app;
 };
 
-describe('task-question', () => {
+describe('section-question', () => {
   it('should render the main advice of the question', (done) => {
     const context = {
       question: {
@@ -36,7 +36,7 @@ describe('task-question', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        expect($('[data-test-id="task-question-main-advice"]').text().trim()).toEqual('main advice for question');
+        expect($('[data-test-id="section-question-main-advice"]').text().trim()).toEqual('main advice for question');
 
         done();
       });
@@ -60,7 +60,7 @@ describe('task-question', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        const additionalAdvice = $('[data-test-id="task-question-additional-advice"]');
+        const additionalAdvice = $('[data-test-id="section-question-additional-advice"]');
 
         expect(additionalAdvice.find('.nhsuk-label').length).toEqual(3);
 

@@ -3,13 +3,13 @@ import { createMarketingDashboardContext } from './createMarketingDashboardConte
 describe('createMarketingDashboardContext', () => {
   it('should create a context from the manifest and the marketingData', () => {
     const expectedContext = {
-      sections: [
+      sectionGroups: [
         {
           id: 'about-your-solution',
           title: 'About your Solution',
-          tasks: [
+          sections: [
             {
-              URL: '/some-solution-id/task/features',
+              URL: '/some-solution-id/section/features',
               title: 'Features',
               requirement: 'Mandatory',
               status: 'INCOMPLETE',
@@ -21,11 +21,11 @@ describe('createMarketingDashboardContext', () => {
 
     const dashboardManifest = {
       id: 'marketing-page-dashboard',
-      sections: [
+      sectionGroups: [
         {
           id: 'about-your-solution',
           title: 'About your Solution',
-          tasks: [
+          sections: [
             {
               id: 'features',
               title: 'Features',
@@ -37,7 +37,7 @@ describe('createMarketingDashboardContext', () => {
     };
 
     const marketingData = {
-      tasks: [
+      sections: [
         {
           id: 'features',
           data: {},

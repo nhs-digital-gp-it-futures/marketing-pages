@@ -96,7 +96,7 @@ describe('generateFields', () => {
       maxItems: 3,
     };
 
-    const exisitingDataForTask = {
+    const exisitingDataForSection = {
       data: {
         'some-question-id': [
           'some-data-1', 'some-data-2',
@@ -104,7 +104,7 @@ describe('generateFields', () => {
       },
     };
 
-    const fields = generateFields(question, exisitingDataForTask);
+    const fields = generateFields(question, exisitingDataForSection);
 
     expect(fields).toEqual(expectedGeneratedFields);
   });
@@ -141,7 +141,7 @@ describe('generateFields', () => {
       },
     ];
 
-    const exisitingDataForTask = {
+    const exisitingDataForSection = {
       data: {
         'some-question-id': [
           'some-data-1', 'some-really-large-data-2', 'some-data-3',
@@ -149,7 +149,7 @@ describe('generateFields', () => {
       },
     };
 
-    const fields = generateFields(question, exisitingDataForTask, validationErrors);
+    const fields = generateFields(question, exisitingDataForSection, validationErrors);
 
     expect(fields).toEqual(expectedGeneratedFields);
   });

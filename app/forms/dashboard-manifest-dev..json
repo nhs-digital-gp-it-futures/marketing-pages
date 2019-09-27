@@ -1,10 +1,10 @@
 {
   "id":"marketing-page-dashboard",
-  "sections": [
+  "sectionGroups": [
     {
       "id": "about-your-solution",
       "title": "About your Solution",
-      "tasks": [
+      "sections": [
         {
           "id": "features",
           "title": "Features",
@@ -15,7 +15,7 @@
     {
       "id": "about-your-self",
       "title": "About yourself",
-      "tasks": [
+      "sections": [
         {
           "id": "your-features",
           "title": "Your Features",

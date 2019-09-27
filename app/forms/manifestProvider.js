@@ -9,11 +9,11 @@ export class ManifestProvider {
     return this.dashboardManifest;
   }
 
-  getTaskManifest(taskName) {
-    this.taskManifestRaw = fs.readFileSync(`./app/forms/tasks/${taskName}.json`);
+  getSectionManifest(sectionName) {
+    this.sectionManifestRaw = fs.readFileSync(`./app/forms/sections/${sectionName}.json`);
 
-    this.taskManifest = JSON.parse(this.taskManifestRaw);
+    this.sectionManifest = JSON.parse(this.sectionManifestRaw);
 
-    return this.taskManifest;
+    return this.sectionManifest;
   }
 }

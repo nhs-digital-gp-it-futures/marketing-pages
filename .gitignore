@@ -4,6 +4,7 @@
 /dist
 /tmp
 /public
+/coverage
 
 # Runtime data
 pids

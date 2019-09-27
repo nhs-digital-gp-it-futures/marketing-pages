@@ -1,13 +1,13 @@
 import { createUpdatedSolutionData } from './createUpdatedSolutionData';
 
 describe('createUpdatedSolutionData', () => {
-  it('should return the solution data as is if the task can not be found', () => {
+  it('should return the solution data as is if the section can not be found', () => {
     const existingSolutionData = {
       id: 'S100000-001',
       name: 'Write on Time',
       summary: 'Write on Time is a Citizen-facing Appointments Management system specifically designed to reduce the number of DNAs in your practice.',
       marketingData: {
-        tasks: [
+        sections: [
           {
             id: 'features',
             data: {},
@@ -17,7 +17,7 @@ describe('createUpdatedSolutionData', () => {
       },
     };
 
-    const taskData = {
+    const sectionData = {
       'features-listing': [
         'Feature A',
         'Feature B',
@@ -25,7 +25,7 @@ describe('createUpdatedSolutionData', () => {
       ],
     };
 
-    const updatedSolutionData = createUpdatedSolutionData('some-other-task-id', existingSolutionData, taskData);
+    const updatedSolutionData = createUpdatedSolutionData('some-other-section-id', existingSolutionData, sectionData);
 
     expect(updatedSolutionData).toEqual(existingSolutionData);
   });
@@ -36,7 +36,7 @@ describe('createUpdatedSolutionData', () => {
       name: 'Write on Time',
       summary: 'Write on Time is a Citizen-facing Appointments Management system specifically designed to reduce the number of DNAs in your practice.',
       marketingData: {
-        tasks: [
+        sections: [
           {
             id: 'features',
             data: {
@@ -57,7 +57,7 @@ describe('createUpdatedSolutionData', () => {
       name: 'Write on Time',
       summary: 'Write on Time is a Citizen-facing Appointments Management system specifically designed to reduce the number of DNAs in your practice.',
       marketingData: {
-        tasks: [
+        sections: [
           {
             id: 'features',
             data: {},
@@ -67,7 +67,7 @@ describe('createUpdatedSolutionData', () => {
       },
     };
 
-    const taskData = {
+    const sectionData = {
       'features-listing': [
         'Feature A',
         'Feature B',
@@ -75,7 +75,7 @@ describe('createUpdatedSolutionData', () => {
       ],
     };
 
-    const updatedSolutionData = createUpdatedSolutionData('features', existingSolutionData, taskData);
+    const updatedSolutionData = createUpdatedSolutionData('features', existingSolutionData, sectionData);
 
     expect(updatedSolutionData).toEqual(expectedUpdatedSolutionData);
   });

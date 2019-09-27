@@ -1,11 +1,11 @@
-import { validateTaskData } from './validateTaskData';
+import { validateSectionData } from './validateSectionData';
 
 
-describe('validateTaskData', () => {
-  describe('when the task contains just a single question', () => {
+describe('validateSectionData', () => {
+  describe('when the section contains just a single question', () => {
     it('return an empty array if there are no validation requirments for the question', () => {
-      const taskManifest = {
-        id: 'task-one',
+      const sectionManifest = {
+        id: 'section-one',
         questions: [
           {
             id: 'question-one',
@@ -14,18 +14,18 @@ describe('validateTaskData', () => {
         ],
       };
 
-      const taskData = {
+      const sectionData = {
         'question-one': ['all good regardless'],
       };
 
-      const validationErrors = validateTaskData(taskManifest, taskData);
+      const validationErrors = validateSectionData(sectionManifest, sectionData);
 
       expect(validationErrors).toEqual([]);
     });
 
     it('return an empty array if there are no validation errors', () => {
-      const taskManifest = {
-        id: 'task-one',
+      const sectionManifest = {
+        id: 'section-one',
         questions: [
           {
             id: 'question-one',
@@ -41,11 +41,11 @@ describe('validateTaskData', () => {
         ],
       };
 
-      const taskData = {
+      const sectionData = {
         'question-one': ['all good'],
       };
 
-      const validationErrors = validateTaskData(taskManifest, taskData);
+      const validationErrors = validateSectionData(sectionManifest, sectionData);
 
       expect(validationErrors).toEqual([]);
     });
@@ -59,8 +59,8 @@ describe('validateTaskData', () => {
         },
       ];
 
-      const taskManifest = {
-        id: 'task-one',
+      const sectionManifest = {
+        id: 'section-one',
         questions: [
           {
             id: 'question-one',
@@ -76,11 +76,11 @@ describe('validateTaskData', () => {
         ],
       };
 
-      const taskData = {
+      const sectionData = {
         'question-one': ['all good not anymore'],
       };
 
-      const validationErrors = validateTaskData(taskManifest, taskData);
+      const validationErrors = validateSectionData(sectionManifest, sectionData);
 
       expect(validationErrors).toEqual(expectedValidationError);
     });
@@ -99,8 +99,8 @@ describe('validateTaskData', () => {
         },
       ];
 
-      const taskManifest = {
-        id: 'task-one',
+      const sectionManifest = {
+        id: 'section-one',
         questions: [
           {
             id: 'question-one',
@@ -116,11 +116,11 @@ describe('validateTaskData', () => {
         ],
       };
 
-      const taskData = {
+      const sectionData = {
         'question-one': ['all good not anymore', 'and this one not good too'],
       };
 
-      const validationErrors = validateTaskData(taskManifest, taskData);
+      const validationErrors = validateSectionData(sectionManifest, sectionData);
 
       expect(validationErrors).toEqual(expectedValidationError);
     });
@@ -134,8 +134,8 @@ describe('validateTaskData', () => {
         },
       ];
 
-      const taskManifest = {
-        id: 'task-one',
+      const sectionManifest = {
+        id: 'section-one',
         questions: [
           {
             id: 'question-one',
@@ -151,11 +151,11 @@ describe('validateTaskData', () => {
         ],
       };
 
-      const taskData = {
+      const sectionData = {
         'question-one': ['all good', 'this one not good'],
       };
 
-      const validationErrors = validateTaskData(taskManifest, taskData);
+      const validationErrors = validateSectionData(sectionManifest, sectionData);
 
       expect(validationErrors).toEqual(expectedValidationError);
     });
