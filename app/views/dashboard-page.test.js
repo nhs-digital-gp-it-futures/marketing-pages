@@ -32,9 +32,9 @@ describe('dashboard page', () => {
       });
   });
 
-  it('should render the sections on the dashboard page', (done) => {
+  it('should render the sectionGroups on the dashboard page', (done) => {
     const context = {
-      sections: [
+      sectionGroups: [
         {
           title: 'Some section title',
           tasks: [],

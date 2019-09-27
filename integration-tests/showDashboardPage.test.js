@@ -37,13 +37,13 @@ test('should render the marketing dashboard page title', async (t) => {
     .expect(title.innerText).eql('Marketing Page - Dashboard');
 });
 
-test('should render the sections configured in the dashboard manifest', async (t) => {
+test('should render the sectionGroups configured in the dashboard manifest', async (t) => {
   pageSetup(t);
 
   const dashboardManifest = new ManifestProvider().getDashboardManifest();
-  const dashboardSections = dashboardManifest.sections;
+  const dashboardsectionGroups = dashboardManifest.sectionGroups;
 
-  await Promise.all(dashboardSections.map(async (dashboardSection, idx) => {
+  await Promise.all(dashboardsectionGroups.map(async (dashboardSection, idx) => {
     const theSection = Selector(`[data-test-id="dashboard-section-${idx + 1}"]`);
     await t
       .expect(theSection.count).eql(1)
@@ -51,13 +51,13 @@ test('should render the sections configured in the dashboard manifest', async (t
   }));
 });
 
-test('should render all the tasks for sections', async (t) => {
+test('should render all the tasks for sectionGroups', async (t) => {
   pageSetup(t);
 
   const dashboardManifest = new ManifestProvider().getDashboardManifest();
-  const dashboardSections = dashboardManifest.sections;
+  const dashboardsectionGroups = dashboardManifest.sectionGroups;
 
-  await Promise.all(dashboardSections.map(async (dashboardSection, idx) => {
+  await Promise.all(dashboardsectionGroups.map(async (dashboardSection, idx) => {
     const theSection = Selector(`[data-test-id="dashboard-section-${idx + 1}"]`);
 
     await Promise.all(dashboardSection.tasks.map(async (task, taskIdx) => {
@@ -78,9 +78,9 @@ test('should render the correct status for a solution with marketing data and st
   pageSetup(t, false);
 
   const dashboardManifest = new ManifestProvider().getDashboardManifest();
-  const dashboardSections = dashboardManifest.sections;
+  const dashboardsectionGroups = dashboardManifest.sectionGroups;
 
-  await Promise.all(dashboardSections.map(async (dashboardSection, idx) => {
+  await Promise.all(dashboardsectionGroups.map(async (dashboardSection, idx) => {
     const theSection = Selector(`[data-test-id="dashboard-section-${idx + 1}"]`);
 
     await Promise.all(dashboardSection.tasks.map(async (task, taskIdx) => {
@@ -108,9 +108,9 @@ test('clicking on the task link should navigate the user to the task page', asyn
   const getLocation = ClientFunction(() => document.location.href);
 
   const dashboardManifest = new ManifestProvider().getDashboardManifest();
-  const dashboardSections = dashboardManifest.sections;
+  const dashboardsectionGroups = dashboardManifest.sectionGroups;
 
-  await Promise.all(dashboardSections.map(async (dashboardSection, idx) => {
+  await Promise.all(dashboardsectionGroups.map(async (dashboardSection, idx) => {
     const theSection = Selector(`[data-test-id="dashboard-section-${idx + 1}"]`);
 
     await Promise.all(dashboardSection.tasks.map(async (task, taskIdx) => {

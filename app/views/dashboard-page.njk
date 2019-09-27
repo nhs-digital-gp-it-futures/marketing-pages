@@ -6,7 +6,7 @@
   <div class="nhsuk-grid-column-full">
 
     <h1>Marketing Page - Dashboard</h1>
-    {% for section in sections %}
+    {% for section in sectionGroups %}
       {{ dashboardSection(section, loop.index) }}
     {% endfor %}
   </div>

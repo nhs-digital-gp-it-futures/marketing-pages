@@ -3,7 +3,7 @@ import { createMarketingDashboardContext } from './createMarketingDashboardConte
 describe('createMarketingDashboardContext', () => {
   it('should create a context from the manifest and the marketingData', () => {
     const expectedContext = {
-      sections: [
+      sectionGroups: [
         {
           id: 'about-your-solution',
           title: 'About your Solution',
@@ -21,7 +21,7 @@ describe('createMarketingDashboardContext', () => {
 
     const dashboardManifest = {
       id: 'marketing-page-dashboard',
-      sections: [
+      sectionGroups: [
         {
           id: 'about-your-solution',
           title: 'About your Solution',

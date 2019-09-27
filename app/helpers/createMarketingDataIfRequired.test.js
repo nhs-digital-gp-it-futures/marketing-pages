@@ -2,9 +2,9 @@ import { createMarketingDataIfRequired } from './createMarketingDataIfRequired';
 
 
 describe('createMarketingDataIfRequired', () => {
-  const createDashboardManifest = sections => ({
+  const createDashboardManifest = sectionGroups => ({
     id: 'marketing-page-dashboard',
-    sections,
+    sectionGroups,
   });
 
   const createSection = (id, title, tasks) => ({
@@ -83,7 +83,7 @@ describe('createMarketingDataIfRequired', () => {
       expect(initialMarketingData).toEqual(expectedInitialMarketingData);
     });
 
-    it('should create the inital marketing data for tasks with multiple sections', () => {
+    it('should create the inital marketing data for tasks with multiple sectionGroups', () => {
       const expectedInitialMarketingData = {
         tasks: [
           {

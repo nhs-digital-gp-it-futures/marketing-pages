@@ -1,8 +1,8 @@
 export const createMarketingDashboardContext = (solutionId, dashboardManifest, marketingData) => {
   const context = {};
-  const sections = [];
+  const sectionGroups = [];
 
-  dashboardManifest.sections.map((manifestSection) => {
+  dashboardManifest.sectionGroups.map((manifestSection) => {
     const section = {};
     const tasks = [];
 
@@ -23,10 +23,10 @@ export const createMarketingDashboardContext = (solutionId, dashboardManifest, m
     });
 
     section.tasks = tasks;
-    sections.push(section);
+    sectionGroups.push(section);
   });
 
-  context.sections = sections;
+  context.sectionGroups = sectionGroups;
 
   return context;
 };

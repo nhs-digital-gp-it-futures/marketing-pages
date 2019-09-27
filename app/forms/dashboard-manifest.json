@@ -1,6 +1,6 @@
 {
   "id":"marketing-page-dashboard",
-  "sections": [
+  "sectionGroups": [
     {
       "id": "about-your-solution",
       "title": "About your Solution",

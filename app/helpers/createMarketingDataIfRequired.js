@@ -4,7 +4,7 @@ export const createMarketingDataIfRequired = (dashboardManifest, exisingSolution
   const marketingData = {};
   const tasks = [];
 
-  dashboardManifest.sections.map((section) => {
+  dashboardManifest.sectionGroups.map((section) => {
     section.tasks.map((task) => {
       let marketingDataTask = {};
 
