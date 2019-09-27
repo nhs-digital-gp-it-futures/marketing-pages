@@ -10,7 +10,7 @@ export class ManifestProvider {
   }
 
   getTaskManifest(taskName) {
-    this.taskManifestRaw = fs.readFileSync(`./app/forms/tasks/${taskName}.json`);
+    this.taskManifestRaw = fs.readFileSync(`./app/forms/sections/${taskName}.json`);
 
     this.taskManifest = JSON.parse(this.taskManifestRaw);
 

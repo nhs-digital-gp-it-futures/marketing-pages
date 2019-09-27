@@ -7,10 +7,10 @@ describe('createMarketingDataIfRequired', () => {
     sectionGroups,
   });
 
-  const createSection = (id, title, tasks) => ({
+  const createSection = (id, title, sections) => ({
     id,
     title,
-    tasks,
+    sections,
   });
 
   const createTask = (id, title) => ({
@@ -21,7 +21,7 @@ describe('createMarketingDataIfRequired', () => {
   describe('when initial load and no marketing data exists', () => {
     it('should create the inital marketing data for 1 task', () => {
       const expectedInitialMarketingData = {
-        tasks: [
+        sections: [
           {
             id: 'first-task',
             data: {},
@@ -48,9 +48,9 @@ describe('createMarketingDataIfRequired', () => {
       expect(initialMarketingData).toEqual(expectedInitialMarketingData);
     });
 
-    it('should create the inital marketing data for 2 tasks', () => {
+    it('should create the inital marketing data for 2 sections', () => {
       const expectedInitialMarketingData = {
-        tasks: [
+        sections: [
           {
             id: 'first-task',
             data: {},
@@ -83,9 +83,9 @@ describe('createMarketingDataIfRequired', () => {
       expect(initialMarketingData).toEqual(expectedInitialMarketingData);
     });
 
-    it('should create the inital marketing data for tasks with multiple sectionGroups', () => {
+    it('should create the inital marketing data for sections with multiple sectionGroups', () => {
       const expectedInitialMarketingData = {
-        tasks: [
+        sections: [
           {
             id: 'first-task',
             data: {},
@@ -131,7 +131,7 @@ describe('createMarketingDataIfRequired', () => {
   describe('when there is existing marketing data', () => {
     it('should return the existing marketing data for the task', () => {
       const expectedMarketingData = {
-        tasks: [
+        sections: [
           {
             id: 'first-task',
             data: {},
@@ -142,7 +142,7 @@ describe('createMarketingDataIfRequired', () => {
 
       const existingSolutionData = {
         marketingData: {
-          tasks: [
+          sections: [
             {
               id: 'first-task',
               data: {},
@@ -170,7 +170,7 @@ describe('createMarketingDataIfRequired', () => {
 
     it('should return the existing marketing data for the task and initial marketing data for a task that does not exist', () => {
       const expectedMarketingData = {
-        tasks: [
+        sections: [
           {
             id: 'first-task',
             data: {},
@@ -186,7 +186,7 @@ describe('createMarketingDataIfRequired', () => {
 
       const existingSolutionData = {
         marketingData: {
-          tasks: [
+          sections: [
             {
               id: 'first-task',
               data: {},

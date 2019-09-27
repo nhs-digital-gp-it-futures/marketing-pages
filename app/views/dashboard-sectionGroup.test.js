@@ -9,11 +9,11 @@ const aTaskContext = title => ({
   title,
 });
 
-const aSectionGroupContext = (tasks = []) => ({
+const aSectionGroupContext = (sections = []) => ({
   sectionGroup: {
     id: 'some-sectionGroup-group-id',
     title: 'sectionGroup Group Title',
-    tasks,
+    sections,
   },
 });
 
@@ -64,7 +64,7 @@ describe('dashboard-sectionGroup', () => {
       });
   });
 
-  it('should render a task list of 2 if the sectionGroup group contains 2 tasks', (done) => {
+  it('should render a task list of 2 if the sectionGroup group contains 2 sections', (done) => {
     const aSectionWithOneTask = aSectionGroupContext([aTaskContext('Some First Task'), aTaskContext('Some Second Task')]);
     const dummyApp = createDummyApp(aSectionWithOneTask);
 

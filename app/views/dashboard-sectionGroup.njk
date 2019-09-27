@@ -6,7 +6,7 @@
       {{ sectionGroup.title }}
     </h2>
     <ul class="app-task-list__items">
-      {% for task in sectionGroup.tasks %}
+      {% for task in sectionGroup.sections %}
         {{ dashboardSectionGroupTask(task, loop.index) }}
       {% endfor %}
     </ul>

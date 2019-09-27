@@ -7,7 +7,7 @@ describe('createMarketingDashboardContext', () => {
         {
           id: 'about-your-solution',
           title: 'About your Solution',
-          tasks: [
+          sections: [
             {
               URL: '/some-solution-id/task/features',
               title: 'Features',
@@ -25,7 +25,7 @@ describe('createMarketingDashboardContext', () => {
         {
           id: 'about-your-solution',
           title: 'About your Solution',
-          tasks: [
+          sections: [
             {
               id: 'features',
               title: 'Features',
@@ -37,7 +37,7 @@ describe('createMarketingDashboardContext', () => {
     };
 
     const marketingData = {
-      tasks: [
+      sections: [
         {
           id: 'features',
           data: {},

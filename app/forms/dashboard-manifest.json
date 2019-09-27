@@ -4,7 +4,7 @@
     {
       "id": "about-your-solution",
       "title": "About your Solution",
-      "tasks": [
+      "sections": [
         {
           "id": "features",
           "title": "Features",

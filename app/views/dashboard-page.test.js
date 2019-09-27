@@ -37,7 +37,7 @@ describe('dashboard page', () => {
       sectionGroups: [
         {
           title: 'Some section group title',
-          tasks: [],
+          sections: [],
         },
       ],
     };

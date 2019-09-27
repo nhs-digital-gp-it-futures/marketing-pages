@@ -51,7 +51,7 @@ test('should render the sectionGroups configured in the dashboard manifest', asy
   }));
 });
 
-test('should render all the tasks for sectionGroups', async (t) => {
+test('should render all the sections for sectionGroups', async (t) => {
   pageSetup(t);
 
   const dashboardManifest = new ManifestProvider().getDashboardManifest();
@@ -60,7 +60,7 @@ test('should render all the tasks for sectionGroups', async (t) => {
   await Promise.all(dashboardsectionGroups.map(async (dashboardSection, idx) => {
     const theSection = Selector(`[data-test-id="dashboard-sectionGroup-${idx + 1}"]`);
 
-    await Promise.all(dashboardSection.tasks.map(async (task, taskIdx) => {
+    await Promise.all(dashboardSection.sections.map(async (task, taskIdx) => {
       const theTask = theSection.find(`[data-test-id="dashboard-sectionGroup-task-${taskIdx + 1}"]`);
       await t
         .expect(theTask.count).eql(1)
@@ -83,7 +83,7 @@ test('should render the correct status for a solution with marketing data and st
   await Promise.all(dashboardsectionGroups.map(async (dashboardSection, idx) => {
     const theSection = Selector(`[data-test-id="dashboard-sectionGroup-${idx + 1}"]`);
 
-    await Promise.all(dashboardSection.tasks.map(async (task, taskIdx) => {
+    await Promise.all(dashboardSection.sections.map(async (task, taskIdx) => {
       const theTask = theSection.find(`[data-test-id="dashboard-sectionGroup-task-${taskIdx + 1}"]`);
 
       await t
@@ -113,7 +113,7 @@ test('clicking on the task link should navigate the user to the task page', asyn
   await Promise.all(dashboardsectionGroups.map(async (dashboardSection, idx) => {
     const theSection = Selector(`[data-test-id="dashboard-sectionGroup-${idx + 1}"]`);
 
-    await Promise.all(dashboardSection.tasks.map(async (task, taskIdx) => {
+    await Promise.all(dashboardSection.sections.map(async (task, taskIdx) => {
       const theTask = theSection.find(`[data-test-id="dashboard-sectionGroup-task-${taskIdx + 1}"]`);
 
       await t

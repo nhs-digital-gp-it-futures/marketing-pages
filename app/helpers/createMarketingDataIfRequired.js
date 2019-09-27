@@ -2,10 +2,10 @@ import { findExistingMarketingDataForTask } from './findExistingMarketingDataFor
 
 export const createMarketingDataIfRequired = (dashboardManifest, exisingSolutionData) => {
   const marketingData = {};
-  const tasks = [];
+  const sections = [];
 
   dashboardManifest.sectionGroups.map((sectionGroup) => {
-    sectionGroup.tasks.map((task) => {
+    sectionGroup.sections.map((task) => {
       let marketingDataTask = {};
 
       const existingMarketingDataForTask = findExistingMarketingDataForTask(exisingSolutionData, task.id);
@@ -18,11 +18,11 @@ export const createMarketingDataIfRequired = (dashboardManifest, exisingSolution
         marketingDataTask.status = 'INCOMPLETE';
       }
 
-      tasks.push(marketingDataTask);
+      sections.push(marketingDataTask);
     });
   });
 
-  marketingData.tasks = tasks;
+  marketingData.sections = sections;
 
   return marketingData;
 };

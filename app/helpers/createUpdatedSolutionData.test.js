@@ -7,7 +7,7 @@ describe('createUpdatedSolutionData', () => {
       name: 'Write on Time',
       summary: 'Write on Time is a Citizen-facing Appointments Management system specifically designed to reduce the number of DNAs in your practice.',
       marketingData: {
-        tasks: [
+        sections: [
           {
             id: 'features',
             data: {},
@@ -36,7 +36,7 @@ describe('createUpdatedSolutionData', () => {
       name: 'Write on Time',
       summary: 'Write on Time is a Citizen-facing Appointments Management system specifically designed to reduce the number of DNAs in your practice.',
       marketingData: {
-        tasks: [
+        sections: [
           {
             id: 'features',
             data: {
@@ -57,7 +57,7 @@ describe('createUpdatedSolutionData', () => {
       name: 'Write on Time',
       summary: 'Write on Time is a Citizen-facing Appointments Management system specifically designed to reduce the number of DNAs in your practice.',
       marketingData: {
-        tasks: [
+        sections: [
           {
             id: 'features',
             data: {},
