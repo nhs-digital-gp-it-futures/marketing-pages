@@ -42,13 +42,11 @@ class App {
       path.join(__dirname, 'node_modules/nhsuk-frontend/packages/'),
     ];
 
-    const env = nunjucks.configure(appViews, {
+    nunjucks.configure(appViews, {
       autoescape: true,
       express: this.app,
       noCache: true,
     });
-
-    env.addFilter('isArray', value => Array.isArray(value))
 
     return this.app;
   }
