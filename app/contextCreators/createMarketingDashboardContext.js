@@ -2,24 +2,24 @@ export const createMarketingDashboardContext = (solutionId, dashboardManifest, m
   const context = {};
   const sectionGroups = [];
 
-  dashboardManifest.sectionGroups.map((manifestSection) => {
+  dashboardManifest.sectionGroups.map((manifestSectionGroup) => {
     const sectionGroup = {};
     const sections = [];
 
-    sectionGroup.id = manifestSection.id;
-    sectionGroup.title = manifestSection.title;
+    sectionGroup.id = manifestSectionGroup.id;
+    sectionGroup.title = manifestSectionGroup.title;
 
-    manifestSection.sections.map((manifestTask) => {
-      const task = {};
-      task.URL = `/${solutionId}/task/${manifestTask.id}`;
-      task.title = manifestTask.title;
-      task.requirement = manifestTask.requirement;
+    manifestSectionGroup.sections.map((manifestSection) => {
+      const section = {};
+      section.URL = `/${solutionId}/section/${manifestSection.id}`;
+      section.title = manifestSection.title;
+      section.requirement = manifestSection.requirement;
 
       const { status } = marketingData.sections
-        .find(marketingDataTask => marketingDataTask.id === manifestTask.id);
-      task.status = status;
+        .find(marketingDataTask => marketingDataTask.id === manifestSection.id);
+      section.status = status;
 
-      sections.push(task);
+      sections.push(section);
     });
 
     sectionGroup.sections = sections;

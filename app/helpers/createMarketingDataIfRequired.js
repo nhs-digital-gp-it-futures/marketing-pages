@@ -1,24 +1,24 @@
-import { findExistingMarketingDataForTask } from './findExistingMarketingDataForTask';
+import { findExistingMarketingDataForSection } from './findExistingMarketingDataForSection';
 
 export const createMarketingDataIfRequired = (dashboardManifest, exisingSolutionData) => {
   const marketingData = {};
   const sections = [];
 
   dashboardManifest.sectionGroups.map((sectionGroup) => {
-    sectionGroup.sections.map((task) => {
-      let marketingDataTask = {};
+    sectionGroup.sections.map((section) => {
+      let marketingDataSection = {};
 
-      const existingMarketingDataForTask = findExistingMarketingDataForTask(exisingSolutionData, task.id);
+      const existingMarketingDataForSection = findExistingMarketingDataForSection(exisingSolutionData, section.id);
 
-      if (existingMarketingDataForTask) {
-        marketingDataTask = existingMarketingDataForTask;
+      if (existingMarketingDataForSection) {
+        marketingDataSection = existingMarketingDataForSection;
       } else {
-        marketingDataTask.id = task.id;
-        marketingDataTask.data = {};
-        marketingDataTask.status = 'INCOMPLETE';
+        marketingDataSection.id = section.id;
+        marketingDataSection.data = {};
+        marketingDataSection.status = 'INCOMPLETE';
       }
 
-      sections.push(marketingDataTask);
+      sections.push(marketingDataSection);
     });
   });
 

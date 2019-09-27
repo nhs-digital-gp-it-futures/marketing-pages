@@ -1,7 +1,7 @@
-export const getExistingDataForFieldIfAvailable = (exisitingDataForTask, questionId, index) => (
-  exisitingDataForTask
-    && exisitingDataForTask.data
-    && exisitingDataForTask.data[questionId]
-    && exisitingDataForTask.data[questionId][index]
-    ? exisitingDataForTask.data[questionId][index] : undefined
+export const getExistingDataForFieldIfAvailable = (exisitingDataForSection, questionId, index) => (
+  exisitingDataForSection
+    && exisitingDataForSection.data
+    && exisitingDataForSection.data[questionId]
+    && exisitingDataForSection.data[questionId][index]
+    ? exisitingDataForSection.data[questionId][index] : undefined
 );

@@ -41,13 +41,13 @@ test('should render the sectionGroups configured in the dashboard manifest', asy
   pageSetup(t);
 
   const dashboardManifest = new ManifestProvider().getDashboardManifest();
-  const dashboardsectionGroups = dashboardManifest.sectionGroups;
+  const dashboardSectionGroups = dashboardManifest.sectionGroups;
 
-  await Promise.all(dashboardsectionGroups.map(async (dashboardSection, idx) => {
-    const theSection = Selector(`[data-test-id="dashboard-sectionGroup-${idx + 1}"]`);
+  await Promise.all(dashboardSectionGroups.map(async (dashboardSectionGroup, idx) => {
+    const theSectionGroup = Selector(`[data-test-id="dashboard-sectionGroup-${idx + 1}"]`);
     await t
-      .expect(theSection.count).eql(1)
-      .expect(theSection.find('h2').innerText).eql(dashboardSection.title);
+      .expect(theSectionGroup.count).eql(1)
+      .expect(theSectionGroup.find('h2').innerText).eql(dashboardSectionGroup.title);
   }));
 });
 
@@ -57,18 +57,18 @@ test('should render all the sections for sectionGroups', async (t) => {
   const dashboardManifest = new ManifestProvider().getDashboardManifest();
   const dashboardsectionGroups = dashboardManifest.sectionGroups;
 
-  await Promise.all(dashboardsectionGroups.map(async (dashboardSection, idx) => {
-    const theSection = Selector(`[data-test-id="dashboard-sectionGroup-${idx + 1}"]`);
+  await Promise.all(dashboardsectionGroups.map(async (dashboardSectionGroup, idx) => {
+    const theSectionGroup = Selector(`[data-test-id="dashboard-sectionGroup-${idx + 1}"]`);
 
-    await Promise.all(dashboardSection.sections.map(async (task, taskIdx) => {
-      const theTask = theSection.find(`[data-test-id="dashboard-sectionGroup-task-${taskIdx + 1}"]`);
+    await Promise.all(dashboardSectionGroup.sections.map(async (section, sectionIdx) => {
+      const theSection = theSectionGroup.find(`[data-test-id="dashboard-sectionGroup-section-${sectionIdx + 1}"]`);
       await t
-        .expect(theTask.count).eql(1)
-        .expect(theTask.find('[data-test-id="dashboard-sectionGroup-task-title"]').innerText)
-        .eql(task.title)
-        .expect(theTask.find('[data-test-id="dashboard-sectionGroup-task-requirement"]').innerText)
-        .eql(task.requirement)
-        .expect(theTask.find('[data-test-id="dashboard-sectionGroup-task-status"]').innerText)
+        .expect(theSection.count).eql(1)
+        .expect(theSection.find('[data-test-id="dashboard-sectionGroup-section-title"]').innerText)
+        .eql(section.title)
+        .expect(theSection.find('[data-test-id="dashboard-sectionGroup-section-requirement"]').innerText)
+        .eql(section.requirement)
+        .expect(theSection.find('[data-test-id="dashboard-sectionGroup-section-status"]').innerText)
         .eql('INCOMPLETE');
     }));
   }));
@@ -80,25 +80,25 @@ test('should render the correct status for a solution with marketing data and st
   const dashboardManifest = new ManifestProvider().getDashboardManifest();
   const dashboardsectionGroups = dashboardManifest.sectionGroups;
 
-  await Promise.all(dashboardsectionGroups.map(async (dashboardSection, idx) => {
-    const theSection = Selector(`[data-test-id="dashboard-sectionGroup-${idx + 1}"]`);
+  await Promise.all(dashboardsectionGroups.map(async (dashboardSectionGroup, idx) => {
+    const theSectionGroup = Selector(`[data-test-id="dashboard-sectionGroup-${idx + 1}"]`);
 
-    await Promise.all(dashboardSection.sections.map(async (task, taskIdx) => {
-      const theTask = theSection.find(`[data-test-id="dashboard-sectionGroup-task-${taskIdx + 1}"]`);
+    await Promise.all(dashboardSectionGroup.sections.map(async (section, sectionIdx) => {
+      const theSection = theSectionGroup.find(`[data-test-id="dashboard-sectionGroup-section-${sectionIdx + 1}"]`);
 
       await t
-        .expect(theTask.count).eql(1)
-        .expect(theTask.find('[data-test-id="dashboard-sectionGroup-task-title"]').innerText)
-        .eql(task.title)
-        .expect(theTask.find('[data-test-id="dashboard-sectionGroup-task-requirement"]').innerText)
-        .eql(task.requirement)
-        .expect(theTask.find('[data-test-id="dashboard-sectionGroup-task-status"]').innerText)
+        .expect(theSection.count).eql(1)
+        .expect(theSection.find('[data-test-id="dashboard-sectionGroup-section-title"]').innerText)
+        .eql(section.title)
+        .expect(theSection.find('[data-test-id="dashboard-sectionGroup-section-requirement"]').innerText)
+        .eql(section.requirement)
+        .expect(theSection.find('[data-test-id="dashboard-sectionGroup-section-status"]').innerText)
         .eql('COMPLETE');
     }));
   }));
 });
 
-test('clicking on the task link should navigate the user to the task page', async (t) => {
+test('clicking on the section link should navigate the user to the section page', async (t) => {
   pageSetup(t);
 
   nock('http://localhost:8080')
@@ -110,15 +110,15 @@ test('clicking on the task link should navigate the user to the task page', asyn
   const dashboardManifest = new ManifestProvider().getDashboardManifest();
   const dashboardsectionGroups = dashboardManifest.sectionGroups;
 
-  await Promise.all(dashboardsectionGroups.map(async (dashboardSection, idx) => {
-    const theSection = Selector(`[data-test-id="dashboard-sectionGroup-${idx + 1}"]`);
+  await Promise.all(dashboardsectionGroups.map(async (dashboardSectionGroup, idx) => {
+    const theSectionGroup = Selector(`[data-test-id="dashboard-sectionGroup-${idx + 1}"]`);
 
-    await Promise.all(dashboardSection.sections.map(async (task, taskIdx) => {
-      const theTask = theSection.find(`[data-test-id="dashboard-sectionGroup-task-${taskIdx + 1}"]`);
+    await Promise.all(dashboardSectionGroup.sections.map(async (section, sectionIdx) => {
+      const theSection = theSectionGroup.find(`[data-test-id="dashboard-sectionGroup-section-${sectionIdx + 1}"]`);
 
       await t
-        .click(theTask.find('a'))
-        .expect(getLocation()).contains(`S100000-001/task/${task.id}`);
+        .click(theSection.find('a'))
+        .expect(getLocation()).contains(`S100000-001/section/${section.id}`);
     }));
   }));
 });

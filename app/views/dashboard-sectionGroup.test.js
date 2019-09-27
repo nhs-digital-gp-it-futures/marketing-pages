@@ -4,7 +4,7 @@ import nunjucks from 'nunjucks';
 import cheerio from 'cheerio';
 import { App } from '../../app';
 
-const aTaskContext = title => ({
+const aSectionContext = title => ({
   URL: 'someUrl',
   title,
 });
@@ -49,31 +49,31 @@ describe('dashboard-sectionGroup', () => {
       });
   });
 
-  it('should render a task list of 1 if the sectionGroup group only contains the 1 task', (done) => {
-    const aSectionWithOneTask = aSectionGroupContext([aTaskContext('Some Task')]);
-    const dummyApp = createDummyApp(aSectionWithOneTask);
+  it('should render a section list of 1 if the sectionGroup group only contains the 1 section', (done) => {
+    const aSectionGroupWithOneSection = aSectionGroupContext([aSectionContext('Some section')]);
+    const dummyApp = createDummyApp(aSectionGroupWithOneSection);
 
     request(dummyApp)
       .get('/')
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        expect($('.app-task-list__item').length).toEqual(1);
+        expect($('.app-section-list__item').length).toEqual(1);
 
         done();
       });
   });
 
-  it('should render a task list of 2 if the sectionGroup group contains 2 sections', (done) => {
-    const aSectionWithOneTask = aSectionGroupContext([aTaskContext('Some First Task'), aTaskContext('Some Second Task')]);
-    const dummyApp = createDummyApp(aSectionWithOneTask);
+  it('should render a section list of 2 if the sectionGroup group contains 2 sections', (done) => {
+    const aSectionGroupWithTwoSections = aSectionGroupContext([aSectionContext('Some First section'), aSectionContext('Some Second section')]);
+    const dummyApp = createDummyApp(aSectionGroupWithTwoSections);
 
     request(dummyApp)
       .get('/')
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        expect($('.app-task-list__item').length).toEqual(2);
+        expect($('.app-section-list__item').length).toEqual(2);
 
         done();
       });

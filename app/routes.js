@@ -1,10 +1,10 @@
 import express from 'express';
 import {
   getMarketingPageDashboardContext,
-  getTaskPageContext,
-  getTaskPageErrorContext,
-  validateTask,
-  postTask,
+  getSectionPageContext,
+  getSectionPageErrorContext,
+  validateSection,
+  postSection,
 } from './controller';
 
 const router = express.Router();
@@ -16,27 +16,27 @@ router.get('/:solutionId', async (req, res) => {
   res.render('dashboard-page', context);
 });
 
-router.get('/:solutionId/task/:taskId', async (req, res) => {
-  const { solutionId, taskId } = req.params;
-  const context = await getTaskPageContext(solutionId, taskId);
+router.get('/:solutionId/section/:sectionId', async (req, res) => {
+  const { solutionId, sectionId } = req.params;
+  const context = await getSectionPageContext(solutionId, sectionId);
 
-  res.render('task-page', context);
+  res.render('section-page', context);
 });
 
-router.post('/:solutionId/task/:taskId', async (req, res) => {
-  const { solutionId, taskId } = req.params;
-  const taskPostData = req.body;
+router.post('/:solutionId/section/:sectionId', async (req, res) => {
+  const { solutionId, sectionId } = req.params;
+  const sectionPostData = req.body;
 
-  const validationErrors = validateTask(taskId, taskPostData);
+  const validationErrors = validateSection(sectionId, sectionPostData);
 
   if (validationErrors && validationErrors.length > 0) {
-    const context = await getTaskPageErrorContext(
-      solutionId, taskId, taskPostData, validationErrors,
+    const context = await getSectionPageErrorContext(
+      solutionId, sectionId, sectionPostData, validationErrors,
     );
 
-    res.render('task-page', context);
+    res.render('section-page', context);
   } else {
-    const response = await postTask(solutionId, taskId, taskPostData);
+    const response = await postSection(solutionId, sectionId, sectionPostData);
 
     res.redirect(`../../${solutionId}`);
   }

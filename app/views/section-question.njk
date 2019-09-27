@@ -1,16 +1,16 @@
 {% from 'components/label/macro.njk' import label %}
 {% from './fields/bulletpoint-list.njk' import bulletpointList %}
 
-{% macro taskQuestion(question) %}
-  <div data-test-id="task-question">
-    <div data-test-id="task-question-main-advice">
+{% macro sectionQuestion(question) %}
+  <div data-test-id="section-question">
+    <div data-test-id="section-question-main-advice">
       {{ label({
         "classes": "nhsuk-label--s",
         "text": question.mainAdvice
       }) }}
     </div>
 
-    <div data-test-id="task-question-additional-advice">
+    <div data-test-id="section-question-additional-advice">
       {% for additionalAdvice in question.additionalAdvice %}
         {{ label({
           "text": additionalAdvice
@@ -18,7 +18,7 @@
       {% endfor %}
     </div>
 
-    <div data-test-id="task-question-fields">
+    <div data-test-id="section-question-fields">
       {% if (question.type === 'bulletpoint-list') %}
         {{ bulletpointList(question) }}
       {% endif %}

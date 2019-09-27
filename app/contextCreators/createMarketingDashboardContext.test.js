@@ -9,7 +9,7 @@ describe('createMarketingDashboardContext', () => {
           title: 'About your Solution',
           sections: [
             {
-              URL: '/some-solution-id/task/features',
+              URL: '/some-solution-id/section/features',
               title: 'Features',
               requirement: 'Mandatory',
               status: 'INCOMPLETE',

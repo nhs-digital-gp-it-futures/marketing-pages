@@ -1,11 +1,11 @@
 import axios from 'axios';
 import { ManifestProvider } from './forms/manifestProvider';
-import { createTaskPageContext } from './contextCreators/createTaskPageContext';
+import { createSectionPageContext } from './contextCreators/createSectionPageContext';
 import { createMarketingDashboardContext } from './contextCreators/createMarketingDashboardContext';
 import { createMarketingDataIfRequired } from './helpers/createMarketingDataIfRequired';
 import { createUpdatedSolutionData } from './helpers/createUpdatedSolutionData';
-import { validateTaskData } from './helpers/validateTaskData';
-import { findExistingMarketingDataForTask } from './helpers/findExistingMarketingDataForTask';
+import { validateSectionData } from './helpers/validateSectionData';
+import { findExistingMarketingDataForSection } from './helpers/findExistingMarketingDataForSection';
 
 export const getMarketingPageDashboardContext = async (solutionId) => {
   const dashboardManifest = new ManifestProvider().getDashboardManifest();
@@ -23,44 +23,44 @@ export const getMarketingPageDashboardContext = async (solutionId) => {
   return context;
 };
 
-export const getTaskPageContext = async (solutionId, taskId) => {
-  const taskManifest = new ManifestProvider().getTaskManifest(taskId);
+export const getSectionPageContext = async (solutionId, sectionId) => {
+  const sectionManifest = new ManifestProvider().getSectionManifest(sectionId);
 
   const solutionData = await axios.get(`http://localhost:8080/api/v1/Solutions/${solutionId}`);
   const existingSolutionData = solutionData.data.solution;
 
-  const formData = findExistingMarketingDataForTask(existingSolutionData, taskManifest.id);
+  const formData = findExistingMarketingDataForSection(existingSolutionData, sectionManifest.id);
 
-  const context = createTaskPageContext(solutionId, taskManifest, formData);
+  const context = createSectionPageContext(solutionId, sectionManifest, formData);
 
   return context;
 };
 
-const convertToFormData = taskData => ({
+const convertToFormData = sectionData => ({
   data: {
-    ...taskData,
+    ...sectionData,
   },
 });
 
-export const getTaskPageErrorContext = async (solutionId, taskId, taskData, validationErrors) => {
-  const taskManifest = new ManifestProvider().getTaskManifest(taskId);
+export const getSectionPageErrorContext = async (solutionId, sectionId, sectionData, validationErrors) => {
+  const sectionManifest = new ManifestProvider().getSectionManifest(sectionId);
 
-  const formData = convertToFormData(taskData);
-  const context = createTaskPageContext(solutionId, taskManifest, formData, validationErrors);
+  const formData = convertToFormData(sectionData);
+  const context = createSectionPageContext(solutionId, sectionManifest, formData, validationErrors);
 
   return context;
 };
 
-export const validateTask = (taskId, taskData) => {
-  const taskManifest = new ManifestProvider().getTaskManifest(taskId);
-  return validateTaskData(taskManifest, taskData);
+export const validateSection = (sectionId, sectionData) => {
+  const sectionManifest = new ManifestProvider().getSectionManifest(sectionId);
+  return validateSectionData(sectionManifest, sectionData);
 };
 
-export const postTask = async (solutionId, taskId, taskData) => {
+export const postSection = async (solutionId, sectionId, sectionData) => {
   const solutionData = await axios.get(`http://localhost:8080/api/v1/Solutions/${solutionId}`);
   const existingSolutionData = solutionData.data.solution;
 
-  const updatedSolutionData = createUpdatedSolutionData(taskId, existingSolutionData, taskData);
+  const updatedSolutionData = createUpdatedSolutionData(sectionId, existingSolutionData, sectionData);
 
   await axios.put(`http://localhost:8080/api/v1/Solutions/${solutionId}`, updatedSolutionData);
 

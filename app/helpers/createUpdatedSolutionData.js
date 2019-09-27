@@ -1,12 +1,12 @@
-import { findExistingMarketingDataForTask } from './findExistingMarketingDataForTask';
+import { findExistingMarketingDataForSection } from './findExistingMarketingDataForSection';
 
-export const createUpdatedSolutionData = (taskId, existingSolutionData, taskData) => {
+export const createUpdatedSolutionData = (sectionId, existingSolutionData, sectionData) => {
   const updatedSolutionData = { ...existingSolutionData };
 
-  const taskToUpdate = findExistingMarketingDataForTask(updatedSolutionData, taskId);
-  if (taskToUpdate) {
-    taskToUpdate.data = taskData;
-    taskToUpdate.status = 'COMPLETE';
+  const sectionToUpdate = findExistingMarketingDataForSection(updatedSolutionData, sectionId);
+  if (sectionToUpdate) {
+    sectionToUpdate.data = sectionData;
+    sectionToUpdate.status = 'COMPLETE';
 
     return updatedSolutionData;
   }

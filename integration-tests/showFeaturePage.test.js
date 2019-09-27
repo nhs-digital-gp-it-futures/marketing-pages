@@ -19,7 +19,7 @@ const mocks = (withMarketingData) => {
 
 const pageSetup = async (t, withMarketingData = false) => {
   mocks(withMarketingData);
-  await t.navigateTo('http://localhost:1234/S100000-001/task/features');
+  await t.navigateTo('http://localhost:1234/S100000-001/section/features');
 };
 
 fixture('Show Feature page');
@@ -36,7 +36,7 @@ test('should render the Features page title', async (t) => {
 test('should render main advice of question', async (t) => {
   pageSetup(t);
 
-  const mainAdvice = Selector('[data-test-id="task-question-main-advice"]');
+  const mainAdvice = Selector('[data-test-id="section-question-main-advice"]');
 
   await t
     .expect(mainAdvice.innerText).eql('Add up to 10 features that describe your Solution.');
@@ -45,10 +45,10 @@ test('should render main advice of question', async (t) => {
 test('should render all the advice of question', async (t) => {
   pageSetup(t);
 
-  const taskManifest = new ManifestProvider().getTaskManifest('features');
-  const expectedAdditionalAdvice = taskManifest.questions[0].additionalAdvice.join('\n');
+  const sectionManifest = new ManifestProvider().getSectionManifest('features');
+  const expectedAdditionalAdvice = sectionManifest.questions[0].additionalAdvice.join('\n');
 
-  const additionalAdvice = Selector('[data-test-id="task-question-additional-advice"]');
+  const additionalAdvice = Selector('[data-test-id="section-question-additional-advice"]');
 
   await t
     .expect(additionalAdvice.innerText).eql(expectedAdditionalAdvice);
@@ -79,7 +79,7 @@ test('should populate the text fields with existing data', async (t) => {
 test('should render the submit button', async (t) => {
   pageSetup(t);
 
-  const submitButton = Selector('[data-test-id="task-submit-button"]');
+  const submitButton = Selector('[data-test-id="section-submit-button"]');
 
   await t
     .expect(submitButton.find('button').count).eql(1);
@@ -100,7 +100,7 @@ test('should allow posting an empty form and navigate back to the dashboard when
 
   const getLocation = ClientFunction(() => document.location.href);
 
-  const submitButton = Selector('[data-test-id="task-submit-button"]');
+  const submitButton = Selector('[data-test-id="section-submit-button"]');
 
   await Promise.all(Array(10).fill().map(async (_, i) => {
     const theField = Selector(`[data-test-id="features-listing-${i + 1}"]`);
@@ -110,14 +110,14 @@ test('should allow posting an empty form and navigate back to the dashboard when
 
   await t
     .click(submitButton.find('button'))
-    .expect(getLocation()).notContains('task')
+    .expect(getLocation()).notContains('section')
     .expect(getLocation()).contains('S100000-001');
 });
 
 test('should show validation for fields exceeding the maxLength', async (t) => {
   pageSetup(t);
 
-  const submitButton = Selector('[data-test-id="task-submit-button"]');
+  const submitButton = Selector('[data-test-id="section-submit-button"]');
 
   const firstField = Selector('[data-test-id="features-listing-1"]');
   const secondField = Selector('[data-test-id="features-listing-2"]');

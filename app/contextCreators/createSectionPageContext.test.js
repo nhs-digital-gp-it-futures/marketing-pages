@@ -1,10 +1,10 @@
-import { createTaskPageContext } from './createTaskPageContext';
+import { createSectionPageContext } from './createSectionPageContext';
 
-describe('createTaskPageContext', () => {
-  it('should create a context from the task manifest', () => {
+describe('createSectionPageContext', () => {
+  it('should create a context from the section manifest', () => {
     const expectedContext = {
       title: 'Features',
-      submitActionUrl: '/some-solution-id/task/features',
+      submitActionUrl: '/some-solution-id/section/features',
       questions: [
         {
           id: 'features-listing',
@@ -18,7 +18,7 @@ describe('createTaskPageContext', () => {
       ],
     };
 
-    const taskManifest = {
+    const sectionManifest = {
       id: 'features',
       title: 'Features',
       questions: [
@@ -34,14 +34,14 @@ describe('createTaskPageContext', () => {
       ],
     };
 
-    const context = createTaskPageContext('some-solution-id', taskManifest);
+    const context = createSectionPageContext('some-solution-id', sectionManifest);
 
     expect(context).toEqual(expectedContext);
   });
 
   it('should create a context for bulletpoint-list type question', () => {
     const expectedContext = {
-      submitActionUrl: '/some-solution-id/task/some-task-id',
+      submitActionUrl: '/some-solution-id/section/some-section-id',
       questions: [
         {
           id: 'fieldId',
@@ -61,8 +61,8 @@ describe('createTaskPageContext', () => {
       ],
     };
 
-    const taskManifest = {
-      id: 'some-task-id',
+    const sectionManifest = {
+      id: 'some-section-id',
       questions: [
         {
           id: 'fieldId',
@@ -72,14 +72,14 @@ describe('createTaskPageContext', () => {
       ],
     };
 
-    const context = createTaskPageContext('some-solution-id', taskManifest);
+    const context = createSectionPageContext('some-solution-id', sectionManifest);
 
     expect(context).toEqual(expectedContext);
   });
 
   it('should create a context for bulletpoint-list type question with existing data populated', () => {
     const expectedContext = {
-      submitActionUrl: '/some-solution-id/task/some-task-id',
+      submitActionUrl: '/some-solution-id/section/some-section-id',
       questions: [
         {
           id: 'fieldId',
@@ -112,8 +112,8 @@ describe('createTaskPageContext', () => {
       },
     };
 
-    const taskManifest = {
-      id: 'some-task-id',
+    const sectionManifest = {
+      id: 'some-section-id',
       questions: [
         {
           id: 'fieldId',
@@ -123,14 +123,14 @@ describe('createTaskPageContext', () => {
       ],
     };
 
-    const context = createTaskPageContext('some-solution-id', taskManifest, formData);
+    const context = createSectionPageContext('some-solution-id', sectionManifest, formData);
 
     expect(context).toEqual(expectedContext);
   });
 
   it('should create a context for bulletpoint-list type question with existing data populated', () => {
     const expectedContext = {
-      submitActionUrl: '/some-solution-id/task/some-task-id',
+      submitActionUrl: '/some-solution-id/section/some-section-id',
       questions: [
         {
           id: 'fieldId',
@@ -174,8 +174,8 @@ describe('createTaskPageContext', () => {
       },
     ];
 
-    const taskManifest = {
-      id: 'some-task-id',
+    const sectionManifest = {
+      id: 'some-section-id',
       questions: [
         {
           id: 'fieldId',
@@ -192,7 +192,7 @@ describe('createTaskPageContext', () => {
       ],
     };
 
-    const context = createTaskPageContext('some-solution-id', taskManifest, formData, validationErrors);
+    const context = createSectionPageContext('some-solution-id', sectionManifest, formData, validationErrors);
 
     expect(context).toEqual(expectedContext);
   });

@@ -1,42 +1,42 @@
 import { getExistingDataForFieldIfAvailable } from './getExistingDataForFieldIfAvailable';
 
 describe('getExistingDataIfAvailable', () => {
-  it('should return undefined if the exisitingDataForTask provided is undefined', () => {
-    const exisitingDataForTask = undefined;
+  it('should return undefined if the exisitingDataForSection provided is undefined', () => {
+    const exisitingDataForSection = undefined;
 
-    const existingDataForField = getExistingDataForFieldIfAvailable(exisitingDataForTask, 'some-question-id', 0);
-
-    expect(existingDataForField).toEqual(undefined);
-  });
-
-  it('should return undefined if the exisitingDataForTask if there is no data property', () => {
-    const exisitingDataForTask = {};
-
-    const existingDataForField = getExistingDataForFieldIfAvailable(exisitingDataForTask, 'some-question-id', 0);
+    const existingDataForField = getExistingDataForFieldIfAvailable(exisitingDataForSection, 'some-question-id', 0);
 
     expect(existingDataForField).toEqual(undefined);
   });
 
-  it('should return undefined if the exisitingDataForTask if the question does not exist within the data property', () => {
-    const exisitingDataForTask = { data: {} };
+  it('should return undefined if the exisitingDataForSection if there is no data property', () => {
+    const exisitingDataForSection = {};
 
-    const existingDataForField = getExistingDataForFieldIfAvailable(exisitingDataForTask, 'some-question-id', 0);
+    const existingDataForField = getExistingDataForFieldIfAvailable(exisitingDataForSection, 'some-question-id', 0);
 
     expect(existingDataForField).toEqual(undefined);
   });
 
-  it('should return undefined if the exisitingDataForTask if the value does not exist for the question', () => {
-    const exisitingDataForTask = { data: { 'some-question-id': [] } };
+  it('should return undefined if the exisitingDataForSection if the question does not exist within the data property', () => {
+    const exisitingDataForSection = { data: {} };
 
-    const existingDataForField = getExistingDataForFieldIfAvailable(exisitingDataForTask, 'some-question-id', 0);
+    const existingDataForField = getExistingDataForFieldIfAvailable(exisitingDataForSection, 'some-question-id', 0);
+
+    expect(existingDataForField).toEqual(undefined);
+  });
+
+  it('should return undefined if the exisitingDataForSection if the value does not exist for the question', () => {
+    const exisitingDataForSection = { data: { 'some-question-id': [] } };
+
+    const existingDataForField = getExistingDataForFieldIfAvailable(exisitingDataForSection, 'some-question-id', 0);
 
     expect(existingDataForField).toEqual(undefined);
   });
 
   it('should return the value at the specific index if existing data does exist for the question', () => {
-    const exisitingDataForTask = { data: { 'some-question-id': ['some-existing-data'] } };
+    const exisitingDataForSection = { data: { 'some-question-id': ['some-existing-data'] } };
 
-    const existingDataForField = getExistingDataForFieldIfAvailable(exisitingDataForTask, 'some-question-id', 0);
+    const existingDataForField = getExistingDataForFieldIfAvailable(exisitingDataForSection, 'some-question-id', 0);
 
     expect(existingDataForField).toEqual('some-existing-data');
   });
