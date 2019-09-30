@@ -6,6 +6,8 @@ export const createSectionPageContext = (solutionId, sectionManifest, formData, 
 
   context.title = sectionManifest.title;
   context.submitActionUrl = `/${solutionId}/section/${sectionManifest.id}`;
+  context.mainAdvice = sectionManifest.mainAdvice;
+  context.additionalAdvice = sectionManifest.additionalAdvice;
 
   sectionManifest.questions.map((sectionManifestQuestion) => {
     const question = {};

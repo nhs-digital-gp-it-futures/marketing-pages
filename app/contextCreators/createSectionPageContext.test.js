@@ -5,15 +5,15 @@ describe('createSectionPageContext', () => {
     const expectedContext = {
       title: 'Features',
       submitActionUrl: '/some-solution-id/section/features',
+      mainAdvice: 'Add up to 10 features that describe your Solution.',
+      additionalAdvice: [
+        'Each feature will be displayed as a bulleted list item. For example:',
+        '- Create and change appointment entries',
+        'You can enter up to 100 characters per feature',
+      ],
       questions: [
         {
           id: 'features-listing',
-          mainAdvice: 'Add up to 10 features that describe your Solution.',
-          additionalAdvice: [
-            'Each feature will be displayed as a bulleted list item. For example:',
-            '- Create and change appointment entries',
-            'You can enter up to 100 characters per feature',
-          ],
         },
       ],
     };
@@ -21,15 +21,15 @@ describe('createSectionPageContext', () => {
     const sectionManifest = {
       id: 'features',
       title: 'Features',
+      mainAdvice: 'Add up to 10 features that describe your Solution.',
+      additionalAdvice: [
+        'Each feature will be displayed as a bulleted list item. For example:',
+        '- Create and change appointment entries',
+        'You can enter up to 100 characters per feature',
+      ],
       questions: [
         {
           id: 'features-listing',
-          mainAdvice: 'Add up to 10 features that describe your Solution.',
-          additionalAdvice: [
-            'Each feature will be displayed as a bulleted list item. For example:',
-            '- Create and change appointment entries',
-            'You can enter up to 100 characters per feature',
-          ],
         },
       ],
     };

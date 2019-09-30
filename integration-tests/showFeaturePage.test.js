@@ -36,7 +36,7 @@ test('should render the Features page title', async (t) => {
 test('should render main advice of question', async (t) => {
   pageSetup(t);
 
-  const mainAdvice = Selector('[data-test-id="section-question-main-advice"]');
+  const mainAdvice = Selector('[data-test-id="section-main-advice"]');
 
   await t
     .expect(mainAdvice.innerText).eql('Add up to 10 features that describe your Solution.');
@@ -46,9 +46,9 @@ test('should render all the advice of question', async (t) => {
   pageSetup(t);
 
   const sectionManifest = new ManifestProvider().getSectionManifest('features');
-  const expectedAdditionalAdvice = sectionManifest.questions[0].additionalAdvice.join('\n');
+  const expectedAdditionalAdvice = sectionManifest.additionalAdvice.join('\n\n');
 
-  const additionalAdvice = Selector('[data-test-id="section-question-additional-advice"]');
+  const additionalAdvice = Selector('[data-test-id="section-additional-advice"]');
 
   await t
     .expect(additionalAdvice.innerText).eql(expectedAdditionalAdvice);
