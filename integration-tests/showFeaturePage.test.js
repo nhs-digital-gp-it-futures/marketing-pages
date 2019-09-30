@@ -27,7 +27,7 @@ fixture('Show Feature page');
 test('should render the Features page title', async (t) => {
   pageSetup(t);
 
-  const title = Selector('h1');
+  const title = Selector('h2');
 
   await t
     .expect(title.innerText).eql('Features');

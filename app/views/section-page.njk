@@ -7,7 +7,14 @@
   <div class="nhsuk-grid-column-full">
   
     <h2 data-test-id="section-title">{{ title }}</h2>
-    <h4 data-test-id="section-mainAdvice">{{ mainAdvice }}</h4>
+    <h4 data-test-id="section-main-advice">{{ mainAdvice }}</h4>
+    <div data-test-id="section-additional-advice">
+      {% for advice in additionalAdvice %}
+        <p class="nhsuk-body-l">
+          {{ advice }}
+        </p>
+      {% endfor %}
+    </div>
 
     <form method="post" action="{{ submitActionUrl }}">
       {% for question in questions%}

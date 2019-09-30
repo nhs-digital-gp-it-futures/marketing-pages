@@ -46,7 +46,30 @@ describe('section page', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        expect($('h4').text().trim()).toEqual('This is the main advice for this section');
+        expect($('h4[data-test-id="section-main-advice"]').text().trim()).toEqual('This is the main advice for this section');
+
+        done();
+      });
+  });
+
+  it('should render any additional advice of the section', (done) => {
+    const context = {
+      title: 'Title of the section',
+      additionalAdvice: [
+        'First bit of addtional advice',
+        'Second bit of addtional advice',
+      ],
+    };
+
+    const dummyApp = createDummyApp(context);
+    request(dummyApp)
+      .get('/')
+      .then((res) => {
+        const $ = cheerio.load(res.text);
+
+        context.additionalAdvice.map((advice, idx) => {
+          expect($(`div[data-test-id="section-additional-advice"] p:nth-child(${idx + 1})`).text().trim()).toEqual(advice);
+        });
 
         done();
       });
