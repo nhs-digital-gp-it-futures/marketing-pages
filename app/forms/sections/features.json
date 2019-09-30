@@ -15,7 +15,7 @@
       "saveValidations": [
         {
           "type": "maxLength",
-          "maxLength": 10,
+          "maxLength": 100,
           "message": "some validation error message"
         }
       ]

@@ -28,7 +28,25 @@ describe('section page', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        expect($('h1').text().trim()).toEqual('Title of the section');
+        expect($('h2[data-test-id="section-title"]').text().trim()).toEqual('Title of the section');
+
+        done();
+      });
+  });
+
+  it('should render the main advice of the section', (done) => {
+    const context = {
+      title: 'Title of the section',
+      mainAdvice: 'This is the main advice for this section',
+    };
+
+    const dummyApp = createDummyApp(context);
+    request(dummyApp)
+      .get('/')
+      .then((res) => {
+        const $ = cheerio.load(res.text);
+
+        expect($('h4').text().trim()).toEqual('This is the main advice for this section');
 
         done();
       });
