@@ -6,6 +6,11 @@
       "title": "About your Solution",
       "sections": [
         {
+          "id": "solution-description",
+          "title": "Solution description",
+          "requirement": "Mandatory"
+        },
+        {
           "id": "features",
           "title": "Features",
           "requirement": "Optional"

@@ -12,6 +12,11 @@
     "marketingData": {
       "sections":[
         {
+          "id":"solution-description",
+          "data":{},
+          "status":"COMPLETE"
+        },
+        {
           "id":"features",
           "data":{
             "features-listing": [

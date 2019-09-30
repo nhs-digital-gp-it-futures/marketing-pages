@@ -98,7 +98,7 @@ test('should render the correct status for a solution with marketing data and st
   }));
 });
 
-test('clicking on the section link should navigate the user to the section page', async (t) => {
+test('clicking on the solution description section link should navigate the user to the solution description page', async (t) => {
   pageSetup(t);
 
   nock('http://localhost:8080')
@@ -107,18 +107,26 @@ test('clicking on the section link should navigate the user to the section page'
 
   const getLocation = ClientFunction(() => document.location.href);
 
-  const dashboardManifest = new ManifestProvider().getDashboardManifest();
-  const dashboardsectionGroups = dashboardManifest.sectionGroups;
+  const theFeatureSection = Selector('[data-test-id="dashboard-section-1"]');
 
-  await Promise.all(dashboardsectionGroups.map(async (dashboardSectionGroup, idx) => {
-    const theSectionGroup = Selector(`[data-test-id="dashboard-sectionGroup-${idx + 1}"]`);
+  await t
+    .click(theFeatureSection.find('a'))
+    .expect(getLocation()).contains('S100000-001/section/solution-description');
+});
 
-    await Promise.all(dashboardSectionGroup.sections.map(async (section, sectionIdx) => {
-      const theSection = theSectionGroup.find(`[data-test-id="dashboard-section-${sectionIdx + 1}"]`);
 
-      await t
-        .click(theSection.find('a'))
-        .expect(getLocation()).contains(`S100000-001/section/${section.id}`);
-    }));
-  }));
+test('clicking on the feature section link should navigate the user to the features page', async (t) => {
+  pageSetup(t);
+
+  nock('http://localhost:8080')
+    .get('/api/v1/Solutions/S100000-001')
+    .reply(200, aSolutionFixture);
+
+  const getLocation = ClientFunction(() => document.location.href);
+
+  const theFeatureSection = Selector('[data-test-id="dashboard-section-2"]');
+
+  await t
+    .click(theFeatureSection.find('a'))
+    .expect(getLocation()).contains('S100000-001/section/feature');
 });

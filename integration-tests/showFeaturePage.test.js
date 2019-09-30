@@ -67,7 +67,9 @@ test('should render 10 text fields', async (t) => {
 test('should populate the text fields with existing data', async (t) => {
   pageSetup(t, true);
 
-  const existingFeatures = aSolutionWithMarketingDataFixture.solution.marketingData.sections[0].data['features-listing'];
+  const existingFeatures = aSolutionWithMarketingDataFixture.solution.marketingData.sections
+    .find(section => section.id === 'features')
+    .data['features-listing'];
 
   await Promise.all(existingFeatures.map(async (existingFeature, i) => {
     const theField = Selector(`[data-test-id="features-listing-${i + 1}"]`);

@@ -1,0 +1,11 @@
+{
+  "id": "solution-description",
+  "title": "Solution description",
+  "mainAdvice": "Add further detail about your Solution to provide the buyer with more information.",
+  "additionalAdvice": [
+    "This information will be visible to buyers on your Solution page but it will not affect search ranking.",
+    "* indicates required field."
+  ],
+  "questions": [
+  ]
+}
