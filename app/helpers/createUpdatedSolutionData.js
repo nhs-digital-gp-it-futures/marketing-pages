@@ -1,4 +1,5 @@
 import { findExistingMarketingDataForSection } from './findExistingMarketingDataForSection';
+import { determineStatusForSection } from './determineStatusForSection';
 
 export const createUpdatedSolutionData = (sectionId, existingSolutionData, sectionData) => {
   const updatedSolutionData = { ...existingSolutionData };
@@ -6,7 +7,7 @@ export const createUpdatedSolutionData = (sectionId, existingSolutionData, secti
   const sectionToUpdate = findExistingMarketingDataForSection(updatedSolutionData, sectionId);
   if (sectionToUpdate) {
     sectionToUpdate.data = sectionData;
-    sectionToUpdate.status = 'COMPLETE';
+    sectionToUpdate.status = determineStatusForSection(sectionData);
 
     return updatedSolutionData;
   }

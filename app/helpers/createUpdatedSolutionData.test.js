@@ -79,4 +79,60 @@ describe('createUpdatedSolutionData', () => {
 
     expect(updatedSolutionData).toEqual(expectedUpdatedSolutionData);
   });
+
+  it('should return updated solution data with blank data and status as INCOMPLETE if the data has been removed in the secitonData', () => {
+    const expectedUpdatedSolutionData = {
+      id: 'S100000-001',
+      name: 'Write on Time',
+      summary: 'Write on Time is a Citizen-facing Appointments Management system specifically designed to reduce the number of DNAs in your practice.',
+      marketingData: {
+        sections: [
+          {
+            id: 'features',
+            data: {
+              'features-listing': [
+                '',
+                '',
+                '',
+              ],
+            },
+            status: 'INCOMPLETE',
+          },
+        ],
+      },
+    };
+
+    const existingSolutionData = {
+      id: 'S100000-001',
+      name: 'Write on Time',
+      summary: 'Write on Time is a Citizen-facing Appointments Management system specifically designed to reduce the number of DNAs in your practice.',
+      marketingData: {
+        sections: [
+          {
+            id: 'features',
+            data: {
+              'features-listing': [
+                'Feature A',
+                'Feature B',
+                'Feature C',
+              ],
+            },
+            status: 'INCOMPLETE',
+          },
+        ],
+      },
+    };
+
+    const sectionData = {
+      'features-listing': [
+        '',
+        '',
+        '',
+      ],
+    };
+
+    const updatedSolutionData = createUpdatedSolutionData('features', existingSolutionData, sectionData);
+
+    expect(updatedSolutionData).toEqual(expectedUpdatedSolutionData);
+  });
 });
