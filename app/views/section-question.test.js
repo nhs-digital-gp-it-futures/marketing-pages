@@ -90,4 +90,27 @@ describe('section-question', () => {
         });
     });
   });
+
+  describe('when question type is textarea-field', () => {
+    it('should render the textarea-field component', (done) => {
+      const context = {
+        question: {
+          type: 'textarea-field',
+        },
+      };
+
+      const dummyApp = createDummyApp(context);
+      request(dummyApp)
+        .get('/')
+        .then((res) => {
+          const $ = cheerio.load(res.text);
+
+          const textareaField = $('[data-test-id="textarea-field"]');
+
+          expect(textareaField.length).toEqual(1);
+
+          done();
+        });
+    });
+  });
 });

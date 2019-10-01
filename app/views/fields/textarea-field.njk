@@ -1,7 +1,7 @@
 {% from 'components/textarea/macro.njk' import textarea %}
 
 {% macro textareaField(question) %}
-  <div data-test-id="textarea">
+  <div data-test-id="textarea-field">
     {{ textarea({
       "name": question.id,
       "id": question.id,
