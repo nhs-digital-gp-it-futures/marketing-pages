@@ -23,51 +23,6 @@ const createDummyApp = (context) => {
 };
 
 describe('section-question', () => {
-  it('should render the main advice of the question', (done) => {
-    const context = {
-      question: {
-        mainAdvice: 'main advice for question',
-      },
-    };
-
-    const dummyApp = createDummyApp(context);
-    request(dummyApp)
-      .get('/')
-      .then((res) => {
-        const $ = cheerio.load(res.text);
-
-        expect($('[data-test-id="section-question-main-advice"]').text().trim()).toEqual('main advice for question');
-
-        done();
-      });
-  });
-
-  it('should render any additional advice', (done) => {
-    const context = {
-      question: {
-        mainAdvice: 'main advice for question',
-        additionalAdvice: [
-          'first additional advice',
-          'second additional advice',
-          'third additional advice',
-        ],
-      },
-    };
-
-    const dummyApp = createDummyApp(context);
-    request(dummyApp)
-      .get('/')
-      .then((res) => {
-        const $ = cheerio.load(res.text);
-
-        const additionalAdvice = $('[data-test-id="section-question-additional-advice"]');
-
-        expect(additionalAdvice.find('.nhsuk-label').length).toEqual(3);
-
-        done();
-      });
-  });
-
   describe('when question type is bulletpoint-list', () => {
     it('should render the bullepoint-list component', (done) => {
       const context = {
