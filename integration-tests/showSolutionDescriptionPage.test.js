@@ -53,3 +53,14 @@ test('should render all the advice of the section', async (t) => {
   await t
     .expect(additionalAdvice.innerText).eql(expectedAdditionalAdvice);
 });
+
+test('should render the solution summary question', async (t) => {
+  pageSetup(t);
+
+  const summaryQuestion = Selector('[data-test-id="textarea-field-solution-summary"]');
+
+  await t
+    .expect(summaryQuestion.find('label.nhsuk-label').innerText).eql('Summarise your Solution *')
+    .expect(summaryQuestion.find('span.nhsuk-hint').innerText).eql('Your text from Stage 1, Solution registration has been automatically inserted but can be edited.')
+    .expect(summaryQuestion.find('textarea').count).eql(1);
+});

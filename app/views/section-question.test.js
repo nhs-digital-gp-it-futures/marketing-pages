@@ -50,6 +50,7 @@ describe('section-question', () => {
     it('should render the textarea-field component', (done) => {
       const context = {
         question: {
+          id: 'question-id',
           type: 'textarea-field',
         },
       };
@@ -60,7 +61,7 @@ describe('section-question', () => {
         .then((res) => {
           const $ = cheerio.load(res.text);
 
-          const textareaField = $('[data-test-id="textarea-field"]');
+          const textareaField = $('[data-test-id="textarea-field-question-id"]');
 
           expect(textareaField.length).toEqual(1);
 

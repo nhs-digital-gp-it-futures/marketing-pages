@@ -33,7 +33,7 @@ test('should render the Features page title', async (t) => {
     .expect(title.innerText).eql('Features');
 });
 
-test('should render main advice of question', async (t) => {
+test('should render main advice of section', async (t) => {
   pageSetup(t);
 
   const mainAdvice = Selector('[data-test-id="section-main-advice"]');
@@ -42,7 +42,7 @@ test('should render main advice of question', async (t) => {
     .expect(mainAdvice.innerText).eql('Add up to 10 features that describe your Solution.');
 });
 
-test('should render all the advice of question', async (t) => {
+test('should render all the advice of section', async (t) => {
   pageSetup(t);
 
   const sectionManifest = new ManifestProvider().getSectionManifest('features');
