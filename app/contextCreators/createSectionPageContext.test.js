@@ -39,161 +39,198 @@ describe('createSectionPageContext', () => {
     expect(context).toEqual(expectedContext);
   });
 
-  it('should create a context for bulletpoint-list type question', () => {
-    const expectedContext = {
-      submitActionUrl: '/some-solution-id/section/some-section-id',
-      questions: [
-        {
-          id: 'fieldId',
-          type: 'bulletpoint-list',
-          fields: [
-            {
-              id: 'fieldId-1',
-            },
-            {
-              id: 'fieldId-2',
-            },
-            {
-              id: 'fieldId-3',
-            },
-          ],
-        },
-      ],
-    };
-
-    const sectionManifest = {
-      id: 'some-section-id',
-      questions: [
-        {
-          id: 'fieldId',
-          type: 'bulletpoint-list',
-          maxItems: 3,
-        },
-      ],
-    };
-
-    const context = createSectionPageContext('some-solution-id', sectionManifest);
-
-    expect(context).toEqual(expectedContext);
-  });
-
-  it('should create a context for bulletpoint-list type question with existing data populated', () => {
-    const expectedContext = {
-      submitActionUrl: '/some-solution-id/section/some-section-id',
-      questions: [
-        {
-          id: 'fieldId',
-          type: 'bulletpoint-list',
-          fields: [
-            {
-              id: 'fieldId-1',
-              data: 'Field A',
-            },
-            {
-              id: 'fieldId-2',
-              data: 'Field B',
-            },
-            {
-              id: 'fieldId-3',
-              data: 'Field C',
-            },
-          ],
-        },
-      ],
-    };
-
-    const formData = {
-      data: {
-        fieldId: [
-          'Field A',
-          'Field B',
-          'Field C',
+  describe('when the question type is a bulletpoint-list', () => {
+    it('should create a context for bulletpoint-list type question', () => {
+      const expectedContext = {
+        submitActionUrl: '/some-solution-id/section/some-section-id',
+        questions: [
+          {
+            id: 'fieldId',
+            type: 'bulletpoint-list',
+            fields: [
+              {
+                id: 'fieldId-1',
+              },
+              {
+                id: 'fieldId-2',
+              },
+              {
+                id: 'fieldId-3',
+              },
+            ],
+          },
         ],
-      },
-    };
+      };
 
-    const sectionManifest = {
-      id: 'some-section-id',
-      questions: [
-        {
-          id: 'fieldId',
-          type: 'bulletpoint-list',
-          maxItems: 3,
+      const sectionManifest = {
+        id: 'some-section-id',
+        questions: [
+          {
+            id: 'fieldId',
+            type: 'bulletpoint-list',
+            maxItems: 3,
+          },
+        ],
+      };
+
+      const context = createSectionPageContext('some-solution-id', sectionManifest);
+
+      expect(context).toEqual(expectedContext);
+    });
+
+    it('should create a context for bulletpoint-list type question with existing data populated', () => {
+      const expectedContext = {
+        submitActionUrl: '/some-solution-id/section/some-section-id',
+        questions: [
+          {
+            id: 'fieldId',
+            type: 'bulletpoint-list',
+            fields: [
+              {
+                id: 'fieldId-1',
+                data: 'Field A',
+              },
+              {
+                id: 'fieldId-2',
+                data: 'Field B',
+              },
+              {
+                id: 'fieldId-3',
+                data: 'Field C',
+              },
+            ],
+          },
+        ],
+      };
+
+      const formData = {
+        data: {
+          fieldId: [
+            'Field A',
+            'Field B',
+            'Field C',
+          ],
         },
-      ],
-    };
+      };
 
-    const context = createSectionPageContext('some-solution-id', sectionManifest, formData);
+      const sectionManifest = {
+        id: 'some-section-id',
+        questions: [
+          {
+            id: 'fieldId',
+            type: 'bulletpoint-list',
+            maxItems: 3,
+          },
+        ],
+      };
 
-    expect(context).toEqual(expectedContext);
-  });
+      const context = createSectionPageContext('some-solution-id', sectionManifest, formData);
 
-  it('should create a context for bulletpoint-list type question with existing data populated', () => {
-    const expectedContext = {
-      submitActionUrl: '/some-solution-id/section/some-section-id',
-      questions: [
+      expect(context).toEqual(expectedContext);
+    });
+
+    it('should create a context for bulletpoint-list type question with existing data populated and a validation error', () => {
+      const expectedContext = {
+        submitActionUrl: '/some-solution-id/section/some-section-id',
+        questions: [
+          {
+            id: 'fieldId',
+            type: 'bulletpoint-list',
+            fields: [
+              {
+                id: 'fieldId-1',
+                data: 'Field A',
+              },
+              {
+                id: 'fieldId-2',
+                data: 'Field B is too big',
+                error: {
+                  message: 'some really helpful error message',
+                },
+              },
+              {
+                id: 'fieldId-3',
+                data: 'Field C',
+              },
+            ],
+          },
+        ],
+      };
+
+      const formData = {
+        data: {
+          fieldId: [
+            'Field A',
+            'Field B is too big',
+            'Field C',
+          ],
+        },
+      };
+
+      const validationErrors = [
         {
-          id: 'fieldId',
-          type: 'bulletpoint-list',
-          fields: [
-            {
-              id: 'fieldId-1',
-              data: 'Field A',
-            },
-            {
-              id: 'fieldId-2',
-              data: 'Field B is too big',
-              error: {
+          questionId: 'fieldId',
+          fieldId: 'fieldId-2',
+          message: 'some really helpful error message',
+        },
+      ];
+
+      const sectionManifest = {
+        id: 'some-section-id',
+        questions: [
+          {
+            id: 'fieldId',
+            type: 'bulletpoint-list',
+            maxItems: 3,
+            saveValidations: [
+              {
+                type: 'maxLength',
+                maxLength: 10,
                 message: 'some really helpful error message',
               },
-            },
-            {
-              id: 'fieldId-3',
-              data: 'Field C',
-            },
-          ],
-        },
-      ],
-    };
-
-    const formData = {
-      data: {
-        fieldId: [
-          'Field A',
-          'Field B is too big',
-          'Field C',
+            ],
+          },
         ],
-      },
-    };
+      };
 
-    const validationErrors = [
-      {
-        questionId: 'fieldId',
-        fieldId: 'fieldId-2',
-        message: 'some really helpful error message',
-      },
-    ];
+      const context = createSectionPageContext('some-solution-id', sectionManifest, formData, validationErrors);
 
-    const sectionManifest = {
-      id: 'some-section-id',
-      questions: [
-        {
-          id: 'fieldId',
-          type: 'bulletpoint-list',
-          maxItems: 3,
-          saveValidations: [
-            {
-              type: 'maxLength',
-              maxLength: 10,
-              message: 'some really helpful error message',
-            },
-          ],
+      expect(context).toEqual(expectedContext);
+    });
+  });
+
+  describe('when the question type is not a bulletpoint-list', () => {
+    it('should create a context for question with existing data populated', () => {
+      const expectedContext = {
+        submitActionUrl: '/some-solution-id/section/some-section-id',
+        questions: [
+          {
+            id: 'fieldId',
+            type: 'textarea-field',
+            data: 'some existing data',
+          },
+        ],
+      };
+
+      const formData = {
+        data: {
+          fieldId: 'some existing data',
         },
-      ],
-    };
+      };
 
-    const context = createSectionPageContext('some-solution-id', sectionManifest, formData, validationErrors);
+      const sectionManifest = {
+        id: 'some-section-id',
+        questions: [
+          {
+            id: 'fieldId',
+            type: 'textarea-field',
+          },
+        ],
+      };
 
-    expect(context).toEqual(expectedContext);
+      const context = createSectionPageContext('some-solution-id', sectionManifest, formData);
+
+      expect(context).toEqual(expectedContext);
+    });
   });
 });

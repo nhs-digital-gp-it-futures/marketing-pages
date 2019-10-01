@@ -3,11 +3,13 @@ export const determineStatusForSection = (sectionData) => {
 
   Object.values(sectionData)
     .map((values) => {
-      values.map((value) => {
-        if (value.trim().length > 0) {
-          status = 'COMPLETE';
-        }
-      });
+      if (Array.isArray(values)) {
+        values.map((value) => {
+          if (value.trim().length > 0) {
+            status = 'COMPLETE';
+          }
+        });
+      }
     });
 
   return status;

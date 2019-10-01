@@ -13,7 +13,11 @@
       "sections":[
         {
           "id":"solution-description",
-          "data":{},
+          "data":{
+            "solution-summary":"The solution summary",
+            "solution-description":"The solution description",
+            "solution-link":"The solution link"
+          },
           "status":"COMPLETE"
         },
         {

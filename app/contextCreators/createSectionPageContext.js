@@ -18,6 +18,11 @@ export const createSectionPageContext = (solutionId, sectionManifest, formData, 
 
     if (sectionManifestQuestion.type === 'bulletpoint-list') {
       question.fields = generateFields(sectionManifestQuestion, formData, validationErrors);
+    } else {
+      question.data = formData
+        && formData.data
+        && formData.data[sectionManifestQuestion.id]
+        ? formData.data[sectionManifestQuestion.id] : undefined;
     }
 
     questions.push(question);

@@ -85,4 +85,26 @@ describe('textField', () => {
         done();
       });
   });
+
+  it('should render the text field with the data populated', (done) => {
+    const context = {
+      question: {
+        id: 'fieldId',
+        mainAdvice: 'Some really important main advice',
+        additionalAdvice: 'Some not so important additional advice',
+        data: 'Some populated data',
+      },
+    };
+
+    const dummyApp = createDummyApp(context);
+    request(dummyApp)
+      .get('/')
+      .then((res) => {
+        const $ = cheerio.load(res.text);
+
+        expect($('input').val()).toEqual('Some populated data');
+
+        done();
+      });
+  });
 });

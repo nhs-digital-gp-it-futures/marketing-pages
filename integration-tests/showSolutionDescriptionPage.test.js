@@ -1,5 +1,5 @@
 import nock from 'nock';
-import { Selector, ClientFunction } from 'testcafe';
+import { Selector } from 'testcafe';
 import { ManifestProvider } from '../app/forms/manifestProvider';
 import aSolutionFixture from './fixtures/aSolution.json';
 import aSolutionWithMarketingDataFixture from './fixtures/aSolutionWithMarketingData.json';
@@ -85,4 +85,15 @@ test('should render the solution link field', async (t) => {
     .expect(summaryQuestion.find('label.nhsuk-label').innerText).eql('Enter a link to more Solution information')
     .expect(summaryQuestion.find('span.nhsuk-hint').innerText).eql('Buyers will be directed to an external link.')
     .expect(summaryQuestion.find('input').count).eql(1);
+});
+
+test('should populate the text fields with existing data', async (t) => {
+  pageSetup(t, true);
+
+  const theQuestions = Selector('form');
+
+  await t
+    .expect(theQuestions.find('[data-test-id="textarea-field-solution-summary"]').find('textarea').value).eql('The solution summary')
+    .expect(theQuestions.find('[data-test-id="textarea-field-solution-description"]').find('textarea').value).eql('The solution description')
+    .expect(theQuestions.find('[data-test-id="text-field-solution-link"]').find('input').value).eql('The solution link');
 });
