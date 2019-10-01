@@ -69,4 +69,28 @@ describe('section-question', () => {
         });
     });
   });
+
+  describe('when question type is text-field', () => {
+    it('should render the text-field component', (done) => {
+      const context = {
+        question: {
+          id: 'question-id',
+          type: 'text-field',
+        },
+      };
+
+      const dummyApp = createDummyApp(context);
+      request(dummyApp)
+        .get('/')
+        .then((res) => {
+          const $ = cheerio.load(res.text);
+
+          const textField = $('[data-test-id="text-field-question-id"]');
+
+          expect(textField.length).toEqual(1);
+
+          done();
+        });
+    });
+  });
 });

@@ -1,5 +1,6 @@
 {% from './fields/bulletpoint-list.njk' import bulletpointList %}
 {% from './fields/textarea-field.njk' import textareaField %}
+{% from './fields/text-field.njk' import textField %}
 
 {% macro sectionQuestion(question) %}
   <div data-test-id="section-question">
@@ -10,6 +11,10 @@
 
       {% if (question.type === 'textarea-field') %}
         {{ textareaField(question) }}
+      {% endif %}
+
+      {% if (question.type === 'text-field') %}
+        {{ textField(question) }}
       {% endif %}
     </div>
   </div>
