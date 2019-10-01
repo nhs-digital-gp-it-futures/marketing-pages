@@ -1,0 +1,16 @@
+{% from 'components/textarea/macro.njk' import textarea %}
+
+{% macro textareaField(question) %}
+  <div data-test-id="textarea">
+    {{ textarea({
+      "name": question.id,
+      "id": question.id,
+      "label": {
+        "text": question.mainAdvice
+      },
+      "hint": {
+        "text": question.additionalAdvice
+      }
+    }) }}
+  </div>
+{% endmacro %}
