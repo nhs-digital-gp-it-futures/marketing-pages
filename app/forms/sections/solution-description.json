@@ -12,6 +12,12 @@
       "mainAdvice": "Summarise your Solution *",
       "additionalAdvice": "Your text from Stage 1, Solution registration has been automatically inserted but can be edited.",
       "type": "textarea-field"
+    },
+    {
+      "id": "solution-description",
+      "mainAdvice": "Write a description about your Solution",
+      "additionalAdvice": "The description will give the buyer more insight into your Solution and the qualities it can provide.",
+      "type": "textarea-field"
     }
   ]
 }

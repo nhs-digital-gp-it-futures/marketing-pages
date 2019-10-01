@@ -64,3 +64,14 @@ test('should render the solution summary question', async (t) => {
     .expect(summaryQuestion.find('span.nhsuk-hint').innerText).eql('Your text from Stage 1, Solution registration has been automatically inserted but can be edited.')
     .expect(summaryQuestion.find('textarea').count).eql(1);
 });
+
+test('should render the about your solution question', async (t) => {
+  pageSetup(t);
+
+  const summaryQuestion = Selector('[data-test-id="textarea-field-solution-description"]');
+
+  await t
+    .expect(summaryQuestion.find('label.nhsuk-label').innerText).eql('Write a description about your Solution')
+    .expect(summaryQuestion.find('span.nhsuk-hint').innerText).eql('The description will give the buyer more insight into your Solution and the qualities it can provide.')
+    .expect(summaryQuestion.find('textarea').count).eql(1);
+});
