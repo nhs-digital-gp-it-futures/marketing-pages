@@ -18,6 +18,12 @@
       "mainAdvice": "Write a description about your Solution",
       "additionalAdvice": "The description will give the buyer more insight into your Solution and the qualities it can provide.",
       "type": "textarea-field"
+    },
+    {
+      "id": "solution-link",
+      "mainAdvice": "Enter a link to more Solution information",
+      "additionalAdvice": "Buyers will be directed to an external link.",
+      "type": "text-field"
     }
   ]
 }

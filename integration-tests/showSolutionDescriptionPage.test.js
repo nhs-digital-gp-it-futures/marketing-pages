@@ -75,3 +75,14 @@ test('should render the about your solution question', async (t) => {
     .expect(summaryQuestion.find('span.nhsuk-hint').innerText).eql('The description will give the buyer more insight into your Solution and the qualities it can provide.')
     .expect(summaryQuestion.find('textarea').count).eql(1);
 });
+
+test('should render the solution link field', async (t) => {
+  pageSetup(t);
+
+  const summaryQuestion = Selector('[data-test-id="text-field-solution-link"]');
+
+  await t
+    .expect(summaryQuestion.find('label.nhsuk-label').innerText).eql('Enter a link to more Solution information')
+    .expect(summaryQuestion.find('span.nhsuk-hint').innerText).eql('Buyers will be directed to an external link.')
+    .expect(summaryQuestion.find('input').count).eql(1);
+});
