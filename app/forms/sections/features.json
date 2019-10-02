@@ -10,6 +10,7 @@
   "questions": [
     {
       "id": "features-listing",
+      "requirement": "Optional",
       "type": "bulletpoint-list",
       "maxItems": 10,
       "saveValidations": [

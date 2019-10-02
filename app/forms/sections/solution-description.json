@@ -9,18 +9,21 @@
   "questions": [
     {
       "id": "solution-summary",
+      "requirement": "Mandatory",
       "mainAdvice": "Summarise your Solution *",
       "additionalAdvice": "Your text from Stage 1, Solution registration has been automatically inserted but can be edited.",
       "type": "textarea-field"
     },
     {
       "id": "solution-description",
+      "requirement": "Optional",
       "mainAdvice": "Write a description about your Solution",
       "additionalAdvice": "The description will give the buyer more insight into your Solution and the qualities it can provide.",
       "type": "textarea-field"
     },
     {
       "id": "solution-link",
+      "requirement": "Optional",
       "mainAdvice": "Enter a link to more Solution information",
       "additionalAdvice": "Buyers will be directed to an external link.",
       "type": "text-field"

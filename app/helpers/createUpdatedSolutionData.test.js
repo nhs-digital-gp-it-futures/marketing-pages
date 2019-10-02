@@ -17,6 +17,18 @@ describe('createUpdatedSolutionData', () => {
       },
     };
 
+    const sectionManifest = {
+      id: 'features',
+      title: 'Features',
+      questions: [
+        {
+          id: 'features-listing',
+          type: 'bulletpoint-list',
+          requirement: 'Optional',
+        },
+      ],
+    };
+
     const sectionData = {
       'features-listing': [
         'Feature A',
@@ -25,7 +37,7 @@ describe('createUpdatedSolutionData', () => {
       ],
     };
 
-    const updatedSolutionData = createUpdatedSolutionData('some-other-section-id', existingSolutionData, sectionData);
+    const updatedSolutionData = createUpdatedSolutionData('some-other-section-id', existingSolutionData, sectionManifest, sectionData);
 
     expect(updatedSolutionData).toEqual(existingSolutionData);
   });
@@ -67,6 +79,18 @@ describe('createUpdatedSolutionData', () => {
       },
     };
 
+    const sectionManifest = {
+      id: 'features',
+      title: 'Features',
+      questions: [
+        {
+          id: 'features-listing',
+          type: 'bulletpoint-list',
+          requirement: 'Optional',
+        },
+      ],
+    };
+
     const sectionData = {
       'features-listing': [
         'Feature A',
@@ -75,7 +99,7 @@ describe('createUpdatedSolutionData', () => {
       ],
     };
 
-    const updatedSolutionData = createUpdatedSolutionData('features', existingSolutionData, sectionData);
+    const updatedSolutionData = createUpdatedSolutionData('features', existingSolutionData, sectionManifest, sectionData);
 
     expect(updatedSolutionData).toEqual(expectedUpdatedSolutionData);
   });
@@ -123,6 +147,18 @@ describe('createUpdatedSolutionData', () => {
       },
     };
 
+    const sectionManifest = {
+      id: 'features',
+      title: 'Features',
+      questions: [
+        {
+          id: 'features-listing',
+          type: 'bulletpoint-list',
+          requirement: 'Optional',
+        },
+      ],
+    };
+
     const sectionData = {
       'features-listing': [
         '',
@@ -131,7 +167,7 @@ describe('createUpdatedSolutionData', () => {
       ],
     };
 
-    const updatedSolutionData = createUpdatedSolutionData('features', existingSolutionData, sectionData);
+    const updatedSolutionData = createUpdatedSolutionData('features', existingSolutionData, sectionManifest, sectionData);
 
     expect(updatedSolutionData).toEqual(expectedUpdatedSolutionData);
   });
