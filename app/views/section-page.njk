@@ -1,6 +1,7 @@
 {% extends 'includes/layout.njk' %}
 {% from 'components/button/macro.njk' import button %}
 {% from './section-question.njk' import sectionQuestion %}
+{% from './section-error-summary.njk' import sectionErrorSummary %}
 
 {% block body %}
 <div class="nhsuk-grid-row">
@@ -17,6 +18,10 @@
     </div>
 
     <form method="post" action="{{ submitActionUrl }}">
+      {% if (errors.length > 0) %}
+        {{ sectionErrorSummary(errors) }}
+      {% endif %}
+
       {% for question in questions%}
         {{ sectionQuestion(question) }}
       {% endfor %}
