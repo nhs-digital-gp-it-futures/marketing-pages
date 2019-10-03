@@ -79,4 +79,34 @@ describe('sectionErrorSummary', () => {
         done();
       });
   });
+
+  it('should render multiple errors if the context contains multiple errors', (done) => {
+    const context = {
+      errors: [
+        {
+          text: 'This is the first error',
+          href: '#link-to-first-error',
+        },
+        {
+          text: 'This is the second error',
+          href: '#link-to-second-error',
+        },
+        {
+          text: 'This is the third error',
+          href: '#link-to-third-error',
+        },
+      ],
+    };
+
+    const dummyApp = createDummyApp(context);
+    request(dummyApp)
+      .get('/')
+      .then((res) => {
+        const $ = cheerio.load(res.text);
+
+        expect($('ul li').length).toEqual(3);
+
+        done();
+      });
+  });
 });
