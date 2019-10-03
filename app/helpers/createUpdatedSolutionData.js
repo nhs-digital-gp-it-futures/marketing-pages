@@ -6,6 +6,12 @@ export const createUpdatedSolutionData = (
 ) => {
   const updatedSolutionData = { ...existingSolutionData };
 
+  if (sectionId === 'solution-description') {
+    updatedSolutionData.summary = sectionData['solution-summary'];
+    updatedSolutionData.description = sectionData['solution-description'];
+    updatedSolutionData.aboutUrl = sectionData['solution-link'];
+  }
+
   const sectionToUpdate = findExistingMarketingDataForSection(updatedSolutionData, sectionId);
   if (sectionToUpdate) {
     sectionToUpdate.data = sectionData;

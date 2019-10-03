@@ -128,7 +128,6 @@ test('should show validation for questions when they exceed the maxLength', asyn
   const thousandCharacters = oneHundredCharacters.repeat(10);
   const threeThousandCharacters = thousandCharacters.repeat(3);
 
-
   const solutionSummary = Selector('[data-test-id="textarea-field-solution-summary"]');
   const solutionDescription = Selector('[data-test-id="textarea-field-solution-description"]');
   const solutionLink = Selector('[data-test-id="text-field-solution-link"]');

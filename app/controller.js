@@ -42,7 +42,9 @@ const convertToFormData = sectionData => ({
   },
 });
 
-export const getSectionPageErrorContext = async (solutionId, sectionId, sectionData, validationErrors) => {
+export const getSectionPageErrorContext = async (
+  solutionId, sectionId, sectionData, validationErrors,
+) => {
   const sectionManifest = new ManifestProvider().getSectionManifest(sectionId);
 
   const formData = convertToFormData(sectionData);
