@@ -33,13 +33,12 @@ export const validateSectionData = (sectionManifest, sectionData) => {
               validationErrors.push(error);
             }
           });
-        } else {
-          if (validationRules[saveValidation.type].rule(sectionData[sectionQuestion.id], saveValidation)) {
-            const error = createErrorForField(
-              sectionQuestion.id, undefined, saveValidation.message,
-            );
-            validationErrors.push(error);
-          }
+        } else if (validationRules[saveValidation.type]
+          .rule(sectionData[sectionQuestion.id], saveValidation)) {
+          const error = createErrorForField(
+            sectionQuestion.id, undefined, saveValidation.message,
+          );
+          validationErrors.push(error);
         }
       });
     }
