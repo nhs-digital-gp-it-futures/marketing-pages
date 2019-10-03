@@ -12,7 +12,14 @@
       "requirement": "Mandatory",
       "mainAdvice": "Summarise your Solution *",
       "additionalAdvice": "Your text from Stage 1, Solution registration has been automatically inserted but can be edited.",
-      "type": "textarea-field"
+      "type": "textarea-field",
+      "saveValidations": [
+        {
+          "type": "maxLength",
+          "maxLength": 10,
+          "message": "Solution Summary validation error message"
+        }
+      ]
     },
     {
       "id": "solution-description",

@@ -30,7 +30,7 @@ const createDataStateForQuestions = (sectionManifest, sectionData) => {
   return questionsState;
 };
 
-const getMandatoryQuestions = questionsState => questionsState.filter(questionState => questionState.requirement === 'Mandatory');
+const findMandatoryQuestions = questionsState => questionsState.filter(questionState => questionState.requirement === 'Mandatory');
 
 const doesSectionHaveMandatoryQuestions = mandatoryQuestions => mandatoryQuestions.length > 0;
 
@@ -50,7 +50,7 @@ const determineStatusOfSectionWithAllOptionalQuestions = (questionsState) => {
 export const determineStatusForSection = (sectionManifest, sectionData) => {
   const questionsState = createDataStateForQuestions(sectionManifest, sectionData);
 
-  const mandatoryQuestions = getMandatoryQuestions(questionsState);
+  const mandatoryQuestions = findMandatoryQuestions(questionsState);
 
   if (doesSectionHaveMandatoryQuestions(mandatoryQuestions)) {
     return determineStatusOfSectionWithMandatoryQuestions(mandatoryQuestions);
