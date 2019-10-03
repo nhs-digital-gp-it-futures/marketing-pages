@@ -56,4 +56,27 @@ describe('sectionErrorSummary', () => {
         done();
       });
   });
+
+  it('should render the one error if the context only contains a single error', (done) => {
+    const context = {
+      errors: [
+        {
+          text: 'This is the first error',
+          href: '#link-to-first-error',
+        },
+      ],
+    };
+
+    const dummyApp = createDummyApp(context);
+    request(dummyApp)
+      .get('/')
+      .then((res) => {
+        const $ = cheerio.load(res.text);
+
+        expect($('ul li a').text().trim()).toEqual('This is the first error');
+        expect($('ul li a').attr('href')).toEqual('#link-to-first-error');
+
+        done();
+      });
+  });
 });
