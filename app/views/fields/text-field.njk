@@ -2,16 +2,33 @@
 
 {% macro textField(question) %}
   <div data-test-id="text-field-{{ question.id }}">
-    {{ input({
-      "id": question.id,
-      "name": question.id,
-      "label": {
-        "text": question.mainAdvice
-      },
-      "hint": {
-        "text": question.additionalAdvice
-      },
-      "value": question.data
-    }) }}
+    {% if (question.error != undefined) %}
+      {{ input({
+        "id": question.id,
+        "name": question.id,
+        "label": {
+          "text": question.mainAdvice
+        },
+        "hint": {
+          "text": question.additionalAdvice
+        },
+        "value": question.data,
+        "errorMessage": {
+          "text": question.error.message
+        }
+      }) }}
+    {% else %}
+      {{ input({
+        "id": question.id,
+        "name": question.id,
+        "label": {
+          "text": question.mainAdvice
+        },
+        "hint": {
+          "text": question.additionalAdvice
+        },
+        "value": question.data
+      }) }}
+    {% endif %}
   </div>
 {% endmacro %}

@@ -26,14 +26,28 @@
       "requirement": "Optional",
       "mainAdvice": "Write a description about your Solution",
       "additionalAdvice": "The description will give the buyer more insight into your Solution and the qualities it can provide.",
-      "type": "textarea-field"
+      "type": "textarea-field",
+      "saveValidations": [
+        {
+          "type": "maxLength",
+          "maxLength": 10,
+          "message": "Solution Description validation error message"
+        }
+      ]
     },
     {
       "id": "solution-link",
       "requirement": "Optional",
       "mainAdvice": "Enter a link to more Solution information",
       "additionalAdvice": "Buyers will be directed to an external link.",
-      "type": "text-field"
+      "type": "text-field",
+      "saveValidations": [
+        {
+          "type": "maxLength",
+          "maxLength": 10,
+          "message": "Solution Link validation error message"
+        }
+      ]
     }
   ]
 }
