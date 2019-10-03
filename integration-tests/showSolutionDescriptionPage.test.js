@@ -1,5 +1,5 @@
 import nock from 'nock';
-import { Selector } from 'testcafe';
+import { Selector, ClientFunction } from 'testcafe';
 import { ManifestProvider } from '../app/forms/manifestProvider';
 import aSolutionFixture from './fixtures/aSolution.json';
 import aSolutionWithMarketingDataFixture from './fixtures/aSolutionWithMarketingData.json';
@@ -96,4 +96,51 @@ test('should populate the text fields with existing data', async (t) => {
     .expect(theQuestions.find('[data-test-id="textarea-field-solution-summary"]').find('textarea').value).eql('The solution summary')
     .expect(theQuestions.find('[data-test-id="textarea-field-solution-description"]').find('textarea').value).eql('The solution description')
     .expect(theQuestions.find('[data-test-id="text-field-solution-link"]').find('input').value).eql('The solution link');
+});
+
+test('should allow posting an empty form and navigate back to the dashboard', async (t) => {
+  pageSetup(t);
+
+  nock('http://localhost:8080')
+    .get('/api/v1/Solutions/S100000-001')
+    .twice()
+    .reply(200, aSolutionFixture);
+
+  nock('http://localhost:8080')
+    .put('/api/v1/Solutions/S100000-001')
+    .twice()
+    .reply(200, {});
+
+  const getLocation = ClientFunction(() => document.location.href);
+
+  const submitButton = Selector('[data-test-id="section-submit-button"]');
+
+  await t
+    .click(submitButton.find('button'))
+    .expect(getLocation()).notContains('section')
+    .expect(getLocation()).contains('S100000-001');
+});
+
+test('should show validation for questions when they exceed the maxLength', async (t) => {
+  pageSetup(t);
+
+  const oneHundredCharacters = '0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789';
+  const thousandCharacters = oneHundredCharacters.repeat(10);
+  const threeThousandCharacters = thousandCharacters.repeat(3);
+
+
+  const solutionSummary = Selector('[data-test-id="textarea-field-solution-summary"]');
+  const solutionDescription = Selector('[data-test-id="textarea-field-solution-description"]');
+  const solutionLink = Selector('[data-test-id="text-field-solution-link"]');
+
+  const submitButton = Selector('[data-test-id="section-submit-button"]');
+
+  await t
+    .typeText(solutionSummary, `${thousandCharacters}0`, { paste: true })
+    .typeText(solutionDescription, `${threeThousandCharacters}0`, { paste: true })
+    .typeText(solutionLink, `${oneHundredCharacters}0`, { paste: true })
+    .click(submitButton.find('button'))
+    .expect(solutionSummary.find('.nhsuk-textarea--error').exists).ok()
+    .expect(solutionDescription.find('.nhsuk-textarea--error').exists).ok()
+    .expect(solutionLink.find('.nhsuk-input--error').exists).ok();
 });
