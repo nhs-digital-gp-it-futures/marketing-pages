@@ -4,6 +4,7 @@ export const createSectionPageContext = (
   solutionId, sectionManifest, formData, validationErrors,
 ) => {
   const context = {};
+  const errors = [];
   const questions = [];
 
   context.title = sectionManifest.title;
@@ -34,6 +35,11 @@ export const createSectionPageContext = (
         const error = {};
         error.message = findValidationErrorForQuestion.message;
         question.error = error;
+
+        const contextError = {};
+        contextError.text = findValidationErrorForQuestion.message;
+        contextError.href = `#${sectionManifestQuestion.id}`;
+        errors.push(contextError);
       }
 
       question.rows = sectionManifestQuestion.rows;
@@ -42,6 +48,7 @@ export const createSectionPageContext = (
     questions.push(question);
   });
 
+  context.errors = errors;
   context.questions = questions;
 
   return context;

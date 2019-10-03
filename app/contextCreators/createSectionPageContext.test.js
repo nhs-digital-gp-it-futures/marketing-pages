@@ -11,6 +11,7 @@ describe('createSectionPageContext', () => {
         '- Create and change appointment entries',
         'You can enter up to 100 characters per feature',
       ],
+      errors: [],
       questions: [
         {
           id: 'features-listing',
@@ -43,6 +44,7 @@ describe('createSectionPageContext', () => {
     it('should create a context for bulletpoint-list type question', () => {
       const expectedContext = {
         submitActionUrl: '/some-solution-id/section/some-section-id',
+        errors: [],
         questions: [
           {
             id: 'fieldId',
@@ -81,6 +83,7 @@ describe('createSectionPageContext', () => {
     it('should create a context for bulletpoint-list type question with existing data populated', () => {
       const expectedContext = {
         submitActionUrl: '/some-solution-id/section/some-section-id',
+        errors: [],
         questions: [
           {
             id: 'fieldId',
@@ -132,6 +135,7 @@ describe('createSectionPageContext', () => {
     it('should create a context for bulletpoint-list type question with existing data populated and a validation error', () => {
       const expectedContext = {
         submitActionUrl: '/some-solution-id/section/some-section-id',
+        errors: [],
         questions: [
           {
             id: 'fieldId',
@@ -203,6 +207,7 @@ describe('createSectionPageContext', () => {
     it('should create a context for question with existing data populated', () => {
       const expectedContext = {
         submitActionUrl: '/some-solution-id/section/some-section-id',
+        errors: [],
         questions: [
           {
             id: 'fieldId',
@@ -238,6 +243,12 @@ describe('createSectionPageContext', () => {
     it('should create a context with existing data populated and a validation error', () => {
       const expectedContext = {
         submitActionUrl: '/some-solution-id/section/some-section-id',
+        errors: [
+          {
+            text: 'some really helpful error message',
+            href: '#fieldId',
+          },
+        ],
         questions: [
           {
             id: 'fieldId',
