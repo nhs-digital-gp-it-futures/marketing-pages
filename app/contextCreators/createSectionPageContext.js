@@ -1,6 +1,8 @@
 import { generateFields } from './generateFields';
 
-export const createSectionPageContext = (solutionId, sectionManifest, formData, validationErrors) => {
+export const createSectionPageContext = (
+  solutionId, sectionManifest, formData, validationErrors,
+) => {
   const context = {};
   const questions = [];
 

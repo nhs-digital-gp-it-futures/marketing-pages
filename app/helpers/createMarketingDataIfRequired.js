@@ -8,7 +8,9 @@ export const createMarketingDataIfRequired = (dashboardManifest, exisingSolution
     sectionGroup.sections.map((section) => {
       let marketingDataSection = {};
 
-      const existingMarketingDataForSection = findExistingMarketingDataForSection(exisingSolutionData, section.id);
+      const existingMarketingDataForSection = findExistingMarketingDataForSection(
+        exisingSolutionData, section.id,
+      );
 
       if (existingMarketingDataForSection) {
         marketingDataSection = existingMarketingDataForSection;
