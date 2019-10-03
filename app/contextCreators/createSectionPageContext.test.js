@@ -207,6 +207,7 @@ describe('createSectionPageContext', () => {
           {
             id: 'fieldId',
             type: 'textarea-field',
+            rows: 10,
             data: 'some existing data',
           },
         ],
@@ -224,6 +225,7 @@ describe('createSectionPageContext', () => {
           {
             id: 'fieldId',
             type: 'textarea-field',
+            rows: 10,
           },
         ],
       };

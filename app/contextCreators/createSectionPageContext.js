@@ -35,6 +35,8 @@ export const createSectionPageContext = (
         error.message = findValidationErrorForQuestion.message;
         question.error = error;
       }
+
+      question.rows = sectionManifestQuestion.rows;
     }
 
     questions.push(question);

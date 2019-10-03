@@ -86,6 +86,27 @@ describe('textarea', () => {
       });
   });
 
+  it('should render the text area with specific amount of rows as specified in the context', (done) => {
+    const context = {
+      question: {
+        id: 'fieldId',
+        rows: 10,
+      },
+    };
+
+    const dummyApp = createDummyApp(context);
+    request(dummyApp)
+      .get('/')
+      .then((res) => {
+        const $ = cheerio.load(res.text);
+
+        expect($('textarea').attr('rows')).toEqual(' 10 ');
+
+        done();
+      });
+  });
+
+
   it('should render the text area with the data populated', (done) => {
     const context = {
       question: {

@@ -27,6 +27,7 @@
       "mainAdvice": "Write a description about your Solution",
       "additionalAdvice": "The description will give the buyer more insight into your Solution and the qualities it can provide.",
       "type": "textarea-field",
+      "rows": 17,
       "saveValidations": [
         {
           "type": "maxLength",
