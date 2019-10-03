@@ -39,4 +39,21 @@ describe('sectionErrorSummary', () => {
         done();
       });
   });
+
+  it('should render the error summary body', (done) => {
+    const context = {
+      errors: [],
+    };
+
+    const dummyApp = createDummyApp(context);
+    request(dummyApp)
+      .get('/')
+      .then((res) => {
+        const $ = cheerio.load(res.text);
+
+        expect($('.nhsuk-error-summary p').text().trim()).toEqual('To complete this page, resolve the following errors;');
+
+        done();
+      });
+  });
 });
