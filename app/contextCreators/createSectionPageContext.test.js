@@ -232,5 +232,55 @@ describe('createSectionPageContext', () => {
 
       expect(context).toEqual(expectedContext);
     });
+
+    it('should create a context with existing data populated and a validation error', () => {
+      const expectedContext = {
+        submitActionUrl: '/some-solution-id/section/some-section-id',
+        questions: [
+          {
+            id: 'fieldId',
+            type: 'textarea-field',
+            data: 'some existing data',
+            error: {
+              message: 'some really helpful error message',
+            },
+          },
+        ],
+      };
+
+      const formData = {
+        data: {
+          fieldId: 'some existing data',
+        },
+      };
+
+      const validationErrors = [
+        {
+          questionId: 'fieldId',
+          message: 'some really helpful error message',
+        },
+      ];
+
+      const sectionManifest = {
+        id: 'some-section-id',
+        questions: [
+          {
+            id: 'fieldId',
+            type: 'textarea-field',
+            saveValidations: [
+              {
+                type: 'maxLength',
+                maxLength: 10,
+                message: 'some really helpful error message',
+              },
+            ],
+          },
+        ],
+      };
+
+      const context = createSectionPageContext('some-solution-id', sectionManifest, formData, validationErrors);
+
+      expect(context).toEqual(expectedContext);
+    });
   });
 });

@@ -23,6 +23,16 @@ export const createSectionPageContext = (solutionId, sectionManifest, formData, 
         && formData.data
         && formData.data[sectionManifestQuestion.id]
         ? formData.data[sectionManifestQuestion.id] : undefined;
+
+      const findValidationErrorForQuestion = validationErrors && validationErrors.find(
+        validationError => validationError.questionId === sectionManifestQuestion.id,
+      );
+
+      if (findValidationErrorForQuestion) {
+        const error = {};
+        error.message = findValidationErrorForQuestion.message;
+        question.error = error;
+      }
     }
 
     questions.push(question);

@@ -2,16 +2,33 @@
 
 {% macro textareaField(question) %}
   <div data-test-id="textarea-field-{{ question.id }}">
-    {{ textarea({
-      "id": question.id,
-      "name": question.id,
-      "label": {
-        "text": question.mainAdvice
-      },
-      "hint": {
-        "text": question.additionalAdvice
-      },
-      "value": question.data
-    }) }}
+    {% if (question.error != undefined) %}
+      {{ textarea({
+        "id": question.id,
+        "name": question.id,
+        "label": {
+          "text": question.mainAdvice
+        },
+        "hint": {
+          "text": question.additionalAdvice
+        },
+        "value": question.data,
+        "errorMessage": {
+          "text": question.error.message
+        }
+      }) }}
+    {% else %}
+      {{ textarea({
+        "id": question.id,
+        "name": question.id,
+        "label": {
+          "text": question.mainAdvice
+        },
+        "hint": {
+          "text": question.additionalAdvice
+        },
+        "value": question.data
+      }) }}
+    {% endif %}
   </div>
 {% endmacro %}
