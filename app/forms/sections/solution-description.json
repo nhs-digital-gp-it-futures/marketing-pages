@@ -12,11 +12,12 @@
       "requirement": "Mandatory",
       "mainAdvice": "Summarise your Solution *",
       "additionalAdvice": "Your text from Stage 1, Solution registration has been automatically inserted but can be edited.",
+      "footerAdvice": "You can enter up to 300 characters",
       "type": "textarea-field",
       "saveValidations": [
         {
           "type": "maxLength",
-          "maxLength": 10,
+          "maxLength": 300,
           "message": "Solution Summary validation error message"
         }
       ]
@@ -26,12 +27,13 @@
       "requirement": "Optional",
       "mainAdvice": "Write a description about your Solution",
       "additionalAdvice": "The description will give the buyer more insight into your Solution and the qualities it can provide.",
+      "footerAdvice": "You can enter up to 1000 characters",
       "type": "textarea-field",
       "rows": 17,
       "saveValidations": [
         {
           "type": "maxLength",
-          "maxLength": 10,
+          "maxLength": 1000,
           "message": "Solution Description validation error message"
         }
       ]
@@ -45,7 +47,7 @@
       "saveValidations": [
         {
           "type": "maxLength",
-          "maxLength": 10,
+          "maxLength": 1000,
           "message": "Solution Link validation error message"
         }
       ]

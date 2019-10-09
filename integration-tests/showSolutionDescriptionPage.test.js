@@ -62,7 +62,8 @@ test('should render the solution summary question', async (t) => {
   await t
     .expect(summaryQuestion.find('label.nhsuk-label').innerText).eql('Summarise your Solution *')
     .expect(summaryQuestion.find('span.nhsuk-hint').innerText).eql('Your text from Stage 1, Solution registration has been automatically inserted but can be edited.')
-    .expect(summaryQuestion.find('textarea').count).eql(1);
+    .expect(summaryQuestion.find('textarea').count).eql(1)
+    .expect(summaryQuestion.find('[data-test-id="textarea-field-footer"]').innerText).eql('You can enter up to 300 characters');
 });
 
 test('should render the about your solution question', async (t) => {
@@ -73,7 +74,8 @@ test('should render the about your solution question', async (t) => {
   await t
     .expect(summaryQuestion.find('label.nhsuk-label').innerText).eql('Write a description about your Solution')
     .expect(summaryQuestion.find('span.nhsuk-hint').innerText).eql('The description will give the buyer more insight into your Solution and the qualities it can provide.')
-    .expect(summaryQuestion.find('textarea').count).eql(1);
+    .expect(summaryQuestion.find('textarea').count).eql(1)
+    .expect(summaryQuestion.find('[data-test-id="textarea-field-footer"]').innerText).eql('You can enter up to 1000 characters');
 });
 
 test('should render the solution link field', async (t) => {
@@ -125,8 +127,8 @@ test('should show error summary and validation for questions when they exceed th
   pageSetup(t);
 
   const oneHundredCharacters = '0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789';
+  const threeHundredCharacters = oneHundredCharacters.repeat(3);
   const thousandCharacters = oneHundredCharacters.repeat(10);
-  const threeThousandCharacters = thousandCharacters.repeat(3);
 
   const errorSummary = Selector('[data-test-id="section-error-summary"]');
   const errorSummaryList = Selector('.nhsuk-error-summary__list');
@@ -138,9 +140,9 @@ test('should show error summary and validation for questions when they exceed th
 
   await t
     .expect(errorSummary.exists).notOk()
-    .typeText(solutionSummary, `${thousandCharacters}0`, { paste: true })
-    .typeText(solutionDescription, `${threeThousandCharacters}0`, { paste: true })
-    .typeText(solutionLink, `${oneHundredCharacters}0`, { paste: true })
+    .typeText(solutionSummary, `${threeHundredCharacters}0`, { paste: true })
+    .typeText(solutionDescription, `${thousandCharacters}0`, { paste: true })
+    .typeText(solutionLink, `${thousandCharacters}0`, { paste: true })
     .click(submitButton.find('button'))
     .expect(errorSummary.exists).ok()
     .expect(errorSummaryList.find('li').count).eql(3)
