@@ -37,6 +37,15 @@ test('should render the marketing dashboard page title', async (t) => {
     .expect(title.innerText).eql('Marketing Page - Dashboard');
 });
 
+test('should render the preview marketing page button', async (t) => {
+  pageSetup(t);
+
+  const title = Selector('[data-test-id="dashboard-preview-button"] button');
+
+  await t
+    .expect(title.innerText).eql('Preview Marketing page');
+});
+
 test('should render the sectionGroups configured in the dashboard manifest', async (t) => {
   pageSetup(t);
 
