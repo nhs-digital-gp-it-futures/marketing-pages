@@ -32,6 +32,22 @@ describe('dashboard page', () => {
       });
   });
 
+  it('should render the preview button', (done) => {
+    const context = {};
+
+    const dummyApp = createDummyApp(context);
+    request(dummyApp)
+      .get('/')
+      .then((res) => {
+        const $ = cheerio.load(res.text);
+
+        expect($('[data-test-id="dashboard-preview-button"] button').length).toEqual(1);
+        expect($('[data-test-id="dashboard-preview-button"] button').text().trim()).toEqual('Preview Marketing page');
+
+        done();
+      });
+  });
+
   it('should render the sectionGroups on the dashboard page', (done) => {
     const context = {
       sectionGroups: [
