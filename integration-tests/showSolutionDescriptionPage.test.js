@@ -121,13 +121,15 @@ test('should allow posting an empty form and navigate back to the dashboard', as
     .expect(getLocation()).contains('S100000-001');
 });
 
-test('should show validation for questions when they exceed the maxLength', async (t) => {
+test('should show error summary and validation for questions when they exceed the maxLength', async (t) => {
   pageSetup(t);
 
   const oneHundredCharacters = '0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789';
   const thousandCharacters = oneHundredCharacters.repeat(10);
   const threeThousandCharacters = thousandCharacters.repeat(3);
 
+  const errorSummary = Selector('[data-test-id="section-error-summary"]');
+  const errorSummaryList = Selector('.nhsuk-error-summary__list');
   const solutionSummary = Selector('[data-test-id="textarea-field-solution-summary"]');
   const solutionDescription = Selector('[data-test-id="textarea-field-solution-description"]');
   const solutionLink = Selector('[data-test-id="text-field-solution-link"]');
@@ -135,11 +137,23 @@ test('should show validation for questions when they exceed the maxLength', asyn
   const submitButton = Selector('[data-test-id="section-submit-button"]');
 
   await t
+    .expect(errorSummary.exists).notOk()
     .typeText(solutionSummary, `${thousandCharacters}0`, { paste: true })
     .typeText(solutionDescription, `${threeThousandCharacters}0`, { paste: true })
     .typeText(solutionLink, `${oneHundredCharacters}0`, { paste: true })
     .click(submitButton.find('button'))
+    .expect(errorSummary.exists).ok()
+    .expect(errorSummaryList.find('li').count).eql(3)
+    .expect(errorSummaryList.find('li:nth-child(1)').innerText).eql('Solution Summary validation error message')
+    .expect(errorSummaryList.find('li:nth-child(1) a').getAttribute('href')).eql('#solution-summary')
+    .expect(errorSummaryList.find('li:nth-child(2)').innerText).eql('Solution Description validation error message')
+    .expect(errorSummaryList.find('li:nth-child(2) a').getAttribute('href')).eql('#solution-description')
+    .expect(errorSummaryList.find('li:nth-child(3)').innerText).eql('Solution Link validation error message')
+    .expect(errorSummaryList.find('li:nth-child(3) a').getAttribute('href')).eql('#solution-link')
     .expect(solutionSummary.find('.nhsuk-textarea--error').exists).ok()
+    .expect(solutionSummary.find('.nhsuk-error-message').innerText).eql('Error:\nSolution Summary validation error message')
     .expect(solutionDescription.find('.nhsuk-textarea--error').exists).ok()
-    .expect(solutionLink.find('.nhsuk-input--error').exists).ok();
+    .expect(solutionDescription.find('.nhsuk-error-message').innerText).eql('Error:\nSolution Description validation error message')
+    .expect(solutionLink.find('.nhsuk-input--error').exists).ok()
+    .expect(solutionLink.find('.nhsuk-error-message').innerText).eql('Error:\nSolution Link validation error message');
 });
