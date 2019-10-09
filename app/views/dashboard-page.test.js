@@ -33,7 +33,9 @@ describe('dashboard page', () => {
   });
 
   it('should render the preview button', (done) => {
-    const context = {};
+    const context = {
+      previewUrl: '/S100000-001/preview',
+    };
 
     const dummyApp = createDummyApp(context);
     request(dummyApp)
@@ -41,8 +43,9 @@ describe('dashboard page', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        expect($('[data-test-id="dashboard-preview-button"] button').length).toEqual(1);
-        expect($('[data-test-id="dashboard-preview-button"] button').text().trim()).toEqual('Preview Marketing page');
+        expect($('[data-test-id="dashboard-preview-button"] a').length).toEqual(1);
+        expect($('[data-test-id="dashboard-preview-button"] a').text().trim()).toEqual('Preview Marketing page');
+        expect($('[data-test-id="dashboard-preview-button"] a').attr('href')).toEqual('/S100000-001/preview');
 
         done();
       });

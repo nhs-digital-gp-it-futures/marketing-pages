@@ -42,4 +42,10 @@ router.post('/:solutionId/section/:sectionId', async (req, res) => {
   }
 });
 
+router.get('/:solutionId/preview', async (req, res) => {
+  //const { solutionId } = req.params;
+
+  res.render('preview-page', {});
+});
+
 module.exports = router;

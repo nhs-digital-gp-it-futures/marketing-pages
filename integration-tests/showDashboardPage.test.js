@@ -40,10 +40,14 @@ test('should render the marketing dashboard page title', async (t) => {
 test('should render the preview marketing page button', async (t) => {
   pageSetup(t);
 
-  const title = Selector('[data-test-id="dashboard-preview-button"] button');
+  const getLocation = ClientFunction(() => document.location.href);
+
+  const previewButton = Selector('[data-test-id="dashboard-preview-button"] a');
 
   await t
-    .expect(title.innerText).eql('Preview Marketing page');
+    .expect(previewButton.innerText).eql('Preview Marketing page')
+    .click(previewButton)
+    .expect(getLocation()).contains('S100000-001/preview');
 });
 
 test('should render the sectionGroups configured in the dashboard manifest', async (t) => {
