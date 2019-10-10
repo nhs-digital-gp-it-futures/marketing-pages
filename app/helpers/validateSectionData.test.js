@@ -50,6 +50,34 @@ describe('validateSectionData', () => {
       expect(validationErrors).toEqual([]);
     });
 
+    it('return an empty array if the validation rule does not exist', () => {
+      const expectedValidationError = [];
+
+      const sectionManifest = {
+        id: 'section-one',
+        questions: [
+          {
+            id: 'question-one',
+            type: 'bulletpoint-list',
+            saveValidations: [
+              {
+                type: 'unknownValidation',
+                message: 'some validation error message',
+              },
+            ],
+          },
+        ],
+      };
+
+      const sectionData = {
+        'question-one': ['all good not anymore'],
+      };
+
+      const validationErrors = validateSectionData(sectionManifest, sectionData);
+
+      expect(validationErrors).toEqual(expectedValidationError);
+    });
+
     it('return an array of 1 validation error', () => {
       const expectedValidationError = [
         {
