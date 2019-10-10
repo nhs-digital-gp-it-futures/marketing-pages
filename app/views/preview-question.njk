@@ -12,9 +12,21 @@
       </div>
     {% endif %}
     <div data-test-id="preview-question-data">
-      {{ label({
-        "text": question.data
-      }) }}
+      {% if (question.type === 'bulletpoint-list') %}
+        <ul>
+          {% for data in question.data %}
+            <li>
+              {{ label({
+                "text": data
+              }) }}
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        {{ label({
+          "text": question.data
+        }) }}
+      {% endif %}
     </div>
   </div>
 

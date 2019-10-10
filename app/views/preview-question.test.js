@@ -81,4 +81,31 @@ describe('preview-question', () => {
         done();
       });
   });
+
+  it('should render the data of the question as a list if the type is bulletpoint-list', (done) => {
+    const context = {
+      question: {
+        id: 'some-question-id',
+        type: 'bulletpoint-list',
+        data: [
+          'Some first data',
+          'Some second data',
+          'Some third data',
+        ],
+      },
+    };
+
+    const dummyApp = createDummyApp(context);
+    request(dummyApp)
+      .get('/')
+      .then((res) => {
+        const $ = cheerio.load(res.text);
+
+        expect($('[data-test-id="preview-question-data"] ul').length).toEqual(1);
+        expect($('[data-test-id="preview-question-data"] li').length).toEqual(3);
+
+        done();
+      });
+  });
+
 });
