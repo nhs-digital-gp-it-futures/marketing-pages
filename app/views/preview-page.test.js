@@ -31,4 +31,21 @@ describe('preview page', () => {
         done();
       });
   });
+
+  it('should render one section if one section is provided', (done) => {
+    const context = {
+      sections: [{}],
+    };
+
+    const dummyApp = createDummyApp(context);
+    request(dummyApp)
+      .get('/')
+      .then((res) => {
+        const $ = cheerio.load(res.text);
+
+        expect($('[data-test-id="preview-section"]').length).toEqual(1);
+
+        done();
+      });
+  });
 });
