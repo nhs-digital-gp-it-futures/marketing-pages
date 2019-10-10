@@ -18,6 +18,12 @@ const createErrorForField = (questionId, fieldId, message) => {
   return error;
 };
 
+const executeValidationRule = (saveValidation, sectionDataField) => {
+  return validationRules[saveValidation.type]
+    && validationRules[saveValidation.type]
+      .rule(sectionDataField, saveValidation);
+};
+
 export const validateSectionData = (sectionManifest, sectionData) => {
   const validationErrors = [];
 
@@ -26,15 +32,14 @@ export const validateSectionData = (sectionManifest, sectionData) => {
       sectionQuestion.saveValidations.map((saveValidation) => {
         if (sectionQuestion.type === 'bulletpoint-list') {
           sectionData[sectionQuestion.id].map((sectionDataField, sectionDataFieldId) => {
-            if (validationRules[saveValidation.type].rule(sectionDataField, saveValidation)) {
+            if (executeValidationRule(saveValidation, sectionDataField)) {
               const error = createErrorForField(
                 sectionQuestion.id, sectionDataFieldId, saveValidation.message,
               );
               validationErrors.push(error);
             }
           });
-        } else if (validationRules[saveValidation.type]
-          .rule(sectionData[sectionQuestion.id], saveValidation)) {
+        } else if (executeValidationRule(saveValidation, sectionData[sectionQuestion.id])) {
           const error = createErrorForField(
             sectionQuestion.id, undefined, saveValidation.message,
           );

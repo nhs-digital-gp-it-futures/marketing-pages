@@ -154,4 +154,26 @@ describe('textarea', () => {
         done();
       });
   });
+
+  it('should render the footer advice', (done) => {
+    const context = {
+      question: {
+        id: 'fieldId',
+        mainAdvice: 'Some really important main advice',
+        additionalAdvice: 'Some not so important additional advice',
+        footerAdvice: 'Some footer based advice',
+      },
+    };
+
+    const dummyApp = createDummyApp(context);
+    request(dummyApp)
+      .get('/')
+      .then((res) => {
+        const $ = cheerio.load(res.text);
+
+        expect($('[data-test-id="textarea-field-footer"]').text().trim()).toEqual('Some footer based advice');
+
+        done();
+      });
+  });
 });

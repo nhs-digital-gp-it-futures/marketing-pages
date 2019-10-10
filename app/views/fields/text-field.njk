@@ -1,3 +1,4 @@
+{% from 'components/label/macro.njk' import label %}
 {% from 'components/input/macro.njk' import input %}
 
 {% macro textField(question) %}
@@ -30,5 +31,10 @@
         "value": question.data
       }) }}
     {% endif %}
+    <div data-test-id="text-field-footer">
+      {{ label({
+        "text": question.footerAdvice
+      }) }}
+    </div>
   </div>
 {% endmacro %}

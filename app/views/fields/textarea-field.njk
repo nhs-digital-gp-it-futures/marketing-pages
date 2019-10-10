@@ -1,3 +1,4 @@
+{% from 'components/label/macro.njk' import label %}
 {% from 'components/textarea/macro.njk' import textarea %}
 
 {% macro textareaField(question) %}
@@ -6,7 +7,7 @@
       {{ textarea({
         "id": question.id,
         "name": question.id,
-        "label": {
+                "label": {
           "text": question.mainAdvice
         },
         "hint": {
@@ -22,7 +23,7 @@
       {{ textarea({
         "id": question.id,
         "name": question.id,
-        "label": {
+                "label": {
           "text": question.mainAdvice
         },
         "hint": {
@@ -32,5 +33,11 @@
         "rows": question.rows
       }) }}
     {% endif %}
+    <div data-test-id="textarea-field-footer">
+      {{ label({
+        "text": question.footerAdvice
+      }) }}
+    </div>
+    <br/>
   </div>
 {% endmacro %}

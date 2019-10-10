@@ -18,6 +18,7 @@ export const createSectionPageContext = (
     question.type = sectionManifestQuestion.type;
     question.mainAdvice = sectionManifestQuestion.mainAdvice;
     question.additionalAdvice = sectionManifestQuestion.additionalAdvice;
+    question.footerAdvice = sectionManifestQuestion.footerAdvice;
 
     if (sectionManifestQuestion.type === 'bulletpoint-list') {
       question.fields = generateFields(sectionManifestQuestion, formData, validationErrors);

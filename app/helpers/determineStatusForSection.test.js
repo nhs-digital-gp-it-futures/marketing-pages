@@ -158,7 +158,7 @@ describe('determineStatusForSection', () => {
       expect(status).toEqual('INCOMPLETE');
     });
 
-    it('should return COMPLETE if just one optional question of type bulletpoint-list and data has been provided', () => {
+    it('should return COMPLETE if just one optional question and data has been provided', () => {
       const sectionData = {
         'some-question': 'some data',
       };
