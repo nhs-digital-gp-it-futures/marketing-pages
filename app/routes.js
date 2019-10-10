@@ -5,6 +5,7 @@ import {
   getSectionPageErrorContext,
   validateSection,
   postSection,
+  getPreviewPageContext,
 } from './controller';
 
 const router = express.Router();
@@ -43,9 +44,31 @@ router.post('/:solutionId/section/:sectionId', async (req, res) => {
 });
 
 router.get('/:solutionId/preview', async (req, res) => {
-  //const { solutionId } = req.params;
+  const { solutionId } = req.params;
 
-  res.render('preview-page', {});
+  const context = {
+    sections: [
+      {
+        title: 'Fawad is the man!',
+        questions: [{
+          id: 'questionId1',
+          title: 'Question title',
+          data: 'Test data 1',
+        }],
+      },
+      {
+        title: 'Fawad is the man! x2',
+        questions: [{
+          id: 'questionId2',
+          data: 'Test data 2',
+        }],
+      },
+    ],
+  };
+
+  await getPreviewPageContext(solutionId);
+
+  res.render('preview-page', context);
 });
 
 module.exports = router;

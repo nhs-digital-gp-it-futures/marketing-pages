@@ -2,6 +2,7 @@ import axios from 'axios';
 import { ManifestProvider } from './forms/manifestProvider';
 import { createSectionPageContext } from './contextCreators/createSectionPageContext';
 import { createMarketingDashboardContext } from './contextCreators/createMarketingDashboardContext';
+import { createPreviewPageContext } from './contextCreators/createPreviewPageContext';
 import { createMarketingDataIfRequired } from './helpers/createMarketingDataIfRequired';
 import { createUpdatedSolutionData } from './helpers/createUpdatedSolutionData';
 import { validateSectionData } from './helpers/validateSectionData';
@@ -71,4 +72,17 @@ export const postSection = async (solutionId, sectionId, sectionData) => {
   await axios.put(`http://localhost:8080/api/v1/Solutions/${solutionId}`, updatedSolutionData);
 
   return true;
+};
+
+export const getPreviewPageContext = async (solutionId) => {
+  const previewManifest = new ManifestProvider().getPreviewManifest();
+
+  console.log(`previewManifest\n${JSON.stringify(previewManifest, null, 2)}`);
+
+  const solutionData = await axios.get(`http://localhost:8080/api/v1/Solutions/${solutionId}`);
+  const existingSolutionData = solutionData.data.solution;
+
+  const context = createPreviewPageContext(previewManifest, existingSolutionData);
+
+  return null;
 };
