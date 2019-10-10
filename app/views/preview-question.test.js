@@ -9,8 +9,8 @@ const createDummyApp = (context) => {
 
   const router = express.Router();
   const dummyRouter = router.get('/', (req, res) => {
-    const macroWrapper = `{% from './preview-section.njk' import previewSection %}
-                            {{ previewSection(section) }}`;
+    const macroWrapper = `{% from './preview-question.njk' import previewQuestion %}
+                            {{ previewQuestion(question) }}`;
 
     const viewToTest = nunjucks.renderString(macroWrapper, context);
 
@@ -22,11 +22,12 @@ const createDummyApp = (context) => {
   return app;
 };
 
-describe('preview-section', () => {
-  it('should render the title of the section', (done) => {
+describe('preview-question', () => {
+  it('should render the title of the question', (done) => {
     const context = {
-      section: {
-        title: 'Some section title',
+      question: {
+        id: 'some-question-id',
+        title: 'Some question title',
       },
     };
 
@@ -36,17 +37,17 @@ describe('preview-section', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        expect($('h2').text().trim()).toEqual('Some section title');
+        expect($('[data-test-id="preview-question-title"]').text().trim()).toEqual('Some question title');
 
         done();
       });
   });
 
-  it('should render a single question when the section has only one question', (done) => {
+  it('should render the data of the question', (done) => {
     const context = {
-      section: {
-        title: 'Some section title',
-        questions: [{}],
+      question: {
+        id: 'some-question-id',
+        data: 'Some question data',
       },
     };
 
@@ -56,19 +57,16 @@ describe('preview-section', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        const sectionQuestions = $('[data-test-id^="preview-section-question"]');
-
-        expect(sectionQuestions.length).toEqual(1);
+        expect($('[data-test-id="preview-question-data"]').text().trim()).toEqual('Some question data');
 
         done();
       });
   });
 
-  it('should render a multiple question when the section has multiple questions', (done) => {
+  it('should not render the title if it is not available', (done) => {
     const context = {
-      section: {
-        title: 'Some section title',
-        questions: [{}, {}, {}],
+      question: {
+        id: 'some-question-id',
       },
     };
 
@@ -78,9 +76,7 @@ describe('preview-section', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        const sectionQuestions = $('[data-test-id^="preview-section-question"]');
-
-        expect(sectionQuestions.length).toEqual(3);
+        expect($('[data-test-id="preview-question-title"]').length).toEqual(0);
 
         done();
       });

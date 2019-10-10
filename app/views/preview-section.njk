@@ -1,25 +1,12 @@
 {% from 'components/label/macro.njk' import label %}
+{% from './preview-question.njk' import previewQuestion %}
 
 {% macro previewSection(section) %}
   <div data-test-id="preview-section">
     <h2>{{ section.title }}</h2>
 
     {% for question in section.questions %}
-      <div data-test-id="preview-section-question-{{question.id}}">
-        <div data-test-id="preview-section-question-title">
-          {{ label({
-            "classes": "nhsuk-label--s",
-            "text": question.title
-          }) }}
-        </div>
-        <div data-test-id="preview-section-question-data">
-          {{ label({
-            "text": question.data
-          }) }}
-        </div>
-    </div>
+      {{ previewQuestion(question) }}
     {% endfor %}
-
-
   </div>
 {% endmacro %}

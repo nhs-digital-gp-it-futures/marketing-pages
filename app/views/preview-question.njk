@@ -1,0 +1,21 @@
+{% from 'components/label/macro.njk' import label %}
+
+{% macro previewQuestion(question) %}
+  
+  <div data-test-id="preview-section-question-{{question.id}}">
+    {% if (question.title) %}
+      <div data-test-id="preview-question-title">
+        {{ label({
+          "classes": "nhsuk-label--s",
+          "text": question.title
+        }) }}
+      </div>
+    {% endif %}
+    <div data-test-id="preview-question-data">
+      {{ label({
+        "text": question.data
+      }) }}
+    </div>
+  </div>
+
+{% endmacro %}
