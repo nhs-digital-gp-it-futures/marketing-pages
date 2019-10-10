@@ -4,18 +4,22 @@
   <div data-test-id="preview-section">
     <h2>{{ section.title }}</h2>
 
-    <div data-test-id="preview-section-question">
-      <div data-test-id="preview-section-question-title">
-        {{ label({
-          "classes": "nhsuk-label--s",
-          "text": section.question.title
-        }) }}
-      </div>
-      <div data-test-id="preview-section-question-data">
-        {{ label({
-          "text": section.question.data
-        }) }}
-      </div>
+    {% for question in section.questions %}
+      <div data-test-id="preview-section-question-{{question.id}}">
+        <div data-test-id="preview-section-question-title">
+          {{ label({
+            "classes": "nhsuk-label--s",
+            "text": question.title
+          }) }}
+        </div>
+        <div data-test-id="preview-section-question-data">
+          {{ label({
+            "text": question.data
+          }) }}
+        </div>
     </div>
+    {% endfor %}
+
+
   </div>
 {% endmacro %}
