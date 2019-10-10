@@ -19,7 +19,10 @@
           "maxLength": 100,
           "message": "some validation error message"
         }
-      ]
+      ],
+      "preview": {
+        "title": "List of features"
+      }
     }
   ]
 }
