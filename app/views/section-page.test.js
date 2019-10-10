@@ -75,6 +75,41 @@ describe('section page', () => {
       });
   });
 
+  it('should render the error summary if errors', (done) => {
+    const context = {
+      title: 'Title of the section',
+      errors: [{}],
+    };
+
+    const dummyApp = createDummyApp(context);
+    request(dummyApp)
+      .get('/')
+      .then((res) => {
+        const $ = cheerio.load(res.text);
+
+        expect($('[data-test-id="section-error-summary"]').length).toEqual(1);
+
+        done();
+      });
+  });
+
+  it('should not render the error summary if no errors', (done) => {
+    const context = {
+      title: 'Title of the section',
+    };
+
+    const dummyApp = createDummyApp(context);
+    request(dummyApp)
+      .get('/')
+      .then((res) => {
+        const $ = cheerio.load(res.text);
+
+        expect($('[data-test-id="section-error-summary"]').length).toEqual(0);
+
+        done();
+      });
+  });
+
   it('should render all the questions for the section', (done) => {
     const context = {
       title: 'Title of the section',

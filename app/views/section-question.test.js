@@ -23,51 +23,6 @@ const createDummyApp = (context) => {
 };
 
 describe('section-question', () => {
-  it('should render the main advice of the question', (done) => {
-    const context = {
-      question: {
-        mainAdvice: 'main advice for question',
-      },
-    };
-
-    const dummyApp = createDummyApp(context);
-    request(dummyApp)
-      .get('/')
-      .then((res) => {
-        const $ = cheerio.load(res.text);
-
-        expect($('[data-test-id="section-question-main-advice"]').text().trim()).toEqual('main advice for question');
-
-        done();
-      });
-  });
-
-  it('should render any additional advice', (done) => {
-    const context = {
-      question: {
-        mainAdvice: 'main advice for question',
-        additionalAdvice: [
-          'first additional advice',
-          'second additional advice',
-          'third additional advice',
-        ],
-      },
-    };
-
-    const dummyApp = createDummyApp(context);
-    request(dummyApp)
-      .get('/')
-      .then((res) => {
-        const $ = cheerio.load(res.text);
-
-        const additionalAdvice = $('[data-test-id="section-question-additional-advice"]');
-
-        expect(additionalAdvice.find('.nhsuk-label').length).toEqual(3);
-
-        done();
-      });
-  });
-
   describe('when question type is bulletpoint-list', () => {
     it('should render the bullepoint-list component', (done) => {
       const context = {
@@ -85,6 +40,54 @@ describe('section-question', () => {
           const bulletpointList = $('[data-test-id="bulletpoint-list"]');
 
           expect(bulletpointList.length).toEqual(1);
+
+          done();
+        });
+    });
+  });
+
+  describe('when question type is textarea-field', () => {
+    it('should render the textarea-field component', (done) => {
+      const context = {
+        question: {
+          id: 'question-id',
+          type: 'textarea-field',
+        },
+      };
+
+      const dummyApp = createDummyApp(context);
+      request(dummyApp)
+        .get('/')
+        .then((res) => {
+          const $ = cheerio.load(res.text);
+
+          const textareaField = $('[data-test-id="textarea-field-question-id"]');
+
+          expect(textareaField.length).toEqual(1);
+
+          done();
+        });
+    });
+  });
+
+  describe('when question type is text-field', () => {
+    it('should render the text-field component', (done) => {
+      const context = {
+        question: {
+          id: 'question-id',
+          type: 'text-field',
+        },
+      };
+
+      const dummyApp = createDummyApp(context);
+      request(dummyApp)
+        .get('/')
+        .then((res) => {
+          const $ = cheerio.load(res.text);
+
+          const textField = $('[data-test-id="text-field-question-id"]');
+
+          expect(textField.length).toEqual(1);
 
           done();
         });

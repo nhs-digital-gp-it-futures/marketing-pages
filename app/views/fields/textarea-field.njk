@@ -1,0 +1,43 @@
+{% from 'components/label/macro.njk' import label %}
+{% from 'components/textarea/macro.njk' import textarea %}
+
+{% macro textareaField(question) %}
+  <div data-test-id="textarea-field-{{ question.id }}">
+    {% if (question.error != undefined) %}
+      {{ textarea({
+        "id": question.id,
+        "name": question.id,
+                "label": {
+          "text": question.mainAdvice
+        },
+        "hint": {
+          "text": question.additionalAdvice
+        },
+        "value": question.data,
+        "rows": question.rows,
+        "errorMessage": {
+          "text": question.error.message
+        }
+      }) }}
+    {% else %}
+      {{ textarea({
+        "id": question.id,
+        "name": question.id,
+                "label": {
+          "text": question.mainAdvice
+        },
+        "hint": {
+          "text": question.additionalAdvice
+        },
+        "value": question.data,
+        "rows": question.rows
+      }) }}
+    {% endif %}
+    <div data-test-id="textarea-field-footer">
+      {{ label({
+        "text": question.footerAdvice
+      }) }}
+    </div>
+    <br/>
+  </div>
+{% endmacro %}

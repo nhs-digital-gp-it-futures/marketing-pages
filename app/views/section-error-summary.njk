@@ -1,0 +1,11 @@
+{% from 'components/error-summary/macro.njk' import errorSummary %}
+
+{% macro sectionErrorSummary(errors) %}
+  <div data-test-id="section-error-summary">
+    {{ errorSummary({
+      "titleText": "There is a problem",
+      "descriptionText": "To complete this page, resolve the following errors;",
+      "errorList": errors
+    }) }}
+  </div>
+{% endmacro %}

@@ -1,26 +1,20 @@
-{% from 'components/label/macro.njk' import label %}
 {% from './fields/bulletpoint-list.njk' import bulletpointList %}
+{% from './fields/textarea-field.njk' import textareaField %}
+{% from './fields/text-field.njk' import textField %}
 
 {% macro sectionQuestion(question) %}
   <div data-test-id="section-question">
-    <div data-test-id="section-question-main-advice">
-      {{ label({
-        "classes": "nhsuk-label--s",
-        "text": question.mainAdvice
-      }) }}
-    </div>
-
-    <div data-test-id="section-question-additional-advice">
-      {% for additionalAdvice in question.additionalAdvice %}
-        {{ label({
-          "text": additionalAdvice
-        }) }}
-      {% endfor %}
-    </div>
-
     <div data-test-id="section-question-fields">
       {% if (question.type === 'bulletpoint-list') %}
         {{ bulletpointList(question) }}
+      {% endif %}
+
+      {% if (question.type === 'textarea-field') %}
+        {{ textareaField(question) }}
+      {% endif %}
+
+      {% if (question.type === 'text-field') %}
+        {{ textField(question) }}
       {% endif %}
     </div>
   </div>

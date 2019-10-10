@@ -1,30 +1,44 @@
+{% from 'components/label/macro.njk' import label %}
 {% from 'components/input/macro.njk' import input %}
 
 {% macro bulletpointList(question) %}
   <div data-test-id="bulletpoint-list">
 
-  {% for field in question.fields %}
-    <div data-test-id="{{ field.id }}">
-      {% if (field.error != undefined) %}
-        {{ input({
-          "id": field.id,
-          "name": question.id,
-          "value": field.data,
-          "classes": "nhsuk-input--width-30",
-          "errorMessage": {
-            "text": field.error.message
-          }
-        }) }}
-      {% else %}
-        {{ input({
-          "id": field.id,
-          "name": question.id,
-          "value": field.data,
-          "classes": "nhsuk-input--width-30"
-        }) }}
-      {% endif %}
+    <div data-test-id="bulletpoint-list-main-advice">
+      {{ label({
+        "classes": "nhsuk-label--s",
+        "text": question.mainAdvice
+      }) }}
     </div>
-  {% endfor %}
+
+    <div data-test-id="bulletpoint-list-additional-advice">
+      {{ label({
+        "text": question.additionalAdvice
+      }) }}
+    </div>
+
+    {% for field in question.fields %}
+      <div data-test-id="{{ field.id }}">
+        {% if (field.error != undefined) %}
+          {{ input({
+            "id": field.id,
+            "name": question.id,
+            "value": field.data,
+            "classes": "nhsuk-input--width-30",
+            "errorMessage": {
+              "text": field.error.message
+            }
+          }) }}
+        {% else %}
+          {{ input({
+            "id": field.id,
+            "name": question.id,
+            "value": field.data,
+            "classes": "nhsuk-input--width-30"
+          }) }}
+        {% endif %}
+      </div>
+    {% endfor %}
 
   </div>
 {% endmacro %}

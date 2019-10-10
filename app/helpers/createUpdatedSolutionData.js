@@ -1,13 +1,21 @@
 import { findExistingMarketingDataForSection } from './findExistingMarketingDataForSection';
 import { determineStatusForSection } from './determineStatusForSection';
 
-export const createUpdatedSolutionData = (sectionId, existingSolutionData, sectionData) => {
+export const createUpdatedSolutionData = (
+  sectionId, existingSolutionData, sectionManifest, sectionData,
+) => {
   const updatedSolutionData = { ...existingSolutionData };
+
+  if (sectionId === 'solution-description') {
+    updatedSolutionData.summary = sectionData['solution-summary'];
+    updatedSolutionData.description = sectionData['solution-description'];
+    updatedSolutionData.aboutUrl = sectionData['solution-link'];
+  }
 
   const sectionToUpdate = findExistingMarketingDataForSection(updatedSolutionData, sectionId);
   if (sectionToUpdate) {
     sectionToUpdate.data = sectionData;
-    sectionToUpdate.status = determineStatusForSection(sectionData);
+    sectionToUpdate.status = determineStatusForSection(sectionManifest, sectionData);
 
     return updatedSolutionData;
   }

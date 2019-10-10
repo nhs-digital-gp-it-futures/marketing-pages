@@ -42,7 +42,9 @@ const convertToFormData = sectionData => ({
   },
 });
 
-export const getSectionPageErrorContext = async (solutionId, sectionId, sectionData, validationErrors) => {
+export const getSectionPageErrorContext = async (
+  solutionId, sectionId, sectionData, validationErrors,
+) => {
   const sectionManifest = new ManifestProvider().getSectionManifest(sectionId);
 
   const formData = convertToFormData(sectionData);
@@ -57,10 +59,14 @@ export const validateSection = (sectionId, sectionData) => {
 };
 
 export const postSection = async (solutionId, sectionId, sectionData) => {
+  const sectionManifest = new ManifestProvider().getSectionManifest(sectionId);
+
   const solutionData = await axios.get(`http://localhost:8080/api/v1/Solutions/${solutionId}`);
   const existingSolutionData = solutionData.data.solution;
 
-  const updatedSolutionData = createUpdatedSolutionData(sectionId, existingSolutionData, sectionData);
+  const updatedSolutionData = createUpdatedSolutionData(
+    sectionId, existingSolutionData, sectionManifest, sectionData,
+  );
 
   await axios.put(`http://localhost:8080/api/v1/Solutions/${solutionId}`, updatedSolutionData);
 

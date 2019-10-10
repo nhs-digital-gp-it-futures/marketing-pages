@@ -9,5 +9,6 @@ module.exports = {
   "rules": {
     "import/prefer-default-export": "off",
     "array-callback-return": "off",
+    "newline-per-chained-call": "off",
   }
 };
