@@ -46,27 +46,27 @@ router.post('/:solutionId/section/:sectionId', async (req, res) => {
 router.get('/:solutionId/preview', async (req, res) => {
   const { solutionId } = req.params;
 
-  const context = {
-    sections: [
-      {
-        title: 'Fawad is the man!',
-        questions: [{
-          id: 'questionId1',
-          title: 'Question title',
-          data: 'Test data 1',
-        }],
-      },
-      {
-        title: 'Fawad is the man! x2',
-        questions: [{
-          id: 'questionId2',
-          data: 'Test data 2',
-        }],
-      },
-    ],
-  };
+  // const context = {
+  //   sections: [
+  //     {
+  //       title: 'Fawad is the man!',
+  //       questions: [{
+  //         id: 'questionId1',
+  //         title: 'Question title',
+  //         data: 'Test data 1',
+  //       }],
+  //     },
+  //     {
+  //       title: 'Fawad is the man! x2',
+  //       questions: [{
+  //         id: 'questionId2',
+  //         data: 'Test data 2',
+  //       }],
+  //     },
+  //   ],
+  // };
 
-  await getPreviewPageContext(solutionId);
+  const context = await getPreviewPageContext(solutionId);
 
   res.render('preview-page', context);
 });
