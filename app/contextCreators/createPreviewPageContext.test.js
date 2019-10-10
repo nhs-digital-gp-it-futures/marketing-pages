@@ -64,6 +64,7 @@ describe('createPreviewPageContext', () => {
             {
               id: 'Some-question-id',
               title: 'Some question preview title',
+              type: 'some-question-type',
             },
           ],
         },
@@ -77,6 +78,7 @@ describe('createPreviewPageContext', () => {
         questions: [
           {
             id: 'Some-question-id',
+            type: 'some-question-type',
             preview: {
               title: 'Some question preview title',
             },
@@ -92,16 +94,6 @@ describe('createPreviewPageContext', () => {
 
 
   it('should create a context from the preview manifest with one section and one question with existing data', () => {
-    // sections: [
-    //     {
-    //       title: 'Fawad is the man!',
-    //       questions: [{
-    //         id: 'questionId1',
-    //         title: 'Question title',
-    //         data: 'Test data 1',
-    //       }],
-    //     },
-
     const expectedContext = {
       sections: [
         {

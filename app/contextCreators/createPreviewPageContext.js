@@ -19,6 +19,7 @@ export const createPreviewPageContext = (
       const question = {
         id: questionManifest.id,
         title: questionManifest.preview.title,
+        type: questionManifest.type,
         data: getMarketingDataForQuestion(existingSolutionData, sectionManifest.id, questionManifest.id),
       };
 
