@@ -76,13 +76,10 @@ export const postSection = async (solutionId, sectionId, sectionData) => {
 
 export const getPreviewPageContext = async (solutionId) => {
   const previewManifest = new ManifestProvider().getPreviewManifest();
-
-  console.log(`previewManifest\n${JSON.stringify(previewManifest, null, 2)}`);
-
   const solutionData = await axios.get(`http://localhost:8080/api/v1/Solutions/${solutionId}`);
   const existingSolutionData = solutionData.data.solution;
 
   const context = createPreviewPageContext(previewManifest, existingSolutionData);
 
-  return null;
+  return context;
 };

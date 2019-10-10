@@ -20,7 +20,10 @@
           "maxLength": 300,
           "message": "Solution Summary validation error message"
         }
-      ]
+      ],
+      "preview": {
+        "title": "Summary"
+      }
     },
     {
       "id": "solution-description",
@@ -36,7 +39,10 @@
           "maxLength": 1000,
           "message": "Solution Description validation error message"
         }
-      ]
+      ],
+      "preview": {
+        "title": "About the solution"
+      }
     },
     {
       "id": "solution-link",
@@ -50,7 +56,10 @@
           "maxLength": 1000,
           "message": "Solution Link validation error message"
         }
-      ]
+      ],
+      "preview": {
+        "title": "URL"
+      }
     }
   ]
 }
