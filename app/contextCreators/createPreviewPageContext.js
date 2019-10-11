@@ -23,7 +23,8 @@ export const createPreviewPageContext = (
       const questionData = getMarketingDataForQuestion(existingSolutionData, sectionManifest.id, questionManifest.id);
       const questionRequirment = questionManifest.requirement ? questionManifest.requirement : 'Optional';
 
-      if (questionRequirment === 'Optional' && questionData) {
+      if ((questionRequirment === 'Optional' && questionData)
+            || (questionRequirment === 'Mandatory')) {
         const question = {
           id: questionManifest.id,
           title: addTitleIfProvided(questionManifest),

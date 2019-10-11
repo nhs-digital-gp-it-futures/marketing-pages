@@ -255,4 +255,51 @@ describe('createPreviewPageContext', () => {
 
     expect(context).toEqual(expectedContext);
   });
+
+  it('should create question if requirement is mandatory and whether there is data or not', () => {
+    const expectedContext = {
+      sections: [
+        {
+          title: 'Some section title',
+          questions: [
+            {
+              id: 'some-question-id',
+            },
+          ],
+        },
+      ],
+    };
+
+    const previewManifest = [
+      {
+        id: 'some-section-id',
+        title: 'Some section title',
+        questions: [
+          {
+            id: 'some-question-id',
+            requirement: 'Mandatory',
+          },
+          {
+            id: 'some-other-question-id',
+            requirement: 'Optional',
+          },
+        ],
+      },
+    ];
+
+    const existingSolutionData = {
+      marketingData: {
+        sections: [
+          {
+            id: 'some-section-id',
+            data: {},
+          },
+        ],
+      },
+    };
+
+    const context = createPreviewPageContext(previewManifest, existingSolutionData);
+
+    expect(context).toEqual(expectedContext);
+  });
 });
