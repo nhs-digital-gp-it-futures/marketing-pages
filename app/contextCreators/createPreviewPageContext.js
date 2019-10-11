@@ -1,40 +1,48 @@
 import { getMarketingDataForQuestion } from '../helpers/getMarketingDataForQuestion';
 
-const addTitleIfProvided = (questionManifest) => {
-  return questionManifest.preview && questionManifest.preview.title ? questionManifest.preview.title : undefined;
+const addTitleIfProvided = questionManifest => (
+  questionManifest.preview
+    && questionManifest.preview.title ? questionManifest.preview.title : undefined
+);
+
+const shouldQuestionBeAddedToPreviewContext = (questionManifest, questionData) => {
+  const questionRequirment = questionManifest.requirement ? questionManifest.requirement : 'Optional';
+  return (questionRequirment === 'Optional' && questionData) || (questionRequirment === 'Mandatory');
 };
 
-export const createPreviewPageContext = (
-  previewManifest, existingSolutionData,
-) => {
+const createQuestionContext = (questionManifest, questionData) => ({
+  id: questionManifest.id,
+  title: addTitleIfProvided(questionManifest),
+  type: questionManifest.type,
+  data: questionData,
+});
+
+const shouldSectionBeAddedToPreviewContext = questions => questions.length > 0;
+
+const createSectionContext = (sectionManifest, questions) => ({
+  title: sectionManifest.title,
+  questions,
+});
+
+export const createPreviewPageContext = (previewManifest, existingSolutionData) => {
   const sections = [];
 
   previewManifest.map((sectionManifest) => {
     const questions = [];
 
     sectionManifest.questions.map((questionManifest) => {
-      const questionData = getMarketingDataForQuestion(existingSolutionData, sectionManifest.id, questionManifest.id, questionManifest.type);
-      const questionRequirment = questionManifest.requirement ? questionManifest.requirement : 'Optional';
+      const questionData = getMarketingDataForQuestion(
+        existingSolutionData, sectionManifest.id, questionManifest.id, questionManifest.type,
+      );
 
-      if ((questionRequirment === 'Optional' && questionData)
-        || (questionRequirment === 'Mandatory')) {
-        const question = {
-          id: questionManifest.id,
-          title: addTitleIfProvided(questionManifest),
-          type: questionManifest.type,
-          data: questionData,
-        };
-
+      if (shouldQuestionBeAddedToPreviewContext(questionManifest, questionData)) {
+        const question = createQuestionContext(questionManifest, questionData);
         questions.push(question);
       }
     });
 
-    if (questions.length > 0) {
-      const section = {
-        title: sectionManifest.title,
-        questions,
-      };
-
+    if (shouldSectionBeAddedToPreviewContext(questions)) {
+      const section = createSectionContext(sectionManifest, questions);
       sections.push(section);
     }
   });
