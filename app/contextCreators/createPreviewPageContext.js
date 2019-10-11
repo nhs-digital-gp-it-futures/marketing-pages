@@ -1,19 +1,4 @@
-import { findExistingMarketingDataForSection } from '../helpers/findExistingMarketingDataForSection';
-
-export const getMarketingDataForQuestion = (
-  existingSolutionData, sectionId, questionId, questionType,
-) => {
-  const marketingDataForSection = findExistingMarketingDataForSection(
-    existingSolutionData, sectionId,
-  );
-
-  if (marketingDataForSection && marketingDataForSection.data[questionId] && questionType === 'bulletpoint-list') {
-    const dataWithValues = marketingDataForSection.data[questionId].filter(data => data.length > 0);
-    return dataWithValues.length > 0 ? dataWithValues : undefined;
-  }
-
-  return marketingDataForSection ? marketingDataForSection.data[questionId] : undefined;
-};
+import { getMarketingDataForQuestion } from '../helpers/getMarketingDataForQuestion';
 
 const addTitleIfProvided = (questionManifest) => {
   return questionManifest.preview && questionManifest.preview.title ? questionManifest.preview.title : undefined;
