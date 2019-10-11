@@ -17,7 +17,7 @@ const createDummyApp = (context) => {
 };
 
 describe('preview page', () => {
-  it('should render the title of the preview page', (done) => {
+  it.only('should render the title of the preview page', (done) => {
     const context = {};
 
     const dummyApp = createDummyApp(context);
@@ -44,6 +44,22 @@ describe('preview page', () => {
         const $ = cheerio.load(res.text);
 
         expect($('[data-test-id^="preview-section-"]').length).toEqual(1);
+
+        done();
+      });
+  });
+
+  it('should render the submit for moderation button', (done) => {
+    const context = {};
+
+    const dummyApp = createDummyApp(context);
+    request(dummyApp)
+      .get('/')
+      .then((res) => {
+        const $ = cheerio.load(res.text);
+
+        expect($('[data-test-id="preview-submit-button"] button').length).toEqual(1);
+        expect($('[data-test-id="preview-submit-button"] button').text().trim()).toEqual('Submit for moderation');
 
         done();
       });
