@@ -108,4 +108,26 @@ describe('preview-question', () => {
       });
   });
 
+  it('should render the data of the question as a link if the type is a link', (done) => {
+    const context = {
+      question: {
+        id: 'some-question-id',
+        data: 'wwww.whatalink.com',
+        type: 'link',
+      },
+    };
+
+    const dummyApp = createDummyApp(context);
+    request(dummyApp)
+      .get('/')
+      .then((res) => {
+        const $ = cheerio.load(res.text);
+
+        expect($('[data-test-id="preview-question-data"] a').text().trim()).toEqual('wwww.whatalink.com');
+        expect($('[data-test-id="preview-question-data"] a').attr('href')).toEqual('wwww.whatalink.com');
+
+        done();
+      });
+  });
+
 });

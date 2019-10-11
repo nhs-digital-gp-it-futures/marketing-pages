@@ -36,7 +36,7 @@ describe('preview-section', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        expect($('h2').text().trim()).toEqual('Some section title');
+        expect($('h3').text().trim()).toEqual('Some section title');
 
         done();
       });
