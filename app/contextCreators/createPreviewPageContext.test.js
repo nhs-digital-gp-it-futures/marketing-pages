@@ -1,12 +1,92 @@
-import { createPreviewPageContext } from './createPreviewPageContext';
+import { createPreviewPageContext, getMarketingDataForQuestion } from './createPreviewPageContext';
+
+describe('getMarketingDataForQuestion', () => {
+  it('should return undefined if the question does not exist in the existing solution data', () => {
+    const existingSolutionData = {
+      marketingData: {
+        sections: [
+          {
+            id: 'some-section-id',
+            data: {
+              'some-question-id': 'some question data',
+            },
+          },
+        ],
+      },
+    };
+
+    const marketingData = getMarketingDataForQuestion(existingSolutionData, 'some-section-id', 'some-other-question-id');
+    expect(marketingData).toEqual(undefined);
+  });
+
+  it('should return the question data if it does exist', () => {
+    const existingSolutionData = {
+      marketingData: {
+        sections: [
+          {
+            id: 'some-section-id',
+            data: {
+              'some-question-id': 'some question data',
+            },
+          },
+        ],
+      },
+    };
+
+    const marketingData = getMarketingDataForQuestion(existingSolutionData, 'some-section-id', 'some-question-id');
+    expect(marketingData).toEqual('some question data');
+  });
+
+  describe('when question type is bulletpoint-list', () => {
+    it('should return the question data with empty values filtered out', () => {
+      const expectedMarketingData = ['some first data', 'some second data'];
+
+      const existingSolutionData = {
+        marketingData: {
+          sections: [
+            {
+              id: 'some-section-id',
+              data: {
+                'some-question-id': ['', 'some first data', 'some second data', ''],
+              },
+            },
+          ],
+        },
+      };
+
+      const marketingData = getMarketingDataForQuestion(existingSolutionData, 'some-section-id', 'some-question-id', 'bulletpoint-list');
+      expect(marketingData).toEqual(expectedMarketingData);
+    });
+
+    it('should return undefined if all values for bullet point list are empty', () => {
+      const existingSolutionData = {
+        marketingData: {
+          sections: [
+            {
+              id: 'some-section-id',
+              data: {
+                'some-question-id': ['', '', '', ''],
+              },
+            },
+          ],
+        },
+      };
+
+      const marketingData = getMarketingDataForQuestion(existingSolutionData, 'some-section-id', 'some-question-id', 'bulletpoint-list');
+      expect(marketingData).toEqual(undefined);
+    });
+  });
+});
 
 describe('createPreviewPageContext', () => {
   it('should create a context from the preview manifest with a title', () => {
     const expectedContext = {
       sections: [
         {
-          title: 'Some section title',
-          questions: [],
+          title: 'some section title',
+          questions: [{
+            id: 'some-question-id',
+          }],
         },
       ],
     };
@@ -14,8 +94,11 @@ describe('createPreviewPageContext', () => {
     const previewManifest = [
       {
         id: 'some-id',
-        title: 'Some section title',
-        questions: [],
+        title: 'some section title',
+        questions: [{
+          id: 'some-question-id',
+          requirement: 'Mandatory',
+        }],
       }];
 
     const context = createPreviewPageContext(previewManifest, {});
@@ -27,12 +110,16 @@ describe('createPreviewPageContext', () => {
     const expectedContext = {
       sections: [
         {
-          title: 'Some first section title',
-          questions: [],
+          title: 'some first section title',
+          questions: [{
+            id: 'some-first-question-id',
+          }],
         },
         {
-          title: 'Some second section title',
-          questions: [],
+          title: 'some second section title',
+          questions: [{
+            id: 'some-second-question-id',
+          }],
         },
       ],
     };
@@ -40,13 +127,19 @@ describe('createPreviewPageContext', () => {
     const previewManifest = [
       {
         id: 'some-first-id',
-        title: 'Some first section title',
-        questions: [],
+        title: 'some first section title',
+        questions: [{
+          id: 'some-first-question-id',
+          requirement: 'Mandatory',
+        }],
       },
       {
         id: 'some-second-id',
-        title: 'Some second section title',
-        questions: [],
+        title: 'some second section title',
+        questions: [{
+          id: 'some-second-question-id',
+          requirement: 'Mandatory',
+        }],
       },
     ];
 
@@ -111,7 +204,7 @@ describe('createPreviewPageContext', () => {
     const expectedContext = {
       sections: [
         {
-          title: 'Some first section title',
+          title: 'some first section title',
           questions: [
             {
               id: 'some-question-id',
@@ -126,7 +219,7 @@ describe('createPreviewPageContext', () => {
     const previewManifest = [
       {
         id: 'some-first-id',
-        title: 'Some first section title',
+        title: 'some first section title',
         questions: [
           {
             id: 'some-question-id',
@@ -159,11 +252,11 @@ describe('createPreviewPageContext', () => {
     const expectedContext = {
       sections: [
         {
-          title: 'Some section title',
+          title: 'some section title',
           questions: [
             {
               id: 'some-question-id',
-              title: 'Some question preview title',
+              title: 'some question preview title',
               data: 'some question data',
             },
           ],
@@ -174,12 +267,12 @@ describe('createPreviewPageContext', () => {
     const previewManifest = [
       {
         id: 'some-section-id',
-        title: 'Some section title',
+        title: 'some section title',
         questions: [
           {
             id: 'some-question-id',
             preview: {
-              title: 'Some question preview title',
+              title: 'some question preview title',
             },
           },
         ],
@@ -209,7 +302,7 @@ describe('createPreviewPageContext', () => {
     const expectedContext = {
       sections: [
         {
-          title: 'Some section title',
+          title: 'some section title',
           questions: [
             {
               id: 'some-question-id',
@@ -223,7 +316,7 @@ describe('createPreviewPageContext', () => {
     const previewManifest = [
       {
         id: 'some-section-id',
-        title: 'Some section title',
+        title: 'some section title',
         questions: [
           {
             id: 'some-question-id',
@@ -260,7 +353,7 @@ describe('createPreviewPageContext', () => {
     const expectedContext = {
       sections: [
         {
-          title: 'Some section title',
+          title: 'some section title',
           questions: [
             {
               id: 'some-question-id',
@@ -273,7 +366,7 @@ describe('createPreviewPageContext', () => {
     const previewManifest = [
       {
         id: 'some-section-id',
-        title: 'Some section title',
+        title: 'some section title',
         questions: [
           {
             id: 'some-question-id',
@@ -292,6 +385,63 @@ describe('createPreviewPageContext', () => {
         sections: [
           {
             id: 'some-section-id',
+            data: {},
+          },
+        ],
+      },
+    };
+
+    const context = createPreviewPageContext(previewManifest, existingSolutionData);
+
+    expect(context).toEqual(expectedContext);
+  });
+
+  it('should not create section if it has no questions', () => {
+    const expectedContext = {
+      sections: [
+        {
+          title: 'some section title',
+          questions: [
+            {
+              id: 'some-question-id',
+            },
+          ],
+        },
+      ],
+    };
+
+    const previewManifest = [
+      {
+        id: 'some-section-id',
+        title: 'some section title',
+        questions: [
+          {
+            id: 'some-question-id',
+            requirement: 'Mandatory',
+          },
+        ],
+      },
+      {
+        id: 'some-other-section-id',
+        title: 'some other section title',
+        questions: [
+          {
+            id: 'some-other-question-id',
+            requirement: 'Optional',
+          },
+        ],
+      },
+    ];
+
+    const existingSolutionData = {
+      marketingData: {
+        sections: [
+          {
+            id: 'some-section-id',
+            data: {},
+          },
+          {
+            id: 'some-other-section-id',
             data: {},
           },
         ],
