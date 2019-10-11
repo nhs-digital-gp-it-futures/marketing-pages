@@ -7,9 +7,10 @@
   <div class="nhsuk-grid-column-full">
 
     <h1>Marketing Page - Dashboard</h1>
-    <div data-test-id="dashboard-preview-button">
+    <div data-test-id="dashboard-preview-secondary-button">
       {{ button({
         "text": "Preview Marketing page",
+        "classes": "nhsuk-button--secondary",
         "href": previewUrl
       }) }}
     </div>
@@ -17,6 +18,15 @@
     {% for sectionGroup in sectionGroups %}
       {{ dashboardSectionGroup(sectionGroup, loop.index) }}
     {% endfor %}
+
+    <br/>
+    <br/>
+    <div data-test-id="dashboard-preview-button">
+      {{ button({
+        "text": "Preview Marketing page",
+        "href": previewUrl
+      }) }}
+    </div>
   </div>
 </div>
 {% endblock %}
