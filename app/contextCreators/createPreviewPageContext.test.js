@@ -59,12 +59,13 @@ describe('createPreviewPageContext', () => {
     const expectedContext = {
       sections: [
         {
-          title: 'Some first section title',
+          title: 'some first section title',
           questions: [
             {
-              id: 'Some-question-id',
-              title: 'Some question preview title',
+              id: 'some-question-id',
+              title: 'some question preview title',
               type: 'some-question-type',
+              data: 'some question data',
             },
           ],
         },
@@ -74,20 +75,34 @@ describe('createPreviewPageContext', () => {
     const previewManifest = [
       {
         id: 'some-first-id',
-        title: 'Some first section title',
+        title: 'some first section title',
         questions: [
           {
-            id: 'Some-question-id',
+            id: 'some-question-id',
             type: 'some-question-type',
             preview: {
-              title: 'Some question preview title',
+              title: 'some question preview title',
             },
           },
         ],
       },
     ];
 
-    const context = createPreviewPageContext(previewManifest, {});
+    const existingSolutionData = {
+      marketingData: {
+        sections: [
+          {
+            id: 'some-first-id',
+            data: {
+              'some-question-id': 'some question data',
+            },
+            status: 'COMPLETE',
+          },
+        ],
+      },
+    };
+
+    const context = createPreviewPageContext(previewManifest, existingSolutionData);
 
     expect(context).toEqual(expectedContext);
   });
@@ -99,8 +114,9 @@ describe('createPreviewPageContext', () => {
           title: 'Some first section title',
           questions: [
             {
-              id: 'Some-question-id',
+              id: 'some-question-id',
               type: 'some-question-type',
+              data: 'some question data',
             },
           ],
         },
@@ -113,14 +129,28 @@ describe('createPreviewPageContext', () => {
         title: 'Some first section title',
         questions: [
           {
-            id: 'Some-question-id',
+            id: 'some-question-id',
             type: 'some-question-type',
           },
         ],
       },
     ];
 
-    const context = createPreviewPageContext(previewManifest, {});
+    const existingSolutionData = {
+      marketingData: {
+        sections: [
+          {
+            id: 'some-first-id',
+            data: {
+              'some-question-id': 'some question data',
+            },
+            status: 'COMPLETE',
+          },
+        ],
+      },
+    };
+
+    const context = createPreviewPageContext(previewManifest, existingSolutionData);
 
     expect(context).toEqual(expectedContext);
   });
@@ -151,6 +181,57 @@ describe('createPreviewPageContext', () => {
             preview: {
               title: 'Some question preview title',
             },
+          },
+        ],
+      },
+    ];
+
+    const existingSolutionData = {
+      marketingData: {
+        sections: [
+          {
+            id: 'some-section-id',
+            data: {
+              'some-question-id': 'some question data',
+            },
+            status: 'COMPLETE',
+          },
+        ],
+      },
+    };
+
+    const context = createPreviewPageContext(previewManifest, existingSolutionData);
+
+    expect(context).toEqual(expectedContext);
+  });
+
+  it('should not create question if optional and no data', () => {
+    const expectedContext = {
+      sections: [
+        {
+          title: 'Some section title',
+          questions: [
+            {
+              id: 'some-question-id',
+              data: 'some question data',
+            },
+          ],
+        },
+      ],
+    };
+
+    const previewManifest = [
+      {
+        id: 'some-section-id',
+        title: 'Some section title',
+        questions: [
+          {
+            id: 'some-question-id',
+            requirement: 'Optional',
+          },
+          {
+            id: 'some-other-question-id',
+            requirement: 'Optional',
           },
         ],
       },

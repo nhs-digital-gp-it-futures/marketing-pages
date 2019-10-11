@@ -20,14 +20,19 @@ export const createPreviewPageContext = (
     const questions = [];
 
     sectionManifest.questions.map((questionManifest) => {
-      const question = {
-        id: questionManifest.id,
-        title: addTitleIfProvided(questionManifest),
-        type: questionManifest.type,
-        data: getMarketingDataForQuestion(existingSolutionData, sectionManifest.id, questionManifest.id),
-      };
+      const questionData = getMarketingDataForQuestion(existingSolutionData, sectionManifest.id, questionManifest.id);
+      const questionRequirment = questionManifest.requirement ? questionManifest.requirement : 'Optional';
 
-      questions.push(question);
+      if (questionRequirment === 'Optional' && questionData) {
+        const question = {
+          id: questionManifest.id,
+          title: addTitleIfProvided(questionManifest),
+          type: questionManifest.type,
+          data: questionData,
+        };
+
+        questions.push(question);
+      }
     });
 
     const section = {
