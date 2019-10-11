@@ -37,12 +37,16 @@ test('should render the marketing dashboard page title', async (t) => {
     .expect(title.innerText).eql('Marketing Page - Dashboard');
 });
 
-test('should render the preview marketing page button', async (t) => {
+test('should render the preview page button', async (t) => {
   pageSetup(t);
+
+  nock('http://localhost:8080')
+    .get('/api/v1/Solutions/S100000-001')
+    .reply(200, aSolutionFixture);
 
   const getLocation = ClientFunction(() => document.location.href);
 
-  const previewButton = Selector('[data-test-id="dashboard-preview-button"] a');
+  const previewButton = Selector('[data-test-id="dashboard-preview-secondary-button"] a');
 
   await t
     .expect(previewButton.innerText).eql('Preview Marketing page')
