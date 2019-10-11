@@ -92,6 +92,38 @@ describe('createPreviewPageContext', () => {
     expect(context).toEqual(expectedContext);
   });
 
+  it('should create a context from the preview manifest and not include the title of the question if not provided', () => {
+    const expectedContext = {
+      sections: [
+        {
+          title: 'Some first section title',
+          questions: [
+            {
+              id: 'Some-question-id',
+              type: 'some-question-type',
+            },
+          ],
+        },
+      ],
+    };
+
+    const previewManifest = [
+      {
+        id: 'some-first-id',
+        title: 'Some first section title',
+        questions: [
+          {
+            id: 'Some-question-id',
+            type: 'some-question-type',
+          },
+        ],
+      },
+    ];
+
+    const context = createPreviewPageContext(previewManifest, {});
+
+    expect(context).toEqual(expectedContext);
+  });
 
   it('should create a context from the preview manifest with one section and one question with existing data', () => {
     const expectedContext = {

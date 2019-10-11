@@ -7,6 +7,10 @@ const getMarketingDataForQuestion = (existingSolutionData, sectionId, questionId
   return marketingDataForSection ? marketingDataForSection.data[questionId] : undefined;
 };
 
+const addTitleIfProvided = (questionManifest) => {
+  return questionManifest.preview && questionManifest.preview.title ? questionManifest.preview.title : undefined;
+};
+
 export const createPreviewPageContext = (
   previewManifest, existingSolutionData,
 ) => {
@@ -18,7 +22,7 @@ export const createPreviewPageContext = (
     sectionManifest.questions.map((questionManifest) => {
       const question = {
         id: questionManifest.id,
-        title: questionManifest.preview.title,
+        title: addTitleIfProvided(questionManifest),
         type: questionManifest.type,
         data: getMarketingDataForQuestion(existingSolutionData, sectionManifest.id, questionManifest.id),
       };
