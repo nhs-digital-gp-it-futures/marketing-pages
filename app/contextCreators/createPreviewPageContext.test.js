@@ -5,6 +5,7 @@ describe('createPreviewPageContext', () => {
     const expectedContext = {
       sections: [
         {
+          id: 'some-id',
           title: 'some section title',
           questions: [{
             id: 'some-question-id',
@@ -32,12 +33,14 @@ describe('createPreviewPageContext', () => {
     const expectedContext = {
       sections: [
         {
+          id: 'some-first-id',
           title: 'some first section title',
           questions: [{
             id: 'some-first-question-id',
           }],
         },
         {
+          id: 'some-second-id',
           title: 'some second section title',
           questions: [{
             id: 'some-second-question-id',
@@ -74,6 +77,7 @@ describe('createPreviewPageContext', () => {
     const expectedContext = {
       sections: [
         {
+          id: 'some-first-id',
           title: 'some first section title',
           questions: [
             {
@@ -126,6 +130,7 @@ describe('createPreviewPageContext', () => {
     const expectedContext = {
       sections: [
         {
+          id: 'some-first-id',
           title: 'some first section title',
           questions: [
             {
@@ -179,6 +184,7 @@ describe('createPreviewPageContext', () => {
     const expectedContext = {
       sections: [
         {
+          id: 'some-first-id',
           title: 'some first section title',
           questions: [
             {
@@ -227,6 +233,7 @@ describe('createPreviewPageContext', () => {
     const expectedContext = {
       sections: [
         {
+          id: 'some-section-id',
           title: 'some section title',
           questions: [
             {
@@ -277,6 +284,7 @@ describe('createPreviewPageContext', () => {
     const expectedContext = {
       sections: [
         {
+          id: 'some-section-id',
           title: 'some section title',
           questions: [
             {
@@ -328,6 +336,7 @@ describe('createPreviewPageContext', () => {
     const expectedContext = {
       sections: [
         {
+          id: 'some-section-id',
           title: 'some section title',
           questions: [
             {
@@ -375,6 +384,7 @@ describe('createPreviewPageContext', () => {
     const expectedContext = {
       sections: [
         {
+          id: 'some-section-id',
           title: 'some section title',
           questions: [
             {

@@ -2,7 +2,7 @@
 {% from './preview-question.njk' import previewQuestion %}
 
 {% macro previewSection(section) %}
-  <div data-test-id="preview-section">
+  <div data-test-id="preview-section-{{section.id}}">
     <div class="nhsuk_title">
       <h3>{{ section.title }}</h3>
     </div>

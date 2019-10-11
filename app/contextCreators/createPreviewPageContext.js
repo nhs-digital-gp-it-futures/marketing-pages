@@ -25,6 +25,7 @@ const createQuestionContext = (questionManifest, questionData) => ({
 const shouldSectionBeAddedToPreviewContext = questions => questions.length > 0;
 
 const createSectionContext = (sectionManifest, questions) => ({
+  id: sectionManifest.id,
   title: sectionManifest.title,
   questions,
 });

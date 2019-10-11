@@ -43,7 +43,7 @@ describe('preview page', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        expect($('[data-test-id="preview-section"]').length).toEqual(1);
+        expect($('[data-test-id^="preview-section-"]').length).toEqual(1);
 
         done();
       });
