@@ -56,7 +56,10 @@
           "maxLength": 1000,
           "message": "Solution Link validation error message"
         }
-      ]
+      ],
+      "preview": {
+        "type": "link"
+      }
     }
   ]
 }

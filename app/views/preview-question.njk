@@ -23,7 +23,7 @@
           {% endfor %}
         </ul>
       {% elif (question.type === 'link') %}
-        <a href="{{ question.data }}">
+        <a href="{{ question.data }}" target="_blank">
           {{ label({
             "text": question.data
           }) }}

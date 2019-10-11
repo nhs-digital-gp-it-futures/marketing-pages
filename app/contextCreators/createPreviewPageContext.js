@@ -10,10 +10,15 @@ const shouldQuestionBeAddedToPreviewContext = (questionManifest, questionData) =
   return (questionRequirment === 'Optional' && questionData) || (questionRequirment === 'Mandatory');
 };
 
+const overrideQuestionTypeIfApplicable = questionManifest => (
+  questionManifest.preview
+    && questionManifest.preview.type ? questionManifest.preview.type : questionManifest.type
+);
+
 const createQuestionContext = (questionManifest, questionData) => ({
   id: questionManifest.id,
   title: addTitleIfProvided(questionManifest),
-  type: questionManifest.type,
+  type: overrideQuestionTypeIfApplicable(questionManifest),
   data: questionData,
 });
 

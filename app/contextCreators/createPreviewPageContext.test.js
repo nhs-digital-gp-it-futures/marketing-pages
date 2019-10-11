@@ -122,6 +122,59 @@ describe('createPreviewPageContext', () => {
     expect(context).toEqual(expectedContext);
   });
 
+  it('should override the question type with the type provided in the preview config for the question', () => {
+    const expectedContext = {
+      sections: [
+        {
+          title: 'some first section title',
+          questions: [
+            {
+              id: 'some-question-id',
+              title: 'some question preview title',
+              type: 'some-overrided-preview-type',
+              data: 'some question data',
+            },
+          ],
+        },
+      ],
+    };
+
+    const previewManifest = [
+      {
+        id: 'some-first-id',
+        title: 'some first section title',
+        questions: [
+          {
+            id: 'some-question-id',
+            type: 'some-question-type',
+            preview: {
+              title: 'some question preview title',
+              type: 'some-overrided-preview-type',
+            },
+          },
+        ],
+      },
+    ];
+
+    const existingSolutionData = {
+      marketingData: {
+        sections: [
+          {
+            id: 'some-first-id',
+            data: {
+              'some-question-id': 'some question data',
+            },
+            status: 'COMPLETE',
+          },
+        ],
+      },
+    };
+
+    const context = createPreviewPageContext(previewManifest, existingSolutionData);
+
+    expect(context).toEqual(expectedContext);
+  });
+
   it('should create a context from the preview manifest and not include the title of the question if not provided', () => {
     const expectedContext = {
       sections: [
