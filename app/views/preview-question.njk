@@ -2,7 +2,7 @@
 
 {% macro previewQuestion(question) %}
   
-  <div data-test-id="preview-section-question-{{question.id}}">
+  <div data-test-id="preview-section-question-{{question.id}}" class="nhsuk-table__row">
     {% if (question.title) %}
       <div data-test-id="preview-question-title">
         {{ label({

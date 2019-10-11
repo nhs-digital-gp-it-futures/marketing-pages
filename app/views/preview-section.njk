@@ -3,7 +3,9 @@
 
 {% macro previewSection(section) %}
   <div data-test-id="preview-section">
-    <h2>{{ section.title }}</h2>
+    <div class="nhsuk_title">
+      <h3>{{ section.title }}</h3>
+    </div>
 
     {% for question in section.questions %}
       {{ previewQuestion(question) }}
