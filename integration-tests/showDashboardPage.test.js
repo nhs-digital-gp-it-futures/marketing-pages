@@ -15,10 +15,6 @@ const mocks = (isFirstLoad) => {
       .get('/api/v1/Solutions/S100000-001')
       .reply(200, aSolutionWithMarketingDataFixture);
   }
-
-  nock('http://localhost:8080')
-    .put('/api/v1/Solutions/S100000-001')
-    .reply(200, {});
 };
 
 const pageSetup = async (t, isFirstLoad = true) => {
@@ -96,14 +92,16 @@ test('should render all the sections for sectionGroups', async (t) => {
 
     await Promise.all(dashboardSectionGroup.sections.map(async (section, sectionIdx) => {
       const theSection = theSectionGroup.find(`[data-test-id="dashboard-section-${sectionIdx + 1}"]`);
+      const sectionData = aSolutionFixture.solution.marketingData.sections[sectionIdx];
+
       await t
         .expect(theSection.count).eql(1)
         .expect(theSection.find('[data-test-id="dashboard-section-title"]').innerText)
         .eql(section.title)
         .expect(theSection.find('[data-test-id="dashboard-section-requirement"]').innerText)
-        .eql(section.requirement)
+        .eql(sectionData.requirement)
         .expect(theSection.find('[data-test-id="dashboard-section-status"]').innerText)
-        .eql('INCOMPLETE');
+        .eql(sectionData.status);
     }));
   }));
 });
@@ -119,15 +117,16 @@ test('should render the correct status for a solution with marketing data and st
 
     await Promise.all(dashboardSectionGroup.sections.map(async (section, sectionIdx) => {
       const theSection = theSectionGroup.find(`[data-test-id="dashboard-section-${sectionIdx + 1}"]`);
+      const sectionData = aSolutionWithMarketingDataFixture.solution.marketingData.sections[sectionIdx];
 
       await t
         .expect(theSection.count).eql(1)
         .expect(theSection.find('[data-test-id="dashboard-section-title"]').innerText)
         .eql(section.title)
         .expect(theSection.find('[data-test-id="dashboard-section-requirement"]').innerText)
-        .eql(section.requirement)
+        .eql(sectionData.requirement)
         .expect(theSection.find('[data-test-id="dashboard-section-status"]').innerText)
-        .eql('COMPLETE');
+        .eql(sectionData.status);
     }));
   }));
 });

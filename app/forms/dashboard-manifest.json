@@ -7,13 +7,11 @@
       "sections": [
         {
           "id": "solution-description",
-          "title": "Solution description",
-          "requirement": "Mandatory"
+          "title": "Solution description"
         },
         {
           "id": "features",
-          "title": "Features",
-          "requirement": "Optional"
+          "title": "Features"
         }
       ]
     }

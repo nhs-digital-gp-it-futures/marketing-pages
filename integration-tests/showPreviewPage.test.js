@@ -35,9 +35,9 @@ test('when no existing marketing data - The solution description section should 
   pageSetup(t);
 
   const solutionDescriptionSection = Selector('[data-test-id="preview-section-solution-description"]');
-  const summaryQuestion = Selector('[data-test-id="preview-section-question-solution-summary"]');
-  const descriptionQuestion = Selector('[data-test-id="preview-section-question-solution-description"]');
-  const linkQuestion = Selector('[data-test-id="preview-section-question-solution-link"]');
+  const summaryQuestion = Selector('[data-test-id="preview-section-question-summary"]');
+  const descriptionQuestion = Selector('[data-test-id="preview-section-question-description"]');
+  const linkQuestion = Selector('[data-test-id="preview-section-question-link"]');
 
 
   await t
@@ -57,9 +57,9 @@ test('when existing marketing data - The solution description section and all qu
   pageSetup(t, true);
 
   const solutionDescriptionSection = Selector('[data-test-id="preview-section-solution-description"]');
-  const summaryQuestion = Selector('[data-test-id="preview-section-question-solution-summary"]');
-  const descriptionQuestion = Selector('[data-test-id="preview-section-question-solution-description"]');
-  const linkQuestion = Selector('[data-test-id="preview-section-question-solution-link"]');
+  const summaryQuestion = Selector('[data-test-id="preview-section-question-summary"]');
+  const descriptionQuestion = Selector('[data-test-id="preview-section-question-description"]');
+  const linkQuestion = Selector('[data-test-id="preview-section-question-link"]');
 
 
   await t
@@ -91,7 +91,7 @@ test('when existing marketing data - The features section should rendered and th
   pageSetup(t, true);
 
   const featuresSection = Selector('[data-test-id="preview-section-features"]');
-  const featureListingQuestion = Selector('[data-test-id="preview-section-question-features-listing"]');
+  const featureListingQuestion = Selector('[data-test-id="preview-section-question-listing"]');
 
   await t
     .expect(featuresSection.exists).ok()

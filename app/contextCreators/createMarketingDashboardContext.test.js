@@ -30,7 +30,6 @@ describe('createMarketingDashboardContext', () => {
             {
               id: 'features',
               title: 'Features',
-              requirement: 'Mandatory',
             },
           ],
         },
@@ -43,6 +42,7 @@ describe('createMarketingDashboardContext', () => {
           id: 'features',
           data: {},
           status: 'INCOMPLETE',
+          requirement: 'Mandatory',
         },
       ],
     };
