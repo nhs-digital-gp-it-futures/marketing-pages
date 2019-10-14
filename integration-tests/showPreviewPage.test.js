@@ -1,9 +1,7 @@
 import nock from 'nock';
-import { Selector, ClientFunction } from 'testcafe';
+import { Selector } from 'testcafe';
 import aSolutionFixture from './fixtures/aSolution.json';
 import aSolutionWithMarketingDataFixture from './fixtures/aSolutionWithMarketingData.json';
-import { ManifestProvider } from '../app/forms/manifestProvider';
-
 
 const mocks = (existingData) => {
   if (!existingData) {
