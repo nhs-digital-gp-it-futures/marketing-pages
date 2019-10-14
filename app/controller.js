@@ -3,7 +3,6 @@ import { ManifestProvider } from './forms/manifestProvider';
 import { createSectionPageContext } from './contextCreators/createSectionPageContext';
 import { createMarketingDashboardContext } from './contextCreators/createMarketingDashboardContext';
 import { createPreviewPageContext } from './contextCreators/createPreviewPageContext';
-import { createMarketingDataIfRequired } from './helpers/createMarketingDataIfRequired';
 import { createUpdatedSolutionData } from './helpers/createUpdatedSolutionData';
 import { validateSectionData } from './helpers/validateSectionData';
 import { findExistingMarketingDataForSection } from './helpers/findExistingMarketingDataForSection';
@@ -13,9 +12,6 @@ export const getMarketingPageDashboardContext = async (solutionId) => {
 
   const solutionData = await axios.get(`http://localhost:8080/api/v1/Solutions/${solutionId}`);
   const { solution } = solutionData.data;
-
-  solution.marketingData = createMarketingDataIfRequired(dashboardManifest, solution);
-  await axios.put(`http://localhost:8080/api/v1/Solutions/${solutionId}`, solution);
 
   const context = createMarketingDashboardContext(
     solutionId, dashboardManifest, solution.marketingData,

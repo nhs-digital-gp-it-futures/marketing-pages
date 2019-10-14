@@ -15,11 +15,11 @@ export const createMarketingDashboardContext = (solutionId, dashboardManifest, m
       const section = {};
       section.URL = `/${solutionId}/section/${manifestSection.id}`;
       section.title = manifestSection.title;
-      section.requirement = manifestSection.requirement;
 
-      const { status } = marketingData.sections
+      const { status, requirement } = marketingData.sections
         .find(marketingDataTask => marketingDataTask.id === manifestSection.id);
       section.status = status;
+      section.requirement = requirement;
 
       sections.push(section);
     });
