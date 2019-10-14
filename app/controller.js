@@ -79,7 +79,12 @@ export const getPreviewPageContext = async (solutionId) => {
   const solutionData = await axios.get(`http://localhost:8080/api/v1/Solutions/${solutionId}`);
   const existingSolutionData = solutionData.data.solution;
 
-  const context = createPreviewPageContext(previewManifest, existingSolutionData);
+  const context = createPreviewPageContext(solutionId, previewManifest, existingSolutionData);
 
   return context;
+};
+
+export const postPreview = async (solutionId) => {
+  await axios.put(`http://localhost:8080/api/v1/Solutions/${solutionId}/SubmitForReview`, {});
+  return true;
 };

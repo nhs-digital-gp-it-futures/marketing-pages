@@ -1,5 +1,5 @@
 import nock from 'nock';
-import { Selector } from 'testcafe';
+import { Selector, ClientFunction } from 'testcafe';
 import aSolutionFixture from './fixtures/aSolution.json';
 import aSolutionWithMarketingDataFixture from './fixtures/aSolutionWithMarketingData.json';
 
@@ -104,4 +104,25 @@ test('when existing marketing data - The features section should rendered and th
     .expect(featureListingQuestion.find('[data-test-id="preview-question-data"]').find('li:nth-child(1)').innerText).eql('Feature A')
     .expect(featureListingQuestion.find('[data-test-id="preview-question-data"]').find('li:nth-child(2)').innerText).eql('Feature B')
     .expect(featureListingQuestion.find('[data-test-id="preview-question-data"]').find('li:nth-child(3)').innerText).eql('Feature C');
+});
+
+test('should render the submit for moderation page button', async (t) => {
+  pageSetup(t);
+
+  nock('http://localhost:8080')
+    .get('/api/v1/Solutions/S100000-001')
+    .reply(200, aSolutionFixture);
+
+  nock('http://localhost:8080')
+    .put('/api/v1/Solutions/S100000-001/SubmitForReview')
+    .reply(204);
+
+  const getLocation = ClientFunction(() => document.location.href);
+
+  const previewButton = Selector('[data-test-id="preview-submit-button"] a');
+
+  await t
+    .expect(previewButton.innerText).eql('Submit for moderation')
+    .click(previewButton)
+    .expect(getLocation()).contains('S100000-001/preview');
 });

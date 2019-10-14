@@ -2,7 +2,7 @@ export const createMarketingDashboardContext = (solutionId, dashboardManifest, m
   const context = {};
   const sectionGroups = [];
 
-  context.previewUrl = `${solutionId}/preview`;
+  context.previewUrl = `/${solutionId}/preview`;
 
   dashboardManifest.sectionGroups.map((manifestSectionGroup) => {
     const sectionGroup = {};

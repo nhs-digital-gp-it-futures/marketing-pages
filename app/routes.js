@@ -6,6 +6,7 @@ import {
   validateSection,
   postSection,
   getPreviewPageContext,
+  postPreview,
 } from './controller';
 
 const router = express.Router();
@@ -48,6 +49,13 @@ router.get('/:solutionId/preview', async (req, res) => {
   const context = await getPreviewPageContext(solutionId);
 
   res.render('preview-page', context);
+});
+
+router.get('/:solutionId/submitPreview', async (req, res) => {
+  const { solutionId } = req.params;
+  await postPreview(solutionId);
+
+  res.redirect(`/${solutionId}/preview`);
 });
 
 module.exports = router;

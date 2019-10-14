@@ -30,7 +30,7 @@ const createSectionContext = (sectionManifest, questions) => ({
   questions,
 });
 
-export const createPreviewPageContext = (previewManifest, existingSolutionData) => {
+export const createPreviewPageContext = (solutionId, previewManifest, existingSolutionData) => {
   const sections = [];
 
   previewManifest.map((sectionManifest) => {
@@ -54,6 +54,7 @@ export const createPreviewPageContext = (previewManifest, existingSolutionData) 
   });
 
   const context = {
+    submitPreviewUrl: `/${solutionId}/submitPreview`,
     sections,
   };
 

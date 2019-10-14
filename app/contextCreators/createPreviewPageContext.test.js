@@ -3,6 +3,7 @@ import { createPreviewPageContext } from './createPreviewPageContext';
 describe('createPreviewPageContext', () => {
   it('should create a context from the preview manifest with a title', () => {
     const expectedContext = {
+      submitPreviewUrl: '/some-solution-id/submitPreview',
       sections: [
         {
           id: 'some-id',
@@ -24,13 +25,14 @@ describe('createPreviewPageContext', () => {
         }],
       }];
 
-    const context = createPreviewPageContext(previewManifest, {});
+    const context = createPreviewPageContext('some-solution-id', previewManifest, {});
 
     expect(context).toEqual(expectedContext);
   });
 
   it('should create a context from the preview manifest with mulitple titles', () => {
     const expectedContext = {
+      submitPreviewUrl: '/some-solution-id/submitPreview',
       sections: [
         {
           id: 'some-first-id',
@@ -68,13 +70,14 @@ describe('createPreviewPageContext', () => {
       },
     ];
 
-    const context = createPreviewPageContext(previewManifest, {});
+    const context = createPreviewPageContext('some-solution-id', previewManifest, {});
 
     expect(context).toEqual(expectedContext);
   });
 
   it('should create a context from the preview manifest with one section and one question', () => {
     const expectedContext = {
+      submitPreviewUrl: '/some-solution-id/submitPreview',
       sections: [
         {
           id: 'some-first-id',
@@ -121,13 +124,14 @@ describe('createPreviewPageContext', () => {
       },
     };
 
-    const context = createPreviewPageContext(previewManifest, existingSolutionData);
+    const context = createPreviewPageContext('some-solution-id', previewManifest, existingSolutionData);
 
     expect(context).toEqual(expectedContext);
   });
 
   it('should override the question type with the type provided in the preview config for the question', () => {
     const expectedContext = {
+      submitPreviewUrl: '/some-solution-id/submitPreview',
       sections: [
         {
           id: 'some-first-id',
@@ -175,13 +179,14 @@ describe('createPreviewPageContext', () => {
       },
     };
 
-    const context = createPreviewPageContext(previewManifest, existingSolutionData);
+    const context = createPreviewPageContext('some-solution-id', previewManifest, existingSolutionData);
 
     expect(context).toEqual(expectedContext);
   });
 
   it('should create a context from the preview manifest and not include the title of the question if not provided', () => {
     const expectedContext = {
+      submitPreviewUrl: '/some-solution-id/submitPreview',
       sections: [
         {
           id: 'some-first-id',
@@ -224,13 +229,14 @@ describe('createPreviewPageContext', () => {
       },
     };
 
-    const context = createPreviewPageContext(previewManifest, existingSolutionData);
+    const context = createPreviewPageContext('some-solution-id', previewManifest, existingSolutionData);
 
     expect(context).toEqual(expectedContext);
   });
 
   it('should create a context from the preview manifest with one section and one question with existing data', () => {
     const expectedContext = {
+      submitPreviewUrl: '/some-solution-id/submitPreview',
       sections: [
         {
           id: 'some-section-id',
@@ -275,13 +281,14 @@ describe('createPreviewPageContext', () => {
       },
     };
 
-    const context = createPreviewPageContext(previewManifest, existingSolutionData);
+    const context = createPreviewPageContext('some-solution-id', previewManifest, existingSolutionData);
 
     expect(context).toEqual(expectedContext);
   });
 
   it('should not create question if optional and no data', () => {
     const expectedContext = {
+      submitPreviewUrl: '/some-solution-id/submitPreview',
       sections: [
         {
           id: 'some-section-id',
@@ -327,13 +334,14 @@ describe('createPreviewPageContext', () => {
       },
     };
 
-    const context = createPreviewPageContext(previewManifest, existingSolutionData);
+    const context = createPreviewPageContext('some-solution-id', previewManifest, existingSolutionData);
 
     expect(context).toEqual(expectedContext);
   });
 
   it('should create question if requirement is mandatory and whether there is data or not', () => {
     const expectedContext = {
+      submitPreviewUrl: '/some-solution-id/submitPreview',
       sections: [
         {
           id: 'some-section-id',
@@ -375,13 +383,14 @@ describe('createPreviewPageContext', () => {
       },
     };
 
-    const context = createPreviewPageContext(previewManifest, existingSolutionData);
+    const context = createPreviewPageContext('some-solution-id', previewManifest, existingSolutionData);
 
     expect(context).toEqual(expectedContext);
   });
 
   it('should not create section if it has no questions', () => {
     const expectedContext = {
+      submitPreviewUrl: '/some-solution-id/submitPreview',
       sections: [
         {
           id: 'some-section-id',
@@ -433,7 +442,7 @@ describe('createPreviewPageContext', () => {
       },
     };
 
-    const context = createPreviewPageContext(previewManifest, existingSolutionData);
+    const context = createPreviewPageContext('some-solution-id', previewManifest, existingSolutionData);
 
     expect(context).toEqual(expectedContext);
   });
