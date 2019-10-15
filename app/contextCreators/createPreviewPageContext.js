@@ -1,3 +1,4 @@
+import { findExistingMarketingDataForSection } from '../helpers/findExistingMarketingDataForSection';
 import { getMarketingDataForQuestion } from '../helpers/getMarketingDataForQuestion';
 
 const addTitleIfProvided = questionManifest => (
@@ -5,8 +6,13 @@ const addTitleIfProvided = questionManifest => (
     && questionManifest.preview.title ? questionManifest.preview.title : undefined
 );
 
-const shouldQuestionBeAddedToPreviewContext = (questionManifest, questionData) => {
-  const questionRequirment = questionManifest.requirement ? questionManifest.requirement : 'Optional';
+const shouldQuestionBeAddedToPreviewContext = (questionManifest, questionData, sectionData) => {
+  const isQuestionMandatory = sectionData
+    && sectionData.mandatory
+    && sectionData.mandatory.some(
+      mandatoryQuestionId => mandatoryQuestionId === questionManifest.id,
+    );
+  const questionRequirment = isQuestionMandatory ? 'Mandatory' : 'Optional';
   return (questionRequirment === 'Optional' && questionData) || (questionRequirment === 'Mandatory');
 };
 
@@ -37,11 +43,14 @@ export const createPreviewPageContext = (solutionId, previewManifest, existingSo
     const questions = [];
 
     sectionManifest.questions.map((questionManifest) => {
+      const sectionData = findExistingMarketingDataForSection(
+        existingSolutionData, sectionManifest.id,
+      );
       const questionData = getMarketingDataForQuestion(
-        existingSolutionData, sectionManifest.id, questionManifest.id, questionManifest.type,
+        sectionData, questionManifest.id, questionManifest.type,
       );
 
-      if (shouldQuestionBeAddedToPreviewContext(questionManifest, questionData)) {
+      if (shouldQuestionBeAddedToPreviewContext(questionManifest, questionData, sectionData)) {
         const question = createQuestionContext(questionManifest, questionData);
         questions.push(question);
       }

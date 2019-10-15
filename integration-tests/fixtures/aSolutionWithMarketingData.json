@@ -11,6 +11,7 @@
             "description":"The solution description",
             "link":"The solution link"
           },
+          "mandatory": ["summary"],
           "requirement": "Mandatory",
           "status":"COMPLETE"
         },
@@ -23,6 +24,7 @@
               "Feature C"
             ]
           },
+          "mandatory": [],
           "requirement": "Optional",
           "status":"COMPLETE"
         }

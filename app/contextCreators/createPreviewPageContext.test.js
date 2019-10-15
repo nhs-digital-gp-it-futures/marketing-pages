@@ -21,11 +21,23 @@ describe('createPreviewPageContext', () => {
         title: 'some section title',
         questions: [{
           id: 'some-question-id',
-          requirement: 'Mandatory',
         }],
-      }];
+      },
+    ];
 
-    const context = createPreviewPageContext('some-solution-id', previewManifest, {});
+    const existingSolutionData = {
+      marketingData: {
+        sections: [
+          {
+            id: 'some-id',
+            data: {},
+            mandatory: ['some-question-id'],
+          },
+        ],
+      },
+    };
+
+    const context = createPreviewPageContext('some-solution-id', previewManifest, existingSolutionData);
 
     expect(context).toEqual(expectedContext);
   });
@@ -57,7 +69,6 @@ describe('createPreviewPageContext', () => {
         title: 'some first section title',
         questions: [{
           id: 'some-first-question-id',
-          requirement: 'Mandatory',
         }],
       },
       {
@@ -65,12 +76,28 @@ describe('createPreviewPageContext', () => {
         title: 'some second section title',
         questions: [{
           id: 'some-second-question-id',
-          requirement: 'Mandatory',
         }],
       },
     ];
 
-    const context = createPreviewPageContext('some-solution-id', previewManifest, {});
+    const existingSolutionData = {
+      marketingData: {
+        sections: [
+          {
+            id: 'some-first-id',
+            data: {},
+            mandatory: ['some-first-question-id'],
+          },
+          {
+            id: 'some-second-id',
+            data: {},
+            mandatory: ['some-second-question-id'],
+          },
+        ],
+      },
+    };
+
+    const context = createPreviewPageContext('some-solution-id', previewManifest, existingSolutionData);
 
     expect(context).toEqual(expectedContext);
   });
@@ -310,11 +337,9 @@ describe('createPreviewPageContext', () => {
         questions: [
           {
             id: 'some-question-id',
-            requirement: 'Optional',
           },
           {
             id: 'some-other-question-id',
-            requirement: 'Optional',
           },
         ],
       },
@@ -328,6 +353,7 @@ describe('createPreviewPageContext', () => {
             data: {
               'some-question-id': 'some question data',
             },
+            mandatory: [],
             status: 'COMPLETE',
           },
         ],
@@ -362,11 +388,9 @@ describe('createPreviewPageContext', () => {
         questions: [
           {
             id: 'some-question-id',
-            requirement: 'Mandatory',
           },
           {
             id: 'some-other-question-id',
-            requirement: 'Optional',
           },
         ],
       },
@@ -378,6 +402,7 @@ describe('createPreviewPageContext', () => {
           {
             id: 'some-section-id',
             data: {},
+            mandatory: ['some-question-id'],
           },
         ],
       },
@@ -411,7 +436,6 @@ describe('createPreviewPageContext', () => {
         questions: [
           {
             id: 'some-question-id',
-            requirement: 'Mandatory',
           },
         ],
       },
@@ -421,7 +445,6 @@ describe('createPreviewPageContext', () => {
         questions: [
           {
             id: 'some-other-question-id',
-            requirement: 'Optional',
           },
         ],
       },
@@ -433,10 +456,12 @@ describe('createPreviewPageContext', () => {
           {
             id: 'some-section-id',
             data: {},
+            mandatory: ['some-question-id'],
           },
           {
             id: 'some-other-section-id',
             data: {},
+            mandatory: [],
           },
         ],
       },
