@@ -3,7 +3,6 @@ import { ManifestProvider } from './forms/manifestProvider';
 import { createSectionPageContext } from './contextCreators/createSectionPageContext';
 import { createMarketingDashboardContext } from './contextCreators/createMarketingDashboardContext';
 import { createPreviewPageContext } from './contextCreators/createPreviewPageContext';
-import { createUpdatedSolutionData } from './helpers/createUpdatedSolutionData';
 import { validateSectionData } from './helpers/validateSectionData';
 import { findExistingMarketingDataForSection } from './helpers/findExistingMarketingDataForSection';
 
@@ -56,16 +55,7 @@ export const validateSection = (sectionId, sectionData) => {
 };
 
 export const postSection = async (solutionId, sectionId, sectionData) => {
-  const sectionManifest = new ManifestProvider().getSectionManifest(sectionId);
-
-  const solutionData = await axios.get(`http://localhost:8080/api/v1/Solutions/${solutionId}`);
-  const existingSolutionData = solutionData.data.solution;
-
-  const updatedSolutionData = createUpdatedSolutionData(
-    sectionId, existingSolutionData, sectionManifest, sectionData,
-  );
-
-  await axios.put(`http://localhost:8080/api/v1/Solutions/${solutionId}`, updatedSolutionData);
+  await axios.put(`http://localhost:8080/api/v1/Solutions/${solutionId}/sections/${sectionId}`, sectionData);
 
   return true;
 };

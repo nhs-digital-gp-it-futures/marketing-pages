@@ -69,7 +69,7 @@ test('should populate the text fields with existing data', async (t) => {
 
   const existingFeatures = aSolutionWithMarketingDataFixture.solution.marketingData.sections
     .find(section => section.id === 'features')
-    .data['listing'];
+    .data.listing;
 
   await Promise.all(existingFeatures.map(async (existingFeature, i) => {
     const theField = Selector(`[data-test-id="listing-${i + 1}"]`);
@@ -92,12 +92,10 @@ test('should allow posting an empty form and navigate back to the dashboard when
 
   nock('http://localhost:8080')
     .get('/api/v1/Solutions/S100000-001')
-    .twice()
     .reply(200, aSolutionFixture);
 
   nock('http://localhost:8080')
-    .put('/api/v1/Solutions/S100000-001')
-    .twice()
+    .put('/api/v1/Solutions/S100000-001/sections/features')
     .reply(200, {});
 
   const getLocation = ClientFunction(() => document.location.href);

@@ -105,12 +105,10 @@ test('should allow posting an empty form and navigate back to the dashboard', as
 
   nock('http://localhost:8080')
     .get('/api/v1/Solutions/S100000-001')
-    .twice()
     .reply(200, aSolutionFixture);
 
   nock('http://localhost:8080')
-    .put('/api/v1/Solutions/S100000-001')
-    .twice()
+    .put('/api/v1/Solutions/S100000-001/sections/solution-description')
     .reply(200, {});
 
   const getLocation = ClientFunction(() => document.location.href);
