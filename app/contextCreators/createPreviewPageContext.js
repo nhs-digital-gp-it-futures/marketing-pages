@@ -21,7 +21,10 @@ const overrideQuestionTypeIfApplicable = questionManifest => (
     && questionManifest.preview.type ? questionManifest.preview.type : questionManifest.type
 );
 
-const findValidationErrorTypeForQuestionIfApplicaple = (questionId, validationErrorsForSection) => {
+const findValidationErrorTypeForQuestionIfApplicaple = (
+  sectionId, questionId, previewValidationErrors,
+) => {
+  const validationErrorsForSection = previewValidationErrors && previewValidationErrors[sectionId];
   return validationErrorsForSection
    && Object.entries(validationErrorsForSection).map(([errorType, questionsWithErrors]) => {
      if (questionsWithErrors.some(questionIdWithError => questionIdWithError === questionId)) {
@@ -55,6 +58,13 @@ const createSectionContext = (sectionManifest, questions) => ({
   questions,
 });
 
+const createErrorSummaryContextForQuestion = (questionId, errorMessage) => {
+  const contextError = {};
+  contextError.text = errorMessage;
+  contextError.href = `#${questionId}`;
+  return contextError;
+}
+
 export const createPreviewPageContext = (
   solutionId, previewManifest, existingSolutionData, previewValidationErrors,
 ) => {
@@ -73,21 +83,25 @@ export const createPreviewPageContext = (
       );
 
       if (shouldQuestionBeAddedToPreviewContext(questionManifest, questionData, sectionData)) {
-        const validationErrorsForSection = previewValidationErrors && previewValidationErrors[sectionManifest.id];
-        const errorType = findValidationErrorTypeForQuestionIfApplicaple(questionManifest.id, validationErrorsForSection);
-        const errorMessage = errorType && getErrorMessageForQuestion(errorType, questionManifest);
-        const errorForQuestion = errorType ? { message: errorMessage } : undefined;
+        let errorForQuestion;
+
+        const errorTypeIfApplicable = findValidationErrorTypeForQuestionIfApplicaple(
+          sectionManifest.id, questionManifest.id, previewValidationErrors,
+        );
+
+        if (errorTypeIfApplicable) {
+          const errorMessage = getErrorMessageForQuestion(errorTypeIfApplicable, questionManifest);
+          errorForQuestion = { message: errorMessage };
+
+          const errorSummaryContextForQuestion = createErrorSummaryContextForQuestion(
+            questionManifest.id, errorMessage,
+          );
+          errors.push(errorSummaryContextForQuestion);
+        }
 
         const question = createQuestionContext(
           questionManifest, questionData, errorForQuestion,
         );
-
-        if (errorType) {
-          const contextError = {};
-          contextError.text = errorMessage;
-          contextError.href = `#${questionManifest.id}`;
-          errors.push(contextError);
-        }
 
         questions.push(question);
       }
