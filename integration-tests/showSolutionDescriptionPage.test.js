@@ -128,7 +128,7 @@ test('should show error summary and validation for questions when they exceed th
   const threeHundredCharacters = oneHundredCharacters.repeat(3);
   const thousandCharacters = oneHundredCharacters.repeat(10);
 
-  const errorSummary = Selector('[data-test-id="section-error-summary"]');
+  const errorSummary = Selector('[data-test-id="error-summary"]');
   const errorSummaryList = Selector('.nhsuk-error-summary__list');
   const solutionSummary = Selector('[data-test-id="textarea-field-summary"]');
   const solutionDescription = Selector('[data-test-id="textarea-field-description"]');

@@ -87,7 +87,7 @@ describe('section page', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        expect($('[data-test-id="section-error-summary"]').length).toEqual(1);
+        expect($('[data-test-id="error-summary"]').length).toEqual(1);
 
         done();
       });
@@ -104,7 +104,7 @@ describe('section page', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        expect($('[data-test-id="section-error-summary"]').length).toEqual(0);
+        expect($('[data-test-id="error-summary"]').length).toEqual(0);
 
         done();
       });

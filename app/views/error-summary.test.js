@@ -9,8 +9,8 @@ const createDummyApp = (context) => {
 
   const router = express.Router();
   const dummyRouter = router.get('/', (req, res) => {
-    const macroWrapper = `{% from './section-error-summary.njk' import sectionErrorSummary %}
-                            {{ sectionErrorSummary(errors) }}`;
+    const macroWrapper = `{% from './error-summary.njk' import errorSummary %}
+                            {{ errorSummary(errors) }}`;
 
     const viewToTest = nunjucks.renderString(macroWrapper, context);
 
@@ -22,7 +22,7 @@ const createDummyApp = (context) => {
   return app;
 };
 
-describe('sectionErrorSummary', () => {
+describe('errorSummary', () => {
   it('should render the error summary title', (done) => {
     const context = {
       errors: [],
