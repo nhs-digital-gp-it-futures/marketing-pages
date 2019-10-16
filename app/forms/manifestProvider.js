@@ -16,4 +16,19 @@ export class ManifestProvider {
 
     return this.sectionManifest;
   }
+
+  getPreviewManifest() {
+    const previewManifest = [];
+
+    const dashboardManifest = this.getDashboardManifest();
+
+    dashboardManifest.sectionGroups.map((sectionGroup) => {
+      sectionGroup.sections.map((section) => {
+        const sectionManifest = this.getSectionManifest(section.id);
+        previewManifest.push(sectionManifest);
+      });
+    });
+
+    return previewManifest;
+  }
 }

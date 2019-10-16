@@ -3,6 +3,7 @@ import { createMarketingDashboardContext } from './createMarketingDashboardConte
 describe('createMarketingDashboardContext', () => {
   it('should create a context from the manifest and the marketingData', () => {
     const expectedContext = {
+      previewUrl: '/some-solution-id/preview',
       sectionGroups: [
         {
           id: 'about-your-solution',
@@ -29,7 +30,6 @@ describe('createMarketingDashboardContext', () => {
             {
               id: 'features',
               title: 'Features',
-              requirement: 'Mandatory',
             },
           ],
         },
@@ -42,6 +42,7 @@ describe('createMarketingDashboardContext', () => {
           id: 'features',
           data: {},
           status: 'INCOMPLETE',
+          requirement: 'Mandatory',
         },
       ],
     };

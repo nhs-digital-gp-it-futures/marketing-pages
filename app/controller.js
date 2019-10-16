@@ -2,8 +2,7 @@ import axios from 'axios';
 import { ManifestProvider } from './forms/manifestProvider';
 import { createSectionPageContext } from './contextCreators/createSectionPageContext';
 import { createMarketingDashboardContext } from './contextCreators/createMarketingDashboardContext';
-import { createMarketingDataIfRequired } from './helpers/createMarketingDataIfRequired';
-import { createUpdatedSolutionData } from './helpers/createUpdatedSolutionData';
+import { createPreviewPageContext } from './contextCreators/createPreviewPageContext';
 import { validateSectionData } from './helpers/validateSectionData';
 import { findExistingMarketingDataForSection } from './helpers/findExistingMarketingDataForSection';
 
@@ -12,9 +11,6 @@ export const getMarketingPageDashboardContext = async (solutionId) => {
 
   const solutionData = await axios.get(`http://localhost:8080/api/v1/Solutions/${solutionId}`);
   const { solution } = solutionData.data;
-
-  solution.marketingData = createMarketingDataIfRequired(dashboardManifest, solution);
-  await axios.put(`http://localhost:8080/api/v1/Solutions/${solutionId}`, solution);
 
   const context = createMarketingDashboardContext(
     solutionId, dashboardManifest, solution.marketingData,
@@ -59,16 +55,30 @@ export const validateSection = (sectionId, sectionData) => {
 };
 
 export const postSection = async (solutionId, sectionId, sectionData) => {
-  const sectionManifest = new ManifestProvider().getSectionManifest(sectionId);
+  await axios.put(`http://localhost:8080/api/v1/Solutions/${solutionId}/sections/${sectionId}`, sectionData);
 
+  return true;
+};
+
+export const getPreviewPageContext = async (solutionId, previewValidationErrors) => {
+  const previewManifest = new ManifestProvider().getPreviewManifest();
   const solutionData = await axios.get(`http://localhost:8080/api/v1/Solutions/${solutionId}`);
   const existingSolutionData = solutionData.data.solution;
 
-  const updatedSolutionData = createUpdatedSolutionData(
-    sectionId, existingSolutionData, sectionManifest, sectionData,
+  const context = createPreviewPageContext(
+    solutionId, previewManifest, existingSolutionData, previewValidationErrors,
   );
 
-  await axios.put(`http://localhost:8080/api/v1/Solutions/${solutionId}`, updatedSolutionData);
+  return context;
+};
 
-  return true;
+export const postPreview = async (solutionId) => {
+  try {
+    await axios.put(`http://localhost:8080/api/v1/Solutions/${solutionId}/SubmitForReview`, {});
+    return {
+      success: true,
+    };
+  } catch (error) {
+    return error.response.data;
+  }
 };

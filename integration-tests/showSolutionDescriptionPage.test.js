@@ -57,7 +57,7 @@ test('should render all the advice of the section', async (t) => {
 test('should render the solution summary question', async (t) => {
   pageSetup(t);
 
-  const summaryQuestion = Selector('[data-test-id="textarea-field-solution-summary"]');
+  const summaryQuestion = Selector('[data-test-id="textarea-field-summary"]');
 
   await t
     .expect(summaryQuestion.find('label.nhsuk-label').innerText).eql('Summarise your Solution *')
@@ -69,7 +69,7 @@ test('should render the solution summary question', async (t) => {
 test('should render the about your solution question', async (t) => {
   pageSetup(t);
 
-  const summaryQuestion = Selector('[data-test-id="textarea-field-solution-description"]');
+  const summaryQuestion = Selector('[data-test-id="textarea-field-description"]');
 
   await t
     .expect(summaryQuestion.find('label.nhsuk-label').innerText).eql('Write a description about your Solution')
@@ -81,7 +81,7 @@ test('should render the about your solution question', async (t) => {
 test('should render the solution link field', async (t) => {
   pageSetup(t);
 
-  const summaryQuestion = Selector('[data-test-id="text-field-solution-link"]');
+  const summaryQuestion = Selector('[data-test-id="text-field-link"]');
 
   await t
     .expect(summaryQuestion.find('label.nhsuk-label').innerText).eql('Enter a link to more Solution information')
@@ -95,9 +95,9 @@ test('should populate the text fields with existing data', async (t) => {
   const theQuestions = Selector('form');
 
   await t
-    .expect(theQuestions.find('[data-test-id="textarea-field-solution-summary"]').find('textarea').value).eql('The solution summary')
-    .expect(theQuestions.find('[data-test-id="textarea-field-solution-description"]').find('textarea').value).eql('The solution description')
-    .expect(theQuestions.find('[data-test-id="text-field-solution-link"]').find('input').value).eql('The solution link');
+    .expect(theQuestions.find('[data-test-id="textarea-field-summary"]').find('textarea').value).eql('The solution summary')
+    .expect(theQuestions.find('[data-test-id="textarea-field-description"]').find('textarea').value).eql('The solution description')
+    .expect(theQuestions.find('[data-test-id="text-field-link"]').find('input').value).eql('The solution link');
 });
 
 test('should allow posting an empty form and navigate back to the dashboard', async (t) => {
@@ -105,12 +105,10 @@ test('should allow posting an empty form and navigate back to the dashboard', as
 
   nock('http://localhost:8080')
     .get('/api/v1/Solutions/S100000-001')
-    .twice()
     .reply(200, aSolutionFixture);
 
   nock('http://localhost:8080')
-    .put('/api/v1/Solutions/S100000-001')
-    .twice()
+    .put('/api/v1/Solutions/S100000-001/sections/solution-description')
     .reply(200, {});
 
   const getLocation = ClientFunction(() => document.location.href);
@@ -130,11 +128,11 @@ test('should show error summary and validation for questions when they exceed th
   const threeHundredCharacters = oneHundredCharacters.repeat(3);
   const thousandCharacters = oneHundredCharacters.repeat(10);
 
-  const errorSummary = Selector('[data-test-id="section-error-summary"]');
+  const errorSummary = Selector('[data-test-id="error-summary"]');
   const errorSummaryList = Selector('.nhsuk-error-summary__list');
-  const solutionSummary = Selector('[data-test-id="textarea-field-solution-summary"]');
-  const solutionDescription = Selector('[data-test-id="textarea-field-solution-description"]');
-  const solutionLink = Selector('[data-test-id="text-field-solution-link"]');
+  const solutionSummary = Selector('[data-test-id="textarea-field-summary"]');
+  const solutionDescription = Selector('[data-test-id="textarea-field-description"]');
+  const solutionLink = Selector('[data-test-id="text-field-link"]');
 
   const submitButton = Selector('[data-test-id="section-submit-button"]');
 
@@ -147,11 +145,11 @@ test('should show error summary and validation for questions when they exceed th
     .expect(errorSummary.exists).ok()
     .expect(errorSummaryList.find('li').count).eql(3)
     .expect(errorSummaryList.find('li:nth-child(1)').innerText).eql('Solution Summary validation error message')
-    .expect(errorSummaryList.find('li:nth-child(1) a').getAttribute('href')).eql('#solution-summary')
+    .expect(errorSummaryList.find('li:nth-child(1) a').getAttribute('href')).eql('#summary')
     .expect(errorSummaryList.find('li:nth-child(2)').innerText).eql('Solution Description validation error message')
-    .expect(errorSummaryList.find('li:nth-child(2) a').getAttribute('href')).eql('#solution-description')
+    .expect(errorSummaryList.find('li:nth-child(2) a').getAttribute('href')).eql('#description')
     .expect(errorSummaryList.find('li:nth-child(3)').innerText).eql('Solution Link validation error message')
-    .expect(errorSummaryList.find('li:nth-child(3) a').getAttribute('href')).eql('#solution-link')
+    .expect(errorSummaryList.find('li:nth-child(3) a').getAttribute('href')).eql('#link')
     .expect(solutionSummary.find('.nhsuk-textarea--error').exists).ok()
     .expect(solutionSummary.find('.nhsuk-error-message').innerText).eql('Error:\nSolution Summary validation error message')
     .expect(solutionDescription.find('.nhsuk-textarea--error').exists).ok()

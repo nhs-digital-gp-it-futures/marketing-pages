@@ -9,8 +9,7 @@
   ],
   "questions": [
     {
-      "id": "features-listing",
-      "requirement": "Optional",
+      "id": "listing",
       "type": "bulletpoint-list",
       "maxItems": 10,
       "saveValidations": [

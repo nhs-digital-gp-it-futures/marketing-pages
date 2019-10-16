@@ -15,10 +15,6 @@ const mocks = (isFirstLoad) => {
       .get('/api/v1/Solutions/S100000-001')
       .reply(200, aSolutionWithMarketingDataFixture);
   }
-
-  nock('http://localhost:8080')
-    .put('/api/v1/Solutions/S100000-001')
-    .reply(200, {});
 };
 
 const pageSetup = async (t, isFirstLoad = true) => {
@@ -35,6 +31,40 @@ test('should render the marketing dashboard page title', async (t) => {
 
   await t
     .expect(title.innerText).eql('Marketing Page - Dashboard');
+});
+
+test('should render the secondary preview page button', async (t) => {
+  pageSetup(t);
+
+  nock('http://localhost:8080')
+    .get('/api/v1/Solutions/S100000-001')
+    .reply(200, aSolutionFixture);
+
+  const getLocation = ClientFunction(() => document.location.href);
+
+  const previewButton = Selector('[data-test-id="dashboard-preview-secondary-button"] a');
+
+  await t
+    .expect(previewButton.innerText).eql('Preview Marketing page')
+    .click(previewButton)
+    .expect(getLocation()).contains('S100000-001/preview');
+});
+
+test('should render the preview page button', async (t) => {
+  pageSetup(t);
+
+  nock('http://localhost:8080')
+    .get('/api/v1/Solutions/S100000-001')
+    .reply(200, aSolutionFixture);
+
+  const getLocation = ClientFunction(() => document.location.href);
+
+  const previewButton = Selector('[data-test-id="dashboard-preview-button"] a');
+
+  await t
+    .expect(previewButton.innerText).eql('Preview Marketing page')
+    .click(previewButton)
+    .expect(getLocation()).contains('S100000-001/preview');
 });
 
 test('should render the sectionGroups configured in the dashboard manifest', async (t) => {
@@ -62,14 +92,16 @@ test('should render all the sections for sectionGroups', async (t) => {
 
     await Promise.all(dashboardSectionGroup.sections.map(async (section, sectionIdx) => {
       const theSection = theSectionGroup.find(`[data-test-id="dashboard-section-${sectionIdx + 1}"]`);
+      const sectionData = aSolutionFixture.solution.marketingData.sections[sectionIdx];
+
       await t
         .expect(theSection.count).eql(1)
         .expect(theSection.find('[data-test-id="dashboard-section-title"]').innerText)
         .eql(section.title)
         .expect(theSection.find('[data-test-id="dashboard-section-requirement"]').innerText)
-        .eql(section.requirement)
+        .eql(sectionData.requirement)
         .expect(theSection.find('[data-test-id="dashboard-section-status"]').innerText)
-        .eql('INCOMPLETE');
+        .eql(sectionData.status);
     }));
   }));
 });
@@ -85,15 +117,16 @@ test('should render the correct status for a solution with marketing data and st
 
     await Promise.all(dashboardSectionGroup.sections.map(async (section, sectionIdx) => {
       const theSection = theSectionGroup.find(`[data-test-id="dashboard-section-${sectionIdx + 1}"]`);
+      const sectionData = aSolutionWithMarketingDataFixture.solution.marketingData.sections[sectionIdx];
 
       await t
         .expect(theSection.count).eql(1)
         .expect(theSection.find('[data-test-id="dashboard-section-title"]').innerText)
         .eql(section.title)
         .expect(theSection.find('[data-test-id="dashboard-section-requirement"]').innerText)
-        .eql(section.requirement)
+        .eql(sectionData.requirement)
         .expect(theSection.find('[data-test-id="dashboard-section-status"]').innerText)
-        .eql('COMPLETE');
+        .eql(sectionData.status);
     }));
   }));
 });

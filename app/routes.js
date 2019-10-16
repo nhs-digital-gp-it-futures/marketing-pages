@@ -5,6 +5,8 @@ import {
   getSectionPageErrorContext,
   validateSection,
   postSection,
+  getPreviewPageContext,
+  postPreview,
 } from './controller';
 
 const router = express.Router();
@@ -39,6 +41,26 @@ router.post('/:solutionId/section/:sectionId', async (req, res) => {
     const response = await postSection(solutionId, sectionId, sectionPostData);
 
     res.redirect(`../../${solutionId}`);
+  }
+});
+
+router.get('/:solutionId/preview', async (req, res) => {
+  const { solutionId } = req.params;
+  const context = await getPreviewPageContext(solutionId);
+
+  res.render('preview-page', context);
+});
+
+router.get('/:solutionId/submitPreview', async (req, res) => {
+  const { solutionId } = req.params;
+  const response = await postPreview(solutionId);
+
+  if (response.success) {
+    res.redirect(`/${solutionId}/preview`);
+  } else {
+    const context = await getPreviewPageContext(solutionId, response);
+
+    res.render('preview-page', context);
   }
 });
 

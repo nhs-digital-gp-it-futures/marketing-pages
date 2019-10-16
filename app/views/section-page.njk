@@ -1,13 +1,13 @@
 {% extends 'includes/layout.njk' %}
 {% from 'components/button/macro.njk' import button %}
 {% from './section-question.njk' import sectionQuestion %}
-{% from './section-error-summary.njk' import sectionErrorSummary %}
+{% from './error-summary.njk' import errorSummary %}
 
 {% block body %}
 <div class="nhsuk-grid-row">
   <div class="nhsuk-grid-column-full">
     {% if (errors.length > 0) %}
-      {{ sectionErrorSummary(errors) }}
+      {{ errorSummary(errors) }}
     {% endif %}  
     
     <h2 data-test-id="section-title">{{ title }}</h2>

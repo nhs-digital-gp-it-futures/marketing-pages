@@ -1,0 +1,30 @@
+{% extends 'includes/layout.njk' %}
+{% from 'components/button/macro.njk' import button %}
+{% from './preview-section.njk' import previewSection %}
+{% from './error-summary.njk' import errorSummary %}
+
+{% block body %}
+<div class="nhsuk-grid-row">
+  <div class="nhsuk-grid-column-full">
+    {% if (errors.length > 0) %}
+      {{ errorSummary(errors) }}
+    {% endif %}  
+
+    <h1>Preview Page</h1>
+    
+    {% for section in sections %}
+      {{ previewSection(section) }}
+    {% endfor %}
+
+  </div>
+
+  <br/>
+  <br/>
+  <div data-test-id="preview-submit-button">
+    {{ button({
+      "text": "Submit for moderation",
+      "href": submitPreviewUrl
+    }) }}
+  </div>
+</div>
+{% endblock %}

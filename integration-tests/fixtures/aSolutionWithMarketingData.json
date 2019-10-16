@@ -1,43 +1,34 @@
 {
-  "success": true,
-  "message": "solution retrieved succesfully",
   "solution":   {
     "id": "S100000-001",
     "name": "Write on Time",
-    "summary": "Write on Time is a Citizen-facing Appointments Management system specifically designed to reduce the number of DNAs in your practice.",
-    "organisation": {
-      "id": "1000000",
-      "name": "Really Kool Corporation"
-    },
     "marketingData": {
       "sections":[
         {
           "id":"solution-description",
           "data":{
-            "solution-summary":"The solution summary",
-            "solution-description":"The solution description",
-            "solution-link":"The solution link"
+            "summary":"The solution summary",
+            "description":"The solution description",
+            "link":"The solution link"
           },
+          "mandatory": ["summary"],
+          "requirement": "Mandatory",
           "status":"COMPLETE"
         },
         {
           "id":"features",
           "data":{
-            "features-listing": [
+            "listing": [
               "Feature A",
               "Feature B",
               "Feature C"
             ]
           },
+          "mandatory": [],
+          "requirement": "Optional",
           "status":"COMPLETE"
         }
       ]
-    },
-    "capabilities": [
-      {
-        "id": "E4D22F8A-0F5F-43D5-A8E4-60F1365E968A",
-        "name": "Appointments Management - Citizen"
-      }
-    ]
+    }
   }  
 }

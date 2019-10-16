@@ -32,6 +32,25 @@ describe('dashboard page', () => {
       });
   });
 
+  it('should render the secondary preview button at the top of the page', (done) => {
+    const context = {
+      previewUrl: '/S100000-001/preview',
+    };
+
+    const dummyApp = createDummyApp(context);
+    request(dummyApp)
+      .get('/')
+      .then((res) => {
+        const $ = cheerio.load(res.text);
+
+        expect($('[data-test-id="dashboard-preview-secondary-button"] a').length).toEqual(1);
+        expect($('[data-test-id="dashboard-preview-secondary-button"] a').text().trim()).toEqual('Preview Marketing page');
+        expect($('[data-test-id="dashboard-preview-secondary-button"] a').attr('href')).toEqual('/S100000-001/preview');
+
+        done();
+      });
+  });
+
   it('should render the sectionGroups on the dashboard page', (done) => {
     const context = {
       sectionGroups: [
@@ -49,6 +68,25 @@ describe('dashboard page', () => {
         const $ = cheerio.load(res.text);
 
         expect($('[data-test-id="dashboard-sectionGroup-1"]').length).toEqual(1);
+
+        done();
+      });
+  });
+
+  it('should render the preview button at the bottom of the page', (done) => {
+    const context = {
+      previewUrl: '/S100000-001/preview',
+    };
+
+    const dummyApp = createDummyApp(context);
+    request(dummyApp)
+      .get('/')
+      .then((res) => {
+        const $ = cheerio.load(res.text);
+
+        expect($('[data-test-id="dashboard-preview-button"] a').length).toEqual(1);
+        expect($('[data-test-id="dashboard-preview-button"] a').text().trim()).toEqual('Preview Marketing page');
+        expect($('[data-test-id="dashboard-preview-button"] a').attr('href')).toEqual('/S100000-001/preview');
 
         done();
       });
