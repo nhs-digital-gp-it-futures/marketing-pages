@@ -144,11 +144,22 @@ test('When no data for solution description and the submit button is pressed it 
     .put('/api/v1/Solutions/S100000-001/SubmitForReview')
     .reply(400, submitForReviewValidationErrorResponse);
 
-  const summaryQuestion = Selector('[data-test-id="preview-section-question-summary"]');
+  const errorSummary = Selector('[data-test-id="error-summary"]');
+  const errorSummaryList = Selector('.nhsuk-error-summary__list');
+  const summaryQuestionAsError = Selector('[data-test-id="preview-question-title-error"]');
   const previewButton = Selector('[data-test-id="preview-submit-button"] a');
 
-
   await t
+    .expect(errorSummary.exists).notOk()
+    .expect(summaryQuestionAsError.exists).notOk()
+
     .click(previewButton)
-    .expect(summaryQuestion.exists).ok();
+
+    .expect(errorSummary.exists).ok()
+    .expect(errorSummaryList.find('li').count).eql(1)
+    .expect(errorSummaryList.find('li:nth-child(1)').innerText).eql('Solution Summary is a required field error message')
+    .expect(errorSummaryList.find('li:nth-child(1) a').getAttribute('href')).eql('#summary')
+
+    .expect(summaryQuestionAsError.exists).ok()
+    .expect(summaryQuestionAsError.find('.nhsuk-error-message').innerText).eql('Error:\nSolution Summary is a required field error message');
 });
