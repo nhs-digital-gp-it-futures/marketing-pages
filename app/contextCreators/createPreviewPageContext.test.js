@@ -472,10 +472,16 @@ describe('createPreviewPageContext', () => {
     expect(context).toEqual(expectedContext);
   });
 
-  describe('when mandatoryFieldsMissing is provided', () => {
+  describe('when previewValidationErrors are provided', () => {
     it('should create a context with the error message supplied for the question missing mandatory data', () => {
       const expectedContext = {
         submitPreviewUrl: '/some-solution-id/submitPreview',
+        errors: [
+          {
+            text: 'some question is a required field',
+            href: '#some-question-id',
+          },
+        ],
         sections: [
           {
             id: 'some-section-id',

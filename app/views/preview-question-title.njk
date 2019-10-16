@@ -3,13 +3,13 @@
 
 {% macro previewQuestionTitle(question) %}
   {% if (question.error.message) %}
-    <div data-test-id="preview-question-title-error" class="nhsuk-form-group nhsuk-form-group--error">
-      {{ errorMessage({
-        "text": question.error.message
-      }) }}
+    <div id="{{ question.id }}" data-test-id="preview-question-title-error" class="nhsuk-form-group nhsuk-form-group--error">
       {{ label({
         "classes": "nhsuk-label--s",
         "text": question.title
+      }) }}
+      {{ errorMessage({
+        "text": question.error.message
       }) }}
     </div>
   {% else %}

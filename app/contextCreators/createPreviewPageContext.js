@@ -37,20 +37,13 @@ const getErrorMessageForQuestion = (errorType, questionManifest) => {
   return submitValidationForErrorType ? submitValidationForErrorType.message : undefined;
 };
 
-const createQuestionContext = (questionManifest, questionData, validationErrorsForSection) => {
-  const error = {};
-  const errorType = findValidationErrorTypeForQuestionIfApplicaple(questionManifest.id, validationErrorsForSection);
-
-  if (errorType) {
-    error.message = getErrorMessageForQuestion(errorType, questionManifest);
-  }
-
+const createQuestionContext = (questionManifest, questionData, errorForQuestion) => {
   return {
     id: questionManifest.id,
     title: addTitleIfProvided(questionManifest),
     type: overrideQuestionTypeIfApplicable(questionManifest),
     data: questionData,
-    error: errorType ? error : undefined,
+    error: errorForQuestion || undefined,
   };
 };
 
@@ -66,6 +59,7 @@ export const createPreviewPageContext = (
   solutionId, previewManifest, existingSolutionData, previewValidationErrors,
 ) => {
   const sections = [];
+  const errors = [];
 
   previewManifest.map((sectionManifest) => {
     const questions = [];
@@ -79,11 +73,22 @@ export const createPreviewPageContext = (
       );
 
       if (shouldQuestionBeAddedToPreviewContext(questionManifest, questionData, sectionData)) {
-        const validationErrorsForSection = previewValidationErrors
-          && previewValidationErrors[sectionManifest.id];
+        const validationErrorsForSection = previewValidationErrors && previewValidationErrors[sectionManifest.id];
+        const errorType = findValidationErrorTypeForQuestionIfApplicaple(questionManifest.id, validationErrorsForSection);
+        const errorMessage = errorType && getErrorMessageForQuestion(errorType, questionManifest);
+        const errorForQuestion = errorType ? { message: errorMessage } : undefined;
+
         const question = createQuestionContext(
-          questionManifest, questionData, validationErrorsForSection,
+          questionManifest, questionData, errorForQuestion,
         );
+
+        if (errorType) {
+          const contextError = {};
+          contextError.text = errorMessage;
+          contextError.href = `#${questionManifest.id}`;
+          errors.push(contextError);
+        }
+
         questions.push(question);
       }
     });
@@ -96,6 +101,7 @@ export const createPreviewPageContext = (
 
   const context = {
     submitPreviewUrl: `/${solutionId}/submitPreview`,
+    errors: errors.length > 0 ? errors : undefined,
     sections,
   };
 
