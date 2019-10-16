@@ -1,10 +1,14 @@
 {% extends 'includes/layout.njk' %}
 {% from 'components/button/macro.njk' import button %}
 {% from './preview-section.njk' import previewSection %}
+{% from './section-error-summary.njk' import sectionErrorSummary %}
 
 {% block body %}
 <div class="nhsuk-grid-row">
   <div class="nhsuk-grid-column-full">
+    {% if (errors.length > 0) %}
+      {{ sectionErrorSummary(errors) }}
+    {% endif %}  
 
     <h1>Preview Page</h1>
     

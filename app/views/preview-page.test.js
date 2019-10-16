@@ -67,4 +67,36 @@ describe('preview page', () => {
         done();
       });
   });
+
+  it('should render the error summary if errors', (done) => {
+    const context = {
+      errors: [{}],
+    };
+
+    const dummyApp = createDummyApp(context);
+    request(dummyApp)
+      .get('/')
+      .then((res) => {
+        const $ = cheerio.load(res.text);
+
+        expect($('[data-test-id="section-error-summary"]').length).toEqual(1);
+
+        done();
+      });
+  });
+
+  it('should not render the error summary if no errors', (done) => {
+    const context = {};
+
+    const dummyApp = createDummyApp(context);
+    request(dummyApp)
+      .get('/')
+      .then((res) => {
+        const $ = cheerio.load(res.text);
+
+        expect($('[data-test-id="section-error-summary"]').length).toEqual(0);
+
+        done();
+      });
+  });
 });
