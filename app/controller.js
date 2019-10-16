@@ -60,17 +60,25 @@ export const postSection = async (solutionId, sectionId, sectionData) => {
   return true;
 };
 
-export const getPreviewPageContext = async (solutionId) => {
+export const getPreviewPageContext = async (solutionId, previewValidationErrors) => {
   const previewManifest = new ManifestProvider().getPreviewManifest();
   const solutionData = await axios.get(`http://localhost:8080/api/v1/Solutions/${solutionId}`);
   const existingSolutionData = solutionData.data.solution;
 
-  const context = createPreviewPageContext(solutionId, previewManifest, existingSolutionData);
+  const context = createPreviewPageContext(
+    solutionId, previewManifest, existingSolutionData, previewValidationErrors,
+  );
 
   return context;
 };
 
 export const postPreview = async (solutionId) => {
-  await axios.put(`http://localhost:8080/api/v1/Solutions/${solutionId}/SubmitForReview`, {});
-  return true;
+  try {
+    await axios.put(`http://localhost:8080/api/v1/Solutions/${solutionId}/SubmitForReview`, {});
+    return {
+      success: true,
+    };
+  } catch (error) {
+    return error.response.data;
+  }
 };

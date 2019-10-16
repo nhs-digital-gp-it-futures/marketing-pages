@@ -126,3 +126,29 @@ test('should render the submit for moderation page button', async (t) => {
     .click(previewButton)
     .expect(getLocation()).contains('S100000-001/preview');
 });
+
+test('When no data for solution description and the submit button is pressed it should render the summary title as an error', async (t) => {
+  pageSetup(t);
+
+  const submitForReviewValidationErrorResponse = {
+    'solution-description': {
+      required: ['summary'],
+    },
+  };
+
+  nock('http://localhost:8080')
+    .get('/api/v1/Solutions/S100000-001')
+    .reply(200, aSolutionFixture);
+
+  nock('http://localhost:8080')
+    .put('/api/v1/Solutions/S100000-001/SubmitForReview')
+    .reply(400, submitForReviewValidationErrorResponse);
+
+  const summaryQuestion = Selector('[data-test-id="preview-section-question-summary"]');
+  const previewButton = Selector('[data-test-id="preview-submit-button"] a');
+
+
+  await t
+    .click(previewButton)
+    .expect(summaryQuestion.exists).ok();
+});

@@ -20,6 +20,12 @@
           "message": "Solution Summary validation error message"
         }
       ],
+      "submitValidations": [
+        {
+          "type": "required",
+          "message": "Solution Summary is a required field error message"
+        }
+      ],
       "preview": {
         "title": "Summary"
       }

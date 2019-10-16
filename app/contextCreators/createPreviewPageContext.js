@@ -21,12 +21,38 @@ const overrideQuestionTypeIfApplicable = questionManifest => (
     && questionManifest.preview.type ? questionManifest.preview.type : questionManifest.type
 );
 
-const createQuestionContext = (questionManifest, questionData) => ({
-  id: questionManifest.id,
-  title: addTitleIfProvided(questionManifest),
-  type: overrideQuestionTypeIfApplicable(questionManifest),
-  data: questionData,
-});
+const findValidationErrorTypeForQuestionIfApplicaple = (questionId, validationErrorsForSection) => {
+  return validationErrorsForSection
+   && Object.entries(validationErrorsForSection).map(([errorType, questionsWithErrors]) => {
+     if (questionsWithErrors.some(questionIdWithError => questionIdWithError === questionId)) {
+       return errorType;
+     }
+   });
+};
+
+const getErrorMessageForQuestion = (errorType, questionManifest) => {
+  const submitValidationForErrorType = questionManifest.submitValidations
+    .find(submitValidation => submitValidation.type.toString() === errorType.toString());
+
+  return submitValidationForErrorType ? submitValidationForErrorType.message : undefined;
+};
+
+const createQuestionContext = (questionManifest, questionData, validationErrorsForSection) => {
+  const error = {};
+  const errorType = findValidationErrorTypeForQuestionIfApplicaple(questionManifest.id, validationErrorsForSection);
+
+  if (errorType) {
+    error.message = getErrorMessageForQuestion(errorType, questionManifest);
+  }
+
+  return {
+    id: questionManifest.id,
+    title: addTitleIfProvided(questionManifest),
+    type: overrideQuestionTypeIfApplicable(questionManifest),
+    data: questionData,
+    error: errorType ? error : undefined,
+  };
+};
 
 const shouldSectionBeAddedToPreviewContext = questions => questions.length > 0;
 
@@ -36,7 +62,9 @@ const createSectionContext = (sectionManifest, questions) => ({
   questions,
 });
 
-export const createPreviewPageContext = (solutionId, previewManifest, existingSolutionData) => {
+export const createPreviewPageContext = (
+  solutionId, previewManifest, existingSolutionData, previewValidationErrors,
+) => {
   const sections = [];
 
   previewManifest.map((sectionManifest) => {
@@ -51,7 +79,11 @@ export const createPreviewPageContext = (solutionId, previewManifest, existingSo
       );
 
       if (shouldQuestionBeAddedToPreviewContext(questionManifest, questionData, sectionData)) {
-        const question = createQuestionContext(questionManifest, questionData);
+        const validationErrorsForSection = previewValidationErrors
+          && previewValidationErrors[sectionManifest.id];
+        const question = createQuestionContext(
+          questionManifest, questionData, validationErrorsForSection,
+        );
         questions.push(question);
       }
     });

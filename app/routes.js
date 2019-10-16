@@ -53,9 +53,15 @@ router.get('/:solutionId/preview', async (req, res) => {
 
 router.get('/:solutionId/submitPreview', async (req, res) => {
   const { solutionId } = req.params;
-  await postPreview(solutionId);
+  const response = await postPreview(solutionId);
 
-  res.redirect(`/${solutionId}/preview`);
+  if (response.success) {
+    res.redirect(`/${solutionId}/preview`);
+  } else {
+    const context = await getPreviewPageContext(solutionId, response);
+
+    res.render('preview-page', context);
+  }
 });
 
 module.exports = router;
