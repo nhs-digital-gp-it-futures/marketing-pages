@@ -64,4 +64,35 @@ describe('checkboxOptions', () => {
         done();
       });
   });
+
+  it('should render the checkbox options', (done) => {
+    const context = {
+      question: {
+        id: 'fieldId',
+        mainAdvice: 'Some really important main advice',
+        additionalAdvice: 'Some not so important additional advice',
+        options: [
+          {
+            value: 'first-option',
+            text: 'First Option',
+          },
+          {
+            value: 'second-option',
+            text: 'Second Option',
+          },
+        ],
+      },
+    };
+
+    const dummyApp = createDummyApp(context);
+    request(dummyApp)
+      .get('/')
+      .then((res) => {
+        const $ = cheerio.load(res.text);
+
+        expect($('.nhsuk-checkboxes__item').length).toEqual(2);
+
+        done();
+      });
+  });
 });
