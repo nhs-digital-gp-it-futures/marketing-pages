@@ -25,30 +25,35 @@ const findValidationErrorTypeForQuestionIfApplicaple = (
   sectionId, questionId, previewValidationErrors,
 ) => {
   const validationErrorsForSection = previewValidationErrors && previewValidationErrors[sectionId];
-  return validationErrorsForSection
+  const foundErrorTypes = validationErrorsForSection
    && Object.entries(validationErrorsForSection).map(([errorType, questionsWithErrors]) => {
      if (questionsWithErrors.some(questionIdWithError => questionIdWithError === questionId)) {
        return errorType;
      }
+     return undefined;
    });
+
+  const firstErrorTypeFound = foundErrorTypes
+    && foundErrorTypes.length > 0 ? foundErrorTypes[0] : undefined;
+
+  return firstErrorTypeFound;
 };
 
 const getErrorMessageForQuestion = (errorType, questionManifest) => {
   const submitValidationForErrorType = questionManifest.submitValidations
-    .find(submitValidation => submitValidation.type.toString() === errorType.toString());
+    && questionManifest.submitValidations
+      .find(submitValidation => submitValidation.type === errorType);
 
   return submitValidationForErrorType ? submitValidationForErrorType.message : undefined;
 };
 
-const createQuestionContext = (questionManifest, questionData, errorForQuestion) => {
-  return {
-    id: questionManifest.id,
-    title: addTitleIfProvided(questionManifest),
-    type: overrideQuestionTypeIfApplicable(questionManifest),
-    data: questionData,
-    error: errorForQuestion || undefined,
-  };
-};
+const createQuestionContext = (questionManifest, questionData, errorForQuestion) => ({
+  id: questionManifest.id,
+  title: addTitleIfProvided(questionManifest),
+  type: overrideQuestionTypeIfApplicable(questionManifest),
+  data: questionData,
+  error: errorForQuestion || undefined,
+});
 
 const shouldSectionBeAddedToPreviewContext = questions => questions.length > 0;
 
@@ -63,7 +68,7 @@ const createErrorSummaryContextForQuestion = (questionId, errorMessage) => {
   contextError.text = errorMessage;
   contextError.href = `#${questionId}`;
   return contextError;
-}
+};
 
 export const createPreviewPageContext = (
   solutionId, previewManifest, existingSolutionData, previewValidationErrors,
