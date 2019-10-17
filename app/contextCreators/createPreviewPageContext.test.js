@@ -512,6 +512,9 @@ describe('createPreviewPageContext', () => {
                 },
               ],
             },
+            {
+              id: 'some-other-question-id',
+            },
           ],
         },
       ];
