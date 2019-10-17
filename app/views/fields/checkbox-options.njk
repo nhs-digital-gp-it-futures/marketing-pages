@@ -1,7 +1,7 @@
 {% from 'components/checkboxes/macro.njk' import checkboxes %}
 
 {% macro checkboxOptions(question) %}
-  <div data-test-id="checkbox-option-field-{{ question.id }}">
+  <div data-test-id="checkbox-options-{{ question.id }}">
     {{ checkboxes({
       "idPrefix": question.id,
       "name": question.id,

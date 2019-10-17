@@ -1,6 +1,7 @@
 {% from './fields/bulletpoint-list.njk' import bulletpointList %}
 {% from './fields/textarea-field.njk' import textareaField %}
 {% from './fields/text-field.njk' import textField %}
+{% from './fields/checkbox-options.njk' import checkboxOptions %}
 
 {% macro sectionQuestion(question) %}
   <div data-test-id="section-question">
@@ -15,6 +16,10 @@
 
       {% if (question.type === 'text-field') %}
         {{ textField(question) }}
+      {% endif %}
+
+      {% if (question.type === 'checkbox-options') %}
+        {{ checkboxOptions(question) }}
       {% endif %}
     </div>
   </div>

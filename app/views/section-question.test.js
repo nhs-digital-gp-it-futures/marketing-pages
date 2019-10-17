@@ -93,4 +93,28 @@ describe('section-question', () => {
         });
     });
   });
+
+  describe('when question type is checkbox-options', () => {
+    it('should render the checkbox-options component', (done) => {
+      const context = {
+        question: {
+          id: 'question-id',
+          type: 'checkbox-options',
+        },
+      };
+
+      const dummyApp = createDummyApp(context);
+      request(dummyApp)
+        .get('/')
+        .then((res) => {
+          const $ = cheerio.load(res.text);
+
+          const textField = $('[data-test-id="checkbox-options-question-id"]');
+
+          expect(textField.length).toEqual(1);
+
+          done();
+        });
+    });
+  });
 });
