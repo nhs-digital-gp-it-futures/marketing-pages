@@ -1,0 +1,32 @@
+{% from 'components/checkboxes/macro.njk' import checkboxes %}
+
+{% macro checkboxOptions(question) %}
+  <div data-test-id="checkbox-option-field-{{ question.id }}">
+    {{ checkboxes({
+      "idPrefix": question.id,
+      "name": question.id,
+      "fieldset": {
+        "legend": {
+          "text": question.mainAdvice
+        }
+      },
+      "hint": {
+        "text": question.additionalAdvice
+      },
+      "items": [
+        {
+          "value": "british",
+          "text": "British"
+        },
+        {
+          "value": "irish",
+          "text": "Irish"
+        },
+        {
+          "value": "other",
+          "text": "citizen of another country"
+        }
+      ]
+    }) }}
+  </div>
+{% endmacro %}
