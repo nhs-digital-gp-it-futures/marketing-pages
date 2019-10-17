@@ -1,0 +1,37 @@
+{
+  "id": "client-application-type",
+  "title": "Client application type",
+  "mainAdvice": "Select all client application types your Solution supports",
+  "additionalAdvice": [
+    "This information will be visible to buyers on your Solution page.",
+    "* indicates required field."
+  ],
+  "questions": [
+    {
+      "id": "clientApplicationTypes",
+      "mainAdvice": "Select the client application types your Solution supports *",
+      "additionalAdvice": "Check all the options that are relevant to you. You will be required to provide further information for each client application type you select.",
+      "type": "checkbox-options",
+      "options": [
+        {
+          "id": "browser-based",
+          "value": "Browser based"
+        },
+        {
+          "id": "native-mobile",
+          "value": "Native mobile or tablet"
+        },
+        {
+          "id": "native-desktop",
+          "value": "Native desktop"
+        }
+      ],
+      "submitValidations": [
+        {
+          "type": "required",
+          "message": "Client application type is a required field error message"
+        }
+      ]
+    }
+  ]
+}

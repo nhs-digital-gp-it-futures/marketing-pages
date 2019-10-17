@@ -19,6 +19,12 @@
           "mandatory": [],
           "requirement": "Optional",
           "status": "INCOMPLETE"
+        },
+        {
+          "id": "client-application-type",
+          "data": {},
+          "requirement": "Mandatory",
+          "status": "INCOMPLETE"
         }
       ]
     }
