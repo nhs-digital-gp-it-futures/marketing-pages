@@ -1,5 +1,6 @@
 import { findExistingMarketingDataForSection } from '../helpers/findExistingMarketingDataForSection';
 import { getMarketingDataForQuestion } from '../helpers/getMarketingDataForQuestion';
+import { findValidationErrorTypeForQuestion } from '../helpers/findValidationErrorTypeForQuestion';
 
 const addTitleIfProvided = questionManifest => (
   questionManifest.preview
@@ -20,24 +21,6 @@ const overrideQuestionTypeIfApplicable = questionManifest => (
   questionManifest.preview
     && questionManifest.preview.type ? questionManifest.preview.type : questionManifest.type
 );
-
-const findValidationErrorTypeForQuestionIfApplicaple = (
-  sectionId, questionId, previewValidationErrors,
-) => {
-  const validationErrorsForSection = previewValidationErrors && previewValidationErrors[sectionId];
-  const foundErrorTypes = validationErrorsForSection
-   && Object.entries(validationErrorsForSection).map(([errorType, questionsWithErrors]) => {
-     if (questionsWithErrors.some(questionIdWithError => questionIdWithError === questionId)) {
-       return errorType;
-     }
-     return undefined;
-   });
-
-  const firstErrorTypeFound = foundErrorTypes
-    && foundErrorTypes.length > 0 ? foundErrorTypes[0] : undefined;
-
-  return firstErrorTypeFound;
-};
 
 const getErrorMessageForQuestion = (errorType, questionManifest) => {
   const submitValidationForErrorType = questionManifest.submitValidations
@@ -90,7 +73,7 @@ export const createPreviewPageContext = (
       if (shouldQuestionBeAddedToPreviewContext(questionManifest, questionData, sectionData)) {
         let errorForQuestion;
 
-        const errorTypeIfApplicable = findValidationErrorTypeForQuestionIfApplicaple(
+        const errorTypeIfApplicable = findValidationErrorTypeForQuestion(
           sectionManifest.id, questionManifest.id, previewValidationErrors,
         );
 
