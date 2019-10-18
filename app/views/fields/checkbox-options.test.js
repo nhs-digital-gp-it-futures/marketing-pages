@@ -91,6 +91,44 @@ describe('checkboxOptions', () => {
         const $ = cheerio.load(res.text);
 
         expect($('.nhsuk-checkboxes__item').length).toEqual(2);
+        expect($('.nhsuk-checkboxes__item:nth-child(1)').find('input').attr('value')).toEqual('first-option');
+        expect($('.nhsuk-checkboxes__item:nth-child(2)').find('input').attr('value')).toEqual('second-option');
+
+        done();
+      });
+  });
+
+  it('should render the checked checkbox option', (done) => {
+    const context = {
+      question: {
+        id: 'fieldId',
+        mainAdvice: 'Some really important main advice',
+        additionalAdvice: 'Some not so important additional advice',
+        options: [
+          {
+            value: 'first-option',
+            text: 'First Option',
+          },
+          {
+            value: 'second-option',
+            text: 'Second Option',
+            checked: true,
+          },
+        ],
+      },
+    };
+
+    const dummyApp = createDummyApp(context);
+    request(dummyApp)
+      .get('/')
+      .then((res) => {
+        const $ = cheerio.load(res.text);
+
+        expect($('.nhsuk-checkboxes__item').length).toEqual(2);
+        expect($('.nhsuk-checkboxes__item:nth-child(1)').find('input').attr('checked')).toBeUndefined();
+        expect($('.nhsuk-checkboxes__item:nth-child(1)').find('input').attr('value')).toEqual('first-option');
+        expect($('.nhsuk-checkboxes__item:nth-child(2)').find('input').attr('checked')).toEqual('checked');
+        expect($('.nhsuk-checkboxes__item:nth-child(2)').find('input').attr('value')).toEqual('second-option');
 
         done();
       });
