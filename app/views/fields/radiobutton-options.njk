@@ -2,18 +2,37 @@
 
 {% macro radiobuttonOptions(question) %}
   <div data-test-id="radiobutton-options-{{ question.id }}">
-    {{ radios({
-      "idPrefix": question.id,
-      "name": question.id,
-      "fieldset": {
-        "legend": {
-          "text": question.mainAdvice
+    {% if (question.error != undefined) %}
+      {{ radios({
+        "idPrefix": question.id,
+        "name": question.id,
+        "fieldset": {
+          "legend": {
+            "text": question.mainAdvice
+          }
+        },
+        "hint": {
+          "text": question.additionalAdvice
+        },
+        "items": question.options,
+        "errorMessage": {
+          "text": question.error.message
         }
-      },
-      "hint": {
-        "text": question.additionalAdvice
-      },
-      "items": question.options
-    }) }}
+      }) }}
+    {% else %}
+      {{ radios({
+        "idPrefix": question.id,
+        "name": question.id,
+        "fieldset": {
+          "legend": {
+            "text": question.mainAdvice
+          }
+        },
+        "hint": {
+          "text": question.additionalAdvice
+        },
+        "items": question.options
+      }) }}
+    {% endif %}
   </div>
 {% endmacro %}
