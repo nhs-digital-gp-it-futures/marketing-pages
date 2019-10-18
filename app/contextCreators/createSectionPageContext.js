@@ -23,7 +23,22 @@ export const createSectionPageContext = (
     if (sectionManifestQuestion.type === 'bulletpoint-list') {
       question.fields = generateFields(sectionManifestQuestion, formData, validationErrors);
     } else if (sectionManifestQuestion.type === 'checkbox-options') {
-      question.options = sectionManifestQuestion.options;
+      const options = [];
+      sectionManifestQuestion.options.map((manifestOption) => {
+        if (formData && formData.data
+          && formData.data[sectionManifestQuestion.id]
+          && formData.data[sectionManifestQuestion.id]
+            .some(questionData => questionData === manifestOption.value)) {
+          const checkedOption = {
+            ...manifestOption,
+            checked: true,
+          };
+          options.push(checkedOption);
+        } else {
+          options.push(manifestOption);
+        }
+      });
+      question.options = options;
     } else {
       question.data = formData
         && formData.data

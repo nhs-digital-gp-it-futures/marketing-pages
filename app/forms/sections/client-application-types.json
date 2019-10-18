@@ -8,7 +8,7 @@
   ],
   "questions": [
     {
-      "id": "clientApplicationTypes",
+      "id": "client-application-types",
       "mainAdvice": "Select the client application types your Solution supports *",
       "additionalAdvice": "Check all the options that are relevant to you. You will be required to provide further information for each client application type you select.",
       "type": "checkbox-options",

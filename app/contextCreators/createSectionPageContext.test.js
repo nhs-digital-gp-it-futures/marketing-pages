@@ -258,6 +258,72 @@ describe('createSectionPageContext', () => {
 
       expect(context).toEqual(expectedContext);
     });
+
+    it('should create a context for checkbox-options type question with existing data populated', () => {
+      const expectedContext = {
+        submitActionUrl: '/some-solution-id/section/some-section-id',
+        errors: [],
+        questions: [
+          {
+            id: 'fieldId',
+            type: 'checkbox-options',
+            options: [
+              {
+                text: 'option 1',
+                value: 'option-1',
+                checked: true,
+              },
+              {
+                text: 'option 2',
+                value: 'option-2',
+              },
+              {
+                text: 'option 3',
+                value: 'option-3',
+                checked: true,
+              },
+            ],
+          },
+        ],
+      };
+
+      const sectionManifest = {
+        id: 'some-section-id',
+        questions: [
+          {
+            id: 'fieldId',
+            type: 'checkbox-options',
+            options: [
+              {
+                text: 'option 1',
+                value: 'option-1',
+              },
+              {
+                text: 'option 2',
+                value: 'option-2',
+              },
+              {
+                text: 'option 3',
+                value: 'option-3',
+              },
+            ],
+          },
+        ],
+      };
+
+      const formData = {
+        data: {
+          fieldId: [
+            'option-1',
+            'option-3',
+          ],
+        },
+      };
+
+      const context = createSectionPageContext('some-solution-id', sectionManifest, formData);
+
+      expect(context).toEqual(expectedContext);
+    });
   });
 
   describe('when the question type is not a bulletpoint-list', () => {
