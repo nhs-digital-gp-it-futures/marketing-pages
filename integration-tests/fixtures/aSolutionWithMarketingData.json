@@ -27,6 +27,18 @@
           "mandatory": [],
           "requirement": "Optional",
           "status":"COMPLETE"
+        },
+        {
+          "id": "client-application-types",
+          "data": {
+            "client-application-types": [
+              "browser-based",
+              "native-mobile",
+              "native-desktop"
+            ]
+          },
+          "requirement": "Mandatory",
+          "status": "COMPLETE"
         }
       ]
     }
