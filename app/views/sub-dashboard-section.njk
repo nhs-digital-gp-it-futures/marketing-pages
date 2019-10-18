@@ -1,0 +1,7 @@
+{% from 'components/inset-text/macro.njk' import insetText %}
+
+{% macro subDashboardSection(section, index) %}
+  {{ insetText({
+    "HTML": "<p>You can report any suspected side effect to the <a href=\"https://yellowcard.mhra.gov.uk/\" title=\"External website\">UK safety scheme</a>.</p>"
+  }) }}
+{% endmacro %}
