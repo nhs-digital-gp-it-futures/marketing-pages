@@ -133,35 +133,4 @@ describe('checkboxOptions', () => {
         done();
       });
   });
-
-  it('should render the checkbox as an error if the context provided contains an error', (done) => {
-    const context = {
-      question: {
-        id: 'fieldId',
-        mainAdvice: 'Some really important main advice',
-        additionalAdvice: 'Some not so important additional advice',
-        options: [
-          {
-            value: 'first-option',
-            text: 'First Option',
-          },
-        ],
-        error: {
-          message: 'Some error message',
-        },
-      },
-    };
-
-    const dummyApp = createDummyApp(context);
-    request(dummyApp)
-      .get('/')
-      .then((res) => {
-        const $ = cheerio.load(res.text);
-
-        expect($('.nhsuk-error-message').text().trim()).toEqual('Error: Some error message');
-        expect($('.nhsuk-checkboxes__item').length).toEqual(1);
-
-        done();
-      });
-  });
 });
