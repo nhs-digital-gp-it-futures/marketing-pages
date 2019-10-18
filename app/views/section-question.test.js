@@ -109,9 +109,33 @@ describe('section-question', () => {
         .then((res) => {
           const $ = cheerio.load(res.text);
 
-          const textField = $('[data-test-id="checkbox-options-question-id"]');
+          const checkbox = $('[data-test-id="checkbox-options-question-id"]');
 
-          expect(textField.length).toEqual(1);
+          expect(checkbox.length).toEqual(1);
+
+          done();
+        });
+    });
+  });
+
+  describe('when question type is radiobutton-options', () => {
+    it('should render the radiobutton-options component', (done) => {
+      const context = {
+        question: {
+          id: 'question-id',
+          type: 'radiobutton-options',
+        },
+      };
+
+      const dummyApp = createDummyApp(context);
+      request(dummyApp)
+        .get('/')
+        .then((res) => {
+          const $ = cheerio.load(res.text);
+
+          const radiobutton = $('[data-test-id="radiobutton-options-question-id"]');
+
+          expect(radiobutton.length).toEqual(1);
 
           done();
         });
