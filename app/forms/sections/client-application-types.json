@@ -1,5 +1,5 @@
 {
-  "id": "client-application-type",
+  "id": "client-application-types",
   "title": "Client application type",
   "mainAdvice": "Select all client application types your Solution supports",
   "additionalAdvice": [
@@ -14,16 +14,16 @@
       "type": "checkbox-options",
       "options": [
         {
-          "id": "browser-based",
-          "value": "Browser based"
+          "value": "browser-based",
+          "text": "Browser based"
         },
         {
-          "id": "native-mobile",
-          "value": "Native mobile or tablet"
+          "value": "native-mobile",
+          "text": "Native mobile or tablet"
         },
         {
-          "id": "native-desktop",
-          "value": "Native desktop"
+          "value": "native-desktop",
+          "text": "Native desktop"
         }
       ],
       "submitValidations": [

@@ -22,6 +22,8 @@ export const createSectionPageContext = (
 
     if (sectionManifestQuestion.type === 'bulletpoint-list') {
       question.fields = generateFields(sectionManifestQuestion, formData, validationErrors);
+    } else if (sectionManifestQuestion.type === 'checkbox-options') {
+      question.options = sectionManifestQuestion.options;
     } else {
       question.data = formData
         && formData.data

@@ -21,7 +21,7 @@
           "status": "INCOMPLETE"
         },
         {
-          "id": "client-application-type",
+          "id": "client-application-types",
           "data": {},
           "requirement": "Mandatory",
           "status": "INCOMPLETE"
