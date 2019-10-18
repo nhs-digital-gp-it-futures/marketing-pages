@@ -4,12 +4,15 @@ import nunjucks from 'nunjucks';
 import cheerio from 'cheerio';
 import { App } from '../../app';
 
-const aSectionContext = (title, requirement = 'Mandatory', status = 'INCOMPLETE') => ({
+const aSectionContext = (
+  title, requirement = 'Mandatory', status = 'INCOMPLETE', defaultMessage = '',
+) => ({
   section: {
     URL: 'someUrl',
     title,
     requirement,
     status,
+    defaultMessage,
   },
 });
 
@@ -79,6 +82,22 @@ describe('dashboard-section', () => {
         const $ = cheerio.load(res.text);
 
         expect($('[data-test-id="dashboard-section-status"]').text().trim()).toEqual('COMPLETE');
+
+        done();
+      });
+  });
+
+  it('should render defaultMessage for the section if provided', (done) => {
+    const dummyApp = createDummyApp(aSectionContext(
+      'Some section Title', 'Mandatory', 'COMPLETE', 'some default message',
+    ));
+
+    request(dummyApp)
+      .get('/')
+      .then((res) => {
+        const $ = cheerio.load(res.text);
+
+        expect($('[data-test-id="dashboard-section-default-message"]').text().trim()).toEqual('some default message');
 
         done();
       });

@@ -40,4 +40,23 @@ describe('sub-dashboard-section', () => {
         done();
       });
   });
+
+  it('should render the dashboard section', (done) => {
+    const context = {
+      section: {
+      },
+
+    };
+
+    const dummyApp = createDummyApp(context);
+    request(dummyApp)
+      .get('/')
+      .then((res) => {
+        const $ = cheerio.load(res.text);
+
+        expect($('li[data-test-id^="dashboard-section-"]').length).toEqual(1);
+
+        done();
+      });
+  });
 });
