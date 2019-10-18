@@ -53,3 +53,15 @@ test('should render all the advice of the section', async (t) => {
   await t
     .expect(additionalAdvice.innerText).eql(expectedAdditionalAdvice);
 });
+
+test('should render the select supported client application types question', async (t) => {
+  pageSetup(t);
+
+  const clientApplicationTypesQuestion = Selector('[data-test-id="checkbox-options-clientApplicationTypes"]');
+
+  await t
+    .expect(clientApplicationTypesQuestion.find('.nhsuk-fieldset__legend').innerText).eql('Select the client application types your Solution supports *')
+    .expect(clientApplicationTypesQuestion.find('.nhsuk-hint').innerText).eql('Check all the options that are relevant to you. You will be required to provide further information for each client application type you select.')
+    .expect(clientApplicationTypesQuestion.find('.nhsuk-checkboxes').count).eql(1)
+    .expect(clientApplicationTypesQuestion.find('.nhsuk-checkboxes__item').count).eql(3);
+});
