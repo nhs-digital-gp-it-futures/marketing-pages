@@ -23,6 +23,7 @@ export const createMarketingDashboardContext = (solutionId, dashboardManifest, m
         .find(marketingDataTask => marketingDataTask.id === manifestSection.id);
       section.status = status;
       section.requirement = requirement;
+      section.isActive = true;
 
       if (manifestSection.sections) {
         manifestSection.sections.map((manifestSubSection) => {
@@ -30,7 +31,7 @@ export const createMarketingDashboardContext = (solutionId, dashboardManifest, m
           subSection.id = manifestSubSection.id;
           subSection.title = manifestSubSection.title;
           subSection.defaultMessage = manifestSubSection.defaultMessage;
-          subSection.showDefaultMessage = true;
+          subSection.isActive = false;
 
           subSections.push(subSection);
         });

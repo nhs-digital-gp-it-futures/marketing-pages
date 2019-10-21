@@ -133,8 +133,19 @@ test('should render all the sub sections for the client application type section
 
   await t
     .expect(browserBasedSubSection.count).eql(1)
+    .expect(browserBasedSubSection.find('a').exists).notOk()
+    .expect(browserBasedSubSection.find('[data-test-id="dashboard-section-title"]').innerText).eql('Browser based')
+    .expect(browserBasedSubSection.find('[data-test-id="dashboard-section-default-message"]').innerText).eql('Select from client application types')
+
     .expect(nativeMobileSubSection.count).eql(1)
-    .expect(nativeDesktopSubSection.count).eql(1);
+    .expect(nativeMobileSubSection.find('a').exists).notOk()
+    .expect(nativeMobileSubSection.find('[data-test-id="dashboard-section-title"]').innerText).eql('Native mobile or tablet')
+    .expect(nativeMobileSubSection.find('[data-test-id="dashboard-section-default-message"]').innerText).eql('Select from client application types')
+
+    .expect(nativeDesktopSubSection.count).eql(1)
+    .expect(nativeDesktopSubSection.find('a').exists).notOk()
+    .expect(nativeDesktopSubSection.find('[data-test-id="dashboard-section-title"]').innerText).eql('Native desktop')
+    .expect(nativeDesktopSubSection.find('[data-test-id="dashboard-section-default-message"]').innerText).eql('Select from client application types');
 });
 
 test('clicking on the solution description section link should navigate the user to the solution description page', async (t) => {
