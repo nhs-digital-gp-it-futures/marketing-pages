@@ -20,6 +20,12 @@
       {% endfor %}
     </div>
 
+    {% if (warningAdvice != undefined) %}
+      <div data-test-id="section-warning-advice" class="nhsuk-inset-text">
+        <p>{{ warningAdvice }}</p>
+      </div>
+    {% endif %}  
+
     <form method="post" action="{{ submitActionUrl }}">
       {% for question in questions%}
         {{ sectionQuestion(question) }}
