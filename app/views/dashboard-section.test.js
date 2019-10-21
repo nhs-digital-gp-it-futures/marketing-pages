@@ -5,14 +5,14 @@ import cheerio from 'cheerio';
 import { App } from '../../app';
 
 const aSectionContext = (
-  title, requirement = 'Mandatory', status = 'INCOMPLETE', showDetaultMessage = false, defaultMessage = undefined,
+  title, requirement = 'Mandatory', status = 'INCOMPLETE', showDefaultMessage = false, defaultMessage = undefined,
 ) => ({
   section: {
     URL: 'someUrl',
     title,
     requirement,
     status,
-    showDetaultMessage,
+    showDefaultMessage,
     defaultMessage,
   },
 });

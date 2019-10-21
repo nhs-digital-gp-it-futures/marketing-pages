@@ -12,6 +12,8 @@ export const createMarketingDashboardContext = (solutionId, dashboardManifest, m
     sectionGroup.title = manifestSectionGroup.title;
 
     manifestSectionGroup.sections.map((manifestSection) => {
+      const subSections = [];
+
       const section = {};
       section.URL = `/${solutionId}/section/${manifestSection.id}`;
       section.id = manifestSection.id;
@@ -21,6 +23,20 @@ export const createMarketingDashboardContext = (solutionId, dashboardManifest, m
         .find(marketingDataTask => marketingDataTask.id === manifestSection.id);
       section.status = status;
       section.requirement = requirement;
+
+      if (manifestSection.sections) {
+        manifestSection.sections.map((manifestSubSection) => {
+          const subSection = {};
+          subSection.id = manifestSubSection.id;
+          subSection.title = manifestSubSection.title;
+          subSection.defaultMessage = manifestSubSection.defaultMessage;
+          subSection.showDefaultMessage = true;
+
+          subSections.push(subSection);
+        });
+      }
+
+      section.sections = subSections.length > 0 ? subSections : undefined;
 
       sections.push(section);
     });

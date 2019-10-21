@@ -1,11 +1,19 @@
-{% from './dashboard-sub-section.njk' import dashboardSubSection %}
 {% from './dashboard-section.njk' import dashboardSection %}
 
 {% macro dashboardSectionRow(section) %}
-  {{ dashboardSection(section) }}
+  <div data-test-id="dashboard-section-{{section.id}}">
+    {{ dashboardSection(section) }}
 
-  {% for subSection in section.sections %}
-    {{ dashboardSubSection(subSection) }}
-  {% endfor %}
-
+    {% if section.sections %}
+      <ul class="app-section-list__items">
+        <div class="nhsuk-inset-text">
+          {% for subSection in section.sections %}
+              <div data-test-id="dashboard-sub-section-{{subSection.id}}">
+                {{ dashboardSection(subSection) }}
+              </div>
+          {% endfor %}
+        </div>
+      </ul>
+    {% endif %}
+  </div>
 {% endmacro %}

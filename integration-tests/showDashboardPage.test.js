@@ -121,6 +121,22 @@ test('should render all the sections for the Client application type section gro
     .eql('INCOMPLETE');
 });
 
+test('should render all the sub sections for the client application type section with the default message', async (t) => {
+  pageSetup(t);
+
+  const clientApplicationTypeSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-2"]');
+  const clientApplicationTypeSection = clientApplicationTypeSectionGroup.find('[data-test-id="dashboard-section-client-application-types"]');
+
+  const browserBasedSubSection = clientApplicationTypeSection.find('[data-test-id="dashboard-sub-section-browser-based"]');
+  const nativeMobileSubSection = clientApplicationTypeSection.find('[data-test-id="dashboard-sub-section-native-mobile"]');
+  const nativeDesktopSubSection = clientApplicationTypeSection.find('[data-test-id="dashboard-sub-section-native-desktop"]');
+
+  await t
+    .expect(browserBasedSubSection.count).eql(1)
+    .expect(nativeMobileSubSection.count).eql(1)
+    .expect(nativeDesktopSubSection.count).eql(1);
+});
+
 test('clicking on the solution description section link should navigate the user to the solution description page', async (t) => {
   pageSetup(t);
 

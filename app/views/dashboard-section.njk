@@ -1,5 +1,5 @@
 {% macro dashboardSection(section) %}
-  <li data-test-id="dashboard-section-{{section.id}}" class="app-section-list__item">
+  <li class="app-section-list__item">
       <div class="nhsuk-grid-column-one-half" >
       <span data-test-id="dashboard-section-title" class="app-section-list__task-name">
           <a href="{{ section.URL }}" aria-describedby="eligibility-completed">
@@ -8,7 +8,7 @@
       </span>
       </div>
       <div class="nhsuk-grid-column-two-quarters">
-      {% if section.showDetaultMessage %}
+      {% if section.showDefaultMessage %}
           <span data-test-id="dashboard-section-default-message" class="app-section-list__task-name">
           <p>{{ section.defaultMessage }}</p>
           </span>
