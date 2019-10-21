@@ -4,20 +4,20 @@ import aSolutionFixture from './fixtures/aSolution.json';
 import aSolutionWithMarketingDataFixture from './fixtures/aSolutionWithMarketingData.json';
 
 
-const mocks = (isFirstLoad) => {
-  if (isFirstLoad) {
-    nock('http://localhost:8080')
-      .get('/api/v1/Solutions/S100000-001')
-      .reply(200, aSolutionFixture);
-  } else {
+const mocks = (withMarketingData) => {
+  if (withMarketingData) {
     nock('http://localhost:8080')
       .get('/api/v1/Solutions/S100000-001')
       .reply(200, aSolutionWithMarketingDataFixture);
+  } else {
+    nock('http://localhost:8080')
+      .get('/api/v1/Solutions/S100000-001')
+      .reply(200, aSolutionFixture);
   }
 };
 
-const pageSetup = async (t, isFirstLoad = true) => {
-  mocks(isFirstLoad);
+const pageSetup = async (t, withMarketingData = false) => {
+  mocks(withMarketingData);
   await t.navigateTo('http://localhost:1234/S100000-001');
 };
 
@@ -121,7 +121,7 @@ test('should render all the sections for the Client application type section gro
     .eql('INCOMPLETE');
 });
 
-test('should render all the sub sections for the client application type section with the default message', async (t) => {
+test('should render all the sub sections for the client application type section with the default message when no selection has been made', async (t) => {
   pageSetup(t);
 
   const clientApplicationTypeSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-2"]');
@@ -146,6 +146,39 @@ test('should render all the sub sections for the client application type section
     .expect(nativeDesktopSubSection.find('a').exists).notOk()
     .expect(nativeDesktopSubSection.find('[data-test-id="dashboard-section-title"]').innerText).eql('Native desktop')
     .expect(nativeDesktopSubSection.find('[data-test-id="dashboard-section-default-message"]').innerText).eql('Select from client application types');
+});
+
+test('should render all the sub sections for the client application type section with requirment and status when all 3 application types have been selected', async (t) => {
+  pageSetup(t, true);
+
+  const clientApplicationTypeSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-2"]');
+  const clientApplicationTypeSection = clientApplicationTypeSectionGroup.find('[data-test-id="dashboard-section-client-application-types"]');
+
+  const browserBasedSubSection = clientApplicationTypeSection.find('[data-test-id="dashboard-sub-section-browser-based"]');
+  const nativeMobileSubSection = clientApplicationTypeSection.find('[data-test-id="dashboard-sub-section-native-mobile"]');
+  const nativeDesktopSubSection = clientApplicationTypeSection.find('[data-test-id="dashboard-sub-section-native-desktop"]');
+
+  await t
+    .expect(browserBasedSubSection.count).eql(1)
+    .expect(browserBasedSubSection.find('a').exists).ok()
+    .expect(browserBasedSubSection.find('[data-test-id="dashboard-section-title"]').innerText).eql('Browser based')
+    .expect(browserBasedSubSection.find('[data-test-id="dashboard-section-default-message"]').exists).notOk()
+    .expect(browserBasedSubSection.find('[data-test-id="dashboard-section-requirement"]').innerText).eql('Mandatory')
+    .expect(browserBasedSubSection.find('[data-test-id="dashboard-section-status"]').innerText).eql('INCOMPLETE')
+
+    .expect(nativeMobileSubSection.count).eql(1)
+    .expect(nativeMobileSubSection.find('a').exists).ok()
+    .expect(nativeMobileSubSection.find('[data-test-id="dashboard-section-title"]').innerText).eql('Native mobile or tablet')
+    .expect(nativeMobileSubSection.find('[data-test-id="dashboard-section-default-message"]').exists).notOk()
+    .expect(nativeMobileSubSection.find('[data-test-id="dashboard-section-requirement"]').innerText).eql('Mandatory')
+    .expect(nativeMobileSubSection.find('[data-test-id="dashboard-section-status"]').innerText).eql('INCOMPLETE')
+
+    .expect(nativeDesktopSubSection.count).eql(1)
+    .expect(nativeDesktopSubSection.find('a').exists).ok()
+    .expect(nativeDesktopSubSection.find('[data-test-id="dashboard-section-title"]').innerText).eql('Native desktop')
+    .expect(nativeDesktopSubSection.find('[data-test-id="dashboard-section-default-message"]').exists).notOk()
+    .expect(nativeDesktopSubSection.find('[data-test-id="dashboard-section-requirement"]').innerText).eql('Mandatory')
+    .expect(nativeDesktopSubSection.find('[data-test-id="dashboard-section-status"]').innerText).eql('INCOMPLETE');
 });
 
 test('clicking on the solution description section link should navigate the user to the solution description page', async (t) => {

@@ -19,7 +19,7 @@ export const createMarketingDashboardContext = (solutionId, dashboardManifest, m
       section.id = manifestSection.id;
       section.title = manifestSection.title;
 
-      const { status, requirement } = marketingData.sections
+      const { status, requirement, sections: subSectionsData } = marketingData.sections
         .find(marketingDataTask => marketingDataTask.id === manifestSection.id);
       section.status = status;
       section.requirement = requirement;
@@ -31,7 +31,17 @@ export const createMarketingDashboardContext = (solutionId, dashboardManifest, m
           subSection.id = manifestSubSection.id;
           subSection.title = manifestSubSection.title;
           subSection.defaultMessage = manifestSubSection.defaultMessage;
-          subSection.isActive = false;
+
+          const foundSubSectionData = subSectionsData
+            && subSectionsData.find(subSectionData => subSectionData.id === manifestSubSection.id);
+
+          if (foundSubSectionData) {
+            subSection.isActive = true;
+            subSection.requirement = foundSubSectionData.requirement;
+            subSection.status = foundSubSectionData.status;
+          } else {
+            subSection.isActive = false;
+          }
 
           subSections.push(subSection);
         });

@@ -132,4 +132,92 @@ describe('createMarketingDashboardContext', () => {
 
     expect(context).toEqual(expectedContext);
   });
+
+  it('should create a context with sub sections from the manifest and with existing marketingData', () => {
+    const expectedContext = {
+      previewUrl: '/some-solution-id/preview',
+      sectionGroups: [
+        {
+          id: 'some-section-group-id',
+          title: 'Some section group',
+          sections: [
+            {
+              URL: '/some-solution-id/section/some-section-id',
+              id: 'some-section-id',
+              title: 'Some section',
+              requirement: 'Mandatory',
+              status: 'INCOMPLETE',
+              isActive: true,
+              sections: [
+                {
+                  id: 'some-first-sub-section-id',
+                  title: 'Some first sub section',
+                  defaultMessage: 'some default message',
+                  isActive: false,
+                },
+                {
+                  id: 'some-second-sub-section-id',
+                  title: 'Some second sub section',
+                  defaultMessage: 'some default message',
+                  isActive: true,
+                  requirement: 'Mandatory',
+                  status: 'INCOMPLETE',
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    };
+
+    const dashboardManifest = {
+      id: 'marketing-page-dashboard',
+      sectionGroups: [
+        {
+          id: 'some-section-group-id',
+          title: 'Some section group',
+          sections: [
+            {
+              id: 'some-section-id',
+              title: 'Some section',
+              sections: [
+                {
+                  id: 'some-first-sub-section-id',
+                  title: 'Some first sub section',
+                  defaultMessage: 'some default message',
+                },
+                {
+                  id: 'some-second-sub-section-id',
+                  title: 'Some second sub section',
+                  defaultMessage: 'some default message',
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    };
+
+    const marketingData = {
+      sections: [
+        {
+          id: 'some-section-id',
+          data: {},
+          status: 'INCOMPLETE',
+          requirement: 'Mandatory',
+          sections: [
+            {
+              id: 'some-second-sub-section-id',
+              requirement: 'Mandatory',
+              status: 'INCOMPLETE',
+            },
+          ],
+        },
+      ],
+    };
+
+    const context = createMarketingDashboardContext('some-solution-id', dashboardManifest, marketingData);
+
+    expect(context).toEqual(expectedContext);
+  });
 });
