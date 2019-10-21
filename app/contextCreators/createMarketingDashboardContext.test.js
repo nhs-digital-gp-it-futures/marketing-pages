@@ -54,7 +54,7 @@ describe('createMarketingDashboardContext', () => {
     expect(context).toEqual(expectedContext);
   });
 
-  it('should create a context with sub sections from the manifest and no existing marketingData', () => {
+  it.only('should create a context with sub sections from the manifest and no existing marketingData', () => {
     const expectedContext = {
       previewUrl: '/some-solution-id/preview',
       sectionGroups: [

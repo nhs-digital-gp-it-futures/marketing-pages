@@ -1,3 +1,57 @@
+const createSectionGroupContext = (manifestSectionGroup) => {
+  const sectionGroup = {
+    id: manifestSectionGroup.id,
+    title: manifestSectionGroup.title,
+  };
+
+  return sectionGroup;
+};
+
+const createSubSectionsContext = (manifestSection, subSectionsData) => {
+  const subSections = [];
+
+  if (manifestSection.sections) {
+    manifestSection.sections.map((manifestSubSection) => {
+      const subSection = {};
+      subSection.id = manifestSubSection.id;
+      subSection.title = manifestSubSection.title;
+      subSection.defaultMessage = manifestSubSection.defaultMessage;
+
+      const foundSubSectionData = subSectionsData
+        && subSectionsData.find(subSectionData => subSectionData.id === manifestSubSection.id);
+
+      if (foundSubSectionData) {
+        subSection.isActive = true;
+        subSection.requirement = foundSubSectionData.requirement;
+        subSection.status = foundSubSectionData.status;
+      } else {
+        subSection.isActive = false;
+      }
+
+      subSections.push(subSection);
+    });
+  }
+
+  return subSections.length > 0 ? subSections : undefined;
+};
+
+const createSectionContext = (solutionId, manifestSection, marketingData) => {
+  const { status, requirement, sections: subSectionsData } = marketingData.sections
+    .find(marketingDataTask => marketingDataTask.id === manifestSection.id);
+
+  const section = {
+    URL: `/${solutionId}/section/${manifestSection.id}`,
+    id: manifestSection.id,
+    title: manifestSection.title,
+    status,
+    requirement,
+    isActive: true,
+    sections: createSubSectionsContext(manifestSection, subSectionsData),
+  };
+
+  return section;
+};
+
 export const createMarketingDashboardContext = (solutionId, dashboardManifest, marketingData) => {
   const context = {};
   const sectionGroups = [];
@@ -5,49 +59,12 @@ export const createMarketingDashboardContext = (solutionId, dashboardManifest, m
   context.previewUrl = `/${solutionId}/preview`;
 
   dashboardManifest.sectionGroups.map((manifestSectionGroup) => {
-    const sectionGroup = {};
     const sections = [];
 
-    sectionGroup.id = manifestSectionGroup.id;
-    sectionGroup.title = manifestSectionGroup.title;
+    const sectionGroup = createSectionGroupContext(manifestSectionGroup);
 
     manifestSectionGroup.sections.map((manifestSection) => {
-      const subSections = [];
-
-      const section = {};
-      section.URL = `/${solutionId}/section/${manifestSection.id}`;
-      section.id = manifestSection.id;
-      section.title = manifestSection.title;
-
-      const { status, requirement, sections: subSectionsData } = marketingData.sections
-        .find(marketingDataTask => marketingDataTask.id === manifestSection.id);
-      section.status = status;
-      section.requirement = requirement;
-      section.isActive = true;
-
-      if (manifestSection.sections) {
-        manifestSection.sections.map((manifestSubSection) => {
-          const subSection = {};
-          subSection.id = manifestSubSection.id;
-          subSection.title = manifestSubSection.title;
-          subSection.defaultMessage = manifestSubSection.defaultMessage;
-
-          const foundSubSectionData = subSectionsData
-            && subSectionsData.find(subSectionData => subSectionData.id === manifestSubSection.id);
-
-          if (foundSubSectionData) {
-            subSection.isActive = true;
-            subSection.requirement = foundSubSectionData.requirement;
-            subSection.status = foundSubSectionData.status;
-          } else {
-            subSection.isActive = false;
-          }
-
-          subSections.push(subSection);
-        });
-      }
-
-      section.sections = subSections.length > 0 ? subSections : undefined;
+      const section = createSectionContext(solutionId, manifestSection, marketingData);
 
       sections.push(section);
     });
