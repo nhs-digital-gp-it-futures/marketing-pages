@@ -12,21 +12,17 @@ const createSubSectionsContext = (manifestSection, subSectionsData) => {
 
   if (manifestSection.sections) {
     manifestSection.sections.map((manifestSubSection) => {
-      const subSection = {};
-      subSection.id = manifestSubSection.id;
-      subSection.title = manifestSubSection.title;
-      subSection.defaultMessage = manifestSubSection.defaultMessage;
-
       const foundSubSectionData = subSectionsData
         && subSectionsData.find(subSectionData => subSectionData.id === manifestSubSection.id);
 
-      if (foundSubSectionData) {
-        subSection.isActive = true;
-        subSection.requirement = foundSubSectionData.requirement;
-        subSection.status = foundSubSectionData.status;
-      } else {
-        subSection.isActive = false;
-      }
+      const subSection = {
+        id: manifestSubSection.id,
+        title: manifestSubSection.title,
+        defaultMessage: manifestSubSection.defaultMessage,
+        isActive: !!foundSubSectionData,
+        requirement: foundSubSectionData ? foundSubSectionData.requirement : undefined,
+        status: foundSubSectionData ? foundSubSectionData.status : undefined,
+      };
 
       subSections.push(subSection);
     });
