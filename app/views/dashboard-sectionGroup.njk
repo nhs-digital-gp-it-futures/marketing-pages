@@ -1,4 +1,4 @@
-{% from './dashboard-section.njk' import dashboardSection %}
+{% from './dashboard-section-row.njk' import dashboardSectionRow %}
 
 {% macro dashboardSectionGroup(sectionGroup, index) %}
   <div data-test-id="dashboard-sectionGroup-{{index}}">
@@ -7,7 +7,7 @@
     </h2>
     <ul class="app-section-list__items">
       {% for section in sectionGroup.sections %}
-        {{ dashboardSection(section, loop.index) }}
+        {{ dashboardSectionRow(section) }}
       {% endfor %}
     </ul>
   </div>

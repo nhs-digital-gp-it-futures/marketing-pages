@@ -1,8 +1,0 @@
-{% from 'components/inset-text/macro.njk' import insetText %}
-{% from './dashboard-section.njk' import dashboardSection %}
-
-{% macro subDashboardSection(section, index) %}
-  {{ insetText({
-    "HTML": dashboardSection(section, index)
-  }) }}
-{% endmacro %}

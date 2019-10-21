@@ -9,8 +9,8 @@ const createDummyApp = (context) => {
 
   const router = express.Router();
   const dummyRouter = router.get('/', (req, res) => {
-    const macroWrapper = `{% from './sub-dashboard-section.njk' import subDashboardSection %}
-                            {{ subDashboardSection(section) }}`;
+    const macroWrapper = `{% from './dashboard-sub-section.njk' import dashboardSubSection %}
+                            {{ dashboardSubSection(section) }}`;
 
     const viewToTest = nunjucks.renderString(macroWrapper, context);
 
@@ -22,7 +22,7 @@ const createDummyApp = (context) => {
   return app;
 };
 
-describe('sub-dashboard-section', () => {
+describe('dashboard-section', () => {
   it('should render the inset', (done) => {
     const context = {
       section: {

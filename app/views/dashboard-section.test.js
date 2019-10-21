@@ -5,13 +5,14 @@ import cheerio from 'cheerio';
 import { App } from '../../app';
 
 const aSectionContext = (
-  title, requirement = 'Mandatory', status = 'INCOMPLETE', defaultMessage = '',
+  title, requirement = 'Mandatory', status = 'INCOMPLETE', showDetaultMessage = false, defaultMessage = undefined,
 ) => ({
   section: {
     URL: 'someUrl',
     title,
     requirement,
     status,
+    showDetaultMessage,
     defaultMessage,
   },
 });
@@ -87,9 +88,9 @@ describe('dashboard-section', () => {
       });
   });
 
-  it('should render defaultMessage for the section if provided', (done) => {
+  it('should render defaultMessage for the section if the showDetaultMessage flag is true', (done) => {
     const dummyApp = createDummyApp(aSectionContext(
-      'Some section Title', 'Mandatory', 'COMPLETE', 'some default message',
+      'Some section Title', undefined, undefined, true, 'some default message',
     ));
 
     request(dummyApp)

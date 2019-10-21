@@ -14,6 +14,7 @@ export const createMarketingDashboardContext = (solutionId, dashboardManifest, m
     manifestSectionGroup.sections.map((manifestSection) => {
       const section = {};
       section.URL = `/${solutionId}/section/${manifestSection.id}`;
+      section.id = manifestSection.id;
       section.title = manifestSection.title;
 
       const { status, requirement } = marketingData.sections

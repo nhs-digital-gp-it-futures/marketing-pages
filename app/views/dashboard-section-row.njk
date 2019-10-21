@@ -1,0 +1,11 @@
+{% from './dashboard-sub-section.njk' import dashboardSubSection %}
+{% from './dashboard-section.njk' import dashboardSection %}
+
+{% macro dashboardSectionRow(section) %}
+  {{ dashboardSection(section) }}
+
+  {% for subSection in section.sections %}
+    {{ dashboardSubSection(subSection) }}
+  {% endfor %}
+
+{% endmacro %}

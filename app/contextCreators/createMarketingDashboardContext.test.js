@@ -11,6 +11,7 @@ describe('createMarketingDashboardContext', () => {
           sections: [
             {
               URL: '/some-solution-id/section/features',
+              id: 'features',
               title: 'Features',
               requirement: 'Mandatory',
               status: 'INCOMPLETE',

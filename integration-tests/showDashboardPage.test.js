@@ -88,8 +88,8 @@ test('should render all the sections for the About your solution section group',
   pageSetup(t);
 
   const aboutYourSolutionSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-1"]');
-  const solutionDescriptionSection = aboutYourSolutionSectionGroup.find('[data-test-id="dashboard-section-1"]');
-  const featuresSection = aboutYourSolutionSectionGroup.find('[data-test-id="dashboard-section-2"]');
+  const solutionDescriptionSection = aboutYourSolutionSectionGroup.find('[data-test-id="dashboard-section-solution-description"]');
+  const featuresSection = aboutYourSolutionSectionGroup.find('[data-test-id="dashboard-section-features"]');
 
   await t
     .expect(solutionDescriptionSection.find('[data-test-id="dashboard-section-title"]').innerText)
@@ -131,7 +131,7 @@ test('clicking on the solution description section link should navigate the user
   const getLocation = ClientFunction(() => document.location.href);
 
   const aboutYourSolutionSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-1"]');
-  const theSolutionDescriptionSection = aboutYourSolutionSectionGroup.find('[data-test-id="dashboard-section-1"]');
+  const theSolutionDescriptionSection = aboutYourSolutionSectionGroup.find('[data-test-id="dashboard-section-solution-description"]');
 
   await t
     .click(theSolutionDescriptionSection.find('a'))
@@ -149,7 +149,7 @@ test('clicking on the feature section link should navigate the user to the featu
   const getLocation = ClientFunction(() => document.location.href);
 
   const aboutYourSolutionSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-1"]');
-  const theFeatureSection = aboutYourSolutionSectionGroup.find('[data-test-id="dashboard-section-2"]');
+  const theFeatureSection = aboutYourSolutionSectionGroup.find('[data-test-id="dashboard-section-features"]');
 
   await t
     .click(theFeatureSection.find('a'))
@@ -166,7 +166,7 @@ test('clicking on the client application type section link should navigate the u
   const getLocation = ClientFunction(() => document.location.href);
 
   const clientApplicationTypeSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-2"]');
-  const theClientApplicationTypeSection = clientApplicationTypeSectionGroup.find('[data-test-id="dashboard-section-1"]');
+  const theClientApplicationTypeSection = clientApplicationTypeSectionGroup.find('[data-test-id="dashboard-section-client-application-types"]');
 
   await t
     .click(theClientApplicationTypeSection.find('a'))
