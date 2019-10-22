@@ -26,7 +26,7 @@ fixture('Show Solution Description page');
 test('should render the Solution Description page title', async (t) => {
   pageSetup(t);
 
-  const title = Selector('h2');
+  const title = Selector('[data-test-id="section-title"]');
 
   await t
     .expect(title.innerText).eql('Solution description');

@@ -9,10 +9,10 @@ const createContextForBulletpointListQuestion = (
   return undefined;
 };
 
-const createContextForCheckboxOptionsQuestion = (
+const createContextForOptionsTypeQuestion = (
   sectionManifestQuestion, formData,
 ) => {
-  if (sectionManifestQuestion.type === 'checkbox-options') {
+  if (sectionManifestQuestion.type === 'checkbox-options' || sectionManifestQuestion.type === 'radiobutton-options') {
     const options = [];
     sectionManifestQuestion.options.map((manifestOption) => {
       if (formData && formData.data
@@ -30,6 +30,7 @@ const createContextForCheckboxOptionsQuestion = (
     });
     return options;
   }
+
   return undefined;
 };
 
@@ -82,7 +83,7 @@ const createQuestionContext = (
   fields: createContextForBulletpointListQuestion(
     sectionManifestQuestion, formData, validationErrors,
   ),
-  options: createContextForCheckboxOptionsQuestion(sectionManifestQuestion, formData),
+  options: createContextForOptionsTypeQuestion(sectionManifestQuestion, formData),
   data: createContextForTextInputsQuestion(sectionManifestQuestion, formData),
   error: createContextForTextInputsValidationErrors(
     sectionManifestQuestion, validationErrorForQuestion,

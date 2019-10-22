@@ -6,26 +6,24 @@
 
 {% macro sectionQuestion(question) %}
   <div data-test-id="section-question">
-    <div data-test-id="section-question-fields">
-      {% if (question.type === 'bulletpoint-list') %}
-        {{ bulletpointList(question) }}
-      {% endif %}
+    {% if (question.type === 'bulletpoint-list') %}
+      {{ bulletpointList(question) }}
+    {% endif %}
 
-      {% if (question.type === 'textarea-field') %}
-        {{ textareaField(question) }}
-      {% endif %}
+    {% if (question.type === 'textarea-field') %}
+      {{ textareaField(question) }}
+    {% endif %}
 
-      {% if (question.type === 'text-field') %}
-        {{ textField(question) }}
-      {% endif %}
+    {% if (question.type === 'text-field') %}
+      {{ textField(question) }}
+    {% endif %}
 
-      {% if (question.type === 'checkbox-options') %}
-        {{ checkboxOptions(question) }}
-      {% endif %}
+    {% if (question.type === 'checkbox-options') %}
+      {{ checkboxOptions(question) }}
+    {% endif %}
 
-      {% if (question.type === 'radiobutton-options') %}
-        {{ radiobuttonOptions(question) }}
-      {% endif %}
-    </div>
+    {% if (question.type === 'radiobutton-options') %}
+      {{ radiobuttonOptions(question) }}
+    {% endif %}
   </div>
 {% endmacro %}

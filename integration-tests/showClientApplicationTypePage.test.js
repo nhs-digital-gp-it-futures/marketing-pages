@@ -27,7 +27,7 @@ fixture('Show Client Application Type page');
 test('should render the Client Application Type page title', async (t) => {
   pageSetup(t);
 
-  const title = Selector('h2');
+  const title = Selector('[data-test-id="section-title"]');
 
   await t
     .expect(title.innerText).eql('Client application type');
