@@ -1,0 +1,22 @@
+{% extends 'includes/layout.njk' %}
+{% from './dashboard-sectionGroup.njk' import dashboardSectionGroup %}
+
+{% block body %}
+<div class="nhsuk-grid-row">
+  <div class="nhsuk-grid-column-full">
+    <h1 data-test-id="sub-dashboard-title">{{ title }}</h1>
+    <h2 data-test-id="sub-dashboard-main-advice">{{ mainAdvice }}</h2>
+    <div data-test-id="sub-dashboard-additional-advice">
+      {% for advice in additionalAdvice %}
+        <p class="nhsuk-body-l">
+          {{ advice }}
+        </p>
+      {% endfor %}
+    </div>
+
+    {% for sectionGroup in sectionGroups %}
+      {{ dashboardSectionGroup(sectionGroup, loop.index) }}
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
