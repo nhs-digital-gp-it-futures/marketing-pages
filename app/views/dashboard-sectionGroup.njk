@@ -1,7 +1,7 @@
 {% from './dashboard-section-row.njk' import dashboardSectionRow %}
 
-{% macro dashboardSectionGroup(sectionGroup, index) %}
-  <div data-test-id="dashboard-sectionGroup-{{index}}">
+{% macro dashboardSectionGroup(sectionGroup) %}
+  <div data-test-id="dashboard-sectionGroup-{{sectionGroup.id}}">
     <div class="nhsuk_title">
       <h2 class="app-section-list__section">
         {{ sectionGroup.title }}

@@ -36,7 +36,7 @@ test('should render the browser based dashboard main advice', async (t) => {
 test('should render the Browser based section group', async (t) => {
   pageSetup(t);
 
-  const browserBasedSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-1"]');
+  const browserBasedSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-browser-based-sections"]');
 
   await t
     .expect(browserBasedSectionGroup.find('h2').innerText).eql('Browser based sections');
@@ -45,7 +45,7 @@ test('should render the Browser based section group', async (t) => {
 test('should render all the sections for the Browser based sections section group', async (t) => {
   pageSetup(t);
 
-  const browserBasedSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-1"]');
+  const browserBasedSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-browser-based-sections"]');
   const browsersSupportedSection = browserBasedSectionGroup.find('[data-test-id="dashboard-section-browsers-supported"]');
   const pluginsOrExtensionsSection = browserBasedSectionGroup.find('[data-test-id="dashboard-section-plug-ins-or-extensions"]');
   const connectivityAndResolutionSection = browserBasedSectionGroup.find('[data-test-id="dashboard-section-connectivity-and-resolution"]');

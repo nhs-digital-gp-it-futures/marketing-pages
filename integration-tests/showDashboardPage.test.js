@@ -69,7 +69,7 @@ test('should render the preview page button', async (t) => {
 test('should render the About your solution section group', async (t) => {
   pageSetup(t);
 
-  const aboutYourSolutionSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-1"]');
+  const aboutYourSolutionSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-about-your-solution"]');
 
   await t
     .expect(aboutYourSolutionSectionGroup.find('h2').innerText).eql('About your Solution');
@@ -78,7 +78,7 @@ test('should render the About your solution section group', async (t) => {
 test('should render the Client application type section group', async (t) => {
   pageSetup(t);
 
-  const clientApplicationTypeSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-2"]');
+  const clientApplicationTypeSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-client-application-type"]');
 
   await t
     .expect(clientApplicationTypeSectionGroup.find('h2').innerText).eql('Client application type');
@@ -87,7 +87,7 @@ test('should render the Client application type section group', async (t) => {
 test('should render all the sections for the About your solution section group', async (t) => {
   pageSetup(t);
 
-  const aboutYourSolutionSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-1"]');
+  const aboutYourSolutionSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-about-your-solution"]');
   const solutionDescriptionSection = aboutYourSolutionSectionGroup.find('[data-test-id="dashboard-section-solution-description"]');
   const featuresSection = aboutYourSolutionSectionGroup.find('[data-test-id="dashboard-section-features"]');
 
@@ -110,7 +110,7 @@ test('should render all the sections for the About your solution section group',
 test('should render all the sections for the Client application type section group', async (t) => {
   pageSetup(t);
 
-  const clientApplicationTypeSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-2"]');
+  const clientApplicationTypeSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-client-application-type"]');
 
   await t
     .expect(clientApplicationTypeSectionGroup.find('[data-test-id="dashboard-section-title"]').innerText)
@@ -124,7 +124,7 @@ test('should render all the sections for the Client application type section gro
 test('should render all the sub sections for the client application type section with the default message when no selection has been made', async (t) => {
   pageSetup(t);
 
-  const clientApplicationTypeSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-2"]');
+  const clientApplicationTypeSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-client-application-type"]');
   const clientApplicationTypeSection = clientApplicationTypeSectionGroup.find('[data-test-id="dashboard-section-client-application-types"]');
 
   const browserBasedSubSection = clientApplicationTypeSection.find('[data-test-id="dashboard-sub-section-browser-based"]');
@@ -151,7 +151,7 @@ test('should render all the sub sections for the client application type section
 test('should render all the sub sections for the client application type section with requirment and status when all 3 application types have been selected', async (t) => {
   pageSetup(t, true);
 
-  const clientApplicationTypeSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-2"]');
+  const clientApplicationTypeSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-client-application-type"]');
   const clientApplicationTypeSection = clientApplicationTypeSectionGroup.find('[data-test-id="dashboard-section-client-application-types"]');
 
   const browserBasedSubSection = clientApplicationTypeSection.find('[data-test-id="dashboard-sub-section-browser-based"]');
@@ -190,7 +190,7 @@ test('clicking on the solution description section link should navigate the user
 
   const getLocation = ClientFunction(() => document.location.href);
 
-  const aboutYourSolutionSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-1"]');
+  const aboutYourSolutionSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-about-your-solution"]');
   const theSolutionDescriptionSection = aboutYourSolutionSectionGroup.find('[data-test-id="dashboard-section-solution-description"]');
 
   await t
@@ -208,7 +208,7 @@ test('clicking on the feature section link should navigate the user to the featu
 
   const getLocation = ClientFunction(() => document.location.href);
 
-  const aboutYourSolutionSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-1"]');
+  const aboutYourSolutionSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-about-your-solution"]');
   const theFeatureSection = aboutYourSolutionSectionGroup.find('[data-test-id="dashboard-section-features"]');
 
   await t
@@ -225,7 +225,7 @@ test('clicking on the client application type section link should navigate the u
 
   const getLocation = ClientFunction(() => document.location.href);
 
-  const clientApplicationTypeSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-2"]');
+  const clientApplicationTypeSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-client-application-type"]');
   const theClientApplicationTypeSection = clientApplicationTypeSectionGroup.find('[data-test-id="dashboard-section-client-application-types"]');
 
   await t
