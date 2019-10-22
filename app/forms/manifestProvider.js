@@ -9,6 +9,14 @@ export class ManifestProvider {
     return this.dashboardManifest;
   }
 
+  getSubDashboardManifest(sectionName) {
+    this.subDashboardManifestRaw = fs.readFileSync(`./app/forms/dashboards/${sectionName}.json`);
+
+    this.subDashboardManifest = JSON.parse(this.subDashboardManifestRaw);
+
+    return this.subDashboardManifest;
+  }
+
   getSectionManifest(sectionName) {
     this.sectionManifestRaw = fs.readFileSync(`./app/forms/sections/${sectionName}.json`);
 

@@ -7,7 +7,7 @@ const createSectionGroupContext = (manifestSectionGroup) => {
   return sectionGroup;
 };
 
-const createSubSectionsContext = (manifestSection, subSectionsData) => {
+const createSubSectionsContext = (solutionId, manifestSection, subSectionsData) => {
   const subSections = [];
 
   if (manifestSection.sections) {
@@ -16,6 +16,7 @@ const createSubSectionsContext = (manifestSection, subSectionsData) => {
         && subSectionsData.find(subSectionData => subSectionData.id === manifestSubSection.id);
 
       const subSection = {
+        URL: `/${solutionId}/dashboard/${manifestSubSection.id}`,
         id: manifestSubSection.id,
         title: manifestSubSection.title,
         defaultMessage: manifestSubSection.defaultMessage,
@@ -42,7 +43,7 @@ const createSectionContext = (solutionId, manifestSection, marketingData) => {
     status,
     requirement,
     isActive: true,
-    sections: createSubSectionsContext(manifestSection, subSectionsData),
+    sections: createSubSectionsContext(solutionId, manifestSection, subSectionsData),
   };
 
   return section;

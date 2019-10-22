@@ -71,12 +71,14 @@ describe('createMarketingDashboardContext', () => {
               isActive: true,
               sections: [
                 {
+                  URL: '/some-solution-id/dashboard/some-first-sub-section-id',
                   id: 'some-first-sub-section-id',
                   title: 'Some first sub section',
                   defaultMessage: 'some default message',
                   isActive: false,
                 },
                 {
+                  URL: '/some-solution-id/dashboard/some-second-sub-section-id',
                   id: 'some-second-sub-section-id',
                   title: 'Some second sub section',
                   defaultMessage: 'some default message',
@@ -150,12 +152,14 @@ describe('createMarketingDashboardContext', () => {
               isActive: true,
               sections: [
                 {
+                  URL: '/some-solution-id/dashboard/some-first-sub-section-id',
                   id: 'some-first-sub-section-id',
                   title: 'Some first sub section',
                   defaultMessage: 'some default message',
                   isActive: false,
                 },
                 {
+                  URL: '/some-solution-id/dashboard/some-second-sub-section-id',
                   id: 'some-second-sub-section-id',
                   title: 'Some second sub section',
                   defaultMessage: 'some default message',

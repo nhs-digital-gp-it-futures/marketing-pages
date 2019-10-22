@@ -19,6 +19,19 @@ export const getMarketingPageDashboardContext = async (solutionId) => {
   return context;
 };
 
+export const getSubDashboardPageContext = async (solutionId, sectionId) => {
+  const dashboardManifest = new ManifestProvider().getSubDashboardManifest(sectionId);
+
+  const sectionData = await axios.get(`http://localhost:8080/api/v1/Solutions/${solutionId}/sections/${sectionId}`);
+  const { sections } = sectionData.data;
+
+  const context = createMarketingDashboardContext(
+    solutionId, dashboardManifest, sections,
+  );
+
+  return context;
+};
+
 export const getSectionPageContext = async (solutionId, sectionId) => {
   const sectionManifest = new ManifestProvider().getSectionManifest(sectionId);
 
