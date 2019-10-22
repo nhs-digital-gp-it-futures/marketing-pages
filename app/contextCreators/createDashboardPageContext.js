@@ -49,7 +49,9 @@ const createSectionContext = (solutionId, manifestSection, marketingDataSections
   return section;
 };
 
-export const createMarketingDashboardContext = (solutionId, dashboardManifest, marketingDataSections) => {
+export const createDashboardPageContext = (
+  solutionId, dashboardManifest, marketingDataSections,
+) => {
   const context = {
     title: dashboardManifest.title,
     mainAdvice: dashboardManifest.mainAdvice,

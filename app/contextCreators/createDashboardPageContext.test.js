@@ -1,6 +1,6 @@
-import { createMarketingDashboardContext } from './createMarketingDashboardContext';
+import { createDashboardPageContext } from './createDashboardPageContext';
 
-describe('createMarketingDashboardContext', () => {
+describe('createDashboardPageContext', () => {
   it('should create a context from the manifest and the marketingData', () => {
     const expectedContext = {
       previewUrl: '/some-solution-id/preview',
@@ -47,7 +47,7 @@ describe('createMarketingDashboardContext', () => {
       },
     ];
 
-    const context = createMarketingDashboardContext('some-solution-id', dashboardManifest, marketingDataSections);
+    const context = createDashboardPageContext('some-solution-id', dashboardManifest, marketingDataSections);
 
     expect(context).toEqual(expectedContext);
   });
@@ -127,7 +127,7 @@ describe('createMarketingDashboardContext', () => {
     ];
 
 
-    const context = createMarketingDashboardContext('some-solution-id', dashboardManifest, marketingDataSections);
+    const context = createDashboardPageContext('some-solution-id', dashboardManifest, marketingDataSections);
 
     expect(context).toEqual(expectedContext);
   });
@@ -215,7 +215,7 @@ describe('createMarketingDashboardContext', () => {
       },
     ];
 
-    const context = createMarketingDashboardContext('some-solution-id', dashboardManifest, marketingDataSections);
+    const context = createDashboardPageContext('some-solution-id', dashboardManifest, marketingDataSections);
 
     expect(context).toEqual(expectedContext);
   });

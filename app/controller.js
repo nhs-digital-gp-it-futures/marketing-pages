@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { ManifestProvider } from './forms/manifestProvider';
 import { createSectionPageContext } from './contextCreators/createSectionPageContext';
-import { createMarketingDashboardContext } from './contextCreators/createMarketingDashboardContext';
+import { createDashboardPageContext } from './contextCreators/createDashboardPageContext';
 import { createPreviewPageContext } from './contextCreators/createPreviewPageContext';
 import { validateSectionData } from './helpers/validateSectionData';
 import { findExistingMarketingDataForSection } from './helpers/findExistingMarketingDataForSection';
@@ -12,7 +12,7 @@ export const getMarketingPageDashboardContext = async (solutionId) => {
   const solutionData = await axios.get(`http://localhost:8080/api/v1/Solutions/${solutionId}`);
   const { solution } = solutionData.data;
 
-  const context = createMarketingDashboardContext(
+  const context = createDashboardPageContext(
     solutionId, dashboardManifest, solution.marketingData.sections,
   );
 
@@ -25,7 +25,7 @@ export const getSubDashboardPageContext = async (solutionId, sectionId) => {
   const sectionData = await axios.get(`http://localhost:8080/api/v1/Solutions/${solutionId}/sections/${sectionId}`);
   const { sections } = sectionData.data;
 
-  const context = createMarketingDashboardContext(
+  const context = createDashboardPageContext(
     solutionId, dashboardManifest, sections,
   );
 
