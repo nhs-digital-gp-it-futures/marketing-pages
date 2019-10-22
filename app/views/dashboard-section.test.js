@@ -5,14 +5,14 @@ import cheerio from 'cheerio';
 import { App } from '../../app';
 
 const aSectionContext = (
-  title, requirement = 'Mandatory', status = 'INCOMPLETE', showDefaultMessage = false, defaultMessage = undefined,
+  title, requirement = 'Mandatory', status = 'INCOMPLETE', isActive = true, defaultMessage = undefined,
 ) => ({
   section: {
     URL: 'someUrl',
     title,
     requirement,
     status,
-    showDefaultMessage,
+    isActive,
     defaultMessage,
   },
 });
@@ -90,7 +90,7 @@ describe('dashboard-section', () => {
 
   it('should render defaultMessage for the section if the showDetaultMessage flag is true', (done) => {
     const dummyApp = createDummyApp(aSectionContext(
-      'Some section Title', undefined, undefined, true, 'some default message',
+      'Some section Title', undefined, undefined, false, 'some default message',
     ));
 
     request(dummyApp)
@@ -99,6 +99,22 @@ describe('dashboard-section', () => {
         const $ = cheerio.load(res.text);
 
         expect($('[data-test-id="dashboard-section-default-message"]').text().trim()).toEqual('some default message');
+
+        done();
+      });
+  });
+
+  it('should not render the section title as a link when not active', (done) => {
+    const dummyApp = createDummyApp(aSectionContext(
+      'Some section Title', undefined, undefined, false, 'some default message',
+    ));
+
+    request(dummyApp)
+      .get('/')
+      .then((res) => {
+        const $ = cheerio.load(res.text);
+
+        expect($('[data-test-id="dashboard-section-title"] a').length).toEqual(0);
 
         done();
       });

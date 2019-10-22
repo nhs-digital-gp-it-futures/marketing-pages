@@ -38,7 +38,24 @@
             ]
           },
           "requirement": "Mandatory",
-          "status": "COMPLETE"
+          "status": "COMPLETE",
+          "sections": [
+            {
+              "id": "browser-based",
+              "requirement": "Mandatory",
+              "status": "INCOMPLETE"
+            },
+            {
+              "id": "native-mobile",
+              "requirement": "Mandatory",
+              "status": "INCOMPLETE"
+            },
+            {
+              "id": "native-desktop",
+              "requirement": "Mandatory",
+              "status": "INCOMPLETE"
+            }
+          ]
         }
       ]
     }

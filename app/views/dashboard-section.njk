@@ -2,23 +2,27 @@
   <li class="app-section-list__item">
       <div class="nhsuk-grid-column-one-half" >
       <span data-test-id="dashboard-section-title" class="app-section-list__task-name">
+        {% if section.isActive %}
           <a href="{{ section.URL }}" aria-describedby="eligibility-completed">
-          {{ section.title }}
+            {{ section.title }}
           </a>
+        {% else %}
+          {{ section.title }}
+        {% endif %}
       </span>
       </div>
       <div class="nhsuk-grid-column-two-quarters">
-      {% if section.showDefaultMessage %}
-          <span data-test-id="dashboard-section-default-message" class="app-section-list__task-name">
-          <p>{{ section.defaultMessage }}</p>
-          </span>
-      {% else %}
-          <span data-test-id="dashboard-section-requirement" class="app-section-list__task-name">
+      {% if section.isActive %}
+        <span data-test-id="dashboard-section-requirement" class="app-section-list__task-name">
           <p>{{ section.requirement }}</p>
-          </span>
-          <strong data-test-id="dashboard-section-status" class="govuk-tag app-section-list__task-completed" id="eligibility-completed">
+        </span>
+        <strong data-test-id="dashboard-section-status" class="govuk-tag app-section-list__task-completed" id="eligibility-completed">
           {{ section.status }}
-          </strong>
+        </strong>
+      {% else %}
+        <span data-test-id="dashboard-section-default-message" class="app-section-list__task-name">
+          <p>{{ section.defaultMessage }}</p>
+        </span>
       {% endif %}
       </div>
   </li>

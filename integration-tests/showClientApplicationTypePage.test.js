@@ -54,6 +54,16 @@ test('should render all the advice of the section', async (t) => {
     .expect(additionalAdvice.innerText).eql(expectedAdditionalAdvice);
 });
 
+test('should render the warning advise', async (t) => {
+  pageSetup(t);
+
+  const warningAdvice = Selector('[data-test-id="section-warning-advice"]');
+
+  await t
+    .expect(warningAdvice.count).eql(1)
+    .expect(warningAdvice.innerText).eql('When revisiting this section please be aware that if you choose to deselect an application type, any data that has been added to that application type will be deleted.');
+});
+
 test('should render the select supported client application types question', async (t) => {
   pageSetup(t);
 

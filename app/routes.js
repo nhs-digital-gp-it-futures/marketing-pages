@@ -1,6 +1,7 @@
 import express from 'express';
 import {
   getMarketingPageDashboardContext,
+  getSubDashboardPageContext,
   getSectionPageContext,
   getSectionPageErrorContext,
   validateSection,
@@ -17,6 +18,14 @@ router.get('/:solutionId', async (req, res) => {
 
   res.render('dashboard-page', context);
 });
+
+router.get('/:solutionId/dashboard/:sectionId', async (req, res) => {
+  const { solutionId, sectionId } = req.params;
+  const context = await getSubDashboardPageContext(solutionId, sectionId);
+
+  res.render('sub-dashboard-page', context);
+});
+
 
 router.get('/:solutionId/section/:sectionId', async (req, res) => {
   const { solutionId, sectionId } = req.params;

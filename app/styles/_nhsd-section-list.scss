@@ -39,15 +39,13 @@
     .app-section-list__item:first-child {
         border-top: none;
     }
-    .app-section-list__item:last-child {
-        border-bottom: none;
-    }
     .nhsuk-grid-column-one-half {
       width: 47%;
     }
 
     .app-section-list__items {
       padding-left: 0;
+      border-bottom: 1px solid #b1b4b6;
     }
   }
 }
@@ -63,10 +61,6 @@
     content: "";
     display: block;
     clear: both;
-}
-
-.app-section-list__item:first-child {
-  border-top: 1px solid #b1b4b6;
 }
 
 .app-section-list__task-name {

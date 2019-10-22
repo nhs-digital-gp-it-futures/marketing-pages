@@ -6,6 +6,7 @@
     "This information will be visible to buyers on your Solution page.",
     "* indicates required field."
   ],
+  "warningAdvice": "When revisiting this section please be aware that if you choose to deselect an application type, any data that has been added to that application type will be deleted.",
   "questions": [
     {
       "id": "client-application-types",
