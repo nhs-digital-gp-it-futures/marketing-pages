@@ -1,0 +1,21 @@
+{
+  "id":"browser-based-dashboard-page",
+  "title": "Browser based",
+  "mainAdvice": "Add further detail about your browser based application.",
+  "additionalAdvice": [
+    "If your application is browser based, please complete the sections below to provide information to the user about your client application.",
+    "* indicates required field."
+  ],
+  "sectionGroups": [
+    {
+      "id": "browser-based-sections",
+      "title": "Browser based sections",
+      "sections": [
+        {
+          "id": "browsers-supported",
+          "title": "Browsers supported"
+        }
+      ]
+    }
+  ]
+}
