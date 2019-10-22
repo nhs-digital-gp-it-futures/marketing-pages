@@ -135,7 +135,12 @@ describe('createSectionPageContext', () => {
     it('should create a context for bulletpoint-list type question with existing data populated and a validation error', () => {
       const expectedContext = {
         submitActionUrl: '/some-solution-id/section/some-section-id',
-        errors: [],
+        errors: [
+          {
+            text: 'some really helpful error message',
+            href: '#fieldId',
+          },
+        ],
         questions: [
           {
             id: 'fieldId',
