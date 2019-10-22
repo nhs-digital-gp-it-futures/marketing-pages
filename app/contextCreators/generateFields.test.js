@@ -97,11 +97,9 @@ describe('generateFields', () => {
     };
 
     const exisitingDataForSection = {
-      data: {
-        'some-question-id': [
-          'some-data-1', 'some-data-2',
-        ],
-      },
+      'some-question-id': [
+        'some-data-1', 'some-data-2',
+      ],
     };
 
     const fields = generateFields(question, exisitingDataForSection);
@@ -142,11 +140,9 @@ describe('generateFields', () => {
     ];
 
     const exisitingDataForSection = {
-      data: {
-        'some-question-id': [
-          'some-data-1', 'some-really-large-data-2', 'some-data-3',
-        ],
-      },
+      'some-question-id': [
+        'some-data-1', 'some-really-large-data-2', 'some-data-3',
+      ],
     };
 
     const fields = generateFields(question, exisitingDataForSection, validationErrors);

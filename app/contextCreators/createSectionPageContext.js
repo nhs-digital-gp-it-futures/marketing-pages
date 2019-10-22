@@ -15,9 +15,9 @@ const createContextForOptionsTypeQuestion = (
   if (sectionManifestQuestion.type === 'checkbox-options' || sectionManifestQuestion.type === 'radiobutton-options') {
     const options = [];
     sectionManifestQuestion.options.map((manifestOption) => {
-      if (formData && formData.data
-        && formData.data[sectionManifestQuestion.id]
-        && formData.data[sectionManifestQuestion.id]
+      if (formData
+        && formData[sectionManifestQuestion.id]
+        && formData[sectionManifestQuestion.id]
           .some(questionData => questionData === manifestOption.value)) {
         const checkedOption = {
           ...manifestOption,

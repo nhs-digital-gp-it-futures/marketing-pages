@@ -4,7 +4,6 @@ import { createSectionPageContext } from './contextCreators/createSectionPageCon
 import { createDashboardPageContext } from './contextCreators/createDashboardPageContext';
 import { createPreviewPageContext } from './contextCreators/createPreviewPageContext';
 import { validateSectionData } from './helpers/validateSectionData';
-import { findExistingMarketingDataForSection } from './helpers/findExistingMarketingDataForSection';
 
 export const getMarketingPageDashboardContext = async (solutionId) => {
   const dashboardManifest = new ManifestProvider().getDashboardManifest();
@@ -35,29 +34,22 @@ export const getSubDashboardPageContext = async (solutionId, sectionId) => {
 export const getSectionPageContext = async (solutionId, sectionId) => {
   const sectionManifest = new ManifestProvider().getSectionManifest(sectionId);
 
-  const solutionData = await axios.get(`http://localhost:8080/api/v1/Solutions/${solutionId}`);
-  const existingSolutionData = solutionData.data.solution;
-
-  const formData = findExistingMarketingDataForSection(existingSolutionData, sectionManifest.id);
+  const sectionData = await axios.get(`http://localhost:8080/api/v1/Solutions/${solutionId}/sections/${sectionId}`);
+  const formData = sectionData.data;
 
   const context = createSectionPageContext(solutionId, sectionManifest, formData);
 
   return context;
 };
 
-const convertToFormData = sectionData => ({
-  data: {
-    ...sectionData,
-  },
-});
-
 export const getSectionPageErrorContext = async (
   solutionId, sectionId, sectionData, validationErrors,
 ) => {
   const sectionManifest = new ManifestProvider().getSectionManifest(sectionId);
 
-  const formData = convertToFormData(sectionData);
-  const context = createSectionPageContext(solutionId, sectionManifest, formData, validationErrors);
+  const context = createSectionPageContext(
+    solutionId, sectionManifest, sectionData, validationErrors,
+  );
 
   return context;
 };

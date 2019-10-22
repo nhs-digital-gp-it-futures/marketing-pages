@@ -107,13 +107,11 @@ describe('createSectionPageContext', () => {
       };
 
       const formData = {
-        data: {
-          fieldId: [
-            'Field A',
-            'Field B',
-            'Field C',
-          ],
-        },
+        fieldId: [
+          'Field A',
+          'Field B',
+          'Field C',
+        ],
       };
 
       const sectionManifest = {
@@ -167,13 +165,11 @@ describe('createSectionPageContext', () => {
       };
 
       const formData = {
-        data: {
-          fieldId: [
-            'Field A',
-            'Field B is too big',
-            'Field C',
-          ],
-        },
+        fieldId: [
+          'Field A',
+          'Field B is too big',
+          'Field C',
+        ],
       };
 
       const validationErrors = [
@@ -317,12 +313,10 @@ describe('createSectionPageContext', () => {
       };
 
       const formData = {
-        data: {
-          fieldId: [
-            'option-1',
-            'option-3',
-          ],
-        },
+        fieldId: [
+          'option-1',
+          'option-3',
+        ],
       };
 
       const context = createSectionPageContext('some-solution-id', sectionManifest, formData);
