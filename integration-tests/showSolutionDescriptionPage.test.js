@@ -4,7 +4,6 @@ import { ManifestProvider } from '../app/forms/manifestProvider';
 import aSolutionFixture from './fixtures/aSolution.json';
 import aSolutionWithMarketingDataFixture from './fixtures/aSolutionWithMarketingData.json';
 
-
 const mocks = (withMarketingData) => {
   if (withMarketingData) {
     nock('http://localhost:8080')

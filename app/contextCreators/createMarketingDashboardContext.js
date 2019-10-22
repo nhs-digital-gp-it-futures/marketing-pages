@@ -32,8 +32,8 @@ const createSubSectionsContext = (solutionId, manifestSection, subSectionsData) 
   return subSections.length > 0 ? subSections : undefined;
 };
 
-const createSectionContext = (solutionId, manifestSection, marketingData) => {
-  const { status, requirement, sections: subSectionsData } = marketingData.sections
+const createSectionContext = (solutionId, manifestSection, marketingDataSections) => {
+  const { status, requirement, sections: subSectionsData } = marketingDataSections
     .find(marketingDataTask => marketingDataTask.id === manifestSection.id);
 
   const section = {
@@ -49,11 +49,14 @@ const createSectionContext = (solutionId, manifestSection, marketingData) => {
   return section;
 };
 
-export const createMarketingDashboardContext = (solutionId, dashboardManifest, marketingData) => {
-  const context = {};
+export const createMarketingDashboardContext = (solutionId, dashboardManifest, marketingDataSections) => {
+  const context = {
+    title: dashboardManifest.title,
+    mainAdvice: dashboardManifest.mainAdvice,
+    additionalAdvice: dashboardManifest.additionalAdvice,
+    previewUrl: `/${solutionId}/preview`,
+  };
   const sectionGroups = [];
-
-  context.previewUrl = `/${solutionId}/preview`;
 
   dashboardManifest.sectionGroups.map((manifestSectionGroup) => {
     const sections = [];
@@ -61,7 +64,7 @@ export const createMarketingDashboardContext = (solutionId, dashboardManifest, m
     const sectionGroup = createSectionGroupContext(manifestSectionGroup);
 
     manifestSectionGroup.sections.map((manifestSection) => {
-      const section = createSectionContext(solutionId, manifestSection, marketingData);
+      const section = createSectionContext(solutionId, manifestSection, marketingDataSections);
 
       sections.push(section);
     });

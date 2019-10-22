@@ -38,18 +38,16 @@ describe('createMarketingDashboardContext', () => {
       ],
     };
 
-    const marketingData = {
-      sections: [
-        {
-          id: 'some-section-id',
-          data: {},
-          status: 'INCOMPLETE',
-          requirement: 'Mandatory',
-        },
-      ],
-    };
+    const marketingDataSections = [
+      {
+        id: 'some-section-id',
+        data: {},
+        status: 'INCOMPLETE',
+        requirement: 'Mandatory',
+      },
+    ];
 
-    const context = createMarketingDashboardContext('some-solution-id', dashboardManifest, marketingData);
+    const context = createMarketingDashboardContext('some-solution-id', dashboardManifest, marketingDataSections);
 
     expect(context).toEqual(expectedContext);
   });
@@ -119,18 +117,17 @@ describe('createMarketingDashboardContext', () => {
       ],
     };
 
-    const marketingData = {
-      sections: [
-        {
-          id: 'some-section-id',
-          data: {},
-          status: 'INCOMPLETE',
-          requirement: 'Mandatory',
-        },
-      ],
-    };
+    const marketingDataSections = [
+      {
+        id: 'some-section-id',
+        data: {},
+        status: 'INCOMPLETE',
+        requirement: 'Mandatory',
+      },
+    ];
 
-    const context = createMarketingDashboardContext('some-solution-id', dashboardManifest, marketingData);
+
+    const context = createMarketingDashboardContext('some-solution-id', dashboardManifest, marketingDataSections);
 
     expect(context).toEqual(expectedContext);
   });
@@ -202,25 +199,23 @@ describe('createMarketingDashboardContext', () => {
       ],
     };
 
-    const marketingData = {
-      sections: [
-        {
-          id: 'some-section-id',
-          data: {},
-          status: 'INCOMPLETE',
-          requirement: 'Mandatory',
-          sections: [
-            {
-              id: 'some-second-sub-section-id',
-              requirement: 'Mandatory',
-              status: 'INCOMPLETE',
-            },
-          ],
-        },
-      ],
-    };
+    const marketingDataSections = [
+      {
+        id: 'some-section-id',
+        data: {},
+        status: 'INCOMPLETE',
+        requirement: 'Mandatory',
+        sections: [
+          {
+            id: 'some-second-sub-section-id',
+            requirement: 'Mandatory',
+            status: 'INCOMPLETE',
+          },
+        ],
+      },
+    ];
 
-    const context = createMarketingDashboardContext('some-solution-id', dashboardManifest, marketingData);
+    const context = createMarketingDashboardContext('some-solution-id', dashboardManifest, marketingDataSections);
 
     expect(context).toEqual(expectedContext);
   });

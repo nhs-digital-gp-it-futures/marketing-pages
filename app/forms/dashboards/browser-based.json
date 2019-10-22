@@ -14,6 +14,22 @@
         {
           "id": "browsers-supported",
           "title": "Browsers supported"
+        },
+        {
+          "id": "plug-ins-or-extensions",
+          "title": "Plug-ins or extensions"
+        },
+        {
+          "id": "connectivity-and-resolution",
+          "title": "Connectivity and resolution"
+        },
+        {
+          "id": "hardware-requirements",
+          "title": "Hardware requirements"
+        },
+        {
+          "id": "additional-information",
+          "title": "Additional information"
         }
       ]
     }

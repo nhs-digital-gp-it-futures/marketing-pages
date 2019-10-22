@@ -28,7 +28,7 @@ describe('sub dashboard page', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        expect($('h1[data-test-id="sub-dashboard-title"]').text().trim()).toEqual('Title of the sub dashboard');
+        expect($('[data-test-id="sub-dashboard-title"]').text().trim()).toEqual('Title of the sub dashboard');
 
         done();
       });
@@ -46,7 +46,7 @@ describe('sub dashboard page', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        expect($('h2[data-test-id="sub-dashboard-main-advice"]').text().trim()).toEqual('This is the main advice for this sub dashboard');
+        expect($('[data-test-id="sub-dashboard-main-advice"]').text().trim()).toEqual('This is the main advice for this sub dashboard');
 
         done();
       });
@@ -68,7 +68,7 @@ describe('sub dashboard page', () => {
         const $ = cheerio.load(res.text);
 
         context.additionalAdvice.map((advice, idx) => {
-          expect($(`div[data-test-id="sub-dashboard-additional-advice"] p:nth-child(${idx + 1})`).text().trim()).toEqual(advice);
+          expect($(`[data-test-id="sub-dashboard-additional-advice"] p:nth-child(${idx + 1})`).text().trim()).toEqual(advice);
         });
 
         done();

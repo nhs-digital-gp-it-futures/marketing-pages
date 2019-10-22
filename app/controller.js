@@ -13,7 +13,7 @@ export const getMarketingPageDashboardContext = async (solutionId) => {
   const { solution } = solutionData.data;
 
   const context = createMarketingDashboardContext(
-    solutionId, dashboardManifest, solution.marketingData,
+    solutionId, dashboardManifest, solution.marketingData.sections,
   );
 
   return context;
