@@ -1,0 +1,11 @@
+  
+version: '3.5'
+
+services:
+
+  nhsd.marketing-page:
+    image: nhsd/buying-catalogue-frontend
+    container_name: nhsd_bcfrontend
+    build:
+      context: .
+      dockerfile: Dockerfile
