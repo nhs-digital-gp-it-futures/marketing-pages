@@ -1,17 +1,19 @@
+const arrayTransformation = (questionValue) => {
+  if (!questionValue) {
+    return [];
+  }
+
+  if (Array.isArray(questionValue)) {
+    return questionValue;
+  }
+
+  return [questionValue];
+};
+
 const transformationStratergy = {
   'client-application-types': {
     'client-application-types': {
-      transform: (questionValue) => {
-        if (!questionValue) {
-          return [];
-        }
-
-        if (Array.isArray(questionValue)) {
-          return questionValue;
-        }
-
-        return [questionValue];
-      },
+      transform: questionValue => arrayTransformation(questionValue),
     },
   },
 };
