@@ -17,8 +17,9 @@ const createContextForOptionsTypeQuestion = (
     sectionManifestQuestion.options.map((manifestOption) => {
       if (formData
         && formData[sectionManifestQuestion.id]
-        && formData[sectionManifestQuestion.id]
-          .some(questionData => questionData === manifestOption.value)) {
+        && ((Array.isArray(formData[sectionManifestQuestion.id])
+          && formData[sectionManifestQuestion.id].some(questionData => questionData === manifestOption.value)
+          || formData[sectionManifestQuestion.id] === manifestOption.value))) {
         const checkedOption = {
           ...manifestOption,
           checked: true,
