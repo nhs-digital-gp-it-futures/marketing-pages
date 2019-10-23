@@ -175,8 +175,8 @@ describe('section page', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        expect($('[data-test-id="section-return-to-dashboard-link"] a').length).toEqual(1);
-        expect($('[data-test-id="section-return-to-dashboard-link"] a').text().trim()).toEqual('Return to all sections');
+        expect($('[data-test-id="section-back-link"] a').length).toEqual(1);
+        expect($('[data-test-id="section-back-link"] a').text().trim()).toEqual('Return to all sections');
 
         done();
       });

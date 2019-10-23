@@ -141,7 +141,7 @@ test('should show validation for fields exceeding the maxLength', async (t) => {
 test('should render the return to all sections link', async (t) => {
   pageSetup(t);
 
-  const link = Selector('[data-test-id="section-return-to-dashboard-link"] a');
+  const link = Selector('[data-test-id="section-back-link"] a');
 
   await t
     .expect(link.innerText).eql('Return to all sections');
