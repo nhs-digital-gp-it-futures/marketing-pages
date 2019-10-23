@@ -4,6 +4,7 @@ import { createSectionPageContext } from './contextCreators/createSectionPageCon
 import { createDashboardPageContext } from './contextCreators/createDashboardPageContext';
 import { createPreviewPageContext } from './contextCreators/createPreviewPageContext';
 import { validateSectionData } from './helpers/validateSectionData';
+import { transformSectionData } from './helpers/transformSectionData';
 
 export const getMarketingPageDashboardContext = async (solutionId) => {
   const dashboardManifest = new ManifestProvider().getDashboardManifest();
@@ -60,7 +61,10 @@ export const validateSection = (sectionId, sectionData) => {
 };
 
 export const postSection = async (solutionId, sectionId, sectionData) => {
-  await axios.put(`http://localhost:8080/api/v1/Solutions/${solutionId}/sections/${sectionId}`, sectionData);
+  const sectionManifest = new ManifestProvider().getSectionManifest(sectionId);
+  const transformedSectionData = transformSectionData(sectionId, sectionManifest, sectionData);
+
+  await axios.put(`http://localhost:8080/api/v1/Solutions/${solutionId}/sections/${sectionId}`, transformedSectionData);
 
   return true;
 };
