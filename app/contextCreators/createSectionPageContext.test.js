@@ -341,9 +341,7 @@ describe('createSectionPageContext', () => {
       };
 
       const formData = {
-        data: {
-          fieldId: 'some existing data',
-        },
+        fieldId: 'some existing data',
       };
 
       const sectionManifest = {
@@ -384,9 +382,7 @@ describe('createSectionPageContext', () => {
       };
 
       const formData = {
-        data: {
-          fieldId: 'some existing data',
-        },
+        fieldId: 'some existing data',
       };
 
       const validationErrors = [

@@ -185,8 +185,8 @@ test('clicking on the solution description section link should navigate the user
   pageSetup(t);
 
   nock('http://localhost:8080')
-    .get('/api/v1/Solutions/S100000-001')
-    .reply(200, aSolutionFixture);
+    .get('/api/v1/Solutions/S100000-001/sections/solution-description')
+    .reply(200, {});
 
   const getLocation = ClientFunction(() => document.location.href);
 
@@ -203,8 +203,8 @@ test('clicking on the feature section link should navigate the user to the featu
   pageSetup(t);
 
   nock('http://localhost:8080')
-    .get('/api/v1/Solutions/S100000-001')
-    .reply(200, aSolutionFixture);
+    .get('/api/v1/Solutions/S100000-001/sections/features')
+    .reply(200, {});
 
   const getLocation = ClientFunction(() => document.location.href);
 
@@ -213,15 +213,15 @@ test('clicking on the feature section link should navigate the user to the featu
 
   await t
     .click(theFeatureSection.find('a'))
-    .expect(getLocation()).contains('S100000-001/section/feature');
+    .expect(getLocation()).contains('S100000-001/section/features');
 });
 
 test('clicking on the client application type section link should navigate the user to the client application type page', async (t) => {
   pageSetup(t);
 
   nock('http://localhost:8080')
-    .get('/api/v1/Solutions/S100000-001')
-    .reply(200, aSolutionFixture);
+    .get('/api/v1/Solutions/S100000-001/sections/client-application-types')
+    .reply(200, {});
 
   const getLocation = ClientFunction(() => document.location.href);
 

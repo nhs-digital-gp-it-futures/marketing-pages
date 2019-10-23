@@ -1,18 +1,18 @@
 import nock from 'nock';
 import { Selector, ClientFunction } from 'testcafe';
 import { ManifestProvider } from '../app/forms/manifestProvider';
-import aSolutionFixture from './fixtures/aSolution.json';
-import aSolutionWithMarketingDataFixture from './fixtures/aSolutionWithMarketingData.json';
+
+const browserSupportedMarketingData = {};
 
 const mocks = (withMarketingData) => {
   if (withMarketingData) {
     nock('http://localhost:8080')
-      .get('/api/v1/Solutions/S100000-001')
-      .reply(200, aSolutionWithMarketingDataFixture);
+      .get('/api/v1/Solutions/S100000-001/sections/browsers-supported')
+      .reply(200, browserSupportedMarketingData);
   } else {
     nock('http://localhost:8080')
-      .get('/api/v1/Solutions/S100000-001')
-      .reply(200, aSolutionFixture);
+      .get('/api/v1/Solutions/S100000-001/sections/browsers-supported')
+      .reply(200, {});
   }
 };
 

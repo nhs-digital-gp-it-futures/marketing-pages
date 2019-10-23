@@ -1,6 +1,35 @@
 import nock from 'nock';
 import { Selector } from 'testcafe';
-import browserBasedMarketingData from './fixtures/browserBasedMarketingData.json';
+
+const browserBasedMarketingData = {
+  sections: [
+    {
+      id: 'browsers-supported',
+      status: 'INCOMPLETE',
+      requirement: 'Mandatory',
+    },
+    {
+      id: 'plug-ins-or-extensions',
+      status: 'INCOMPLETE',
+      requirement: 'Mandatory',
+    },
+    {
+      id: 'connectivity-and-resolution',
+      status: 'INCOMPLETE',
+      requirement: 'Mandatory',
+    },
+    {
+      id: 'hardware-requirements',
+      status: 'INCOMPLETE',
+      requirement: 'Optional',
+    },
+    {
+      id: 'additional-information',
+      status: 'INCOMPLETE',
+      requirement: 'Optional',
+    },
+  ],
+};
 
 const mocks = () => {
   nock('http://localhost:8080')

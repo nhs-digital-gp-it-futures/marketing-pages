@@ -2,17 +2,22 @@ import nock from 'nock';
 import { Selector, ClientFunction } from 'testcafe';
 import { ManifestProvider } from '../app/forms/manifestProvider';
 import aSolutionFixture from './fixtures/aSolution.json';
-import aSolutionWithMarketingDataFixture from './fixtures/aSolutionWithMarketingData.json';
+
+const solutionDescriptionMarketingData = {
+  summary: 'The solution summary',
+  description: 'The solution description',
+  link: 'The solution link',
+};
 
 const mocks = (withMarketingData) => {
   if (withMarketingData) {
     nock('http://localhost:8080')
-      .get('/api/v1/Solutions/S100000-001')
-      .reply(200, aSolutionWithMarketingDataFixture);
+      .get('/api/v1/Solutions/S100000-001/sections/solution-description')
+      .reply(200, solutionDescriptionMarketingData);
   } else {
     nock('http://localhost:8080')
-      .get('/api/v1/Solutions/S100000-001')
-      .reply(200, aSolutionFixture);
+      .get('/api/v1/Solutions/S100000-001/sections/solution-description')
+      .reply(200, {});
   }
 };
 

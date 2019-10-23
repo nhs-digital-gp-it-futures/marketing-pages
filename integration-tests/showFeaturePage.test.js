@@ -2,18 +2,24 @@ import nock from 'nock';
 import { Selector, ClientFunction } from 'testcafe';
 import { ManifestProvider } from '../app/forms/manifestProvider';
 import aSolutionFixture from './fixtures/aSolution.json';
-import aSolutionWithMarketingDataFixture from './fixtures/aSolutionWithMarketingData.json';
 
+const featuresMarketingData = {
+  listing: [
+    'Feature A',
+    'Feature B',
+    'Feature C',
+  ],
+};
 
 const mocks = (withMarketingData) => {
   if (withMarketingData) {
     nock('http://localhost:8080')
-      .get('/api/v1/Solutions/S100000-001')
-      .reply(200, aSolutionWithMarketingDataFixture);
+      .get('/api/v1/Solutions/S100000-001/sections/features')
+      .reply(200, featuresMarketingData);
   } else {
     nock('http://localhost:8080')
-      .get('/api/v1/Solutions/S100000-001')
-      .reply(200, aSolutionFixture);
+      .get('/api/v1/Solutions/S100000-001/sections/features')
+      .reply(200, {});
   }
 };
 
@@ -67,9 +73,7 @@ test('should render 10 text fields', async (t) => {
 test('should populate the text fields with existing data', async (t) => {
   pageSetup(t, true);
 
-  const existingFeatures = aSolutionWithMarketingDataFixture.solution.marketingData.sections
-    .find(section => section.id === 'features')
-    .data.listing;
+  const existingFeatures = featuresMarketingData.listing;
 
   await Promise.all(existingFeatures.map(async (existingFeature, i) => {
     const theField = Selector(`[data-test-id="listing-${i + 1}"]`);
