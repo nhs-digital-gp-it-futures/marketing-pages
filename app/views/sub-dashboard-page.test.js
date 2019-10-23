@@ -96,4 +96,22 @@ describe('sub dashboard page', () => {
         done();
       });
   });
+
+  it('should render the return to all sections link', (done) => {
+    const context = {
+      title: 'Title of the section',
+    };
+
+    const dummyApp = createDummyApp(context);
+    request(dummyApp)
+      .get('/')
+      .then((res) => {
+        const $ = cheerio.load(res.text);
+
+        expect($('[data-test-id="sub-dashboard-back-link"] a').length).toEqual(1);
+        expect($('[data-test-id="sub-dashboard-back-link"] a').text().trim()).toEqual('Return to all sections');
+
+        done();
+      });
+  });
 });
