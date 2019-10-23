@@ -1,5 +1,6 @@
 import nock from 'nock';
-import { Selector } from 'testcafe';
+import { Selector, ClientFunction } from 'testcafe';
+import aSolutionFixture from './fixtures/aSolution.json';
 
 const browserBasedMarketingData = {
   sections: [
@@ -116,4 +117,30 @@ test('should render all the sections for the Browser based sections section grou
     .eql('Optional')
     .expect(additionalInformationSection.find('[data-test-id="dashboard-section-status"]').innerText)
     .eql('INCOMPLETE');
+});
+
+test('should render the return to all sections link', async (t) => {
+  pageSetup(t);
+
+  const link = Selector('[data-test-id="sub-dashboard-back-link"] a');
+
+  await t
+    .expect(link.innerText).eql('Return to all sections');
+});
+
+test('should return to the marketing data dashboard when the return to all sections is clicked', async (t) => {
+  pageSetup(t);
+
+  nock('http://localhost:8080')
+    .get('/api/v1/Solutions/S100000-001')
+    .reply(200, aSolutionFixture);
+
+  const getLocation = ClientFunction(() => document.location.href);
+
+  const link = Selector('[data-test-id="sub-dashboard-back-link"]');
+
+  await t
+    .click(link.find('a'))
+    .expect(getLocation()).notContains('section')
+    .expect(getLocation()).contains('S100000-001');
 });

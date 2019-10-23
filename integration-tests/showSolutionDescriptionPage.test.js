@@ -170,3 +170,20 @@ test('should render the return to all sections link', async (t) => {
   await t
     .expect(link.innerText).eql('Return to all sections');
 });
+
+test('should return to the marketing data dashboard when the return to all sections is clicked', async (t) => {
+  pageSetup(t);
+
+  nock('http://localhost:8080')
+    .get('/api/v1/Solutions/S100000-001')
+    .reply(200, aSolutionFixture);
+
+  const getLocation = ClientFunction(() => document.location.href);
+
+  const link = Selector('[data-test-id="section-back-link"]');
+
+  await t
+    .click(link.find('a'))
+    .expect(getLocation()).notContains('section')
+    .expect(getLocation()).contains('S100000-001');
+});
