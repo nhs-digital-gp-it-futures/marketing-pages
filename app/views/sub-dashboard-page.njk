@@ -18,14 +18,14 @@
     {% for sectionGroup in sectionGroups %}
       {{ dashboardSectionGroup(sectionGroup, loop.index) }}
     {% endfor %}
-  </div>
 
-  <div data-test-id="sub-dashboard-back-link">
-    {{ backLink({
-      "href": returnToDashboardUrl,
-      "text": "Return to all sections"
-    }) }}
+    <br/>
+    <div data-test-id="sub-dashboard-back-link">
+      {{ backLink({
+        "href": returnToDashboardUrl,
+        "text": "Return to all sections"
+      }) }}
+    </div>
   </div>
-
 </div>
 {% endblock %}
