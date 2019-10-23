@@ -16,6 +16,11 @@ const transformationStratergy = {
       transform: questionValue => arrayTransformation(questionValue),
     },
   },
+  'browsers-supported': {
+    'supported-browsers': {
+      transform: questionValue => arrayTransformation(questionValue),
+    },
+  },
 };
 
 export const transformSectionData = (sectionId, sectionManifest, sectionData) => {
