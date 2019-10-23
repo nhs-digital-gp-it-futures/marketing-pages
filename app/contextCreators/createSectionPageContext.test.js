@@ -17,6 +17,7 @@ describe('createSectionPageContext', () => {
           id: 'features-listing',
         },
       ],
+      returnToDashboardUrl: '/some-solution-id',
     };
 
     const sectionManifest = {
@@ -62,6 +63,7 @@ describe('createSectionPageContext', () => {
             ],
           },
         ],
+        returnToDashboardUrl: '/some-solution-id',
       };
 
       const sectionManifest = {
@@ -104,6 +106,7 @@ describe('createSectionPageContext', () => {
             ],
           },
         ],
+        returnToDashboardUrl: '/some-solution-id',
       };
 
       const formData = {
@@ -162,6 +165,7 @@ describe('createSectionPageContext', () => {
             ],
           },
         ],
+        returnToDashboardUrl: '/some-solution-id',
       };
 
       const formData = {
@@ -229,6 +233,7 @@ describe('createSectionPageContext', () => {
             ],
           },
         ],
+        returnToDashboardUrl: '/some-solution-id',
       };
 
       const sectionManifest = {
@@ -286,6 +291,7 @@ describe('createSectionPageContext', () => {
             ],
           },
         ],
+        returnToDashboardUrl: '/some-solution-id',
       };
 
       const sectionManifest = {
@@ -338,6 +344,7 @@ describe('createSectionPageContext', () => {
             data: 'some existing data',
           },
         ],
+        returnToDashboardUrl: '/some-solution-id',
       };
 
       const formData = {
@@ -379,6 +386,7 @@ describe('createSectionPageContext', () => {
             },
           },
         ],
+        returnToDashboardUrl: '/some-solution-id',
       };
 
       const formData = {

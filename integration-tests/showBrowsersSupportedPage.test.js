@@ -76,3 +76,12 @@ test('should render the mobile responsive question', async (t) => {
     .expect(mobileResponsiveQuestion.find('.nhsuk-radios').count).eql(1)
     .expect(mobileResponsiveQuestion.find('.nhsuk-radios__item').count).eql(2);
 });
+
+test('should render the return to all sections link', async (t) => {
+  pageSetup(t);
+
+  const link = Selector('[data-test-id="section-return-to-dashboard-link"] a');
+
+  await t
+    .expect(link.innerText).eql('Return to all sections');
+});

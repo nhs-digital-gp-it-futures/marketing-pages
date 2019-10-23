@@ -101,6 +101,7 @@ export const createSectionPageContext = (
     mainAdvice: sectionManifest.mainAdvice,
     additionalAdvice: sectionManifest.additionalAdvice,
     warningAdvice: sectionManifest.warningAdvice || undefined,
+    returnToDashboardUrl: `/${solutionId}`,
   };
 
   sectionManifest.questions.map((sectionManifestQuestion) => {

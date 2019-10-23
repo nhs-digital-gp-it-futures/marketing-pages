@@ -161,3 +161,12 @@ test('should show error summary and validation for questions when they exceed th
     .expect(solutionLink.find('.nhsuk-input--error').exists).ok()
     .expect(solutionLink.find('.nhsuk-error-message').innerText).eql('Error:\nSolution Link validation error message');
 });
+
+test('should render the return to all sections link', async (t) => {
+  pageSetup(t);
+
+  const link = Selector('[data-test-id="section-return-to-dashboard-link"] a');
+
+  await t
+    .expect(link.innerText).eql('Return to all sections');
+});
