@@ -1,0 +1,17 @@
+{% from 'components/label/macro.njk' import label %}
+
+{% macro previewQuestionDataBulletlist(question) %}
+  {% if question.data %}
+    <div data-test-id="preview-question-data-bulletlist">
+        <ul>
+          {% for data in question.data %}
+            <li>
+              {{ label({
+                "text": data
+              }) }}
+            </li>
+          {% endfor %}
+        </ul>
+    </div>
+  {% endif %}
+{% endmacro %}

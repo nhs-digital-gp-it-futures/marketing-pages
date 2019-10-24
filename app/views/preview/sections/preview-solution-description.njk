@@ -1,0 +1,25 @@
+{% from '../components/preview-question-title.njk' import previewQuestionTitle %}
+{% from '../components/preview-question-data-text.njk' import previewQuestionDataText %}
+{% from '../components/preview-question-data-link.njk' import previewQuestionDataLink %}
+
+{% macro previewSolutionDescription(section) %}
+  <div data-test-id="preview-solution-description">
+    <div class="nhsuk_title">
+      <h3>Solution description</h3>
+    </div>
+
+    <div data-test-id="preview-section-question-summary" class="nhsuk-table__row">
+        {{ previewQuestionTitle(section.questions.summary) }}
+        {{ previewQuestionDataText(section.questions.summary) }}
+    </div>
+
+    <div data-test-id="preview-section-question-description" class="nhsuk-table__row">
+        {{ previewQuestionTitle(section.questions.description) }}
+        {{ previewQuestionDataText(section.questions.description) }}
+    </div>
+
+    <div data-test-id="preview-section-question-link" class="nhsuk-table__row">
+      {{ previewQuestionDataLink(section.questions.link) }}
+    </div>
+  </div>
+{% endmacro %}

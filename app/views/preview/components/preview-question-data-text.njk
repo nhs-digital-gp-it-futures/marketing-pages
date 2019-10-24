@@ -1,0 +1,11 @@
+{% from 'components/label/macro.njk' import label %}
+
+{% macro previewQuestionDataText(question) %}
+  {% if question.data %}
+    <div data-test-id="preview-question-data-text">
+      {{ label({
+        "text": question.data
+      }) }}
+    </div>
+  {% endif %}
+{% endmacro %}

@@ -1,0 +1,13 @@
+{% from '../components/preview-question-data-bulletlist.njk' import previewQuestionDataBulletlist %}
+
+{% macro previewFeatures(section) %}
+  <div data-test-id="preview-features">
+    <div class="nhsuk_title">
+      <h3>Features</h3>
+    </div>
+
+    <div data-test-id="preview-section-question-listings" class="nhsuk-table__row">
+        {{ previewQuestionDataBulletlist(section.questions.listings) }}
+    </div>
+  </div>
+{% endmacro %}
