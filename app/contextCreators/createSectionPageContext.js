@@ -1,4 +1,5 @@
 import { generateFields } from './generateFields';
+import { getFormDataValue, doesFormDataContainValue } from '../helpers/formData';
 
 const createContextForBulletpointListQuestion = (
   sectionManifestQuestion, formData, validationErrors,
@@ -9,25 +10,30 @@ const createContextForBulletpointListQuestion = (
   return undefined;
 };
 
+const createQuestionOption = (
+  manifestQuestionId, manifestOption, formData,
+) => {
+  const option = manifestOption;
+
+  if (doesFormDataContainValue(manifestQuestionId, option.value, formData)) {
+    return {
+      ...option,
+      checked: true,
+    };
+  }
+
+  return option;
+};
+
 const createContextForOptionsTypeQuestion = (
   sectionManifestQuestion, formData,
 ) => {
   if (sectionManifestQuestion.type === 'checkbox-options' || sectionManifestQuestion.type === 'radiobutton-options') {
     const options = [];
+
     sectionManifestQuestion.options.map((manifestOption) => {
-      if (formData
-        && formData[sectionManifestQuestion.id]
-        && ((Array.isArray(formData[sectionManifestQuestion.id])
-          && formData[sectionManifestQuestion.id].some(questionData => questionData === manifestOption.value)
-          || formData[sectionManifestQuestion.id] === manifestOption.value))) {
-        const checkedOption = {
-          ...manifestOption,
-          checked: true,
-        };
-        options.push(checkedOption);
-      } else {
-        options.push(manifestOption);
-      }
+      const option = createQuestionOption(sectionManifestQuestion.id, manifestOption, formData);
+      options.push(option);
     });
     return options;
   }
@@ -39,9 +45,7 @@ const createContextForTextInputsQuestion = (
   sectionManifestQuestion, formData,
 ) => {
   if (sectionManifestQuestion.type === 'textarea-field' || sectionManifestQuestion.type === 'text-field') {
-    return formData
-      && formData[sectionManifestQuestion.id]
-      ? formData[sectionManifestQuestion.id] : undefined;
+    return getFormDataValue(formData, sectionManifestQuestion.id);
   }
   return undefined;
 };
