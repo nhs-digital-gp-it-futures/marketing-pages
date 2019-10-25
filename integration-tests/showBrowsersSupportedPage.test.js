@@ -1,8 +1,15 @@
 import nock from 'nock';
 import { Selector, ClientFunction } from 'testcafe';
 import { ManifestProvider } from '../app/forms/manifestProvider';
+import aBrowserBasedFixture from './fixtures/aBrowserBasedData.json';
 
-const browserSupportedMarketingData = {};
+const browserSupportedMarketingData = {
+  'supported-browsers': [
+    'google-chrome',
+    'internet-explorer-10',
+  ],
+  'mobile-responsive': 'yes',
+};
 
 const mocks = (withMarketingData) => {
   if (withMarketingData) {
@@ -84,6 +91,78 @@ test('should render the submit button', async (t) => {
 
   await t
     .expect(submitButton.find('button').count).eql(1);
+});
+
+test('should allow posting an empty form and navigate back to the sub dashboard', async (t) => {
+  pageSetup(t);
+
+  nock('http://localhost:8080')
+    .get('/api/v1/Solutions/S100000-001/sections/browser-based')
+    .reply(200, aBrowserBasedFixture);
+
+  nock('http://localhost:8080')
+    .put('/api/v1/Solutions/S100000-001/sections/browsers-supported')
+    .reply(200, {});
+
+  const getLocation = ClientFunction(() => document.location.href);
+
+  const submitButton = Selector('[data-test-id="section-submit-button"]');
+
+  await t
+    .click(submitButton.find('button'))
+    .expect(getLocation()).contains('/S100000-001/dashboard/browser-based');
+});
+
+test('should allow posting an empty form and navigate back to the sub dashboard', async (t) => {
+  pageSetup(t);
+
+  nock('http://localhost:8080')
+    .get('/api/v1/Solutions/S100000-001/sections/browser-based')
+    .reply(200, aBrowserBasedFixture);
+
+  nock('http://localhost:8080')
+    .put('/api/v1/Solutions/S100000-001/sections/browsers-supported')
+    .reply(200, {});
+
+  const getLocation = ClientFunction(() => document.location.href);
+
+  const submitButton = Selector('[data-test-id="section-submit-button"]');
+
+  await t
+    .click(submitButton.find('button'))
+    .expect(getLocation()).contains('/S100000-001/dashboard/browser-based');
+});
+
+test('should populate the questions with existing data', async (t) => {
+  pageSetup(t, true);
+
+  const supportedBrowserQuestion = Selector('[data-test-id="checkbox-options-supported-browsers"]');
+  const googleChromeCheckbox = supportedBrowserQuestion.find('.nhsuk-checkboxes__item:nth-child(1)');
+  const edgeCheckbox = supportedBrowserQuestion.find('.nhsuk-checkboxes__item:nth-child(2)');
+  const firefoxCheckbox = supportedBrowserQuestion.find('.nhsuk-checkboxes__item:nth-child(3)');
+  const operaCheckbox = supportedBrowserQuestion.find('.nhsuk-checkboxes__item:nth-child(4)');
+  const safariCheckbox = supportedBrowserQuestion.find('.nhsuk-checkboxes__item:nth-child(5)');
+  const chromiumCheckbox = supportedBrowserQuestion.find('.nhsuk-checkboxes__item:nth-child(6)');
+  const internetExplorerElevenCheckbox = supportedBrowserQuestion.find('.nhsuk-checkboxes__item:nth-child(7)');
+  const internetExplorerTenCheckbox = supportedBrowserQuestion.find('.nhsuk-checkboxes__item:nth-child(8)');
+
+  await t
+    .expect(googleChromeCheckbox.find('input:checked').exists).ok()
+    .expect(edgeCheckbox.find('input:checked').exists).notOk()
+    .expect(firefoxCheckbox.find('input:checked').exists).notOk()
+    .expect(operaCheckbox.find('input:checked').exists).notOk()
+    .expect(safariCheckbox.find('input:checked').exists).notOk()
+    .expect(chromiumCheckbox.find('input:checked').exists).notOk()
+    .expect(internetExplorerElevenCheckbox.find('input:checked').exists).notOk()
+    .expect(internetExplorerTenCheckbox.find('input:checked').exists).ok();
+
+  const mobileResponsiveQuestion = Selector('[data-test-id="radiobutton-options-mobile-responsive"]');
+  const yesRadiobutton = mobileResponsiveQuestion.find('.nhsuk-radios__item:nth-child(1)');
+  const noRadiobutton = mobileResponsiveQuestion.find('.nhsuk-radios__item:nth-child(2)');
+
+  await t
+    .expect(yesRadiobutton.find('input:checked').exists).ok()
+    .expect(noRadiobutton.find('input:checked').exists).notOk();
 });
 
 test('should render the return to all sections link', async (t) => {
