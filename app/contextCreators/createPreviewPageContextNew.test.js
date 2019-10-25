@@ -296,4 +296,61 @@ describe('createPreviewPageContext', () => {
       expect(context).toEqual(expectedContext);
     });
   });
+
+  describe('when previewValidationErrors are provided', () => {
+    it('should create a context with the error message supplied for the question missing mandatory data', () => {
+      const expectedContext = {
+        submitPreviewUrl: '/some-solution-id/submitPreview',
+        errors: [
+          {
+            text: 'some mandatory question is a required field',
+            href: '#some-mandatory-question',
+          },
+        ],
+        sections: {
+          'some-mandatory-section': {
+            questions: {
+              'some-mandatory-question': {
+                display: true,
+                errorMessage: 'some mandatory question is a required field',
+              },
+            },
+          },
+        },
+      };
+
+      const existingMarketingData = {
+        sections: [
+          {
+            mandatory: ['some-mandatory-question'],
+            id: 'some-mandatory-section',
+            data: {},
+            requirement: 'Mandatory',
+            status: 'INCOMPLETE',
+          },
+        ],
+      };
+
+      const previewValidationErrors = {
+        'some-mandatory-section': {
+          required: ['some-mandatory-question'],
+        },
+      };
+
+      const errorManifest = {
+        'some-mandatory-section': {
+          'some-mandatory-question': {
+            required: 'some mandatory question is a required field',
+          },
+        },
+      };
+
+
+      const context = createPreviewPageContextNew(
+        'some-solution-id', existingMarketingData, previewValidationErrors, errorManifest,
+      );
+
+      expect(context).toEqual(expectedContext);
+    });
+  });
 });

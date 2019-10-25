@@ -6,6 +6,7 @@ import { createPreviewPageContext } from './contextCreators/createPreviewPageCon
 import { createPreviewPageContextNew } from './contextCreators/createPreviewPageContextNew';
 import { validateSectionData } from './helpers/validateSectionData';
 import { transformSectionData } from './helpers/transformSectionData';
+import { errorManifest } from './forms/error-manifest';
 
 export const getMarketingPageDashboardContext = async (solutionId) => {
   const dashboardManifest = new ManifestProvider().getDashboardManifest();
@@ -79,7 +80,7 @@ export const getPreviewPageContext = async (solutionId, previewValidationErrors)
   //   solutionId, previewManifest, existingSolutionData, previewValidationErrors,
   // );
 
-  const contextNew = createPreviewPageContextNew(solutionId, existingSolutionData);
+  const contextNew = createPreviewPageContextNew(solutionId, existingSolutionData, previewValidationErrors, errorManifest);
 
   return contextNew;
 };

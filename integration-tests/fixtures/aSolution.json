@@ -23,6 +23,7 @@
         {
           "id": "client-application-types",
           "data": {},
+          "mandatory": ["client-application-types"],
           "requirement": "Mandatory",
           "status": "INCOMPLETE"
         }

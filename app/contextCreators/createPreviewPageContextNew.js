@@ -1,11 +1,14 @@
+import { findValidationErrorTypeForQuestion } from '../helpers/findValidationErrorTypeForQuestion';
+
 export const createPreviewPageContextNew = (
-  solutionId, existingMarketingData,
+  solutionId, existingMarketingData, previewValidationErrors, errorManifest,
 ) => {
   const context = {
     submitPreviewUrl: `/${solutionId}/submitPreview`,
   };
 
   const sections = {};
+  const errors = [];
 
   existingMarketingData.sections.map((marketingDataSection) => {
     const questions = {};
@@ -42,6 +45,27 @@ export const createPreviewPageContextNew = (
     }
   });
 
+  if (previewValidationErrors) {
+    Object.entries(sections).map(([sectionId, sectionData]) => {
+      Object.keys(sectionData.questions).map((questionId) => {
+        const errorTypeIfApplicable = findValidationErrorTypeForQuestion(
+          sectionId, questionId, previewValidationErrors,
+        );
+
+        if (errorTypeIfApplicable) {
+          const errorMessage = errorManifest[sectionId][questionId][errorTypeIfApplicable];
+          sections[sectionId].questions[questionId].errorMessage = errorMessage;
+
+          const errorSummary = {};
+          errorSummary.text = errorMessage;
+          errorSummary.href = `#${questionId}`;
+          errors.push(errorSummary);
+        }
+      });
+    });
+  }
+
+  context.errors = errors.length > 0 ? errors : undefined;
   context.sections = sections;
 
   return context;
