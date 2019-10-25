@@ -10,7 +10,7 @@ const createDummyApp = (context) => {
   const router = express.Router();
   const dummyRouter = router.get('/', (req, res) => {
     const macroWrapper = `{% from './preview/components/preview-question-data-bulletlist.njk' import previewQuestionDataBulletlist %}
-                            {{ previewQuestionDataBulletlist(question) }}`;
+                            {{ previewQuestionDataBulletlist(questionData) }}`;
 
     const viewToTest = nunjucks.renderString(macroWrapper, context);
 
@@ -25,13 +25,11 @@ const createDummyApp = (context) => {
 describe('preview-question-data-bulletlist', () => {
   it('should render the data of the question as a list when provided', (done) => {
     const context = {
-      question: {
-        data: [
-          'Some first data',
-          'Some second data',
-          'Some third data',
-        ],
-      },
+      questionData: [
+        'Some first data',
+        'Some second data',
+        'Some third data',
+      ],
     };
 
     const dummyApp = createDummyApp(context);
@@ -48,9 +46,7 @@ describe('preview-question-data-bulletlist', () => {
   });
 
   it('should not render the data when not provided', (done) => {
-    const context = {
-      question: {},
-    };
+    const context = {};
 
     const dummyApp = createDummyApp(context);
     request(dummyApp)

@@ -10,7 +10,7 @@ const createDummyApp = (context) => {
   const router = express.Router();
   const dummyRouter = router.get('/', (req, res) => {
     const macroWrapper = `{% from './preview/components/preview-question-data-link.njk' import previewQuestionDataLink %}
-                            {{ previewQuestionDataLink(question) }}`;
+                            {{ previewQuestionDataLink(questionData) }}`;
 
     const viewToTest = nunjucks.renderString(macroWrapper, context);
 
@@ -25,9 +25,7 @@ const createDummyApp = (context) => {
 describe('preview-question-link', () => {
   it('should render the link when provided', (done) => {
     const context = {
-      question: {
-        data: 'www.somelink.com',
-      },
+      questionData: 'www.somelink.com',
     };
 
     const dummyApp = createDummyApp(context);
@@ -44,11 +42,7 @@ describe('preview-question-link', () => {
   });
 
   it('should not render the data when not provided', (done) => {
-    const context = {
-      question: {
-        data: 'Some question data',
-      },
-    };
+    const context = {};
 
     const dummyApp = createDummyApp(context);
     request(dummyApp)
@@ -56,7 +50,7 @@ describe('preview-question-link', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        expect($('[data-test-id="preview-question-data-text"]').length).toEqual(0);
+        expect($('[data-test-id="preview-question-data-link"]').length).toEqual(0);
 
         done();
       });

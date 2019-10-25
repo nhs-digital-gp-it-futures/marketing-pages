@@ -8,18 +8,24 @@
       <h3>Solution description</h3>
     </div>
 
-    <div data-test-id="preview-section-question-summary" class="nhsuk-table__row">
-        {{ previewQuestionTitle(section.questions.summary) }}
-        {{ previewQuestionDataText(section.questions.summary) }}
-    </div>
+    {% if section.questions.summary.display %}
+      <div data-test-id="preview-section-question-summary" class="nhsuk-table__row">
+          {{ previewQuestionTitle('summary', 'Summary', section.questions.summary.errorMessage) }}
+          {{ previewQuestionDataText(section.questions.summary.data) }}
+      </div>
+    {% endif %}
 
-    <div data-test-id="preview-section-question-description" class="nhsuk-table__row">
-        {{ previewQuestionTitle(section.questions.description) }}
-        {{ previewQuestionDataText(section.questions.description) }}
-    </div>
-
-    <div data-test-id="preview-section-question-link" class="nhsuk-table__row">
-      {{ previewQuestionDataLink(section.questions.link) }}
-    </div>
+    {% if section.questions.description.display %}
+      <div data-test-id="preview-section-question-description" class="nhsuk-table__row">
+          {{ previewQuestionTitle('description', 'Description') }}
+          {{ previewQuestionDataText(section.questions.description.data) }}
+      </div>
+    {% endif %}
+    
+    {% if section.questions.link.display %}
+      <div data-test-id="preview-section-question-link" class="nhsuk-table__row">
+        {{ previewQuestionDataLink(section.questions.link.data) }}
+      </div>
+    {% endif %}
   </div>
 {% endmacro %}

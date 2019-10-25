@@ -1,11 +1,11 @@
 {% from 'components/label/macro.njk' import label %}
 
-{% macro previewQuestionDataLink(question) %}
-  {% if question.data %}
+{% macro previewQuestionDataLink(questionData) %}
+  {% if questionData %}
     <div data-test-id="preview-question-data-link">
-        <a href="{{ question.data }}" target="_blank">
+        <a href="{{ questionData }}" target="_blank">
           {{ label({
-            "text": question.data
+            "text": questionData
           }) }}
         </a>
     </div>

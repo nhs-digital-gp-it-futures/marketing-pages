@@ -10,7 +10,7 @@ const createDummyApp = (context) => {
   const router = express.Router();
   const dummyRouter = router.get('/', (req, res) => {
     const macroWrapper = `{% from './preview/components/preview-question-data-text.njk' import previewQuestionDataText %}
-                            {{ previewQuestionDataText(question) }}`;
+                            {{ previewQuestionDataText(questionData) }}`;
 
     const viewToTest = nunjucks.renderString(macroWrapper, context);
 
@@ -25,9 +25,7 @@ const createDummyApp = (context) => {
 describe('preview-question-data-text', () => {
   it('should render the data when provided', (done) => {
     const context = {
-      question: {
-        data: 'Some question data',
-      },
+      questionData: 'Some question data',
     };
 
     const dummyApp = createDummyApp(context);
@@ -43,9 +41,7 @@ describe('preview-question-data-text', () => {
   });
 
   it('should not render the data when not provided', (done) => {
-    const context = {
-      question: {},
-    };
+    const context = {};
 
     const dummyApp = createDummyApp(context);
     request(dummyApp)

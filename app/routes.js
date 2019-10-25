@@ -57,6 +57,8 @@ router.get('/:solutionId/preview', async (req, res) => {
   const { solutionId } = req.params;
   const context = await getPreviewPageContext(solutionId);
 
+  console.log(`context\n${JSON.stringify(context, null, 2)}`);
+
   res.render('preview-page', context);
 });
 

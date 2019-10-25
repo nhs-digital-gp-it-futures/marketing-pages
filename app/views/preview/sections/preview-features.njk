@@ -1,13 +1,17 @@
 {% from '../components/preview-question-data-bulletlist.njk' import previewQuestionDataBulletlist %}
 
 {% macro previewFeatures(section) %}
-  <div data-test-id="preview-features">
-    <div class="nhsuk_title">
-      <h3>Features</h3>
-    </div>
+  {% if section %}
+    <div data-test-id="preview-features">
+      <div class="nhsuk_title">
+        <h3>Features</h3>
+      </div>
 
-    <div data-test-id="preview-section-question-listings" class="nhsuk-table__row">
-        {{ previewQuestionDataBulletlist(section.questions.listings) }}
+      {% if section.questions.listing.display %}
+        <div data-test-id="preview-section-question-listing" class="nhsuk-table__row">
+            {{ previewQuestionDataBulletlist(section.questions.listing.data) }}
+        </div>
+      {% endif %}
     </div>
-  </div>
+  {% endif %}
 {% endmacro %}

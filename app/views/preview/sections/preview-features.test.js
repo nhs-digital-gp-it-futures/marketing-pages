@@ -10,7 +10,7 @@ const createDummyApp = (context) => {
   const router = express.Router();
   const dummyRouter = router.get('/', (req, res) => {
     const macroWrapper = `{% from './preview/sections/preview-features.njk' import previewFeatures %}
-                            {{ previewFeatures(featuresSection) }}`;
+                            {{ previewFeatures(section) }}`;
 
     const viewToTest = nunjucks.renderString(macroWrapper, context);
 
@@ -23,10 +23,9 @@ const createDummyApp = (context) => {
 };
 
 describe('preview-features', () => {
-  it('should render the title of the section', (done) => {
+  it('should render the title of the features section', (done) => {
     const context = {
-      featuresSection: {
-      },
+      section: {},
     };
 
     const dummyApp = createDummyApp(context);
@@ -41,19 +40,63 @@ describe('preview-features', () => {
       });
   });
 
-  it('should render the listings', (done) => {
-    const context = {
-      featuresSection: {
-        questions: {
-          listings: {
-            data: [
-              'Some first data',
-              'Some second data',
-              'Some third data',
-            ],
+  describe('when display is true for the question', () => {
+    it('should render the listings', (done) => {
+      const context = {
+        section: {
+          questions: {
+            listing: {
+              display: true,
+              data: [
+                'Some first data',
+                'Some second data',
+                'Some third data',
+              ],
+            },
           },
         },
-      },
+      };
+
+      const dummyApp = createDummyApp(context);
+      request(dummyApp)
+        .get('/')
+        .then((res) => {
+          const $ = cheerio.load(res.text);
+
+          const listingsQuestion = $('[data-test-id="preview-section-question-listing"]');
+          expect(listingsQuestion.find('[data-test-id="preview-question-data-bulletlist"]').length).toEqual(1);
+
+          done();
+        });
+    });
+  });
+
+  describe('when display is falsy for the question', () => {
+    it('should render the listings', (done) => {
+      const context = {
+        section: {
+          questions: {
+            listing: {},
+          },
+        },
+      };
+
+      const dummyApp = createDummyApp(context);
+      request(dummyApp)
+        .get('/')
+        .then((res) => {
+          const $ = cheerio.load(res.text);
+
+          const listingsQuestion = $('[data-test-id="preview-section-question-listing"]');
+          expect(listingsQuestion.length).toEqual(0);
+
+          done();
+        });
+    });
+  });
+
+  it('should not render the features section when not provided', (done) => {
+    const context = {
     };
 
     const dummyApp = createDummyApp(context);
@@ -62,8 +105,7 @@ describe('preview-features', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        const listingsQuestion = $('[data-test-id="preview-section-question-listings"]');
-        expect(listingsQuestion.find('[data-test-id="preview-question-data-bulletlist"]').length).toEqual(1);
+        expect($('[data-test-id="preview-features"]').length).toEqual(0);
 
         done();
       });

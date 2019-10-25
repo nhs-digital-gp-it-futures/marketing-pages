@@ -10,7 +10,7 @@ const createDummyApp = (context) => {
   const router = express.Router();
   const dummyRouter = router.get('/', (req, res) => {
     const macroWrapper = `{% from './preview/components/preview-question-title.njk' import previewQuestionTitle %}
-                            {{ previewQuestionTitle(question) }}`;
+                            {{ previewQuestionTitle(questionId, questionTitle, questionErrorMessage) }}`;
 
     const viewToTest = nunjucks.renderString(macroWrapper, context);
 
@@ -26,10 +26,8 @@ describe('preview-question-title', () => {
   describe('when there is no error for the question', () => {
     it('should render the title of the question', (done) => {
       const context = {
-        question: {
-          id: 'some-question-id',
-          title: 'Some question title',
-        },
+        questionId: 'some-question-id',
+        questionTitle: 'Some question title',
       };
 
       const dummyApp = createDummyApp(context);
@@ -47,13 +45,9 @@ describe('preview-question-title', () => {
 
   describe('when there is an error for the question', () => {
     const context = {
-      question: {
-        id: 'some-question-id',
-        title: 'Some question title',
-        error: {
-          message: 'Some error message',
-        },
-      },
+      questionId: 'some-question-id',
+      questionTitle: 'Some question title',
+      questionErrorMessage: 'Some error message',
     };
 
     it('should render the error message for the question', (done) => {

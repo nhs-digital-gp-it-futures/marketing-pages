@@ -1,6 +1,7 @@
 {% extends 'includes/layout.njk' %}
 {% from 'components/button/macro.njk' import button %}
-{% from './preview-section.njk' import previewSection %}
+{% from './preview/sections/preview-solution-description.njk' import previewSolutionDescription %}
+{% from './preview/sections/preview-features.njk' import previewFeatures %}
 {% from './error-summary.njk' import errorSummary %}
 
 {% block body %}
@@ -12,9 +13,8 @@
 
     <h1>Preview Page</h1>
     
-    {% for section in sections %}
-      {{ previewSection(section) }}
-    {% endfor %}
+    {{ previewSolutionDescription(sections['solution-description']) }}
+    {{ previewFeatures(sections['features']) }}
 
   </div>
 
