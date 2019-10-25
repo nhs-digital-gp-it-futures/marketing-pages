@@ -104,6 +104,15 @@ test('should populate the text fields with existing data', async (t) => {
     .expect(theQuestions.find('[data-test-id="text-field-link"]').find('input').value).eql('The solution link');
 });
 
+test('should render the submit button', async (t) => {
+  pageSetup(t);
+
+  const submitButton = Selector('[data-test-id="section-submit-button"]');
+
+  await t
+    .expect(submitButton.find('button').count).eql(1);
+});
+
 test('should allow posting an empty form and navigate back to the dashboard', async (t) => {
   pageSetup(t);
 

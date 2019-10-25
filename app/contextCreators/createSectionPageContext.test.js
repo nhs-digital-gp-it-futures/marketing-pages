@@ -18,6 +18,7 @@ describe('createSectionPageContext', () => {
         },
       ],
       returnToDashboardUrl: '/some-solution-id',
+      submitText: 'some-submit-text',
     };
 
     const sectionManifest = {
@@ -34,6 +35,7 @@ describe('createSectionPageContext', () => {
           id: 'features-listing',
         },
       ],
+      submitText: 'some-submit-text',
     };
 
     const context = createSectionPageContext('some-solution-id', sectionManifest);

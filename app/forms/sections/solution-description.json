@@ -64,5 +64,6 @@
         "type": "link"
       }
     }
-  ]
+  ],
+  "submitText" : "Save and return to all sections"
 }

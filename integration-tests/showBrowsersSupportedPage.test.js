@@ -77,6 +77,15 @@ test('should render the mobile responsive question', async (t) => {
     .expect(mobileResponsiveQuestion.find('.nhsuk-radios__item').count).eql(2);
 });
 
+test('should render the submit button', async (t) => {
+  pageSetup(t);
+
+  const submitButton = Selector('[data-test-id="section-submit-button"]');
+
+  await t
+    .expect(submitButton.find('button').count).eql(1);
+});
+
 test('should render the return to all sections link', async (t) => {
   pageSetup(t);
 
