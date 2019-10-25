@@ -45,7 +45,7 @@ const createContextForTextInputsQuestion = (
   sectionManifestQuestion, formData,
 ) => {
   if (sectionManifestQuestion.type === 'textarea-field' || sectionManifestQuestion.type === 'text-field') {
-    return getFormDataValue(formData, sectionManifestQuestion.id);
+    return getFormDataValue(sectionManifestQuestion.id, formData);
   }
   return undefined;
 };

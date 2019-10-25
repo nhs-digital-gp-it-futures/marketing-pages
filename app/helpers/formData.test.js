@@ -61,15 +61,6 @@ describe('doesFormDataContainValue', () => {
     expect(result).toEqual(true);
   });
 
-  it('should return true when the value is undefined but does match', () => {
-    const formData = {
-      'some-key': undefined,
-    };
-    const result = doesFormDataContainValue('some-key', undefined, formData);
-
-    expect(result).toEqual(true);
-  });
-
   it('should return true when the key and value match an array element within the form data', () => {
     const formData = {
       'some-key': ['some-value', 'some-other-value'],
@@ -112,7 +103,7 @@ describe('doesFormDataContainValue', () => {
     expect(result).toEqual(false);
   });
 
-  it('should return false when the value is undefined and does not match', () => {
+  it('should return false when the value is undefined', () => {
     const formData = {
       'some-key': 'some-value',
     };
