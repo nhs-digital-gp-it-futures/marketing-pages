@@ -86,7 +86,7 @@ describe('preview-solution-description', () => {
 
           const descriptionQuestion = $('[data-test-id="preview-section-question-description"]');
 
-          expect(descriptionQuestion.find('[data-test-id="preview-question-title"]').text().trim()).toEqual('Description');
+          expect(descriptionQuestion.find('[data-test-id="preview-question-title"]').text().trim()).toEqual('About the solution');
           expect(descriptionQuestion.find('[data-test-id="preview-question-data-text"]').text().trim()).toEqual('Some description data');
 
           done();

@@ -2,7 +2,6 @@ import axios from 'axios';
 import { ManifestProvider } from './forms/manifestProvider';
 import { createSectionPageContext } from './contextCreators/createSectionPageContext';
 import { createDashboardPageContext } from './contextCreators/createDashboardPageContext';
-import { createPreviewPageContext } from './contextCreators/createPreviewPageContext';
 import { createPreviewPageContextNew } from './contextCreators/createPreviewPageContextNew';
 import { validateSectionData } from './helpers/validateSectionData';
 import { transformSectionData } from './helpers/transformSectionData';
@@ -72,15 +71,12 @@ export const postSection = async (solutionId, sectionId, sectionData) => {
 };
 
 export const getPreviewPageContext = async (solutionId, previewValidationErrors) => {
-  // const previewManifest = new ManifestProvider().getPreviewManifest();
   const solutionData = await axios.get(`http://localhost:8080/api/v1/Solutions/${solutionId}`);
   const existingSolutionData = solutionData.data.solution.marketingData;
 
-  // const context = createPreviewPageContext(
-  //   solutionId, previewManifest, existingSolutionData, previewValidationErrors,
-  // );
-
-  const contextNew = createPreviewPageContextNew(solutionId, existingSolutionData, previewValidationErrors, errorManifest);
+  const contextNew = createPreviewPageContextNew(
+    solutionId, existingSolutionData, previewValidationErrors, errorManifest,
+  );
 
   return contextNew;
 };
