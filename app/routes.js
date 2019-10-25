@@ -49,7 +49,7 @@ router.post('/:solutionId/section/:sectionId', async (req, res) => {
   } else {
     const response = await postSection(solutionId, sectionId, sectionPostData);
 
-    res.redirect(`../../${solutionId}`);
+    res.redirect(response.redirectUrl);
   }
 });
 
