@@ -1,6 +1,6 @@
 import { findValidationErrorTypeForQuestion } from '../helpers/findValidationErrorTypeForQuestion';
 
-export const createPreviewPageContextNew = (
+export const createPreviewPageContext = (
   solutionId, existingMarketingData, previewValidationErrors, errorManifest,
 ) => {
   const context = {

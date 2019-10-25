@@ -1,4 +1,4 @@
-import { createPreviewPageContextNew } from './createPreviewPageContextNew';
+import { createPreviewPageContext } from './createPreviewPageContext';
 
 describe('createPreviewPageContext', () => {
   describe('when there is no existing marketing data ', () => {
@@ -29,7 +29,7 @@ describe('createPreviewPageContext', () => {
         ],
       };
 
-      const context = createPreviewPageContextNew('some-solution-id', existingMarketingData);
+      const context = createPreviewPageContext('some-solution-id', existingMarketingData);
 
       expect(context).toEqual(expectedContext);
     });
@@ -53,7 +53,7 @@ describe('createPreviewPageContext', () => {
         ],
       };
 
-      const context = createPreviewPageContextNew('some-solution-id', existingMarketingData);
+      const context = createPreviewPageContext('some-solution-id', existingMarketingData);
 
       expect(context).toEqual(expectedContext);
     });
@@ -92,7 +92,7 @@ describe('createPreviewPageContext', () => {
         ],
       };
 
-      const context = createPreviewPageContextNew('some-solution-id', existingMarketingData);
+      const context = createPreviewPageContext('some-solution-id', existingMarketingData);
 
       expect(context).toEqual(expectedContext);
     });
@@ -132,7 +132,7 @@ describe('createPreviewPageContext', () => {
         ],
       };
 
-      const context = createPreviewPageContextNew('some-solution-id', existingMarketingData);
+      const context = createPreviewPageContext('some-solution-id', existingMarketingData);
 
       expect(context).toEqual(expectedContext);
     });
@@ -172,7 +172,7 @@ describe('createPreviewPageContext', () => {
         ],
       };
 
-      const context = createPreviewPageContextNew('some-solution-id', existingMarketingData);
+      const context = createPreviewPageContext('some-solution-id', existingMarketingData);
 
       expect(context).toEqual(expectedContext);
     });
@@ -207,7 +207,7 @@ describe('createPreviewPageContext', () => {
         ],
       };
 
-      const context = createPreviewPageContextNew('some-solution-id', existingMarketingData);
+      const context = createPreviewPageContext('some-solution-id', existingMarketingData);
 
       expect(context).toEqual(expectedContext);
     });
@@ -291,7 +291,7 @@ describe('createPreviewPageContext', () => {
         ],
       };
 
-      const context = createPreviewPageContextNew('some-solution-id', existingMarketingData);
+      const context = createPreviewPageContext('some-solution-id', existingMarketingData);
 
       expect(context).toEqual(expectedContext);
     });
@@ -346,7 +346,7 @@ describe('createPreviewPageContext', () => {
       };
 
 
-      const context = createPreviewPageContextNew(
+      const context = createPreviewPageContext(
         'some-solution-id', existingMarketingData, previewValidationErrors, errorManifest,
       );
 

@@ -2,7 +2,7 @@ import axios from 'axios';
 import { ManifestProvider } from './forms/manifestProvider';
 import { createSectionPageContext } from './contextCreators/createSectionPageContext';
 import { createDashboardPageContext } from './contextCreators/createDashboardPageContext';
-import { createPreviewPageContextNew } from './contextCreators/createPreviewPageContextNew';
+import { createPreviewPageContext } from './contextCreators/createPreviewPageContext';
 import { validateSectionData } from './helpers/validateSectionData';
 import { transformSectionData } from './helpers/transformSectionData';
 import { errorManifest } from './forms/error-manifest';
@@ -74,7 +74,7 @@ export const getPreviewPageContext = async (solutionId, previewValidationErrors)
   const solutionData = await axios.get(`http://localhost:8080/api/v1/Solutions/${solutionId}`);
   const existingSolutionData = solutionData.data.solution.marketingData;
 
-  const contextNew = createPreviewPageContextNew(
+  const contextNew = createPreviewPageContext(
     solutionId, existingSolutionData, previewValidationErrors, errorManifest,
   );
 
