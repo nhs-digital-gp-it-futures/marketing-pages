@@ -1,49 +1,68 @@
 import { findValidationErrorTypeForQuestion } from '../helpers/findValidationErrorTypeForQuestion';
 
-export const createPreviewPageContext = (
-  solutionId, existingMarketingData, previewValidationErrors, errorManifest,
+const populateQuestionsContextWithExistingData = (marketingDataSection) => {
+  const questionsContext = {};
+  if (marketingDataSection.data) {
+    Object.entries(marketingDataSection.data).map(([questionId, questionData]) => {
+      if (questionData) {
+        questionsContext[questionId] = {
+          display: true,
+          data: Array.isArray(questionData)
+            ? questionData.filter(data => data.length > 0) : questionData,
+        };
+      }
+    });
+  }
+  return questionsContext;
+};
+
+const addIncompleteMandatorySectionsToContext = (
+  marketingDataSection, questionsPopulatedWithExistingData, existingSections,
 ) => {
-  const context = {
-    submitPreviewUrl: `/${solutionId}/submitPreview`,
+  const questions = {
+    ...questionsPopulatedWithExistingData,
   };
 
-  const sections = {};
-  const errors = [];
+  const updateSections = {
+    ...existingSections,
+  };
 
-  existingMarketingData.sections.map((marketingDataSection) => {
-    const questions = {};
-
-    if (marketingDataSection.data) {
-      Object.entries(marketingDataSection.data).map(([questionId, questionData]) => {
-        if (questionData) {
-          questions[questionId] = {
-            display: true,
-            data: Array.isArray(questionData)
-              ? questionData.filter(data => data.length > 0) : questionData,
-          };
-        }
+  if (marketingDataSection.requirement === 'Mandatory') {
+    if (marketingDataSection.status === 'INCOMPLETE') {
+      marketingDataSection.mandatory.map((mandatoryQuestion) => {
+        questions[mandatoryQuestion] = {
+          display: true,
+        };
       });
     }
+    updateSections[marketingDataSection.id] = {
+      questions,
+    };
+  }
+  return updateSections;
+};
 
-    if (marketingDataSection.requirement === 'Mandatory') {
-      if (marketingDataSection.status === 'INCOMPLETE') {
-        marketingDataSection.mandatory.map((mandatoryQuestion) => {
-          questions[mandatoryQuestion] = {
-            display: true,
-          };
-        });
-      }
-      sections[marketingDataSection.id] = {
-        questions,
-      };
-    }
+const addCompletedOptionalSectionsToContext = (
+  marketingDataSection, questionsPopulatedWithExistingData, existingSections,
+) => {
+  const updatedSections = {
+    ...existingSections,
+  };
 
-    if (marketingDataSection.requirement === 'Optional' && marketingDataSection.status === 'COMPLETE') {
-      sections[marketingDataSection.id] = {
-        questions,
-      };
-    }
-  });
+  if (marketingDataSection.requirement === 'Optional' && marketingDataSection.status === 'COMPLETE') {
+    updatedSections[marketingDataSection.id] = {
+      questions: questionsPopulatedWithExistingData,
+    };
+  }
+  return updatedSections;
+};
+
+const addErrorsToApplicableSections = (previewValidationErrors, errorManifest, sections) => {
+  const sectionsWithErrors = {
+    ...sections,
+  };
+
+  const errors = [];
 
   if (previewValidationErrors) {
     Object.entries(sections).map(([sectionId, sectionData]) => {
@@ -54,7 +73,7 @@ export const createPreviewPageContext = (
 
         if (errorTypeIfApplicable) {
           const errorMessage = errorManifest[sectionId][questionId][errorTypeIfApplicable];
-          sections[sectionId].questions[questionId].errorMessage = errorMessage;
+          sectionsWithErrors[sectionId].questions[questionId].errorMessage = errorMessage;
 
           const errorSummary = {};
           errorSummary.text = errorMessage;
@@ -65,8 +84,42 @@ export const createPreviewPageContext = (
     });
   }
 
-  context.errors = errors.length > 0 ? errors : undefined;
-  context.sections = sections;
+  return {
+    sectionsWithErrors,
+    errors: errors.length > 0 ? errors : undefined,
+  };
+};
+
+export const createPreviewPageContext = (
+  solutionId, existingMarketingData, previewValidationErrors, errorManifest,
+) => {
+  const sectionsContext = existingMarketingData.sections.reduce(
+    (sectionsAcc, marketingDataSection) => {
+      const questionsPopulatedWithExistingData = populateQuestionsContextWithExistingData(
+        marketingDataSection,
+      );
+
+      const incompleteMandatorySectionsAdded = addIncompleteMandatorySectionsToContext(
+        marketingDataSection, questionsPopulatedWithExistingData, sectionsAcc,
+      );
+
+      const completedOptionalSectionsAdded = addCompletedOptionalSectionsToContext(
+        marketingDataSection, questionsPopulatedWithExistingData, incompleteMandatorySectionsAdded,
+      );
+
+      return completedOptionalSectionsAdded;
+    }, {},
+  );
+
+  const { sectionsWithErrors: sections, errors } = addErrorsToApplicableSections(
+    previewValidationErrors, errorManifest, sectionsContext,
+  );
+
+  const context = {
+    submitPreviewUrl: `/${solutionId}/submitPreview`,
+    errors,
+    sections,
+  };
 
   return context;
 };

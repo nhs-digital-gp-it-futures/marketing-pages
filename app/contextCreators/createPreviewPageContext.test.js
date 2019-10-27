@@ -2,7 +2,7 @@ import { createPreviewPageContext } from './createPreviewPageContext';
 
 describe('createPreviewPageContext', () => {
   describe('when there is no existing marketing data ', () => {
-    it('when section is Mandatory and INCOMPLETE'
+    it('when section is Mandatory and INCOMPLETE '
       + 'it should add the section to the context and any mandatory questions', () => {
       const expectedContext = {
         submitPreviewUrl: '/some-solution-id/submitPreview',
@@ -99,7 +99,7 @@ describe('createPreviewPageContext', () => {
   });
 
   describe('when there is existing marketing data ', () => {
-    it('when section is Mandatory and INCOMPLETE'
+    it('when section is Mandatory and INCOMPLETE '
     + 'it should add the section and any exisiting data to the context and add any mandatory questions', () => {
       const expectedContext = {
         submitPreviewUrl: '/some-solution-id/submitPreview',
