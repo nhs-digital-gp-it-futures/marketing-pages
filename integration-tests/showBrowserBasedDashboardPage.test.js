@@ -1,41 +1,12 @@
 import nock from 'nock';
 import { Selector, ClientFunction } from 'testcafe';
 import aSolutionFixture from './fixtures/aSolution.json';
-
-const browserBasedMarketingData = {
-  sections: [
-    {
-      id: 'browsers-supported',
-      status: 'INCOMPLETE',
-      requirement: 'Mandatory',
-    },
-    {
-      id: 'plug-ins-or-extensions',
-      status: 'INCOMPLETE',
-      requirement: 'Mandatory',
-    },
-    {
-      id: 'connectivity-and-resolution',
-      status: 'INCOMPLETE',
-      requirement: 'Mandatory',
-    },
-    {
-      id: 'hardware-requirements',
-      status: 'INCOMPLETE',
-      requirement: 'Optional',
-    },
-    {
-      id: 'additional-information',
-      status: 'INCOMPLETE',
-      requirement: 'Optional',
-    },
-  ],
-};
+import aBrowserBasedFixture from './fixtures/aBrowserBasedData.json';
 
 const mocks = () => {
   nock('http://localhost:8080')
     .get('/api/v1/Solutions/S100000-001/sections/browser-based')
-    .reply(200, browserBasedMarketingData);
+    .reply(200, aBrowserBasedFixture);
 };
 
 const pageSetup = async (t) => {
