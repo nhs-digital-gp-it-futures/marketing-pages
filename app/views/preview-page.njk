@@ -1,8 +1,9 @@
 {% extends 'includes/layout.njk' %}
 {% from 'components/button/macro.njk' import button %}
+{% from './error-summary.njk' import errorSummary %}
 {% from './preview/sections/preview-solution-description.njk' import previewSolutionDescription %}
 {% from './preview/sections/preview-features.njk' import previewFeatures %}
-{% from './error-summary.njk' import errorSummary %}
+{% from './preview/sections/preview-client-application-types.njk' import previewClientApplicationTypes %}
 
 {% block body %}
 <div class="nhsuk-grid-row">
@@ -15,6 +16,7 @@
     
     {{ previewSolutionDescription(sections['solution-description']) }}
     {{ previewFeatures(sections['features']) }}
+    {{ previewClientApplicationTypes(sections['client-application-types']) }}
 
   </div>
 

@@ -105,6 +105,16 @@ test('when existing marketing data - The features section should rendered and th
     .expect(featureListingQuestion.find('[data-test-id="preview-question-data-bulletlist"]').find('li:nth-child(3)').innerText).eql('Feature C');
 });
 
+test('when no existing marketing data - The client-application-types section should just render the section heading', async (t) => {
+  pageSetup(t);
+
+  const clientApplicationTypesSection = Selector('[data-test-id="preview-client-application-types"]');
+
+  await t
+    .expect(clientApplicationTypesSection.exists).ok()
+    .expect(clientApplicationTypesSection.find('h3').innerText).eql('Client application type');
+});
+
 test('should render the submit for moderation page button', async (t) => {
   pageSetup(t);
 

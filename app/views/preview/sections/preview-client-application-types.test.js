@@ -24,7 +24,9 @@ const createDummyApp = (context) => {
 
 describe('preview-client-application-types', () => {
   it('should render the title of the section', (done) => {
-    const context = {};
+    const context = {
+      section: {},
+    };
 
     const dummyApp = createDummyApp(context);
     request(dummyApp)
@@ -33,6 +35,22 @@ describe('preview-client-application-types', () => {
         const $ = cheerio.load(res.text);
 
         expect($('h3').text().trim()).toEqual('Client application type');
+
+        done();
+      });
+  });
+
+  it('should not render the client-application-types section when not provided', (done) => {
+    const context = {
+    };
+
+    const dummyApp = createDummyApp(context);
+    request(dummyApp)
+      .get('/')
+      .then((res) => {
+        const $ = cheerio.load(res.text);
+
+        expect($('[data-test-id="preview-client-application-types"]').length).toEqual(0);
 
         done();
       });

@@ -1,8 +1,10 @@
 {% macro previewClientApplicationTypes(section) %}
-  <div data-test-id="preview-client-application-types">
-    <div class="nhsuk_title">
-      <h3>Client application type</h3>
-    </div>
+  {% if section %}
+    <div data-test-id="preview-client-application-types">
+      <div class="nhsuk_title">
+        <h3>Client application type</h3>
+      </div>
 
-  </div>
+    </div>
+  {% endif %}
 {% endmacro %}

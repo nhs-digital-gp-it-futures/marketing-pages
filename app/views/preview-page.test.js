@@ -35,7 +35,7 @@ describe('preview page', () => {
   it('should render the solutions-description section when provided', (done) => {
     const context = {
       sections: {
-        solutionDescription: {},
+        'solution-description': {},
       },
     };
 
@@ -65,6 +65,25 @@ describe('preview page', () => {
         const $ = cheerio.load(res.text);
 
         expect($('[data-test-id="preview-features"]').length).toEqual(1);
+
+        done();
+      });
+  });
+
+  it('should render the client-application-types section when provided', (done) => {
+    const context = {
+      sections: {
+        'client-application-types': {},
+      },
+    };
+
+    const dummyApp = createDummyApp(context);
+    request(dummyApp)
+      .get('/')
+      .then((res) => {
+        const $ = cheerio.load(res.text);
+
+        expect($('[data-test-id="preview-client-application-types"]').length).toEqual(1);
 
         done();
       });
