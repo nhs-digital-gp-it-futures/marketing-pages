@@ -2,6 +2,7 @@ import nock from 'nock';
 import { Selector, ClientFunction } from 'testcafe';
 import { ManifestProvider } from '../app/forms/manifestProvider';
 import aBrowserBasedFixture from './fixtures/aBrowserBasedData.json';
+import aSolutionFixture from './fixtures/aSolution.json';
 
 const browserSupportedMarketingData = {
   'supported-browsers': [
@@ -113,26 +114,6 @@ test('should allow posting an empty form and navigate back to the sub dashboard'
     .expect(getLocation()).contains('/S100000-001/dashboard/browser-based');
 });
 
-test('should allow posting an empty form and navigate back to the sub dashboard', async (t) => {
-  pageSetup(t);
-
-  nock('http://localhost:8080')
-    .get('/api/v1/Solutions/S100000-001/sections/browser-based')
-    .reply(200, aBrowserBasedFixture);
-
-  nock('http://localhost:8080')
-    .put('/api/v1/Solutions/S100000-001/sections/browsers-supported')
-    .reply(200, {});
-
-  const getLocation = ClientFunction(() => document.location.href);
-
-  const submitButton = Selector('[data-test-id="section-submit-button"]');
-
-  await t
-    .click(submitButton.find('button'))
-    .expect(getLocation()).contains('/S100000-001/dashboard/browser-based');
-});
-
 test('should populate the questions with existing data', async (t) => {
   pageSetup(t, true);
 
@@ -172,4 +153,21 @@ test('should render the return to all sections link', async (t) => {
 
   await t
     .expect(link.innerText).eql('Return to all sections');
+});
+
+test('should return to the marketing data dashboard when the return to all sections is clicked', async (t) => {
+  pageSetup(t);
+
+  nock('http://localhost:8080')
+    .get('/api/v1/Solutions/S100000-001')
+    .reply(200, aSolutionFixture);
+
+  const getLocation = ClientFunction(() => document.location.href);
+
+  const link = Selector('[data-test-id="section-back-link"]');
+
+  await t
+    .click(link.find('a'))
+    .expect(getLocation()).notContains('section')
+    .expect(getLocation()).contains('S100000-001');
 });
