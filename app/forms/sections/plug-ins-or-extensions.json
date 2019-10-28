@@ -1,0 +1,43 @@
+{
+  "id": "plug-ins-or-extensions",
+  "title": "Browser based - plug ins or extensions",
+  "mainAdvice": "Answer the following questions about your browser based Solution",
+  "additionalAdvice": [
+    "This information will be visible to buyers on your Solution page.",
+    "* indicates required field."
+  ],
+  "questions": [
+    {
+      "id": "plugins-required",
+      "mainAdvice": "Are any plug-ins or browser extensions required?*",
+      "additionalAdvice": "Please select below if your Solution requires any plug-ins or browser extentions.",
+      "type": "radiobutton-options",
+      "options": [
+        {
+          "value": "yes",
+          "text": "Yes"
+        },
+        {
+          "value": "no",
+          "text": "No"
+        }
+      ]
+    },
+    {
+      "id": "plugins-detail",
+      "mainAdvice": "If any plug-ins or browser extensions are required, provide more detail or constraints*",
+      "additionalAdvice": "Tell buyers more information about the plug-ins or extensions required.",
+      "type": "textarea-field",
+      "saveValidations": [
+        {
+          "type": "maxLength",
+          "maxLength": 500,
+          "message": "Plug-ings or extensions validation error message"
+        }
+      ],
+      "footerAdvice": "You can enter up to 500 characters"
+    }
+  ],
+  "submitText" : "Save and return",
+  "successfulSubmitResponsePath" : "dashboard/browser-based"
+}
