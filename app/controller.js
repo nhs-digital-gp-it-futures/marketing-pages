@@ -72,10 +72,10 @@ export const postSection = async (solutionId, sectionId, sectionData) => {
 
 export const getPreviewPageContext = async (solutionId, previewValidationErrors) => {
   const solutionData = await axios.get(`http://localhost:8080/api/v1/Solutions/${solutionId}`);
-  const existingSolutionData = solutionData.data.solution.marketingData;
+  const existingMarketingData = solutionData.data.solution.marketingData;
 
   const context = createPreviewPageContext(
-    solutionId, existingSolutionData, previewValidationErrors, errorManifest,
+    solutionId, existingMarketingData, previewValidationErrors, errorManifest,
   );
 
   return context;
