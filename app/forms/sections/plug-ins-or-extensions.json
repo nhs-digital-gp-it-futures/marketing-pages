@@ -25,7 +25,7 @@
     },
     {
       "id": "plugins-detail",
-      "mainAdvice": "If any plug-ins or browser extensions are required, provide more detail or constraints*",
+      "mainAdvice": "If any plug-ins or browser extensions are required, provide more detail or constraints",
       "additionalAdvice": "Tell buyers more information about the plug-ins or extensions required.",
       "type": "textarea-field",
       "saveValidations": [
