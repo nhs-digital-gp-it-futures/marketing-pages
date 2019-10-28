@@ -1,0 +1,10 @@
+{% macro previewSectionTableRow(questionId, questionTitle, innerComponent) %}
+  <div data-test-id="preview-section-table-row-{{ questionId }}" class="nhsuk-summary-list__row">
+    <dt class="nhsuk-summary-list__key">
+      {{ questionTitle }}
+    </dt>
+    <dd class="nhsuk-summary-list__value">
+      {{- innerComponent | safe }}
+    </dd>
+  </div>
+{% endmacro %}

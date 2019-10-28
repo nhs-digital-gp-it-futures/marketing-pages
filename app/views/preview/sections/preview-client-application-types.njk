@@ -1,9 +1,30 @@
+{% from '../components/preview-expandable-section.njk' import previewExpandableSection %}
+{% from '../components/preview-section-table-row.njk' import previewSectionTableRow %}
+{% from '../components/preview-question-data-bulletlist.njk' import previewQuestionDataBulletlist %}
+
+{% macro previewBrowserBased(section) %}
+  <dl data-test-id="preview-section-table-browser-based" class="nhsuk-summary-list">
+    {{ previewSectionTableRow(
+      'supported-browsers', 
+      'Browsers Supported', 
+      previewQuestionDataBulletlist(section.questions['supported-browsers'].data)) }}
+  <dl>
+{% endmacro %}
+
+
 {% macro previewClientApplicationTypes(section) %}
   {% if section %}
     <div data-test-id="preview-client-application-types">
       <div class="nhsuk_title">
         <h3>Client application type</h3>
       </div>
+
+      {% if section.sections['browser-based'] %}
+        {{ previewExpandableSection('browser-based',
+            'Browser based application', 
+            previewBrowserBased(section.sections['browser-based'])) 
+        }}
+      {% endif %}
 
     </div>
   {% endif %}
