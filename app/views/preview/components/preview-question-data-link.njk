@@ -1,0 +1,13 @@
+{% from 'components/label/macro.njk' import label %}
+
+{% macro previewQuestionDataLink(questionData) %}
+  {% if questionData %}
+    <div data-test-id="preview-question-data-link">
+        <a href="{{ questionData }}" target="_blank">
+          {{ label({
+            "text": questionData
+          }) }}
+        </a>
+    </div>
+  {% endif %}
+{% endmacro %}

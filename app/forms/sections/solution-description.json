@@ -19,16 +19,7 @@
           "maxLength": 300,
           "message": "Solution Summary validation error message"
         }
-      ],
-      "submitValidations": [
-        {
-          "type": "required",
-          "message": "Solution Summary is a required field error message"
-        }
-      ],
-      "preview": {
-        "title": "Summary"
-      }
+      ]
     },
     {
       "id": "description",
@@ -43,10 +34,7 @@
           "maxLength": 1000,
           "message": "Solution Description validation error message"
         }
-      ],
-      "preview": {
-        "title": "About the solution"
-      }
+      ]
     },
     {
       "id": "link",
@@ -59,10 +47,7 @@
           "maxLength": 1000,
           "message": "Solution Link validation error message"
         }
-      ],
-      "preview": {
-        "type": "link"
-      }
+      ]
     }
   ]
 }

@@ -5,6 +5,7 @@ import { createDashboardPageContext } from './contextCreators/createDashboardPag
 import { createPreviewPageContext } from './contextCreators/createPreviewPageContext';
 import { validateSectionData } from './helpers/validateSectionData';
 import { transformSectionData } from './helpers/transformSectionData';
+import { errorManifest } from './forms/error-manifest';
 
 export const getMarketingPageDashboardContext = async (solutionId) => {
   const dashboardManifest = new ManifestProvider().getDashboardManifest();
@@ -70,12 +71,11 @@ export const postSection = async (solutionId, sectionId, sectionData) => {
 };
 
 export const getPreviewPageContext = async (solutionId, previewValidationErrors) => {
-  const previewManifest = new ManifestProvider().getPreviewManifest();
   const solutionData = await axios.get(`http://localhost:8080/api/v1/Solutions/${solutionId}`);
-  const existingSolutionData = solutionData.data.solution;
+  const existingMarketingData = solutionData.data.solution.marketingData;
 
   const context = createPreviewPageContext(
-    solutionId, previewManifest, existingSolutionData, previewValidationErrors,
+    solutionId, existingMarketingData, previewValidationErrors, errorManifest,
   );
 
   return context;

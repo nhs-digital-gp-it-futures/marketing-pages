@@ -32,9 +32,11 @@ describe('preview page', () => {
       });
   });
 
-  it('should render one section if one section is provided', (done) => {
+  it('should render the solutions-description section when provided', (done) => {
     const context = {
-      sections: [{}],
+      sections: {
+        solutionDescription: {},
+      },
     };
 
     const dummyApp = createDummyApp(context);
@@ -43,7 +45,26 @@ describe('preview page', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        expect($('[data-test-id^="preview-section-"]').length).toEqual(1);
+        expect($('[data-test-id="preview-solution-description"]').length).toEqual(1);
+
+        done();
+      });
+  });
+
+  it('should render the features section when provided', (done) => {
+    const context = {
+      sections: {
+        features: {},
+      },
+    };
+
+    const dummyApp = createDummyApp(context);
+    request(dummyApp)
+      .get('/')
+      .then((res) => {
+        const $ = cheerio.load(res.text);
+
+        expect($('[data-test-id="preview-features"]').length).toEqual(1);
 
         done();
       });
