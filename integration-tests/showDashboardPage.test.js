@@ -1,23 +1,23 @@
 import nock from 'nock';
 import { Selector, ClientFunction } from 'testcafe';
-import aSolutionFixture from './fixtures/aSolution.json';
-import aSolutionWithMarketingDataFixture from './fixtures/aSolutionWithMarketingData.json';
+import dashboardWithIncompleteSections from './fixtures/dashboardWithIncompleteSections.json';
+import dashboardWithCompleteSections from './fixtures/dashboardWithCompleteSections.json';
+import previewWithMarketingData from './fixtures/previewWithMarketingData.json';
 
-
-const mocks = (withMarketingData) => {
-  if (withMarketingData) {
+const mocks = (initalDashboard) => {
+  if (initalDashboard) {
     nock('http://localhost:8080')
-      .get('/api/v1/Solutions/S100000-001')
-      .reply(200, aSolutionWithMarketingDataFixture);
+      .get('/api/v1/Solutions/S100000-001/dashboard')
+      .reply(200, dashboardWithIncompleteSections);
   } else {
     nock('http://localhost:8080')
-      .get('/api/v1/Solutions/S100000-001')
-      .reply(200, aSolutionFixture);
+      .get('/api/v1/Solutions/S100000-001/dashboard')
+      .reply(200, dashboardWithCompleteSections);
   }
 };
 
-const pageSetup = async (t, withMarketingData = false) => {
-  mocks(withMarketingData);
+const pageSetup = async (t, initalDashboard = true) => {
+  mocks(initalDashboard);
   await t.navigateTo('http://localhost:1234/S100000-001');
 };
 
@@ -36,8 +36,8 @@ test('should render the secondary preview page button', async (t) => {
   pageSetup(t);
 
   nock('http://localhost:8080')
-    .get('/api/v1/Solutions/S100000-001')
-    .reply(200, aSolutionFixture);
+    .get('/api/v1/Solutions/S100000-001/preview')
+    .reply(200, previewWithMarketingData);
 
   const getLocation = ClientFunction(() => document.location.href);
 
@@ -53,8 +53,8 @@ test('should render the preview page button', async (t) => {
   pageSetup(t);
 
   nock('http://localhost:8080')
-    .get('/api/v1/Solutions/S100000-001')
-    .reply(200, aSolutionFixture);
+    .get('/api/v1/Solutions/S100000-001/preview')
+    .reply(200, previewWithMarketingData);
 
   const getLocation = ClientFunction(() => document.location.href);
 
@@ -149,7 +149,7 @@ test('should render all the sub sections for the client application type section
 });
 
 test('should render all the sub sections for the client application type section with requirment and status when all 3 application types have been selected', async (t) => {
-  pageSetup(t, true);
+  pageSetup(t, false);
 
   const clientApplicationTypeSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-client-application-type"]');
   const clientApplicationTypeSection = clientApplicationTypeSectionGroup.find('[data-test-id="dashboard-section-client-application-types"]');
@@ -164,21 +164,21 @@ test('should render all the sub sections for the client application type section
     .expect(browserBasedSubSection.find('[data-test-id="dashboard-section-title"]').innerText).eql('Browser based')
     .expect(browserBasedSubSection.find('[data-test-id="dashboard-section-default-message"]').exists).notOk()
     .expect(browserBasedSubSection.find('[data-test-id="dashboard-section-requirement"]').innerText).eql('Mandatory')
-    .expect(browserBasedSubSection.find('[data-test-id="dashboard-section-status"]').innerText).eql('INCOMPLETE')
+    .expect(browserBasedSubSection.find('[data-test-id="dashboard-section-status"]').innerText).eql('COMPLETE')
 
     .expect(nativeMobileSubSection.count).eql(1)
     .expect(nativeMobileSubSection.find('a').exists).ok()
     .expect(nativeMobileSubSection.find('[data-test-id="dashboard-section-title"]').innerText).eql('Native mobile or tablet')
     .expect(nativeMobileSubSection.find('[data-test-id="dashboard-section-default-message"]').exists).notOk()
     .expect(nativeMobileSubSection.find('[data-test-id="dashboard-section-requirement"]').innerText).eql('Mandatory')
-    .expect(nativeMobileSubSection.find('[data-test-id="dashboard-section-status"]').innerText).eql('INCOMPLETE')
+    .expect(nativeMobileSubSection.find('[data-test-id="dashboard-section-status"]').innerText).eql('COMPLETE')
 
     .expect(nativeDesktopSubSection.count).eql(1)
     .expect(nativeDesktopSubSection.find('a').exists).ok()
     .expect(nativeDesktopSubSection.find('[data-test-id="dashboard-section-title"]').innerText).eql('Native desktop')
     .expect(nativeDesktopSubSection.find('[data-test-id="dashboard-section-default-message"]').exists).notOk()
     .expect(nativeDesktopSubSection.find('[data-test-id="dashboard-section-requirement"]').innerText).eql('Mandatory')
-    .expect(nativeDesktopSubSection.find('[data-test-id="dashboard-section-status"]').innerText).eql('INCOMPLETE');
+    .expect(nativeDesktopSubSection.find('[data-test-id="dashboard-section-status"]').innerText).eql('COMPLETE');
 });
 
 test('clicking on the solution description section link should navigate the user to the solution description page', async (t) => {

@@ -40,16 +40,30 @@ describe('preview-client-application-types', () => {
       });
   });
 
+  it('should not render the client-application-types section when not provided', (done) => {
+    const context = {
+    };
+
+    const dummyApp = createDummyApp(context);
+    request(dummyApp)
+      .get('/')
+      .then((res) => {
+        const $ = cheerio.load(res.text);
+
+        expect($('[data-test-id="preview-client-application-types"]').length).toEqual(0);
+
+        done();
+      });
+  });
+
   describe('when a sub section exists for an application type', () => {
     it('should render the browsed based application type', (done) => {
       const context = {
         section: {
           sections: {
             'browser-based': {
-              questions: {
-                'supported-browsers': {
-                  data: ['chrome'],
-                },
+              answers: {
+                'supported-browsers': ['chrome'],
               },
             },
           },
@@ -82,19 +96,31 @@ describe('preview-client-application-types', () => {
     });
   });
 
-  it('should not render the client-application-types section when not provided', (done) => {
-    const context = {
-    };
+  describe('when a sub section does not exist for an application type', () => {
+    it('should not render the browsed based application type', (done) => {
+      const context = {
+        section: {
+          sections: {
+            'some-other-section': {
+              answers: {
+                'some-question': 'Some data',
+              },
+            },
+          },
+        },
+      };
 
-    const dummyApp = createDummyApp(context);
-    request(dummyApp)
-      .get('/')
-      .then((res) => {
-        const $ = cheerio.load(res.text);
+      const dummyApp = createDummyApp(context);
+      request(dummyApp)
+        .get('/')
+        .then((res) => {
+          const $ = cheerio.load(res.text);
+          const browserBasedExpandableSection = $('[data-test-id="preview-section-browser-based"]');
 
-        expect($('[data-test-id="preview-client-application-types"]').length).toEqual(0);
+          expect(browserBasedExpandableSection.length).toEqual(0);
 
-        done();
-      });
+          done();
+        });
+    });
   });
 });

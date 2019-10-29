@@ -1,7 +1,7 @@
 import nock from 'nock';
 import { Selector, ClientFunction } from 'testcafe';
 import { ManifestProvider } from '../app/forms/manifestProvider';
-import aSolutionFixture from './fixtures/aSolution.json';
+import dashboardWithCompleteSections from './fixtures/dashboardWithCompleteSections.json';
 
 const solutionDescriptionMarketingData = {
   summary: 'The solution summary',
@@ -117,8 +117,8 @@ test('should allow posting an empty form and navigate back to the dashboard', as
   pageSetup(t);
 
   nock('http://localhost:8080')
-    .get('/api/v1/Solutions/S100000-001')
-    .reply(200, aSolutionFixture);
+    .get('/api/v1/Solutions/S100000-001/dashboard')
+    .reply(200, dashboardWithCompleteSections);
 
   nock('http://localhost:8080')
     .put('/api/v1/Solutions/S100000-001/sections/solution-description')
@@ -184,8 +184,8 @@ test('should return to the marketing data dashboard when the return to all secti
   pageSetup(t);
 
   nock('http://localhost:8080')
-    .get('/api/v1/Solutions/S100000-001')
-    .reply(200, aSolutionFixture);
+    .get('/api/v1/Solutions/S100000-001/dashboard')
+    .reply(200, dashboardWithCompleteSections);
 
   const getLocation = ClientFunction(() => document.location.href);
 

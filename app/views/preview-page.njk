@@ -1,6 +1,4 @@
 {% extends 'includes/layout.njk' %}
-{% from 'components/button/macro.njk' import button %}
-{% from './error-summary.njk' import errorSummary %}
 {% from './preview/sections/preview-solution-description.njk' import previewSolutionDescription %}
 {% from './preview/sections/preview-features.njk' import previewFeatures %}
 {% from './preview/sections/preview-client-application-types.njk' import previewClientApplicationTypes %}
@@ -8,25 +6,12 @@
 {% block body %}
 <div class="nhsuk-grid-row">
   <div class="nhsuk-grid-column-full">
-    {% if (errors.length > 0) %}
-      {{ errorSummary(errors) }}
-    {% endif %}  
-
     <h1>Preview Page</h1>
     
     {{ previewSolutionDescription(sections['solution-description']) }}
     {{ previewFeatures(sections['features']) }}
     {{ previewClientApplicationTypes(sections['client-application-types']) }}
 
-  </div>
-
-  <br/>
-  <br/>
-  <div data-test-id="preview-submit-button">
-    {{ button({
-      "text": "Submit for moderation",
-      "href": submitPreviewUrl
-    }) }}
   </div>
 </div>
 {% endblock %}

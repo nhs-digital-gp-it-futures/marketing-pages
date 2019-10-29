@@ -1,23 +1,11 @@
 {% from 'components/label/macro.njk' import label %}
 {% from 'components/error-message/macro.njk' import errorMessage %}
 
-{% macro previewQuestionTitle(questionId, questionTitle, questionErrorMessage) %}
-  {% if (questionErrorMessage) %}
-    <div id="{{ questionId }}" data-test-id="preview-question-title-error" class="nhsuk-form-group nhsuk-form-group--error">
-      {{ label({
-        "classes": "nhsuk-label--s",
-        "text": questionTitle
-      }) }}
-      {{ errorMessage({
-        "text": questionErrorMessage
-      }) }}
-    </div>
-  {% else %}
-    <div data-test-id="preview-question-title">
-      {{ label({
-        "classes": "nhsuk-label--s",
-        "text": questionTitle
-      }) }}
-    </div>
-  {% endif %}
+{% macro previewQuestionTitle(questionId, questionTitle) %}
+  <div data-test-id="preview-question-title">
+    {{ label({
+      "classes": "nhsuk-label--s",
+      "text": questionTitle
+    }) }}
+  </div>
 {% endmacro %}

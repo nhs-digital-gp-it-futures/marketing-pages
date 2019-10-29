@@ -1,17 +1,17 @@
 import nock from 'nock';
-import { Selector, ClientFunction } from 'testcafe';
-import aSolutionFixture from './fixtures/aSolution.json';
-import aSolutionWithMarketingDataFixture from './fixtures/aSolutionWithMarketingData.json';
+import { Selector } from 'testcafe';
+import previewWithNoMarketingData from './fixtures/previewWithNoMarketingData.json';
+import previewWithMarketingData from './fixtures/previewWithMarketingData.json';
 
 const mocks = (existingData) => {
   if (!existingData) {
     nock('http://localhost:8080')
-      .get('/api/v1/Solutions/S100000-001')
-      .reply(200, aSolutionFixture);
+      .get('/api/v1/Solutions/S100000-001/preview')
+      .reply(200, previewWithNoMarketingData);
   } else {
     nock('http://localhost:8080')
-      .get('/api/v1/Solutions/S100000-001')
-      .reply(200, aSolutionWithMarketingDataFixture);
+      .get('/api/v1/Solutions/S100000-001/preview')
+      .reply(200, previewWithMarketingData);
   }
 };
 
@@ -31,25 +31,13 @@ test('should render the marketing preview page title', async (t) => {
     .expect(title.innerText).eql('Preview Page');
 });
 
-test('when no existing marketing data - The solution description section should just render the section heading and summary title', async (t) => {
+test('when no existing marketing data - The solution description section should not be rendered', async (t) => {
   pageSetup(t);
 
   const solutionDescriptionSection = Selector('[data-test-id="preview-solution-description"]');
-  const summaryQuestion = Selector('[data-test-id="preview-section-question-summary"]');
-  const descriptionQuestion = Selector('[data-test-id="preview-section-question-description"]');
-  const linkQuestion = Selector('[data-test-id="preview-section-question-link"]');
 
   await t
-    .expect(solutionDescriptionSection.exists).ok()
-    .expect(solutionDescriptionSection.find('h3').innerText).eql('Solution description')
-
-    .expect(summaryQuestion.exists).ok()
-    .expect(summaryQuestion.find('[data-test-id="preview-question-title"]').innerText).eql('Summary')
-    .expect(summaryQuestion.find('[data-test-id="preview-question-data-text"]').exists).notOk()
-
-    .expect(descriptionQuestion.exists).notOk()
-
-    .expect(linkQuestion.exists).notOk();
+    .expect(solutionDescriptionSection.exists).notOk();
 });
 
 test('when existing marketing data - The solution description section and all questions should be rendered', async (t) => {
@@ -105,70 +93,11 @@ test('when existing marketing data - The features section should rendered and th
     .expect(featureListingQuestion.find('[data-test-id="preview-question-data-bulletlist"]').find('li:nth-child(3)').innerText).eql('Feature C');
 });
 
-test('when no existing marketing data - The client-application-types section should just render the section heading', async (t) => {
+test('when no existing marketing data - The client-application-types section should not be rendered', async (t) => {
   pageSetup(t);
 
   const clientApplicationTypesSection = Selector('[data-test-id="preview-client-application-types"]');
 
   await t
-    .expect(clientApplicationTypesSection.exists).ok()
-    .expect(clientApplicationTypesSection.find('h3').innerText).eql('Client application type');
-});
-
-test('should render the submit for moderation page button', async (t) => {
-  pageSetup(t);
-
-  nock('http://localhost:8080')
-    .get('/api/v1/Solutions/S100000-001')
-    .reply(200, aSolutionFixture);
-
-  nock('http://localhost:8080')
-    .put('/api/v1/Solutions/S100000-001/SubmitForReview')
-    .reply(204);
-
-  const getLocation = ClientFunction(() => document.location.href);
-
-  const previewButton = Selector('[data-test-id="preview-submit-button"] a');
-
-  await t
-    .expect(previewButton.innerText).eql('Submit for moderation')
-    .click(previewButton)
-    .expect(getLocation()).contains('S100000-001/preview');
-});
-
-test('When no data for solution description and the submit button is pressed it should render the summary title as an error', async (t) => {
-  pageSetup(t);
-
-  const submitForReviewValidationErrorResponse = {
-    'solution-description': {
-      required: ['summary'],
-    },
-  };
-
-  nock('http://localhost:8080')
-    .get('/api/v1/Solutions/S100000-001')
-    .reply(200, aSolutionFixture);
-
-  nock('http://localhost:8080')
-    .put('/api/v1/Solutions/S100000-001/SubmitForReview')
-    .reply(400, submitForReviewValidationErrorResponse);
-
-  const errorSummary = Selector('[data-test-id="error-summary"]');
-  const errorSummaryList = Selector('.nhsuk-error-summary__list');
-  const summaryQuestionAsError = Selector('[data-test-id="preview-question-title-error"]');
-  const previewButton = Selector('[data-test-id="preview-submit-button"] a');
-
-  await t
-    .expect(errorSummary.exists).notOk()
-    .expect(summaryQuestionAsError.exists).notOk()
-
-    .click(previewButton)
-
-    .expect(errorSummary.exists).ok()
-    .expect(errorSummaryList.find('li').count).eql(1)
-    .expect(errorSummaryList.find('li:nth-child(1)').innerText).eql('Solution Summary is a required field error message')
-    .expect(errorSummaryList.find('li:nth-child(1) a').getAttribute('href')).eql('#summary')
-
-    .expect(summaryQuestionAsError.exists).ok()
-    .expect(summaryQuestionAsError.find('.nhsuk-error-message').innerText).eql('Error:\nSolution Summary is a required field error message');
+    .expect(clientApplicationTypesSection.exists).notOk();
 });

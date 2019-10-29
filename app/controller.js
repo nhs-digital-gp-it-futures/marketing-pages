@@ -11,11 +11,11 @@ import { errorManifest } from './forms/error-manifest';
 export const getMarketingPageDashboardContext = async (solutionId) => {
   const dashboardManifest = new ManifestProvider().getDashboardManifest();
 
-  const solutionData = await axios.get(`http://localhost:8080/api/v1/Solutions/${solutionId}`);
-  const { solution } = solutionData.data;
+  const dashboardDataRaw = await axios.get(`http://localhost:8080/api/v1/Solutions/${solutionId}/dashboard`);
+  const dashboardData = dashboardDataRaw.data;
 
   const context = createDashboardPageContext(
-    solutionId, dashboardManifest, solution.marketingData.sections,
+    solutionId, dashboardManifest, dashboardData.sections,
   );
 
   return context;
@@ -73,13 +73,11 @@ export const postSection = async (solutionId, sectionId, sectionData) => {
   return response;
 };
 
-export const getPreviewPageContext = async (solutionId, previewValidationErrors) => {
-  const solutionData = await axios.get(`http://localhost:8080/api/v1/Solutions/${solutionId}`);
-  const existingMarketingData = solutionData.data.solution.marketingData;
+export const getPreviewPageContext = async (solutionId) => {
+  const previewDataRaw = await axios.get(`http://localhost:8080/api/v1/Solutions/${solutionId}/preview`);
+  const previewData = previewDataRaw.data;
 
-  const context = createPreviewPageContext(
-    solutionId, existingMarketingData, previewValidationErrors, errorManifest,
-  );
+  const context = createPreviewPageContext(previewData);
 
   return context;
 };

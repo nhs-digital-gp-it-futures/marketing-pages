@@ -24,7 +24,9 @@ const createDummyApp = (context) => {
 
 describe('preview-solution-description', () => {
   it('should render the title of the section', (done) => {
-    const context = {};
+    const context = {
+      section: {},
+    };
 
     const dummyApp = createDummyApp(context);
     request(dummyApp)
@@ -38,15 +40,28 @@ describe('preview-solution-description', () => {
       });
   });
 
-  describe('when display is true for the question', () => {
+  it('should not render the solution-description section when not provided', (done) => {
+    const context = {
+    };
+
+    const dummyApp = createDummyApp(context);
+    request(dummyApp)
+      .get('/')
+      .then((res) => {
+        const $ = cheerio.load(res.text);
+
+        expect($('[data-test-id="preview-solution-description"]').length).toEqual(0);
+
+        done();
+      });
+  });
+
+  describe('when there are answers provided for the questions', () => {
     it('should render the summary question title and data', (done) => {
       const context = {
         section: {
-          questions: {
-            summary: {
-              display: true,
-              data: 'Some summary data',
-            },
+          answers: {
+            summary: 'Some summary data',
           },
         },
       };
@@ -69,11 +84,8 @@ describe('preview-solution-description', () => {
     it('should render the description question title and data', (done) => {
       const context = {
         section: {
-          questions: {
-            description: {
-              display: true,
-              data: 'Some description data',
-            },
+          answers: {
+            description: 'Some description data',
           },
         },
       };
@@ -96,11 +108,8 @@ describe('preview-solution-description', () => {
     it('should only render the link question as a link component', (done) => {
       const context = {
         section: {
-          questions: {
-            link: {
-              display: true,
-              data: 'www.somelink.com',
-            },
+          answers: {
+            link: 'www.somelink.com',
           },
         },
       };
@@ -121,12 +130,12 @@ describe('preview-solution-description', () => {
     });
   });
 
-  describe('when display is falsy for the question', () => {
-    it('should render the summary question title and data', (done) => {
+  describe('when there are no answers provided for the questions', () => {
+    it('should not render the summary question title and data', (done) => {
       const context = {
         section: {
-          questions: {
-            summary: {},
+          answers: {
+            summary: '',
           },
         },
       };
@@ -145,11 +154,11 @@ describe('preview-solution-description', () => {
         });
     });
 
-    it('should render the description question title and data', (done) => {
+    it('should not render the description question title and data', (done) => {
       const context = {
         section: {
-          questions: {
-            description: {},
+          answers: {
+            description: '',
           },
         },
       };
@@ -168,11 +177,11 @@ describe('preview-solution-description', () => {
         });
     });
 
-    it('should only render the link question as a link component', (done) => {
+    it('should not render the solution link', (done) => {
       const context = {
         section: {
-          questions: {
-            link: {},
+          answers: {
+            link: '',
           },
         },
       };

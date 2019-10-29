@@ -40,19 +40,32 @@ describe('preview-features', () => {
       });
   });
 
-  describe('when display is true for the question', () => {
+  it('should not render the features section when not provided', (done) => {
+    const context = {
+    };
+
+    const dummyApp = createDummyApp(context);
+    request(dummyApp)
+      .get('/')
+      .then((res) => {
+        const $ = cheerio.load(res.text);
+
+        expect($('[data-test-id="preview-features"]').length).toEqual(0);
+
+        done();
+      });
+  });
+
+  describe('when there are answers provided for the questions', () => {
     it('should render the listings', (done) => {
       const context = {
         section: {
-          questions: {
-            listing: {
-              display: true,
-              data: [
-                'Some first data',
-                'Some second data',
-                'Some third data',
-              ],
-            },
+          answers: {
+            listing: [
+              'Some first data',
+              'Some second data',
+              'Some third data',
+            ],
           },
         },
       };
@@ -71,12 +84,12 @@ describe('preview-features', () => {
     });
   });
 
-  describe('when display is falsy for the question', () => {
-    it('should render the listings', (done) => {
+  describe('when there are no answers provided for the questions', () => {
+    it('should not render the listings', (done) => {
       const context = {
         section: {
-          questions: {
-            listing: {},
+          answers: {
+            listing: [],
           },
         },
       };
@@ -93,21 +106,5 @@ describe('preview-features', () => {
           done();
         });
     });
-  });
-
-  it('should not render the features section when not provided', (done) => {
-    const context = {
-    };
-
-    const dummyApp = createDummyApp(context);
-    request(dummyApp)
-      .get('/')
-      .then((res) => {
-        const $ = cheerio.load(res.text);
-
-        expect($('[data-test-id="preview-features"]').length).toEqual(0);
-
-        done();
-      });
   });
 });
