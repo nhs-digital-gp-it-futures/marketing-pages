@@ -13,20 +13,6 @@
       "mainAdvice": "Select the client application types your Solution supports *",
       "additionalAdvice": "Check all the options that are relevant to you. You will be required to provide further information for each client application type you select.",
       "type": "checkbox-options",
-      "options": [
-        {
-          "value": "browser-based",
-          "text": "Browser based"
-        },
-        {
-          "value": "native-mobile",
-          "text": "Native mobile or tablet"
-        },
-        {
-          "value": "native-desktop",
-          "text": "Native desktop"
-        }
-      ],
       "submitValidations": [
         {
           "type": "required",

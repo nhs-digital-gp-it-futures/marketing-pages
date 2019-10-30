@@ -25,18 +25,12 @@ export class ManifestProvider {
     return this.sectionManifest;
   }
 
-  getPreviewManifest() {
-    const previewManifest = [];
-
-    const dashboardManifest = this.getDashboardManifest();
-
-    dashboardManifest.sectionGroups.map((sectionGroup) => {
-      sectionGroup.sections.map((section) => {
-        const sectionManifest = this.getSectionManifest(section.id);
-        previewManifest.push(sectionManifest);
-      });
-    });
-
-    return previewManifest;
+  getOptionsManifest(sectionName) {
+    try {
+      this.optionsManifestRaw = fs.readFileSync(`./app/forms/options/${sectionName}.json`);
+      return JSON.parse(this.optionsManifestRaw);
+    } catch (err) {
+      return undefined;
+    }
   }
 }

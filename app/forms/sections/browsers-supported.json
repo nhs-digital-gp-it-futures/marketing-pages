@@ -12,56 +12,14 @@
       "mainAdvice": "What browsers are supported? Select all that apply*",
       "additionalAdvice": "If your Solution is browser based, please select below all the browsers your Solution supports.",
       "type": "checkbox-options",
-      "options": [
-        {
-          "value": "google-chrome",
-          "text": "Google Chrome"
-        },
-        {
-          "value": "microsoft-edge",
-          "text": "Microsoft Edge"
-        },
-        {
-          "value": "mozilla-firefox",
-          "text": "Mozilla Firefox"
-        },
-        {
-          "value": "opera",
-          "text": "Opera"
-        },
-        {
-          "value": "safari",
-          "text": "Safari"
-        },
-        {
-          "value": "chromium",
-          "text": "Chromium"
-        },
-        {
-          "value": "internet-explorer-11",
-          "text": "Internet Explorer 11"
-        },
-        {
-          "value": "internet-explorer-10",
-          "text": "Internet Explorer 10"
-        }
-      ]
+      "optionsId": "supported-browsers"
     },
     {
       "id": "mobile-responsive",
       "mainAdvice": "Is your Solution mobile responsive?*",
       "additionalAdvice": "Please select below if the design responds and adapts to mobile or tablet devices.",
-      "type": "radiobutton-options",
-      "options": [
-        {
-          "value": "yes",
-          "text": "Yes"
-        },
-        {
-          "value": "no",
-          "text": "No"
-        }
-      ]
+      "type": "radiobutton-options"
+
     }
   ],
   "submitText" : "Save and return",

@@ -130,7 +130,9 @@ describe('createSectionPageContext', () => {
         ],
       };
 
-      const context = createSectionPageContext('some-solution-id', sectionManifest, formData);
+      const optionsManifest = {};
+
+      const context = createSectionPageContext('some-solution-id', sectionManifest, optionsManifest, formData);
 
       expect(context).toEqual(expectedContext);
     });
@@ -204,7 +206,9 @@ describe('createSectionPageContext', () => {
         ],
       };
 
-      const context = createSectionPageContext('some-solution-id', sectionManifest, formData, validationErrors);
+      const optionsManifest = {};
+
+      const context = createSectionPageContext('some-solution-id', sectionManifest, optionsManifest, formData, validationErrors);
 
       expect(context).toEqual(expectedContext);
     });
@@ -244,25 +248,30 @@ describe('createSectionPageContext', () => {
           {
             id: 'fieldId',
             type: 'checkbox-options',
-            options: [
-              {
-                text: 'option 1',
-                value: 'option-1',
-              },
-              {
-                text: 'option 2',
-                value: 'option-2',
-              },
-              {
-                text: 'option 3',
-                value: 'option-3',
-              },
-            ],
           },
         ],
       };
 
-      const context = createSectionPageContext('some-solution-id', sectionManifest);
+      const optionsManifest = {
+        fieldId: {
+          options: [
+            {
+              text: 'option 1',
+              value: 'option-1',
+            },
+            {
+              text: 'option 2',
+              value: 'option-2',
+            },
+            {
+              text: 'option 3',
+              value: 'option-3',
+            },
+          ],
+        },
+      };
+
+      const context = createSectionPageContext('some-solution-id', sectionManifest, optionsManifest);
 
       expect(context).toEqual(expectedContext);
     });
@@ -302,20 +311,6 @@ describe('createSectionPageContext', () => {
           {
             id: 'fieldId',
             type: 'checkbox-options',
-            options: [
-              {
-                text: 'option 1',
-                value: 'option-1',
-              },
-              {
-                text: 'option 2',
-                value: 'option-2',
-              },
-              {
-                text: 'option 3',
-                value: 'option-3',
-              },
-            ],
           },
         ],
       };
@@ -327,7 +322,26 @@ describe('createSectionPageContext', () => {
         ],
       };
 
-      const context = createSectionPageContext('some-solution-id', sectionManifest, formData);
+      const optionsManifest = {
+        fieldId: {
+          options: [
+            {
+              text: 'option 1',
+              value: 'option-1',
+            },
+            {
+              text: 'option 2',
+              value: 'option-2',
+            },
+            {
+              text: 'option 3',
+              value: 'option-3',
+            },
+          ],
+        },
+      };
+
+      const context = createSectionPageContext('some-solution-id', sectionManifest, optionsManifest, formData);
 
       expect(context).toEqual(expectedContext);
     });
@@ -367,25 +381,30 @@ describe('createSectionPageContext', () => {
           {
             id: 'fieldId',
             type: 'radiobutton-options',
-            options: [
-              {
-                text: 'option 1',
-                value: 'option-1',
-              },
-              {
-                text: 'option 2',
-                value: 'option-2',
-              },
-              {
-                text: 'option 3',
-                value: 'option-3',
-              },
-            ],
           },
         ],
       };
 
-      const context = createSectionPageContext('some-solution-id', sectionManifest);
+      const optionsManifest = {
+        fieldId: {
+          options: [
+            {
+              text: 'option 1',
+              value: 'option-1',
+            },
+            {
+              text: 'option 2',
+              value: 'option-2',
+            },
+            {
+              text: 'option 3',
+              value: 'option-3',
+            },
+          ],
+        },
+      };
+
+      const context = createSectionPageContext('some-solution-id', sectionManifest, optionsManifest);
 
       expect(context).toEqual(expectedContext);
     });
@@ -424,20 +443,6 @@ describe('createSectionPageContext', () => {
           {
             id: 'fieldId',
             type: 'radiobutton-options',
-            options: [
-              {
-                text: 'option 1',
-                value: 'option-1',
-              },
-              {
-                text: 'option 2',
-                value: 'option-2',
-              },
-              {
-                text: 'option 3',
-                value: 'option-3',
-              },
-            ],
           },
         ],
       };
@@ -446,7 +451,26 @@ describe('createSectionPageContext', () => {
         fieldId: 'option-1',
       };
 
-      const context = createSectionPageContext('some-solution-id', sectionManifest, formData);
+      const optionsManifest = {
+        fieldId: {
+          options: [
+            {
+              text: 'option 1',
+              value: 'option-1',
+            },
+            {
+              text: 'option 2',
+              value: 'option-2',
+            },
+            {
+              text: 'option 3',
+              value: 'option-3',
+            },
+          ],
+        },
+      };
+
+      const context = createSectionPageContext('some-solution-id', sectionManifest, optionsManifest, formData);
 
       expect(context).toEqual(expectedContext);
     });
@@ -483,7 +507,9 @@ describe('createSectionPageContext', () => {
         ],
       };
 
-      const context = createSectionPageContext('some-solution-id', sectionManifest, formData);
+      const optionsManifest = {};
+
+      const context = createSectionPageContext('some-solution-id', sectionManifest, optionsManifest, formData);
 
       expect(context).toEqual(expectedContext);
     });
@@ -538,7 +564,9 @@ describe('createSectionPageContext', () => {
         ],
       };
 
-      const context = createSectionPageContext('some-solution-id', sectionManifest, formData, validationErrors);
+      const optionsManifest = {};
+
+      const context = createSectionPageContext('some-solution-id', sectionManifest, optionsManifest, formData, validationErrors);
 
       expect(context).toEqual(expectedContext);
     });

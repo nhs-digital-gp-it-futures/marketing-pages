@@ -6,7 +6,6 @@ import { createPreviewPageContext } from './contextCreators/createPreviewPageCon
 import { validateSectionData } from './helpers/validateSectionData';
 import { transformSectionData } from './helpers/transformSectionData';
 import { createPostSectionResponse } from './helpers/createPostSectionResponse';
-import { errorManifest } from './forms/error-manifest';
 
 export const getMarketingPageDashboardContext = async (solutionId) => {
   const dashboardManifest = new ManifestProvider().getDashboardManifest();
@@ -36,11 +35,12 @@ export const getSubDashboardPageContext = async (solutionId, sectionId) => {
 
 export const getSectionPageContext = async (solutionId, sectionId) => {
   const sectionManifest = new ManifestProvider().getSectionManifest(sectionId);
+  const optionsManifest = new ManifestProvider().getOptionsManifest(sectionId);
 
   const sectionData = await axios.get(`http://localhost:8080/api/v1/Solutions/${solutionId}/sections/${sectionId}`);
   const formData = sectionData.data;
 
-  const context = createSectionPageContext(solutionId, sectionManifest, formData);
+  const context = createSectionPageContext(solutionId, sectionManifest, optionsManifest, formData);
 
   return context;
 };
@@ -49,9 +49,10 @@ export const getSectionPageErrorContext = async (
   solutionId, sectionId, sectionData, validationErrors,
 ) => {
   const sectionManifest = new ManifestProvider().getSectionManifest(sectionId);
+  const optionsManifest = new ManifestProvider().getOptionsManifest(sectionId);
 
   const context = createSectionPageContext(
-    solutionId, sectionManifest, sectionData, validationErrors,
+    solutionId, sectionManifest, optionsManifest, sectionData, validationErrors,
   );
 
   return context;

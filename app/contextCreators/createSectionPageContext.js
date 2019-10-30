@@ -10,32 +10,34 @@ const createContextForBulletpointListQuestion = (
   return undefined;
 };
 
-const createQuestionOption = (
-  manifestQuestionId, manifestOption, formData,
+const populateQuestionOption = (
+  manifestQuestionId, questionOption, formData,
 ) => {
-  const option = manifestOption;
+  const populatedOption = questionOption;
 
-  if (doesFormDataContainValue(manifestQuestionId, option.value, formData)) {
+  if (doesFormDataContainValue(manifestQuestionId, questionOption.value, formData)) {
     return {
-      ...option,
+      ...questionOption,
       checked: true,
     };
   }
 
-  return option;
+  return populatedOption;
 };
 
 const createContextForOptionsTypeQuestion = (
-  sectionManifestQuestion, formData,
+  sectionManifestQuestion, optionsManifest, formData,
 ) => {
   if (sectionManifestQuestion.type === 'checkbox-options' || sectionManifestQuestion.type === 'radiobutton-options') {
-    const options = [];
+    const options = optionsManifest
+      && optionsManifest[sectionManifestQuestion.id]
+      && optionsManifest[sectionManifestQuestion.id].options;
 
-    sectionManifestQuestion.options.map((manifestOption) => {
-      const option = createQuestionOption(sectionManifestQuestion.id, manifestOption, formData);
-      options.push(option);
-    });
-    return options;
+    const populatedOptions = options.map(option => populateQuestionOption(
+      sectionManifestQuestion.id, option, formData,
+    ));
+
+    return populatedOptions;
   }
 
   return undefined;
@@ -76,7 +78,11 @@ const createErrorSummaryForQuestionContext = (
 };
 
 const createQuestionContext = (
-  sectionManifestQuestion, formData, validationErrors, validationErrorForQuestion,
+  sectionManifestQuestion,
+  optionsManifest,
+  formData,
+  validationErrors,
+  validationErrorForQuestion,
 ) => ({
   id: sectionManifestQuestion.id,
   type: sectionManifestQuestion.type,
@@ -87,7 +93,9 @@ const createQuestionContext = (
   fields: createContextForBulletpointListQuestion(
     sectionManifestQuestion, formData, validationErrors,
   ),
-  options: createContextForOptionsTypeQuestion(sectionManifestQuestion, formData),
+  options: createContextForOptionsTypeQuestion(
+    sectionManifestQuestion, optionsManifest, formData,
+  ),
   data: createContextForTextInputsQuestion(sectionManifestQuestion, formData),
   error: createContextForTextInputsValidationErrors(
     sectionManifestQuestion, validationErrorForQuestion,
@@ -95,7 +103,7 @@ const createQuestionContext = (
 });
 
 export const createSectionPageContext = (
-  solutionId, sectionManifest, formData, validationErrors,
+  solutionId, sectionManifest, optionsManifest, formData, validationErrors,
 ) => {
   const errors = [];
   const questions = [];
@@ -116,7 +124,11 @@ export const createSectionPageContext = (
     );
 
     const question = createQuestionContext(
-      sectionManifestQuestion, formData, validationErrors, validationErrorForQuestion,
+      sectionManifestQuestion,
+      optionsManifest,
+      formData,
+      validationErrors,
+      validationErrorForQuestion,
     );
 
     const errorSummaryContextForQuestion = createErrorSummaryForQuestionContext(
