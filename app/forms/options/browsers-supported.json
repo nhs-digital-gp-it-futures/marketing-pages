@@ -1,50 +1,20 @@
 {
   "supported-browsers": {
-    "options": [
-      {
-        "value": "google-chrome",
-        "text": "Google Chrome"
-      },
-      {
-        "value": "microsoft-edge",
-        "text": "Microsoft Edge"
-      },
-      {
-        "value": "mozilla-firefox",
-        "text": "Mozilla Firefox"
-      },
-      {
-        "value": "opera",
-        "text": "Opera"
-      },
-      {
-        "value": "safari",
-        "text": "Safari"
-      },
-      {
-        "value": "chromium",
-        "text": "Chromium"
-      },
-      {
-        "value": "internet-explorer-11",
-        "text": "Internet Explorer 11"
-      },
-      {
-        "value": "internet-explorer-10",
-        "text": "Internet Explorer 10"
-      }
-    ]
+    "options": {
+      "google-chrome": "Google Chrome",
+      "microsoft-edge": "Microsoft Edge",
+      "mozilla-firefox": "Mozilla Firefox",
+      "opera": "Opera",
+      "safari": "Safari",
+      "chromium": "Chromium",
+      "internet-explorer-11": "Internet Explorer 11",
+      "internet-explorer-10": "Internet Explorer 10"
+    }
   },
   "mobile-responsive": {
-    "options": [
-      {
-        "value": "yes",
-        "text": "Yes"
-      },
-      {
-        "value": "no",
-        "text": "No"
-      }
-    ]
+    "options": {
+      "yes": "Yes",
+      "no": "No"
+    } 
   }
 }

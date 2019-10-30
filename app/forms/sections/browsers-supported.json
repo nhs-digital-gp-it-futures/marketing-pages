@@ -11,8 +11,7 @@
       "id": "supported-browsers",
       "mainAdvice": "What browsers are supported? Select all that apply*",
       "additionalAdvice": "If your Solution is browser based, please select below all the browsers your Solution supports.",
-      "type": "checkbox-options",
-      "optionsId": "supported-browsers"
+      "type": "checkbox-options"
     },
     {
       "id": "mobile-responsive",

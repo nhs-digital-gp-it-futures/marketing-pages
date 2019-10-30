@@ -254,20 +254,11 @@ describe('createSectionPageContext', () => {
 
       const optionsManifest = {
         fieldId: {
-          options: [
-            {
-              text: 'option 1',
-              value: 'option-1',
-            },
-            {
-              text: 'option 2',
-              value: 'option-2',
-            },
-            {
-              text: 'option 3',
-              value: 'option-3',
-            },
-          ],
+          options: {
+            'option-1': 'option 1',
+            'option-2': 'option 2',
+            'option-3': 'option 3',
+          },
         },
       };
 
@@ -324,20 +315,11 @@ describe('createSectionPageContext', () => {
 
       const optionsManifest = {
         fieldId: {
-          options: [
-            {
-              text: 'option 1',
-              value: 'option-1',
-            },
-            {
-              text: 'option 2',
-              value: 'option-2',
-            },
-            {
-              text: 'option 3',
-              value: 'option-3',
-            },
-          ],
+          options: {
+            'option-1': 'option 1',
+            'option-2': 'option 2',
+            'option-3': 'option 3',
+          },
         },
       };
 
@@ -387,20 +369,11 @@ describe('createSectionPageContext', () => {
 
       const optionsManifest = {
         fieldId: {
-          options: [
-            {
-              text: 'option 1',
-              value: 'option-1',
-            },
-            {
-              text: 'option 2',
-              value: 'option-2',
-            },
-            {
-              text: 'option 3',
-              value: 'option-3',
-            },
-          ],
+          options: {
+            'option-1': 'option 1',
+            'option-2': 'option 2',
+            'option-3': 'option 3',
+          },
         },
       };
 
@@ -453,20 +426,11 @@ describe('createSectionPageContext', () => {
 
       const optionsManifest = {
         fieldId: {
-          options: [
-            {
-              text: 'option 1',
-              value: 'option-1',
-            },
-            {
-              text: 'option 2',
-              value: 'option-2',
-            },
-            {
-              text: 'option 3',
-              value: 'option-3',
-            },
-          ],
+          options: {
+            'option-1': 'option 1',
+            'option-2': 'option 2',
+            'option-3': 'option 3',
+          },
         },
       };
 

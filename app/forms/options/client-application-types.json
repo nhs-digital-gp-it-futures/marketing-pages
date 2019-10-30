@@ -1,18 +1,9 @@
 {
   "client-application-types": {
-    "options": [
-      {
-        "value": "browser-based",
-        "text": "Browser based"
-      },
-      {
-        "value": "native-mobile",
-        "text": "Native mobile or tablet"
-      },
-      {
-        "value": "native-desktop",
-        "text": "Native desktop"
-      }
-    ]
+    "options": {
+      "browser-based": "Browser based",
+      "native-mobile": "Native mobile or tablet",
+      "native-desktop": "Native desktop"
+    }
   }
 }

@@ -25,13 +25,23 @@ const populateQuestionOption = (
   return populatedOption;
 };
 
+const createOptions = (questionId, optionsManifest) => {
+  const optionsFromManifest = optionsManifest
+    && optionsManifest[questionId]
+    && optionsManifest[questionId].options;
+
+  return optionsFromManifest
+    && Object.entries(optionsFromManifest).map(([optionId, optionValue]) => ({
+      text: optionValue,
+      value: optionId,
+    }));
+};
+
 const createContextForOptionsTypeQuestion = (
   sectionManifestQuestion, optionsManifest, formData,
 ) => {
   if (sectionManifestQuestion.type === 'checkbox-options' || sectionManifestQuestion.type === 'radiobutton-options') {
-    const options = optionsManifest
-      && optionsManifest[sectionManifestQuestion.id]
-      && optionsManifest[sectionManifestQuestion.id].options;
+    const options = createOptions(sectionManifestQuestion.id, optionsManifest);
 
     const populatedOptions = options.map(option => populateQuestionOption(
       sectionManifestQuestion.id, option, formData,
