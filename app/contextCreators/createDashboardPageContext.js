@@ -57,6 +57,7 @@ export const createDashboardPageContext = (
     mainAdvice: dashboardManifest.mainAdvice,
     additionalAdvice: dashboardManifest.additionalAdvice,
     previewUrl: `/${solutionId}/preview`,
+    submitForModerationUrl: `/${solutionId}/submitForModeration`,
     returnToDashboardUrl: `/${solutionId}`,
   };
   const sectionGroups = [];

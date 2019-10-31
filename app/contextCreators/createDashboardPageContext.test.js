@@ -4,6 +4,7 @@ describe('createDashboardPageContext', () => {
   it('should create a context from the manifest and the marketingData', () => {
     const expectedContext = {
       previewUrl: '/some-solution-id/preview',
+      submitForModerationUrl: '/some-solution-id/submitForModeration',
       returnToDashboardUrl: '/some-solution-id',
       sectionGroups: [
         {
@@ -56,6 +57,7 @@ describe('createDashboardPageContext', () => {
   it('should create a context with sub sections from the manifest and no existing marketingData', () => {
     const expectedContext = {
       previewUrl: '/some-solution-id/preview',
+      submitForModerationUrl: '/some-solution-id/submitForModeration',
       returnToDashboardUrl: '/some-solution-id',
       sectionGroups: [
         {
@@ -137,6 +139,7 @@ describe('createDashboardPageContext', () => {
   it('should create a context with sub sections from the manifest and with existing marketingData', () => {
     const expectedContext = {
       previewUrl: '/some-solution-id/preview',
+      submitForModerationUrl: '/some-solution-id/submitForModeration',
       returnToDashboardUrl: '/some-solution-id',
       sectionGroups: [
         {
