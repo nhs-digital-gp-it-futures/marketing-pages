@@ -12,7 +12,7 @@ const updateSections = (sections) => {
             const newAnswerValues = Array.isArray(answerValues)
               ? answerValues.map(answerValue => optionManifest[answerId].options[answerValue])
               : optionManifest[answerId].options[answerValues];
-            // console.log(`newAnswerValues ${JSON.stringify(newAnswerValues)}`);
+
             return ({
               ...answers,
               [answerId]: newAnswerValues,

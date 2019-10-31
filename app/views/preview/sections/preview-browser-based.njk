@@ -7,10 +7,10 @@
     {{ previewSectionTableRow(
       'supported-browsers', 
       'Browsers Supported', 
-      previewQuestionDataBulletlist(section.answers['supported-browsers'])) }}
+      previewQuestionDataBulletlist(section.sections['browsers-supported'].answers['supported-browsers'])) }}
     {{ previewSectionTableRow(
       'mobile-responsive', 
       'Mobile responsive', 
-      previewQuestionDataText(section.answers['mobile-responsive'])) }}
+      previewQuestionDataText(section.sections['browsers-supported'].answers['mobile-responsive'])) }}
   <dl>
 {% endmacro %}

@@ -23,12 +23,16 @@
     "client-application-types": {
       "sections": {
         "browser-based": {
-          "answers": {
-            "supported-browsers": [
-              "Edge",
-              "Google Chrome"
-            ],
-            "mobile-responsive": "yes"
+          "sections": {
+            "browsers-supported": {          
+              "answers": {
+                "supported-browsers": [
+                  "google-chrome",
+                  "mozilla-firefox"
+                ],
+                "mobile-responsive": "yes"
+              }
+            }
           }
         }
       }

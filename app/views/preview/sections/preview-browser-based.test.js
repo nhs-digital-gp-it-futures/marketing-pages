@@ -26,8 +26,12 @@ describe('preview-browser-based', () => {
   it('should render the supported browsers answer', (done) => {
     const context = {
       section: {
-        answers: {
-          'supported-browsers': ['chrome'],
+        sections: {
+          'browsers-supported': {
+            answers: {
+              'supported-browsers': ['chrome'],
+            },
+          },
         },
       },
     };
