@@ -1,81 +1,26 @@
 import { createPreviewPageContext } from './createPreviewPageContext';
-// import { ManifestProvider } from '../forms/manifestProvider';
+import { ManifestProvider } from '../forms/manifestProvider';
 
-// jest.mock('../forms/manifestProvider');
+jest.mock('../forms/manifestProvider');
 
 describe('createPreviewPageContext', () => {
   it('should return the sections provided in the previewData', () => {
     const expectedContext = {
       sections: {
-        'some-section-id': {
+        'some-section': {
           answers: {},
         },
       },
     };
 
     const previewData = {
-      id: 'some-solution-id',
+      id: 'some-solution',
       sections: {
-        'some-section-id': {
+        'some-section': {
           answers: {},
         },
       },
     };
-
-    const context = createPreviewPageContext(previewData);
-
-    expect(context).toEqual(expectedContext);
-  });
-
-  it('should return the sections and sub sections provided in the previewData', () => {
-    const expectedContext = {
-      sections: {
-        'some-section-id': {
-          sections: {
-            'some-sub-section-id': {
-              sections: {
-                'browsers-supported': {
-                  answers: {
-                    'supported-browsers': ['Google Chrome', 'Safari'],
-                  },
-                },
-              },
-            },
-          },
-        },
-      },
-    };
-
-    const previewData = {
-      sections: {
-        'some-section-id': {
-          sections: {
-            'some-sub-section-id': {
-              sections: {
-                'browsers-supported': {
-                  answers: {
-                    'supported-browsers': ['google-chrome', 'safari'],
-                  },
-                },
-              },
-            },
-          },
-        },
-      },
-    };
-
-    // ManifestProvider.getOptionsManifest('some-section-id').mockReturnValue(undefined);
-    // ManifestProvider.getOptionsManifest('some-sub-section-id').mockReturnValue(undefined);
-    // ManifestProvider.getOptionsManifest('another-sub-section-id').mockReturnValue(
-    //   {
-    //     'some-question-id': {
-    //       options: {
-    //         'value-one': 'Value one',
-    //         'value-two': 'Value two',
-    //       },
-    //     },
-    //   },
-    // );
 
     const context = createPreviewPageContext(previewData);
 
@@ -85,9 +30,9 @@ describe('createPreviewPageContext', () => {
   it('should return the sections and updated values', () => {
     const expectedContext = {
       sections: {
-        'browsers-supported': {
+        'some-section': {
           answers: {
-            'supported-browsers': ['Google Chrome', 'Safari'],
+            'some-question': ['Value one', 'Value two'],
             'some-other-question': 'some value',
           },
         },
@@ -96,40 +41,38 @@ describe('createPreviewPageContext', () => {
 
     const previewData = {
       sections: {
-        'browsers-supported': {
+        'some-section': {
           answers: {
-            'supported-browsers': ['google-chrome', 'safari'],
+            'some-question': ['value-one', 'value-two'],
             'some-other-question': 'some value',
           },
         },
       },
     };
 
-    // ManifestProvider.getOptionsManifest('some-section-id').mockReturnValue(undefined);
-    // ManifestProvider.getOptionsManifest('some-sub-section-id').mockReturnValue(undefined);
-    // ManifestProvider.getOptionsManifest('another-sub-section-id').mockReturnValue(
-    //   {
-    //     'some-question-id': {
-    //       options: {
-    //         'value-one': 'Value one',
-    //         'value-two': 'Value two',
-    //       },
-    //     },
-    //   },
-    // );
+    ManifestProvider.prototype.getOptionsManifest.mockReturnValue(
+      {
+        'some-question': {
+          options: {
+            'value-one': 'Value one',
+            'value-two': 'Value two',
+          },
+        },
+      },
+    );
 
     const context = createPreviewPageContext(previewData);
 
     expect(context).toEqual(expectedContext);
   });
 
-  it('should return the sections and updated values', () => {
+  it('should return multiple sections and updated values for section with an options manifest', () => {
     const expectedContext = {
       sections: {
-        'browsers-supported': {
+        'some-section': {
           answers: {
-            'supported-browsers': ['Google Chrome', 'Safari'],
-            'some-question': 'some value',
+            'some-first-question': ['Value one', 'Value two'],
+            'some-second-question': 'some value',
           },
         },
         'some-other-section': {
@@ -142,10 +85,10 @@ describe('createPreviewPageContext', () => {
 
     const previewData = {
       sections: {
-        'browsers-supported': {
+        'some-section': {
           answers: {
-            'supported-browsers': ['google-chrome', 'safari'],
-            'some-question': 'some value',
+            'some-first-question': ['value-one', 'value-two'],
+            'some-second-question': 'some value',
           },
         },
         'some-other-section': {
@@ -155,6 +98,18 @@ describe('createPreviewPageContext', () => {
         },
       },
     };
+
+    ManifestProvider.prototype.getOptionsManifest.mockReturnValueOnce(
+      {
+        'some-first-question': {
+          options: {
+            'value-one': 'Value one',
+            'value-two': 'Value two',
+          },
+        },
+      },
+    );
+    ManifestProvider.prototype.getOptionsManifest.mockReturnValueOnce(undefined);
 
     const context = createPreviewPageContext(previewData);
 
@@ -192,6 +147,8 @@ describe('createPreviewPageContext', () => {
       },
     };
 
+    ManifestProvider.prototype.getOptionsManifest.mockReturnValueOnce(undefined);
+
     const context = createPreviewPageContext(previewData);
 
     expect(context).toEqual(expectedContext);
@@ -200,25 +157,25 @@ describe('createPreviewPageContext', () => {
   it('should return the sections and sub sections with updated values', () => {
     const expectedContext = {
       sections: {
-        'some-first-section-id': {
+        'some-first-section': {
           answers: {
             'some-first-question': 'some first data',
           },
         },
-        'some-section-id': {
+        'some-second-section': {
           sections: {
-            'some-other-section-id': {
+            'some-other-section': {
               sections: {
-                'browsers-supported': {
+                'some-other-sub-section': {
                   answers: {
-                    'supported-browsers': ['Google Chrome', 'Safari'],
-                    'some-other-question': 'some other value',
-                    'mobile-responsive': 'Yes',
+                    'some-question-1': ['Value one', 'Value two'],
+                    'some-question-2': 'some value',
+                    'some-question-3': 'Yes',
                   },
                 },
-                'some-section': {
+                'some-other-second-sub-section': {
                   answers: {
-                    'some-question': 'some, value',
+                    'some-other-question': 'some value',
                   },
                 },
               },
@@ -230,25 +187,25 @@ describe('createPreviewPageContext', () => {
 
     const previewData = {
       sections: {
-        'some-first-section-id': {
+        'some-first-section': {
           answers: {
             'some-first-question': 'some first data',
           },
         },
-        'some-section-id': {
+        'some-second-section': {
           sections: {
-            'some-other-section-id': {
+            'some-other-section': {
               sections: {
-                'browsers-supported': {
+                'some-other-sub-section': {
                   answers: {
-                    'supported-browsers': ['google-chrome', 'safari'],
-                    'some-other-question': 'some other value',
-                    'mobile-responsive': 'yes',
+                    'some-question-1': ['value-one', 'value-two'],
+                    'some-question-2': 'some value',
+                    'some-question-3': 'yes',
                   },
                 },
-                'some-section': {
+                'some-other-second-sub-section': {
                   answers: {
-                    'some-question': 'some, value',
+                    'some-other-question': 'some value',
                   },
                 },
               },
@@ -257,6 +214,25 @@ describe('createPreviewPageContext', () => {
         },
       },
     };
+
+    ManifestProvider.prototype.getOptionsManifest.mockReturnValueOnce(undefined);
+    ManifestProvider.prototype.getOptionsManifest.mockReturnValueOnce(
+      {
+        'some-question-1': {
+          options: {
+            'value-one': 'Value one',
+            'value-two': 'Value two',
+          },
+        },
+        'some-question-3': {
+          options: {
+            yes: 'Yes',
+            no: 'No',
+          },
+        },
+      },
+    );
+    ManifestProvider.prototype.getOptionsManifest.mockReturnValueOnce(undefined);
 
     const context = createPreviewPageContext(previewData);
 
