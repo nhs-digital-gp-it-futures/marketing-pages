@@ -75,7 +75,7 @@ describe('dashboard page', () => {
 
   it('should render the Submit for moderation button at the bottom of the page', (done) => {
     const context = {
-      previewUrl: '/S100000-001/preview',
+      submitForModerationUrl: '/S100000-001/submitForModeration',
     };
 
     const dummyApp = createDummyApp(context);
@@ -86,7 +86,7 @@ describe('dashboard page', () => {
 
         expect($('[data-test-id="dashboard-submit-for-moderation-button"] a').length).toEqual(1);
         expect($('[data-test-id="dashboard-submit-for-moderation-button"] a').text().trim()).toEqual('Submit for moderation');
-        expect($('[data-test-id="dashboard-submit-for-moderation-button"] a').attr('href')).toEqual('/S100000-001/preview');
+        expect($('[data-test-id="dashboard-submit-for-moderation-button"] a').attr('href')).toEqual('/S100000-001/submitForModeration');
 
         done();
       });
