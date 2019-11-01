@@ -27,6 +27,7 @@ describe('preview-section-table-row', () => {
     const context = {
       questionId: 'some-question-id',
       questionTitle: 'Some question title',
+      innerComponent: '<p>Some inner component</p>',
     };
 
     const dummyApp = createDummyApp(context);
@@ -35,13 +36,13 @@ describe('preview-section-table-row', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        expect($('[data-test-id="preview-section-table-row-some-question-id"]').text().trim()).toEqual('Some question title');
+        expect($('.nhsuk-summary-list__key').text().trim()).toEqual('Some question title');
 
         done();
       });
   });
 
-  it('should render innerComponent of the expandable section', (done) => {
+  it('should render innerComponent of the value of the row as an inner component', (done) => {
     const context = {
       questionId: 'some-question-id',
       innerComponent: '<p>Some inner component</p>',
@@ -54,6 +55,23 @@ describe('preview-section-table-row', () => {
         const $ = cheerio.load(res.text);
 
         expect($('[data-test-id="preview-section-table-row-some-question-id"] p').text().trim()).toEqual('Some inner component');
+
+        done();
+      });
+  });
+
+  it('should not render the row if inner component is not provided', (done) => {
+    const context = {
+      questionId: 'some-question-id',
+    };
+
+    const dummyApp = createDummyApp(context);
+    request(dummyApp)
+      .get('/')
+      .then((res) => {
+        const $ = cheerio.load(res.text);
+
+        expect($('[data-test-id="preview-section-table-row-some-question-id"]').length).toEqual(0);
 
         done();
       });
