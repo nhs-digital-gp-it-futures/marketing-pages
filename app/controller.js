@@ -1,19 +1,33 @@
 import axios from 'axios';
 import { ManifestProvider } from './forms/manifestProvider';
 import { createSectionPageContext } from './contextCreators/createSectionPageContext';
-import { createMarketingDashboardContext } from './contextCreators/createMarketingDashboardContext';
+import { createDashboardPageContext } from './contextCreators/createDashboardPageContext';
 import { createPreviewPageContext } from './contextCreators/createPreviewPageContext';
 import { validateSectionData } from './helpers/validateSectionData';
-import { findExistingMarketingDataForSection } from './helpers/findExistingMarketingDataForSection';
+import { transformSectionData } from './helpers/transformSectionData';
+import { createPostSectionResponse } from './helpers/createPostSectionResponse';
 
 export const getMarketingPageDashboardContext = async (solutionId) => {
   const dashboardManifest = new ManifestProvider().getDashboardManifest();
 
-  const solutionData = await axios.get(`http://localhost:8080/api/v1/Solutions/${solutionId}`);
-  const { solution } = solutionData.data;
+  const dashboardDataRaw = await axios.get(`http://localhost:8080/api/v1/Solutions/${solutionId}/dashboard`);
+  const dashboardData = dashboardDataRaw.data;
 
-  const context = createMarketingDashboardContext(
-    solutionId, dashboardManifest, solution.marketingData,
+  const context = createDashboardPageContext(
+    solutionId, dashboardManifest, dashboardData.sections,
+  );
+
+  return context;
+};
+
+export const getSubDashboardPageContext = async (solutionId, sectionId) => {
+  const dashboardManifest = new ManifestProvider().getSubDashboardManifest(sectionId);
+
+  const sectionData = await axios.get(`http://localhost:8080/api/v1/Solutions/${solutionId}/sections/${sectionId}`);
+  const { sections } = sectionData.data;
+
+  const context = createDashboardPageContext(
+    solutionId, dashboardManifest, sections,
   );
 
   return context;
@@ -21,30 +35,25 @@ export const getMarketingPageDashboardContext = async (solutionId) => {
 
 export const getSectionPageContext = async (solutionId, sectionId) => {
   const sectionManifest = new ManifestProvider().getSectionManifest(sectionId);
+  const optionsManifest = new ManifestProvider().getOptionsManifest(sectionId);
 
-  const solutionData = await axios.get(`http://localhost:8080/api/v1/Solutions/${solutionId}`);
-  const existingSolutionData = solutionData.data.solution;
+  const sectionData = await axios.get(`http://localhost:8080/api/v1/Solutions/${solutionId}/sections/${sectionId}`);
+  const formData = sectionData.data;
 
-  const formData = findExistingMarketingDataForSection(existingSolutionData, sectionManifest.id);
-
-  const context = createSectionPageContext(solutionId, sectionManifest, formData);
+  const context = createSectionPageContext(solutionId, sectionManifest, optionsManifest, formData);
 
   return context;
 };
-
-const convertToFormData = sectionData => ({
-  data: {
-    ...sectionData,
-  },
-});
 
 export const getSectionPageErrorContext = async (
   solutionId, sectionId, sectionData, validationErrors,
 ) => {
   const sectionManifest = new ManifestProvider().getSectionManifest(sectionId);
+  const optionsManifest = new ManifestProvider().getOptionsManifest(sectionId);
 
-  const formData = convertToFormData(sectionData);
-  const context = createSectionPageContext(solutionId, sectionManifest, formData, validationErrors);
+  const context = createSectionPageContext(
+    solutionId, sectionManifest, optionsManifest, sectionData, validationErrors,
+  );
 
   return context;
 };
@@ -55,19 +64,21 @@ export const validateSection = (sectionId, sectionData) => {
 };
 
 export const postSection = async (solutionId, sectionId, sectionData) => {
-  await axios.put(`http://localhost:8080/api/v1/Solutions/${solutionId}/sections/${sectionId}`, sectionData);
+  const sectionManifest = new ManifestProvider().getSectionManifest(sectionId);
+  const transformedSectionData = transformSectionData(sectionId, sectionManifest, sectionData);
 
-  return true;
+  await axios.put(`http://localhost:8080/api/v1/Solutions/${solutionId}/sections/${sectionId}`, transformedSectionData);
+
+  const response = createPostSectionResponse(solutionId, sectionManifest);
+
+  return response;
 };
 
-export const getPreviewPageContext = async (solutionId, previewValidationErrors) => {
-  const previewManifest = new ManifestProvider().getPreviewManifest();
-  const solutionData = await axios.get(`http://localhost:8080/api/v1/Solutions/${solutionId}`);
-  const existingSolutionData = solutionData.data.solution;
+export const getPreviewPageContext = async (solutionId) => {
+  const previewDataRaw = await axios.get(`http://localhost:8080/api/v1/Solutions/${solutionId}/preview`);
+  const previewData = previewDataRaw.data;
 
-  const context = createPreviewPageContext(
-    solutionId, previewManifest, existingSolutionData, previewValidationErrors,
-  );
+  const context = createPreviewPageContext(previewData);
 
   return context;
 };

@@ -67,7 +67,7 @@ describe('dashboard page', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        expect($('[data-test-id="dashboard-sectionGroup-1"]').length).toEqual(1);
+        expect($('[data-test-id^="dashboard-sectionGroup"]').length).toEqual(1);
 
         done();
       });

@@ -1,0 +1,16 @@
+{% from '../components/preview-section-table-row.njk' import previewSectionTableRow %}
+{% from '../components/preview-question-data-bulletlist.njk' import previewQuestionDataBulletlist %}
+{% from '../components/preview-question-data-text.njk' import previewQuestionDataText %}
+
+{% macro previewBrowserBased(section) %}
+  <dl data-test-id="preview-section-table-browser-based" class="nhsuk-summary-list">
+    {{ previewSectionTableRow(
+      'supported-browsers', 
+      'Browsers Supported', 
+      previewQuestionDataBulletlist(section.sections['browsers-supported'].answers['supported-browsers'])) }}
+    {{ previewSectionTableRow(
+      'mobile-responsive', 
+      'Mobile responsive', 
+      previewQuestionDataText(section.sections['browsers-supported'].answers['mobile-responsive'])) }}
+  <dl>
+{% endmacro %}

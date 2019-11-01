@@ -1,547 +1,241 @@
 import { createPreviewPageContext } from './createPreviewPageContext';
+import { ManifestProvider } from '../forms/manifestProvider';
+
+jest.mock('../forms/manifestProvider');
 
 describe('createPreviewPageContext', () => {
-  it('should create a context from the preview manifest with a title', () => {
+  it('should return the sections provided in the previewData', () => {
     const expectedContext = {
-      submitPreviewUrl: '/some-solution-id/submitPreview',
-      sections: [
-        {
-          id: 'some-id',
-          title: 'some section title',
-          questions: [{
-            id: 'some-question-id',
-          }],
+      sections: {
+        'some-section': {
+          answers: {},
         },
-      ],
-    };
-
-    const previewManifest = [
-      {
-        id: 'some-id',
-        title: 'some section title',
-        questions: [{
-          id: 'some-question-id',
-        }],
-      },
-    ];
-
-    const existingSolutionData = {
-      marketingData: {
-        sections: [
-          {
-            id: 'some-id',
-            data: {},
-            mandatory: ['some-question-id'],
-          },
-        ],
       },
     };
 
-    const context = createPreviewPageContext('some-solution-id', previewManifest, existingSolutionData);
+    const previewData = {
+      id: 'some-solution',
+      sections: {
+        'some-section': {
+          answers: {},
+        },
+      },
+    };
+
+    const context = createPreviewPageContext(previewData);
 
     expect(context).toEqual(expectedContext);
   });
 
-  it('should create a context from the preview manifest with mulitple titles', () => {
+  it('should return the sections and updated values', () => {
     const expectedContext = {
-      submitPreviewUrl: '/some-solution-id/submitPreview',
-      sections: [
-        {
-          id: 'some-first-id',
-          title: 'some first section title',
-          questions: [{
-            id: 'some-first-question-id',
-          }],
-        },
-        {
-          id: 'some-second-id',
-          title: 'some second section title',
-          questions: [{
-            id: 'some-second-question-id',
-          }],
-        },
-      ],
-    };
-
-    const previewManifest = [
-      {
-        id: 'some-first-id',
-        title: 'some first section title',
-        questions: [{
-          id: 'some-first-question-id',
-        }],
-      },
-      {
-        id: 'some-second-id',
-        title: 'some second section title',
-        questions: [{
-          id: 'some-second-question-id',
-        }],
-      },
-    ];
-
-    const existingSolutionData = {
-      marketingData: {
-        sections: [
-          {
-            id: 'some-first-id',
-            data: {},
-            mandatory: ['some-first-question-id'],
+      sections: {
+        'some-section': {
+          answers: {
+            'some-question': ['Value one', 'Value two'],
+            'some-other-question': 'some value',
           },
-          {
-            id: 'some-second-id',
-            data: {},
-            mandatory: ['some-second-question-id'],
-          },
-        ],
+        },
       },
     };
 
-    const context = createPreviewPageContext('some-solution-id', previewManifest, existingSolutionData);
+    const previewData = {
+      sections: {
+        'some-section': {
+          answers: {
+            'some-question': ['value-one', 'value-two'],
+            'some-other-question': 'some value',
+          },
+        },
+      },
+    };
+
+    ManifestProvider.prototype.getOptionsManifest.mockReturnValue(
+      {
+        'some-question': {
+          options: {
+            'value-one': 'Value one',
+            'value-two': 'Value two',
+          },
+        },
+      },
+    );
+
+    const context = createPreviewPageContext(previewData);
 
     expect(context).toEqual(expectedContext);
   });
 
-  it('should create a context from the preview manifest with one section and one question', () => {
+  it('should return multiple sections and updated values for section with an options manifest', () => {
     const expectedContext = {
-      submitPreviewUrl: '/some-solution-id/submitPreview',
-      sections: [
-        {
-          id: 'some-first-id',
-          title: 'some first section title',
-          questions: [
-            {
-              id: 'some-question-id',
-              title: 'some question preview title',
-              type: 'some-question-type',
-              data: 'some question data',
-            },
-          ],
+      sections: {
+        'some-section': {
+          answers: {
+            'some-first-question': ['Value one', 'Value two'],
+            'some-second-question': 'some value',
+          },
         },
-      ],
+        'some-other-section': {
+          answers: {
+            'some-other-question': 'some other value',
+          },
+        },
+      },
     };
 
-    const previewManifest = [
+    const previewData = {
+      sections: {
+        'some-section': {
+          answers: {
+            'some-first-question': ['value-one', 'value-two'],
+            'some-second-question': 'some value',
+          },
+        },
+        'some-other-section': {
+          answers: {
+            'some-other-question': 'some other value',
+          },
+        },
+      },
+    };
+
+    ManifestProvider.prototype.getOptionsManifest.mockReturnValueOnce(
       {
-        id: 'some-first-id',
-        title: 'some first section title',
-        questions: [
-          {
-            id: 'some-question-id',
-            type: 'some-question-type',
-            preview: {
-              title: 'some question preview title',
-            },
+        'some-first-question': {
+          options: {
+            'value-one': 'Value one',
+            'value-two': 'Value two',
           },
-        ],
+        },
       },
-    ];
+    );
+    ManifestProvider.prototype.getOptionsManifest.mockReturnValueOnce(undefined);
 
-    const existingSolutionData = {
-      marketingData: {
-        sections: [
-          {
-            id: 'some-first-id',
-            data: {
-              'some-question-id': 'some question data',
-            },
-            status: 'COMPLETE',
-          },
-        ],
-      },
-    };
-
-    const context = createPreviewPageContext('some-solution-id', previewManifest, existingSolutionData);
+    const context = createPreviewPageContext(previewData);
 
     expect(context).toEqual(expectedContext);
   });
 
-  it('should override the question type with the type provided in the preview config for the question', () => {
+  it('should return the sections and sub sections', () => {
     const expectedContext = {
-      submitPreviewUrl: '/some-solution-id/submitPreview',
-      sections: [
-        {
-          id: 'some-first-id',
-          title: 'some first section title',
-          questions: [
-            {
-              id: 'some-question-id',
-              title: 'some question preview title',
-              type: 'some-overrided-preview-type',
-              data: 'some question data',
+      sections: {
+        'some-section-id': {
+          sections: {
+            'some-sub-section-id': {
+              answers: {
+                'some-question': 'some value',
+                'some-other-question': 'some other value',
+              },
             },
-          ],
+          },
         },
-      ],
-    };
-
-    const previewManifest = [
-      {
-        id: 'some-first-id',
-        title: 'some first section title',
-        questions: [
-          {
-            id: 'some-question-id',
-            type: 'some-question-type',
-            preview: {
-              title: 'some question preview title',
-              type: 'some-overrided-preview-type',
-            },
-          },
-        ],
-      },
-    ];
-
-    const existingSolutionData = {
-      marketingData: {
-        sections: [
-          {
-            id: 'some-first-id',
-            data: {
-              'some-question-id': 'some question data',
-            },
-            status: 'COMPLETE',
-          },
-        ],
       },
     };
 
-    const context = createPreviewPageContext('some-solution-id', previewManifest, existingSolutionData);
+    const previewData = {
+      sections: {
+        'some-section-id': {
+          sections: {
+            'some-sub-section-id': {
+              answers: {
+                'some-question': 'some value',
+                'some-other-question': 'some other value',
+              },
+            },
+          },
+        },
+      },
+    };
+
+    ManifestProvider.prototype.getOptionsManifest.mockReturnValueOnce(undefined);
+
+    const context = createPreviewPageContext(previewData);
 
     expect(context).toEqual(expectedContext);
   });
 
-  it('should create a context from the preview manifest and not include the title of the question if not provided', () => {
+  it('should return the sections and sub sections with updated values', () => {
     const expectedContext = {
-      submitPreviewUrl: '/some-solution-id/submitPreview',
-      sections: [
-        {
-          id: 'some-first-id',
-          title: 'some first section title',
-          questions: [
-            {
-              id: 'some-question-id',
-              type: 'some-question-type',
-              data: 'some question data',
-            },
-          ],
+      sections: {
+        'some-first-section': {
+          answers: {
+            'some-first-question': 'some first data',
+          },
         },
-      ],
-    };
-
-    const previewManifest = [
-      {
-        id: 'some-first-id',
-        title: 'some first section title',
-        questions: [
-          {
-            id: 'some-question-id',
-            type: 'some-question-type',
-          },
-        ],
-      },
-    ];
-
-    const existingSolutionData = {
-      marketingData: {
-        sections: [
-          {
-            id: 'some-first-id',
-            data: {
-              'some-question-id': 'some question data',
-            },
-            status: 'COMPLETE',
-          },
-        ],
-      },
-    };
-
-    const context = createPreviewPageContext('some-solution-id', previewManifest, existingSolutionData);
-
-    expect(context).toEqual(expectedContext);
-  });
-
-  it('should create a context from the preview manifest with one section and one question with existing data', () => {
-    const expectedContext = {
-      submitPreviewUrl: '/some-solution-id/submitPreview',
-      sections: [
-        {
-          id: 'some-section-id',
-          title: 'some section title',
-          questions: [
-            {
-              id: 'some-question-id',
-              title: 'some question preview title',
-              data: 'some question data',
-            },
-          ],
-        },
-      ],
-    };
-
-    const previewManifest = [
-      {
-        id: 'some-section-id',
-        title: 'some section title',
-        questions: [
-          {
-            id: 'some-question-id',
-            preview: {
-              title: 'some question preview title',
-            },
-          },
-        ],
-      },
-    ];
-
-    const existingSolutionData = {
-      marketingData: {
-        sections: [
-          {
-            id: 'some-section-id',
-            data: {
-              'some-question-id': 'some question data',
-            },
-            status: 'COMPLETE',
-          },
-        ],
-      },
-    };
-
-    const context = createPreviewPageContext('some-solution-id', previewManifest, existingSolutionData);
-
-    expect(context).toEqual(expectedContext);
-  });
-
-  it('should not create question if optional and no data', () => {
-    const expectedContext = {
-      submitPreviewUrl: '/some-solution-id/submitPreview',
-      sections: [
-        {
-          id: 'some-section-id',
-          title: 'some section title',
-          questions: [
-            {
-              id: 'some-question-id',
-              data: 'some question data',
-            },
-          ],
-        },
-      ],
-    };
-
-    const previewManifest = [
-      {
-        id: 'some-section-id',
-        title: 'some section title',
-        questions: [
-          {
-            id: 'some-question-id',
-          },
-          {
-            id: 'some-other-question-id',
-          },
-        ],
-      },
-    ];
-
-    const existingSolutionData = {
-      marketingData: {
-        sections: [
-          {
-            id: 'some-section-id',
-            data: {
-              'some-question-id': 'some question data',
-            },
-            mandatory: [],
-            status: 'COMPLETE',
-          },
-        ],
-      },
-    };
-
-    const context = createPreviewPageContext('some-solution-id', previewManifest, existingSolutionData);
-
-    expect(context).toEqual(expectedContext);
-  });
-
-  it('should create question if requirement is mandatory and whether there is data or not', () => {
-    const expectedContext = {
-      submitPreviewUrl: '/some-solution-id/submitPreview',
-      sections: [
-        {
-          id: 'some-section-id',
-          title: 'some section title',
-          questions: [
-            {
-              id: 'some-question-id',
-            },
-          ],
-        },
-      ],
-    };
-
-    const previewManifest = [
-      {
-        id: 'some-section-id',
-        title: 'some section title',
-        questions: [
-          {
-            id: 'some-question-id',
-          },
-          {
-            id: 'some-other-question-id',
-          },
-        ],
-      },
-    ];
-
-    const existingSolutionData = {
-      marketingData: {
-        sections: [
-          {
-            id: 'some-section-id',
-            data: {},
-            mandatory: ['some-question-id'],
-          },
-        ],
-      },
-    };
-
-    const context = createPreviewPageContext('some-solution-id', previewManifest, existingSolutionData);
-
-    expect(context).toEqual(expectedContext);
-  });
-
-  it('should not create section if it has no questions', () => {
-    const expectedContext = {
-      submitPreviewUrl: '/some-solution-id/submitPreview',
-      sections: [
-        {
-          id: 'some-section-id',
-          title: 'some section title',
-          questions: [
-            {
-              id: 'some-question-id',
-            },
-          ],
-        },
-      ],
-    };
-
-    const previewManifest = [
-      {
-        id: 'some-section-id',
-        title: 'some section title',
-        questions: [
-          {
-            id: 'some-question-id',
-          },
-        ],
-      },
-      {
-        id: 'some-other-section-id',
-        title: 'some other section title',
-        questions: [
-          {
-            id: 'some-other-question-id',
-          },
-        ],
-      },
-    ];
-
-    const existingSolutionData = {
-      marketingData: {
-        sections: [
-          {
-            id: 'some-section-id',
-            data: {},
-            mandatory: ['some-question-id'],
-          },
-          {
-            id: 'some-other-section-id',
-            data: {},
-            mandatory: [],
-          },
-        ],
-      },
-    };
-
-    const context = createPreviewPageContext('some-solution-id', previewManifest, existingSolutionData);
-
-    expect(context).toEqual(expectedContext);
-  });
-
-  describe('when previewValidationErrors are provided', () => {
-    it('should create a context with the error message supplied for the question missing mandatory data', () => {
-      const expectedContext = {
-        submitPreviewUrl: '/some-solution-id/submitPreview',
-        errors: [
-          {
-            text: 'some question is a required field',
-            href: '#some-question-id',
-          },
-        ],
-        sections: [
-          {
-            id: 'some-section-id',
-            title: 'some section title',
-            questions: [
-              {
-                id: 'some-question-id',
-                error: {
-                  message: 'some question is a required field',
+        'some-second-section': {
+          sections: {
+            'some-other-section': {
+              sections: {
+                'some-other-sub-section': {
+                  answers: {
+                    'some-question-1': ['Value one', 'Value two'],
+                    'some-question-2': 'some value',
+                    'some-question-3': 'Yes',
+                  },
+                },
+                'some-other-second-sub-section': {
+                  answers: {
+                    'some-other-question': 'some value',
+                  },
                 },
               },
-            ],
+            },
           },
-        ],
-      };
+        },
+      },
+    };
 
-      const previewManifest = [
-        {
-          id: 'some-section-id',
-          title: 'some section title',
-          questions: [
-            {
-              id: 'some-question-id',
-              submitValidations: [
-                {
-                  type: 'required',
-                  message: 'some question is a required field',
+    const previewData = {
+      sections: {
+        'some-first-section': {
+          answers: {
+            'some-first-question': 'some first data',
+          },
+        },
+        'some-second-section': {
+          sections: {
+            'some-other-section': {
+              sections: {
+                'some-other-sub-section': {
+                  answers: {
+                    'some-question-1': ['value-one', 'value-two'],
+                    'some-question-2': 'some value',
+                    'some-question-3': 'yes',
+                  },
                 },
-              ],
+                'some-other-second-sub-section': {
+                  answers: {
+                    'some-other-question': 'some value',
+                  },
+                },
+              },
             },
-            {
-              id: 'some-other-question-id',
-            },
-          ],
+          },
         },
-      ];
+      },
+    };
 
-      const existingSolutionData = {
-        marketingData: {
-          sections: [
-            {
-              id: 'some-section-id',
-              data: {},
-              mandatory: ['some-question-id'],
-            },
-          ],
+    ManifestProvider.prototype.getOptionsManifest.mockReturnValueOnce(undefined);
+    ManifestProvider.prototype.getOptionsManifest.mockReturnValueOnce(
+      {
+        'some-question-1': {
+          options: {
+            'value-one': 'Value one',
+            'value-two': 'Value two',
+          },
         },
-      };
-
-      const previewValidationErrors = {
-        'some-section-id': {
-          required: ['some-question-id'],
+        'some-question-3': {
+          options: {
+            yes: 'Yes',
+            no: 'No',
+          },
         },
-      };
+      },
+    );
+    ManifestProvider.prototype.getOptionsManifest.mockReturnValueOnce(undefined);
 
-      const context = createPreviewPageContext(
-        'some-solution-id', previewManifest, existingSolutionData, previewValidationErrors,
-      );
+    const context = createPreviewPageContext(previewData);
 
-      expect(context).toEqual(expectedContext);
-    });
+    expect(context).toEqual(expectedContext);
   });
 });

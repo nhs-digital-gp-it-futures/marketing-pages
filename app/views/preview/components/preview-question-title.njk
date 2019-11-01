@@ -1,0 +1,11 @@
+{% from 'components/label/macro.njk' import label %}
+{% from 'components/error-message/macro.njk' import errorMessage %}
+
+{% macro previewQuestionTitle(questionId, questionTitle) %}
+  <div data-test-id="preview-question-title">
+    {{ label({
+      "classes": "nhsuk-label--s",
+      "text": questionTitle
+    }) }}
+  </div>
+{% endmacro %}

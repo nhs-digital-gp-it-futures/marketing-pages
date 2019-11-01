@@ -14,6 +14,33 @@
           "title": "Features"
         }
       ]
+    },
+    {
+      "id": "client-application-type",
+      "title": "Client application type",
+      "sections": [
+        {
+          "id": "client-application-types",
+          "title": "Client application type",
+          "sections": [
+            {
+              "id": "browser-based",
+              "title": "Browser based",
+              "defaultMessage": "Select from client application types"
+            },
+            {
+              "id": "native-mobile",
+              "title": "Native mobile or tablet",
+              "defaultMessage": "Select from client application types"
+            },
+            {
+              "id": "native-desktop",
+              "title": "Native desktop",
+              "defaultMessage": "Select from client application types"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

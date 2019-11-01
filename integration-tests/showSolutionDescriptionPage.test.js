@@ -1,19 +1,23 @@
 import nock from 'nock';
 import { Selector, ClientFunction } from 'testcafe';
 import { ManifestProvider } from '../app/forms/manifestProvider';
-import aSolutionFixture from './fixtures/aSolution.json';
-import aSolutionWithMarketingDataFixture from './fixtures/aSolutionWithMarketingData.json';
+import dashboardWithCompleteSections from './fixtures/dashboardWithCompleteSections.json';
 
+const solutionDescriptionMarketingData = {
+  summary: 'The solution summary',
+  description: 'The solution description',
+  link: 'The solution link',
+};
 
 const mocks = (withMarketingData) => {
   if (withMarketingData) {
     nock('http://localhost:8080')
-      .get('/api/v1/Solutions/S100000-001')
-      .reply(200, aSolutionWithMarketingDataFixture);
+      .get('/api/v1/Solutions/S100000-001/sections/solution-description')
+      .reply(200, solutionDescriptionMarketingData);
   } else {
     nock('http://localhost:8080')
-      .get('/api/v1/Solutions/S100000-001')
-      .reply(200, aSolutionFixture);
+      .get('/api/v1/Solutions/S100000-001/sections/solution-description')
+      .reply(200, {});
   }
 };
 
@@ -27,7 +31,7 @@ fixture('Show Solution Description page');
 test('should render the Solution Description page title', async (t) => {
   pageSetup(t);
 
-  const title = Selector('h2');
+  const title = Selector('[data-test-id="section-title"]');
 
   await t
     .expect(title.innerText).eql('Solution description');
@@ -100,12 +104,21 @@ test('should populate the text fields with existing data', async (t) => {
     .expect(theQuestions.find('[data-test-id="text-field-link"]').find('input').value).eql('The solution link');
 });
 
+test('should render the submit button', async (t) => {
+  pageSetup(t);
+
+  const submitButton = Selector('[data-test-id="section-submit-button"]');
+
+  await t
+    .expect(submitButton.find('button').count).eql(1);
+});
+
 test('should allow posting an empty form and navigate back to the dashboard', async (t) => {
   pageSetup(t);
 
   nock('http://localhost:8080')
-    .get('/api/v1/Solutions/S100000-001')
-    .reply(200, aSolutionFixture);
+    .get('/api/v1/Solutions/S100000-001/dashboard')
+    .reply(200, dashboardWithCompleteSections);
 
   nock('http://localhost:8080')
     .put('/api/v1/Solutions/S100000-001/sections/solution-description')
@@ -156,4 +169,30 @@ test('should show error summary and validation for questions when they exceed th
     .expect(solutionDescription.find('.nhsuk-error-message').innerText).eql('Error:\nSolution Description validation error message')
     .expect(solutionLink.find('.nhsuk-input--error').exists).ok()
     .expect(solutionLink.find('.nhsuk-error-message').innerText).eql('Error:\nSolution Link validation error message');
+});
+
+test('should render the return to all sections link', async (t) => {
+  pageSetup(t);
+
+  const link = Selector('[data-test-id="section-back-link"] a');
+
+  await t
+    .expect(link.innerText).eql('Return to all sections');
+});
+
+test('should return to the marketing data dashboard when the return to all sections is clicked', async (t) => {
+  pageSetup(t);
+
+  nock('http://localhost:8080')
+    .get('/api/v1/Solutions/S100000-001/dashboard')
+    .reply(200, dashboardWithCompleteSections);
+
+  const getLocation = ClientFunction(() => document.location.href);
+
+  const link = Selector('[data-test-id="section-back-link"]');
+
+  await t
+    .click(link.find('a'))
+    .expect(getLocation()).notContains('section')
+    .expect(getLocation()).contains('S100000-001');
 });

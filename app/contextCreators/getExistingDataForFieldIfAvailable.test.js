@@ -9,7 +9,7 @@ describe('getExistingDataIfAvailable', () => {
     expect(existingDataForField).toEqual(undefined);
   });
 
-  it('should return undefined if the exisitingDataForSection if there is no data property', () => {
+  it('should return undefined if the exisitingDataForSection provided is an empty object', () => {
     const exisitingDataForSection = {};
 
     const existingDataForField = getExistingDataForFieldIfAvailable(exisitingDataForSection, 'some-question-id', 0);
@@ -17,16 +17,8 @@ describe('getExistingDataIfAvailable', () => {
     expect(existingDataForField).toEqual(undefined);
   });
 
-  it('should return undefined if the exisitingDataForSection if the question does not exist within the data property', () => {
-    const exisitingDataForSection = { data: {} };
-
-    const existingDataForField = getExistingDataForFieldIfAvailable(exisitingDataForSection, 'some-question-id', 0);
-
-    expect(existingDataForField).toEqual(undefined);
-  });
-
   it('should return undefined if the exisitingDataForSection if the value does not exist for the question', () => {
-    const exisitingDataForSection = { data: { 'some-question-id': [] } };
+    const exisitingDataForSection = { 'some-question-id': [] };
 
     const existingDataForField = getExistingDataForFieldIfAvailable(exisitingDataForSection, 'some-question-id', 0);
 
@@ -34,7 +26,7 @@ describe('getExistingDataIfAvailable', () => {
   });
 
   it('should return the value at the specific index if existing data does exist for the question', () => {
-    const exisitingDataForSection = { data: { 'some-question-id': ['some-existing-data'] } };
+    const exisitingDataForSection = { 'some-question-id': ['some-existing-data'] };
 
     const existingDataForField = getExistingDataForFieldIfAvailable(exisitingDataForSection, 'some-question-id', 0);
 

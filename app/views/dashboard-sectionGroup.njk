@@ -1,13 +1,15 @@
-{% from './dashboard-section.njk' import dashboardSection %}
+{% from './dashboard-section-row.njk' import dashboardSectionRow %}
 
-{% macro dashboardSectionGroup(sectionGroup, index) %}
-  <div data-test-id="dashboard-sectionGroup-{{index}}">
-    <h2 class="app-section-list__section">
-      {{ sectionGroup.title }}
-    </h2>
+{% macro dashboardSectionGroup(sectionGroup) %}
+  <div data-test-id="dashboard-sectionGroup-{{sectionGroup.id}}">
+    <div class="nhsuk_title">
+      <h2 class="app-section-list__section">
+        {{ sectionGroup.title }}
+      </h2>
+    </div>
     <ul class="app-section-list__items">
       {% for section in sectionGroup.sections %}
-        {{ dashboardSection(section, loop.index) }}
+        {{ dashboardSectionRow(section) }}
       {% endfor %}
     </ul>
   </div>

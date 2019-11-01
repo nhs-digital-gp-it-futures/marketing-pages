@@ -17,6 +17,8 @@ describe('createSectionPageContext', () => {
           id: 'features-listing',
         },
       ],
+      returnToDashboardUrl: '/some-solution-id',
+      submitText: 'some-submit-text',
     };
 
     const sectionManifest = {
@@ -33,6 +35,7 @@ describe('createSectionPageContext', () => {
           id: 'features-listing',
         },
       ],
+      submitText: 'some-submit-text',
     };
 
     const context = createSectionPageContext('some-solution-id', sectionManifest);
@@ -62,6 +65,7 @@ describe('createSectionPageContext', () => {
             ],
           },
         ],
+        returnToDashboardUrl: '/some-solution-id',
       };
 
       const sectionManifest = {
@@ -104,16 +108,15 @@ describe('createSectionPageContext', () => {
             ],
           },
         ],
+        returnToDashboardUrl: '/some-solution-id',
       };
 
       const formData = {
-        data: {
-          fieldId: [
-            'Field A',
-            'Field B',
-            'Field C',
-          ],
-        },
+        fieldId: [
+          'Field A',
+          'Field B',
+          'Field C',
+        ],
       };
 
       const sectionManifest = {
@@ -127,7 +130,9 @@ describe('createSectionPageContext', () => {
         ],
       };
 
-      const context = createSectionPageContext('some-solution-id', sectionManifest, formData);
+      const optionsManifest = {};
+
+      const context = createSectionPageContext('some-solution-id', sectionManifest, optionsManifest, formData);
 
       expect(context).toEqual(expectedContext);
     });
@@ -135,7 +140,12 @@ describe('createSectionPageContext', () => {
     it('should create a context for bulletpoint-list type question with existing data populated and a validation error', () => {
       const expectedContext = {
         submitActionUrl: '/some-solution-id/section/some-section-id',
-        errors: [],
+        errors: [
+          {
+            text: 'some really helpful error message',
+            href: '#fieldId',
+          },
+        ],
         questions: [
           {
             id: 'fieldId',
@@ -159,16 +169,15 @@ describe('createSectionPageContext', () => {
             ],
           },
         ],
+        returnToDashboardUrl: '/some-solution-id',
       };
 
       const formData = {
-        data: {
-          fieldId: [
-            'Field A',
-            'Field B is too big',
-            'Field C',
-          ],
-        },
+        fieldId: [
+          'Field A',
+          'Field B is too big',
+          'Field C',
+        ],
       };
 
       const validationErrors = [
@@ -197,7 +206,235 @@ describe('createSectionPageContext', () => {
         ],
       };
 
-      const context = createSectionPageContext('some-solution-id', sectionManifest, formData, validationErrors);
+      const optionsManifest = {};
+
+      const context = createSectionPageContext('some-solution-id', sectionManifest, optionsManifest, formData, validationErrors);
+
+      expect(context).toEqual(expectedContext);
+    });
+  });
+
+  describe('when the question type is a checkbox-options', () => {
+    it('should create a context for checkbox-options type question', () => {
+      const expectedContext = {
+        submitActionUrl: '/some-solution-id/section/some-section-id',
+        errors: [],
+        questions: [
+          {
+            id: 'fieldId',
+            type: 'checkbox-options',
+            options: [
+              {
+                text: 'option 1',
+                value: 'option-1',
+              },
+              {
+                text: 'option 2',
+                value: 'option-2',
+              },
+              {
+                text: 'option 3',
+                value: 'option-3',
+              },
+            ],
+          },
+        ],
+        returnToDashboardUrl: '/some-solution-id',
+      };
+
+      const sectionManifest = {
+        id: 'some-section-id',
+        questions: [
+          {
+            id: 'fieldId',
+            type: 'checkbox-options',
+          },
+        ],
+      };
+
+      const optionsManifest = {
+        fieldId: {
+          options: {
+            'option-1': 'option 1',
+            'option-2': 'option 2',
+            'option-3': 'option 3',
+          },
+        },
+      };
+
+      const context = createSectionPageContext('some-solution-id', sectionManifest, optionsManifest);
+
+      expect(context).toEqual(expectedContext);
+    });
+
+    it('should create a context for checkbox-options type question with existing data populated', () => {
+      const expectedContext = {
+        submitActionUrl: '/some-solution-id/section/some-section-id',
+        errors: [],
+        questions: [
+          {
+            id: 'fieldId',
+            type: 'checkbox-options',
+            options: [
+              {
+                text: 'option 1',
+                value: 'option-1',
+                checked: true,
+              },
+              {
+                text: 'option 2',
+                value: 'option-2',
+              },
+              {
+                text: 'option 3',
+                value: 'option-3',
+                checked: true,
+              },
+            ],
+          },
+        ],
+        returnToDashboardUrl: '/some-solution-id',
+      };
+
+      const sectionManifest = {
+        id: 'some-section-id',
+        questions: [
+          {
+            id: 'fieldId',
+            type: 'checkbox-options',
+          },
+        ],
+      };
+
+      const formData = {
+        fieldId: [
+          'option-1',
+          'option-3',
+        ],
+      };
+
+      const optionsManifest = {
+        fieldId: {
+          options: {
+            'option-1': 'option 1',
+            'option-2': 'option 2',
+            'option-3': 'option 3',
+          },
+        },
+      };
+
+      const context = createSectionPageContext('some-solution-id', sectionManifest, optionsManifest, formData);
+
+      expect(context).toEqual(expectedContext);
+    });
+  });
+
+  describe('when the question type is a radiobutton-options', () => {
+    it('should create a context for radiobutton-options type question', () => {
+      const expectedContext = {
+        submitActionUrl: '/some-solution-id/section/some-section-id',
+        errors: [],
+        questions: [
+          {
+            id: 'fieldId',
+            type: 'radiobutton-options',
+            options: [
+              {
+                text: 'option 1',
+                value: 'option-1',
+              },
+              {
+                text: 'option 2',
+                value: 'option-2',
+              },
+              {
+                text: 'option 3',
+                value: 'option-3',
+              },
+            ],
+          },
+        ],
+        returnToDashboardUrl: '/some-solution-id',
+      };
+
+      const sectionManifest = {
+        id: 'some-section-id',
+        questions: [
+          {
+            id: 'fieldId',
+            type: 'radiobutton-options',
+          },
+        ],
+      };
+
+      const optionsManifest = {
+        fieldId: {
+          options: {
+            'option-1': 'option 1',
+            'option-2': 'option 2',
+            'option-3': 'option 3',
+          },
+        },
+      };
+
+      const context = createSectionPageContext('some-solution-id', sectionManifest, optionsManifest);
+
+      expect(context).toEqual(expectedContext);
+    });
+
+    it('should create a context for radiobutton-options type question with existing data populated', () => {
+      const expectedContext = {
+        submitActionUrl: '/some-solution-id/section/some-section-id',
+        errors: [],
+        questions: [
+          {
+            id: 'fieldId',
+            type: 'radiobutton-options',
+            options: [
+              {
+                text: 'option 1',
+                value: 'option-1',
+                checked: true,
+              },
+              {
+                text: 'option 2',
+                value: 'option-2',
+              },
+              {
+                text: 'option 3',
+                value: 'option-3',
+              },
+            ],
+          },
+        ],
+        returnToDashboardUrl: '/some-solution-id',
+      };
+
+      const sectionManifest = {
+        id: 'some-section-id',
+        questions: [
+          {
+            id: 'fieldId',
+            type: 'radiobutton-options',
+          },
+        ],
+      };
+
+      const formData = {
+        fieldId: 'option-1',
+      };
+
+      const optionsManifest = {
+        fieldId: {
+          options: {
+            'option-1': 'option 1',
+            'option-2': 'option 2',
+            'option-3': 'option 3',
+          },
+        },
+      };
+
+      const context = createSectionPageContext('some-solution-id', sectionManifest, optionsManifest, formData);
 
       expect(context).toEqual(expectedContext);
     });
@@ -216,12 +453,11 @@ describe('createSectionPageContext', () => {
             data: 'some existing data',
           },
         ],
+        returnToDashboardUrl: '/some-solution-id',
       };
 
       const formData = {
-        data: {
-          fieldId: 'some existing data',
-        },
+        fieldId: 'some existing data',
       };
 
       const sectionManifest = {
@@ -235,7 +471,9 @@ describe('createSectionPageContext', () => {
         ],
       };
 
-      const context = createSectionPageContext('some-solution-id', sectionManifest, formData);
+      const optionsManifest = {};
+
+      const context = createSectionPageContext('some-solution-id', sectionManifest, optionsManifest, formData);
 
       expect(context).toEqual(expectedContext);
     });
@@ -259,12 +497,11 @@ describe('createSectionPageContext', () => {
             },
           },
         ],
+        returnToDashboardUrl: '/some-solution-id',
       };
 
       const formData = {
-        data: {
-          fieldId: 'some existing data',
-        },
+        fieldId: 'some existing data',
       };
 
       const validationErrors = [
@@ -291,7 +528,9 @@ describe('createSectionPageContext', () => {
         ],
       };
 
-      const context = createSectionPageContext('some-solution-id', sectionManifest, formData, validationErrors);
+      const optionsManifest = {};
+
+      const context = createSectionPageContext('some-solution-id', sectionManifest, optionsManifest, formData, validationErrors);
 
       expect(context).toEqual(expectedContext);
     });

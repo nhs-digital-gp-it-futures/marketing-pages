@@ -1,0 +1,41 @@
+{
+  "id": "Sln1",
+  "name": "MedicOnline",
+  "orgName": "Whateve",
+  "isFoundation": true,
+  "sections": {
+    "solution-description": {
+      "answers": {
+        "summary": "The solution summary",
+        "description": "The solution description",
+        "link": "The solution link"
+      }
+    },
+    "features": {
+      "answers": {
+        "listing": [
+          "Feature A",
+          "Feature B",
+          "Feature C"
+        ]
+      }
+    },
+    "client-application-types": {
+      "sections": {
+        "browser-based": {
+          "sections": {
+            "browsers-supported": {          
+              "answers": {
+                "supported-browsers": [
+                  "google-chrome",
+                  "mozilla-firefox"
+                ],
+                "mobile-responsive": "yes"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

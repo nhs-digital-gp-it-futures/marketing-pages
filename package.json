@@ -18,7 +18,7 @@
     "start": "babel-node server",
     "test:integration": "NODE_ENV=development babel-node integration-tests/testcafeRunner.js",
     "test:integration_win": "babel-node integration-tests/testcafeRunner.js",
-    "test": "jest --coverage",
+    "test": "jest",
     "prewatch": "npm run build:css",
     "watch": "concurrently \"npm run watch:scss\" \"npm run watch:js\" \"npm run watch:assets\"  \"npm start\"",
     "watch:scss": "npm run build:css -- -w",

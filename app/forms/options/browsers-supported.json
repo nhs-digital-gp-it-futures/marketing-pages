@@ -1,0 +1,20 @@
+{
+  "supported-browsers": {
+    "options": {
+      "google-chrome": "Google Chrome",
+      "microsoft-edge": "Microsoft Edge",
+      "mozilla-firefox": "Mozilla Firefox",
+      "opera": "Opera",
+      "safari": "Safari",
+      "chromium": "Chromium",
+      "internet-explorer-11": "Internet Explorer 11",
+      "internet-explorer-10": "Internet Explorer 10"
+    }
+  },
+  "mobile-responsive": {
+    "options": {
+      "yes": "Yes",
+      "no": "No"
+    } 
+  }
+}

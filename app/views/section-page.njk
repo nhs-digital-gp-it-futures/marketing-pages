@@ -1,4 +1,5 @@
 {% extends 'includes/layout.njk' %}
+{% from 'components/back-link/macro.njk' import backLink %}
 {% from 'components/button/macro.njk' import button %}
 {% from './section-question.njk' import sectionQuestion %}
 {% from './error-summary.njk' import errorSummary %}
@@ -20,6 +21,12 @@
       {% endfor %}
     </div>
 
+    {% if (warningAdvice) %}
+      <div data-test-id="section-warning-advice" class="nhsuk-inset-text">
+        <p>{{ warningAdvice }}</p>
+      </div>
+    {% endif %}  
+
     <form method="post" action="{{ submitActionUrl }}">
       {% for question in questions%}
         {{ sectionQuestion(question) }}
@@ -27,10 +34,17 @@
       
       <div data-test-id="section-submit-button">
         {{ button({
-          "text": "Save and return to all sections"
+          "text": submitText
         }) }}
       </div>
     </form>
+
+    <div data-test-id="section-back-link">
+      {{ backLink({
+        "href": returnToDashboardUrl,
+        "text": "Return to all sections"
+      }) }}
+    </div>
 
   </div>
 </div>

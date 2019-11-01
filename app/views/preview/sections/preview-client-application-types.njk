@@ -1,0 +1,24 @@
+{% from '../components/preview-expandable-section.njk' import previewExpandableSection %}
+{% from './preview-browser-based.njk' import previewBrowserBased %}
+
+{% macro previewClientApplicationTypes(section) %}
+  {% if section %}
+    <div data-test-id="preview-client-application-types">
+      <div class="nhsuk_title">
+        <h3>Client application type</h3>
+      </div>
+
+      <p>
+        Minimum recommended technical specifications needed for the Solution to function efficiently on an application or device.
+      </p>
+
+      {% if section.sections['browser-based'] %}
+        {{ previewExpandableSection('browser-based',
+            'Browser based application', 
+            previewBrowserBased(section.sections['browser-based'])) 
+        }}
+      {% endif %}
+
+    </div>
+  {% endif %}
+{% endmacro %}

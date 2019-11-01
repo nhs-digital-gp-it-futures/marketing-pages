@@ -1,19 +1,29 @@
-{% macro dashboardSection(section, index) %}
-  <li data-test-id="dashboard-section-{{index}}" class="app-section-list__item">
-    <div class="nhsuk-grid-column-one-half" >
+{% macro dashboardSection(section) %}
+  <li class="app-section-list__item">
+      <div class="nhsuk-grid-column-one-half" >
       <span data-test-id="dashboard-section-title" class="app-section-list__task-name">
-        <a href="{{ section.URL }}" aria-describedby="eligibility-completed">
+        {% if section.isActive %}
+          <a href="{{ section.URL }}">
+            {{ section.title }}
+          </a>
+        {% else %}
           {{ section.title }}
-        </a>
+        {% endif %}
       </span>
-    </div>
-    <div class="nhsuk-grid-column-two-quarters">
-      <span data-test-id="dashboard-section-requirement" class="app-section-list__task-name">
-        <p>{{ section.requirement }}</p>
-      </span>
-      <strong data-test-id="dashboard-section-status" class="govuk-tag app-section-list__task-completed" id="eligibility-completed">
-        {{ section.status }}
-      </strong>
-    </div>
+      </div>
+      <div class="nhsuk-grid-column-two-quarters">
+      {% if section.isActive %}
+        <span data-test-id="dashboard-section-requirement" class="app-section-list__task-name">
+          <p>{{ section.requirement }}</p>
+        </span>
+        <strong data-test-id="dashboard-section-status" class="govuk-tag app-section-list__task-completed" id="eligibility-completed">
+          {{ section.status }}
+        </strong>
+      {% else %}
+        <span data-test-id="dashboard-section-default-message" class="app-section-list__task-name">
+          <p>{{ section.defaultMessage }}</p>
+        </span>
+      {% endif %}
+      </div>
   </li>
 {% endmacro %}

@@ -1,21 +1,29 @@
 {% from './fields/bulletpoint-list.njk' import bulletpointList %}
 {% from './fields/textarea-field.njk' import textareaField %}
 {% from './fields/text-field.njk' import textField %}
+{% from './fields/checkbox-options.njk' import checkboxOptions %}
+{% from './fields/radiobutton-options.njk' import radiobuttonOptions %}
 
 {% macro sectionQuestion(question) %}
   <div data-test-id="section-question">
-    <div data-test-id="section-question-fields">
-      {% if (question.type === 'bulletpoint-list') %}
-        {{ bulletpointList(question) }}
-      {% endif %}
+    {% if (question.type === 'bulletpoint-list') %}
+      {{ bulletpointList(question) }}
+    {% endif %}
 
-      {% if (question.type === 'textarea-field') %}
-        {{ textareaField(question) }}
-      {% endif %}
+    {% if (question.type === 'textarea-field') %}
+      {{ textareaField(question) }}
+    {% endif %}
 
-      {% if (question.type === 'text-field') %}
-        {{ textField(question) }}
-      {% endif %}
-    </div>
+    {% if (question.type === 'text-field') %}
+      {{ textField(question) }}
+    {% endif %}
+
+    {% if (question.type === 'checkbox-options') %}
+      {{ checkboxOptions(question) }}
+    {% endif %}
+
+    {% if (question.type === 'radiobutton-options') %}
+      {{ radiobuttonOptions(question) }}
+    {% endif %}
   </div>
 {% endmacro %}
