@@ -56,6 +56,10 @@ test('should render the Submit for moderation button', async (t) => {
     .put('/api/v1/Solutions/S100000-001/SubmitForReview')
     .reply(204, {});
 
+  nock('http://localhost:8080')
+    .get('/api/v1/Solutions/S100000-001/dashboard')
+    .reply(200, dashboardWithIncompleteSections);
+
   const getLocation = ClientFunction(() => document.location.href);
 
   const submitForModerationButton = Selector('[data-test-id="dashboard-submit-for-moderation-button"] a');
