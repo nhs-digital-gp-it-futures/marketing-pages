@@ -38,7 +38,8 @@ const createSectionsContext = (
         URL: `/${solutionId}/${manifestSection.type}/${manifestSectionId}`,
         id: manifestSectionId,
         title: manifestSection.title,
-        status: doesDataExistForSection ? marketingDataSections[manifestSectionId].status : undefined,
+        status: doesDataExistForSection
+          ? marketingDataSections[manifestSectionId].status : undefined,
         requirement: doesDataExistForSection
           ? marketingDataSections[manifestSectionId].requirement : undefined,
         isActive: doesDataExistForSection,

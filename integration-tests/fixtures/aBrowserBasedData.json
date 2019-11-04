@@ -1,29 +1,24 @@
 {
-  "sections": [
-    {
-      "id": "browsers-supported",
+  "sections": {
+    "browsers-supported": {
       "status": "INCOMPLETE",
       "requirement": "Mandatory"
     },
-    {
-      "id": "plug-ins-or-extensions",
+    "plug-ins-or-extensions": {
       "status": "INCOMPLETE",
       "requirement": "Mandatory"
     },
-    {
-      "id": "connectivity-and-resolution",
+    "connectivity-and-resolution": {
       "status": "INCOMPLETE",
       "requirement": "Mandatory"
     },
-    {
-      "id": "hardware-requirements",
+    "hardware-requirements": {
       "status": "INCOMPLETE",
       "requirement": "Optional"
     },
-    {
-      "id": "additional-information",
+    "additional-information": {
       "status": "INCOMPLETE",
       "requirement": "Optional"
     }
-  ]
+  }
 }

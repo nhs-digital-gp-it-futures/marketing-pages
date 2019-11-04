@@ -53,8 +53,8 @@ test('should render the Submit for moderation button', async (t) => {
   pageSetup(t);
 
   nock('http://localhost:8080')
-    .get('/api/v1/Solutions/S100000-001/preview')
-    .reply(200, previewWithMarketingData);
+    .put('/api/v1/Solutions/S100000-001/SubmitForReview')
+    .reply(204, {});
 
   const getLocation = ClientFunction(() => document.location.href);
 
@@ -63,7 +63,7 @@ test('should render the Submit for moderation button', async (t) => {
   await t
     .expect(submitForModerationButton.innerText).eql('Submit for moderation')
     .click(submitForModerationButton)
-    .expect(getLocation()).contains('S100000-001/preview');
+    .expect(getLocation()).contains('S100000-001');
 });
 
 test('should render the About your solution section group', async (t) => {

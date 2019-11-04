@@ -1,22 +1,19 @@
 {
   "id": "S100000-001",
   "name": "Write on Time",
-  "sections": [
-    {
-      "id": "solution-description",
+  "sections": {
+    "solution-description": {
       "requirement": "Mandatory",
       "status": "INCOMPLETE"
     },
-    {
-      "id": "features",
+    "features": {
       "requirement": "Optional",
       "status": "INCOMPLETE"
     },
-    {
-      "id": "client-application-types",
+    "client-application-types": {
       "requirement": "Mandatory",
       "status": "INCOMPLETE",
-      "sections": []
+      "sections": {}
     }
-  ]
+  }
 }
