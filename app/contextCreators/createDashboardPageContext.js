@@ -46,15 +46,14 @@ const createSectionsContext = (
         sections: subSections,
       };
 
-      const sectionsAdded = sectionsAcc.concat(sectionContext);
       const errorsForSection = addErrors(manifestSectionId, manifestSection, validationErrors);
-      const errorsAdded = subSectionErrors
+      const accumulatedErrors = subSectionErrors
         ? errorsAcc.concat(subSectionErrors).concat(errorsForSection)
         : errorsAcc.concat(errorsForSection);
 
       return ({
-        errorsAcc: errorsAdded,
-        sectionsAcc: sectionsAdded,
+        errorsAcc: accumulatedErrors,
+        sectionsAcc: sectionsAcc.concat(sectionContext),
       });
     }, { errorsAcc: [], sectionsAcc: [] });
 
