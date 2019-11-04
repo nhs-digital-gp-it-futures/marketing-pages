@@ -7,7 +7,10 @@
       "sections": [
         {
           "id": "solution-description",
-          "title": "Solution description"
+          "title": "Solution description",
+          "errorResponse": {
+            "required": "Solution description is mandatory fill it in"
+          }
         },
         {
           "id": "features",
@@ -22,21 +25,33 @@
         {
           "id": "client-application-types",
           "title": "Client application type",
+          "errorResponse": {
+            "required": "Client application type is mandatory fill it in"
+          },
           "sections": [
             {
               "id": "browser-based",
               "title": "Browser based",
-              "defaultMessage": "Select from client application types"
+              "defaultMessage": "Select from client application types",
+              "errorResponse": {
+                "required": "Browser based is mandatory fill it in"
+              }
             },
             {
               "id": "native-mobile",
               "title": "Native mobile or tablet",
-              "defaultMessage": "Select from client application types"
+              "defaultMessage": "Select from client application types",
+              "errorResponse": {
+                "required": "Native mobile or tablet is mandatory fill it in"
+              }
             },
             {
               "id": "native-desktop",
               "title": "Native desktop",
-              "defaultMessage": "Select from client application types"
+              "defaultMessage": "Select from client application types",
+              "errorResponse": {
+                "required": "Native desktop is mandatory fill it in"
+              }
             }
           ]
         }

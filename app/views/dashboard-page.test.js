@@ -32,6 +32,24 @@ describe('dashboard page', () => {
       });
   });
 
+  it('should render the error summary if errors', (done) => {
+    const context = {
+      title: 'Title of the section',
+      errors: [{}],
+    };
+
+    const dummyApp = createDummyApp(context);
+    request(dummyApp)
+      .get('/')
+      .then((res) => {
+        const $ = cheerio.load(res.text);
+
+        expect($('[data-test-id="error-summary"]').length).toEqual(1);
+
+        done();
+      });
+  });
+
   it('should render the preview button at the top of the page', (done) => {
     const context = {
       previewUrl: '/S100000-001/preview',

@@ -7,14 +7,14 @@ import { validateSectionData } from './helpers/validateSectionData';
 import { transformSectionData } from './helpers/transformSectionData';
 import { createPostSectionResponse } from './helpers/createPostSectionResponse';
 
-export const getMarketingPageDashboardContext = async (solutionId) => {
+export const getMarketingPageDashboardContext = async (solutionId, validationErrors) => {
   const dashboardManifest = new ManifestProvider().getDashboardManifest();
 
   const dashboardDataRaw = await axios.get(`http://localhost:8080/api/v1/Solutions/${solutionId}/dashboard`);
   const dashboardData = dashboardDataRaw.data;
 
   const context = createDashboardPageContext(
-    solutionId, dashboardManifest, dashboardData.sections,
+    solutionId, dashboardManifest, dashboardData.sections, validationErrors,
   );
 
   return context;
@@ -83,7 +83,7 @@ export const getPreviewPageContext = async (solutionId) => {
   return context;
 };
 
-export const postPreview = async (solutionId) => {
+export const postSubmitForModeration = async (solutionId) => {
   try {
     await axios.put(`http://localhost:8080/api/v1/Solutions/${solutionId}/SubmitForReview`, {});
     return {
