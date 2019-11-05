@@ -85,7 +85,7 @@ test('should render the about your solution question', async (t) => {
 test('should render the solution link field', async (t) => {
   pageSetup(t);
 
-  const summaryQuestion = Selector('[data-test-id="text-field-link"]');
+  const summaryQuestion = Selector('[data-test-id="question-link"]');
 
   await t
     .expect(summaryQuestion.find('label.nhsuk-label').innerText).eql('Enter a link to more Solution information')
@@ -101,7 +101,7 @@ test('should populate the text fields with existing data', async (t) => {
   await t
     .expect(theQuestions.find('[data-test-id="textarea-field-summary"]').find('textarea').value).eql('The solution summary')
     .expect(theQuestions.find('[data-test-id="textarea-field-description"]').find('textarea').value).eql('The solution description')
-    .expect(theQuestions.find('[data-test-id="text-field-link"]').find('input').value).eql('The solution link');
+    .expect(theQuestions.find('[data-test-id="question-link"]').find('input').value).eql('The solution link');
 });
 
 test('should render the submit button', async (t) => {
@@ -145,7 +145,7 @@ test('should show error summary and validation for questions when they exceed th
   const errorSummaryList = Selector('.nhsuk-error-summary__list');
   const solutionSummary = Selector('[data-test-id="textarea-field-summary"]');
   const solutionDescription = Selector('[data-test-id="textarea-field-description"]');
-  const solutionLink = Selector('[data-test-id="text-field-link"]');
+  const solutionLink = Selector('[data-test-id="question-link"]');
 
   const submitButton = Selector('[data-test-id="section-submit-button"]');
 
