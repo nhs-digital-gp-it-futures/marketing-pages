@@ -2,18 +2,37 @@
 
 {% macro checkboxOptions(question) %}
   <div data-test-id="checkbox-options-{{ question.id }}">
-    {{ checkboxes({
-      "idPrefix": question.id,
-      "name": question.id,
-      "fieldset": {
-        "legend": {
-          "text": question.mainAdvice
-        }
-      },
-      "hint": {
-        "text": question.additionalAdvice
-      },
-      "items": question.options
-    }) }}
+    {% if (question.error) %}
+      {{ checkboxes({
+        "idPrefix": question.id,
+        "name": question.id,
+          "errorMessage": {
+            "text": question.error.message
+        },
+        "fieldset": {
+          "legend": {
+            "text": question.mainAdvice
+          }
+        },
+        "hint": {
+          "text": question.additionalAdvice
+        },
+        "items": question.options
+      }) }}
+    {% else %}
+      {{ checkboxes({
+        "idPrefix": question.id,
+        "name": question.id,
+        "fieldset": {
+          "legend": {
+            "text": question.mainAdvice
+          }
+        },
+        "hint": {
+          "text": question.additionalAdvice
+        },
+        "items": question.options
+      }) }}
+    {% endif %}
   </div>
 {% endmacro %}

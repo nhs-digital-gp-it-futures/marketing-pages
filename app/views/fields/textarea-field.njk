@@ -3,7 +3,7 @@
 
 {% macro textareaField(question) %}
   <div data-test-id="textarea-field-{{ question.id }}">
-    {% if (question.error != undefined) %}
+    {% if (question.error) %}
       {{ textarea({
         "id": question.id,
         "name": question.id,
