@@ -67,7 +67,10 @@ const createSectionsContext = (
 const createSectionGroupsContext = (
   solutionId, sectionGroups, marketingDataSections, validationErrors,
 ) => {
-  const { errorsAcc: errors, sectionGroupsAcc: sectionGroupsContext } = Object.entries(sectionGroups)
+  const {
+    errorsAcc: errors,
+    sectionGroupsAcc: sectionGroupsContext,
+  } = Object.entries(sectionGroups)
     .reduce(({ errorsAcc, sectionGroupsAcc }, [sectionGroupId, sectionGroup]) => {
       const { errors: sectionErrors, sections } = createSectionsContext(
         solutionId, sectionGroup.sections, marketingDataSections, validationErrors,
