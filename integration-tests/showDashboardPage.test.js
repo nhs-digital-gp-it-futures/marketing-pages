@@ -265,11 +265,11 @@ test('should render the Error summary containing all the sections that failed th
 
     .expect(errorSummary.exists).ok()
 
-    .expect(solutionDescriptionError.innerText).eql('Solution description is mandatory fill it in')
+    .expect(solutionDescriptionError.innerText).eql('Solution description is a mandatory section')
     .click(solutionDescriptionError.find('a'))
     .expect(getLocation()).contains('S100000-001/submitForModeration#solution-description')
 
-    .expect(clientApplicationTypeError.innerText).eql('Client application type is mandatory fill it in')
+    .expect(clientApplicationTypeError.innerText).eql('Client application type is a mandatory section')
     .click(clientApplicationTypeError.find('a'))
     .expect(getLocation()).contains('S100000-001/submitForModeration#client-application-types');
 });
