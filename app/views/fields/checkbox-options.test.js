@@ -133,4 +133,40 @@ describe('checkboxOptions', () => {
         done();
       });
   });
+
+  it('should render the checkbox option as an error if the context provided contains an error', (done) => {
+    const context = {
+      question: {
+        id: 'fieldId',
+        mainAdvice: 'Some really important main advice',
+        additionalAdvice: 'Some not so important additional advice',
+        options: [
+          {
+            value: 'first-option',
+            text: 'First Option',
+          },
+          {
+            value: 'second-option',
+            text: 'Second Option',
+            checked: true,
+          },
+        ],
+        error: {
+          message: 'Some error message',
+        },
+      },
+    };
+
+    const dummyApp = createDummyApp(context);
+    request(dummyApp)
+      .get('/')
+      .then((res) => {
+        const $ = cheerio.load(res.text);
+
+        expect($('.nhsuk-error-message').text().trim()).toEqual('Error: Some error message');
+        expect($('#fieldId-error').length).toEqual(1);
+
+        done();
+      });
+  });
 });
