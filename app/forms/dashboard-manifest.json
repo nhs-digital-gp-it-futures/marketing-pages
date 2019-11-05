@@ -1,46 +1,59 @@
 {
   "id":"marketing-page-dashboard",
-  "sectionGroups": [
-    {
-      "id": "about-your-solution",
+  "sectionGroups": {
+    "about-your-solution": {
       "title": "About your Solution",
-      "sections": [
-        {
-          "id": "solution-description",
-          "title": "Solution description"
+      "sections": {
+        "solution-description": {
+          "title": "Solution description",
+          "type": "section",
+          "errorResponse": {
+            "required": "Solution description is a mandatory section"
+          }
         },
-        {
-          "id": "features",
-          "title": "Features"
+        "features": {
+          "title": "Features",
+          "type": "section"
         }
-      ]
+      }
     },
-    {
-      "id": "client-application-type",
+    "client-application-type": {
       "title": "Client application type",
-      "sections": [
-        {
-          "id": "client-application-types",
+      "sections": {
+        "client-application-types": {
           "title": "Client application type",
-          "sections": [
-            {
-              "id": "browser-based",
+          "type": "section",
+          "errorResponse": {
+            "required": "Client application type is a mandatory section"
+          },
+          "sections": {
+            "browser-based": {
               "title": "Browser based",
-              "defaultMessage": "Select from client application types"
+              "defaultMessage": "Select from client application types",
+              "type": "dashboard",
+              "errorResponse": {
+                "required": "Browser based is a mandatory section"
+              }
             },
-            {
-              "id": "native-mobile",
+            "native-mobile": {
               "title": "Native mobile or tablet",
-              "defaultMessage": "Select from client application types"
+              "defaultMessage": "Select from client application types",
+              "type": "dashboard",
+              "errorResponse": {
+                "required": "Native mobile or tablet is a mandatory section"
+              }
             },
-            {
-              "id": "native-desktop",
+            "native-desktop": {
               "title": "Native desktop",
-              "defaultMessage": "Select from client application types"
+              "defaultMessage": "Select from client application types",
+              "type": "dashboard",
+              "errorResponse": {
+                "required": "Native desktop is a mandatory section"
+              }
             }
-          ]
+          }
         }
-      ]
+      }
     }
-  ]
+  }
 }

@@ -32,7 +32,25 @@ describe('dashboard page', () => {
       });
   });
 
-  it('should render the secondary preview button at the top of the page', (done) => {
+  it('should render the error summary if errors', (done) => {
+    const context = {
+      title: 'Title of the section',
+      errors: [{}],
+    };
+
+    const dummyApp = createDummyApp(context);
+    request(dummyApp)
+      .get('/')
+      .then((res) => {
+        const $ = cheerio.load(res.text);
+
+        expect($('[data-test-id="error-summary"]').length).toEqual(1);
+
+        done();
+      });
+  });
+
+  it('should render the preview button at the top of the page', (done) => {
     const context = {
       previewUrl: '/S100000-001/preview',
     };
@@ -43,9 +61,9 @@ describe('dashboard page', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        expect($('[data-test-id="dashboard-preview-secondary-button"] a').length).toEqual(1);
-        expect($('[data-test-id="dashboard-preview-secondary-button"] a').text().trim()).toEqual('Preview Marketing page');
-        expect($('[data-test-id="dashboard-preview-secondary-button"] a').attr('href')).toEqual('/S100000-001/preview');
+        expect($('[data-test-id="dashboard-preview-button"] a').length).toEqual(1);
+        expect($('[data-test-id="dashboard-preview-button"] a').text().trim()).toEqual('Preview Marketing page');
+        expect($('[data-test-id="dashboard-preview-button"] a').attr('href')).toEqual('/S100000-001/preview');
 
         done();
       });
@@ -73,9 +91,9 @@ describe('dashboard page', () => {
       });
   });
 
-  it('should render the preview button at the bottom of the page', (done) => {
+  it('should render the Submit for moderation button at the bottom of the page', (done) => {
     const context = {
-      previewUrl: '/S100000-001/preview',
+      submitForModerationUrl: '/S100000-001/submitForModeration',
     };
 
     const dummyApp = createDummyApp(context);
@@ -84,9 +102,9 @@ describe('dashboard page', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        expect($('[data-test-id="dashboard-preview-button"] a').length).toEqual(1);
-        expect($('[data-test-id="dashboard-preview-button"] a').text().trim()).toEqual('Preview Marketing page');
-        expect($('[data-test-id="dashboard-preview-button"] a').attr('href')).toEqual('/S100000-001/preview');
+        expect($('[data-test-id="dashboard-submit-for-moderation-button"] a').length).toEqual(1);
+        expect($('[data-test-id="dashboard-submit-for-moderation-button"] a').text().trim()).toEqual('Submit for moderation');
+        expect($('[data-test-id="dashboard-submit-for-moderation-button"] a').attr('href')).toEqual('/S100000-001/submitForModeration');
 
         done();
       });

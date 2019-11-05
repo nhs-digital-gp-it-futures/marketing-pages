@@ -1,13 +1,18 @@
 {% extends 'includes/layout.njk' %}
 {% from 'components/button/macro.njk' import button %}
 {% from './dashboard-sectionGroup.njk' import dashboardSectionGroup %}
+{% from './error-summary.njk' import errorSummary %}
 
 {% block body %}
 <div class="nhsuk-grid-row">
   <div class="nhsuk-grid-column-full">
 
+    {% if (errors.length > 0) %}
+      {{ errorSummary(errors) }}
+    {% endif %}  
+
     <h1>Marketing Page - Dashboard</h1>
-    <div data-test-id="dashboard-preview-secondary-button">
+    <div data-test-id="dashboard-preview-button">
       {{ button({
         "text": "Preview Marketing page",
         "classes": "nhsuk-button--secondary",
@@ -21,10 +26,10 @@
 
     <br/>
     <br/>
-    <div data-test-id="dashboard-preview-button">
+    <div data-test-id="dashboard-submit-for-moderation-button">
       {{ button({
-        "text": "Preview Marketing page",
-        "href": previewUrl
+        "text": "Submit for moderation",
+        "href": submitForModerationUrl
       }) }}
     </div>
   </div>

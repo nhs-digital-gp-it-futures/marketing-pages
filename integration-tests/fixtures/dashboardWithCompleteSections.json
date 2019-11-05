@@ -1,38 +1,32 @@
 {
   "id": "S100000-001",
   "name": "Write on Time",
-  "sections": [
-    {
-      "id": "solution-description",
+  "sections": {
+    "solution-description": {
       "requirement": "Mandatory",
       "status": "COMPLETE"
     },
-    {
-      "id": "features",
+    "features": {
       "requirement": "Optional",
       "status": "COMPLETE"
     },
-    {
-      "id": "client-application-types",
+    "client-application-types": {
       "requirement": "Mandatory",
       "status": "COMPLETE",
-      "sections": [
-        {
-          "id": "browser-based",
+      "sections": {
+        "browser-based": {
           "requirement": "Mandatory",
           "status": "COMPLETE"
         },
-        {
-          "id": "native-mobile",
+        "native-mobile": {
           "requirement": "Mandatory",
           "status": "COMPLETE"
         },
-        {
-          "id": "native-desktop",
+        "native-desktop": {
           "requirement": "Mandatory",
           "status": "COMPLETE"
         }
-      ]
+      }
     }
-  ]
+  }
 }

@@ -7,7 +7,7 @@ import {
   validateSection,
   postSection,
   getPreviewPageContext,
-  postPreview,
+  postSubmitForModeration,
 } from './controller';
 
 const router = express.Router();
@@ -60,16 +60,16 @@ router.get('/:solutionId/preview', async (req, res) => {
   res.render('preview-page', context);
 });
 
-router.get('/:solutionId/submitPreview', async (req, res) => {
+router.get('/:solutionId/submitForModeration', async (req, res) => {
   const { solutionId } = req.params;
-  const response = await postPreview(solutionId);
+  const response = await postSubmitForModeration(solutionId);
 
   if (response.success) {
-    res.redirect(`/${solutionId}/preview`);
+    res.redirect(`/${solutionId}`);
   } else {
-    const context = await getPreviewPageContext(solutionId, response);
+    const context = await getMarketingPageDashboardContext(solutionId, response);
 
-    res.render('preview-page', context);
+    res.render('dashboard-page', context);
   }
 });
 

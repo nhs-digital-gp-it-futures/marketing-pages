@@ -32,23 +32,6 @@ test('should render the marketing dashboard page title', async (t) => {
     .expect(title.innerText).eql('Marketing Page - Dashboard');
 });
 
-test('should render the secondary preview page button', async (t) => {
-  pageSetup(t);
-
-  nock('http://localhost:8080')
-    .get('/api/v1/Solutions/S100000-001/preview')
-    .reply(200, previewWithMarketingData);
-
-  const getLocation = ClientFunction(() => document.location.href);
-
-  const previewButton = Selector('[data-test-id="dashboard-preview-secondary-button"] a');
-
-  await t
-    .expect(previewButton.innerText).eql('Preview Marketing page')
-    .click(previewButton)
-    .expect(getLocation()).contains('S100000-001/preview');
-});
-
 test('should render the preview page button', async (t) => {
   pageSetup(t);
 
@@ -64,6 +47,27 @@ test('should render the preview page button', async (t) => {
     .expect(previewButton.innerText).eql('Preview Marketing page')
     .click(previewButton)
     .expect(getLocation()).contains('S100000-001/preview');
+});
+
+test('should render the Submit for moderation button', async (t) => {
+  pageSetup(t);
+
+  nock('http://localhost:8080')
+    .put('/api/v1/Solutions/S100000-001/SubmitForReview')
+    .reply(204, {});
+
+  nock('http://localhost:8080')
+    .get('/api/v1/Solutions/S100000-001/dashboard')
+    .reply(200, dashboardWithIncompleteSections);
+
+  const getLocation = ClientFunction(() => document.location.href);
+
+  const submitForModerationButton = Selector('[data-test-id="dashboard-submit-for-moderation-button"] a');
+
+  await t
+    .expect(submitForModerationButton.innerText).eql('Submit for moderation')
+    .click(submitForModerationButton)
+    .expect(getLocation()).contains('S100000-001');
 });
 
 test('should render the About your solution section group', async (t) => {
@@ -231,4 +235,41 @@ test('clicking on the client application type section link should navigate the u
   await t
     .click(theClientApplicationTypeSection.find('a'))
     .expect(getLocation()).contains('S100000-001/section/client-application-type');
+});
+
+test('should render the Error summary containing all the sections that failed the SubmitForReview', async (t) => {
+  pageSetup(t);
+
+  const submitForReviewError = {
+    required: ['solution-description', 'client-application-types'],
+  };
+
+  nock('http://localhost:8080')
+    .put('/api/v1/Solutions/S100000-001/SubmitForReview')
+    .reply(400, submitForReviewError);
+
+  nock('http://localhost:8080')
+    .get('/api/v1/Solutions/S100000-001/dashboard')
+    .reply(200, dashboardWithIncompleteSections);
+
+  const getLocation = ClientFunction(() => document.location.href);
+
+  const errorSummary = Selector('[data-test-id="error-summary"]');
+  const solutionDescriptionError = errorSummary.find('li:nth-child(1)');
+  const clientApplicationTypeError = errorSummary.find('li:nth-child(2)');
+  const submitForModerationButton = Selector('[data-test-id="dashboard-submit-for-moderation-button"] a');
+
+  await t
+    .expect(errorSummary.exists).notOk()
+    .click(submitForModerationButton)
+
+    .expect(errorSummary.exists).ok()
+
+    .expect(solutionDescriptionError.innerText).eql('Solution description is a mandatory section')
+    .click(solutionDescriptionError.find('a'))
+    .expect(getLocation()).contains('S100000-001/submitForModeration#solution-description')
+
+    .expect(clientApplicationTypeError.innerText).eql('Client application type is a mandatory section')
+    .click(clientApplicationTypeError.find('a'))
+    .expect(getLocation()).contains('S100000-001/submitForModeration#client-application-types');
 });
