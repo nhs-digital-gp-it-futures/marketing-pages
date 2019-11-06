@@ -1,38 +1,42 @@
 {% from 'components/checkboxes/macro.njk' import checkboxes %}
 
 {% macro checkboxOptions(question) %}
-  <div data-test-id="checkbox-options-{{ question.id }}">
+  <div data-test-id="question-{{ question.id }}">
     {% if (question.error) %}
-      {{ checkboxes({
-        "idPrefix": question.id,
-        "name": question.id,
-          "errorMessage": {
-            "text": question.error.message
-        },
-        "fieldset": {
-          "legend": {
-            "text": question.mainAdvice
-          }
-        },
-        "hint": {
-          "text": question.additionalAdvice
-        },
-        "items": question.options
-      }) }}
+      <div data-test-id="checkbox-options-error">
+        {{ checkboxes({
+          "idPrefix": question.id,
+          "name": question.id,
+            "errorMessage": {
+              "text": question.error.message
+          },
+          "fieldset": {
+            "legend": {
+              "text": question.mainAdvice
+            }
+          },
+          "hint": {
+            "text": question.additionalAdvice
+          },
+          "items": question.options
+        }) }}
+      </div>
     {% else %}
-      {{ checkboxes({
-        "idPrefix": question.id,
-        "name": question.id,
-        "fieldset": {
-          "legend": {
-            "text": question.mainAdvice
-          }
-        },
-        "hint": {
-          "text": question.additionalAdvice
-        },
-        "items": question.options
-      }) }}
+      <div data-test-id="checkbox-options">
+        {{ checkboxes({
+          "idPrefix": question.id,
+          "name": question.id,
+          "fieldset": {
+            "legend": {
+              "text": question.mainAdvice
+            }
+          },
+          "hint": {
+            "text": question.additionalAdvice
+          },
+          "items": question.options
+        }) }}
+      </div>
     {% endif %}
   </div>
 {% endmacro %}

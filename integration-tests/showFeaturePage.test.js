@@ -64,7 +64,7 @@ test('should render 10 text fields', async (t) => {
   pageSetup(t);
 
   await Promise.all(Array(10).fill().map(async (_, i) => {
-    const theField = Selector(`[data-test-id="listing-${i + 1}"]`);
+    const theField = Selector(`[data-test-id="field-listing-${i + 1}"]`);
     await t
       .expect(theField.find('input').count).eql(1);
   }));
@@ -76,7 +76,7 @@ test('should populate the text fields with existing data', async (t) => {
   const existingFeatures = featuresMarketingData.listing;
 
   await Promise.all(existingFeatures.map(async (existingFeature, i) => {
-    const theField = Selector(`[data-test-id="listing-${i + 1}"]`);
+    const theField = Selector(`[data-test-id="field-listing-${i + 1}"]`);
     await t
       .expect(theField.find('input').value).eql(existingFeature);
   }));
@@ -107,7 +107,7 @@ test('should allow posting an empty form and navigate back to the dashboard when
   const submitButton = Selector('[data-test-id="section-submit-button"]');
 
   await Promise.all(Array(10).fill().map(async (_, i) => {
-    const theField = Selector(`[data-test-id="listing-${i + 1}"]`);
+    const theField = Selector(`[data-test-id="field-listing-${i + 1}"]`);
     await t
       .expect(theField.find('input').value).eql('');
   }));
@@ -123,19 +123,24 @@ test('should show validation for fields exceeding the maxLength', async (t) => {
 
   const submitButton = Selector('[data-test-id="section-submit-button"]');
 
-  const firstField = Selector('[data-test-id="listing-1"]');
-  const secondField = Selector('[data-test-id="listing-2"]');
-  const thirdField = Selector('[data-test-id="listing-3"]');
+  const firstField = Selector('[data-test-id="field-listing-1"]');
+  const secondField = Selector('[data-test-id="field-listing-2"]');
+  const thirdField = Selector('[data-test-id="field-listing-3"]');
 
   await t
     .typeText(firstField.find('input'), 'good')
     .typeText(secondField.find('input'), 'good')
     .typeText(thirdField.find('input'), 'a'.repeat(101))
-    .click(submitButton.find('button'))
+    .click(submitButton.find('button'));
+
+  const thirdFieldError = Selector('[data-test-id="field-error-listing-3"]');
+
+  await t
     .expect(firstField.find('.nhsuk-form-group--error').exists).notOk()
     .expect(secondField.find('.nhsuk-form-group--error').exists).notOk()
-    .expect(thirdField.find('.nhsuk-form-group--error').exists).ok()
-    .expect(thirdField.find('.nhsuk-error-message').innerText).eql('Error:\nsome validation error message');
+    .expect(thirdField.exists).notOk()
+    .expect(thirdFieldError.exists).ok()
+    .expect(thirdFieldError.find('.nhsuk-error-message').innerText).eql('Error:\nsome validation error message');
 });
 
 test('should render the return to all sections link', async (t) => {

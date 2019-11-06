@@ -59,7 +59,8 @@ describe('radiobuttonOptions', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        expect($('.nhsuk-hint').text().trim()).toEqual('Some not so important additional advice');
+        const question = $('div[data-test-id="question-fieldId"]');
+        expect(question.find('.nhsuk-hint').text().trim()).toEqual('Some not so important additional advice');
 
         done();
       });
@@ -90,9 +91,10 @@ describe('radiobuttonOptions', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        expect($('.nhsuk-radios__item').length).toEqual(2);
-        expect($('.nhsuk-radios__item:nth-child(1)').find('input').attr('value')).toEqual('first-option');
-        expect($('.nhsuk-radios__item:nth-child(2)').find('input').attr('value')).toEqual('second-option');
+        const question = $('div[data-test-id="question-fieldId"]');
+        expect(question.find('.nhsuk-radios__item').length).toEqual(2);
+        expect(question.find('.nhsuk-radios__item:nth-child(1)').find('input').attr('value')).toEqual('first-option');
+        expect(question.find('.nhsuk-radios__item:nth-child(2)').find('input').attr('value')).toEqual('second-option');
 
         done();
       });
@@ -124,11 +126,12 @@ describe('radiobuttonOptions', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        expect($('.nhsuk-radios__item').length).toEqual(2);
-        expect($('.nhsuk-radios__item:nth-child(1)').find('input').attr('checked')).toBeUndefined();
-        expect($('.nhsuk-radios__item:nth-child(1)').find('input').attr('value')).toEqual('first-option');
-        expect($('.nhsuk-radios__item:nth-child(2)').find('input').attr('checked')).toEqual('checked');
-        expect($('.nhsuk-radios__item:nth-child(2)').find('input').attr('value')).toEqual('second-option');
+        const question = $('div[data-test-id="question-fieldId"]');
+        expect(question.find('.nhsuk-radios__item').length).toEqual(2);
+        expect(question.find('.nhsuk-radios__item:nth-child(1)').find('input').attr('checked')).toBeUndefined();
+        expect(question.find('.nhsuk-radios__item:nth-child(1)').find('input').attr('value')).toEqual('first-option');
+        expect(question.find('.nhsuk-radios__item:nth-child(2)').find('input').attr('checked')).toEqual('checked');
+        expect(question.find('.nhsuk-radios__item:nth-child(2)').find('input').attr('value')).toEqual('second-option');
 
         done();
       });
@@ -162,8 +165,9 @@ describe('radiobuttonOptions', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        expect($('.nhsuk-error-message').text().trim()).toEqual('Error: Some error message');
-        expect($('#fieldId-error').length).toEqual(1);
+        const question = $('div[data-test-id="question-fieldId"]');
+        expect(question.find('.nhsuk-error-message').text().trim()).toEqual('Error: Some error message');
+        expect(question.find('div[data-test-id="radiobutton-options-error"]').length).toEqual(1);
 
         done();
       });

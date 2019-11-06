@@ -38,7 +38,8 @@ describe('textarea', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        expect($('label.nhsuk-label').text().trim()).toEqual('Some really important main advice');
+        const question = $('div[data-test-id="question-fieldId"]');
+        expect(question.find('label.nhsuk-label').text().trim()).toEqual('Some really important main advice');
 
         done();
       });
@@ -59,7 +60,8 @@ describe('textarea', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        expect($('span.nhsuk-hint').text().trim()).toEqual('Some not so important additional advice');
+        const question = $('div[data-test-id="question-fieldId"]');
+        expect(question.find('span.nhsuk-hint').text().trim()).toEqual('Some not so important additional advice');
 
         done();
       });
@@ -80,7 +82,8 @@ describe('textarea', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        expect($('textarea').length).toEqual(1);
+        const question = $('div[data-test-id="question-fieldId"]');
+        expect(question.find('textarea').length).toEqual(1);
 
         done();
       });
@@ -100,7 +103,8 @@ describe('textarea', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        expect($('textarea').attr('rows')).toEqual(' 10 ');
+        const question = $('div[data-test-id="question-fieldId"]');
+        expect(question.find('textarea').attr('rows')).toEqual(' 10 ');
 
         done();
       });
@@ -123,7 +127,8 @@ describe('textarea', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        expect($('textarea').val()).toEqual('Some populated data');
+        const question = $('div[data-test-id="question-fieldId"]');
+        expect(question.find('textarea').val()).toEqual('Some populated data');
 
         done();
       });
@@ -148,8 +153,9 @@ describe('textarea', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        expect($('.nhsuk-error-message').text().trim()).toEqual('Error: Some error message');
-        expect($('textarea.nhsuk-textarea--error').length).toEqual(1);
+        const question = $('div[data-test-id="question-fieldId"]');
+        expect(question.find('.nhsuk-error-message').text().trim()).toEqual('Error: Some error message');
+        expect(question.find('div[data-test-id="textarea-field-error"]').length).toEqual(1);
 
         done();
       });
@@ -171,7 +177,8 @@ describe('textarea', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        expect($('[data-test-id="textarea-field-footer"]').text().trim()).toEqual('Some footer based advice');
+        const question = $('div[data-test-id="question-fieldId"]');
+        expect(question.find('[data-test-id="textarea-field-footer"]').text().trim()).toEqual('Some footer based advice');
 
         done();
       });

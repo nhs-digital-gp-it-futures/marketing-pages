@@ -27,6 +27,7 @@ describe('section-question', () => {
     it('should render the bullepoint-list component', (done) => {
       const context = {
         question: {
+          id: 'question-id',
           type: 'bulletpoint-list',
         },
       };
@@ -37,9 +38,8 @@ describe('section-question', () => {
         .then((res) => {
           const $ = cheerio.load(res.text);
 
-          const bulletpointList = $('[data-test-id="bulletpoint-list"]');
-
-          expect(bulletpointList.length).toEqual(1);
+          const question = $('div[data-test-id="section-question-bulletpoint-list"]');
+          expect(question.length).toEqual(1);
 
           done();
         });
@@ -61,9 +61,8 @@ describe('section-question', () => {
         .then((res) => {
           const $ = cheerio.load(res.text);
 
-          const textareaField = $('[data-test-id="textarea-field-question-id"]');
-
-          expect(textareaField.length).toEqual(1);
+          const question = $('div[data-test-id="section-question-textarea-field"]');
+          expect(question.length).toEqual(1);
 
           done();
         });
@@ -85,9 +84,8 @@ describe('section-question', () => {
         .then((res) => {
           const $ = cheerio.load(res.text);
 
-          const textField = $('[data-test-id="text-field-question-id"]');
-
-          expect(textField.length).toEqual(1);
+          const question = $('div[data-test-id="section-question-text-field"]');
+          expect(question.length).toEqual(1);
 
           done();
         });
@@ -109,9 +107,8 @@ describe('section-question', () => {
         .then((res) => {
           const $ = cheerio.load(res.text);
 
-          const checkbox = $('[data-test-id="checkbox-options-question-id"]');
-
-          expect(checkbox.length).toEqual(1);
+          const question = $('div[data-test-id="section-question-checkbox-options"]');
+          expect(question.length).toEqual(1);
 
           done();
         });
@@ -133,9 +130,8 @@ describe('section-question', () => {
         .then((res) => {
           const $ = cheerio.load(res.text);
 
-          const radiobutton = $('[data-test-id="radiobutton-options-question-id"]');
-
-          expect(radiobutton.length).toEqual(1);
+          const question = $('div[data-test-id="section-question-radiobutton-options"]');
+          expect(question.length).toEqual(1);
 
           done();
         });
