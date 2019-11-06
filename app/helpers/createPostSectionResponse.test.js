@@ -3,6 +3,7 @@ import { createPostSectionResponse } from './createPostSectionResponse';
 describe('createPostSectionResponse', () => {
   it('should create a context from the section manifest', () => {
     const expectedContext = {
+      success: true,
       redirectUrl: '/some-solution-id',
     };
 
@@ -15,6 +16,7 @@ describe('createPostSectionResponse', () => {
 
   it('should create a context from the sub section manifest', () => {
     const expectedContext = {
+      success: true,
       redirectUrl: '/some-solution-id/some-parent-section-id',
     };
 

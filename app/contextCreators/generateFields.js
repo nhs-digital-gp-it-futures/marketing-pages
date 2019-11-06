@@ -1,55 +1,49 @@
 import { getExistingDataForFieldIfAvailable } from './getExistingDataForFieldIfAvailable';
 
-export const generateFields = (question, exisitingDataForSection, validationErrors) => {
-  if (question && question.maxItems && question.maxItems > 0) {
-    const fields = [];
-
-    Array(question.maxItems).fill().map((_, i) => {
-      const field = {};
-      field.id = `${question.id}-${i + 1}`;
-      field.data = getExistingDataForFieldIfAvailable(exisitingDataForSection, question.id, i);
-
-      const validationErrorForField = validationErrors && validationErrors
-        .find(validationError => validationError.fieldId === field.id);
-
-      if (validationErrorForField) {
-        const error = {};
-        error.message = validationErrorForField.message;
-        field.error = error;
-      }
-
-      fields.push(field);
-    });
-
-    return fields;
+const createErrorsForField = (
+  fieldId, questionManifest, validationErrors,
+) => {
+  if (validationErrors) {
+    const errorForField = Object.entries(validationErrors)
+      .reduce((errorForQuestionAcc, [errorType, erroredQuestions]) => {
+        if (erroredQuestions.some(erroredQuestionId => erroredQuestionId === fieldId)) {
+          return {
+            text: questionManifest.errorResponse[errorType],
+            href: `#${fieldId}`,
+          };
+        }
+      }, undefined);
+    return errorForField;
   }
+
   return undefined;
 };
 
-export const generateFieldsNew = (
+export const generateFields = (
   questionId, questionManifest, exisitingDataForSection, validationErrors,
 ) => {
   if (questionManifest && questionManifest.maxItems && questionManifest.maxItems > 0) {
-    const fields = [];
+    const { errorsAcc: errors, fieldsAcc: fields } = Array(questionManifest.maxItems).fill().reduce(({ errorsAcc, fieldsAcc }, _, i) => {
+      const fieldId = `${questionId}-${i + 1}`;
 
-    Array(questionManifest.maxItems).fill().map((_, i) => {
-      const field = {};
-      field.id = `${questionId}-${i + 1}`;
-      field.data = getExistingDataForFieldIfAvailable(exisitingDataForSection, questionId, i);
+      const errorForField = createErrorsForField(fieldId, questionManifest, validationErrors);
 
-      const validationErrorForField = validationErrors && validationErrors
-        .find(validationError => validationError.fieldId === field.id);
+      const field = {
+        id: fieldId,
+        data: getExistingDataForFieldIfAvailable(exisitingDataForSection, questionId, i),
+        error: errorForField ? { message: errorForField.text } : undefined,
+      };
 
-      if (validationErrorForField) {
-        const error = {};
-        error.message = validationErrorForField.message;
-        field.error = error;
-      }
+      return {
+        errorsAcc: errorForField ? errorsAcc.concat(errorForField) : errorsAcc,
+        fieldsAcc: fieldsAcc.concat(field),
+      };
+    }, { errorsAcc: [], fieldsAcc: [] });
 
-      fields.push(field);
-    });
-
-    return fields;
+    return {
+      errors: errors.length > 0 ? errors : undefined,
+      fields,
+    };
   }
   return undefined;
 };

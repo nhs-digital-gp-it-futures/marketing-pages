@@ -1,4 +1,4 @@
-import { createSectionPageContextNew } from './createSectionPageContext';
+import { createSectionPageContext } from './createSectionPageContext';
 
 describe('createSectionPageContext', () => {
   it('should create a context from the section manifest', () => {
@@ -35,7 +35,7 @@ describe('createSectionPageContext', () => {
       submitText: 'some-submit-text',
     };
 
-    const context = createSectionPageContextNew('some-solution-id', sectionManifest);
+    const context = createSectionPageContext('some-solution-id', sectionManifest);
 
     expect(context).toEqual(expectedContext);
   });
@@ -74,7 +74,7 @@ describe('createSectionPageContext', () => {
         },
       };
 
-      const context = createSectionPageContextNew('some-solution-id', sectionManifest);
+      const context = createSectionPageContext('some-solution-id', sectionManifest);
 
       expect(context).toEqual(expectedContext);
     });
@@ -125,18 +125,26 @@ describe('createSectionPageContext', () => {
 
       const optionsManifest = {};
 
-      const context = createSectionPageContextNew('some-solution-id', sectionManifest, optionsManifest, formData);
+      const context = createSectionPageContext('some-solution-id', sectionManifest, optionsManifest, formData);
 
       expect(context).toEqual(expectedContext);
     });
 
-    it.skip('should create a context for bulletpoint-list type question with existing data populated and a validation error', () => {
+    it('should create a context for bulletpoint-list type question with existing data populated and a validation error', () => {
       const expectedContext = {
         submitActionUrl: '/some-solution-id/section/some-section-id',
         errors: [
           {
             text: 'some really helpful error message',
-            href: '#fieldId',
+            href: '#fieldId-2',
+          },
+          {
+            text: 'some really helpful error message',
+            href: '#fieldId-3',
+          },
+          {
+            text: 'some other really helpful error message',
+            href: '#someField',
           },
         ],
         questions: [
@@ -157,9 +165,20 @@ describe('createSectionPageContext', () => {
               },
               {
                 id: 'fieldId-3',
-                data: 'Field C',
+                data: 'Field C is too big too',
+                error: {
+                  message: 'some really helpful error message',
+                },
               },
             ],
+          },
+          {
+            id: 'someField',
+            type: 'text-field',
+            data: 'man some field is massive',
+            error: {
+              message: 'some other really helpful error message',
+            },
           },
         ],
         returnToDashboardUrl: '/some-solution-id',
@@ -169,17 +188,14 @@ describe('createSectionPageContext', () => {
         fieldId: [
           'Field A',
           'Field B is too big',
-          'Field C',
+          'Field C is too big too',
         ],
+        someField: 'man some field is massive',
       };
 
-      const validationErrors = [
-        {
-          questionId: 'fieldId',
-          fieldId: 'fieldId-2',
-          message: 'some really helpful error message',
-        },
-      ];
+      const validationErrors = {
+        maxLength: ['fieldId-2', 'fieldId-3', 'someField'],
+      };
 
       const sectionManifest = {
         id: 'some-section-id',
@@ -187,20 +203,22 @@ describe('createSectionPageContext', () => {
           fieldId: {
             type: 'bulletpoint-list',
             maxItems: 3,
-            saveValidations: [
-              {
-                type: 'maxLength',
-                maxLength: 10,
-                message: 'some really helpful error message',
-              },
-            ],
+            errorResponse: {
+              maxLength: 'some really helpful error message',
+            },
+          },
+          someField: {
+            type: 'text-field',
+            errorResponse: {
+              maxLength: 'some other really helpful error message',
+            },
           },
         },
       };
 
       const optionsManifest = {};
 
-      const context = createSectionPageContextNew('some-solution-id', sectionManifest, optionsManifest, formData, validationErrors);
+      const context = createSectionPageContext('some-solution-id', sectionManifest, optionsManifest, formData, validationErrors);
 
       expect(context).toEqual(expectedContext);
     });
@@ -252,7 +270,7 @@ describe('createSectionPageContext', () => {
         },
       };
 
-      const context = createSectionPageContextNew('some-solution-id', sectionManifest, optionsManifest);
+      const context = createSectionPageContext('some-solution-id', sectionManifest, optionsManifest);
 
       expect(context).toEqual(expectedContext);
     });
@@ -311,7 +329,7 @@ describe('createSectionPageContext', () => {
         },
       };
 
-      const context = createSectionPageContextNew('some-solution-id', sectionManifest, optionsManifest, formData);
+      const context = createSectionPageContext('some-solution-id', sectionManifest, optionsManifest, formData);
 
       expect(context).toEqual(expectedContext);
     });
@@ -363,7 +381,7 @@ describe('createSectionPageContext', () => {
         },
       };
 
-      const context = createSectionPageContextNew('some-solution-id', sectionManifest, optionsManifest);
+      const context = createSectionPageContext('some-solution-id', sectionManifest, optionsManifest);
 
       expect(context).toEqual(expectedContext);
     });
@@ -418,7 +436,7 @@ describe('createSectionPageContext', () => {
         },
       };
 
-      const context = createSectionPageContextNew('some-solution-id', sectionManifest, optionsManifest, formData);
+      const context = createSectionPageContext('some-solution-id', sectionManifest, optionsManifest, formData);
 
       expect(context).toEqual(expectedContext);
     });
@@ -455,7 +473,7 @@ describe('createSectionPageContext', () => {
 
       const optionsManifest = {};
 
-      const context = createSectionPageContextNew('some-solution-id', sectionManifest, optionsManifest, formData);
+      const context = createSectionPageContext('some-solution-id', sectionManifest, optionsManifest, formData);
 
       expect(context).toEqual(expectedContext);
     });
@@ -504,7 +522,7 @@ describe('createSectionPageContext', () => {
 
       const optionsManifest = {};
 
-      const context = createSectionPageContextNew('some-solution-id', sectionManifest, optionsManifest, formData, validationErrors);
+      const context = createSectionPageContext('some-solution-id', sectionManifest, optionsManifest, formData, validationErrors);
 
       expect(context).toEqual(expectedContext);
     });

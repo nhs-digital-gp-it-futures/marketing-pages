@@ -19,10 +19,10 @@ describe('transformSectionData', () => {
     };
 
     const sectionManifest = {
-      questions: [
-        { id: 'some-question-id' },
-        { id: 'some-other-question-id' },
-      ],
+      questions: {
+        'some-question-id': {},
+        'some-other-question-id': {},
+      },
     };
 
     const transformedSectionData = transformSectionData('client-application-types', sectionManifest, sectionData);
@@ -32,11 +32,9 @@ describe('transformSectionData', () => {
 
   describe('when a transformation stratergy does exist for the section and question', () => {
     const sectionManifest = {
-      questions: [
-        {
-          id: 'client-application-types',
-        },
-      ],
+      questions: {
+        'client-application-types': {},
+      },
     };
 
     it('should return the sectionData provided as is if the sectionData is an array of strings', () => {

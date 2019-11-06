@@ -113,29 +113,14 @@ test('should render the submit button', async (t) => {
     .expect(submitButton.find('button').count).eql(1);
 });
 
-test('should allow posting an empty form and navigate back to the dashboard', async (t) => {
+test('should show error summary and validation for questions when they exceed the maxLength', async (t) => {
   pageSetup(t);
-
-  nock('http://localhost:8080')
-    .get('/api/v1/Solutions/S100000-001/dashboard')
-    .reply(200, dashboardWithCompleteSections);
 
   nock('http://localhost:8080')
     .put('/api/v1/Solutions/S100000-001/sections/solution-description')
-    .reply(200, {});
-
-  const getLocation = ClientFunction(() => document.location.href);
-
-  const submitButton = Selector('[data-test-id="section-submit-button"]');
-
-  await t
-    .click(submitButton.find('button'))
-    .expect(getLocation()).notContains('section')
-    .expect(getLocation()).contains('S100000-001');
-});
-
-test('should show error summary and validation for questions when they exceed the maxLength', async (t) => {
-  pageSetup(t);
+    .reply(400, {
+      maxLength: ['summary', 'description', 'link'],
+    });
 
   const oneHundredCharacters = '0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789';
   const threeHundredCharacters = oneHundredCharacters.repeat(3);
@@ -157,18 +142,46 @@ test('should show error summary and validation for questions when they exceed th
     .click(submitButton.find('button'))
     .expect(errorSummary.exists).ok()
     .expect(errorSummaryList.find('li').count).eql(3)
-    .expect(errorSummaryList.find('li:nth-child(1)').innerText).eql('Solution Summary validation error message')
+    .expect(errorSummaryList.find('li:nth-child(1)').innerText).eql('Solution Summary is over the character limit')
     .expect(errorSummaryList.find('li:nth-child(1) a').getAttribute('href')).eql('#summary')
-    .expect(errorSummaryList.find('li:nth-child(2)').innerText).eql('Solution Description validation error message')
+    .expect(errorSummaryList.find('li:nth-child(2)').innerText).eql('Solution Description is over the character limit')
     .expect(errorSummaryList.find('li:nth-child(2) a').getAttribute('href')).eql('#description')
-    .expect(errorSummaryList.find('li:nth-child(3)').innerText).eql('Solution Link validation error message')
+    .expect(errorSummaryList.find('li:nth-child(3)').innerText).eql('Solution Link is over the character limit')
     .expect(errorSummaryList.find('li:nth-child(3) a').getAttribute('href')).eql('#link')
     .expect(solutionSummary.find('.nhsuk-textarea--error').exists).ok()
-    .expect(solutionSummary.find('.nhsuk-error-message').innerText).eql('Error:\nSolution Summary validation error message')
+    .expect(solutionSummary.find('.nhsuk-error-message').innerText).eql('Error:\nSolution Summary is over the character limit')
     .expect(solutionDescription.find('.nhsuk-textarea--error').exists).ok()
-    .expect(solutionDescription.find('.nhsuk-error-message').innerText).eql('Error:\nSolution Description validation error message')
+    .expect(solutionDescription.find('.nhsuk-error-message').innerText).eql('Error:\nSolution Description is over the character limit')
     .expect(solutionLink.find('.nhsuk-input--error').exists).ok()
-    .expect(solutionLink.find('.nhsuk-error-message').innerText).eql('Error:\nSolution Link validation error message');
+    .expect(solutionLink.find('.nhsuk-error-message').innerText).eql('Error:\nSolution Link is over the character limit');
+});
+
+test('should show error summary and validation for Summary indicating it is mandatory', async (t) => {
+  pageSetup(t);
+
+  nock('http://localhost:8080')
+    .put('/api/v1/Solutions/S100000-001/sections/solution-description')
+    .reply(400, {
+      required: ['summary'],
+    });
+
+  const errorSummary = Selector('[data-test-id="error-summary"]');
+  const errorSummaryList = Selector('.nhsuk-error-summary__list');
+  const solutionSummary = Selector('[data-test-id="textarea-field-summary"]');
+
+
+  const submitButton = Selector('[data-test-id="section-submit-button"]');
+
+  await t
+    .expect(errorSummary.exists).notOk()
+    .click(submitButton.find('button'))
+    .expect(errorSummary.exists).ok()
+    .expect(errorSummaryList.find('li').count).eql(1)
+    .expect(errorSummaryList.find('li:nth-child(1)').innerText).eql('Solution Summary is a mandatory question')
+    .expect(errorSummaryList.find('li:nth-child(1) a').getAttribute('href')).eql('#summary')
+
+    .expect(solutionSummary.find('.nhsuk-textarea--error').exists).ok()
+    .expect(solutionSummary.find('.nhsuk-error-message').innerText).eql('Error:\nSolution Summary is a mandatory question');
 });
 
 test('should render the return to all sections link', async (t) => {

@@ -121,21 +121,38 @@ test('should allow posting an empty form and navigate back to the dashboard when
 test('should show validation for fields exceeding the maxLength', async (t) => {
   pageSetup(t);
 
+  nock('http://localhost:8080')
+    .put('/api/v1/Solutions/S100000-001/sections/features')
+    .reply(400, {
+      maxLength: ['listing-1', 'listing-3'],
+    });
+
   const submitButton = Selector('[data-test-id="section-submit-button"]');
 
+  const errorSummary = Selector('[data-test-id="error-summary"]');
+  const errorSummaryList = Selector('.nhsuk-error-summary__list');
   const firstField = Selector('[data-test-id="listing-1"]');
   const secondField = Selector('[data-test-id="listing-2"]');
   const thirdField = Selector('[data-test-id="listing-3"]');
 
   await t
-    .typeText(firstField.find('input'), 'good')
-    .typeText(secondField.find('input'), 'good')
-    .typeText(thirdField.find('input'), 'a'.repeat(101))
+    .expect(errorSummary.exists).notOk()
+    .typeText(firstField.find('input'), 'a'.repeat(101), { paste: true })
+    .typeText(secondField.find('input'), 'good', { paste: true })
+    .typeText(thirdField.find('input'), 'a'.repeat(101), { paste: true })
     .click(submitButton.find('button'))
-    .expect(firstField.find('.nhsuk-form-group--error').exists).notOk()
+
+    .expect(errorSummaryList.find('li').count).eql(2)
+    .expect(errorSummaryList.find('li:nth-child(1)').innerText).eql('This feature is over the character limit')
+    .expect(errorSummaryList.find('li:nth-child(1) a').getAttribute('href')).eql('#listing-1')
+    .expect(errorSummaryList.find('li:nth-child(2)').innerText).eql('This feature is over the character limit')
+    .expect(errorSummaryList.find('li:nth-child(2) a').getAttribute('href')).eql('#listing-3')
+
+    .expect(firstField.find('.nhsuk-form-group--error').exists).ok()
+    .expect(firstField.find('.nhsuk-error-message').innerText).eql('Error:\nThis feature is over the character limit')
     .expect(secondField.find('.nhsuk-form-group--error').exists).notOk()
     .expect(thirdField.find('.nhsuk-form-group--error').exists).ok()
-    .expect(thirdField.find('.nhsuk-error-message').innerText).eql('Error:\nsome validation error message');
+    .expect(thirdField.find('.nhsuk-error-message').innerText).eql('Error:\nThis feature is over the character limit');
 });
 
 test('should render the return to all sections link', async (t) => {

@@ -3,7 +3,6 @@ import { ManifestProvider } from './forms/manifestProvider';
 import { createSectionPageContext } from './contextCreators/createSectionPageContext';
 import { createDashboardPageContext } from './contextCreators/createDashboardPageContext';
 import { createPreviewPageContext } from './contextCreators/createPreviewPageContext';
-import { validateSectionData } from './helpers/validateSectionData';
 import { transformSectionData } from './helpers/transformSectionData';
 import { createPostSectionResponse } from './helpers/createPostSectionResponse';
 
@@ -58,20 +57,17 @@ export const getSectionPageErrorContext = async (
   return context;
 };
 
-export const validateSection = (sectionId, sectionData) => {
-  const sectionManifest = new ManifestProvider().getSectionManifest(sectionId);
-  return validateSectionData(sectionManifest, sectionData);
-};
-
 export const postSection = async (solutionId, sectionId, sectionData) => {
   const sectionManifest = new ManifestProvider().getSectionManifest(sectionId);
   const transformedSectionData = transformSectionData(sectionId, sectionManifest, sectionData);
+  try {
+    await axios.put(`http://localhost:8080/api/v1/Solutions/${solutionId}/sections/${sectionId}`, transformedSectionData);
 
-  await axios.put(`http://localhost:8080/api/v1/Solutions/${solutionId}/sections/${sectionId}`, transformedSectionData);
-
-  const response = createPostSectionResponse(solutionId, sectionManifest);
-
-  return response;
+    const response = createPostSectionResponse(solutionId, sectionManifest);
+    return response;
+  } catch (error) {
+    return error.response.data;
+  }
 };
 
 export const getPreviewPageContext = async (solutionId) => {
