@@ -4,7 +4,7 @@ const createErrorsForField = (
   fieldId, questionManifest, validationErrors,
 ) => {
   if (validationErrors) {
-    const errorForField = Object.entries(validationErrors)
+    const errorForQuestion = Object.entries(validationErrors)
       .reduce((errorForQuestionAcc, [errorType, erroredQuestions]) => {
         if (erroredQuestions.some(erroredQuestionId => erroredQuestionId === fieldId)) {
           return {
@@ -12,10 +12,11 @@ const createErrorsForField = (
             href: `#${fieldId}`,
           };
         }
+        return errorForQuestionAcc;
       }, undefined);
-    return errorForField;
-  }
 
+    return errorForQuestion;
+  }
   return undefined;
 };
 
