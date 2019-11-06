@@ -75,7 +75,7 @@ test('should render the supported browsers question', async (t) => {
 test('should render the mobile responsive question', async (t) => {
   pageSetup(t);
 
-  const mobileResponsiveQuestion = Selector('[data-test-id="radiobutton-options-mobile-responsive"]');
+  const mobileResponsiveQuestion = Selector('[data-test-id="question-mobile-responsive"]');
 
   await t
     .expect(mobileResponsiveQuestion.find('.nhsuk-fieldset__legend').innerText).eql('Is your Solution mobile responsive?*')
@@ -136,7 +136,7 @@ test('should populate the questions with existing data', async (t) => {
     .expect(internetExplorerElevenCheckbox.find('input:checked').exists).notOk()
     .expect(internetExplorerTenCheckbox.find('input:checked').exists).ok();
 
-  const mobileResponsiveQuestion = Selector('[data-test-id="radiobutton-options-mobile-responsive"]');
+  const mobileResponsiveQuestion = Selector('[data-test-id="question-mobile-responsive"]');
   const yesRadiobutton = mobileResponsiveQuestion.find('.nhsuk-radios__item:nth-child(1)');
   const noRadiobutton = mobileResponsiveQuestion.find('.nhsuk-radios__item:nth-child(2)');
 
