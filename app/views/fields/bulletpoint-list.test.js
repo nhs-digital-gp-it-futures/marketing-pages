@@ -37,7 +37,8 @@ describe('bulletpoint-list', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        expect($('[data-test-id="bulletpoint-list-main-advice"]').text().trim()).toEqual('main advice for question');
+        expect($('[data-test-id="bulletpoint-list-main-advice"]')
+          .text().trim()).toEqual('main advice for question');
 
         done();
       });
@@ -60,7 +61,8 @@ describe('bulletpoint-list', () => {
 
         const additionalAdvice = $('[data-test-id="bulletpoint-list-additional-advice"]');
 
-        expect(additionalAdvice.find('.nhsuk-label').text().trim()).toEqual('some additional advice for question');
+        expect(additionalAdvice.find('.nhsuk-label')
+          .text().trim()).toEqual('some additional advice for question');
 
         done();
       });
@@ -85,8 +87,8 @@ describe('bulletpoint-list', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        expect($('[data-test-id="fieldId-1"]').length).toEqual(1);
-        expect($('[data-test-id="fieldId-2"]').length).toEqual(0);
+        expect($('[data-test-id="field-fieldId-1"]').length).toEqual(1);
+        expect($('[data-test-id="field-fieldId-2"]').length).toEqual(0);
 
         done();
       });
@@ -119,10 +121,10 @@ describe('bulletpoint-list', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        expect($('[data-test-id="fieldId-1"]').length).toEqual(1);
-        expect($('[data-test-id="fieldId-2"]').length).toEqual(1);
-        expect($('[data-test-id="fieldId-3"]').length).toEqual(1);
-        expect($('[data-test-id="fieldId-4"]').length).toEqual(0);
+        expect($('[data-test-id="field-fieldId-1"]').length).toEqual(1);
+        expect($('[data-test-id="field-fieldId-2"]').length).toEqual(1);
+        expect($('[data-test-id="field-fieldId-3"]').length).toEqual(1);
+        expect($('[data-test-id="field-fieldId-4"]').length).toEqual(0);
 
         done();
       });
@@ -158,9 +160,10 @@ describe('bulletpoint-list', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        expect($('[data-test-id="fieldId-1"]').find('.nhsuk-input').length).toEqual(1);
-        expect($('[data-test-id="fieldId-2"]').find('.nhsuk-form-group--error').length).toEqual(1);
-        expect($('[data-test-id="fieldId-3"]').find('.nhsuk-input').length).toEqual(1);
+        expect($('[data-test-id="field-fieldId-1"]').length).toEqual(1);
+        expect($('[data-test-id="field-fieldId-2"]').length).toEqual(0);
+        expect($('[data-test-id="field-error-fieldId-2"]').length).toEqual(1);
+        expect($('[data-test-id="field-fieldId-3"]').length).toEqual(1);
 
         done();
       });
