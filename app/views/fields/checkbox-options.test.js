@@ -168,8 +168,8 @@ describe('checkboxOptions', () => {
         const $ = cheerio.load(res.text);
 
         const question = $('div[data-test-id="question-fieldId"]');
-        expect(question.find('.nhsuk-error-message').text().trim()).toEqual('Error: Some error message');
         expect(question.find('div[data-test-id="checkbox-options-error"]').length).toEqual(1);
+        expect(question.find('.nhsuk-error-message').text().trim()).toEqual('Error: Some error message');
 
         done();
       });

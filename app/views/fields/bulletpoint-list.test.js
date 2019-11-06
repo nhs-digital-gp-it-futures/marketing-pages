@@ -60,9 +60,7 @@ describe('bulletpoint-list', () => {
         const $ = cheerio.load(res.text);
 
         const additionalAdvice = $('[data-test-id="bulletpoint-list-additional-advice"]');
-
-        expect(additionalAdvice.find('.nhsuk-label')
-          .text().trim()).toEqual('some additional advice for question');
+        expect(additionalAdvice.text().trim()).toEqual('some additional advice for question');
 
         done();
       });
