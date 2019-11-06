@@ -38,7 +38,8 @@ describe('textField', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        expect($('label.nhsuk-label').text().trim()).toEqual('Some really important main advice');
+        const question = $('div[data-test-id="question-fieldId"]');
+        expect(question.find('label.nhsuk-label').text().trim()).toEqual('Some really important main advice');
 
         done();
       });
@@ -59,7 +60,8 @@ describe('textField', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        expect($('span.nhsuk-hint').text().trim()).toEqual('Some not so important additional advice');
+        const question = $('div[data-test-id="question-fieldId"]');
+        expect(question.find('span.nhsuk-hint').text().trim()).toEqual('Some not so important additional advice');
 
         done();
       });
@@ -80,7 +82,8 @@ describe('textField', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        expect($('input').length).toEqual(1);
+        const question = $('div[data-test-id="question-fieldId"]');
+        expect(question.find('input').length).toEqual(1);
 
         done();
       });
@@ -102,7 +105,8 @@ describe('textField', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        expect($('input').val()).toEqual('Some populated data');
+        const question = $('div[data-test-id="question-fieldId"]');
+        expect(question.find('div[data-test-id="question-fieldId"] input').val()).toEqual('Some populated data');
 
         done();
       });
@@ -127,8 +131,11 @@ describe('textField', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        expect($('.nhsuk-error-message').text().trim()).toEqual('Error: Some error message');
-        expect($('input.nhsuk-input--error').length).toEqual(1);
+        const question = $('div[data-test-id="question-fieldId"]');
+        const inputError = question.find('div[data-test-id="text-field-input-error"] .nhsuk-error-message');
+
+        expect(inputError.length).toEqual(1);
+        expect(inputError.text().trim()).toEqual('Error: Some error message');
 
         done();
       });
@@ -150,7 +157,8 @@ describe('textField', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        expect($('[data-test-id="text-field-footer"]').text().trim()).toEqual('Some footer based advice');
+        const question = $('div[data-test-id="question-fieldId"]');
+        expect(question.find('[data-test-id="text-field-footer"]').text().trim()).toEqual('Some footer based advice');
 
         done();
       });

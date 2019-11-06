@@ -1,19 +1,42 @@
 {% from 'components/radios/macro.njk' import radios %}
 
 {% macro radiobuttonOptions(question) %}
-  <div data-test-id="radiobutton-options-{{ question.id }}">
-    {{ radios({
-      "idPrefix": question.id,
-      "name": question.id,
-      "fieldset": {
-        "legend": {
-          "text": question.mainAdvice
-        }
-      },
-      "hint": {
-        "text": question.additionalAdvice
-      },
-      "items": question.options
-    }) }}
+  <div data-test-id="question-{{ question.id }}">
+    {% if (question.error) %}
+      <div data-test-id="radiobutton-options-error">
+        {{ radios({
+          "idPrefix": question.id,
+          "name": question.id,
+          "errorMessage": {
+            "text": question.error.message
+          },
+          "fieldset": {
+            "legend": {
+              "text": question.mainAdvice
+            }
+          },
+          "hint": {
+            "text": question.additionalAdvice
+          },
+          "items": question.options
+        }) }}
+      </div>
+    {% else %}
+      <div data-test-id="radiobutton-options">
+        {{ radios({
+          "idPrefix": question.id,
+          "name": question.id,
+          "fieldset": {
+            "legend": {
+              "text": question.mainAdvice
+            }
+          },
+          "hint": {
+            "text": question.additionalAdvice
+          },
+          "items": question.options
+        }) }}
+      </div>
+    {% endif %}
   </div>
 {% endmacro %}

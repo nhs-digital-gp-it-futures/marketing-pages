@@ -113,7 +113,11 @@ describe('section page', () => {
   it('should render all the questions for the section', (done) => {
     const context = {
       title: 'Title of the section',
-      questions: [{}, {}, {}],
+      questions: [
+        { type: 'text-field' },
+        { type: 'text-field' },
+        { type: 'text-field' },
+      ],
     };
 
     const dummyApp = createDummyApp(context);
@@ -122,7 +126,7 @@ describe('section page', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        expect($('[data-test-id="section-question"]').length).toEqual(3);
+        expect($('div[data-test-id="section-question-text-field"]').length).toEqual(3);
 
         done();
       });
