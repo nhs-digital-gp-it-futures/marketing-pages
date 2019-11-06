@@ -63,7 +63,7 @@ test('should render all the advice of the section', async (t) => {
 test('should render the supported browsers question', async (t) => {
   pageSetup(t);
 
-  const supportedBrowsersQuestion = Selector('[data-test-id="checkbox-options-supported-browsers"]');
+  const supportedBrowsersQuestion = Selector('[data-test-id="question-supported-browsers"]');
 
   await t
     .expect(supportedBrowsersQuestion.find('.nhsuk-fieldset__legend').innerText).eql('What browsers are supported? Select all that apply*')
@@ -113,30 +113,10 @@ test('should allow posting an empty form and navigate back to the sub dashboard'
     .expect(getLocation()).contains('/S100000-001/dashboard/browser-based');
 });
 
-test('should allow posting an empty form and navigate back to the sub dashboard', async (t) => {
-  pageSetup(t);
-
-  nock('http://localhost:8080')
-    .get('/api/v1/Solutions/S100000-001/sections/browser-based')
-    .reply(200, aBrowserBasedFixture);
-
-  nock('http://localhost:8080')
-    .put('/api/v1/Solutions/S100000-001/sections/browsers-supported')
-    .reply(200, {});
-
-  const getLocation = ClientFunction(() => document.location.href);
-
-  const submitButton = Selector('[data-test-id="section-submit-button"]');
-
-  await t
-    .click(submitButton.find('button'))
-    .expect(getLocation()).contains('/S100000-001/dashboard/browser-based');
-});
-
 test('should populate the questions with existing data', async (t) => {
   pageSetup(t, true);
 
-  const supportedBrowserQuestion = Selector('[data-test-id="checkbox-options-supported-browsers"]');
+  const supportedBrowserQuestion = Selector('[data-test-id="question-supported-browsers"]');
   const googleChromeCheckbox = supportedBrowserQuestion.find('.nhsuk-checkboxes__item:nth-child(1)');
   const edgeCheckbox = supportedBrowserQuestion.find('.nhsuk-checkboxes__item:nth-child(2)');
   const firefoxCheckbox = supportedBrowserQuestion.find('.nhsuk-checkboxes__item:nth-child(3)');
