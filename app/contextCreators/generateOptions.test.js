@@ -1,13 +1,13 @@
 import { generateOptions } from './generateOptions';
 
 describe('generateOptions', () => {
-  it.skip('should return undefined if question is undefined', () => {
-    const expectedGeneratedFields = undefined;
+  it('should return undefined if an option manifest is not provided', () => {
+    const expectedOptions = undefined;
 
-    const questionManifest = undefined;
+    const optionsManifest = undefined;
 
-    const fields = generateOptions('some-question-id', questionManifest);
+    const options = generateOptions('some-question-id', optionsManifest);
 
-    expect(fields).toEqual(expectedGeneratedFields);
+    expect(options).toEqual(expectedOptions);
   });
 });

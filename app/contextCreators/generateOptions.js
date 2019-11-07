@@ -30,11 +30,14 @@ const createOptions = (questionId, optionsManifest) => {
 export const generateOptions = (
   questionId, optionsManifest, formData,
 ) => {
-  const options = createOptions(questionId, optionsManifest);
+  if (optionsManifest) {
+    const options = createOptions(questionId, optionsManifest);
 
-  const populatedOptions = options.map(option => populateQuestionOption(
-    questionId, option, formData,
-  ));
+    const populatedOptions = options.map(option => populateQuestionOption(
+      questionId, option, formData,
+    ));
 
-  return populatedOptions;
+    return populatedOptions;
+  }
+  return undefined;
 };
