@@ -24,7 +24,8 @@
     "watch:scss": "npm run build:css -- -w",
     "watch:js": "webpack --w",
     "watch:assets": "npm run build:assets -- -w",
-    "webpack": "webpack"
+    "webpack": "webpack",
+    "debug": "babel-node server --inspect"
   },
   "author": "Fawad Ali",
   "repository": {
