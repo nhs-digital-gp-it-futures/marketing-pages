@@ -1,27 +1,50 @@
 import { getExistingDataForFieldIfAvailable } from './getExistingDataForFieldIfAvailable';
 
-export const generateFields = (question, exisitingDataForSection, validationErrors) => {
-  if (question && question.maxItems && question.maxItems > 0) {
-    const fields = [];
+const createErrorsForField = (
+  fieldId, questionManifest, validationErrors,
+) => {
+  if (validationErrors) {
+    const errorForQuestion = Object.entries(validationErrors)
+      .reduce((errorForQuestionAcc, [errorType, erroredQuestions]) => {
+        if (erroredQuestions.some(erroredQuestionId => erroredQuestionId === fieldId)) {
+          return {
+            text: questionManifest.errorResponse[errorType],
+            href: `#${fieldId}`,
+          };
+        }
+        return errorForQuestionAcc;
+      }, undefined);
 
-    Array(question.maxItems).fill().map((_, i) => {
-      const field = {};
-      field.id = `${question.id}-${i + 1}`;
-      field.data = getExistingDataForFieldIfAvailable(exisitingDataForSection, question.id, i);
+    return errorForQuestion;
+  }
+  return undefined;
+};
 
-      const validationErrorForField = validationErrors && validationErrors
-        .find(validationError => validationError.fieldId === field.id);
+export const generateFields = (
+  questionId, questionManifest, exisitingDataForSection, validationErrors,
+) => {
+  if (questionManifest && questionManifest.maxItems && questionManifest.maxItems > 0) {
+    const { errorsAcc: errors, fieldsAcc: fields } = Array(questionManifest.maxItems).fill().reduce(({ errorsAcc, fieldsAcc }, _, i) => {
+      const fieldId = `${questionId}-${i + 1}`;
 
-      if (validationErrorForField) {
-        const error = {};
-        error.message = validationErrorForField.message;
-        field.error = error;
-      }
+      const errorForField = createErrorsForField(fieldId, questionManifest, validationErrors);
 
-      fields.push(field);
-    });
+      const field = {
+        id: fieldId,
+        data: getExistingDataForFieldIfAvailable(exisitingDataForSection, questionId, i),
+        error: errorForField ? { message: errorForField.text } : undefined,
+      };
 
-    return fields;
+      return {
+        errorsAcc: errorForField ? errorsAcc.concat(errorForField) : errorsAcc,
+        fieldsAcc: fieldsAcc.concat(field),
+      };
+    }, { errorsAcc: [], fieldsAcc: [] });
+
+    return {
+      errors: errors.length > 0 ? errors : undefined,
+      fields,
+    };
   }
   return undefined;
 };

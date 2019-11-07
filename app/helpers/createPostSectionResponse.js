@@ -12,6 +12,7 @@ const createRedirectUrl = (
 
 export const createPostSectionResponse = (solutionId, sectionManifest) => {
   const response = {
+    success: true,
     redirectUrl: createRedirectUrl(solutionId, sectionManifest.successfulSubmitResponsePath),
   };
 

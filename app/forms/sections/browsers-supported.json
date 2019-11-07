@@ -6,21 +6,19 @@
     "This information will be visible to buyers on your Solution page.",
     "* indicates required field."
   ],
-  "questions": [
-    {
-      "id": "supported-browsers",
+  "questions": {
+    "supported-browsers": {
       "mainAdvice": "What browsers are supported? Select all that apply*",
       "additionalAdvice": "If your Solution is browser based, please select below all the browsers your Solution supports.",
       "type": "checkbox-options"
     },
-    {
-      "id": "mobile-responsive",
+    "mobile-responsive": {
       "mainAdvice": "Is your Solution mobile responsive?*",
       "additionalAdvice": "Please select below if the design responds and adapts to mobile or tablet devices.",
       "type": "radiobutton-options"
 
     }
-  ],
+  },
   "submitText" : "Save and return",
   "successfulSubmitResponsePath" : "dashboard/browser-based"
 }

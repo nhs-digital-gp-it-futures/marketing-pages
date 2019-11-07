@@ -11,7 +11,6 @@ describe('createSectionPageContext', () => {
         '- Create and change appointment entries',
         'You can enter up to 100 characters per feature',
       ],
-      errors: [],
       questions: [
         {
           id: 'features-listing',
@@ -30,11 +29,9 @@ describe('createSectionPageContext', () => {
         '- Create and change appointment entries',
         'You can enter up to 100 characters per feature',
       ],
-      questions: [
-        {
-          id: 'features-listing',
-        },
-      ],
+      questions: {
+        'features-listing': {},
+      },
       submitText: 'some-submit-text',
     };
 
@@ -47,7 +44,6 @@ describe('createSectionPageContext', () => {
     it('should create a context for bulletpoint-list type question', () => {
       const expectedContext = {
         submitActionUrl: '/some-solution-id/section/some-section-id',
-        errors: [],
         questions: [
           {
             id: 'fieldId',
@@ -70,13 +66,12 @@ describe('createSectionPageContext', () => {
 
       const sectionManifest = {
         id: 'some-section-id',
-        questions: [
-          {
-            id: 'fieldId',
+        questions: {
+          fieldId: {
             type: 'bulletpoint-list',
             maxItems: 3,
           },
-        ],
+        },
       };
 
       const context = createSectionPageContext('some-solution-id', sectionManifest);
@@ -87,7 +82,6 @@ describe('createSectionPageContext', () => {
     it('should create a context for bulletpoint-list type question with existing data populated', () => {
       const expectedContext = {
         submitActionUrl: '/some-solution-id/section/some-section-id',
-        errors: [],
         questions: [
           {
             id: 'fieldId',
@@ -121,13 +115,12 @@ describe('createSectionPageContext', () => {
 
       const sectionManifest = {
         id: 'some-section-id',
-        questions: [
-          {
-            id: 'fieldId',
+        questions: {
+          fieldId: {
             type: 'bulletpoint-list',
             maxItems: 3,
           },
-        ],
+        },
       };
 
       const optionsManifest = {};
@@ -143,7 +136,15 @@ describe('createSectionPageContext', () => {
         errors: [
           {
             text: 'some really helpful error message',
-            href: '#fieldId',
+            href: '#fieldId-2',
+          },
+          {
+            text: 'some really helpful error message',
+            href: '#fieldId-3',
+          },
+          {
+            text: 'some other really helpful error message',
+            href: '#someField',
           },
         ],
         questions: [
@@ -164,9 +165,20 @@ describe('createSectionPageContext', () => {
               },
               {
                 id: 'fieldId-3',
-                data: 'Field C',
+                data: 'Field C is too big too',
+                error: {
+                  message: 'some really helpful error message',
+                },
               },
             ],
+          },
+          {
+            id: 'someField',
+            type: 'text-field',
+            data: 'man some field is massive',
+            error: {
+              message: 'some other really helpful error message',
+            },
           },
         ],
         returnToDashboardUrl: '/some-solution-id',
@@ -176,34 +188,32 @@ describe('createSectionPageContext', () => {
         fieldId: [
           'Field A',
           'Field B is too big',
-          'Field C',
+          'Field C is too big too',
         ],
+        someField: 'man some field is massive',
       };
 
-      const validationErrors = [
-        {
-          questionId: 'fieldId',
-          fieldId: 'fieldId-2',
-          message: 'some really helpful error message',
-        },
-      ];
+      const validationErrors = {
+        maxLength: ['fieldId-2', 'fieldId-3', 'someField'],
+      };
 
       const sectionManifest = {
         id: 'some-section-id',
-        questions: [
-          {
-            id: 'fieldId',
+        questions: {
+          fieldId: {
             type: 'bulletpoint-list',
             maxItems: 3,
-            saveValidations: [
-              {
-                type: 'maxLength',
-                maxLength: 10,
-                message: 'some really helpful error message',
-              },
-            ],
+            errorResponse: {
+              maxLength: 'some really helpful error message',
+            },
           },
-        ],
+          someField: {
+            type: 'text-field',
+            errorResponse: {
+              maxLength: 'some other really helpful error message',
+            },
+          },
+        },
       };
 
       const optionsManifest = {};
@@ -218,7 +228,6 @@ describe('createSectionPageContext', () => {
     it('should create a context for checkbox-options type question', () => {
       const expectedContext = {
         submitActionUrl: '/some-solution-id/section/some-section-id',
-        errors: [],
         questions: [
           {
             id: 'fieldId',
@@ -244,12 +253,11 @@ describe('createSectionPageContext', () => {
 
       const sectionManifest = {
         id: 'some-section-id',
-        questions: [
-          {
-            id: 'fieldId',
+        questions: {
+          fieldId: {
             type: 'checkbox-options',
           },
-        ],
+        },
       };
 
       const optionsManifest = {
@@ -270,7 +278,6 @@ describe('createSectionPageContext', () => {
     it('should create a context for checkbox-options type question with existing data populated', () => {
       const expectedContext = {
         submitActionUrl: '/some-solution-id/section/some-section-id',
-        errors: [],
         questions: [
           {
             id: 'fieldId',
@@ -298,12 +305,11 @@ describe('createSectionPageContext', () => {
 
       const sectionManifest = {
         id: 'some-section-id',
-        questions: [
-          {
-            id: 'fieldId',
+        questions: {
+          fieldId: {
             type: 'checkbox-options',
           },
-        ],
+        },
       };
 
       const formData = {
@@ -333,7 +339,6 @@ describe('createSectionPageContext', () => {
     it('should create a context for radiobutton-options type question', () => {
       const expectedContext = {
         submitActionUrl: '/some-solution-id/section/some-section-id',
-        errors: [],
         questions: [
           {
             id: 'fieldId',
@@ -359,12 +364,11 @@ describe('createSectionPageContext', () => {
 
       const sectionManifest = {
         id: 'some-section-id',
-        questions: [
-          {
-            id: 'fieldId',
+        questions: {
+          fieldId: {
             type: 'radiobutton-options',
           },
-        ],
+        },
       };
 
       const optionsManifest = {
@@ -385,7 +389,6 @@ describe('createSectionPageContext', () => {
     it('should create a context for radiobutton-options type question with existing data populated', () => {
       const expectedContext = {
         submitActionUrl: '/some-solution-id/section/some-section-id',
-        errors: [],
         questions: [
           {
             id: 'fieldId',
@@ -412,12 +415,11 @@ describe('createSectionPageContext', () => {
 
       const sectionManifest = {
         id: 'some-section-id',
-        questions: [
-          {
-            id: 'fieldId',
+        questions: {
+          fieldId: {
             type: 'radiobutton-options',
           },
-        ],
+        },
       };
 
       const formData = {
@@ -444,7 +446,6 @@ describe('createSectionPageContext', () => {
     it('should create a context for question with existing data populated', () => {
       const expectedContext = {
         submitActionUrl: '/some-solution-id/section/some-section-id',
-        errors: [],
         questions: [
           {
             id: 'fieldId',
@@ -462,13 +463,12 @@ describe('createSectionPageContext', () => {
 
       const sectionManifest = {
         id: 'some-section-id',
-        questions: [
-          {
-            id: 'fieldId',
+        questions: {
+          fieldId: {
             type: 'textarea-field',
             rows: 10,
           },
-        ],
+        },
       };
 
       const optionsManifest = {};
@@ -504,28 +504,20 @@ describe('createSectionPageContext', () => {
         fieldId: 'some existing data',
       };
 
-      const validationErrors = [
-        {
-          questionId: 'fieldId',
-          message: 'some really helpful error message',
-        },
-      ];
+      const validationErrors = {
+        required: ['fieldId'],
+      };
 
       const sectionManifest = {
         id: 'some-section-id',
-        questions: [
-          {
-            id: 'fieldId',
+        questions: {
+          fieldId: {
             type: 'textarea-field',
-            saveValidations: [
-              {
-                type: 'maxLength',
-                maxLength: 10,
-                message: 'some really helpful error message',
-              },
-            ],
+            errorResponse: {
+              required: 'some really helpful error message',
+            },
           },
-        ],
+        },
       };
 
       const optionsManifest = {};

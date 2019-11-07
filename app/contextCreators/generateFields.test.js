@@ -4,9 +4,9 @@ describe('generateFields', () => {
   it('should return undefined if question is undefined', () => {
     const expectedGeneratedFields = undefined;
 
-    const question = undefined;
+    const questionManifest = undefined;
 
-    const fields = generateFields(question);
+    const fields = generateFields('some-question-id', questionManifest);
 
     expect(fields).toEqual(expectedGeneratedFields);
   });
@@ -14,11 +14,9 @@ describe('generateFields', () => {
   it('should return undefined if maxItems property does not exist in question', () => {
     const expectedGeneratedFields = undefined;
 
-    const question = {
-      id: 'some-question-id',
-    };
+    const questionManifest = {};
 
-    const fields = generateFields(question);
+    const fields = generateFields('some-question-id', questionManifest);
 
     expect(fields).toEqual(expectedGeneratedFields);
   });
@@ -26,73 +24,75 @@ describe('generateFields', () => {
   it('should return undefined if maxItems property is 0', () => {
     const expectedGeneratedFields = undefined;
 
-    const question = {
-      id: 'some-question-id',
+    const questionManifest = {
       maxItems: 0,
     };
 
-    const fields = generateFields(question);
+    const fields = generateFields('some-question-id', questionManifest);
 
     expect(fields).toEqual(expectedGeneratedFields);
   });
 
   it('should create a list of 1 field if the question provided has a maxItems property of 1', () => {
-    const expectedGeneratedFields = [
-      {
-        id: 'some-question-id-1',
-      },
-    ];
+    const expectedGeneratedFields = {
+      fields: [
+        {
+          id: 'some-question-id-1',
+        },
+      ],
+    };
 
-    const question = {
-      id: 'some-question-id',
+    const questionManifest = {
       maxItems: 1,
     };
 
-    const fields = generateFields(question);
+    const fields = generateFields('some-question-id', questionManifest);
 
     expect(fields).toEqual(expectedGeneratedFields);
   });
 
   it('should create a list of multiple fields if the question provided has a maxItems property of more than 1', () => {
-    const expectedGeneratedFields = [
-      {
-        id: 'some-question-id-1',
-      },
-      {
-        id: 'some-question-id-2',
-      },
-      {
-        id: 'some-question-id-3',
-      },
-    ];
+    const expectedGeneratedFields = {
+      fields: [
+        {
+          id: 'some-question-id-1',
+        },
+        {
+          id: 'some-question-id-2',
+        },
+        {
+          id: 'some-question-id-3',
+        },
+      ],
+    };
 
-    const question = {
-      id: 'some-question-id',
+    const questionManifest = {
       maxItems: 3,
     };
 
-    const fields = generateFields(question);
+    const fields = generateFields('some-question-id', questionManifest);
 
     expect(fields).toEqual(expectedGeneratedFields);
   });
 
   it('should populate the fields with data when there is existing data available', () => {
-    const expectedGeneratedFields = [
-      {
-        id: 'some-question-id-1',
-        data: 'some-data-1',
-      },
-      {
-        id: 'some-question-id-2',
-        data: 'some-data-2',
-      },
-      {
-        id: 'some-question-id-3',
-      },
-    ];
+    const expectedGeneratedFields = {
+      fields: [
+        {
+          id: 'some-question-id-1',
+          data: 'some-data-1',
+        },
+        {
+          id: 'some-question-id-2',
+          data: 'some-data-2',
+        },
+        {
+          id: 'some-question-id-3',
+        },
+      ],
+    };
 
-    const question = {
-      id: 'some-question-id',
+    const questionManifest = {
       maxItems: 3,
     };
 
@@ -102,42 +102,48 @@ describe('generateFields', () => {
       ],
     };
 
-    const fields = generateFields(question, exisitingDataForSection);
+    const fields = generateFields('some-question-id', questionManifest, exisitingDataForSection);
 
     expect(fields).toEqual(expectedGeneratedFields);
   });
 
   it('should add the validation error message to the field', () => {
-    const expectedGeneratedFields = [
-      {
-        id: 'some-question-id-1',
-        data: 'some-data-1',
-      },
-      {
-        id: 'some-question-id-2',
-        data: 'some-really-large-data-2',
-        error: {
-          message: 'some really helpful error message',
+    const expectedGeneratedFields = {
+      errors: [
+        {
+          text: 'some really helpful error message',
+          href: '#some-question-id-2',
         },
-      },
-      {
-        id: 'some-question-id-3',
-        data: 'some-data-3',
-      },
-    ];
-
-    const question = {
-      id: 'some-question-id',
-      maxItems: 3,
+      ],
+      fields: [
+        {
+          id: 'some-question-id-1',
+          data: 'some-data-1',
+        },
+        {
+          id: 'some-question-id-2',
+          data: 'some-really-large-data-2',
+          error: {
+            message: 'some really helpful error message',
+          },
+        },
+        {
+          id: 'some-question-id-3',
+          data: 'some-data-3',
+        },
+      ],
     };
 
-    const validationErrors = [
-      {
-        questionId: 'some-question-id',
-        fieldId: 'some-question-id-2',
-        message: 'some really helpful error message',
+    const questionManifest = {
+      maxItems: 3,
+      errorResponse: {
+        maxLength: 'some really helpful error message',
       },
-    ];
+    };
+
+    const validationErrors = {
+      maxLength: ['some-question-id-2'],
+    };
 
     const exisitingDataForSection = {
       'some-question-id': [
@@ -145,7 +151,7 @@ describe('generateFields', () => {
       ],
     };
 
-    const fields = generateFields(question, exisitingDataForSection, validationErrors);
+    const fields = generateFields('some-question-id', questionManifest, exisitingDataForSection, validationErrors);
 
     expect(fields).toEqual(expectedGeneratedFields);
   });

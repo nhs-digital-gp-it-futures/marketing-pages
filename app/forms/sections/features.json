@@ -7,19 +7,14 @@
     "- Create and change appointment entries",
     "You can enter up to 100 characters per feature"
   ],
-  "questions": [
-    {
-      "id": "listing",
+  "questions": {
+    "listing": {
       "type": "bulletpoint-list",
       "maxItems": 10,
-      "saveValidations": [
-        {
-          "type": "maxLength",
-          "maxLength": 100,
-          "message": "some validation error message"
-        }
-      ]
+      "errorResponse": {
+        "maxLength": "This feature is over the character limit"
+      }
     }
-  ],
+  },
   "submitText" : "Save and return to all sections"
 }

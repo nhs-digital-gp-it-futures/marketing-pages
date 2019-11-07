@@ -27,13 +27,13 @@ export const transformSectionData = (sectionId, sectionManifest, sectionData) =>
   if (transformationStratergy[sectionId]) {
     const transformedSectionData = {};
 
-    sectionManifest.questions.map((manifestQuestion) => {
-      if (transformationStratergy[sectionId][manifestQuestion.id]) {
-        const transformedQuestionValue = transformationStratergy[sectionId][manifestQuestion.id]
-          .transform(sectionData[manifestQuestion.id]);
-        transformedSectionData[manifestQuestion.id] = transformedQuestionValue;
+    Object.keys(sectionManifest.questions).map((questionId) => {
+      if (transformationStratergy[sectionId][questionId]) {
+        const transformedQuestionValue = transformationStratergy[sectionId][questionId]
+          .transform(sectionData[questionId]);
+        transformedSectionData[questionId] = transformedQuestionValue;
       } else {
-        transformedSectionData[manifestQuestion.id] = sectionData[manifestQuestion.id];
+        transformedSectionData[questionId] = sectionData[questionId];
       }
     });
 

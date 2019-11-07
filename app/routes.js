@@ -4,7 +4,6 @@ import {
   getSubDashboardPageContext,
   getSectionPageContext,
   getSectionPageErrorContext,
-  validateSection,
   postSection,
   getPreviewPageContext,
   postSubmitForModeration,
@@ -38,18 +37,16 @@ router.post('/:solutionId/section/:sectionId', async (req, res) => {
   const { solutionId, sectionId } = req.params;
   const sectionPostData = req.body;
 
-  const validationErrors = validateSection(sectionId, sectionPostData);
+  const response = await postSection(solutionId, sectionId, sectionPostData);
 
-  if (validationErrors && validationErrors.length > 0) {
+  if (response.success) {
+    res.redirect(response.redirectUrl);
+  } else {
     const context = await getSectionPageErrorContext(
-      solutionId, sectionId, sectionPostData, validationErrors,
+      solutionId, sectionId, sectionPostData, response,
     );
 
     res.render('section-page', context);
-  } else {
-    const response = await postSection(solutionId, sectionId, sectionPostData);
-
-    res.redirect(response.redirectUrl);
   }
 });
 

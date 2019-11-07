@@ -7,19 +7,15 @@
     "* indicates required field."
   ],
   "warningAdvice": "When revisiting this section please be aware that if you choose to deselect an application type, any data that has been added to that application type will be deleted.",
-  "questions": [
-    {
-      "id": "client-application-types",
+  "questions": {
+    "client-application-types": {
       "mainAdvice": "Select the client application types your Solution supports *",
       "additionalAdvice": "Check all the options that are relevant to you. You will be required to provide further information for each client application type you select.",
       "type": "checkbox-options",
-      "submitValidations": [
-        {
-          "type": "required",
-          "message": "Client application type is a required field error message"
-        }
-      ]
+      "errorResponse": {
+        "required": "You must select at least one client application type"
+      }
     }
-  ],
+  },
   "submitText" : "Save and return to all sections"
 }
