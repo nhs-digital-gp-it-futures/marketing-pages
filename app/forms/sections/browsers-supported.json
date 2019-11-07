@@ -10,13 +10,18 @@
     "supported-browsers": {
       "mainAdvice": "What browsers are supported? Select all that apply*",
       "additionalAdvice": "If your Solution is browser based, please select below all the browsers your Solution supports.",
-      "type": "checkbox-options"
+      "type": "checkbox-options",
+      "errorResponse": {
+        "required": "Please select what browsers are supported"
+      }
     },
     "mobile-responsive": {
       "mainAdvice": "Is your Solution mobile responsive?*",
       "additionalAdvice": "Please select below if the design responds and adapts to mobile or tablet devices.",
-      "type": "radiobutton-options"
-
+      "type": "radiobutton-options",
+      "errorResponse": {
+        "required": "Please select if your solution is mobile responsive"
+      }
     }
   },
   "submitText" : "Save and return",
