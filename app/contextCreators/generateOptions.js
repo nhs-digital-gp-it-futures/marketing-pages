@@ -33,7 +33,7 @@ export const generateOptions = (
   if (optionsManifest) {
     const options = createOptions(questionId, optionsManifest);
 
-    const populatedOptions = options.map(option => populateQuestionOption(
+    const populatedOptions = options && options.map(option => populateQuestionOption(
       questionId, option, formData,
     ));
 
