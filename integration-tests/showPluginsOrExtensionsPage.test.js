@@ -1,8 +1,8 @@
 import nock from 'nock';
 import { Selector, ClientFunction } from 'testcafe';
 import { ManifestProvider } from '../app/forms/manifestProvider';
+import dashboardWithCompleteSections from './fixtures/dashboardWithCompleteSections.json';
 import aBrowserBasedFixture from './fixtures/aBrowserBasedData.json';
-import aSolutionFixture from './fixtures/aSolution.json';
 
 const pluginsOrExtensionsMarketingData = {
   'plugins-required': 'yes',
@@ -61,7 +61,7 @@ test('should render all the advice of the section', async (t) => {
 test('should render the plugin required question', async (t) => {
   pageSetup(t);
 
-  const pluginsRequiredQuestion = Selector('[data-test-id="radiobutton-options-plugins-required"]');
+  const pluginsRequiredQuestion = Selector('[data-test-id="question-plugins-required"]');
 
   await t
     .expect(pluginsRequiredQuestion.find('.nhsuk-fieldset__legend').innerText).eql('Are any plug-ins or browser extensions required?*')
@@ -73,7 +73,7 @@ test('should render the plugin required question', async (t) => {
 test('should render the plugins detail question', async (t) => {
   pageSetup(t);
 
-  const pluginsDetailQuestion = Selector('[data-test-id="textarea-field-plugins-detail"]');
+  const pluginsDetailQuestion = Selector('[data-test-id="question-plugins-detail"]');
 
   await t
     .expect(pluginsDetailQuestion.find('label.nhsuk-label').innerText).eql('If any plug-ins or browser extensions are required, provide more detail or constraints')
@@ -114,7 +114,7 @@ test('should allow posting an empty form and navigate back to the sub dashboard'
 test('should populate the questions with existing data', async (t) => {
   pageSetup(t, true);
 
-  const pluginsRequiredQuestion = Selector('[data-test-id="radiobutton-options-plugins-required"]');
+  const pluginsRequiredQuestion = Selector('[data-test-id="question-plugins-required"]');
   const yesRadiobutton = pluginsRequiredQuestion.find('.nhsuk-radios__item:nth-child(1)');
   const noRadiobutton = pluginsRequiredQuestion.find('.nhsuk-radios__item:nth-child(2)');
 
@@ -122,7 +122,7 @@ test('should populate the questions with existing data', async (t) => {
     .expect(yesRadiobutton.find('input:checked').exists).ok()
     .expect(noRadiobutton.find('input:checked').exists).notOk();
 
-  const pluginsDetailQuestion = Selector('[data-test-id="textarea-field-plugins-detail"]');
+  const pluginsDetailQuestion = Selector('[data-test-id="question-plugins-detail"]');
 
   await t
     .expect(pluginsDetailQuestion.find('textarea').value).eql('Some plugin and extension detail');
@@ -136,7 +136,7 @@ test('should show error summary and validation for questions when they exceed th
 
   const errorSummary = Selector('[data-test-id="error-summary"]');
   const errorSummaryList = Selector('.nhsuk-error-summary__list');
-  const pluginsDetailQuestion = Selector('[data-test-id="textarea-field-plugins-detail"]');
+  const pluginsDetailQuestion = Selector('[data-test-id="question-plugins-detail"]');
   const submitButton = Selector('[data-test-id="section-submit-button"]');
 
   await t
@@ -164,15 +164,15 @@ test('should return to the marketing data dashboard when the return to all secti
   pageSetup(t);
 
   nock('http://localhost:8080')
-    .get('/api/v1/Solutions/S100000-001')
-    .reply(200, aSolutionFixture);
+    .get('/api/v1/Solutions/S100000-001/dashboard')
+    .reply(200, dashboardWithCompleteSections);
 
   const getLocation = ClientFunction(() => document.location.href);
 
-  const link = Selector('[data-test-id="section-back-link"]');
+  const link = Selector('[data-test-id="section-back-link"] a');
 
   await t
-    .click(link.find('a'))
+    .click(link)
     .expect(getLocation()).notContains('section')
     .expect(getLocation()).contains('S100000-001');
 });

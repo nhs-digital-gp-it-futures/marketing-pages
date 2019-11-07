@@ -1,8 +1,8 @@
 import nock from 'nock';
 import { Selector, ClientFunction } from 'testcafe';
 import { ManifestProvider } from '../app/forms/manifestProvider';
+import dashboardWithCompleteSections from './fixtures/dashboardWithCompleteSections.json';
 import aBrowserBasedFixture from './fixtures/aBrowserBasedData.json';
-import aSolutionFixture from './fixtures/aSolution.json';
 
 const browserSupportedMarketingData = {
   'supported-browsers': [
@@ -159,8 +159,8 @@ test('should return to the marketing data dashboard when the return to all secti
   pageSetup(t);
 
   nock('http://localhost:8080')
-    .get('/api/v1/Solutions/S100000-001')
-    .reply(200, aSolutionFixture);
+    .get('/api/v1/Solutions/S100000-001/dashboard')
+    .reply(200, dashboardWithCompleteSections);
 
   const getLocation = ClientFunction(() => document.location.href);
 
