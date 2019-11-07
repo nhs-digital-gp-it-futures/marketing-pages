@@ -56,4 +56,72 @@ describe('preview-browser-based', () => {
         done();
       });
   });
+
+  it('should render the mobile responsive answer', (done) => {
+    const context = {
+      section: {
+        sections: {
+          'browsers-supported': {
+            answers: {
+              'mobile-responsive': 'yes',
+            },
+          },
+        },
+      },
+    };
+
+    const dummyApp = createDummyApp(context);
+    request(dummyApp)
+      .get('/')
+      .then((res) => {
+        const $ = cheerio.load(res.text);
+
+        const browserBasedSectionTable = $('[data-test-id="preview-section-table-browser-based"]');
+        const mobileResponsiveQuestionRow = browserBasedSectionTable.find('[data-test-id="preview-section-table-row-mobile-responsive"]');
+
+        expect(browserBasedSectionTable.length).toEqual(1);
+        expect(mobileResponsiveQuestionRow.length).toEqual(1);
+        expect(mobileResponsiveQuestionRow
+          .find('.nhsuk-summary-list__key').text().trim()).toEqual('Mobile responsive');
+        expect(mobileResponsiveQuestionRow
+          .find('.nhsuk-summary-list__value')
+          .find('[data-test-id="preview-question-data-text"]').length).toEqual(1);
+
+        done();
+      });
+  });
+
+  it('should render the plugins required answer', (done) => {
+    const context = {
+      section: {
+        sections: {
+          'plug-ins-or-extensions': {
+            answers: {
+              'plugins-required': 'yes',
+            },
+          },
+        },
+      },
+    };
+
+    const dummyApp = createDummyApp(context);
+    request(dummyApp)
+      .get('/')
+      .then((res) => {
+        const $ = cheerio.load(res.text);
+
+        const browserBasedSectionTable = $('[data-test-id="preview-section-table-browser-based"]');
+        const pluginsRequiredQuestionRow = browserBasedSectionTable.find('[data-test-id="preview-section-table-row-plugins-required"]');
+
+        expect(browserBasedSectionTable.length).toEqual(1);
+        expect(pluginsRequiredQuestionRow.length).toEqual(1);
+        expect(pluginsRequiredQuestionRow
+          .find('.nhsuk-summary-list__key').text().trim()).toEqual('Plug ins or extensions required');
+        expect(pluginsRequiredQuestionRow
+          .find('.nhsuk-summary-list__value')
+          .find('[data-test-id="preview-question-data-text"]').length).toEqual(1);
+
+        done();
+      });
+  });
 });
