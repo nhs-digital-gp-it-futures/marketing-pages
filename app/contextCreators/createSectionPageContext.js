@@ -1,26 +1,7 @@
 import { generateFields } from './generateFields';
 import { generateOptions } from './generateOptions';
+import { createErrorForQuestion } from './createErrorForQuestion';
 import { getFormDataValue } from '../helpers/formData';
-
-const createErrorForQuestion = (
-  questionId, questionManifest, validationErrors,
-) => {
-  if (validationErrors) {
-    const errorForQuestion = Object.entries(validationErrors)
-      .reduce((errorForQuestionAcc, [errorType, erroredQuestions]) => {
-        if (erroredQuestions.some(erroredQuestionId => erroredQuestionId === questionId)) {
-          return {
-            text: questionManifest.errorResponse[errorType],
-            href: `#${questionId}`,
-          };
-        }
-        return errorForQuestionAcc;
-      }, undefined);
-
-    return errorForQuestion;
-  }
-  return undefined;
-};
 
 const commonQuestionContext = (
   questionId, questionManifest,

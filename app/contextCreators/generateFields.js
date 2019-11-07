@@ -1,24 +1,5 @@
 import { getExistingDataForFieldIfAvailable } from './getExistingDataForFieldIfAvailable';
-
-const createErrorsForField = (
-  fieldId, questionManifest, validationErrors,
-) => {
-  if (validationErrors) {
-    const errorForQuestion = Object.entries(validationErrors)
-      .reduce((errorForQuestionAcc, [errorType, erroredQuestions]) => {
-        if (erroredQuestions.some(erroredQuestionId => erroredQuestionId === fieldId)) {
-          return {
-            text: questionManifest.errorResponse[errorType],
-            href: `#${fieldId}`,
-          };
-        }
-        return errorForQuestionAcc;
-      }, undefined);
-
-    return errorForQuestion;
-  }
-  return undefined;
-};
+import { createErrorForQuestion as createErrorForField } from './createErrorForQuestion';
 
 export const generateFields = (
   questionId, questionManifest, exisitingDataForSection, validationErrors,
@@ -27,7 +8,7 @@ export const generateFields = (
     const { errorsAcc: errors, fieldsAcc: fields } = Array(questionManifest.maxItems).fill().reduce(({ errorsAcc, fieldsAcc }, _, i) => {
       const fieldId = `${questionId}-${i + 1}`;
 
-      const errorForField = createErrorsForField(fieldId, questionManifest, validationErrors);
+      const errorForField = createErrorForField(fieldId, questionManifest, validationErrors);
 
       const field = {
         id: fieldId,
