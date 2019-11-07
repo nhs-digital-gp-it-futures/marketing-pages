@@ -72,14 +72,22 @@ const createContextForTextInputsQuestion = (
 
 
 const createQuestionsContextForOptions = (
-  questionId, questionManifest, optionsManifest, formData,
+  questionId, questionManifest, optionsManifest, formData, validationErrors,
 ) => {
+  const errorForQuestion = createErrorForQuestion(
+    questionId, questionManifest, validationErrors,
+  );
+
   const questionContext = {
     ...commonQuestionContext(questionId, questionManifest),
     options: generateOptions(questionId, optionsManifest, formData),
+    error: errorForQuestion ? { message: errorForQuestion.text } : undefined,
   };
 
-  return questionContext;
+  return {
+    errorForQuestion,
+    questionContext,
+  };
 };
 
 const createQuestionsContext = (
@@ -99,11 +107,13 @@ const createQuestionsContext = (
       }
 
       if (questionManifest.type === 'checkbox-options' || questionManifest.type === 'radiobutton-options') {
+        const { errorForQuestion, questionContext } = createQuestionsContextForOptions(
+          questionId, questionManifest, optionsManifest, formData, validationErrors,
+        );
+
         return {
-          errorsAcc,
-          questionsAcc: questionsAcc.concat(createQuestionsContextForOptions(
-            questionId, questionManifest, optionsManifest, formData,
-          )),
+          errorsAcc: errorForQuestion ? errorsAcc.concat(errorForQuestion) : errorsAcc,
+          questionsAcc: questionsAcc.concat(questionContext),
         };
       }
 
