@@ -71,40 +71,63 @@ const createQuestionsContextForOptions = (
   };
 };
 
+const createQuestionTypeContext = {
+  'bulletpoint-list': {
+    create: (
+      questionId, questionManifest, optionsManifest, formData, validationErrors,
+    ) => createQuestionsContextForBulletpointList(
+      questionId, questionManifest, formData, validationErrors,
+    ),
+  },
+  'checkbox-options': {
+    create: (
+      questionId, questionManifest, optionsManifest, formData, validationErrors,
+    ) => createQuestionsContextForOptions(
+      questionId, questionManifest, optionsManifest, formData, validationErrors,
+    ),
+  },
+  'radiobutton-options': {
+    create: (
+      questionId, questionManifest, optionsManifest, formData, validationErrors,
+    ) => createQuestionsContextForOptions(
+      questionId, questionManifest, optionsManifest, formData, validationErrors,
+    ),
+  },
+  'textarea-field': {
+    create: (
+      questionId, questionManifest, optionsManifest, formData, validationErrors,
+    ) => createContextForTextInputsQuestion(
+      questionId, questionManifest, formData, validationErrors,
+    ),
+  },
+  'text-field': {
+    create: (
+      questionId, questionManifest, optionsManifest, formData, validationErrors,
+    ) => createContextForTextInputsQuestion(
+      questionId, questionManifest, formData, validationErrors,
+    ),
+  },
+};
+
 const createQuestionsContext = (
   sectionManifest, optionsManifest, formData, validationErrors,
 ) => {
-  const { errorsAcc: errors, questionsAcc: questionsContext } = Object.entries(sectionManifest.questions)
+  const {
+    errorsAcc: errors,
+    questionsAcc: questionsContext,
+  } = Object.entries(sectionManifest.questions)
     .reduce(({ errorsAcc, questionsAcc }, [questionId, questionManifest]) => {
-      if (questionManifest.type === 'bulletpoint-list') {
-        const { errorForQuestion, questionContext } = createQuestionsContextForBulletpointList(
-          questionId, questionManifest, formData, validationErrors,
-        );
-
-        return {
-          errorsAcc: errorForQuestion && errorsAcc.concat(errorForQuestion),
-          questionsAcc: questionsAcc.concat(questionContext),
-        };
-      }
-
-      if (questionManifest.type === 'checkbox-options' || questionManifest.type === 'radiobutton-options') {
-        const { errorForQuestion, questionContext } = createQuestionsContextForOptions(
+      if (createQuestionTypeContext[questionManifest.type]) {
+        const {
+          errorForQuestion,
+          questionContext,
+        } = createQuestionTypeContext[questionManifest.type].create(
           questionId, questionManifest, optionsManifest, formData, validationErrors,
         );
 
         return {
-          errorsAcc: errorForQuestion ? errorsAcc.concat(errorForQuestion) : errorsAcc,
-          questionsAcc: questionsAcc.concat(questionContext),
-        };
-      }
-
-      if (questionManifest.type === 'textarea-field' || questionManifest.type === 'text-field') {
-        const { errorForQuestion, questionContext } = createContextForTextInputsQuestion(
-          questionId, questionManifest, formData, validationErrors,
-        );
-
-        return {
-          errorsAcc: errorForQuestion ? errorsAcc.concat(errorForQuestion) : errorsAcc,
+          errorsAcc: errorForQuestion
+            && errorForQuestion ? errorsAcc.concat(errorForQuestion) : errorsAcc,
           questionsAcc: questionsAcc.concat(questionContext),
         };
       }

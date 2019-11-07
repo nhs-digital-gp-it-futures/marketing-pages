@@ -5,7 +5,10 @@ export const generateFields = (
   questionId, questionManifest, exisitingDataForSection, validationErrors,
 ) => {
   if (questionManifest && questionManifest.maxItems && questionManifest.maxItems > 0) {
-    const { errorsAcc: errors, fieldsAcc: fields } = Array(questionManifest.maxItems).fill().reduce(({ errorsAcc, fieldsAcc }, _, i) => {
+    const {
+      errorsAcc: errors,
+      fieldsAcc: fields,
+    } = Array(questionManifest.maxItems).fill().reduce(({ errorsAcc, fieldsAcc }, _, i) => {
       const fieldId = `${questionId}-${i + 1}`;
 
       const errorForField = createErrorForField(fieldId, questionManifest, validationErrors);
