@@ -1,44 +1,6 @@
 import { generateFields } from './generateFields';
-import { getFormDataValue, doesFormDataContainValue } from '../helpers/formData';
-
-const populateQuestionOption = (
-  questionId, questionOption, formData,
-) => {
-  const populatedOption = questionOption;
-
-  if (doesFormDataContainValue(questionId, questionOption.value, formData)) {
-    return {
-      ...questionOption,
-      checked: true,
-    };
-  }
-
-  return populatedOption;
-};
-
-const createOptions = (questionId, optionsManifest) => {
-  const optionsFromManifest = optionsManifest
-    && optionsManifest[questionId]
-    && optionsManifest[questionId].options;
-
-  return optionsFromManifest
-    && Object.entries(optionsFromManifest).map(([optionId, optionValue]) => ({
-      text: optionValue,
-      value: optionId,
-    }));
-};
-
-const createContextForOptions = (
-  questionId, optionsManifest, formData,
-) => {
-  const options = createOptions(questionId, optionsManifest);
-
-  const populatedOptions = options.map(option => populateQuestionOption(
-    questionId, option, formData,
-  ));
-
-  return populatedOptions;
-};
+import { generateOptions } from './generateOptions';
+import { getFormDataValue } from '../helpers/formData';
 
 const createErrorForQuestion = (
   questionId, questionManifest, validationErrors,
@@ -114,7 +76,7 @@ const createQuestionsContextForOptions = (
 ) => {
   const questionContext = {
     ...commonQuestionContext(questionId, questionManifest),
-    options: createContextForOptions(questionId, optionsManifest, formData),
+    options: generateOptions(questionId, optionsManifest, formData),
   };
 
   return questionContext;
