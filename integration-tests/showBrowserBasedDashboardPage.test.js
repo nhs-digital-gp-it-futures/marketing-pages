@@ -108,10 +108,10 @@ test('should return to the marketing data dashboard when the return to all secti
 
   const getLocation = ClientFunction(() => document.location.href);
 
-  const link = Selector('[data-test-id="sub-dashboard-back-link"]');
+  const link = Selector('[data-test-id="sub-dashboard-back-link"] a');
 
   await t
-    .click(link.find('a'))
+    .click(link)
     .expect(getLocation()).notContains('section')
     .expect(getLocation()).contains('S100000-001');
 });
