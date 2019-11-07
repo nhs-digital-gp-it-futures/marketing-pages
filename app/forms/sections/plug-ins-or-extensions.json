@@ -6,12 +6,14 @@
     "This information will be visible to buyers on your Solution page.",
     "* indicates required field."
   ],
-  "questions": [
-    {
-      "id": "plugins-required",
+  "questions": {
+    "plugins-required": {   
       "mainAdvice": "Are any plug-ins or browser extensions required?*",
       "additionalAdvice": "Please select below if your Solution requires any plug-ins or browser extentions.",
       "type": "radiobutton-options",
+      "errorResponse": {
+        "required": "Please select whether or not plug-ins or browser extensions are required"
+      },
       "options": [
         {
           "value": "yes",
@@ -23,21 +25,16 @@
         }
       ]
     },
-    {
-      "id": "plugins-detail",
+    "plugins-detail": {
       "mainAdvice": "If any plug-ins or browser extensions are required, provide more detail or constraints",
       "additionalAdvice": "Tell buyers more information about the plug-ins or extensions required.",
       "type": "textarea-field",
-      "saveValidations": [
-        {
-          "type": "maxLength",
-          "maxLength": 500,
-          "message": "Plug-ings or extensions validation error message"
-        }
-      ],
+      "errorResponse": {
+        "maxLength": "Plug-ins or browser extensions detail is over the character limit"
+      },
       "footerAdvice": "You can enter up to 500 characters"
     }
-  ],
+  },
   "submitText" : "Save and return",
   "successfulSubmitResponsePath" : "dashboard/browser-based"
 }
