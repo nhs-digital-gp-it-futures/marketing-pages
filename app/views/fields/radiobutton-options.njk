@@ -1,7 +1,7 @@
 {% from 'components/radios/macro.njk' import radios %}
 
 {% macro radiobuttonOptions(question) %}
-  <div data-test-id="question-{{ question.id }}">
+  <div id="{{ question.id }}" data-test-id="question-{{ question.id }}">
     {% if (question.error) %}
       <div data-test-id="radiobutton-options-error">
         {{ radios({
