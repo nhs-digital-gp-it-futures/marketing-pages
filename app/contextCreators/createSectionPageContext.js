@@ -1,64 +1,7 @@
 import { generateFields } from './generateFields';
-import { getFormDataValue, doesFormDataContainValue } from '../helpers/formData';
-
-const populateQuestionOption = (
-  questionId, questionOption, formData,
-) => {
-  const populatedOption = questionOption;
-
-  if (doesFormDataContainValue(questionId, questionOption.value, formData)) {
-    return {
-      ...questionOption,
-      checked: true,
-    };
-  }
-
-  return populatedOption;
-};
-
-const createOptions = (questionId, optionsManifest) => {
-  const optionsFromManifest = optionsManifest
-    && optionsManifest[questionId]
-    && optionsManifest[questionId].options;
-
-  return optionsFromManifest
-    && Object.entries(optionsFromManifest).map(([optionId, optionValue]) => ({
-      text: optionValue,
-      value: optionId,
-    }));
-};
-
-const createContextForOptions = (
-  questionId, optionsManifest, formData,
-) => {
-  const options = createOptions(questionId, optionsManifest);
-
-  const populatedOptions = options.map(option => populateQuestionOption(
-    questionId, option, formData,
-  ));
-
-  return populatedOptions;
-};
-
-const createErrorForQuestion = (
-  questionId, questionManifest, validationErrors,
-) => {
-  if (validationErrors) {
-    const errorForQuestion = Object.entries(validationErrors)
-      .reduce((errorForQuestionAcc, [errorType, erroredQuestions]) => {
-        if (erroredQuestions.some(erroredQuestionId => erroredQuestionId === questionId)) {
-          return {
-            text: questionManifest.errorResponse[errorType],
-            href: `#${questionId}`,
-          };
-        }
-        return errorForQuestionAcc;
-      }, undefined);
-
-    return errorForQuestion;
-  }
-  return undefined;
-};
+import { generateOptions } from './generateOptions';
+import { createErrorForQuestion } from './createErrorForQuestion';
+import { getFormDataValue } from '../helpers/formData';
 
 const commonQuestionContext = (
   questionId, questionManifest,
@@ -110,48 +53,81 @@ const createContextForTextInputsQuestion = (
 
 
 const createQuestionsContextForOptions = (
-  questionId, questionManifest, optionsManifest, formData,
+  questionId, questionManifest, optionsManifest, formData, validationErrors,
 ) => {
+  const errorForQuestion = createErrorForQuestion(
+    questionId, questionManifest, validationErrors,
+  );
+
   const questionContext = {
     ...commonQuestionContext(questionId, questionManifest),
-    options: createContextForOptions(questionId, optionsManifest, formData),
+    options: generateOptions(questionId, optionsManifest, formData),
+    error: errorForQuestion ? { message: errorForQuestion.text } : undefined,
   };
 
-  return questionContext;
+  return {
+    errorForQuestion,
+    questionContext,
+  };
+};
+
+const createQuestionTypeContext = {
+  'bulletpoint-list': {
+    create: (
+      questionId, questionManifest, optionsManifest, formData, validationErrors,
+    ) => createQuestionsContextForBulletpointList(
+      questionId, questionManifest, formData, validationErrors,
+    ),
+  },
+  'checkbox-options': {
+    create: (
+      questionId, questionManifest, optionsManifest, formData, validationErrors,
+    ) => createQuestionsContextForOptions(
+      questionId, questionManifest, optionsManifest, formData, validationErrors,
+    ),
+  },
+  'radiobutton-options': {
+    create: (
+      questionId, questionManifest, optionsManifest, formData, validationErrors,
+    ) => createQuestionsContextForOptions(
+      questionId, questionManifest, optionsManifest, formData, validationErrors,
+    ),
+  },
+  'textarea-field': {
+    create: (
+      questionId, questionManifest, optionsManifest, formData, validationErrors,
+    ) => createContextForTextInputsQuestion(
+      questionId, questionManifest, formData, validationErrors,
+    ),
+  },
+  'text-field': {
+    create: (
+      questionId, questionManifest, optionsManifest, formData, validationErrors,
+    ) => createContextForTextInputsQuestion(
+      questionId, questionManifest, formData, validationErrors,
+    ),
+  },
 };
 
 const createQuestionsContext = (
   sectionManifest, optionsManifest, formData, validationErrors,
 ) => {
-  const { errorsAcc: errors, questionsAcc: questionsContext } = Object.entries(sectionManifest.questions)
+  const {
+    errorsAcc: errors,
+    questionsAcc: questionsContext,
+  } = Object.entries(sectionManifest.questions)
     .reduce(({ errorsAcc, questionsAcc }, [questionId, questionManifest]) => {
-      if (questionManifest.type === 'bulletpoint-list') {
-        const { errorForQuestion, questionContext } = createQuestionsContextForBulletpointList(
-          questionId, questionManifest, formData, validationErrors,
+      if (createQuestionTypeContext[questionManifest.type]) {
+        const {
+          errorForQuestion,
+          questionContext,
+        } = createQuestionTypeContext[questionManifest.type].create(
+          questionId, questionManifest, optionsManifest, formData, validationErrors,
         );
 
         return {
-          errorsAcc: errorForQuestion && errorsAcc.concat(errorForQuestion),
-          questionsAcc: questionsAcc.concat(questionContext),
-        };
-      }
-
-      if (questionManifest.type === 'checkbox-options' || questionManifest.type === 'radiobutton-options') {
-        return {
-          errorsAcc,
-          questionsAcc: questionsAcc.concat(createQuestionsContextForOptions(
-            questionId, questionManifest, optionsManifest, formData,
-          )),
-        };
-      }
-
-      if (questionManifest.type === 'textarea-field' || questionManifest.type === 'text-field') {
-        const { errorForQuestion, questionContext } = createContextForTextInputsQuestion(
-          questionId, questionManifest, formData, validationErrors,
-        );
-
-        return {
-          errorsAcc: errorForQuestion ? errorsAcc.concat(errorForQuestion) : errorsAcc,
+          errorsAcc: errorForQuestion
+            && errorForQuestion ? errorsAcc.concat(errorForQuestion) : errorsAcc,
           questionsAcc: questionsAcc.concat(questionContext),
         };
       }

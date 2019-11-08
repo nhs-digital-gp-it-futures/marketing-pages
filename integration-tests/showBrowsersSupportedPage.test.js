@@ -93,26 +93,6 @@ test('should render the submit button', async (t) => {
     .expect(submitButton.find('button').count).eql(1);
 });
 
-test('should allow posting an empty form and navigate back to the sub dashboard', async (t) => {
-  pageSetup(t);
-
-  nock('http://localhost:8080')
-    .get('/api/v1/Solutions/S100000-001/sections/browser-based')
-    .reply(200, aBrowserBasedFixture);
-
-  nock('http://localhost:8080')
-    .put('/api/v1/Solutions/S100000-001/sections/browsers-supported')
-    .reply(200, {});
-
-  const getLocation = ClientFunction(() => document.location.href);
-
-  const submitButton = Selector('[data-test-id="section-submit-button"]');
-
-  await t
-    .click(submitButton.find('button'))
-    .expect(getLocation()).contains('/S100000-001/dashboard/browser-based');
-});
-
 test('should populate the questions with existing data', async (t) => {
   pageSetup(t, true);
 
@@ -143,6 +123,41 @@ test('should populate the questions with existing data', async (t) => {
   await t
     .expect(yesRadiobutton.find('input:checked').exists).ok()
     .expect(noRadiobutton.find('input:checked').exists).notOk();
+});
+
+test('should render the validation errors indicating the supported browsers and mobile responsive questions are mandatory', async (t) => {
+  pageSetup(t);
+
+  nock('http://localhost:8080')
+    .get('/api/v1/Solutions/S100000-001/sections/browser-based')
+    .reply(200, aBrowserBasedFixture);
+
+  nock('http://localhost:8080')
+    .put('/api/v1/Solutions/S100000-001/sections/browsers-supported')
+    .reply(400, {
+      required: ['supported-browsers', 'mobile-responsive'],
+    });
+
+  const errorSummary = Selector('[data-test-id="error-summary"]');
+  const errorSummaryList = Selector('.nhsuk-error-summary__list');
+  const supportedBrowsersQuestion = Selector('[data-test-id="question-supported-browsers"]');
+  const mobileResponsiveQuestion = Selector('[data-test-id="question-mobile-responsive"]');
+  const submitButton = Selector('[data-test-id="section-submit-button"]');
+
+  await t
+    .expect(errorSummary.exists).notOk()
+    .click(submitButton.find('button'))
+    .expect(errorSummary.exists).ok()
+    .expect(errorSummaryList.find('li').count).eql(2)
+    .expect(errorSummaryList.find('li:nth-child(1)').innerText).eql('Please select what browsers are supported')
+    .expect(errorSummaryList.find('li:nth-child(1) a').getAttribute('href')).eql('#supported-browsers')
+    .expect(errorSummaryList.find('li:nth-child(2)').innerText).eql('Please select if your solution is mobile responsive')
+    .expect(errorSummaryList.find('li:nth-child(2) a').getAttribute('href')).eql('#mobile-responsive')
+
+    .expect(supportedBrowsersQuestion.find('[data-test-id="checkbox-options-error"]').exists).ok()
+    .expect(supportedBrowsersQuestion.find('.nhsuk-error-message').innerText).eql('Error:\nPlease select what browsers are supported')
+    .expect(mobileResponsiveQuestion.find('[data-test-id="radiobutton-options-error"]').exists).ok()
+    .expect(mobileResponsiveQuestion.find('.nhsuk-error-message').innerText).eql('Error:\nPlease select if your solution is mobile responsive');
 });
 
 test('should render the return to all sections link', async (t) => {
