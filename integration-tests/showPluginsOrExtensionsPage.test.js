@@ -91,26 +91,6 @@ test('should render the submit button', async (t) => {
     .expect(submitButton.find('button').count).eql(1);
 });
 
-test('should allow posting an empty form and navigate back to the sub dashboard', async (t) => {
-  pageSetup(t);
-
-  nock('http://localhost:8080')
-    .get('/api/v1/Solutions/S100000-001/sections/browser-based')
-    .reply(200, aBrowserBasedFixture);
-
-  nock('http://localhost:8080')
-    .put('/api/v1/Solutions/S100000-001/sections/plug-ins-or-extensions')
-    .reply(200, {});
-
-  const getLocation = ClientFunction(() => document.location.href);
-
-  const submitButton = Selector('[data-test-id="section-submit-button"]');
-
-  await t
-    .click(submitButton.find('button'))
-    .expect(getLocation()).contains('/S100000-001/dashboard/browser-based');
-});
-
 test('should populate the questions with existing data', async (t) => {
   pageSetup(t, true);
 
@@ -157,31 +137,31 @@ test('should show error summary and validation for questions when they exceed th
     .expect(pluginsDetailQuestion.find('.nhsuk-error-message').innerText).eql('Error:\nPlug-ins or browser extensions detail is over the character limit');
 });
 
-// test('should show error summary and validation for plugins required question indicating it is mandatory', async (t) => {
-//   pageSetup(t);
+test('should show error summary and validation for plugins required question indicating it is mandatory', async (t) => {
+  pageSetup(t);
 
-//   nock('http://localhost:8080')
-//     .put('/api/v1/Solutions/S100000-001/sections/plug-ins-or-extensions')
-//     .reply(400, {
-//       required: ['plugins-required'],
-//     });
+  nock('http://localhost:8080')
+    .put('/api/v1/Solutions/S100000-001/sections/plug-ins-or-extensions')
+    .reply(400, {
+      required: ['plugins-required'],
+    });
 
-//   const errorSummary = Selector('[data-test-id="error-summary"]');
-//   const errorSummaryList = Selector('.nhsuk-error-summary__list');
-//   const pluginsRequiredQuestion = Selector('[data-test-id="question-plugins-required"]');
-//   const submitButton = Selector('[data-test-id="section-submit-button"]');
+  const errorSummary = Selector('[data-test-id="error-summary"]');
+  const errorSummaryList = Selector('.nhsuk-error-summary__list');
+  const pluginsRequiredQuestion = Selector('[data-test-id="question-plugins-required"]');
+  const submitButton = Selector('[data-test-id="section-submit-button"]');
 
-//   await t
-//     .expect(errorSummary.exists).notOk()
-//     .click(submitButton.find('button'))
-//     .expect(errorSummary.exists).ok()
-//     .expect(errorSummaryList.find('li').count).eql(1)
-//     .expect(errorSummaryList.find('li:nth-child(1)').innerText).eql('Please select whether or not plug-ins or browser extensions are required')
-//     .expect(errorSummaryList.find('li:nth-child(1) a').getAttribute('href')).eql('#plugins-required')
+  await t
+    .expect(errorSummary.exists).notOk()
+    .click(submitButton.find('button'))
+    .expect(errorSummary.exists).ok()
+    .expect(errorSummaryList.find('li').count).eql(1)
+    .expect(errorSummaryList.find('li:nth-child(1)').innerText).eql('Please select whether or not plug-ins or browser extensions are required')
+    .expect(errorSummaryList.find('li:nth-child(1) a').getAttribute('href')).eql('#plugins-required')
 
-//     .expect(pluginsRequiredQuestion.find('.nhsuk-textarea--error').exists).ok()
-//     .expect(pluginsRequiredQuestion.find('.nhsuk-error-message').innerText).eql('Error:\nPlease select whether or not plug-ins or browser extensions are required');
-// });
+    .expect(pluginsRequiredQuestion.find('[data-test-id="radiobutton-options-error"]').exists).ok()
+    .expect(pluginsRequiredQuestion.find('.nhsuk-error-message').innerText).eql('Error:\nPlease select whether or not plug-ins or browser extensions are required');
+});
 
 test('should render the return to all sections link', async (t) => {
   pageSetup(t);
