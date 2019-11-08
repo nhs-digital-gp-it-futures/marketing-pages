@@ -105,6 +105,32 @@ test('should render the submit button', async (t) => {
     .expect(submitButton.find('button').count).eql(1);
 });
 
+test('should show error summary and validation for client application type is mandatory', async (t) => {
+  pageSetup(t);
+
+  nock('http://localhost:8080')
+    .put('/api/v1/Solutions/S100000-001/sections/client-application-types')
+    .reply(400, {
+      required: ['client-application-types'],
+    });
+
+  const errorSummary = Selector('[data-test-id="error-summary"]');
+  const errorSummaryList = Selector('.nhsuk-error-summary__list');
+  const clientApplicationTypesQuestion = Selector('[data-test-id="question-client-application-types"]');
+  const submitButton = Selector('[data-test-id="section-submit-button"]');
+
+  await t
+    .expect(errorSummary.exists).notOk()
+    .click(submitButton.find('button'))
+    .expect(errorSummary.exists).ok()
+    .expect(errorSummaryList.find('li').count).eql(1)
+    .expect(errorSummaryList.find('li:nth-child(1)').innerText).eql('You must select at least one client application type')
+    .expect(errorSummaryList.find('li:nth-child(1) a').getAttribute('href')).eql('#client-application-types')
+
+    .expect(clientApplicationTypesQuestion.find('[data-test-id="checkbox-options-error"]').exists).ok()
+    .expect(clientApplicationTypesQuestion.find('.nhsuk-error-message').innerText).eql('Error:\nYou must select at least one client application type');
+});
+
 test('should render the return to all sections link', async (t) => {
   pageSetup(t);
 

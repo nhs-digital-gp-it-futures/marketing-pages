@@ -333,6 +333,74 @@ describe('createSectionPageContext', () => {
 
       expect(context).toEqual(expectedContext);
     });
+
+    it('should create a context with validation errors', () => {
+      const expectedContext = {
+        submitActionUrl: '/some-solution-id/section/some-section-id',
+        errors: [
+          {
+            text: 'some really helpful error message',
+            href: '#fieldId',
+          },
+        ],
+        questions: [
+          {
+            id: 'fieldId',
+            type: 'checkbox-options',
+            options: [
+              {
+                text: 'option 1',
+                value: 'option-1',
+              },
+              {
+                text: 'option 2',
+                value: 'option-2',
+              },
+              {
+                text: 'option 3',
+                value: 'option-3',
+              },
+            ],
+            error: {
+              message: 'some really helpful error message',
+            },
+          },
+        ],
+        returnToDashboardUrl: '/some-solution-id',
+      };
+
+      const sectionManifest = {
+        id: 'some-section-id',
+        questions: {
+          fieldId: {
+            type: 'checkbox-options',
+            errorResponse: {
+              required: 'some really helpful error message',
+            },
+          },
+        },
+      };
+
+      const optionsManifest = {
+        fieldId: {
+          options: {
+            'option-1': 'option 1',
+            'option-2': 'option 2',
+            'option-3': 'option 3',
+          },
+        },
+      };
+
+      const formData = {};
+
+      const validationErrors = {
+        required: ['fieldId'],
+      };
+
+      const context = createSectionPageContext('some-solution-id', sectionManifest, optionsManifest, formData, validationErrors);
+
+      expect(context).toEqual(expectedContext);
+    });
   });
 
   describe('when the question type is a radiobutton-options', () => {
