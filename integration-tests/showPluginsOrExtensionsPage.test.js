@@ -34,7 +34,7 @@ test('should render the Plug-ins Or Extensions page title', async (t) => {
   const title = Selector('[data-test-id="section-title"]');
 
   await t
-    .expect(title.innerText).eql('Browser based - plug ins or extensions');
+    .expect(title.innerText).eql('Browser based - plug-ins or extensions');
 });
 
 test('should render main advice of section', async (t) => {
