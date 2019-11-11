@@ -161,6 +161,56 @@ test('should render the validation errors indicating the supported browsers and 
     .expect(mobileResponsiveQuestion.find('.nhsuk-error-message').innerText).eql('Error:\nPlease select if your solution is mobile responsive');
 });
 
+test('should goto anchor when clicking the supported browsers required summary error link', async (t) => {
+  pageSetup(t);
+
+  nock('http://localhost:8080')
+    .put('/api/v1/Solutions/S100000-001/sections/browsers-supported')
+    .reply(400, {
+      required: ['supported-browsers'],
+    });
+
+  const errorSummary = Selector('[data-test-id="error-summary"]');
+  const errorSummaryList = Selector('.nhsuk-error-summary__list');
+  const submitButton = Selector('[data-test-id="section-submit-button"]');
+
+  const getLocation = ClientFunction(() => document.location.href);
+
+  await t
+    .expect(errorSummary.exists).notOk()
+    .click(submitButton.find('button'))
+    .expect(errorSummary.exists).ok()
+    .expect(errorSummaryList.find('li:nth-child(1) a').count).eql(1)
+    .expect(errorSummaryList.find('li:nth-child(1) a').getAttribute('href')).eql('#supported-browsers')
+    .click(errorSummaryList.find('li:nth-child(1) a'))
+    .expect(getLocation()).contains('/S100000-001/section/browsers-supported#supported-browsers');
+});
+
+test('should goto anchor when clicking the mobile-responsive required summary error link', async (t) => {
+  pageSetup(t);
+
+  nock('http://localhost:8080')
+    .put('/api/v1/Solutions/S100000-001/sections/browsers-supported')
+    .reply(400, {
+      required: ['mobile-responsive'],
+    });
+
+  const errorSummary = Selector('[data-test-id="error-summary"]');
+  const errorSummaryList = Selector('.nhsuk-error-summary__list');
+  const submitButton = Selector('[data-test-id="section-submit-button"]');
+
+  const getLocation = ClientFunction(() => document.location.href);
+
+  await t
+    .expect(errorSummary.exists).notOk()
+    .click(submitButton.find('button'))
+    .expect(errorSummary.exists).ok()
+    .expect(errorSummaryList.find('li:nth-child(1) a').count).eql(1)
+    .expect(errorSummaryList.find('li:nth-child(1) a').getAttribute('href')).eql('#mobile-responsive')
+    .click(errorSummaryList.find('li:nth-child(1) a'))
+    .expect(getLocation()).contains('/S100000-001/section/browsers-supported#mobile-responsive');
+});
+
 test('should render the return to all sections link', async (t) => {
   pageSetup(t);
 
