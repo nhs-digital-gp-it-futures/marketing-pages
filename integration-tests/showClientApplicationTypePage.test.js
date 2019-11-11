@@ -131,6 +131,32 @@ test('should show error summary and validation for client application type is ma
     .expect(clientApplicationTypesQuestion.find('.nhsuk-error-message').innerText).eql('Error:\nYou must select at least one client application type');
 });
 
+
+test('should goto anchor when clicking the client application types required summary error link', async (t) => {
+  pageSetup(t);
+
+  nock('http://localhost:8080')
+    .put('/api/v1/Solutions/S100000-001/sections/client-application-types')
+    .reply(400, {
+      required: ['client-application-types'],
+    });
+
+  const errorSummary = Selector('[data-test-id="error-summary"]');
+  const errorSummaryList = Selector('.nhsuk-error-summary__list');
+  const submitButton = Selector('[data-test-id="section-submit-button"]');
+
+  const getLocation = ClientFunction(() => document.location.href);
+
+  await t
+    .expect(errorSummary.exists).notOk()
+    .click(submitButton.find('button'))
+    .expect(errorSummary.exists).ok()
+    .expect(errorSummaryList.find('li:nth-child(1) a').count).eql(1)
+    .expect(errorSummaryList.find('li:nth-child(1) a').getAttribute('href')).eql('#client-application-types')
+    .click(errorSummaryList.find('li:nth-child(1) a'))
+    .expect(getLocation()).contains('/S100000-001/section/client-application-types#client-application-types');
+});
+
 test('should render the return to all sections link', async (t) => {
   pageSetup(t);
 
