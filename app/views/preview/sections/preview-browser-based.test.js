@@ -116,11 +116,43 @@ describe('preview-browser-based', () => {
         expect(browserBasedSectionTable.length).toEqual(1);
         expect(pluginsRequiredQuestionRow.length).toEqual(1);
         expect(pluginsRequiredQuestionRow
-          .find('.nhsuk-summary-list__key').text().trim()).toEqual('Plug ins or extensions required');
+          .find('.nhsuk-summary-list__key').text().trim()).toEqual('Plug-ins or extensions required');
         expect(pluginsRequiredQuestionRow
           .find('.nhsuk-summary-list__value')
           .find('[data-test-id="preview-question-data-text"]').length).toEqual(1);
 
+        done();
+      });
+  });
+
+  it('should render the plugins detail answer', (done) => {
+    const context = {
+      section: {
+        sections: {
+          'plug-ins-or-extensions': {
+            answers: {
+              'plugins-detail': 'Some plugin detail',
+            },
+          },
+        },
+      },
+    };
+
+    const dummyApp = createDummyApp(context);
+    request(dummyApp)
+      .get('/')
+      .then((res) => {
+        const $ = cheerio.load(res.text);
+
+        const browserBasedSectionTable = $('[data-test-id="preview-section-table-browser-based"]');
+        const pluginsRequiredQuestionRow = browserBasedSectionTable.find('[data-test-id="preview-section-table-row-plugins-detail"]');
+
+        expect(browserBasedSectionTable.length).toEqual(1);
+        expect(pluginsRequiredQuestionRow.length).toEqual(1);
+        expect(pluginsRequiredQuestionRow
+          .find('.nhsuk-summary-list__key').text().trim()).toEqual('Plug-ins or extensions information');
+        expect(pluginsRequiredQuestionRow.find('div[data-test-id="preview-question-data-text"]').length).toEqual(1);
+                
         done();
       });
   });
