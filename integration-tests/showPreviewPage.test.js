@@ -3,20 +3,27 @@ import { Selector } from 'testcafe';
 import previewWithNoMarketingData from './fixtures/previewWithNoMarketingData.json';
 import previewWithMarketingData from './fixtures/previewWithMarketingData.json';
 
+const mocksEndpoint = (data) => {
+  nock('http://localhost:8080')
+    .get('/api/v1/Solutions/S100000-001/preview')
+    .reply(200, data);
+};
+
 const mocks = (existingData) => {
   if (!existingData) {
-    nock('http://localhost:8080')
-      .get('/api/v1/Solutions/S100000-001/preview')
-      .reply(200, previewWithNoMarketingData);
+    mocksEndpoint(previewWithNoMarketingData);
   } else {
-    nock('http://localhost:8080')
-      .get('/api/v1/Solutions/S100000-001/preview')
-      .reply(200, previewWithMarketingData);
+    mocksEndpoint(previewWithMarketingData);
   }
 };
 
 const pageSetup = async (t, existingData = false) => {
   mocks(existingData);
+  await t.navigateTo('http://localhost:1234/S100000-001/preview');
+};
+
+const pageSetupWithCustomData = async (t, data) => {
+  mocksEndpoint(data);
   await t.navigateTo('http://localhost:1234/S100000-001/preview');
 };
 
@@ -127,8 +134,79 @@ test('when existing marketing data - The client application type section and bro
     .expect(supportedBrowsersRow.find('.nhsuk-summary-list__value').innerText).eql('Google Chrome\nMozilla Firefox')
     .expect(mobileResponsiveRow.find('.nhsuk-summary-list__key').innerText).eql('Mobile responsive')
     .expect(mobileResponsiveRow.find('.nhsuk-summary-list__value').innerText).eql('Yes')
-    .expect(pluginsRequiredRow.find('.nhsuk-summary-list__key').innerText).eql('Plug ins or extensions required')
+    .expect(pluginsRequiredRow.find('.nhsuk-summary-list__key').innerText).eql('Plug-ins or extensions required')
     .expect(pluginsRequiredRow.find('.nhsuk-summary-list__value').innerText).eql('Yes')
-    .expect(pluginsDetailRow.find('.nhsuk-summary-list__key').innerText).eql('Plug ins or extensions information')
+    .expect(pluginsDetailRow.find('.nhsuk-summary-list__key').innerText).eql('Plug-ins or extensions information')
     .expect(pluginsDetailRow.find('.nhsuk-summary-list__value').innerText).eql('The plugin detail');
+});
+
+const pluginsOrExtensionsMarketingData = {
+  id: 'Sln1',
+  name: 'MedicOnline',
+  orgName: 'Whateve',
+  isFoundation: true,
+  sections: {
+    'solution-description': {
+      answers: {
+        summary: 'The solution summary',
+        description: 'The solution description',
+        link: 'The solution link',
+      },
+    },
+    features: {
+      answers: {
+        listing: [
+          'Feature A',
+          'Feature B',
+          'Feature C',
+        ],
+      },
+    },
+    'client-application-types': {
+      sections: {
+        'browser-based': {
+          sections: {
+            'browsers-supported': {
+              answers: {
+                'supported-browsers': [],
+              },
+            },
+            'plug-ins-or-extensions': {
+              answers: {
+                'plugins-required': 'yes',
+              },
+            },
+          },
+        },
+      },
+    },
+  },
+};
+
+test('when existing plugin marketing data - The client application type section and plugin section within the browser-based section should be rendered', async (t) => {
+  pageSetupWithCustomData(t, pluginsOrExtensionsMarketingData);
+
+  const clientApplicationTypesSection = Selector('[data-test-id="preview-client-application-types"]');
+  const browserBasedExpandaleSection = Selector('[data-test-id="preview-section-browser-based"]');
+  const browserBasedExpandaleSectionTable = Selector('[data-test-id="preview-section-table-browser-based"]');
+  const supportedBrowsersRow = browserBasedExpandaleSectionTable.find('[data-test-id="preview-section-table-row-supported-browsers"]');
+  const mobileResponsiveRow = browserBasedExpandaleSectionTable.find('[data-test-id="preview-section-table-row-mobile-responsive"]');
+  const pluginsRequiredRow = browserBasedExpandaleSectionTable.find('[data-test-id="preview-section-table-row-plugins-required"]');
+  const pluginsDetailRow = browserBasedExpandaleSectionTable.find('[data-test-id="preview-section-table-row-plugins-detail"]');
+
+  await t
+    .expect(clientApplicationTypesSection.exists).ok()
+    .expect(clientApplicationTypesSection.find('h3').innerText).eql('Client application type')
+
+    .expect(browserBasedExpandaleSection.exists).ok()
+    .expect(browserBasedExpandaleSection.innerText).eql('Browser based application')
+    .expect(browserBasedExpandaleSection.find('div[aria-hidden="true"]').exists).ok()
+
+    .click(browserBasedExpandaleSection.find('summary'))
+    .expect(browserBasedExpandaleSection.find('div[aria-hidden="true"]').exists).notOk()
+    .expect(supportedBrowsersRow.exists).notOk()
+    .expect(mobileResponsiveRow.exists).notOk()
+    .expect(pluginsRequiredRow.find('.nhsuk-summary-list__key').innerText).eql('Plug-ins or extensions required')
+    .expect(pluginsRequiredRow.find('.nhsuk-summary-list__value').innerText).eql('Yes')
+    .expect(pluginsDetailRow.exists).notOk();
 });
