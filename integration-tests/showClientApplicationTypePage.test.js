@@ -131,7 +131,6 @@ test('should show error summary and validation for client application type is ma
     .expect(clientApplicationTypesQuestion.find('.nhsuk-error-message').innerText).eql('Error:\nYou must select at least one client application type');
 });
 
-
 test('should goto anchor when clicking the client application types required summary error link', async (t) => {
   pageSetup(t);
 
