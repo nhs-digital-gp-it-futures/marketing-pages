@@ -163,6 +163,56 @@ test('should show error summary and validation for plugins required question ind
     .expect(pluginsRequiredQuestion.find('.nhsuk-error-message').innerText).eql('Error:\nPlease select whether or not plug-ins or browser extensions are required');
 });
 
+test('should goto anchor when clicking the plugin required summary error link', async (t) => {
+  pageSetup(t);
+
+  nock('http://localhost:8080')
+    .put('/api/v1/Solutions/S100000-001/sections/plug-ins-or-extensions')
+    .reply(400, {
+      required: ['plugins-required'],
+    });
+
+  const errorSummary = Selector('[data-test-id="error-summary"]');
+  const errorSummaryList = Selector('.nhsuk-error-summary__list');
+  const submitButton = Selector('[data-test-id="section-submit-button"]');
+
+  const getLocation = ClientFunction(() => document.location.href);
+
+  await t
+    .expect(errorSummary.exists).notOk()
+    .click(submitButton.find('button'))
+    .expect(errorSummary.exists).ok()
+    .expect(errorSummaryList.find('li:nth-child(1) a').count).eql(1)
+    .expect(errorSummaryList.find('li:nth-child(1) a').getAttribute('href')).eql('#plugins-required')
+    .click(errorSummaryList.find('li:nth-child(1) a'))
+    .expect(getLocation()).contains('/S100000-001/section/plug-ins-or-extensions#plugins-required');
+});
+
+test('should goto anchor when clicking the plugin detail summary error link', async (t) => {
+  pageSetup(t);
+
+  nock('http://localhost:8080')
+    .put('/api/v1/Solutions/S100000-001/sections/plug-ins-or-extensions')
+    .reply(400, {
+      maxLength: ['plugins-detail'],
+    });
+
+  const errorSummary = Selector('[data-test-id="error-summary"]');
+  const errorSummaryList = Selector('.nhsuk-error-summary__list');
+  const submitButton = Selector('[data-test-id="section-submit-button"]');
+
+  const getLocation = ClientFunction(() => document.location.href);
+
+  await t
+    .expect(errorSummary.exists).notOk()
+    .click(submitButton.find('button'))
+    .expect(errorSummary.exists).ok()
+    .expect(errorSummaryList.find('li:nth-child(1) a').count).eql(1)
+    .expect(errorSummaryList.find('li:nth-child(1) a').getAttribute('href')).eql('#plugins-detail')
+    .click(errorSummaryList.find('li:nth-child(1) a'))
+    .expect(getLocation()).contains('/S100000-001/section/plug-ins-or-extensions#plugins-detail');
+});
+
 test('should render the return to all sections link', async (t) => {
   pageSetup(t);
 
