@@ -2,7 +2,6 @@ import nock from 'nock';
 import { Selector, ClientFunction } from 'testcafe';
 import { ManifestProvider } from '../app/forms/manifestProvider';
 import dashboardWithCompleteSections from './fixtures/dashboardWithCompleteSections.json';
-import aBrowserBasedFixture from './fixtures/aBrowserBasedData.json';
 
 const pluginsOrExtensionsMarketingData = {
   'plugins-required': 'yes',
