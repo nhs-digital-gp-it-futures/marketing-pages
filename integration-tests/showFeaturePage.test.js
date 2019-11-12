@@ -159,7 +159,7 @@ test('should show validation for fields exceeding the maxLength', async (t) => {
     .expect(thirdFieldError.find('.nhsuk-error-message').innerText).eql('Error:\nThis feature is over the character limit');
 });
 
-test('should goto anchor when clicking the client application types required summary error link', async (t) => {
+test('should goto anchor when clicking the feature max length summary error link', async (t) => {
   pageSetup(t);
 
   nock('http://localhost:8080')

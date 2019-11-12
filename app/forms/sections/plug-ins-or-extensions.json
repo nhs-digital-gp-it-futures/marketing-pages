@@ -13,17 +13,7 @@
       "type": "radiobutton-options",
       "errorResponse": {
         "required": "Please select whether or not plug-ins or browser extensions are required"
-      },
-      "options": [
-        {
-          "value": "yes",
-          "text": "Yes"
-        },
-        {
-          "value": "no",
-          "text": "No"
-        }
-      ]
+      }
     },
     "plugins-detail": {
       "mainAdvice": "If any plug-ins or browser extensions are required, provide more detail or constraints",
