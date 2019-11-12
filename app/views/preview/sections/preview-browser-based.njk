@@ -12,5 +12,13 @@
       'mobile-responsive', 
       'Mobile responsive', 
       previewQuestionDataText(section.sections['browsers-supported'].answers['mobile-responsive'])) }}
+    {{ previewSectionTableRow(
+      'plugins-required', 
+      'Plug-ins or extensions required', 
+      previewQuestionDataText(section.sections['plug-ins-or-extensions'].answers['plugins-required'])) }}
+    {{ previewSectionTableRow(
+      'plugins-detail', 
+      'Plug-ins or extensions information', 
+      previewQuestionDataText(section.sections['plug-ins-or-extensions'].answers['plugins-detail'])) }}
   <dl>
 {% endmacro %}

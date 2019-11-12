@@ -32,6 +32,12 @@
                 ],
                 "mobile-responsive": "yes"
               }
+            },
+            "plug-ins-or-extensions": {
+              "answers": {
+                "plugins-required": "yes",
+                "plugins-detail": "The plugin detail"
+              }
             }
           }
         }

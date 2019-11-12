@@ -156,6 +156,106 @@ test('should show error summary and validation for questions when they exceed th
     .expect(solutionLink.find('.nhsuk-error-message').innerText).eql('Error:\nSolution Link is over the character limit');
 });
 
+test('should goto anchor when clicking the solution summary required summary error link', async (t) => {
+  pageSetup(t);
+
+  nock('http://localhost:8080')
+    .put('/api/v1/Solutions/S100000-001/sections/solution-description')
+    .reply(400, {
+      required: ['summary'],
+    });
+
+  const errorSummary = Selector('[data-test-id="error-summary"]');
+  const errorSummaryList = Selector('.nhsuk-error-summary__list');
+  const submitButton = Selector('[data-test-id="section-submit-button"]');
+
+  const getLocation = ClientFunction(() => document.location.href);
+
+  await t
+    .expect(errorSummary.exists).notOk()
+    .click(submitButton.find('button'))
+    .expect(errorSummary.exists).ok()
+    .expect(errorSummaryList.find('li:nth-child(1) a').count).eql(1)
+    .expect(errorSummaryList.find('li:nth-child(1) a').getAttribute('href')).eql('#summary')
+    .click(errorSummaryList.find('li:nth-child(1) a'))
+    .expect(getLocation()).contains('/S100000-001/section/solution-description#summary');
+});
+
+test('should goto anchor when clicking the solution summary max length summary error link', async (t) => {
+  pageSetup(t);
+
+  nock('http://localhost:8080')
+    .put('/api/v1/Solutions/S100000-001/sections/solution-description')
+    .reply(400, {
+      maxLength: ['summary'],
+    });
+
+  const errorSummary = Selector('[data-test-id="error-summary"]');
+  const errorSummaryList = Selector('.nhsuk-error-summary__list');
+  const submitButton = Selector('[data-test-id="section-submit-button"]');
+
+  const getLocation = ClientFunction(() => document.location.href);
+
+  await t
+    .expect(errorSummary.exists).notOk()
+    .click(submitButton.find('button'))
+    .expect(errorSummary.exists).ok()
+    .expect(errorSummaryList.find('li:nth-child(1) a').count).eql(1)
+    .expect(errorSummaryList.find('li:nth-child(1) a').getAttribute('href')).eql('#summary')
+    .click(errorSummaryList.find('li:nth-child(1) a'))
+    .expect(getLocation()).contains('/S100000-001/section/solution-description#summary');
+});
+
+test('should goto anchor when clicking the description summary error link', async (t) => {
+  pageSetup(t);
+
+  nock('http://localhost:8080')
+    .put('/api/v1/Solutions/S100000-001/sections/solution-description')
+    .reply(400, {
+      maxLength: ['description'],
+    });
+
+  const errorSummary = Selector('[data-test-id="error-summary"]');
+  const errorSummaryList = Selector('.nhsuk-error-summary__list');
+  const submitButton = Selector('[data-test-id="section-submit-button"]');
+
+  const getLocation = ClientFunction(() => document.location.href);
+
+  await t
+    .expect(errorSummary.exists).notOk()
+    .click(submitButton.find('button'))
+    .expect(errorSummary.exists).ok()
+    .expect(errorSummaryList.find('li:nth-child(1) a').count).eql(1)
+    .expect(errorSummaryList.find('li:nth-child(1) a').getAttribute('href')).eql('#description')
+    .click(errorSummaryList.find('li:nth-child(1) a'))
+    .expect(getLocation()).contains('/S100000-001/section/solution-description#description');
+});
+
+test('should goto anchor when clicking the description summary error link', async (t) => {
+  pageSetup(t);
+
+  nock('http://localhost:8080')
+    .put('/api/v1/Solutions/S100000-001/sections/solution-description')
+    .reply(400, {
+      maxLength: ['link'],
+    });
+
+  const errorSummary = Selector('[data-test-id="error-summary"]');
+  const errorSummaryList = Selector('.nhsuk-error-summary__list');
+  const submitButton = Selector('[data-test-id="section-submit-button"]');
+
+  const getLocation = ClientFunction(() => document.location.href);
+
+  await t
+    .expect(errorSummary.exists).notOk()
+    .click(submitButton.find('button'))
+    .expect(errorSummary.exists).ok()
+    .expect(errorSummaryList.find('li:nth-child(1) a').count).eql(1)
+    .expect(errorSummaryList.find('li:nth-child(1) a').getAttribute('href')).eql('#link')
+    .click(errorSummaryList.find('li:nth-child(1) a'))
+    .expect(getLocation()).contains('/S100000-001/section/solution-description#link');
+});
+
 test('should show error summary and validation for Summary indicating it is mandatory', async (t) => {
   pageSetup(t);
 
