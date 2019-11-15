@@ -53,7 +53,7 @@ const createContextForTextInputsQuestion = (
 
 
 const createQuestionsContextForOptions = (
-  questionId, questionManifest, optionsManifest, formData, validationErrors,
+  questionId, questionManifest, formData, validationErrors,
 ) => {
   const errorForQuestion = createErrorForQuestion(
     questionId, questionManifest, validationErrors,
@@ -61,7 +61,7 @@ const createQuestionsContextForOptions = (
 
   const questionContext = {
     ...commonQuestionContext(questionId, questionManifest),
-    options: generateOptions(questionId, optionsManifest, formData),
+    options: generateOptions(questionId, questionManifest.options, formData),
     error: errorForQuestion ? { message: errorForQuestion.text } : undefined,
   };
 
@@ -74,35 +74,35 @@ const createQuestionsContextForOptions = (
 const createQuestionTypeContext = {
   'bulletpoint-list': {
     create: (
-      questionId, questionManifest, optionsManifest, formData, validationErrors,
+      questionId, questionManifest, formData, validationErrors,
     ) => createQuestionsContextForBulletpointList(
       questionId, questionManifest, formData, validationErrors,
     ),
   },
   'checkbox-options': {
     create: (
-      questionId, questionManifest, optionsManifest, formData, validationErrors,
+      questionId, questionManifest, formData, validationErrors,
     ) => createQuestionsContextForOptions(
-      questionId, questionManifest, optionsManifest, formData, validationErrors,
+      questionId, questionManifest, formData, validationErrors,
     ),
   },
   'radiobutton-options': {
     create: (
-      questionId, questionManifest, optionsManifest, formData, validationErrors,
+      questionId, questionManifest, formData, validationErrors,
     ) => createQuestionsContextForOptions(
-      questionId, questionManifest, optionsManifest, formData, validationErrors,
+      questionId, questionManifest, formData, validationErrors,
     ),
   },
   'textarea-field': {
     create: (
-      questionId, questionManifest, optionsManifest, formData, validationErrors,
+      questionId, questionManifest, formData, validationErrors,
     ) => createContextForTextInputsQuestion(
       questionId, questionManifest, formData, validationErrors,
     ),
   },
   'text-field': {
     create: (
-      questionId, questionManifest, optionsManifest, formData, validationErrors,
+      questionId, questionManifest, formData, validationErrors,
     ) => createContextForTextInputsQuestion(
       questionId, questionManifest, formData, validationErrors,
     ),
@@ -110,7 +110,7 @@ const createQuestionTypeContext = {
 };
 
 const createQuestionsContext = (
-  sectionManifest, optionsManifest, formData, validationErrors,
+  sectionManifest, formData, validationErrors,
 ) => {
   const {
     errorsAcc: errors,
@@ -122,7 +122,7 @@ const createQuestionsContext = (
           errorForQuestion,
           questionContext,
         } = createQuestionTypeContext[questionManifest.type].create(
-          questionId, questionManifest, optionsManifest, formData, validationErrors,
+          questionId, questionManifest, formData, validationErrors,
         );
 
         return {
@@ -145,10 +145,10 @@ const createQuestionsContext = (
 };
 
 export const createSectionPageContext = (
-  solutionId, sectionManifest, optionsManifest, formData, validationErrors,
+  solutionId, sectionManifest, formData, validationErrors,
 ) => {
   const { errors, questions } = createQuestionsContext(
-    sectionManifest, optionsManifest, formData, validationErrors,
+    sectionManifest, formData, validationErrors,
   );
 
   const context = {

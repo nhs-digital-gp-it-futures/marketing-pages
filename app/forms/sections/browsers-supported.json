@@ -11,6 +11,16 @@
       "mainAdvice": "What browsers are supported? Select all that apply*",
       "additionalAdvice": "If your Solution is browser based, please select below all the browsers your Solution supports.",
       "type": "checkbox-options",
+      "options": {
+        "Google Chrome": "Google Chrome",
+        "Microsoft Edge": "Microsoft Edge",
+        "Mozilla Firefox": "Mozilla Firefox",
+        "Opera": "Opera",
+        "Safari": "Safari",
+        "Chromium": "Chromium",
+        "Internet Explorer 11": "Internet Explorer 11",
+        "Internet Explorer 10": "Internet Explorer 10"
+      },
       "errorResponse": {
         "required": "Please select what browsers are supported"
       }
@@ -19,6 +29,10 @@
       "mainAdvice": "Is your Solution mobile responsive?*",
       "additionalAdvice": "Please select below if the design responds and adapts to mobile or tablet devices.",
       "type": "radiobutton-options",
+      "options": {
+        "Yes": "Yes",
+        "No": "No"
+      },
       "errorResponse": {
         "required": "Please select if your solution is mobile responsive"
       }

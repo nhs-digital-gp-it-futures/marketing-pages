@@ -27,15 +27,15 @@
             "browsers-supported": {          
               "answers": {
                 "supported-browsers": [
-                  "google-chrome",
-                  "mozilla-firefox"
+                  "Google Chrome",
+                  "Mozilla Firefox"
                 ],
-                "mobile-responsive": "yes"
+                "mobile-responsive": "Yes"
               }
             },
             "plug-ins-or-extensions": {
               "answers": {
-                "plugins-required": "yes",
+                "plugins-required": "Yes",
                 "plugins-detail": "The plugin detail"
               }
             }

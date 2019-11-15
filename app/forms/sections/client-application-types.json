@@ -12,6 +12,11 @@
       "mainAdvice": "Select the client application types your Solution supports *",
       "additionalAdvice": "Check all the options that are relevant to you. You will be required to provide further information for each client application type you select.",
       "type": "checkbox-options",
+      "options": {
+        "browser-based": "Browser based",
+        "native-mobile": "Native mobile or tablet",
+        "native-desktop": "Native desktop"
+      },
       "errorResponse": {
         "required": "You must select at least one client application type"
       }
