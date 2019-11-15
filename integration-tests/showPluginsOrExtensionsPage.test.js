@@ -4,7 +4,7 @@ import { ManifestProvider } from '../app/forms/manifestProvider';
 import dashboardWithCompleteSections from './fixtures/dashboardWithCompleteSections.json';
 
 const pluginsOrExtensionsMarketingData = {
-  'plugins-required': 'yes',
+  'plugins-required': 'Yes',
   'plugins-detail': 'Some plugin and extension detail',
 };
 

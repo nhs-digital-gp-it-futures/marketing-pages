@@ -15,25 +15,19 @@ const populateQuestionOption = (
   return populatedOption;
 };
 
-const createOptions = (questionId, optionsManifest) => {
-  const optionsFromManifest = optionsManifest
-      && optionsManifest[questionId]
-      && optionsManifest[questionId].options;
-
-  return optionsFromManifest
-      && Object.entries(optionsFromManifest).map(([optionId, optionValue]) => ({
+const createOptions = options => options
+      && Object.entries(options).map(([optionId, optionValue]) => ({
         text: optionValue,
         value: optionId,
       }));
-};
 
 export const generateOptions = (
-  questionId, optionsManifest, formData,
+  questionId, options, formData,
 ) => {
-  if (optionsManifest) {
-    const options = createOptions(questionId, optionsManifest);
+  if (options) {
+    const createdOptions = createOptions(options);
 
-    const populatedOptions = options && options.map(option => populateQuestionOption(
+    const populatedOptions = createdOptions && createdOptions.map(option => populateQuestionOption(
       questionId, option, formData,
     ));
 

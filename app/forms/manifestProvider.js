@@ -24,13 +24,4 @@ export class ManifestProvider {
 
     return this.sectionManifest;
   }
-
-  getOptionsManifest(sectionName) {
-    try {
-      this.optionsManifestRaw = fs.readFileSync(`./app/forms/options/${sectionName}.json`);
-      return JSON.parse(this.optionsManifestRaw);
-    } catch (err) {
-      return undefined;
-    }
-  }
 }

@@ -6,10 +6,10 @@ import aBrowserBasedFixture from './fixtures/aBrowserBasedData.json';
 
 const browserSupportedMarketingData = {
   'supported-browsers': [
-    'google-chrome',
-    'internet-explorer-10',
+    'Google Chrome',
+    'Internet Explorer 10',
   ],
-  'mobile-responsive': 'yes',
+  'mobile-responsive': 'Yes',
 };
 
 const mocks = (withMarketingData) => {
