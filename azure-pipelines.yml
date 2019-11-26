@@ -15,17 +15,17 @@ pool:
 steps:
 
   - script: |
-    npm install -g webpack webpack-cli --save-dev
-    npm install
+      npm install -g webpack webpack-cli --save-dev
+      npm install
   displayName: 'NPM install'
 
   - script: |
       npx webpack --config webpack.config.js
-    displayName: 'NPX Webpack'
+  displayName: 'NPX Webpack'
 
   - script: |
       npm run test
-    displayName: 'Unit test'
+  displayName: 'Unit test'
 
   - task: PublishTestResults@2
     displayName: Publish unit test results
@@ -38,7 +38,7 @@ steps:
 
   - script: |
       npm run test:integration
-    displayName: 'Integration test'
+  displayName: 'Integration test'
 
   - task: PublishTestResults@2
     displayName: Publish integration test results
