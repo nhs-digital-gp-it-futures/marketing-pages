@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { ManifestProvider } from '../manifestProvider';
 import { createSectionPageContext } from './createSectionPageContext';
-import { transformSectionData } from './transformSectionData';
-import { createPostSectionResponse } from './createPostSectionResponse';
+import { transformSectionData } from './helpers/transformSectionData';
+import { createPostSectionResponse } from './helpers/createPostSectionResponse';
 
 export const getSectionPageContext = async (solutionId, sectionId) => {
   const sectionManifest = new ManifestProvider().getSectionManifest(sectionId);
