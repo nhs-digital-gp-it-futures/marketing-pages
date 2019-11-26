@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ManifestProvider } from '../../forms/manifestProvider';
+import { ManifestProvider } from '../../manifestProvider';
 import { createDashboardPageContext } from '../createDashboardPageContext';
 
 export const getSubDashboardPageContext = async (solutionId, sectionId) => {

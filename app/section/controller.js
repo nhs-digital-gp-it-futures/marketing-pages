@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ManifestProvider } from '../forms/manifestProvider';
+import { ManifestProvider } from '../manifestProvider';
 import { createSectionPageContext } from './createSectionPageContext';
 import { transformSectionData } from './transformSectionData';
 import { createPostSectionResponse } from './createPostSectionResponse';
