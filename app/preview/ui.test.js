@@ -1,7 +1,7 @@
 import nock from 'nock';
 import { Selector } from 'testcafe';
-import previewWithNoMarketingData from '../../integration-tests/fixtures/previewWithNoMarketingData.json';
-import previewWithMarketingData from '../../integration-tests/fixtures/previewWithMarketingData.json';
+import previewWithNoMarketingData from '../../fixtures/previewWithNoMarketingData.json';
+import previewWithMarketingData from '../../fixtures/previewWithMarketingData.json';
 
 const mocks = (existingData) => {
   if (!existingData) {

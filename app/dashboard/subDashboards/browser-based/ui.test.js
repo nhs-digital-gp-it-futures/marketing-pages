@@ -1,7 +1,7 @@
 import nock from 'nock';
 import { Selector, ClientFunction } from 'testcafe';
-import dashboardWithCompleteSections from '../../../../integration-tests/fixtures/dashboardWithCompleteSections.json';
-import aBrowserBasedFixture from '../../../../integration-tests/fixtures/aBrowserBasedData.json';
+import dashboardWithCompleteSections from '../../../../fixtures/dashboardWithCompleteSections.json';
+import aBrowserBasedFixture from '../../../../fixtures/aBrowserBasedData.json';
 
 const mocks = () => {
   nock('http://localhost:8080')

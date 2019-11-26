@@ -1,7 +1,7 @@
 import nock from 'nock';
 import { Selector, ClientFunction } from 'testcafe';
 import { ManifestProvider } from '../../../manifestProvider';
-import dashboardWithCompleteSections from '../../../../integration-tests/fixtures/dashboardWithCompleteSections.json';
+import dashboardWithCompleteSections from '../../../../fixtures/dashboardWithCompleteSections.json';
 
 const clientApplicationTypeMarketingData = {
   'client-application-types': [
