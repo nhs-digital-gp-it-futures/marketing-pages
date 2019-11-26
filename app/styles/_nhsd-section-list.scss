@@ -1,108 +1,75 @@
 // section list pattern
-
-.app-section-list {
+.bc-c-section-list {
   list-style-type: none;
   padding-left: 0;
   margin-top: 40px;
   margin-bottom: 76px;
 }
 
-.app-section-list__section {
+.bc-c-section-list__title {
   display: table;
   font-size: 24px;
   font-weight: 700;
   margin-top: 40px;
 }
 
-.app-section-list__section-number {
-  display: table-cell;
-
-  @media (min-width: 40.0625em) {
-    min-width: 30px;
-    padding-right: 0;
-  }
-}
-
-.app-section-list__items {
+.bc-c-section-list__items {
   font-size: 19px;
   margin-bottom: 0;
   list-style: none;
   padding-left: 0;
-  @media (min-width: 40.0625em) {
+  @media (min-width: 641px) {
     padding-left: 30px;
   }
   .nhsuk-inset-text {
     margin-top: 20px;
     max-width: 100%;
     padding: 0;
-
-    .app-section-list__item:first-child {
-        border-top: none;
+    .bc-c-section-list__item:first-child {
+      border-top: none;
     }
-    .nhsuk-grid-column-one-half {
-      width: 47%;
-    }
-
-    .app-section-list__items {
+    .bc-c-section-list__items {
       padding-left: 0;
-      border-bottom: 1px solid #b1b4b6;
     }
   }
 }
 
-.app-section-list__item {
-  border-bottom: 1px solid #b1b4b6;
-  margin-bottom: 0 !important;
-  padding-top: 10px;
-  padding-bottom: 10px;
+.bc-c-section-list__item {
+  padding-top: nhsuk-spacing(2);
+  padding-bottom: nhsuk-spacing(2);
 }
 
-.app-section-list__item:after {
+.bc-c-section-list__item:after {
     content: "";
     display: block;
     clear: both;
 }
 
-.app-section-list__task-name {
+.bc-c-section-list__task-default-message {
   display: block;
-  @media (min-width: 28.125em) {
+  margin-left: nhsuk-spacing(3);
+  @media (min-width: 641px) {
     float: left;
-  }
-
-  p {
-    margin-bottom: 0;
   }
 }
 
-.app-section-list__task-completed {
-  margin-top: 10px;
-  margin-bottom: 5px;
+// also in public-browse
+.bc-c-tag {
+  background-color: $color_nhsuk-blue;
+  color:  $color_nhsuk-white;
+  font-weight: 600;
+  padding: nhsuk-spacing(1) nhsuk-spacing(3);
+}
 
-  @media (min-width: 28.125em) {
+.bc-c-section-list__task-tag {
+  @extend .bc-c-tag;
+  margin-top: nhsuk-spacing(2);
+  margin-bottom: nhsuk-spacing(2);
+  margin-left: nhsuk-spacing(3);
+  display: inline-block;
+  @media (min-width: 641px) {
     float: right;
     margin-top: 0;
     margin-bottom: 0;
   }
-}
-
-.govuk-tag {
-    display: inline-block;
-    outline: 2px solid transparent;
-    outline-offset: -2px;
-    color: #ffffff;
-    background-color: #1d70b8;
-    letter-spacing: 1px;
-    text-decoration: none;
-    text-transform: uppercase;
-    font-family: "GDS Transport", Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-weight: 700;
-    font-size: 14px;
-    font-size: 0.875rem;
-    line-height: 1;
-    padding-top: 5px;
-    padding-right: 8px;
-    padding-bottom: 4px;
-    padding-left: 8px;
 }

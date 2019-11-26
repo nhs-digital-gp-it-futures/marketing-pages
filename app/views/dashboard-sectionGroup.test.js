@@ -58,7 +58,7 @@ describe('dashboard-sectionGroup', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        expect($('.app-section-list__item').length).toEqual(1);
+        expect($('.bc-c-section-list__item').length).toEqual(1);
 
         done();
       });
@@ -73,7 +73,7 @@ describe('dashboard-sectionGroup', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        expect($('.app-section-list__item').length).toEqual(2);
+        expect($('.bc-c-section-list__item').length).toEqual(2);
 
         done();
       });
