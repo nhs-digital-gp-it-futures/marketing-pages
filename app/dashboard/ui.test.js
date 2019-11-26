@@ -1,8 +1,8 @@
 import nock from 'nock';
 import { Selector, ClientFunction } from 'testcafe';
-import dashboardWithIncompleteSections from './fixtures/dashboardWithIncompleteSections.json';
-import dashboardWithCompleteSections from './fixtures/dashboardWithCompleteSections.json';
-import previewWithMarketingData from './fixtures/previewWithMarketingData.json';
+import dashboardWithIncompleteSections from '../../integration-tests/fixtures/dashboardWithIncompleteSections.json';
+import dashboardWithCompleteSections from '../../integration-tests/fixtures/dashboardWithCompleteSections.json';
+import previewWithMarketingData from '../../integration-tests/fixtures/previewWithMarketingData.json';
 
 const mocks = (initalDashboard) => {
   if (initalDashboard) {

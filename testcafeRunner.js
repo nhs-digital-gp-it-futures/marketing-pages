@@ -1,6 +1,6 @@
 import createTestcafe from 'testcafe';
-import { App } from '../app';
-import routes from '../app/routes';
+import { App } from './app';
+import routes from './app/routes';
 
 let testcafe;
 let server;
@@ -15,7 +15,7 @@ createTestcafe('localhost')
     server = app.listen('1234');
 
     return tc.createRunner()
-      .src(['integration-tests/*.test.js'])
+      .src(['**/*ui.test.js'])
       .browsers('chrome')
       .concurrency(1)
       .run();
