@@ -28,7 +28,7 @@ router.get('/:solutionId/section/:sectionId', async (req, res) => {
   const { solutionId, sectionId } = req.params;
   const context = await getSectionPageContext(solutionId, sectionId);
 
-  res.render('section-page', context);
+  res.render('section/section-page', context);
 });
 
 router.post('/:solutionId/section/:sectionId', async (req, res) => {
@@ -44,7 +44,7 @@ router.post('/:solutionId/section/:sectionId', async (req, res) => {
       solutionId, sectionId, sectionPostData, response,
     );
 
-    res.render('section-page', context);
+    res.render('section/section-page', context);
   }
 });
 

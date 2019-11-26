@@ -2,15 +2,15 @@ import request from 'supertest';
 import express from 'express';
 import nunjucks from 'nunjucks';
 import cheerio from 'cheerio';
-import { App } from '../../../app';
+import { App } from '../../../../app';
 
 const createDummyApp = (context) => {
   const app = new App().createApp();
 
   const router = express.Router();
   const dummyRouter = router.get('/', (req, res) => {
-    const macroWrapper = `{% from './fields/checkbox-options.njk' import checkboxOptions %}
-                            {{ checkboxOptions(question) }}`;
+    const macroWrapper = `{% from './section/components/fields/radiobutton-options.njk' import radiobuttonOptions %}
+                            {{ radiobuttonOptions(question) }}`;
 
     const viewToTest = nunjucks.renderString(macroWrapper, context);
 
@@ -22,7 +22,7 @@ const createDummyApp = (context) => {
   return app;
 };
 
-describe('checkboxOptions', () => {
+describe('radiobuttonOptions', () => {
   it('should render the main advice', (done) => {
     const context = {
       question: {
@@ -38,8 +38,7 @@ describe('checkboxOptions', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        const question = $('div[data-test-id="question-fieldId"]');
-        expect(question.find('.nhsuk-fieldset__legend').text().trim()).toEqual('Some really important main advice');
+        expect($('.nhsuk-fieldset__legend').text().trim()).toEqual('Some really important main advice');
 
         done();
       });
@@ -67,7 +66,7 @@ describe('checkboxOptions', () => {
       });
   });
 
-  it('should render the checkbox options', (done) => {
+  it('should render the radio button options', (done) => {
     const context = {
       question: {
         id: 'fieldId',
@@ -93,15 +92,15 @@ describe('checkboxOptions', () => {
         const $ = cheerio.load(res.text);
 
         const question = $('div[data-test-id="question-fieldId"]');
-        expect(question.find('.nhsuk-checkboxes__item').length).toEqual(2);
-        expect(question.find('.nhsuk-checkboxes__item:nth-child(1)').find('input').attr('value')).toEqual('first-option');
-        expect(question.find('.nhsuk-checkboxes__item:nth-child(2)').find('input').attr('value')).toEqual('second-option');
+        expect(question.find('.nhsuk-radios__item').length).toEqual(2);
+        expect(question.find('.nhsuk-radios__item:nth-child(1)').find('input').attr('value')).toEqual('first-option');
+        expect(question.find('.nhsuk-radios__item:nth-child(2)').find('input').attr('value')).toEqual('second-option');
 
         done();
       });
   });
 
-  it('should render the checked checkbox option', (done) => {
+  it('should render the checked radio button option', (done) => {
     const context = {
       question: {
         id: 'fieldId',
@@ -128,17 +127,17 @@ describe('checkboxOptions', () => {
         const $ = cheerio.load(res.text);
 
         const question = $('div[data-test-id="question-fieldId"]');
-        expect(question.find('.nhsuk-checkboxes__item').length).toEqual(2);
-        expect(question.find('.nhsuk-checkboxes__item:nth-child(1)').find('input').attr('checked')).toBeUndefined();
-        expect(question.find('.nhsuk-checkboxes__item:nth-child(1)').find('input').attr('value')).toEqual('first-option');
-        expect(question.find('.nhsuk-checkboxes__item:nth-child(2)').find('input').attr('checked')).toEqual('checked');
-        expect(question.find('.nhsuk-checkboxes__item:nth-child(2)').find('input').attr('value')).toEqual('second-option');
+        expect(question.find('.nhsuk-radios__item').length).toEqual(2);
+        expect(question.find('.nhsuk-radios__item:nth-child(1)').find('input').attr('checked')).toBeUndefined();
+        expect(question.find('.nhsuk-radios__item:nth-child(1)').find('input').attr('value')).toEqual('first-option');
+        expect(question.find('.nhsuk-radios__item:nth-child(2)').find('input').attr('checked')).toEqual('checked');
+        expect(question.find('.nhsuk-radios__item:nth-child(2)').find('input').attr('value')).toEqual('second-option');
 
         done();
       });
   });
 
-  it('should render the checkbox option as an error if the context provided contains an error', (done) => {
+  it('should render the radiobutton option as an error if the context provided contains an error', (done) => {
     const context = {
       question: {
         id: 'fieldId',
@@ -152,7 +151,6 @@ describe('checkboxOptions', () => {
           {
             value: 'second-option',
             text: 'Second Option',
-            checked: true,
           },
         ],
         error: {
@@ -168,8 +166,8 @@ describe('checkboxOptions', () => {
         const $ = cheerio.load(res.text);
 
         const question = $('div[data-test-id="question-fieldId"]');
-        expect(question.find('div[data-test-id="checkbox-options-error"]').length).toEqual(1);
         expect(question.find('.nhsuk-error-message').text().trim()).toEqual('Error: Some error message');
+        expect(question.find('div[data-test-id="radiobutton-options-error"]').length).toEqual(1);
 
         done();
       });

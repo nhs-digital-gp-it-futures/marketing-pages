@@ -2,14 +2,14 @@ import request from 'supertest';
 import express from 'express';
 import nunjucks from 'nunjucks';
 import cheerio from 'cheerio';
-import { App } from '../../../app';
+import { App } from '../../../../app';
 
 const createDummyApp = (context) => {
   const app = new App().createApp();
 
   const router = express.Router();
   const dummyRouter = router.get('/', (req, res) => {
-    const macroWrapper = `{% from './fields/bulletpoint-list.njk' import bulletpointList %}
+    const macroWrapper = `{% from './section/components/fields/bulletpoint-list.njk' import bulletpointList %}
                             {{ bulletpointList(question) }}`;
 
     const viewToTest = nunjucks.renderString(macroWrapper, context);

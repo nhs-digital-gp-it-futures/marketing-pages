@@ -2,15 +2,15 @@ import request from 'supertest';
 import express from 'express';
 import nunjucks from 'nunjucks';
 import cheerio from 'cheerio';
-import { App } from '../../../app';
+import { App } from '../../../../app';
 
 const createDummyApp = (context) => {
   const app = new App().createApp();
 
   const router = express.Router();
   const dummyRouter = router.get('/', (req, res) => {
-    const macroWrapper = `{% from './fields/textarea-field.njk' import textareaField %}
-                            {{ textareaField(question) }}`;
+    const macroWrapper = `{% from './section/components/fields/text-field.njk' import textField %}
+                            {{ textField(question) }}`;
 
     const viewToTest = nunjucks.renderString(macroWrapper, context);
 
@@ -22,7 +22,7 @@ const createDummyApp = (context) => {
   return app;
 };
 
-describe('textarea', () => {
+describe('textField', () => {
   it('should render the main advice', (done) => {
     const context = {
       question: {
@@ -67,7 +67,7 @@ describe('textarea', () => {
       });
   });
 
-  it('should render the text area', (done) => {
+  it('should render the input text field', (done) => {
     const context = {
       question: {
         id: 'fieldId',
@@ -83,35 +83,13 @@ describe('textarea', () => {
         const $ = cheerio.load(res.text);
 
         const question = $('div[data-test-id="question-fieldId"]');
-        expect(question.find('textarea').length).toEqual(1);
+        expect(question.find('input').length).toEqual(1);
 
         done();
       });
   });
 
-  it('should render the text area with specific amount of rows as specified in the context', (done) => {
-    const context = {
-      question: {
-        id: 'fieldId',
-        rows: 10,
-      },
-    };
-
-    const dummyApp = createDummyApp(context);
-    request(dummyApp)
-      .get('/')
-      .then((res) => {
-        const $ = cheerio.load(res.text);
-
-        const question = $('div[data-test-id="question-fieldId"]');
-        expect(question.find('textarea').attr('rows')).toEqual(' 10 ');
-
-        done();
-      });
-  });
-
-
-  it('should render the text area with the data populated', (done) => {
+  it('should render the text field with the data populated', (done) => {
     const context = {
       question: {
         id: 'fieldId',
@@ -128,13 +106,13 @@ describe('textarea', () => {
         const $ = cheerio.load(res.text);
 
         const question = $('div[data-test-id="question-fieldId"]');
-        expect(question.find('textarea').val()).toEqual('Some populated data');
+        expect(question.find('div[data-test-id="question-fieldId"] input').val()).toEqual('Some populated data');
 
         done();
       });
   });
 
-  it('should render the textarea-field as an error if the context provided contains an error', (done) => {
+  it('should render the text field as an error if the context provided contains an error', (done) => {
     const context = {
       question: {
         id: 'fieldId',
@@ -154,8 +132,10 @@ describe('textarea', () => {
         const $ = cheerio.load(res.text);
 
         const question = $('div[data-test-id="question-fieldId"]');
-        expect(question.find('.nhsuk-error-message').text().trim()).toEqual('Error: Some error message');
-        expect(question.find('div[data-test-id="textarea-field-error"]').length).toEqual(1);
+        const inputError = question.find('div[data-test-id="text-field-input-error"] .nhsuk-error-message');
+
+        expect(inputError.length).toEqual(1);
+        expect(inputError.text().trim()).toEqual('Error: Some error message');
 
         done();
       });
@@ -178,7 +158,7 @@ describe('textarea', () => {
         const $ = cheerio.load(res.text);
 
         const question = $('div[data-test-id="question-fieldId"]');
-        expect(question.find('[data-test-id="textarea-field-footer"]').text().trim()).toEqual('Some footer based advice');
+        expect(question.find('[data-test-id="text-field-footer"]').text().trim()).toEqual('Some footer based advice');
 
         done();
       });

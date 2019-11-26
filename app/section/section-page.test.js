@@ -8,7 +8,7 @@ const createDummyApp = (context) => {
 
   const router = express.Router();
   const dummyRouter = router.get('/', (req, res) => {
-    res.render('section-page.njk', context);
+    res.render('./section/section-page.njk', context);
   });
 
   app.use(dummyRouter);
