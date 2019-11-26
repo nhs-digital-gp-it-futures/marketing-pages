@@ -16,8 +16,8 @@
     "nuke": "npm run clean && rm -rf node_modules/",
     "postinstall": "npm run build",
     "start": "babel-node server",
-    "test:integration": "NODE_ENV=development babel-node integration-tests/testcafeRunner.js",
-    "test:integration_win": "babel-node integration-tests/testcafeRunner.js",
+    "test:integration": "NODE_ENV=development babel-node testcafeRunner.js",
+    "test:integration_win": "babel-node testcafeRunner.js",
     "test": "jest",
     "prewatch": "npm run build:css",
     "watch": "concurrently \"npm run watch:scss\" \"npm run watch:js\" \"npm run watch:assets\"  \"npm start\"",
@@ -67,7 +67,7 @@
   "jest": {
     "testPathIgnorePatterns": [
       "/node_modules/",
-      "<rootDir>/integration-tests"
+      "((\\.|/)(ui.test))\\.js$"
     ]
   }
 }
