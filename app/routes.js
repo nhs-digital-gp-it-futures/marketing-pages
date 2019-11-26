@@ -1,11 +1,8 @@
 import express from 'express';
-import {
-  getPreviewPageContext,
-  postSubmitForModeration,
-} from './controller';
-import { getMarketingPageDashboardContext } from './dashboard/controller';
+import { getMarketingPageDashboardContext, postSubmitForModeration } from './dashboard/controller';
 import { getSubDashboardPageContext } from './dashboard/subDashboards/controller';
 import { getSectionPageContext, getSectionPageErrorContext, postSection } from './section/controller';
+import { getPreviewPageContext } from './preview/controller';
 
 const router = express.Router();
 

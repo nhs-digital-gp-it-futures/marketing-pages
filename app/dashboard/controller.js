@@ -14,3 +14,14 @@ export const getMarketingPageDashboardContext = async (solutionId, validationErr
 
   return context;
 };
+
+export const postSubmitForModeration = async (solutionId) => {
+  try {
+    await axios.put(`http://localhost:8080/api/v1/Solutions/${solutionId}/SubmitForReview`, {});
+    return {
+      success: true,
+    };
+  } catch (error) {
+    return error.response.data;
+  }
+};
