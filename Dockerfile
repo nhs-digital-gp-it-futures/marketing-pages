@@ -1,16 +1,17 @@
-FROM node:current-alpine
+FROM node:10
 
 # Create app directory
-WORKDIR /usr/app
+WORKDIR /usr/src/app
 
 # Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-COPY . .
+COPY package*.json ./
 
-# RUN npm
+# RUN npm install
 RUN npm install
 
-ENV NODE_ENV production
+# Copy app files to source
+COPY . .
 
+# Expose port 
 EXPOSE 3001
-CMD [ "npm", "start" ]
+CMD [ "node", "server.js", "npm run start" ]
