@@ -49,7 +49,7 @@ router.get('/:solutionId/preview', async (req, res) => {
   const { solutionId } = req.params;
   const context = await getPreviewPageContext(solutionId);
 
-  res.render('preview-page', context);
+  res.render('preview/preview-page', context);
 });
 
 router.get('/:solutionId/submitForModeration', async (req, res) => {
