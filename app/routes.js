@@ -1,13 +1,8 @@
 import express from 'express';
-import {
-  getMarketingPageDashboardContext,
-  getSubDashboardPageContext,
-  getSectionPageContext,
-  getSectionPageErrorContext,
-  postSection,
-  getPreviewPageContext,
-  postSubmitForModeration,
-} from './controller';
+import { getMarketingPageDashboardContext, postSubmitForModeration } from './dashboard/controller';
+import { getSubDashboardPageContext } from './dashboard/subDashboards/controller';
+import { getSectionPageContext, getSectionPageErrorContext, postSection } from './section/controller';
+import { getPreviewPageContext } from './preview/controller';
 
 const router = express.Router();
 
@@ -15,14 +10,14 @@ router.get('/:solutionId', async (req, res) => {
   const { solutionId } = req.params;
   const context = await getMarketingPageDashboardContext(solutionId);
 
-  res.render('dashboard-page', context);
+  res.render('dashboard/template', context);
 });
 
 router.get('/:solutionId/dashboard/:sectionId', async (req, res) => {
   const { solutionId, sectionId } = req.params;
   const context = await getSubDashboardPageContext(solutionId, sectionId);
 
-  res.render('sub-dashboard-page', context);
+  res.render('dashboard/subDashboards/template', context);
 });
 
 
@@ -30,7 +25,7 @@ router.get('/:solutionId/section/:sectionId', async (req, res) => {
   const { solutionId, sectionId } = req.params;
   const context = await getSectionPageContext(solutionId, sectionId);
 
-  res.render('section-page', context);
+  res.render('section/template', context);
 });
 
 router.post('/:solutionId/section/:sectionId', async (req, res) => {
@@ -46,7 +41,7 @@ router.post('/:solutionId/section/:sectionId', async (req, res) => {
       solutionId, sectionId, sectionPostData, response,
     );
 
-    res.render('section-page', context);
+    res.render('section/template', context);
   }
 });
 
@@ -54,7 +49,7 @@ router.get('/:solutionId/preview', async (req, res) => {
   const { solutionId } = req.params;
   const context = await getPreviewPageContext(solutionId);
 
-  res.render('preview-page', context);
+  res.render('preview/template', context);
 });
 
 router.get('/:solutionId/submitForModeration', async (req, res) => {
@@ -66,7 +61,7 @@ router.get('/:solutionId/submitForModeration', async (req, res) => {
   } else {
     const context = await getMarketingPageDashboardContext(solutionId, response);
 
-    res.render('dashboard-page', context);
+    res.render('dashboard/template', context);
   }
 });
 

@@ -1,0 +1,19 @@
+{% extends 'includes/layout.njk' %}
+{% from 'sections/view-solution-description/macro.njk' import viewSolutionDescription %}
+{% from './sections/preview-features.njk' import previewFeatures %}
+{% from './sections/preview-client-application-types.njk' import previewClientApplicationTypes %}
+
+{% block body %}
+<div class="nhsuk-grid-row">
+  <div class="nhsuk-grid-column-full">
+    <h1>Preview Page</h1>
+    
+    {{ viewSolutionDescription({
+      section: sections['solution-description']
+    }) }}
+    {{ previewFeatures(sections['features']) }}
+    {{ previewClientApplicationTypes(sections['client-application-types']) }}
+
+  </div>
+</div>
+{% endblock %}

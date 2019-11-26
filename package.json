@@ -16,8 +16,8 @@
     "nuke": "npm run clean && rm -rf node_modules/",
     "postinstall": "npm run build",
     "start": "babel-node server",
-    "test:integration": "NODE_ENV=development babel-node integration-tests/testcafeRunner.js",
-    "test:integration_win": "babel-node integration-tests/testcafeRunner.js",
+    "test:integration": "NODE_ENV=development babel-node testcafeRunner.js",
+    "test:integration_win": "babel-node testcafeRunner.js",
     "test": "jest",
     "prewatch": "npm run build:css",
     "watch": "concurrently \"npm run watch:scss\" \"npm run watch:js\" \"npm run watch:assets\"  \"npm start\"",
@@ -37,6 +37,7 @@
     "axios": "^0.19.0",
     "body-parser": "^1.19.0",
     "browser-sync": "^2.26.7",
+    "buying-catalogue-components": "^1.0.15",
     "compression": "^1.7.4",
     "express": "^4.17.1",
     "nunjucks": "^3.2.0",
@@ -67,7 +68,7 @@
   "jest": {
     "testPathIgnorePatterns": [
       "/node_modules/",
-      "<rootDir>/integration-tests"
+      "((\\.|/)(ui.test))\\.js$"
     ]
   }
 }
