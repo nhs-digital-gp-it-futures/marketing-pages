@@ -1,5 +1,5 @@
 {% extends 'includes/layout.njk' %}
-{% from './sections/preview-solution-description.njk' import previewSolutionDescription %}
+{% from 'sections/view-solution-description/macro.njk' import viewSolutionDescription %}
 {% from './sections/preview-features.njk' import previewFeatures %}
 {% from './sections/preview-client-application-types.njk' import previewClientApplicationTypes %}
 
@@ -8,7 +8,9 @@
   <div class="nhsuk-grid-column-full">
     <h1>Preview Page</h1>
     
-    {{ previewSolutionDescription(sections['solution-description']) }}
+    {{ viewSolutionDescription({
+      section: sections['solution-description']
+    }) }}
     {{ previewFeatures(sections['features']) }}
     {{ previewClientApplicationTypes(sections['client-application-types']) }}
 
