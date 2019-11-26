@@ -2,7 +2,7 @@ import fs from 'fs';
 
 export class ManifestProvider {
   getDashboardManifest() {
-    this.dashboardManifestRaw = fs.readFileSync('./app/forms/dashboard-manifest.json');
+    this.dashboardManifestRaw = fs.readFileSync('./app/dashboard/manifest.json');
 
     this.dashboardManifest = JSON.parse(this.dashboardManifestRaw);
 
@@ -10,7 +10,7 @@ export class ManifestProvider {
   }
 
   getSubDashboardManifest(sectionName) {
-    this.subDashboardManifestRaw = fs.readFileSync(`./app/forms/dashboards/${sectionName}.json`);
+    this.subDashboardManifestRaw = fs.readFileSync(`./app/dashboard/subDashboards/${sectionName}/manifest.json`);
 
     this.subDashboardManifest = JSON.parse(this.subDashboardManifestRaw);
 

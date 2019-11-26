@@ -1,14 +1,14 @@
 import request from 'supertest';
 import express from 'express';
 import cheerio from 'cheerio';
-import { App } from '../../app';
+import { App } from '../../../app';
 
 const createDummyApp = (context) => {
   const app = new App().createApp();
 
   const router = express.Router();
   const dummyRouter = router.get('/', (req, res) => {
-    res.render('sub-dashboard-page.njk', context);
+    res.render('./dashboard/subDashboards/sub-dashboard-page.njk', context);
   });
 
   app.use(dummyRouter);

@@ -2,7 +2,7 @@ import request from 'supertest';
 import express from 'express';
 import nunjucks from 'nunjucks';
 import cheerio from 'cheerio';
-import { App } from '../../app';
+import { App } from '../../../app';
 
 const aSectionContext = title => ({
   URL: 'someUrl',
@@ -22,7 +22,7 @@ const createDummyApp = (context) => {
 
   const router = express.Router();
   const dummyRouter = router.get('/', (req, res) => {
-    const macroWrapper = `{% from './dashboard-sectionGroup.njk' import dashboardSectionGroup %}
+    const macroWrapper = `{% from './dashboard/components/dashboard-sectionGroup.njk' import dashboardSectionGroup %}
                             {{ dashboardSectionGroup(sectionGroup) }}`;
 
     const viewToTest = nunjucks.renderString(macroWrapper, context);

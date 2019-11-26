@@ -1,13 +1,13 @@
 import express from 'express';
 import {
-  getMarketingPageDashboardContext,
-  getSubDashboardPageContext,
   getSectionPageContext,
   getSectionPageErrorContext,
   postSection,
   getPreviewPageContext,
   postSubmitForModeration,
 } from './controller';
+import { getMarketingPageDashboardContext } from './dashboard/controller';
+import { getSubDashboardPageContext } from './dashboard/subDashboards/controller';
 
 const router = express.Router();
 
@@ -15,14 +15,14 @@ router.get('/:solutionId', async (req, res) => {
   const { solutionId } = req.params;
   const context = await getMarketingPageDashboardContext(solutionId);
 
-  res.render('dashboard-page', context);
+  res.render('dashboard/dashboard-page', context);
 });
 
 router.get('/:solutionId/dashboard/:sectionId', async (req, res) => {
   const { solutionId, sectionId } = req.params;
   const context = await getSubDashboardPageContext(solutionId, sectionId);
 
-  res.render('sub-dashboard-page', context);
+  res.render('dashboard/subDashboards/sub-dashboard-page', context);
 });
 
 
@@ -66,7 +66,7 @@ router.get('/:solutionId/submitForModeration', async (req, res) => {
   } else {
     const context = await getMarketingPageDashboardContext(solutionId, response);
 
-    res.render('dashboard-page', context);
+    res.render('dashboard/dashboard-page', context);
   }
 });
 
