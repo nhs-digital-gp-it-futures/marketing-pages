@@ -10,14 +10,14 @@ router.get('/:solutionId', async (req, res) => {
   const { solutionId } = req.params;
   const context = await getMarketingPageDashboardContext(solutionId);
 
-  res.render('dashboard/dashboard-page', context);
+  res.render('dashboard/template', context);
 });
 
 router.get('/:solutionId/dashboard/:sectionId', async (req, res) => {
   const { solutionId, sectionId } = req.params;
   const context = await getSubDashboardPageContext(solutionId, sectionId);
 
-  res.render('dashboard/subDashboards/sub-dashboard-page', context);
+  res.render('dashboard/subDashboards/template', context);
 });
 
 
@@ -25,7 +25,7 @@ router.get('/:solutionId/section/:sectionId', async (req, res) => {
   const { solutionId, sectionId } = req.params;
   const context = await getSectionPageContext(solutionId, sectionId);
 
-  res.render('section/section-page', context);
+  res.render('section/template', context);
 });
 
 router.post('/:solutionId/section/:sectionId', async (req, res) => {
@@ -41,7 +41,7 @@ router.post('/:solutionId/section/:sectionId', async (req, res) => {
       solutionId, sectionId, sectionPostData, response,
     );
 
-    res.render('section/section-page', context);
+    res.render('section/template', context);
   }
 });
 
@@ -49,7 +49,7 @@ router.get('/:solutionId/preview', async (req, res) => {
   const { solutionId } = req.params;
   const context = await getPreviewPageContext(solutionId);
 
-  res.render('preview/preview-page', context);
+  res.render('preview/template', context);
 });
 
 router.get('/:solutionId/submitForModeration', async (req, res) => {
@@ -61,7 +61,7 @@ router.get('/:solutionId/submitForModeration', async (req, res) => {
   } else {
     const context = await getMarketingPageDashboardContext(solutionId, response);
 
-    res.render('dashboard/dashboard-page', context);
+    res.render('dashboard/template', context);
   }
 });
 

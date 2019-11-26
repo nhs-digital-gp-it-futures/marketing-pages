@@ -1,14 +1,14 @@
 import request from 'supertest';
 import express from 'express';
 import cheerio from 'cheerio';
-import { App } from '../../../app';
+import { App } from '../../app';
 
 const createDummyApp = (context) => {
   const app = new App().createApp();
 
   const router = express.Router();
   const dummyRouter = router.get('/', (req, res) => {
-    res.render('./dashboard/subDashboards/sub-dashboard-page.njk', context);
+    res.render('./dashboard/template.njk', context);
   });
 
   app.use(dummyRouter);
@@ -16,10 +16,26 @@ const createDummyApp = (context) => {
   return app;
 };
 
-describe('sub dashboard page', () => {
-  it('should render the title of the sub dashboard', (done) => {
+describe('dashboard page', () => {
+  it('should render the title of the dashboard page', (done) => {
+    const context = {};
+
+    const dummyApp = createDummyApp(context);
+    request(dummyApp)
+      .get('/')
+      .then((res) => {
+        const $ = cheerio.load(res.text);
+
+        expect($('h1').text().trim()).toEqual('Marketing Page - Dashboard');
+
+        done();
+      });
+  });
+
+  it('should render the error summary if errors', (done) => {
     const context = {
-      title: 'Title of the sub dashboard',
+      title: 'Title of the section',
+      errors: [{}],
     };
 
     const dummyApp = createDummyApp(context);
@@ -28,16 +44,15 @@ describe('sub dashboard page', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        expect($('[data-test-id="sub-dashboard-title"]').text().trim()).toEqual('Title of the sub dashboard');
+        expect($('[data-test-id="error-summary"]').length).toEqual(1);
 
         done();
       });
   });
 
-  it('should render the main advice of the sub dashboard', (done) => {
+  it('should render the preview button at the top of the page', (done) => {
     const context = {
-      title: 'Title of the sub dashboard',
-      mainAdvice: 'This is the main advice for this sub dashboard',
+      previewUrl: '/S100000-001/preview',
     };
 
     const dummyApp = createDummyApp(context);
@@ -46,36 +61,15 @@ describe('sub dashboard page', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        expect($('[data-test-id="sub-dashboard-main-advice"]').text().trim()).toEqual('This is the main advice for this sub dashboard');
+        expect($('[data-test-id="dashboard-preview-button"] a').length).toEqual(1);
+        expect($('[data-test-id="dashboard-preview-button"] a').text().trim()).toEqual('Preview Marketing page');
+        expect($('[data-test-id="dashboard-preview-button"] a').attr('href')).toEqual('/S100000-001/preview');
 
         done();
       });
   });
 
-  it('should render any additional advice of the sub dashboard', (done) => {
-    const context = {
-      title: 'Title of the sub dashboard',
-      additionalAdvice: [
-        'First bit of addtional advice',
-        'Second bit of addtional advice',
-      ],
-    };
-
-    const dummyApp = createDummyApp(context);
-    request(dummyApp)
-      .get('/')
-      .then((res) => {
-        const $ = cheerio.load(res.text);
-
-        context.additionalAdvice.map((advice, idx) => {
-          expect($(`[data-test-id="sub-dashboard-additional-advice"] p:nth-child(${idx + 1})`).text().trim()).toEqual(advice);
-        });
-
-        done();
-      });
-  });
-
-  it('should render the sectionGroups on the sub dashboard page', (done) => {
+  it('should render the sectionGroups on the dashboard page', (done) => {
     const context = {
       sectionGroups: [
         {
@@ -97,9 +91,9 @@ describe('sub dashboard page', () => {
       });
   });
 
-  it('should render the return to all sections link', (done) => {
+  it('should render the Submit for moderation button at the bottom of the page', (done) => {
     const context = {
-      title: 'Title of the section',
+      submitForModerationUrl: '/S100000-001/submitForModeration',
     };
 
     const dummyApp = createDummyApp(context);
@@ -108,8 +102,9 @@ describe('sub dashboard page', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        expect($('[data-test-id="sub-dashboard-back-link"] a').length).toEqual(1);
-        expect($('[data-test-id="sub-dashboard-back-link"] a').text().trim()).toEqual('Return to all sections');
+        expect($('[data-test-id="dashboard-submit-for-moderation-button"] a').length).toEqual(1);
+        expect($('[data-test-id="dashboard-submit-for-moderation-button"] a').text().trim()).toEqual('Submit for moderation');
+        expect($('[data-test-id="dashboard-submit-for-moderation-button"] a').attr('href')).toEqual('/S100000-001/submitForModeration');
 
         done();
       });
