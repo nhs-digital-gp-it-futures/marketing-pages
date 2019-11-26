@@ -1,7 +1,7 @@
 import { generateFields } from './generateFields';
 import { generateOptions } from './generateOptions';
 import { createErrorForQuestion } from './createErrorForQuestion';
-import { getFormDataValue } from '../helpers/formData';
+import { getFormDataValue } from './formData';
 
 const commonQuestionContext = (
   questionId, questionManifest,

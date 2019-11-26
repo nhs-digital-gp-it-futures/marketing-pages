@@ -18,7 +18,7 @@ export class ManifestProvider {
   }
 
   getSectionManifest(sectionName) {
-    this.sectionManifestRaw = fs.readFileSync(`./app/forms/sections/${sectionName}.json`);
+    this.sectionManifestRaw = fs.readFileSync(`./app/section/sections/${sectionName}/manifest.json`);
 
     this.sectionManifest = JSON.parse(this.sectionManifestRaw);
 

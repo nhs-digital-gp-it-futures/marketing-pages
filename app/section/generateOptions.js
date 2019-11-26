@@ -1,4 +1,4 @@
-import { doesFormDataContainValue } from '../helpers/formData';
+import { doesFormDataContainValue } from './formData';
 
 const populateQuestionOption = (
   questionId, questionOption, formData,
