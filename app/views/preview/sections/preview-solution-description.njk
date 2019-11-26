@@ -10,21 +10,21 @@
       </div>
 
       {% if section.answers.summary %}
-        <div data-test-id="preview-section-question-summary" class="nhsuk-table__row">
+        <div data-test-id="preview-section-question-summary" class="nhsuk-u-margin-bottom-4">
             {{ previewQuestionTitle('summary', 'Summary') }}
             {{ previewQuestionDataText(section.answers.summary) }}
         </div>
       {% endif %}
 
       {% if section.answers.description %}
-        <div data-test-id="preview-section-question-description" class="nhsuk-table__row">
+        <div data-test-id="preview-section-question-description" class="nhsuk-u-margin-bottom-4">
             {{ previewQuestionTitle('description', 'About the solution') }}
             {{ previewQuestionDataText(section.answers.description) }}
         </div>
       {% endif %}
       
       {% if section.answers.link %}
-        <div data-test-id="preview-section-question-link" class="nhsuk-table__row">
+        <div data-test-id="preview-section-question-link" class="nhsuk-u-margin-bottom-4">
           {{ previewQuestionDataLink(section.answers.link) }}
         </div>
       {% endif %}
