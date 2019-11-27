@@ -2,12 +2,12 @@
 
 {% macro dashboardSectionGroup(sectionGroup) %}
   <div data-test-id="dashboard-sectionGroup-{{sectionGroup.id}}">
-    <div class="nhsuk_title">
-      <h2 class="app-section-list__section">
+    <div class="bc-c-title">
+      <h2 class="nhsuk-u-font-size-24">
         {{ sectionGroup.title }}
       </h2>
     </div>
-    <ul class="app-section-list__items">
+    <ul class="bc-c-section-list__items">
       {% for section in sectionGroup.sections %}
         {{ dashboardSectionRow(section) }}
       {% endfor %}

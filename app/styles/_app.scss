@@ -1,9 +1,11 @@
-.nhsuk_title {
-  background-color: $color_nhsuk-grey-5;
-  margin: 30px 0;
+.bc-c-title {
+  margin: nhsuk-spacing(5) 0;
   border-bottom: 2px solid $color_nhsuk-blue;
 }
 
-.nhsuk-table__row {
-  margin-bottom: 24px;
+.bc-u-block-float-left {
+  display: block;
+  @media (min-width: 641px) {
+    float: left;
+  }
 }
