@@ -1,6 +1,6 @@
 {% extends 'includes/layout.njk' %}
 {% from 'sections/view-solution-description/macro.njk' import viewSolutionDescription %}
-{% from './sections/preview-features.njk' import previewFeatures %}
+{% from 'sections/view-features/macro.njk' import viewFeatures %}
 {% from './sections/preview-client-application-types.njk' import previewClientApplicationTypes %}
 
 {% block body %}
@@ -11,7 +11,9 @@
     {{ viewSolutionDescription({
       section: sections['solution-description']
     }) }}
-    {{ previewFeatures(sections['features']) }}
+    {{ viewFeatures({
+      section: sections['features']
+    }) }}
     {{ previewClientApplicationTypes(sections['client-application-types']) }}
 
   </div>
