@@ -34,7 +34,7 @@ test('should render the marketing preview page title', async (t) => {
 test('when no existing marketing data - The solution description section should not be rendered', async (t) => {
   pageSetup(t);
 
-  const solutionDescriptionSection = Selector('[data-test-id="preview-solution-description"]');
+  const solutionDescriptionSection = Selector('[data-test-id="view-solution-description"]');
 
   await t
     .expect(solutionDescriptionSection.exists).notOk();
@@ -43,10 +43,10 @@ test('when no existing marketing data - The solution description section should 
 test('when existing marketing data - The solution description section and all questions should be rendered', async (t) => {
   pageSetup(t, true);
 
-  const solutionDescriptionSection = Selector('[data-test-id="preview-solution-description"]');
-  const summaryQuestion = Selector('[data-test-id="preview-section-question-summary"]');
-  const descriptionQuestion = Selector('[data-test-id="preview-section-question-description"]');
-  const linkQuestion = Selector('[data-test-id="preview-section-question-link"]');
+  const solutionDescriptionSection = Selector('[data-test-id="view-solution-description"]');
+  const summaryQuestion = Selector('[data-test-id="view-section-question-summary"]');
+  const descriptionQuestion = Selector('[data-test-id="view-section-question-description"]');
+  const linkQuestion = Selector('[data-test-id="view-section-question-link"]');
 
 
   await t
@@ -54,21 +54,21 @@ test('when existing marketing data - The solution description section and all qu
     .expect(solutionDescriptionSection.find('h3').innerText).eql('Solution description')
 
     .expect(summaryQuestion.exists).ok()
-    .expect(summaryQuestion.find('[data-test-id="preview-question-title"]').innerText).eql('Summary')
-    .expect(summaryQuestion.find('[data-test-id="preview-question-data-text"]').innerText).eql('The solution summary')
+    .expect(summaryQuestion.find('[data-test-id="view-question-title"]').innerText).eql('Summary')
+    .expect(summaryQuestion.find('[data-test-id="view-question-data-text-summary"]').innerText).eql('The solution summary')
 
     .expect(descriptionQuestion.exists).ok()
-    .expect(descriptionQuestion.find('[data-test-id="preview-question-title"]').innerText).eql('About the solution')
-    .expect(descriptionQuestion.find('[data-test-id="preview-question-data-text"]').innerText).eql('The solution description')
+    .expect(descriptionQuestion.find('[data-test-id="view-question-title"]').innerText).eql('About the solution')
+    .expect(descriptionQuestion.find('[data-test-id="view-question-data-text-description"]').innerText).eql('The solution description')
 
     .expect(linkQuestion.exists).ok()
-    .expect(linkQuestion.find('[data-test-id="preview-question-title"]').exists).notOk()
-    .expect(linkQuestion.find('[data-test-id="preview-question-data-link"]').innerText).eql('The solution link');
+    .expect(linkQuestion.find('[data-test-id="view-question-title"]').exists).notOk()
+    .expect(linkQuestion.find('[data-test-id="view-question-data-link"]').innerText).eql('The solution link');
 });
 
 test('when no existing marketing data - The features section should not be rendered', async (t) => {
   pageSetup(t);
-  const featuresSection = Selector('[data-test-id="preview-features"]');
+  const featuresSection = Selector('[data-test-id="view-features"]');
 
   await t
     .expect(featuresSection.exists).notOk();
@@ -77,20 +77,19 @@ test('when no existing marketing data - The features section should not be rende
 test('when existing marketing data - The features section should rendered and the features displayed', async (t) => {
   pageSetup(t, true);
 
-  const featuresSection = Selector('[data-test-id="preview-features"]');
-  const featureListingQuestion = Selector('[data-test-id="preview-section-question-listing"]');
+  const featuresSection = Selector('[data-test-id="view-features"]');
 
   await t
     .expect(featuresSection.exists).ok()
     .expect(featuresSection.find('h3').innerText).eql('Features')
 
-    .expect(featureListingQuestion.exists).ok()
-    .expect(featureListingQuestion.find('[data-test-id="preview-question-title"]').exists).notOk()
-    .expect(featureListingQuestion.find('[data-test-id="preview-question-data-bulletlist"]').exists).ok()
-    .expect(featureListingQuestion.find('[data-test-id="preview-question-data-bulletlist"]').find('li').count).eql(3)
-    .expect(featureListingQuestion.find('[data-test-id="preview-question-data-bulletlist"]').find('li:nth-child(1)').innerText).eql('Feature A')
-    .expect(featureListingQuestion.find('[data-test-id="preview-question-data-bulletlist"]').find('li:nth-child(2)').innerText).eql('Feature B')
-    .expect(featureListingQuestion.find('[data-test-id="preview-question-data-bulletlist"]').find('li:nth-child(3)').innerText).eql('Feature C');
+    .expect(featuresSection.exists).ok()
+    .expect(featuresSection.find('[data-test-id="view-question-title"]').exists).notOk()
+    .expect(featuresSection.find('[data-test-id="view-question-data-bulletlist"]').exists).ok()
+    .expect(featuresSection.find('[data-test-id="view-question-data-bulletlist"]').find('li').count).eql(3)
+    .expect(featuresSection.find('[data-test-id="view-question-data-bulletlist"]').find('li:nth-child(1)').innerText).eql('Feature A')
+    .expect(featuresSection.find('[data-test-id="view-question-data-bulletlist"]').find('li:nth-child(2)').innerText).eql('Feature B')
+    .expect(featuresSection.find('[data-test-id="view-question-data-bulletlist"]').find('li:nth-child(3)').innerText).eql('Feature C');
 });
 
 test('when no existing marketing data - The client-application-types section should not be rendered', async (t) => {
