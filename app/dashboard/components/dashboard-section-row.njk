@@ -5,7 +5,7 @@
     {{ dashboardSection(section) }}
 
     {% if section.sections %}
-      <ul class="bc-c-section-list__items nhsuk-u-font-size-19 nhsuk-u-margin-bottom-0">
+      <ul class="bc-c-section-list__items-sub-section nhsuk-u-font-size-19 nhsuk-u-margin-bottom-0">
         <div class="bc-c-inset-text">
           {% for subSection in section.sections %}
               <div id="{{subSection.id}}" data-test-id="dashboard-sub-section-{{subSection.id}}">

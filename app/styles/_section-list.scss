@@ -1,26 +1,52 @@
+.bc-c-section-list__task-requirement {
+  //for small screen
+  @media (max-width: 641px) {
+    display: block;
+    margin-left: nhsuk-spacing(3);
+  }
+}
+
+.bc-c-section-list__items-sub-section {
+  padding-left: 30px;
+  // for small screen
+  @media (max-width: 641px) {
+    padding-left: 0;
+  }
+  // only needed for subsection alignment
+  .bc-c-section-list__task-requirement {
+    margin-left: -(nhsuk-spacing(4));
+    // for small screen
+    @media (max-width: 641px) {
+      display: block;
+      margin-left: nhsuk-spacing(3);
+    }
+  }
+}
+
 .bc-c-section-list__items {
   list-style: none;
-  padding-left: 0;
-  @media (min-width: 641px) {
-    padding-left: 30px;
+  padding-left: 30px;
+  // fro small screen
+  @media (max-width: 641px) {
+    padding-left: 0;
   }
 }
 
 .bc-c-inset-text {
+  border-left: $nhsuk-border-width-inset-text solid $color_nhsuk-blue;
   margin-top: nhsuk-spacing(3);
+  margin-left: 0;
   max-width: 100%;
   padding: 0;
   .bc-c-section-list__item:first-child {
     border-top: none;
-  }
-  .bc-c-section-list__items {
-    padding-left: 0;
   }
 }
 
 .bc-c-section-list__item {
   padding-top: nhsuk-spacing(2);
   padding-bottom: nhsuk-spacing(2);
+  list-style: none;
 }
 
 .bc-c-section-list__item:after {
@@ -29,14 +55,7 @@
     clear: both;
 }
 
-.bc-c-section-list__task-default-message {
-  display: block;
-  margin-left: nhsuk-spacing(3);
-  @media (min-width: 641px) {
-    float: left;
-    margin-left: nhsuk-spacing(1);
-  }
-}
+
 
 // bc-c-tag is also in public-browse
 .bc-c-tag {
