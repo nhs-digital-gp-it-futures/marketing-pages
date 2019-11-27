@@ -22,6 +22,13 @@ module.exports = {
           presets: ['@babel/preset-env'],
         },
       },
+    },
+    {
+      test: /\.(scss|css)$/,
+      use: [
+        { loader: 'css-loader', options: { sourceMap: true, includePaths: [path.join(__dirname, 'node_modules')] } },
+        { loader: 'sass-loader', options: { sourceMap: true, includePaths: [path.join(__dirname, 'node_modules')] } },
+      ],
     }],
   },
   watchOptions: {
