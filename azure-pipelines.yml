@@ -4,7 +4,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 trigger:
-- test-updates-align-with-pb
+- master
 
 # no PR builds on this file
 pr: none
