@@ -68,7 +68,7 @@ test('when existing marketing data - The solution description section and all qu
 
 test('when no existing marketing data - The features section should not be rendered', async (t) => {
   pageSetup(t);
-  const featuresSection = Selector('[data-test-id="preview-features"]');
+  const featuresSection = Selector('[data-test-id="view-features"]');
 
   await t
     .expect(featuresSection.exists).notOk();
@@ -77,20 +77,19 @@ test('when no existing marketing data - The features section should not be rende
 test('when existing marketing data - The features section should rendered and the features displayed', async (t) => {
   pageSetup(t, true);
 
-  const featuresSection = Selector('[data-test-id="preview-features"]');
-  const featureListingQuestion = Selector('[data-test-id="preview-section-question-listing"]');
+  const featuresSection = Selector('[data-test-id="view-features"]');
 
   await t
     .expect(featuresSection.exists).ok()
     .expect(featuresSection.find('h3').innerText).eql('Features')
 
-    .expect(featureListingQuestion.exists).ok()
-    .expect(featureListingQuestion.find('[data-test-id="preview-question-title"]').exists).notOk()
-    .expect(featureListingQuestion.find('[data-test-id="preview-question-data-bulletlist"]').exists).ok()
-    .expect(featureListingQuestion.find('[data-test-id="preview-question-data-bulletlist"]').find('li').count).eql(3)
-    .expect(featureListingQuestion.find('[data-test-id="preview-question-data-bulletlist"]').find('li:nth-child(1)').innerText).eql('Feature A')
-    .expect(featureListingQuestion.find('[data-test-id="preview-question-data-bulletlist"]').find('li:nth-child(2)').innerText).eql('Feature B')
-    .expect(featureListingQuestion.find('[data-test-id="preview-question-data-bulletlist"]').find('li:nth-child(3)').innerText).eql('Feature C');
+    .expect(featuresSection.exists).ok()
+    .expect(featuresSection.find('[data-test-id="view-question-title"]').exists).notOk()
+    .expect(featuresSection.find('[data-test-id="view-question-data-bulletlist"]').exists).ok()
+    .expect(featuresSection.find('[data-test-id="view-question-data-bulletlist"]').find('li').count).eql(3)
+    .expect(featuresSection.find('[data-test-id="view-question-data-bulletlist"]').find('li:nth-child(1)').innerText).eql('Feature A')
+    .expect(featuresSection.find('[data-test-id="view-question-data-bulletlist"]').find('li:nth-child(2)').innerText).eql('Feature B')
+    .expect(featuresSection.find('[data-test-id="view-question-data-bulletlist"]').find('li:nth-child(3)').innerText).eql('Feature C');
 });
 
 test('when no existing marketing data - The client-application-types section should not be rendered', async (t) => {
