@@ -55,16 +55,6 @@
     clear: both;
 }
 
-
-
-// bc-c-tag is also in public-browse
-.bc-c-tag {
-  background-color: $color_nhsuk-blue;
-  color:  $color_nhsuk-white;
-  font-weight: 600;
-  padding: nhsuk-spacing(1) nhsuk-spacing(3);
-}
-
 .bc-c-section-list__task-tag {
   @extend .bc-c-tag;
   margin-top: nhsuk-spacing(2);
