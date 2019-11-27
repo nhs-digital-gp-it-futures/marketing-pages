@@ -15,7 +15,7 @@ steps:
   inputs:
     containerregistrytype: 'Azure Container Registry'
     azureSubscription: 'NHSAPP-BuyingCatalogue'
-    azureContainerRegistry: '{"loginServer":"gpitfutureaksdev.azurecr.io", "id" : "/subscriptions/7b12a8a2-f06f-456f-b6f9-aa2d92e0b2ec/resourceGroups/gpitfuture-aks-dev/providers/Microsoft.ContainerRegistry/registries/gpitfutureaksdev"}'
+    azureContainerRegistry: '{"loginServer":"gpitfutureacrdev.azurecr.io", "id" : "/subscriptions/7b12a8a2-f06f-456f-b6f9-aa2d92e0b2ec/resourceGroups/gpitfuture-acr-dev/providers/Microsoft.ContainerRegistry/registries/gpitfutureacrdev"}'
     dockerComposeFile: '**/docker-compose.yml'
     action: 'Build services'
 
@@ -23,7 +23,7 @@ steps:
   inputs:
     containerregistrytype: 'Azure Container Registry'
     azureSubscription: 'NHSAPP-BuyingCatalogue'
-    azureContainerRegistry: '{"loginServer":"gpitfutureaksdev.azurecr.io", "id" : "/subscriptions/7b12a8a2-f06f-456f-b6f9-aa2d92e0b2ec/resourceGroups/gpitfuture-aks-dev/providers/Microsoft.ContainerRegistry/registries/gpitfutureaksdev"}'
+    azureContainerRegistry: '{"loginServer":"gpitfutureacrdev.azurecr.io", "id" : "/subscriptions/7b12a8a2-f06f-456f-b6f9-aa2d92e0b2ec/resourceGroups/gpitfuture-acr-dev/providers/Microsoft.ContainerRegistry/registries/gpitfutureacrdev"}'
     dockerComposeFile: '**/docker-compose.yml'
     action: 'Push services'
 
