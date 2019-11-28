@@ -54,6 +54,15 @@
           }
         }
       }
+    },
+    "about-your-organisation": {
+      "title": "About your Organisation",
+      "sections": {
+        "contact-details": {
+          "title": "Contact Details",
+          "type": "section"
+        }
+      }
     }
   }
 }

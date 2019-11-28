@@ -14,6 +14,10 @@
       "requirement": "Mandatory",
       "status": "INCOMPLETE",
       "sections": {}
+    },
+    "contact-details": {
+      "requirement": "Optional",
+      "status": "INCOMPLETE"
     }
   }
 }
