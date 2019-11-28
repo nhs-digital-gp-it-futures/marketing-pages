@@ -91,10 +91,10 @@ test('should render the Client application type section group', async (t) => {
 test('should render the About your Organisation section group', async (t) => {
   pageSetup(t);
 
-  const aboutYourSolutionSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-about-your-organisation"]');
+  const aboutYourOrganisationSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-about-your-organisation"]');
 
   await t
-    .expect(aboutYourSolutionSectionGroup.find('h2').innerText).eql('About your Organisation');
+    .expect(aboutYourOrganisationSectionGroup.find('h2').innerText).eql('About your Organisation');
 });
 
 test('should render all the sections for the About your solution section group', async (t) => {
