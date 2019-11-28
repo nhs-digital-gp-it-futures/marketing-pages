@@ -105,7 +105,7 @@ test('when existing marketing data - The client application type section and bro
   pageSetup(t, true);
 
   const clientApplicationTypesSection = Selector('[data-test-id="preview-client-application-types"]');
-  const browserBasedExpandaleSection = Selector('[data-test-id="preview-section-browser-based"]');
+  const browserBasedExpandableSection = Selector('[data-test-id="preview-section-browser-based"]');
   const browserBasedExpandaleSectionTable = Selector('[data-test-id="preview-section-table-browser-based"]');
   const supportedBrowsersRow = browserBasedExpandaleSectionTable.find('[data-test-id="preview-section-table-row-supported-browsers"]');
   const mobileResponsiveRow = browserBasedExpandaleSectionTable.find('[data-test-id="preview-section-table-row-mobile-responsive"]');
@@ -116,12 +116,11 @@ test('when existing marketing data - The client application type section and bro
     .expect(clientApplicationTypesSection.exists).ok()
     .expect(clientApplicationTypesSection.find('h3').innerText).eql('Client application type')
 
-    .expect(browserBasedExpandaleSection.exists).ok()
-    .expect(browserBasedExpandaleSection.innerText).eql('Browser based application')
-    .expect(browserBasedExpandaleSection.find('div[aria-hidden="true"]').exists).ok()
-
-    .click(browserBasedExpandaleSection.find('summary'))
-    .expect(browserBasedExpandaleSection.find('div[aria-hidden="true"]').exists).notOk()
+    .expect(browserBasedExpandableSection.exists).ok()
+    .expect(browserBasedExpandableSection.innerText).eql('Browser based application')
+    .expect(browserBasedExpandableSection.find('details[open]').exists).notOk()
+    .click(browserBasedExpandableSection.find('summary'))
+    .expect(browserBasedExpandableSection.find('details[open]').exists).ok()
     .expect(supportedBrowsersRow.find('.nhsuk-summary-list__key').innerText).eql('Browsers Supported')
     .expect(supportedBrowsersRow.find('.nhsuk-summary-list__value').innerText).eql('Google Chrome\nMozilla Firefox')
     .expect(mobileResponsiveRow.find('.nhsuk-summary-list__key').innerText).eql('Mobile responsive')
