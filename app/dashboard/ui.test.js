@@ -88,6 +88,15 @@ test('should render the Client application type section group', async (t) => {
     .expect(clientApplicationTypeSectionGroup.find('h2').innerText).eql('Client application type');
 });
 
+test('should render the About your Organisation section group', async (t) => {
+  pageSetup(t);
+
+  const aboutYourSolutionSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-about-your-organisation"]');
+
+  await t
+    .expect(aboutYourSolutionSectionGroup.find('h2').innerText).eql('About your Organisation');
+});
+
 test('should render all the sections for the About your solution section group', async (t) => {
   pageSetup(t);
 
@@ -122,6 +131,21 @@ test('should render all the sections for the Client application type section gro
     .expect(clientApplicationTypeSectionGroup.find('[data-test-id="dashboard-section-requirement"]').innerText)
     .eql('Mandatory')
     .expect(clientApplicationTypeSectionGroup.find('[data-test-id="dashboard-section-status"]').innerText)
+    .eql('INCOMPLETE');
+});
+
+test('should render all the sections for the About your organisation section group', async (t) => {
+  pageSetup(t);
+
+  const aboutYourOrganisationSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-about-your-organisation"]');
+  const contactDetailsSection = aboutYourOrganisationSectionGroup.find('[data-test-id="dashboard-section-contact-details"]');
+
+  await t
+    .expect(contactDetailsSection.find('[data-test-id="dashboard-section-title"]').innerText)
+    .eql('Contact Details')
+    .expect(contactDetailsSection.find('[data-test-id="dashboard-section-requirement"]').innerText)
+    .eql('Optional')
+    .expect(contactDetailsSection.find('[data-test-id="dashboard-section-status"]').innerText)
     .eql('INCOMPLETE');
 });
 
@@ -236,6 +260,24 @@ test('clicking on the client application type section link should navigate the u
     .click(theClientApplicationTypeSection.find('a'))
     .expect(getLocation()).contains('S100000-001/section/client-application-type');
 });
+
+// TODO uncomment this test when contact-details page is complete
+// test('clicking on the contact details section link should navigate the user to contact details page', async (t) => {
+//   pageSetup(t);
+
+//   nock('http://localhost:8080')
+//     .get('/api/v1/Solutions/S100000-001/sections/contact-details')
+//     .reply(200, {});
+
+//   const getLocation = ClientFunction(() => document.location.href);
+
+//   const aboutYourOrganisationSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-about-your-organisation"]');
+//   const contactDetailsSection = aboutYourOrganisationSectionGroup.find('[data-test-id="dashboard-section-contact-details"]');
+
+//   await t
+//     .click(contactDetailsSection.find('a'))
+//     .expect(getLocation()).contains('S100000-001/section/contact-details');
+// });
 
 test('should render the Error summary containing all the sections that failed the SubmitForReview', async (t) => {
   pageSetup(t);
