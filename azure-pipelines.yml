@@ -35,15 +35,6 @@ steps:
       npm run test:integration
     displayName: 'Integration test'
 
-  - task: PublishTestResults@2
-    displayName: Publish integration test results
-    inputs:
-      testResultsFormat: NUnit
-      testResultsFiles: '$(System.DefaultWorkingDirectory)/integration-test-report.xml'
-      testRunTitle: Integration test results
-      failTaskOnFailedTests: true
-    condition: succeededOrFailed()
-
   - task: DockerInstaller@0
     inputs:
       dockerVersion: '17.09.0-ce'
