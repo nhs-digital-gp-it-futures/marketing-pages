@@ -95,7 +95,7 @@ test('when existing marketing data - The features section should rendered and th
 test('when no existing marketing data - The client-application-types section should not be rendered', async (t) => {
   pageSetup(t);
 
-  const clientApplicationTypesSection = Selector('[data-test-id="preview-client-application-types"]');
+  const clientApplicationTypesSection = Selector('[data-test-id="view-client-application-types"]');
 
   await t
     .expect(clientApplicationTypesSection.exists).notOk();
@@ -104,13 +104,13 @@ test('when no existing marketing data - The client-application-types section sho
 test('when existing marketing data - The client application type section and browser-based section should be rendered', async (t) => {
   pageSetup(t, true);
 
-  const clientApplicationTypesSection = Selector('[data-test-id="preview-client-application-types"]');
-  const browserBasedExpandableSection = Selector('[data-test-id="preview-section-browser-based"]');
-  const browserBasedExpandaleSectionTable = Selector('[data-test-id="preview-section-table-browser-based"]');
-  const supportedBrowsersRow = browserBasedExpandaleSectionTable.find('[data-test-id="preview-section-table-row-supported-browsers"]');
-  const mobileResponsiveRow = browserBasedExpandaleSectionTable.find('[data-test-id="preview-section-table-row-mobile-responsive"]');
-  const pluginsRequiredRow = browserBasedExpandaleSectionTable.find('[data-test-id="preview-section-table-row-plugins-required"]');
-  const pluginsDetailRow = browserBasedExpandaleSectionTable.find('[data-test-id="preview-section-table-row-plugins-detail"]');
+  const clientApplicationTypesSection = Selector('[data-test-id="view-client-application-types"]');
+  const browserBasedExpandableSection = Selector('[data-test-id="view-section-browser-based"]');
+  const browserBasedExpandaleSectionTable = Selector('[data-test-id="view-section-table-browser-based"]');
+  const supportedBrowsersRow = browserBasedExpandaleSectionTable.find('[data-test-id="view-section-table-row-supported-browsers"]');
+  const mobileResponsiveRow = browserBasedExpandaleSectionTable.find('[data-test-id="view-section-table-row-mobile-responsive"]');
+  const pluginsRequiredRow = browserBasedExpandaleSectionTable.find('[data-test-id="view-section-table-row-plugins-required"]');
+  const pluginsDetailRow = browserBasedExpandaleSectionTable.find('[data-test-id="view-section-table-row-plugins-detail"]');
 
   await t
     .expect(clientApplicationTypesSection.exists).ok()
