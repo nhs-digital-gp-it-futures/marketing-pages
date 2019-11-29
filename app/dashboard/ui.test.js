@@ -142,7 +142,7 @@ test('should render all the sections for the About your organisation section gro
 
   await t
     .expect(contactDetailsSection.find('[data-test-id="dashboard-section-title"]').innerText)
-    .eql('Contact Details')
+    .eql('Contact details')
     .expect(contactDetailsSection.find('[data-test-id="dashboard-section-requirement"]').innerText)
     .eql('Optional')
     .expect(contactDetailsSection.find('[data-test-id="dashboard-section-status"]').innerText)
