@@ -16,7 +16,7 @@ createTestcafe('localhost')
 
     return tc.createRunner()
       .src(['**/*ui.test.js'])
-      .browsers('chrome:headless')
+      .browsers('chrome')
       .concurrency(1)
       .reporter(['spec', {
           name: 'nunit',
