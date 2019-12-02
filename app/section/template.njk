@@ -2,6 +2,7 @@
 {% from 'components/back-link/macro.njk' import backLink %}
 {% from 'components/button/macro.njk' import button %}
 {% from './components/section-question.njk' import sectionQuestion %}
+{% from './components/multi-question.njk' import multiQuestion %}
 {% from '../views/error-summary.njk' import errorSummary %}
 
 {% block body %}
@@ -28,8 +29,12 @@
     {% endif %}  
 
     <form method="post" action="{{ submitActionUrl }}">
-      {% for question in questions%}
-        {{ sectionQuestion(question) }}
+      {% for question in questions %}
+        {% if question.type === 'multi-question' %}
+          {{ multiQuestion(question) }}
+        {% else %}
+          {{ sectionQuestion(question) }}
+        {% endif %}
       {% endfor %}
       
       <div data-test-id="section-submit-button">

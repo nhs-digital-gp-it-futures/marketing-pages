@@ -38,7 +38,7 @@ describe('section-question', () => {
         .then((res) => {
           const $ = cheerio.load(res.text);
 
-          const question = $('div[data-test-id="section-question-bulletpoint-list"]');
+          const question = $('div[data-test-id="section-question-bulletpoint-list"] > div');
           expect(question.length).toEqual(1);
 
           done();
@@ -61,7 +61,7 @@ describe('section-question', () => {
         .then((res) => {
           const $ = cheerio.load(res.text);
 
-          const question = $('div[data-test-id="section-question-textarea-field"]');
+          const question = $('div[data-test-id="section-question-textarea-field"] > div');
           expect(question.length).toEqual(1);
 
           done();
@@ -84,7 +84,7 @@ describe('section-question', () => {
         .then((res) => {
           const $ = cheerio.load(res.text);
 
-          const question = $('div[data-test-id="section-question-text-field"]');
+          const question = $('div[data-test-id="section-question-text-field"] > div');
           expect(question.length).toEqual(1);
 
           done();
@@ -107,7 +107,7 @@ describe('section-question', () => {
         .then((res) => {
           const $ = cheerio.load(res.text);
 
-          const question = $('div[data-test-id="section-question-checkbox-options"]');
+          const question = $('div[data-test-id="section-question-checkbox-options"] > div');
           expect(question.length).toEqual(1);
 
           done();
@@ -130,33 +130,7 @@ describe('section-question', () => {
         .then((res) => {
           const $ = cheerio.load(res.text);
 
-          const question = $('div[data-test-id="section-question-radiobutton-options"]');
-          expect(question.length).toEqual(1);
-
-          done();
-        });
-    });
-  });
-
-  describe('when question type is multi-question', () => {
-    it('should render the radiobutton-options component', (done) => {
-      const context = {
-        question: {
-          id: 'question-id',
-          type: 'multi-question',
-          questions: [
-            {},
-          ],
-        },
-      };
-
-      const dummyApp = createDummyApp(context);
-      request(dummyApp)
-        .get('/')
-        .then((res) => {
-          const $ = cheerio.load(res.text);
-
-          const question = $('div[data-test-id="section-question-multi-question"]');
+          const question = $('div[data-test-id="section-question-radiobutton-options"] > div');
           expect(question.length).toEqual(1);
 
           done();

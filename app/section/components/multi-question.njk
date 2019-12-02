@@ -1,5 +1,5 @@
 {% from 'components/label/macro.njk' import label %}
-{% from './inner-question.njk' import innerQuestion %}
+{% from './section-question.njk' import sectionQuestion %}
 
 {% macro multiQuestion(parentQuestion) %}
   <div data-test-id="question-{{ parentQuestion.id }}">
@@ -19,7 +19,7 @@
 
     <div data-test-id="multi-question-questions">
       {% for question in parentQuestion.questions %}
-        {{ innerQuestion(question) }}
+        {{ sectionQuestion(question) }}
       {% endfor %}
     </div>
   </div>
