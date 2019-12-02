@@ -9,9 +9,85 @@
     "contact-1": {
       "mainAdvice": "Contact 1",
       "additionalAdvice": "Provide the details you would like to be point of contact for this Solution.",
-      "type": "text-field",
-      "errorResponse": {
-        "maxLength": "This feature is over the character limit"
+      "type": "multi-question",
+      "questions": {
+        "first-name": {
+          "mainAdvice": "First name (optional)",
+          "type": "text-field",
+          "errorResponse": {
+            "maxLength": "First name over the character limit"
+          }
+        },
+        "last-name": {
+          "mainAdvice": "Last name (optional)",
+          "type": "text-field",
+          "errorResponse": {
+            "maxLength": "Last name is over the character limit"
+          }
+        },
+        "phone-number": {
+          "mainAdvice": "Phone number (optional)",
+          "type": "text-field",
+          "errorResponse": {
+            "maxLength": "Phone number is over the character limit"
+          }
+        },
+        "email-address": {
+          "mainAdvice": "Email address (optional)",
+          "type": "text-field",
+          "errorResponse": {
+            "maxLength": "Email address is over the character limit"
+          }
+        },
+        "department-name": {
+          "mainAdvice": "Job sector (optional)",
+          "type": "text-field",
+          "errorResponse": {
+            "maxLength": "Job sector is over the character limit"
+          }
+        }
+      }
+    },
+    "contact-2": {
+      "mainAdvice": "Contact 2",
+      "additionalAdvice": "Provide the details you would like to be point of contact for this Solution.",
+      "type": "multi-question",
+      "questions": {
+        "first-name": {
+          "mainAdvice": "First name (optional)",
+          "type": "text-field",
+          "errorResponse": {
+            "maxLength": "First name over the character limit"
+          }
+        },
+        "last-name": {
+          "mainAdvice": "Last name (optional)",
+          "type": "text-field",
+          "errorResponse": {
+            "maxLength": "Last name is over the character limit"
+          }
+        },
+        "phone-number": {
+          "mainAdvice": "Phone number (optional)",
+          "type": "text-field",
+          "errorResponse": {
+            "maxLength": "Phone number is over the character limit"
+          }
+        },
+        "email-address": {
+          "mainAdvice": "Email address (optional)",
+          "type": "text-field",
+          "errorResponse": {
+            "maxLength": "Email address is over the character limit"
+          }
+        },
+        "department-name": {
+          "mainAdvice": "Job sector (optional)",
+          "type": "text-field",
+          "errorResponse": {
+            "maxLength": "Job sector is over the character limit"
+          }
+        }
       }
     }
   },

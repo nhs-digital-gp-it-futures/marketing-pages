@@ -137,4 +137,30 @@ describe('section-question', () => {
         });
     });
   });
+
+  describe('when question type is multi-question', () => {
+    it('should render the radiobutton-options component', (done) => {
+      const context = {
+        question: {
+          id: 'question-id',
+          type: 'multi-question',
+          questions: [
+            {},
+          ],
+        },
+      };
+
+      const dummyApp = createDummyApp(context);
+      request(dummyApp)
+        .get('/')
+        .then((res) => {
+          const $ = cheerio.load(res.text);
+
+          const question = $('div[data-test-id="section-question-multi-question"]');
+          expect(question.length).toEqual(1);
+
+          done();
+        });
+    });
+  });
 });

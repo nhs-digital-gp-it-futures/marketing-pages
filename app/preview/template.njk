@@ -2,6 +2,7 @@
 {% from 'sections/view-solution-description/macro.njk' import viewSolutionDescription %}
 {% from 'sections/view-features/macro.njk' import viewFeatures %}
 {% from 'sections/view-client-application-types/macro.njk' import viewClientApplicationTypes %}
+{% from 'sections/view-solution-contact-details/macro.njk' import viewSolutionContactDetails %}
 
 {% block body %}
 <div class="nhsuk-grid-row">
@@ -16,6 +17,9 @@
     }) }}
     {{ viewClientApplicationTypes({
       section: sections['client-application-types']
+    }) }}
+    {{ viewSolutionContactDetails({
+      section: sections['contact-details']
     }) }}
 
   </div>

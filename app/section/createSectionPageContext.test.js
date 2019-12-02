@@ -562,4 +562,57 @@ describe('createSectionPageContext', () => {
       expect(context).toEqual(expectedContext);
     });
   });
+
+  describe('when the question type is multi-question', () => {
+    it('should create a context for multi-question type question', () => {
+      const expectedContext = {
+        submitActionUrl: '/some-solution-id/section/some-section-id',
+        questions: [
+          {
+            id: 'parentQuestionId',
+            type: 'multi-question',
+            questions: [
+              {
+                id: 'parentQuestionId[question-1]',
+                type: 'text-field',
+              },
+              {
+                id: 'parentQuestionId[question-2]',
+                type: 'text-field',
+              },
+              {
+                id: 'parentQuestionId[question-3]',
+                type: 'text-field',
+              },
+            ],
+          },
+        ],
+        returnToDashboardUrl: '/some-solution-id',
+      };
+
+      const sectionManifest = {
+        id: 'some-section-id',
+        questions: {
+          parentQuestionId: {
+            type: 'multi-question',
+            questions: {
+              'question-1': {
+                type: 'text-field',
+              },
+              'question-2': {
+                type: 'text-field',
+              },
+              'question-3': {
+                type: 'text-field',
+              },
+            },
+          },
+        },
+      };
+
+      const context = createSectionPageContext('some-solution-id', sectionManifest);
+
+      expect(context).toEqual(expectedContext);
+    });
+  });
 });
