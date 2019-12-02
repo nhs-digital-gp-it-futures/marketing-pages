@@ -249,4 +249,75 @@ describe('createQuestionsContext', () => {
 
     expect(context).toEqual(expectedContext);
   });
+
+  it('should create a context for a multiple question with a multiple error', () => {
+    const expectedContext = {
+      errors: [
+        {
+          text: 'some really helpful error message',
+          href: '#some-question-id',
+        },
+        {
+          text: 'some other really helpful error message',
+          href: '#some-other-question-id',
+        },
+      ],
+      questions: [
+        {
+          id: 'some-question-id',
+          type: 'text-field',
+          data: 'some existing data',
+          error: {
+            message: 'some really helpful error message',
+          },
+        },
+        {
+          id: 'some-other-question-id',
+          type: 'checkbox-options',
+          options: [
+            {
+              text: 'option 1',
+              value: 'option 1',
+            },
+          ],
+          error: {
+            message: 'some other really helpful error message',
+          },
+        },
+      ],
+    };
+
+    const sectionManifest = {
+      questions: {
+        'some-question-id': {
+          type: 'text-field',
+          errorResponse: {
+            maxLength: 'some really helpful error message',
+          },
+        },
+        'some-other-question-id': {
+          type: 'checkbox-options',
+          options: {
+            'option 1': 'option 1',
+          },
+          errorResponse: {
+            required: 'some other really helpful error message',
+          },
+        },
+      },
+    };
+
+    const formData = {
+      'some-question-id': 'some existing data',
+    };
+
+    const validationErrors = {
+      maxLength: ['some-question-id'],
+      required: ['some-other-question-id'],
+    };
+
+    const context = createQuestionsContext(sectionManifest, formData, validationErrors);
+
+    expect(context).toEqual(expectedContext);
+  });
 });
