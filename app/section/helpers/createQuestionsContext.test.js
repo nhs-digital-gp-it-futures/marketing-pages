@@ -143,7 +143,37 @@ describe('createQuestionsContext', () => {
   });
 
   it('should create a context for question type multi-question', () => {
+    const expectedContext = {
+      questions: [
+        {
+          id: 'some-question-id',
+          type: 'multi-question',
+          questions: [
+            {
+              id: 'some-question-id[some-inner-question]',
+              type: 'text-field',
+            },
+          ],
+        },
+      ],
+    };
 
+    const sectionManifest = {
+      questions: {
+        'some-question-id': {
+          type: 'multi-question',
+          questions: {
+            'some-inner-question': {
+              type: 'text-field',
+            },
+          },
+        },
+      },
+    };
+
+    const context = createQuestionsContext(sectionManifest);
+
+    expect(context).toEqual(expectedContext);
   });
 
   it('should create a context for multiple questions', () => {
@@ -172,6 +202,50 @@ describe('createQuestionsContext', () => {
     };
 
     const context = createQuestionsContext(sectionManifest);
+
+    expect(context).toEqual(expectedContext);
+  });
+
+  it('should create a context for a single question with a single error', () => {
+    const expectedContext = {
+      errors: [
+        {
+          text: 'some really helpful error message',
+          href: '#some-question-id',
+        },
+      ],
+      questions: [
+        {
+          id: 'some-question-id',
+          type: 'text-field',
+          data: 'some existing data',
+          error: {
+            message: 'some really helpful error message',
+          },
+        },
+      ],
+    };
+
+    const sectionManifest = {
+      questions: {
+        'some-question-id': {
+          type: 'text-field',
+          errorResponse: {
+            maxLength: 'some really helpful error message',
+          },
+        },
+      },
+    };
+
+    const formData = {
+      'some-question-id': 'some existing data',
+    };
+
+    const validationErrors = {
+      maxLength: ['some-question-id'],
+    };
+
+    const context = createQuestionsContext(sectionManifest, formData, validationErrors);
 
     expect(context).toEqual(expectedContext);
   });
