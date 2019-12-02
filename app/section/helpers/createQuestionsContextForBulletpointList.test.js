@@ -129,7 +129,7 @@ describe('when the question type is a bulletpoint-list', () => {
     };
 
     const context = createQuestionsContextForBulletpointList('some-question-id', questionManifest, formData, validationErrors);
-    fieldId
+
     expect(context).toEqual(expectedContext);
   });
 });
