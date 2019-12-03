@@ -132,6 +132,33 @@ describe('section page', () => {
       });
   });
 
+  it('should render a multi-question', (done) => {
+    const context = {
+      questions: [
+        {
+          id: 'parent-question-id',
+          type: 'multi-question',
+          questions: [
+            {
+              id: 'parent-question-id[inner-question-id]',
+            },
+          ],
+        },
+      ],
+    };
+
+    const dummyApp = createDummyApp(context);
+    request(dummyApp)
+      .get('/')
+      .then((res) => {
+        const $ = cheerio.load(res.text);
+
+        expect($('div[data-test-id="question-parent-question-id"]').length).toEqual(1);
+
+        done();
+      });
+  });
+
   it('should render a button to submit the form', (done) => {
     const context = {
       title: 'Title of the section',
