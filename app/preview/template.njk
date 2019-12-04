@@ -3,7 +3,6 @@
 {% from 'sections/view-features/macro.njk' import viewFeatures %}
 {% from 'sections/view-client-application-types/macro.njk' import viewClientApplicationTypes %}
 {% from 'sections/view-solution-contact-details/macro.njk' import viewSolutionContactDetails %}
-{% from 'sections/view-solution-capabilities/macro.njk' import viewSolutionCapabilities %}
 
 {% block body %}
 <div class="nhsuk-grid-row">
@@ -12,9 +11,6 @@
     
     {{ viewSolutionDescription({
       section: sections['solution-description']
-    }) }}
-    {{ viewSolutionCapabilities({
-      section: sections.capabilities
     }) }}
     {{ viewFeatures({
       section: sections['features']
