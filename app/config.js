@@ -7,4 +7,7 @@ module.exports = {
 
   // Port to run local development server on
   port: process.env.PORT || 3001,
+
+  // API_HOST
+  apiHost: process.env.API_HOST || 'http://localhost:8080/api/v1',
 };

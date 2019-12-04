@@ -3,11 +3,12 @@ import { ManifestProvider } from '../manifestProvider';
 import { createSectionPageContext } from './createSectionPageContext';
 import { transformSectionData } from './helpers/transformSectionData';
 import { createPostSectionResponse } from './helpers/createPostSectionResponse';
+import { apiHost } from '../config';
 
 export const getSectionPageContext = async (solutionId, sectionId) => {
   const sectionManifest = new ManifestProvider().getSectionManifest(sectionId);
 
-  const sectionData = await axios.get(`http://localhost:8080/api/v1/Solutions/${solutionId}/sections/${sectionId}`);
+  const sectionData = await axios.get(`${apiHost}/Solutions/${solutionId}/sections/${sectionId}`);
   const formData = sectionData.data;
 
   const context = createSectionPageContext(solutionId, sectionManifest, formData);
