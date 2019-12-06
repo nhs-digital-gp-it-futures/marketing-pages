@@ -21,10 +21,18 @@ const pageSetup = async (t, initalDashboard = true) => {
   await t.navigateTo('http://localhost:1234/S100000-001');
 };
 
-fixture('Show marketing dashboard page');
+fixture('Show marketing dashboard page')
+  .afterEach(async (t) => {
+    const isDone = nock.isDone();
+    if (!isDone) {
+      nock.cleanAll();
+    }
+
+    await t.expect(isDone).ok('Not all nock interceptors were used!');
+  });
 
 test('should render the marketing dashboard page title', async (t) => {
-  pageSetup(t);
+  await pageSetup(t);
 
   const title = Selector('h1');
 
@@ -33,7 +41,7 @@ test('should render the marketing dashboard page title', async (t) => {
 });
 
 test('should render the preview page button', async (t) => {
-  pageSetup(t);
+  await pageSetup(t);
 
   nock('http://localhost:8080')
     .get('/api/v1/Solutions/S100000-001/preview')
@@ -50,7 +58,7 @@ test('should render the preview page button', async (t) => {
 });
 
 test('should render the Submit for moderation button', async (t) => {
-  pageSetup(t);
+  await pageSetup(t);
 
   nock('http://localhost:8080')
     .put('/api/v1/Solutions/S100000-001/SubmitForReview')
@@ -71,7 +79,7 @@ test('should render the Submit for moderation button', async (t) => {
 });
 
 test('should render the About your solution section group', async (t) => {
-  pageSetup(t);
+  await pageSetup(t);
 
   const aboutYourSolutionSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-about-your-solution"]');
 
@@ -80,7 +88,7 @@ test('should render the About your solution section group', async (t) => {
 });
 
 test('should render the Client application type section group', async (t) => {
-  pageSetup(t);
+  await pageSetup(t);
 
   const clientApplicationTypeSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-client-application-type"]');
 
@@ -89,7 +97,7 @@ test('should render the Client application type section group', async (t) => {
 });
 
 test('should render the About your Organisation section group', async (t) => {
-  pageSetup(t);
+  await pageSetup(t);
 
   const aboutYourOrganisationSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-about-your-organisation"]');
 
@@ -98,7 +106,7 @@ test('should render the About your Organisation section group', async (t) => {
 });
 
 test('should render all the sections for the About your solution section group', async (t) => {
-  pageSetup(t);
+  await pageSetup(t);
 
   const aboutYourSolutionSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-about-your-solution"]');
   const solutionDescriptionSection = aboutYourSolutionSectionGroup.find('[data-test-id="dashboard-section-solution-description"]');
@@ -121,7 +129,7 @@ test('should render all the sections for the About your solution section group',
 });
 
 test('should render all the sections for the Client application type section group', async (t) => {
-  pageSetup(t);
+  await pageSetup(t);
 
   const clientApplicationTypeSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-client-application-type"]');
 
@@ -135,7 +143,7 @@ test('should render all the sections for the Client application type section gro
 });
 
 test('should render all the sections for the About your organisation section group', async (t) => {
-  pageSetup(t);
+  await pageSetup(t);
 
   const aboutYourOrganisationSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-about-your-organisation"]');
   const contactDetailsSection = aboutYourOrganisationSectionGroup.find('[data-test-id="dashboard-section-contact-details"]');
@@ -150,7 +158,7 @@ test('should render all the sections for the About your organisation section gro
 });
 
 test('should render all the sub sections for the client application type section with the default message when no selection has been made', async (t) => {
-  pageSetup(t);
+  await pageSetup(t);
 
   const clientApplicationTypeSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-client-application-type"]');
   const clientApplicationTypeSection = clientApplicationTypeSectionGroup.find('[data-test-id="dashboard-section-client-application-types"]');
@@ -210,7 +218,7 @@ test('should render all the sub sections for the client application type section
 });
 
 test('clicking on the solution description section link should navigate the user to the solution description page', async (t) => {
-  pageSetup(t);
+  await pageSetup(t);
 
   nock('http://localhost:8080')
     .get('/api/v1/Solutions/S100000-001/sections/solution-description')
@@ -228,7 +236,7 @@ test('clicking on the solution description section link should navigate the user
 
 
 test('clicking on the feature section link should navigate the user to the features page', async (t) => {
-  pageSetup(t);
+  await pageSetup(t);
 
   nock('http://localhost:8080')
     .get('/api/v1/Solutions/S100000-001/sections/features')
@@ -245,7 +253,7 @@ test('clicking on the feature section link should navigate the user to the featu
 });
 
 test('clicking on the client application type section link should navigate the user to the client application type page', async (t) => {
-  pageSetup(t);
+  await pageSetup(t);
 
   nock('http://localhost:8080')
     .get('/api/v1/Solutions/S100000-001/sections/client-application-types')
@@ -263,7 +271,7 @@ test('clicking on the client application type section link should navigate the u
 
 // TODO uncomment this test when contact-details page is complete
 // test('clicking on the contact details section link should navigate the user to contact details page', async (t) => {
-//   pageSetup(t);
+//   await pageSetup(t);
 
 //   nock('http://localhost:8080')
 //     .get('/api/v1/Solutions/S100000-001/sections/contact-details')
@@ -280,7 +288,7 @@ test('clicking on the client application type section link should navigate the u
 // });
 
 test('should render the Error summary containing all the sections that failed the SubmitForReview', async (t) => {
-  pageSetup(t);
+  await pageSetup(t);
 
   const submitForReviewError = {
     required: ['solution-description', 'client-application-types'],

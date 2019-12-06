@@ -14,10 +14,18 @@ const pageSetup = async (t) => {
   await t.navigateTo('http://localhost:1234/S100000-001/dashboard/browser-based');
 };
 
-fixture('Show browser based dashboard page');
+fixture('Show browser based dashboard page')
+  .afterEach(async (t) => {
+    const isDone = nock.isDone();
+    if (!isDone) {
+      nock.cleanAll();
+    }
+
+    await t.expect(isDone).ok('Not all nock interceptors were used!');
+  });
 
 test('should render the browser based dashboard page title', async (t) => {
-  pageSetup(t);
+  await pageSetup(t);
 
   const title = Selector('[data-test-id="sub-dashboard-title"]');
 
@@ -26,7 +34,7 @@ test('should render the browser based dashboard page title', async (t) => {
 });
 
 test('should render the browser based dashboard main advice', async (t) => {
-  pageSetup(t);
+  await pageSetup(t);
 
   const mainAdvice = Selector('[data-test-id="sub-dashboard-main-advice"]');
 
@@ -35,7 +43,7 @@ test('should render the browser based dashboard main advice', async (t) => {
 });
 
 test('should render the Browser based section group', async (t) => {
-  pageSetup(t);
+  await pageSetup(t);
 
   const browserBasedSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-browser-based-sections"]');
 
@@ -44,7 +52,7 @@ test('should render the Browser based section group', async (t) => {
 });
 
 test('should render all the sections for the Browser based sections section group', async (t) => {
-  pageSetup(t);
+  await pageSetup(t);
 
   const browserBasedSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-browser-based-sections"]');
   const browsersSupportedSection = browserBasedSectionGroup.find('[data-test-id="dashboard-section-browsers-supported"]');
@@ -91,7 +99,7 @@ test('should render all the sections for the Browser based sections section grou
 });
 
 test('should render the return to all sections link', async (t) => {
-  pageSetup(t);
+  await pageSetup(t);
 
   const link = Selector('[data-test-id="sub-dashboard-back-link"] a');
 
@@ -100,7 +108,7 @@ test('should render the return to all sections link', async (t) => {
 });
 
 test('should return to the marketing data dashboard when the return to all sections is clicked', async (t) => {
-  pageSetup(t);
+  await pageSetup(t);
 
   nock('http://localhost:8080')
     .get('/api/v1/Solutions/S100000-001/dashboard')

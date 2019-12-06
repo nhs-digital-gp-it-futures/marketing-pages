@@ -1,20 +1,8 @@
 import request from 'supertest';
-import express from 'express';
 import cheerio from 'cheerio';
-import { App } from '../../app';
+import { testHarness } from '../test-utils/testHarness';
 
-const createDummyApp = (context) => {
-  const app = new App().createApp();
-
-  const router = express.Router();
-  const dummyRouter = router.get('/', (req, res) => {
-    res.render('./section/template.njk', context);
-  });
-
-  app.use(dummyRouter);
-
-  return app;
-};
+const template = './section/template.njk';
 
 describe('section page', () => {
   it('should render the title of the section', (done) => {
@@ -22,7 +10,7 @@ describe('section page', () => {
       title: 'Title of the section',
     };
 
-    const dummyApp = createDummyApp(context);
+    const dummyApp = testHarness().createComponentDummyApp(template, context);
     request(dummyApp)
       .get('/')
       .then((res) => {
@@ -40,7 +28,7 @@ describe('section page', () => {
       mainAdvice: 'This is the main advice for this section',
     };
 
-    const dummyApp = createDummyApp(context);
+    const dummyApp = testHarness().createComponentDummyApp(template, context);
     request(dummyApp)
       .get('/')
       .then((res) => {
@@ -61,7 +49,7 @@ describe('section page', () => {
       ],
     };
 
-    const dummyApp = createDummyApp(context);
+    const dummyApp = testHarness().createComponentDummyApp(template, context);
     request(dummyApp)
       .get('/')
       .then((res) => {
@@ -81,7 +69,7 @@ describe('section page', () => {
       errors: [{}],
     };
 
-    const dummyApp = createDummyApp(context);
+    const dummyApp = testHarness().createComponentDummyApp(template, context);
     request(dummyApp)
       .get('/')
       .then((res) => {
@@ -98,7 +86,7 @@ describe('section page', () => {
       title: 'Title of the section',
     };
 
-    const dummyApp = createDummyApp(context);
+    const dummyApp = testHarness().createComponentDummyApp(template, context);
     request(dummyApp)
       .get('/')
       .then((res) => {
@@ -120,7 +108,7 @@ describe('section page', () => {
       ],
     };
 
-    const dummyApp = createDummyApp(context);
+    const dummyApp = testHarness().createComponentDummyApp(template, context);
     request(dummyApp)
       .get('/')
       .then((res) => {
@@ -147,7 +135,7 @@ describe('section page', () => {
       ],
     };
 
-    const dummyApp = createDummyApp(context);
+    const dummyApp = testHarness().createComponentDummyApp(template, context);
     request(dummyApp)
       .get('/')
       .then((res) => {
@@ -164,7 +152,7 @@ describe('section page', () => {
       title: 'Title of the section',
     };
 
-    const dummyApp = createDummyApp(context);
+    const dummyApp = testHarness().createComponentDummyApp(template, context);
     request(dummyApp)
       .get('/')
       .then((res) => {
@@ -182,7 +170,7 @@ describe('section page', () => {
       warningAdvice: 'Some warning advice',
     };
 
-    const dummyApp = createDummyApp(context);
+    const dummyApp = testHarness().createComponentDummyApp(template, context);
     request(dummyApp)
       .get('/')
       .then((res) => {
@@ -200,7 +188,7 @@ describe('section page', () => {
       title: 'Title of the section',
     };
 
-    const dummyApp = createDummyApp(context);
+    const dummyApp = testHarness().createComponentDummyApp(template, context);
     request(dummyApp)
       .get('/')
       .then((res) => {

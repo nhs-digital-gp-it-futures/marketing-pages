@@ -1,26 +1,14 @@
 import request from 'supertest';
-import express from 'express';
 import cheerio from 'cheerio';
-import { App } from '../../app';
+import { testHarness } from '../test-utils/testHarness';
 
-const createDummyApp = (context) => {
-  const app = new App().createApp();
-
-  const router = express.Router();
-  const dummyRouter = router.get('/', (req, res) => {
-    res.render('./dashboard/template.njk', context);
-  });
-
-  app.use(dummyRouter);
-
-  return app;
-};
+const template = './dashboard/template.njk';
 
 describe('dashboard page', () => {
   it('should render the title of the dashboard page', (done) => {
     const context = {};
 
-    const dummyApp = createDummyApp(context);
+    const dummyApp = testHarness().createComponentDummyApp(template, context);
     request(dummyApp)
       .get('/')
       .then((res) => {
@@ -38,7 +26,7 @@ describe('dashboard page', () => {
       errors: [{}],
     };
 
-    const dummyApp = createDummyApp(context);
+    const dummyApp = testHarness().createComponentDummyApp(template, context);
     request(dummyApp)
       .get('/')
       .then((res) => {
@@ -55,7 +43,7 @@ describe('dashboard page', () => {
       previewUrl: '/S100000-001/preview',
     };
 
-    const dummyApp = createDummyApp(context);
+    const dummyApp = testHarness().createComponentDummyApp(template, context);
     request(dummyApp)
       .get('/')
       .then((res) => {
@@ -79,7 +67,7 @@ describe('dashboard page', () => {
       ],
     };
 
-    const dummyApp = createDummyApp(context);
+    const dummyApp = testHarness().createComponentDummyApp(template, context);
     request(dummyApp)
       .get('/')
       .then((res) => {
@@ -96,7 +84,7 @@ describe('dashboard page', () => {
       submitForModerationUrl: '/S100000-001/submitForModeration',
     };
 
-    const dummyApp = createDummyApp(context);
+    const dummyApp = testHarness().createComponentDummyApp(template, context);
     request(dummyApp)
       .get('/')
       .then((res) => {

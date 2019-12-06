@@ -1,26 +1,8 @@
 import request from 'supertest';
-import express from 'express';
-import nunjucks from 'nunjucks';
 import cheerio from 'cheerio';
-import { App } from '../../../../app';
-
-const createDummyApp = (context) => {
-  const app = new App().createApp();
-
-  const router = express.Router();
-  const dummyRouter = router.get('/', (req, res) => {
-    const macroWrapper = `{% from './section/components/fields/text-field.njk' import textField %}
-                            {{ textField(question) }}`;
-
-    const viewToTest = nunjucks.renderString(macroWrapper, context);
-
-    res.send(viewToTest);
-  });
-
-  app.use(dummyRouter);
-
-  return app;
-};
+import { testHarness } from '../../../test-utils/testHarness';
+const macroWrapper = `{% from './section/components/fields/text-field.njk' import textField %}
+                        {{ textField(question) }}`;
 
 describe('textField', () => {
   it('should render the main advice', (done) => {
@@ -32,7 +14,7 @@ describe('textField', () => {
       },
     };
 
-    const dummyApp = createDummyApp(context);
+    const dummyApp = testHarness().createTemplateDummyApp(macroWrapper, context);
     request(dummyApp)
       .get('/')
       .then((res) => {
@@ -54,7 +36,7 @@ describe('textField', () => {
       },
     };
 
-    const dummyApp = createDummyApp(context);
+    const dummyApp = testHarness().createTemplateDummyApp(macroWrapper, context);
     request(dummyApp)
       .get('/')
       .then((res) => {
@@ -76,7 +58,7 @@ describe('textField', () => {
       },
     };
 
-    const dummyApp = createDummyApp(context);
+    const dummyApp = testHarness().createTemplateDummyApp(macroWrapper, context);
     request(dummyApp)
       .get('/')
       .then((res) => {
@@ -99,7 +81,7 @@ describe('textField', () => {
       },
     };
 
-    const dummyApp = createDummyApp(context);
+    const dummyApp = testHarness().createTemplateDummyApp(macroWrapper, context);
     request(dummyApp)
       .get('/')
       .then((res) => {
@@ -125,7 +107,7 @@ describe('textField', () => {
       },
     };
 
-    const dummyApp = createDummyApp(context);
+    const dummyApp = testHarness().createTemplateDummyApp(macroWrapper, context);
     request(dummyApp)
       .get('/')
       .then((res) => {
@@ -151,7 +133,7 @@ describe('textField', () => {
       },
     };
 
-    const dummyApp = createDummyApp(context);
+    const dummyApp = testHarness().createTemplateDummyApp(macroWrapper, context);
     request(dummyApp)
       .get('/')
       .then((res) => {

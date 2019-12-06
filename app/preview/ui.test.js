@@ -20,10 +20,18 @@ const pageSetup = async (t, existingData = false) => {
   await t.navigateTo('http://localhost:1234/S100000-001/preview');
 };
 
-fixture('Show marketing preview page');
+fixture('Show marketing preview page')
+  .afterEach(async (t) => {
+    const isDone = nock.isDone();
+    if (!isDone) {
+      nock.cleanAll();
+    }
+
+    await t.expect(isDone).ok('Not all nock interceptors were used!');
+  });
 
 test('should render the marketing preview page title', async (t) => {
-  pageSetup(t);
+  await pageSetup(t);
 
   const title = Selector('h1');
 
@@ -32,7 +40,7 @@ test('should render the marketing preview page title', async (t) => {
 });
 
 test('when no existing marketing data - The solution description section should not be rendered', async (t) => {
-  pageSetup(t);
+  await pageSetup(t);
 
   const solutionDescriptionSection = Selector('[data-test-id="view-solution-description"]');
 
@@ -67,7 +75,7 @@ test('when existing marketing data - The solution description section and all qu
 });
 
 test('when no existing marketing data - The features section should not be rendered', async (t) => {
-  pageSetup(t);
+  await pageSetup(t);
   const featuresSection = Selector('[data-test-id="view-features"]');
 
   await t
@@ -93,7 +101,7 @@ test('when existing marketing data - The features section should rendered and th
 });
 
 test('when no existing marketing data - The client-application-types section should not be rendered', async (t) => {
-  pageSetup(t);
+  await pageSetup(t);
 
   const clientApplicationTypesSection = Selector('[data-test-id="view-client-application-types"]');
 

@@ -26,10 +26,18 @@ const pageSetup = async (t, withMarketingData = false) => {
   await t.navigateTo('http://localhost:1234/S100000-001/section/solution-description');
 };
 
-fixture('Show Solution Description page');
+fixture('Show Solution Description page')
+  .afterEach(async (t) => {
+    const isDone = nock.isDone();
+    if (!isDone) {
+      nock.cleanAll();
+    }
+
+    await t.expect(isDone).ok('Not all nock interceptors were used!');
+  });
 
 test('should render the Solution Description page title', async (t) => {
-  pageSetup(t);
+  await pageSetup(t);
 
   const title = Selector('[data-test-id="section-title"]');
 
@@ -38,7 +46,7 @@ test('should render the Solution Description page title', async (t) => {
 });
 
 test('should render main advice of section', async (t) => {
-  pageSetup(t);
+  await pageSetup(t);
 
   const mainAdvice = Selector('[data-test-id="section-main-advice"]');
 
@@ -47,7 +55,7 @@ test('should render main advice of section', async (t) => {
 });
 
 test('should render all the advice of the section', async (t) => {
-  pageSetup(t);
+  await pageSetup(t);
 
   const sectionManifest = new ManifestProvider().getSectionManifest('solution-description');
   const expectedAdditionalAdvice = sectionManifest.additionalAdvice.join('\n\n');
@@ -59,7 +67,7 @@ test('should render all the advice of the section', async (t) => {
 });
 
 test('should render the solution summary question', async (t) => {
-  pageSetup(t);
+  await pageSetup(t);
 
   const summaryQuestion = Selector('[data-test-id="question-summary"]');
 
@@ -71,7 +79,7 @@ test('should render the solution summary question', async (t) => {
 });
 
 test('should render the about your solution question', async (t) => {
-  pageSetup(t);
+  await pageSetup(t);
 
   const summaryQuestion = Selector('[data-test-id="question-description"]');
 
@@ -83,7 +91,7 @@ test('should render the about your solution question', async (t) => {
 });
 
 test('should render the solution link field', async (t) => {
-  pageSetup(t);
+  await pageSetup(t);
 
   const summaryQuestion = Selector('[data-test-id="question-link"]');
 
@@ -105,7 +113,7 @@ test('should populate the text fields with existing data', async (t) => {
 });
 
 test('should render the submit button', async (t) => {
-  pageSetup(t);
+  await pageSetup(t);
 
   const submitButton = Selector('[data-test-id="section-submit-button"]');
 
@@ -114,7 +122,7 @@ test('should render the submit button', async (t) => {
 });
 
 test('should show error summary and validation for questions when they exceed the maxLength', async (t) => {
-  pageSetup(t);
+  await pageSetup(t);
 
   nock('http://localhost:8080')
     .put('/api/v1/Solutions/S100000-001/sections/solution-description')
@@ -157,7 +165,7 @@ test('should show error summary and validation for questions when they exceed th
 });
 
 test('should goto anchor when clicking the solution summary required summary error link', async (t) => {
-  pageSetup(t);
+  await pageSetup(t);
 
   nock('http://localhost:8080')
     .put('/api/v1/Solutions/S100000-001/sections/solution-description')
@@ -182,7 +190,7 @@ test('should goto anchor when clicking the solution summary required summary err
 });
 
 test('should goto anchor when clicking the solution summary max length summary error link', async (t) => {
-  pageSetup(t);
+  await pageSetup(t);
 
   nock('http://localhost:8080')
     .put('/api/v1/Solutions/S100000-001/sections/solution-description')
@@ -207,7 +215,7 @@ test('should goto anchor when clicking the solution summary max length summary e
 });
 
 test('should goto anchor when clicking the description summary error link', async (t) => {
-  pageSetup(t);
+  await pageSetup(t);
 
   nock('http://localhost:8080')
     .put('/api/v1/Solutions/S100000-001/sections/solution-description')
@@ -232,7 +240,7 @@ test('should goto anchor when clicking the description summary error link', asyn
 });
 
 test('should goto anchor when clicking the description summary error link', async (t) => {
-  pageSetup(t);
+  await pageSetup(t);
 
   nock('http://localhost:8080')
     .put('/api/v1/Solutions/S100000-001/sections/solution-description')
@@ -257,7 +265,7 @@ test('should goto anchor when clicking the description summary error link', asyn
 });
 
 test('should show error summary and validation for Summary indicating it is mandatory', async (t) => {
-  pageSetup(t);
+  await pageSetup(t);
 
   nock('http://localhost:8080')
     .put('/api/v1/Solutions/S100000-001/sections/solution-description')
@@ -283,7 +291,7 @@ test('should show error summary and validation for Summary indicating it is mand
 });
 
 test('should render the return to all sections link', async (t) => {
-  pageSetup(t);
+  await pageSetup(t);
 
   const link = Selector('[data-test-id="section-back-link"] a');
 
@@ -292,7 +300,7 @@ test('should render the return to all sections link', async (t) => {
 });
 
 test('should return to the marketing data dashboard when the return to all sections is clicked', async (t) => {
-  pageSetup(t);
+  await pageSetup(t);
 
   nock('http://localhost:8080')
     .get('/api/v1/Solutions/S100000-001/dashboard')

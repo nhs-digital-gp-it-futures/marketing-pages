@@ -1,8 +1,6 @@
 import request from 'supertest';
-import express from 'express';
-import nunjucks from 'nunjucks';
 import cheerio from 'cheerio';
-import { App } from '../../../app';
+import { testHarness } from '../../test-utils/testHarness';
 
 const aSectionContext = title => ({
   URL: 'someUrl',
@@ -17,27 +15,12 @@ const aSectionGroupContext = (sections = []) => ({
   },
 });
 
-const createDummyApp = (context) => {
-  const app = new App().createApp();
-
-  const router = express.Router();
-  const dummyRouter = router.get('/', (req, res) => {
-    const macroWrapper = `{% from './dashboard/components/dashboard-sectionGroup.njk' import dashboardSectionGroup %}
-                            {{ dashboardSectionGroup(sectionGroup) }}`;
-
-    const viewToTest = nunjucks.renderString(macroWrapper, context);
-
-    res.send(viewToTest);
-  });
-
-  app.use(dummyRouter);
-
-  return app;
-};
+const macroWrapper = `{% from './dashboard/components/dashboard-sectionGroup.njk' import dashboardSectionGroup %}
+                        {{ dashboardSectionGroup(sectionGroup) }}`;
 
 describe('dashboard-sectionGroup', () => {
   it('should render the title of the sectionGroup group', (done) => {
-    const dummyApp = createDummyApp(aSectionGroupContext());
+    const dummyApp = testHarness().createTemplateDummyApp(macroWrapper, aSectionGroupContext());
     request(dummyApp)
       .get('/')
       .then((res) => {
@@ -51,7 +34,7 @@ describe('dashboard-sectionGroup', () => {
 
   it('should render a section list of 1 if the sectionGroup group only contains the 1 section', (done) => {
     const aSectionGroupWithOneSection = aSectionGroupContext([aSectionContext('Some section')]);
-    const dummyApp = createDummyApp(aSectionGroupWithOneSection);
+    const dummyApp = testHarness().createTemplateDummyApp(macroWrapper, aSectionGroupWithOneSection);
 
     request(dummyApp)
       .get('/')
@@ -66,7 +49,7 @@ describe('dashboard-sectionGroup', () => {
 
   it('should render a section list of 2 if the sectionGroup group contains 2 sections', (done) => {
     const aSectionGroupWithTwoSections = aSectionGroupContext([aSectionContext('Some First section'), aSectionContext('Some Second section')]);
-    const dummyApp = createDummyApp(aSectionGroupWithTwoSections);
+    const dummyApp = testHarness().createTemplateDummyApp(macroWrapper, aSectionGroupWithTwoSections);
 
     request(dummyApp)
       .get('/')

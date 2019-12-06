@@ -37,10 +37,18 @@ const pageSetup = async (t, withMarketingData = false) => {
   await t.navigateTo('http://localhost:1234/S100000-001/section/contact-details');
 };
 
-fixture('Show Contact Details page');
+fixture('Show Contact Details page')
+  .afterEach(async (t) => {
+    const isDone = nock.isDone();
+    if (!isDone) {
+      nock.cleanAll();
+    }
+
+    await t.expect(isDone).ok('Not all nock interceptors were used!');
+  });
 
 test('should render the Contact details page title', async (t) => {
-  pageSetup(t);
+  await pageSetup(t);
 
   const title = Selector('[data-test-id="section-title"]');
 
@@ -49,7 +57,7 @@ test('should render the Contact details page title', async (t) => {
 });
 
 test('should render main advice of section', async (t) => {
-  pageSetup(t);
+  await pageSetup(t);
 
   const mainAdvice = Selector('[data-test-id="section-main-advice"]');
 
@@ -58,7 +66,7 @@ test('should render main advice of section', async (t) => {
 });
 
 test('should render all the advice of section', async (t) => {
-  pageSetup(t);
+  await pageSetup(t);
 
   const sectionManifest = new ManifestProvider().getSectionManifest('contact-details');
   const expectedAdditionalAdvice = sectionManifest.additionalAdvice.join('\n\n');
@@ -70,7 +78,7 @@ test('should render all the advice of section', async (t) => {
 });
 
 test('should render the contact 1 question', async (t) => {
-  pageSetup(t);
+  await pageSetup(t);
 
   const contact1Question = Selector('[data-test-id="question-contact-1"]');
   const contact1FirstName = contact1Question.find('[data-test-id="question-contact-1[first-name]"]');
@@ -107,7 +115,7 @@ test('should render the contact 1 question', async (t) => {
 });
 
 test('should render the contact 2 question', async (t) => {
-  pageSetup(t);
+  await pageSetup(t);
 
   const contact2Question = Selector('[data-test-id="question-contact-2"]');
   const contactFirstName = contact2Question.find('[data-test-id="question-contact-2[first-name]"]');
@@ -163,7 +171,7 @@ test('should populate the contacts with existing data', async (t) => {
 });
 
 test('should render the submit button', async (t) => {
-  pageSetup(t);
+  await pageSetup(t);
 
   const submitButton = Selector('[data-test-id="section-submit-button"]');
 
@@ -173,7 +181,7 @@ test('should render the submit button', async (t) => {
 
 
 test('should render the return to all sections link', async (t) => {
-  pageSetup(t);
+  await pageSetup(t);
 
   const link = Selector('[data-test-id="section-back-link"] a');
 
@@ -182,7 +190,7 @@ test('should render the return to all sections link', async (t) => {
 });
 
 test('should return to the marketing data dashboard when the return to all sections is clicked', async (t) => {
-  pageSetup(t);
+  await pageSetup(t);
 
   nock('http://localhost:8080')
     .get('/api/v1/Solutions/S100000-001/dashboard')

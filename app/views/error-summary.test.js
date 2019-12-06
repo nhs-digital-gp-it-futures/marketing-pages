@@ -3,14 +3,16 @@ import express from 'express';
 import nunjucks from 'nunjucks';
 import cheerio from 'cheerio';
 import { App } from '../../app';
+import { testHarness } from '../test-utils/testHarness';
+
+const macroWrapper = `{% from './error-summary.njk' import errorSummary %}
+                        {{ errorSummary(errors) }}`;
 
 const createDummyApp = (context) => {
   const app = new App().createApp();
 
   const router = express.Router();
   const dummyRouter = router.get('/', (req, res) => {
-    const macroWrapper = `{% from './error-summary.njk' import errorSummary %}
-                            {{ errorSummary(errors) }}`;
 
     const viewToTest = nunjucks.renderString(macroWrapper, context);
 
@@ -28,7 +30,7 @@ describe('errorSummary', () => {
       errors: [],
     };
 
-    const dummyApp = createDummyApp(context);
+    const dummyApp = testHarness().createTemplateDummyApp(macroWrapper, context);
     request(dummyApp)
       .get('/')
       .then((res) => {
@@ -45,7 +47,7 @@ describe('errorSummary', () => {
       errors: [],
     };
 
-    const dummyApp = createDummyApp(context);
+    const dummyApp = testHarness().createTemplateDummyApp(macroWrapper, context);
     request(dummyApp)
       .get('/')
       .then((res) => {
@@ -67,7 +69,7 @@ describe('errorSummary', () => {
       ],
     };
 
-    const dummyApp = createDummyApp(context);
+    const dummyApp = testHarness().createTemplateDummyApp(macroWrapper, context);
     request(dummyApp)
       .get('/')
       .then((res) => {
@@ -98,7 +100,7 @@ describe('errorSummary', () => {
       ],
     };
 
-    const dummyApp = createDummyApp(context);
+    const dummyApp = testHarness().createTemplateDummyApp(macroWrapper, context);
     request(dummyApp)
       .get('/')
       .then((res) => {
