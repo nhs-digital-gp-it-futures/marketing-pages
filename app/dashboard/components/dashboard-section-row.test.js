@@ -1,8 +1,6 @@
 import request from 'supertest';
-import express from 'express';
-import nunjucks from 'nunjucks';
 import cheerio from 'cheerio';
-import { App } from '../../../app';
+import { testHarness } from '../../test-utils/testHarness';
 
 const aSectionContext = (
   id, sections = undefined,
@@ -13,27 +11,12 @@ const aSectionContext = (
   },
 });
 
-const createDummyApp = (context) => {
-  const app = new App().createApp();
-
-  const router = express.Router();
-  const dummyRouter = router.get('/', (req, res) => {
-    const macroWrapper = `{% from './dashboard/components/dashboard-section-row.njk' import dashboardSectionRow %}
-                            {{ dashboardSectionRow(section) }}`;
-
-    const viewToTest = nunjucks.renderString(macroWrapper, context);
-
-    res.send(viewToTest);
-  });
-
-  app.use(dummyRouter);
-
-  return app;
-};
+const macroWrapper = `{% from './dashboard/components/dashboard-section-row.njk' import dashboardSectionRow %}
+                        {{ dashboardSectionRow(section) }}`;
 
 describe('dashboard-section-row', () => {
   it('should render the dashboard section', (done) => {
-    const dummyApp = createDummyApp(aSectionContext('some-section-id'));
+    const dummyApp = testHarness().createTemplateDummyApp(macroWrapper, aSectionContext('some-section-id'));
     request(dummyApp)
       .get('/')
       .then((res) => {
@@ -46,7 +29,7 @@ describe('dashboard-section-row', () => {
   });
 
   it('should not render the dashboard sub sections if no sections are provided', (done) => {
-    const dummyApp = createDummyApp(aSectionContext('some-section-id'));
+    const dummyApp = testHarness().createTemplateDummyApp(macroWrapper, aSectionContext('some-section-id'));
     request(dummyApp)
       .get('/')
       .then((res) => {
@@ -62,7 +45,7 @@ describe('dashboard-section-row', () => {
     const firstSubSection = aSectionContext('first-sub-section-id');
     const secondSubSection = aSectionContext('second-sub-section-id');
     const subSections = [firstSubSection, secondSubSection];
-    const dummyApp = createDummyApp(aSectionContext('some-section-id', subSections));
+    const dummyApp = testHarness().createTemplateDummyApp(macroWrapper, aSectionContext('some-section-id', subSections));
 
     request(dummyApp)
       .get('/')

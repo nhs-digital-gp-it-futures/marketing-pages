@@ -1,26 +1,9 @@
 import request from 'supertest';
-import express from 'express';
-import nunjucks from 'nunjucks';
 import cheerio from 'cheerio';
-import { App } from '../../../../app';
+import { testHarness } from '../../../test-utils/testHarness';
 
-const createDummyApp = (context) => {
-  const app = new App().createApp();
-
-  const router = express.Router();
-  const dummyRouter = router.get('/', (req, res) => {
-    const macroWrapper = `{% from './section/components/fields/radiobutton-options.njk' import radiobuttonOptions %}
-                            {{ radiobuttonOptions(question) }}`;
-
-    const viewToTest = nunjucks.renderString(macroWrapper, context);
-
-    res.send(viewToTest);
-  });
-
-  app.use(dummyRouter);
-
-  return app;
-};
+const macroWrapper = `{% from './section/components/fields/radiobutton-options.njk' import radiobuttonOptions %}
+                        {{ radiobuttonOptions(question) }}`;
 
 describe('radiobuttonOptions', () => {
   it('should render the main advice', (done) => {
@@ -32,7 +15,7 @@ describe('radiobuttonOptions', () => {
       },
     };
 
-    const dummyApp = createDummyApp(context);
+    const dummyApp = testHarness().createTemplateDummyApp(macroWrapper, context);
     request(dummyApp)
       .get('/')
       .then((res) => {
@@ -53,7 +36,7 @@ describe('radiobuttonOptions', () => {
       },
     };
 
-    const dummyApp = createDummyApp(context);
+    const dummyApp = testHarness().createTemplateDummyApp(macroWrapper, context);
     request(dummyApp)
       .get('/')
       .then((res) => {
@@ -85,7 +68,7 @@ describe('radiobuttonOptions', () => {
       },
     };
 
-    const dummyApp = createDummyApp(context);
+    const dummyApp = testHarness().createTemplateDummyApp(macroWrapper, context);
     request(dummyApp)
       .get('/')
       .then((res) => {
@@ -120,7 +103,7 @@ describe('radiobuttonOptions', () => {
       },
     };
 
-    const dummyApp = createDummyApp(context);
+    const dummyApp = testHarness().createTemplateDummyApp(macroWrapper, context);
     request(dummyApp)
       .get('/')
       .then((res) => {
@@ -159,7 +142,7 @@ describe('radiobuttonOptions', () => {
       },
     };
 
-    const dummyApp = createDummyApp(context);
+    const dummyApp = testHarness().createTemplateDummyApp(macroWrapper, context);
     request(dummyApp)
       .get('/')
       .then((res) => {

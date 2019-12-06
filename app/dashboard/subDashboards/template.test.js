@@ -1,20 +1,8 @@
 import request from 'supertest';
-import express from 'express';
 import cheerio from 'cheerio';
-import { App } from '../../../app';
+import { testHarness } from '../../test-utils/testHarness';
 
-const createDummyApp = (context) => {
-  const app = new App().createApp();
-
-  const router = express.Router();
-  const dummyRouter = router.get('/', (req, res) => {
-    res.render('./dashboard/subDashboards/template.njk', context);
-  });
-
-  app.use(dummyRouter);
-
-  return app;
-};
+const template = './dashboard/subDashboards/template.njk';
 
 describe('sub dashboard page', () => {
   it('should render the title of the sub dashboard', (done) => {
@@ -22,7 +10,7 @@ describe('sub dashboard page', () => {
       title: 'Title of the sub dashboard',
     };
 
-    const dummyApp = createDummyApp(context);
+    const dummyApp = testHarness().createComponentDummyApp(template, context);
     request(dummyApp)
       .get('/')
       .then((res) => {
@@ -40,7 +28,7 @@ describe('sub dashboard page', () => {
       mainAdvice: 'This is the main advice for this sub dashboard',
     };
 
-    const dummyApp = createDummyApp(context);
+    const dummyApp = testHarness().createComponentDummyApp(template, context);
     request(dummyApp)
       .get('/')
       .then((res) => {
@@ -61,7 +49,7 @@ describe('sub dashboard page', () => {
       ],
     };
 
-    const dummyApp = createDummyApp(context);
+    const dummyApp = testHarness().createComponentDummyApp(template, context);
     request(dummyApp)
       .get('/')
       .then((res) => {
@@ -85,7 +73,7 @@ describe('sub dashboard page', () => {
       ],
     };
 
-    const dummyApp = createDummyApp(context);
+    const dummyApp = testHarness().createComponentDummyApp(template, context);
     request(dummyApp)
       .get('/')
       .then((res) => {
@@ -102,7 +90,7 @@ describe('sub dashboard page', () => {
       title: 'Title of the section',
     };
 
-    const dummyApp = createDummyApp(context);
+    const dummyApp = testHarness().createComponentDummyApp(template, context);
     request(dummyApp)
       .get('/')
       .then((res) => {

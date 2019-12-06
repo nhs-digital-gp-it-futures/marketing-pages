@@ -29,10 +29,18 @@ const pageSetup = async (t, withMarketingData = false) => {
   await t.navigateTo('http://localhost:1234/S100000-001/section/browsers-supported');
 };
 
-fixture('Show Browsers Supported page');
+fixture('Show Browsers Supported page')
+  .afterEach(async (t) => {
+    const isDone = nock.isDone();
+    if (!isDone) {
+      nock.cleanAll();
+    }
+
+    await t.expect(isDone).ok('Not all nock interceptors were used!');
+  });
 
 test('should render the Browsers Supported page title', async (t) => {
-  pageSetup(t);
+  await pageSetup(t);
 
   const title = Selector('[data-test-id="section-title"]');
 
@@ -41,7 +49,7 @@ test('should render the Browsers Supported page title', async (t) => {
 });
 
 test('should render main advice of section', async (t) => {
-  pageSetup(t);
+  await pageSetup(t);
 
   const mainAdvice = Selector('[data-test-id="section-main-advice"]');
 
@@ -50,7 +58,7 @@ test('should render main advice of section', async (t) => {
 });
 
 test('should render all the advice of the section', async (t) => {
-  pageSetup(t);
+  await pageSetup(t);
 
   const sectionManifest = new ManifestProvider().getSectionManifest('browsers-supported');
   const expectedAdditionalAdvice = sectionManifest.additionalAdvice.join('\n\n');
@@ -62,7 +70,7 @@ test('should render all the advice of the section', async (t) => {
 });
 
 test('should render the supported browsers question', async (t) => {
-  pageSetup(t);
+  await pageSetup(t);
 
   const supportedBrowsersQuestion = Selector('[data-test-id="question-supported-browsers"]');
 
@@ -74,7 +82,7 @@ test('should render the supported browsers question', async (t) => {
 });
 
 test('should render the mobile responsive question', async (t) => {
-  pageSetup(t);
+  await pageSetup(t);
 
   const mobileResponsiveQuestion = Selector('[data-test-id="question-mobile-responsive"]');
 
@@ -86,7 +94,7 @@ test('should render the mobile responsive question', async (t) => {
 });
 
 test('should render the submit button', async (t) => {
-  pageSetup(t);
+  await pageSetup(t);
 
   const submitButton = Selector('[data-test-id="section-submit-button"]');
 
@@ -127,17 +135,13 @@ test('should populate the questions with existing data', async (t) => {
 });
 
 test('should render the validation errors indicating the supported browsers and mobile responsive questions are mandatory', async (t) => {
-  pageSetup(t);
-
-  nock('http://localhost:8080')
-    .get('/api/v1/Solutions/S100000-001/sections/browser-based')
-    .reply(200, aBrowserBasedFixture);
-
   nock('http://localhost:8080')
     .put('/api/v1/Solutions/S100000-001/sections/browsers-supported')
     .reply(400, {
       required: ['supported-browsers', 'mobile-responsive'],
-    });
+  });
+
+  await pageSetup(t);
 
   const errorSummary = Selector('[data-test-id="error-summary"]');
   const errorSummaryList = Selector('.nhsuk-error-summary__list');
@@ -162,7 +166,7 @@ test('should render the validation errors indicating the supported browsers and 
 });
 
 test('should goto anchor when clicking the supported browsers required summary error link', async (t) => {
-  pageSetup(t);
+  await pageSetup(t);
 
   nock('http://localhost:8080')
     .put('/api/v1/Solutions/S100000-001/sections/browsers-supported')
@@ -187,7 +191,7 @@ test('should goto anchor when clicking the supported browsers required summary e
 });
 
 test('should goto anchor when clicking the mobile-responsive required summary error link', async (t) => {
-  pageSetup(t);
+  await pageSetup(t);
 
   nock('http://localhost:8080')
     .put('/api/v1/Solutions/S100000-001/sections/browsers-supported')
@@ -212,7 +216,7 @@ test('should goto anchor when clicking the mobile-responsive required summary er
 });
 
 test('should render the return to all sections link', async (t) => {
-  pageSetup(t);
+  await pageSetup(t);
 
   const link = Selector('[data-test-id="section-back-link"] a');
 
@@ -221,7 +225,7 @@ test('should render the return to all sections link', async (t) => {
 });
 
 test('should return to the marketing data dashboard when the return to all sections is clicked', async (t) => {
-  pageSetup(t);
+  await pageSetup(t);
 
   nock('http://localhost:8080')
     .get('/api/v1/Solutions/S100000-001/dashboard')

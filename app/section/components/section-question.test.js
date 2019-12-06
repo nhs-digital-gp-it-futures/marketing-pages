@@ -1,26 +1,9 @@
 import request from 'supertest';
-import express from 'express';
-import nunjucks from 'nunjucks';
 import cheerio from 'cheerio';
-import { App } from '../../../app';
+import { testHarness } from '../../test-utils/testHarness';
 
-const createDummyApp = (context) => {
-  const app = new App().createApp();
-
-  const router = express.Router();
-  const dummyRouter = router.get('/', (req, res) => {
-    const macroWrapper = `{% from './section/components/section-question.njk' import sectionQuestion %}
-                            {{ sectionQuestion(question) }}`;
-
-    const viewToTest = nunjucks.renderString(macroWrapper, context);
-
-    res.send(viewToTest);
-  });
-
-  app.use(dummyRouter);
-
-  return app;
-};
+const macroWrapper = `{% from './section/components/section-question.njk' import sectionQuestion %}
+                        {{ sectionQuestion(question) }}`;
 
 describe('section-question', () => {
   describe('when question type is bulletpoint-list', () => {
@@ -32,7 +15,7 @@ describe('section-question', () => {
         },
       };
 
-      const dummyApp = createDummyApp(context);
+      const dummyApp = testHarness().createTemplateDummyApp(macroWrapper, context);
       request(dummyApp)
         .get('/')
         .then((res) => {
@@ -55,7 +38,7 @@ describe('section-question', () => {
         },
       };
 
-      const dummyApp = createDummyApp(context);
+      const dummyApp = testHarness().createTemplateDummyApp(macroWrapper, context);
       request(dummyApp)
         .get('/')
         .then((res) => {
@@ -78,7 +61,7 @@ describe('section-question', () => {
         },
       };
 
-      const dummyApp = createDummyApp(context);
+      const dummyApp = testHarness().createTemplateDummyApp(macroWrapper, context);
       request(dummyApp)
         .get('/')
         .then((res) => {
@@ -101,7 +84,7 @@ describe('section-question', () => {
         },
       };
 
-      const dummyApp = createDummyApp(context);
+      const dummyApp = testHarness().createTemplateDummyApp(macroWrapper, context);
       request(dummyApp)
         .get('/')
         .then((res) => {
@@ -124,7 +107,7 @@ describe('section-question', () => {
         },
       };
 
-      const dummyApp = createDummyApp(context);
+      const dummyApp = testHarness().createTemplateDummyApp(macroWrapper, context);
       request(dummyApp)
         .get('/')
         .then((res) => {
