@@ -58,7 +58,7 @@ test('should render all the sections for the Browser based sections section grou
   const browsersSupportedSection = browserBasedSectionGroup.find('[data-test-id="dashboard-section-browsers-supported"]');
   const pluginsOrExtensionsSection = browserBasedSectionGroup.find('[data-test-id="dashboard-section-plug-ins-or-extensions"]');
   const connectivityAndResolutionSection = browserBasedSectionGroup.find('[data-test-id="dashboard-section-connectivity-and-resolution"]');
-  const hardwareRequirementsSection = browserBasedSectionGroup.find('[data-test-id="dashboard-section-hardware-requirements"]');
+  const hardwareRequirementsSection = browserBasedSectionGroup.find('[data-test-id="dashboard-section-browser-hardware-requirements"]');
   const additionalInformationSection = browserBasedSectionGroup.find('[data-test-id="dashboard-section-additional-information"]');
 
   await t

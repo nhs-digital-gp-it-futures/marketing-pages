@@ -1,0 +1,21 @@
+{
+  "id": "browser-hardware-requirements",
+  "title": "Browser based - hardware requirements",
+  "mainAdvice": "Answer the following questions about your browser based Solution",
+  "additionalAdvice": [
+    "This information will be visible to buyers on your Solution page."
+  ],
+  "questions": {
+    "hardware-requirements-description": {   
+      "mainAdvice": "Do you have any hardware requirements?",
+      "additionalAdvice": "Add a description of any hardware requirements for you Solution.",
+      "type": "textarea-field",
+      "errorResponse": {
+        "maxLength": "Hardware requirement description is over the character limit"
+      },
+      "footerAdvice": "You can enter up to 500 characters"
+    }
+  },
+  "submitText" : "Save and return",
+  "successfulSubmitResponsePath" : "dashboard/browser-based"
+}

@@ -21,7 +21,7 @@
           "title": "Connectivity and resolution",
           "type": "section"
         },
-        "hardware-requirements": {
+        "browser-hardware-requirements": {
           "title": "Hardware requirements",
           "type": "section"
         },
