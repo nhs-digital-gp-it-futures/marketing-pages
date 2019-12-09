@@ -12,7 +12,7 @@
       "status": "INCOMPLETE",
       "requirement": "Mandatory"
     },
-    "hardware-requirements": {
+    "browser-hardware-requirements": {
       "status": "INCOMPLETE",
       "requirement": "Optional"
     },

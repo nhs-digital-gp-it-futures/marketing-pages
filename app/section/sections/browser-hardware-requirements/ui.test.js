@@ -64,7 +64,7 @@ test('should render all the advice of the section', async (t) => {
     .expect(additionalAdvice.innerText).eql(expectedAdditionalAdvice);
 });
 
-test('should render the hardware requirement question', async (t) => {
+test('should render the hardware requirements description question', async (t) => {
   await pageSetup(t);
 
   const hardwareRequirementsQuestion = Selector('[data-test-id="question-hardware-requirements-description"]');
