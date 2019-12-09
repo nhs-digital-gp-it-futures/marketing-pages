@@ -119,6 +119,7 @@ test('when existing marketing data - The client application type section and bro
   const mobileResponsiveRow = browserBasedExpandaleSectionTable.find('[data-test-id="view-section-table-row-mobile-responsive"]');
   const pluginsRequiredRow = browserBasedExpandaleSectionTable.find('[data-test-id="view-section-table-row-plugins-required"]');
   const pluginsDetailRow = browserBasedExpandaleSectionTable.find('[data-test-id="view-section-table-row-plugins-detail"]');
+  const hardwareRequirementsDescriptionRow = browserBasedExpandaleSectionTable.find('[data-test-id="view-section-table-row-hardware-requirements-description"]');
 
   await t
     .expect(clientApplicationTypesSection.exists).ok()
@@ -136,5 +137,7 @@ test('when existing marketing data - The client application type section and bro
     .expect(pluginsRequiredRow.find('.nhsuk-summary-list__key').innerText).eql('Plug-ins or extensions required')
     .expect(pluginsRequiredRow.find('.nhsuk-summary-list__value').innerText).eql('Yes')
     .expect(pluginsDetailRow.find('.nhsuk-summary-list__key').innerText).eql('Plug-ins or extensions information')
-    .expect(pluginsDetailRow.find('.nhsuk-summary-list__value').innerText).eql('The plugin detail');
+    .expect(pluginsDetailRow.find('.nhsuk-summary-list__value').innerText).eql('The plugin detail')
+    .expect(hardwareRequirementsDescriptionRow.find('.nhsuk-summary-list__key').innerText).eql('Hardware requirements')
+    .expect(hardwareRequirementsDescriptionRow.find('.nhsuk-summary-list__value').innerText).eql('Some hardware requirement description');
 });

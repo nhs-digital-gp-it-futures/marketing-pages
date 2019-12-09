@@ -38,6 +38,11 @@
                 "plugins-required": "Yes",
                 "plugins-detail": "The plugin detail"
               }
+            },
+            "browser-hardware-requirements": {
+              "answers": {
+                "hardware-requirements-description": "Some hardware requirement description"
+              }
             }
           }
         }
