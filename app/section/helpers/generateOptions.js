@@ -1,11 +1,18 @@
 import { doesFormDataContainValue } from './formData';
 
 const populateQuestionOption = (
-  questionId, questionOption, formData,
+  questionId, questionOption, formData, questionType,
 ) => {
   const populatedOption = questionOption;
 
   if (doesFormDataContainValue(questionId, questionOption.value, formData)) {
+    if (questionType === 'combobox-options') {
+      return {
+        ...questionOption,
+        selected: true,
+      };
+    }
+
     return {
       ...questionOption,
       checked: true,
@@ -22,13 +29,13 @@ const createOptions = options => options
       }));
 
 export const generateOptions = (
-  questionId, options, formData,
+  questionId, options, formData, questionType,
 ) => {
   if (options) {
     const createdOptions = createOptions(options);
 
     const populatedOptions = createdOptions && createdOptions.map(option => populateQuestionOption(
-      questionId, option, formData,
+      questionId, option, formData, questionType,
     ));
 
     return populatedOptions;
