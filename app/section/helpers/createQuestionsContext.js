@@ -27,6 +27,13 @@ const createQuestionTypeContext = {
       questionId, questionManifest, formData, validationErrors, parentQuestionId,
     ),
   },
+  'combobox-options': {
+    create: (
+      questionId, questionManifest, formData, validationErrors, parentQuestionId,
+    ) => createQuestionsContextForOptions(
+      questionId, questionManifest, formData, validationErrors, parentQuestionId,
+    ),
+  },
   'textarea-field': {
     create: (
       questionId, questionManifest, formData, validationErrors, parentQuestionId,
