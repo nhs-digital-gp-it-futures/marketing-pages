@@ -21,7 +21,6 @@ steps:
   - script: |
       npm install -g webpack webpack-cli --save-dev
       npm install
-      npm build
     displayName: 'NPM install'
 
   - script: |
@@ -41,6 +40,7 @@ steps:
       dockerVersion: '17.09.0-ce'
       
   - task: DockerCompose@0
+    displayName: 'Docker Build: gpitfuturesdevacr'
     inputs:
       containerregistrytype: 'Azure Container Registry'
       azureSubscription: 'NHSAPP-BuyingCatalogue'
@@ -49,6 +49,7 @@ steps:
       action: 'Build services'
 
   - task: DockerCompose@0
+    displayName: 'Docker Push: gpitfuturesdevacr'
     inputs:
       containerregistrytype: 'Azure Container Registry'
       azureSubscription: 'NHSAPP-BuyingCatalogue'
