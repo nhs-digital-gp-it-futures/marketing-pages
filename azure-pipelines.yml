@@ -20,6 +20,7 @@ steps:
 
   - script: |
       npm install -g webpack webpack-cli --save-dev
+      npm install
       npm build
     displayName: 'NPM install'
 
