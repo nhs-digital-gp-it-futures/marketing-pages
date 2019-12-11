@@ -130,18 +130,23 @@ test('when existing marketing data - The client application type section and bro
     .expect(browserBasedExpandableSection.find('details[open]').exists).notOk()
     .click(browserBasedExpandableSection.find('summary'))
     .expect(browserBasedExpandableSection.find('details[open]').exists).ok()
+
     .expect(supportedBrowsersRow.find('div[data-test-id="view-section-table-row-title"]').innerText).eql('Browsers Supported')
     .expect(supportedBrowsersRow.find('div[data-test-id="view-section-table-row-component"]').innerText).eql('Google Chrome\nMozilla Firefox')
     .expect(supportedBrowsersRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok()
+
     .expect(mobileResponsiveRow.find('div[data-test-id="view-section-table-row-title"]').innerText).eql('Mobile responsive')
     .expect(mobileResponsiveRow.find('div[data-test-id="view-section-table-row-component"]').innerText).eql('Yes')
     .expect(mobileResponsiveRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok()
+
     .expect(pluginsRequiredRow.find('div[data-test-id="view-section-table-row-title"]').innerText).eql('Plug-ins or extensions required')
     .expect(pluginsRequiredRow.find('div[data-test-id="view-section-table-row-component"]').innerText).eql('Yes')
     .expect(pluginsRequiredRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok()
+
     .expect(pluginsDetailRow.find('div[data-test-id="view-section-table-row-title"]').innerText).eql('Plug-ins or extensions information')
     .expect(pluginsDetailRow.find('div[data-test-id="view-section-table-row-component"]').innerText).eql('The plugin detail')
     .expect(pluginsDetailRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok()
+
     .expect(hardwareRequirementsDescriptionRow.find('div[data-test-id="view-section-table-row-title"]').innerText).eql('Hardware requirements')
     .expect(hardwareRequirementsDescriptionRow.find('div[data-test-id="view-section-table-row-component"]').innerText).eql('Some hardware requirement description')
     .expect(hardwareRequirementsDescriptionRow.find('div[data-test-id="view-section-table-row-vertical"]').exists).ok();
