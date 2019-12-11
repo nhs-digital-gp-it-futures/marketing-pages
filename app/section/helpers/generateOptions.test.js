@@ -75,7 +75,7 @@ describe('generateOptions', () => {
     expect(generatedOptions).toEqual(expectedOptions);
   });
 
-  it('should return the options and marked the options as selected for combobox type questions', () => {
+  it.only('should return the options and marked the options as selected for combobox type questions', () => {
     const expectedOptions = [
       {
         text: 'option 1',
