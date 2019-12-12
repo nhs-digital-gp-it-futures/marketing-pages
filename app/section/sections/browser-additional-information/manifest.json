@@ -16,6 +16,6 @@
       }
     }
   },
-  "submitText" : "Save and return to browser based",
+  "submitText" : "Save and return",
   "successfulSubmitResponsePath" : "dashboard/browser-based"
 }

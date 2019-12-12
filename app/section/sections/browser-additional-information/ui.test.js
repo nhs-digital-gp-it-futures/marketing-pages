@@ -1,6 +1,5 @@
 import nock from 'nock';
 import { Selector, ClientFunction } from 'testcafe';
-import { ManifestProvider } from '../../../manifestProvider';
 import dashboardWithCompleteSections from '../../../../fixtures/dashboardWithCompleteSections.json';
 
 const additionalInformationData = {
@@ -79,7 +78,7 @@ test('should populate the text fields with existing data', async (t) => {
   const theQuestions = Selector('form');
 
   await t
-    .expect(theQuestions.find('[data-test-id="question-additional-information"]').find('textarea').value).eql('The solution additional information')
+    .expect(theQuestions.find('[data-test-id="question-additional-information"]').find('textarea').value).eql('The solution additional information');
 });
 
 test('should render the submit button', async (t) => {
@@ -114,7 +113,7 @@ test('should show error summary and validation for questions when they exceed th
     .expect(errorSummaryList.find('li:nth-child(1)').innerText).eql('Additional information is over the character limit')
     .expect(errorSummaryList.find('li:nth-child(1) a').getAttribute('href')).eql('#additional-information')
     .expect(additionalInformation.find('.nhsuk-textarea--error').exists).ok()
-    .expect(additionalInformation.find('.nhsuk-error-message').innerText).eql('Error:\nAdditional information is over the character limit')
+    .expect(additionalInformation.find('.nhsuk-error-message').innerText).eql('Error:\nAdditional information is over the character limit');
 });
 
 test('should goto anchor when clicking the additional information required error link', async (t) => {
