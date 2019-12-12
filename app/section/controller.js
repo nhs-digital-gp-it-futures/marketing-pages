@@ -8,7 +8,7 @@ import { apiHost } from '../config';
 export const getSectionPageContext = async (solutionId, sectionId) => {
   const sectionManifest = new ManifestProvider().getSectionManifest(sectionId);
 
-  const sectionData = await axios.get(`${apiHost}/Solutions/${solutionId}/sections/${sectionId}`);
+  const sectionData = await axios.get(`${apiHost}/api/v1/Solutions/${solutionId}/sections/${sectionId}`);
   const formData = sectionData.data;
 
   const context = createSectionPageContext(solutionId, sectionManifest, formData);
@@ -32,7 +32,7 @@ export const postSection = async (solutionId, sectionId, sectionData) => {
   const sectionManifest = new ManifestProvider().getSectionManifest(sectionId);
   const transformedSectionData = transformSectionData(sectionId, sectionManifest, sectionData);
   try {
-    await axios.put(`http://localhost:8080/api/v1/Solutions/${solutionId}/sections/${sectionId}`, transformedSectionData);
+    await axios.put(`${apiHost}/api/v1/Solutions/${solutionId}/sections/${sectionId}`, transformedSectionData);
 
     const response = createPostSectionResponse(solutionId, sectionManifest);
     return response;
