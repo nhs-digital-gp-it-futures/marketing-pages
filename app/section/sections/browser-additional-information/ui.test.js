@@ -24,7 +24,7 @@ const pageSetup = async (t, withMarketingData = false) => {
   await t.navigateTo('http://localhost:1234/S100000-001/section/browser-additional-information');
 };
 
-fixture('Show Additional Information page')
+fixture.only('Show Additional Information page')
   .afterEach(async (t) => {
     const isDone = nock.isDone();
     if (!isDone) {
@@ -70,7 +70,7 @@ test('should render the additional information question', async (t) => {
     .expect(additionalInformation.find('label.nhsuk-label').innerText).eql('Do you have any additional browser based information (optional)')
     .expect(additionalInformation.find('span.nhsuk-hint').innerText).eql('Add any additional information or requirement your Solution needs to function')
     .expect(additionalInformation.find('textarea').count).eql(1)
-    .expect(additionalInformation.find('[data-test-id="textarea-field-footer"]').innerText).eql('You have 500 characters remaining');
+    .expect(additionalInformation.find('[data-test-id="textarea-field-footer"]').innerText).eql('You can enter up to 500 characters');
 });
 
 test('should populate the text fields with existing data', async (t) => {
@@ -105,16 +105,16 @@ test('should show error summary and validation for questions when they exceed th
   const additionalInformation = Selector('[data-test-id="question-additional-information"]');
   
   const submitButton = Selector('[data-test-id="section-submit-button"] button');
-  
+
   await t
-  .expect(errorSummary.exists).notOk()
-  .click(submitButton)
-  .expect(errorSummary.exists).ok()
-  .expect(errorSummaryList.find('li').count).eql(1)
-  .expect(errorSummaryList.find('li:nth-child(1)').innerText).eql('Additional information is over the character limit')
-  .expect(errorSummaryList.find('li:nth-child(1) a').getAttribute('href')).eql('#additional-information')
-  .expect(additionalInformation.find('.nhsuk-textarea--error').exists).ok()
-  .expect(additionalInformation.find('.nhsuk-error-message').innerText).eql('Error:\nAdditional information is over the character limit')
+    .expect(errorSummary.exists).notOk()
+    .click(submitButton)
+    .expect(errorSummary.exists).ok()
+    .expect(errorSummaryList.find('li').count).eql(1)
+    .expect(errorSummaryList.find('li:nth-child(1)').innerText).eql('Additional information is over the character limit')
+    .expect(errorSummaryList.find('li:nth-child(1) a').getAttribute('href')).eql('#additional-information')
+    .expect(additionalInformation.find('.nhsuk-textarea--error').exists).ok()
+    .expect(additionalInformation.find('.nhsuk-error-message').innerText).eql('Error:\nAdditional information is over the character limit')
 });
 
 test('should goto anchor when clicking the additional information required error link', async (t) => {
@@ -163,4 +163,24 @@ test('should return to the marketing data dashboard when the return to all secti
     .click(link.find('a'))
     .expect(getLocation()).notContains('section')
     .expect(getLocation()).contains('S100000-001');
+});
+
+test('should goto the browser based dashboard when clicking the submit button', async (t) => {
+  await pageSetup(t);
+
+  nock('http://localhost:8080')
+    .put('/api/v1/Solutions/S100000-001/sections/browser-additional-information')
+    .reply(200, {});
+
+  nock('http://localhost:8080')
+    .get('/api/v1/Solutions/S100000-001/sections/browser-based')
+    .reply(200, {});
+
+  const submitButton = Selector('[data-test-id="section-submit-button"] button');
+
+  const getLocation = ClientFunction(() => document.location.href);
+
+  await t
+    .click(submitButton)
+    .expect(getLocation()).contains('/S100000-001/dashboard/browser-based');
 });
