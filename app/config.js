@@ -9,5 +9,5 @@ module.exports = {
   port: process.env.PORT || 3001,
 
   // API_HOST
-  apiHost: process.env.API_HOST || 'http://localhost:8080/api/v1',
+  apiHost: process.env.API_HOST || 'http://localhost:8080',
 };

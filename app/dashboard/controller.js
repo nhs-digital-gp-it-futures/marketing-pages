@@ -6,7 +6,7 @@ import { apiHost } from '../config';
 export const getMarketingPageDashboardContext = async (solutionId, validationErrors) => {
   const dashboardManifest = new ManifestProvider().getDashboardManifest();
 
-  const dashboardDataRaw = await axios.get(`${apiHost}/Solutions/${solutionId}/dashboard`);
+  const dashboardDataRaw = await axios.get(`${apiHost}/api/v1/Solutions/${solutionId}/dashboard`);
   const dashboardData = dashboardDataRaw.data;
 
   const context = createDashboardPageContext(
@@ -18,7 +18,7 @@ export const getMarketingPageDashboardContext = async (solutionId, validationErr
 
 export const postSubmitForModeration = async (solutionId) => {
   try {
-    await axios.put(`http://localhost:8080/api/v1/Solutions/${solutionId}/SubmitForReview`, {});
+    await axios.put(`${apiHost}/api/v1/Solutions/${solutionId}/SubmitForReview`, {});
     return {
       success: true,
     };
