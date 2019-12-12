@@ -24,7 +24,7 @@ const pageSetup = async (t, withMarketingData = false) => {
   await t.navigateTo('http://localhost:1234/S100000-001/section/browser-additional-information');
 };
 
-fixture.only('Show Solution Description page')
+fixture('Show Solution Description page')
   .afterEach(async (t) => {
     const isDone = nock.isDone();
     if (!isDone) {
@@ -55,24 +55,22 @@ test('should render main advice of section', async (t) => {
 test('should render all the advice of the section', async (t) => {
   await pageSetup(t);
 
-  const sectionManifest = new ManifestProvider().getSectionManifest('solution-description');
-
   const additionalAdvice = Selector('[data-test-id="section-additional-advice"]');
 
   await t
     .expect(additionalAdvice.innerText).eql('This information is diplayed on the Marketing page for buyers to view');
 });
 
-test('should render the solution summary question', async (t) => {
+test('should render the additional information question', async (t) => {
   await pageSetup(t);
 
-  const summaryQuestion = Selector('[data-test-id="question-additional-information"]');
+  const additionalInformation = Selector('[data-test-id="question-additional-information"]');
 
   await t
-    .expect(summaryQuestion.find('label.nhsuk-label').innerText).eql('Do you have any additional browser based information (optional)')
-    .expect(summaryQuestion.find('span.nhsuk-hint').innerText).eql('Add any additional information or requirement your Solution needs to function')
-    .expect(summaryQuestion.find('textarea').count).eql(1)
-    .expect(summaryQuestion.find('[data-test-id="textarea-field-footer"]').innerText).eql('You have 500 characters remaining');
+    .expect(additionalInformation.find('label.nhsuk-label').innerText).eql('Do you have any additional browser based information (optional)')
+    .expect(additionalInformation.find('span.nhsuk-hint').innerText).eql('Add any additional information or requirement your Solution needs to function')
+    .expect(additionalInformation.find('textarea').count).eql(1)
+    .expect(additionalInformation.find('[data-test-id="textarea-field-footer"]').innerText).eql('You have 500 characters remaining');
 });
 
 test('should populate the text fields with existing data', async (t) => {
@@ -102,9 +100,6 @@ test('should show error summary and validation for questions when they exceed th
       maxLength: ['additional-information'],
     });
 
-  const oneHundredCharacters = '0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789';
-  const thousandCharacters = oneHundredCharacters.repeat(10);
-
   const errorSummary = Selector('[data-test-id="error-summary"]');
   const errorSummaryList = Selector('.nhsuk-error-summary__list');
   const additionalInformation = Selector('[data-test-id="question-additional-information"]');
@@ -113,7 +108,6 @@ test('should show error summary and validation for questions when they exceed th
   
   await t
   .expect(errorSummary.exists).notOk()
-  .typeText(additionalInformation, `${thousandCharacters}0`, { paste: true })
   .click(submitButton)
   .expect(errorSummary.exists).ok()
   .expect(errorSummaryList.find('li').count).eql(1)
@@ -132,24 +126,15 @@ test('should goto anchor when clicking the additional information required error
       maxLength: ['additional-information'],
     });
 
-  const oneHundredCharacters = '0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789';
-  const thousandCharacters = oneHundredCharacters.repeat(10);
-
   const errorSummary = Selector('[data-test-id="error-summary"]');
   const errorSummaryList = Selector('.nhsuk-error-summary__list');
-  const additionalInformation = Selector('[data-test-id="question-additional-information"]');
-  
   const submitButton = Selector('[data-test-id="section-submit-button"] button');
 
   const getLocation = ClientFunction(() => document.location.href);
 
   await t
     .expect(errorSummary.exists).notOk()
-    .typeText(additionalInformation, `${thousandCharacters}0`, { paste: true })
     .click(submitButton)
-    .expect(errorSummary.exists).ok()
-    .expect(errorSummaryList.find('li:nth-child(1) a').count).eql(1)
-    .expect(errorSummaryList.find('li:nth-child(1) a').getAttribute('href')).eql('#additional-information')
     .click(errorSummaryList.find('li:nth-child(1) a'))
     .expect(getLocation()).contains('/S100000-001/section/browser-additional-information#additional-information');
 });
