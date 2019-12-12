@@ -269,23 +269,22 @@ test('clicking on the client application type section link should navigate the u
     .expect(getLocation()).contains('S100000-001/section/client-application-type');
 });
 
-// TODO uncomment this test when contact-details page is complete
-// test('clicking on the contact details section link should navigate the user to contact details page', async (t) => {
-//   await pageSetup(t);
+test('clicking on the contact details section link should navigate the user to contact details page', async (t) => {
+  await pageSetup(t);
 
-//   nock('http://localhost:8080')
-//     .get('/api/v1/Solutions/S100000-001/sections/contact-details')
-//     .reply(200, {});
+  nock('http://localhost:8080')
+    .get('/api/v1/Solutions/S100000-001/sections/contact-details')
+    .reply(200, {});
 
-//   const getLocation = ClientFunction(() => document.location.href);
+  const getLocation = ClientFunction(() => document.location.href);
 
-//   const aboutYourOrganisationSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-about-your-organisation"]');
-//   const contactDetailsSection = aboutYourOrganisationSectionGroup.find('[data-test-id="dashboard-section-contact-details"]');
+  const aboutYourOrganisationSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-about-your-organisation"]');
+  const contactDetailsSection = aboutYourOrganisationSectionGroup.find('[data-test-id="dashboard-section-contact-details"]');
 
-//   await t
-//     .click(contactDetailsSection.find('a'))
-//     .expect(getLocation()).contains('S100000-001/section/contact-details');
-// });
+  await t
+    .click(contactDetailsSection.find('a'))
+    .expect(getLocation()).contains('S100000-001/section/contact-details');
+});
 
 test('should render the Error summary containing all the sections that failed the SubmitForReview', async (t) => {
   await pageSetup(t);
