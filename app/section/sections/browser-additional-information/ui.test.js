@@ -4,7 +4,7 @@ import { ManifestProvider } from '../../../manifestProvider';
 import dashboardWithCompleteSections from '../../../../fixtures/dashboardWithCompleteSections.json';
 
 const additionalInformationData = {
-  'additional-information': 'The solution additional information'
+  'additional-information': 'The solution additional information',
 };
 
 const mocks = (withMarketingData) => {
