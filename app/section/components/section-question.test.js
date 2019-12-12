@@ -120,4 +120,27 @@ describe('section-question', () => {
         });
     });
   });
+
+  describe('when question type is combobox-options', () => {
+    it('should render the combobox-options component', (done) => {
+      const context = {
+        question: {
+          id: 'question-id',
+          type: 'combobox-options',
+        },
+      };
+
+      const dummyApp = testHarness().createTemplateDummyApp(macroWrapper, context);
+      request(dummyApp)
+        .get('/')
+        .then((res) => {
+          const $ = cheerio.load(res.text);
+
+          const question = $('div[data-test-id="section-question-combobox-options"] > div');
+          expect(question.length).toEqual(1);
+
+          done();
+        });
+    });
+  });
 });
