@@ -100,7 +100,6 @@ describe('when the question type is of type checkbox-options or radiobutton-opti
           {
             text: 'option 3',
             value: 'option 3',
-            selected: true,
           },
         ],
       },
@@ -118,7 +117,6 @@ describe('when the question type is of type checkbox-options or radiobutton-opti
     const formData = {
       'some-question-id': [
         'option 1',
-        'option 3',
       ],
     };
 

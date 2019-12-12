@@ -89,7 +89,6 @@ describe('generateOptions', () => {
       {
         text: 'option 3',
         value: 'option 3',
-        selected: true,
       },
     ];
 
@@ -103,7 +102,6 @@ describe('generateOptions', () => {
     const formData = {
       'some-question-id': [
         'option 1',
-        'option 3',
       ],
     };
 
