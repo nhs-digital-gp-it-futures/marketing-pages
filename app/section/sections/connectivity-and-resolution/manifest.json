@@ -25,6 +25,9 @@
         "20Mbps": "20Mbps",
         "30Mbps": "30Mbps",
         "Higher than 30Mbps": "Higher than 30Mbps"
+      },
+      "errorResponse": {
+        "required": "Please select the minimum connection speed required"
       }
     },
     "minimum-desktop-resolution": {
