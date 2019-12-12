@@ -146,18 +146,13 @@ test('should goto anchor when clicking the mobile first design summary error lin
       required: ['mobile-first-design'],
     });
 
-  const errorSummary = Selector('[data-test-id="error-summary"]');
   const errorSummaryList = Selector('.nhsuk-error-summary__list');
   const submitButton = Selector('[data-test-id="section-submit-button"]');
 
   const getLocation = ClientFunction(() => document.location.href);
 
   await t
-    .expect(errorSummary.exists).notOk()
     .click(submitButton.find('button'))
-    .expect(errorSummary.exists).ok()
-    .expect(errorSummaryList.find('li:nth-child(1) a').count).eql(1)
-    .expect(errorSummaryList.find('li:nth-child(1) a').getAttribute('href')).eql('#mobile-first-design')
     .click(errorSummaryList.find('li:nth-child(1) a'))
     .expect(getLocation()).contains('/S100000-001/section/browser-mobile-first#mobile-first-design');
 });
