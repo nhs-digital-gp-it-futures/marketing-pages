@@ -25,7 +25,7 @@
           "title": "Hardware requirements",
           "type": "section"
         },
-        "additional-information": {
+        "browser-additional-information": {
           "title": "Additional information",
           "type": "section"
         }
