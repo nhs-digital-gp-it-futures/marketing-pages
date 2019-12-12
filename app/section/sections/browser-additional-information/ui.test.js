@@ -24,7 +24,7 @@ const pageSetup = async (t, withMarketingData = false) => {
   await t.navigateTo('http://localhost:1234/S100000-001/section/browser-additional-information');
 };
 
-fixture.only('Show Additional Information page')
+fixture('Show Additional Information page')
   .afterEach(async (t) => {
     const isDone = nock.isDone();
     if (!isDone) {
