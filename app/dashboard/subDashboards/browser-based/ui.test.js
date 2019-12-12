@@ -135,7 +135,7 @@ test('should navigate the user to the browsers supported page when clicking on t
     .expect(getLocation()).contains('S100000-001/section/browsers-supported');
 });
 
-test('should navigate the user to the mobile first page when clicking on the browsers supported dashboard row', async (t) => {
+test('should navigate the user to the mobile first page when clicking on the mobile first dashboard row', async (t) => {
   await pageSetup(t);
 
   nock('http://localhost:8080')
@@ -152,7 +152,7 @@ test('should navigate the user to the mobile first page when clicking on the bro
     .expect(getLocation()).contains('S100000-001/section/browser-mobile-first');
 });
 
-test('should navigate the user to the plug-ins or extensions page when clicking on the browsers supported dashboard row', async (t) => {
+test('should navigate the user to the plug-ins or extensions page when clicking on the plug-ins or extensions dashboard row', async (t) => {
   await pageSetup(t);
 
   nock('http://localhost:8080')
@@ -169,7 +169,7 @@ test('should navigate the user to the plug-ins or extensions page when clicking 
     .expect(getLocation()).contains('S100000-001/section/plug-ins-or-extensions');
 });
 
-test('should navigate the user to the connectivity and resolution page when clicking on the browsers supported dashboard row', async (t) => {
+test('should navigate the user to the connectivity and resolution page when clicking on the connectivity and resolution dashboard row', async (t) => {
   await pageSetup(t);
 
   nock('http://localhost:8080')
@@ -186,7 +186,7 @@ test('should navigate the user to the connectivity and resolution page when clic
     .expect(getLocation()).contains('S100000-001/section/connectivity-and-resolution');
 });
 
-test('should navigate the user to the hardware requirements page when clicking on the browsers supported dashboard row', async (t) => {
+test('should navigate the user to the hardware requirements page when clicking on the hardware requirements dashboard row', async (t) => {
   await pageSetup(t);
 
   nock('http://localhost:8080')
@@ -204,7 +204,7 @@ test('should navigate the user to the hardware requirements page when clicking o
 });
 
 //TODO - Add this when the additional information section has been added.
-// test('should navigate the user to the additional information page when clicking on the browsers supported dashboard row', async (t) => {
+// test('should navigate the user to the additional information page when clicking on the additional information dashboard row', async (t) => {
 //   await pageSetup(t);
 
 //   nock('http://localhost:8080')
