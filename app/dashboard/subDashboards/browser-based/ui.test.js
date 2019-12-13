@@ -203,23 +203,22 @@ test('should navigate the user to the hardware requirements page when clicking o
     .expect(getLocation()).contains('S100000-001/section/browser-hardware-requirements');
 });
 
-//TODO - Add this when the additional information section has been added.
-// test('should navigate the user to the additional information page when clicking on the additional information dashboard row', async (t) => {
-//   await pageSetup(t);
+test('should navigate the user to the additional information page when clicking on the additional information dashboard row', async (t) => {
+  await pageSetup(t);
 
-//   nock('http://localhost:8080')
-//     .get('/api/v1/Solutions/S100000-001/sections/additional-information')
-//     .reply(200, {});
+  nock('http://localhost:8080')
+    .get('/api/v1/Solutions/S100000-001/sections/browser-additional-information')
+    .reply(200, {});
 
-//   const getLocation = ClientFunction(() => document.location.href);
+  const getLocation = ClientFunction(() => document.location.href);
 
-//   const browserBasedSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-browser-based-sections"]');
-//   const additionalInformationSection = browserBasedSectionGroup.find('[data-test-id="dashboard-section-additional-information"]');
+  const browserBasedSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-browser-based-sections"]');
+  const additionalInformationSection = browserBasedSectionGroup.find('[data-test-id="dashboard-section-browser-additional-information"]');
 
-//   await t
-//     .click(additionalInformationSection.find('a'))
-//     .expect(getLocation()).contains('S100000-001/section/additional-information');
-// });
+  await t
+    .click(additionalInformationSection.find('a'))
+    .expect(getLocation()).contains('S100000-001/section/browser-additional-information');
+});
 
 test('should render the return to all sections link', async (t) => {
   await pageSetup(t);
