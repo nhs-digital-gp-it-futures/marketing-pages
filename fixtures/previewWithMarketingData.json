@@ -39,9 +39,20 @@
                 "plugins-detail": "The plugin detail"
               }
             },
+            "connectivity-and-resolution": {
+              "answers": {
+                "minimum-connection-speed": "1Mbps",
+                "minimum-desktop-resolution": "4:3 800 x 600"
+              }
+            },
             "browser-hardware-requirements": {
               "answers": {
                 "hardware-requirements-description": "Some hardware requirement description"
+              }
+            },
+            "browser-additional-information": {
+              "answers": {
+                "additional-information": "Some browser additional information"
               }
             }
           }

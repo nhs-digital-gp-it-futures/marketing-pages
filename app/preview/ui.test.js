@@ -119,7 +119,10 @@ test('when existing marketing data - The client application type section and bro
   const mobileResponsiveRow = browserBasedExpandaleSectionTable.find('[data-test-id="view-section-table-row-mobile-responsive"]');
   const pluginsRequiredRow = browserBasedExpandaleSectionTable.find('[data-test-id="view-section-table-row-plugins-required"]');
   const pluginsDetailRow = browserBasedExpandaleSectionTable.find('[data-test-id="view-section-table-row-plugins-detail"]');
+  const minimumConnectionRow = browserBasedExpandaleSectionTable.find('[data-test-id="view-section-table-row-minimum-connection-speed"]');
+  const minimumResolutionRow = browserBasedExpandaleSectionTable.find('[data-test-id="view-section-table-row-minimum-desktop-resolution"]');
   const hardwareRequirementsDescriptionRow = browserBasedExpandaleSectionTable.find('[data-test-id="view-section-table-row-hardware-requirements-description"]');
+  const additionalInformationRow = browserBasedExpandaleSectionTable.find('[data-test-id="view-section-table-row-additional-information"]');
 
   await t
     .expect(clientApplicationTypesSection.exists).ok()
@@ -147,7 +150,19 @@ test('when existing marketing data - The client application type section and bro
     .expect(pluginsDetailRow.find('div[data-test-id="view-section-table-row-component"]').innerText).eql('The plugin detail')
     .expect(pluginsDetailRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok()
 
+    .expect(minimumConnectionRow.find('div[data-test-id="view-section-table-row-title"]').innerText).eql('Minimum connection speed required')
+    .expect(minimumConnectionRow.find('div[data-test-id="view-section-table-row-component"]').innerText).eql('1Mbps')
+    .expect(minimumConnectionRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok()
+
+    .expect(minimumResolutionRow.find('div[data-test-id="view-section-table-row-title"]').innerText).eql('Recommended desktop aspect ratio and screen resolution')
+    .expect(minimumResolutionRow.find('div[data-test-id="view-section-table-row-component"]').innerText).eql('4:3 800 x 600')
+    .expect(minimumResolutionRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok()
+
     .expect(hardwareRequirementsDescriptionRow.find('div[data-test-id="view-section-table-row-title"]').innerText).eql('Hardware requirements')
     .expect(hardwareRequirementsDescriptionRow.find('div[data-test-id="view-section-table-row-component"]').innerText).eql('Some hardware requirement description')
-    .expect(hardwareRequirementsDescriptionRow.find('div[data-test-id="view-section-table-row-vertical"]').exists).ok();
+    .expect(hardwareRequirementsDescriptionRow.find('div[data-test-id="view-section-table-row-vertical"]').exists).ok()
+
+    .expect(additionalInformationRow.find('div[data-test-id="view-section-table-row-title"]').innerText).eql('Additional information')
+    .expect(additionalInformationRow.find('div[data-test-id="view-section-table-row-component"]').innerText).eql('Some browser additional information')
+    .expect(additionalInformationRow.find('div[data-test-id="view-section-table-row-vertical"]').exists).ok();
 });
