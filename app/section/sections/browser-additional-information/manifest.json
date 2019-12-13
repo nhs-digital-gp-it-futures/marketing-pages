@@ -1,0 +1,21 @@
+{
+  "id": "browser-additional-information",
+  "title": "Browser based - additional information",
+  "mainAdvice": "Answer the following questions about your browser based solution",
+  "additionalAdvice": [
+    "This information is diplayed on the Marketing page for buyers to view"
+  ],
+  "questions": {
+    "additional-information": {
+      "mainAdvice": "Do you have any additional browser based information (optional)",
+      "additionalAdvice": "Add any additional information or requirement your Solution needs to function",
+      "footerAdvice": "You can enter up to 500 characters",
+      "type": "textarea-field",
+      "errorResponse": {
+        "maxLength": "Additional information is over the character limit"
+      }
+    }
+  },
+  "submitText" : "Save and return",
+  "successfulSubmitResponsePath" : "dashboard/browser-based"
+}

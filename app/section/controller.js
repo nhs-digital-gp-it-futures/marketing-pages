@@ -8,7 +8,7 @@ import logger from '../logger';
 
 export const getSectionPageContext = async (solutionId, sectionId) => {
   const sectionManifest = new ManifestProvider().getSectionManifest(sectionId);
-  const endpoint = `${apiHost}/Solutions/${solutionId}/sections/${sectionId}`;
+  const endpoint = `${apiHost}/api/v1/Solutions/${solutionId}/sections/${sectionId}`;
   logger.info(`api called: [GET] ${endpoint}`);
   const sectionData = await axios.get(endpoint);
   if (sectionData && sectionData) {
@@ -35,7 +35,7 @@ export const postSection = async (solutionId, sectionId, sectionData) => {
   const sectionManifest = new ManifestProvider().getSectionManifest(sectionId);
   const transformedSectionData = transformSectionData(sectionId, sectionManifest, sectionData);
   try {
-    const endpoint = `http://localhost:8080/api/v1/Solutions/${solutionId}/sections/${sectionId}`;
+    const endpoint = `${apiHost}/api/v1/Solutions/${solutionId}/sections/${sectionId}`;
     logger.info(`api called: [PUT] ${endpoint}`);
     await axios.put(endpoint, transformedSectionData);
 

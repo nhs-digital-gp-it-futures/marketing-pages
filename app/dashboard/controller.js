@@ -7,7 +7,7 @@ import logger from '../logger';
 export const getMarketingPageDashboardContext = async (solutionId, validationErrors) => {
   const dashboardManifest = new ManifestProvider().getDashboardManifest();
 
-  const endpoint = `${apiHost}/Solutions/${solutionId}/dashboard`;
+  const endpoint = `${apiHost}/api/v1/Solutions/${solutionId}/dashboard`;
   logger.info(`api called: [GET] ${endpoint}`);
   const dashboardDataRaw = await axios.get(endpoint);
   if (dashboardDataRaw && dashboardDataRaw.data) {
@@ -22,7 +22,7 @@ export const getMarketingPageDashboardContext = async (solutionId, validationErr
 
 export const postSubmitForModeration = async (solutionId) => {
   try {
-    const endpoint = `http://localhost:8080/api/v1/Solutions/${solutionId}/SubmitForReview`;
+    const endpoint = `${apiHost}/api/v1/Solutions/${solutionId}/SubmitForReview`;
     logger.info(`api called: [PUT] ${endpoint}`);
     await axios.put(endpoint, {});
     return {

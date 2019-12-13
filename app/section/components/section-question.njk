@@ -3,6 +3,7 @@
 {% from './fields/text-field.njk' import textField %}
 {% from './fields/checkbox-options.njk' import checkboxOptions %}
 {% from './fields/radiobutton-options.njk' import radiobuttonOptions %}
+{% from './fields/combobox-options.njk' import comboboxOptions %}
 
 {% macro sectionQuestion(question) %}
   <div data-test-id="section-question-{{ question.type }}">
@@ -24,6 +25,10 @@
 
     {% if (question.type === 'radiobutton-options') %}
       {{ radiobuttonOptions(question) }}
+    {% endif %}
+
+    {% if (question.type === 'combobox-options') %}
+      {{ comboboxOptions(question) }}
     {% endif %}
   </div>
 {% endmacro %}

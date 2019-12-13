@@ -13,6 +13,10 @@
           "title": "Browsers supported",
           "type": "section"
         },
+        "browser-mobile-first": {
+          "title": "Mobile first",
+          "type": "section"
+        },
         "plug-ins-or-extensions": {
           "title": "Plug-ins or extensions",
           "type": "section"
@@ -25,7 +29,7 @@
           "title": "Hardware requirements",
           "type": "section"
         },
-        "additional-information": {
+        "browser-additional-information": {
           "title": "Additional information",
           "type": "section"
         }

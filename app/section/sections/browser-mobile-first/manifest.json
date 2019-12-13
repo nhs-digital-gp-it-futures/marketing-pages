@@ -1,0 +1,24 @@
+{
+  "id": "browser-mobile-first",
+  "title": "Browser based - mobile first",
+  "mainAdvice": "Answer the following questions about your browser based Solution",
+  "additionalAdvice": [
+    "This information is displayed on the Marketing page for buyers to view."
+  ],
+  "questions": {
+    "mobile-first-design": {   
+      "mainAdvice": "Was this Solution design with a mobile first approach?",
+      "additionalAdvice": "Please select from the options below.",
+      "type": "radiobutton-options",
+      "options": {
+        "Yes": "Yes",
+        "No": "No"
+      },
+      "errorResponse": {
+        "required": "Please select whether or not this solution was designed with a mobile first approach"
+      }
+    }
+  },
+  "submitText" : "Save and return",
+  "successfulSubmitResponsePath" : "dashboard/browser-based"
+}

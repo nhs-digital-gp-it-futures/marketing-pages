@@ -74,4 +74,39 @@ describe('generateOptions', () => {
 
     expect(generatedOptions).toEqual(expectedOptions);
   });
+
+  it('should return the options and marked the options as selected for combobox type questions', () => {
+    const expectedOptions = [
+      {
+        text: 'option 1',
+        value: 'option 1',
+        selected: true,
+      },
+      {
+        text: 'option 2',
+        value: 'option 2',
+      },
+      {
+        text: 'option 3',
+        value: 'option 3',
+      },
+    ];
+
+    const options = {
+      'option 1': 'option 1',
+      'option 2': 'option 2',
+      'option 3': 'option 3',
+    };
+
+
+    const formData = {
+      'some-question-id': [
+        'option 1',
+      ],
+    };
+
+    const generatedOptions = generateOptions('some-question-id', options, formData, 'combobox-options');
+
+    expect(generatedOptions).toEqual(expectedOptions);
+  });
 });

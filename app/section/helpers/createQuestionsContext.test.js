@@ -94,6 +94,38 @@ describe('createQuestionsContext', () => {
     expect(context).toEqual(expectedContext);
   });
 
+  it('should create a context for question type combobox-options', () => {
+    const expectedContext = {
+      questions: [
+        {
+          id: 'some-question-id',
+          type: 'combobox-options',
+          options: [
+            {
+              text: 'option 1',
+              value: 'option 1',
+            },
+          ],
+        },
+      ],
+    };
+
+    const sectionManifest = {
+      questions: {
+        'some-question-id': {
+          type: 'combobox-options',
+          options: {
+            'option 1': 'option 1',
+          },
+        },
+      },
+    };
+
+    const context = createQuestionsContext(sectionManifest);
+
+    expect(context).toEqual(expectedContext);
+  });
+
   it('should create a context for question type textarea-field', () => {
     const expectedContext = {
       questions: [

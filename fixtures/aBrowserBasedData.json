@@ -4,6 +4,10 @@
       "status": "INCOMPLETE",
       "requirement": "Mandatory"
     },
+    "browser-mobile-first": {
+      "status": "INCOMPLETE",
+      "requirement": "Mandatory"
+    },
     "plug-ins-or-extensions": {
       "status": "INCOMPLETE",
       "requirement": "Mandatory"
@@ -16,7 +20,7 @@
       "status": "INCOMPLETE",
       "requirement": "Optional"
     },
-    "additional-information": {
+    "browser-additional-information": {
       "status": "INCOMPLETE",
       "requirement": "Optional"
     }
