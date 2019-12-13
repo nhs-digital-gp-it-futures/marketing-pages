@@ -8,39 +8,35 @@ Nodejs with Express app to present the marketing pages.
 
   
 
-## Prerequisite
+## Requirements
+- Node 10
+
+Install the long-term support (LTS) version of <a href="https://nodejs.org/en/">Node.js</a>, which includes NPM.
 
   
 
-Install the long-term support (LTS) version of <a  href="https://nodejs.org/en/">Node.js</a>, which includes NPM.
-
-  
-
+## Setting up
+```
+git clone https://github.com/nhs-digital-gp-it-futures/marketing-pages.git
+cd marketing-pages
+npm install
+```
 ## Running the application
+- Run - `npm run start`
+- Unit Tests - `npm run test`
+- Integration Tests On Linux - `npm run test:integration`
+- Integration Tests On Windows - `npm run test:integration_win`
 
- 1. Make sure you have the API running
- 2. Set an env. variable NODE_ENV with value of 'development' - see the table below on how to set env. variables.
- 3. run `npm run start`
+|
 
-To set a process level environment variable in a CLI see the below table
+You should now be able to view the dashboard at [http://localhost:3002/100000-001](http://localhost:3002/100000-001)
 
-| CLI | Command | Example |
-|---------------|--------------------|---------------
-|`bash` | `export` | `export NODE_ENV=development` |
-| `cmd` | `set` | `set NODE_ENV=development`|
-| `PowerShell` | `$env:` | `$env:NODE_ENV = "development"` |
-
-You should now be able to view the dashboard at [http://localhost:3001/S100000-001](http://localhost:3001/S100000-001)
-
-## Debugging
+## Debugging the application
 
  1. In Visual Studio Code, go to Preferences > Settings and search for 'node debug' and turn the 'Auto Attach' option ON.
  2. Insert breakpoint/s.
  3. In Visual Studio Code, open the integrated terminal and run `npm run debug`
- 
 
-# Buying Catalogue Components
-
-Component Library
-
-
+## Dependencies
+### Buying Catalogue API
+In order for the app to function properly, make sure you have an instance of the Buying Catalogue API in dev. environment running. How to set up the [Buying Catalogue API](https://github.com/nhs-digital-gp-it-futures/BuyingCatalogueService/blob/master/README.md "Buying Catalogue API setup").
