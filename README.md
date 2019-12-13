@@ -27,7 +27,6 @@ npm install
 - Integration Tests On Linux - `npm run test:integration`
 - Integration Tests On Windows - `npm run test:integration_win`
 
-|
 
 You should now be able to view the dashboard at [http://localhost:3002/100000-001](http://localhost:3002/100000-001)
 
