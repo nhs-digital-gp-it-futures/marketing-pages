@@ -38,14 +38,10 @@ steps:
 
   - task: DockerInstaller@0
     inputs:
-      dockerVersion: '17.09.0-ce'
-      
-  - task: DockerInstaller@0
-    inputs:
       dockerVersion: '18.09.9'
   
   - task: DockerCompose@0
-    displayName: 'Build: gpitfuturesdevacr'
+    displayName: 'Build: Dev'
     inputs:
       containerregistrytype: 'Azure Container Registry'
       azureSubscription: 'NHSAPP-BuyingCatalogue'
@@ -54,7 +50,7 @@ steps:
       action: 'Build services'
 
   - task: DockerCompose@0
-    displayName: 'Push: gpitfuturesdevacr'
+    displayName: 'Push: Dev'
     inputs:
       containerregistrytype: 'Azure Container Registry'
       azureSubscription: 'NHSAPP-BuyingCatalogue'
@@ -63,7 +59,7 @@ steps:
       action: 'Push services'
 
   - task: DockerCompose@0
-    displayName: 'Build: gpitfuturestestacr'
+    displayName: 'Build: Test'
     inputs:
       containerregistrytype: 'Azure Container Registry'
       azureSubscription: 'NHSAPP-BuyingCatalogue'
@@ -72,7 +68,7 @@ steps:
       action: 'Build services'
 
   - task: DockerCompose@0
-    displayName: 'Push: gpitfuturestestacr'
+    displayName: 'Push: Test'
     inputs:
       containerregistrytype: 'Azure Container Registry'
       azureSubscription: 'NHSAPP-BuyingCatalogue'
@@ -81,7 +77,7 @@ steps:
       action: 'Push services'
 
   - task: DockerCompose@0
-    displayName: 'Build: gpitfuturespprodacr'
+    displayName: 'Build: Pre-Prod'
     inputs:
       containerregistrytype: 'Azure Container Registry'
       azureSubscription: 'NHSAPP-BuyingCatalogue'
@@ -90,7 +86,7 @@ steps:
       action: 'Build services'
 
   - task: DockerCompose@0
-    displayName: 'Push: gpitfuturespprodacr'
+    displayName: 'Push: Pre-Prod'
     inputs:
       containerregistrytype: 'Azure Container Registry'
       azureSubscription: 'NHSAPP-BuyingCatalogue'
@@ -99,7 +95,7 @@ steps:
       action: 'Push services'
 
   - task: DockerCompose@0
-    displayName: 'Build: gpitfuturesprodacr'
+    displayName: 'Build: Prod'
     inputs:
       containerregistrytype: 'Azure Container Registry'
       azureSubscription: 'NHSAPP-BuyingCatalogue'
@@ -108,7 +104,7 @@ steps:
       action: 'Build services'
 
   - task: DockerCompose@0
-    displayName: 'Push: gpitfuturespprodacr'
+    displayName: 'Push: Prod'
     inputs:
       containerregistrytype: 'Azure Container Registry'
       azureSubscription: 'NHSAPP-BuyingCatalogue'
