@@ -111,7 +111,7 @@ test('should render all the sections for the Browser based sections section grou
     .expect(additionalInformationSection.find('[data-test-id="dashboard-section-title"]').innerText)
     .eql('Additional information')
     .expect(additionalInformationSection.find('[data-test-id="dashboard-section-title"] a').getAttribute('href'))
-    .eql('/S100000-001/section/additional-information')
+    .eql('/S100000-001/section/browser-additional-information')
     .expect(additionalInformationSection.find('[data-test-id="dashboard-section-requirement"]').innerText)
     .eql('Optional')
     .expect(additionalInformationSection.find('[data-test-id="dashboard-section-status"]').innerText)

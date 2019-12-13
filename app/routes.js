@@ -3,65 +3,103 @@ import { getMarketingPageDashboardContext, postSubmitForModeration } from './das
 import { getSubDashboardPageContext } from './dashboard/subDashboards/controller';
 import { getSectionPageContext, getSectionPageErrorContext, postSection } from './section/controller';
 import { getPreviewPageContext } from './preview/controller';
+import logger from './logger';
+import { errorHandler } from './error/errorHandler';
 
 const router = express.Router();
 
-router.get('/:solutionId', async (req, res) => {
+router.get('/:solutionId', async (req, res, next) => {
   const { solutionId } = req.params;
-  const context = await getMarketingPageDashboardContext(solutionId);
-
-  res.render('dashboard/template', context);
-});
-
-router.get('/:solutionId/dashboard/:sectionId', async (req, res) => {
-  const { solutionId, sectionId } = req.params;
-  const context = await getSubDashboardPageContext(solutionId, sectionId);
-
-  res.render('dashboard/subDashboards/template', context);
-});
-
-
-router.get('/:solutionId/section/:sectionId', async (req, res) => {
-  const { solutionId, sectionId } = req.params;
-  const context = await getSectionPageContext(solutionId, sectionId);
-
-  res.render('section/template', context);
-});
-
-router.post('/:solutionId/section/:sectionId', async (req, res) => {
-  const { solutionId, sectionId } = req.params;
-  const sectionPostData = req.body;
-
-  const response = await postSection(solutionId, sectionId, sectionPostData);
-
-  if (response.success) {
-    res.redirect(response.redirectUrl);
-  } else {
-    const context = await getSectionPageErrorContext(
-      solutionId, sectionId, sectionPostData, response,
-    );
-
-    res.render('section/template', context);
+  logger.info(`navigating to Solution ${solutionId} dashboard`);
+  try {
+    const context = await getMarketingPageDashboardContext(solutionId);
+    res.render('dashboard/template', context);
+  } catch (err) {
+    next(err);
   }
 });
 
-router.get('/:solutionId/preview', async (req, res) => {
-  const { solutionId } = req.params;
-  const context = await getPreviewPageContext(solutionId);
-
-  res.render('preview/template', context);
+router.get('/:solutionId/dashboard/:sectionId', async (req, res, next) => {
+  const { solutionId, sectionId } = req.params;
+  logger.info(`navigating to Solution ${solutionId} dashboard: section ${sectionId}`);
+  try {
+    const context = await getSubDashboardPageContext(solutionId, sectionId);
+    res.render('dashboard/subDashboards/template', context);
+  } catch (err) {
+    next(err);
+  }
 });
 
-router.get('/:solutionId/submitForModeration', async (req, res) => {
+
+router.get('/:solutionId/section/:sectionId', async (req, res, next) => {
+  const { solutionId, sectionId } = req.params;
+  logger.info(`navigating to Solution ${solutionId}: section ${sectionId}`);
+  try {
+    const context = await getSectionPageContext(solutionId, sectionId);
+    res.render('section/template', context);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.post('/:solutionId/section/:sectionId', async (req, res, next) => {
+  const { solutionId, sectionId } = req.params;
+  const sectionPostData = req.body;
+  try {
+    const response = await postSection(solutionId, sectionId, sectionPostData);
+    if (response.success) {
+      res.redirect(response.redirectUrl);
+    } else {
+      const context = await getSectionPageErrorContext(
+        solutionId, sectionId, sectionPostData, response,
+      );
+      res.render('section/template', context);
+    }
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.get('/:solutionId/preview', async (req, res, next) => {
   const { solutionId } = req.params;
-  const response = await postSubmitForModeration(solutionId);
+  logger.info(`navigating to Solution ${solutionId} preview`);
+  try {
+    const context = await getPreviewPageContext(solutionId);
+    res.render('preview/template', context);
+  } catch (err) {
+    next(err);
+  }
+});
 
-  if (response.success) {
-    res.redirect(`/${solutionId}`);
+router.get('/:solutionId/submitForModeration', async (req, res, next) => {
+  const { solutionId } = req.params;
+  try {
+    const response = await postSubmitForModeration(solutionId);
+    if (response.success) {
+      res.redirect(`/${solutionId}`);
+    } else {
+      const context = await getMarketingPageDashboardContext(solutionId, response);
+      res.render('dashboard/template', context);
+    }
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.get('*', (req, res, next) => {
+  next({
+    status: 404,
+    message: 'Incorrect url - please check it is valid and try again',
+  });
+});
+
+router.use((err, req, res, next) => {
+  if (err) {
+    const context = errorHandler(err);
+    logger.error(context.message);
+    res.render('error/template.njk', context);
   } else {
-    const context = await getMarketingPageDashboardContext(solutionId, response);
-
-    res.render('dashboard/template', context);
+    next();
   }
 });
 

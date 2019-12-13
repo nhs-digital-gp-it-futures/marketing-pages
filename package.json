@@ -14,7 +14,7 @@
     "lint:css": "sass-lint 'app/**/*.scss' -v -q",
     "nuke": "npm run clean && rm -rf node_modules/",
     "start": "npm run build && babel-node server",
-    "test:integration": "NODE_ENV=development babel-node testcafeRunner.js",
+    "test:integration": "NODE_ENV=development LOGGER_LEVEL=off babel-node testcafeRunner.js",
     "test:integration_win": "babel-node testcafeRunner.js",
     "test": "jest --coverage",
     "prewatch": "npm run build:css",
@@ -39,7 +39,8 @@
     "express": "^4.17.1",
     "nhsuk-frontend": "^3.0.2",
     "nunjucks": "^3.2.0",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "winston": "^3.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",

@@ -10,4 +10,7 @@ module.exports = {
 
   // API_HOST
   apiHost: process.env.API_HOST || 'http://localhost:8080',
+
+  // LOGGER_LEVEL options are info, warn, error, off
+  loggerLevel: process.env.LOGGER_LEVEL || 'error',
 };
