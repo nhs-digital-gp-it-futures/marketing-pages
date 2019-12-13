@@ -239,7 +239,7 @@ test('should goto anchor when clicking the description summary error link', asyn
     .expect(getLocation()).contains('/S100000-001/section/solution-description#description');
 });
 
-test('should goto anchor when clicking the description summary error link', async (t) => {
+test('should goto anchor when clicking the abourt url error link', async (t) => {
   await pageSetup(t);
 
   nock('http://localhost:8080')

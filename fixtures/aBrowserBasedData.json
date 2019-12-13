@@ -4,6 +4,10 @@
       "status": "INCOMPLETE",
       "requirement": "Mandatory"
     },
+    "browser-mobile-first": {
+      "status": "INCOMPLETE",
+      "requirement": "Mandatory"
+    },
     "plug-ins-or-extensions": {
       "status": "INCOMPLETE",
       "requirement": "Mandatory"
