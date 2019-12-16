@@ -36,7 +36,7 @@ fixture.only('Show mobile operating systems')
     await t.expect(isDone).ok('Not all nock interceptors were used!');
   });
 
-test('should render the mobile operating systems page title', async (t) => {
+test('should render the page title', async (t) => {
   await pageSetup(t);
   const title = Selector('[data-test-id="section-title"]');
   await t
@@ -58,7 +58,7 @@ test('should render all the advice of the section', async (t) => {
     .expect(additionalAdvice.innerText).eql(expectedAdditionalAdvice);
 });
 
-test('should render the select operating systems question', async (t) => {
+test('should render the operating systems question', async (t) => {
   const question = 'operating-systems';
   const expectedOperatingSystems = sectionManifest.questions[question];
   await pageSetup(t);
@@ -68,6 +68,19 @@ test('should render the select operating systems question', async (t) => {
     .expect(opertingSystemsQuestion.find('.nhsuk-hint').innerText).eql(expectedOperatingSystems.additionalAdvice)
     .expect(opertingSystemsQuestion.find('.nhsuk-checkboxes').count).eql(1)
     .expect(opertingSystemsQuestion.find('.nhsuk-checkboxes__item').count).eql(3);
+});
+
+test('should populate the operating systems checkboxes with existing data', async (t) => {
+  await pageSetup(t, 200, mobileOperatingSystemsMarketingData);
+  const operatingSystemsQuestion = Selector('[data-test-id="question-operating-systems"]');
+  const appleIOSCheckbox = operatingSystemsQuestion.find('.nhsuk-checkboxes__item:nth-child(1)');
+  const androidCheckbox = operatingSystemsQuestion.find('.nhsuk-checkboxes__item:nth-child(2)');
+  const otherCheckbox = operatingSystemsQuestion.find('.nhsuk-checkboxes__item:nth-child(3)');
+
+  await t
+    .expect(appleIOSCheckbox.find('input:checked').exists).ok()
+    .expect(androidCheckbox.find('input:checked').exists).ok()
+    .expect(otherCheckbox.find('input:checked').exists).ok()
 });
 
 test('should render the operating systems description question', async (t) => {
@@ -82,49 +95,15 @@ test('should render the operating systems description question', async (t) => {
     .expect(operatingSystemsDescriptionQuestion.find('[data-test-id="textarea-field-footer"]').innerText).eql(expectedDescription.footerAdvice);
 });
 
-test('should render the submit button', async (t) => {
-  await pageSetup(t);
-  const submitButton = Selector('[data-test-id="section-submit-button"]');
-  await t
-    .expect(submitButton.find('button').count).eql(1);
-});
-
-// test('should go to the native mobile dashboard when clicking the submit button', async (t) => {
-//   await pageSetup(t, 200, mobileOperatingSystemsMarketingData);
-
-//   nock('http://localhost:8080')
-//     .put(sectionApiUrl)
-//     .reply(200, mobileOperatingSystemsMarketingData);
-
-//   nock('http://localhost:8080')
-//     .get('/api/v1/Solutions/S100000-001/sections/native-mobile')
-//     .reply(200, {});
-
-//   const submitButton = Selector('[data-test-id="section-submit-button"] button');
-
-//   await t
-//     .expect(submitButton.exists).ok()
-//     .click(submitButton)
-//     .expect(getLocation()).contains('/S100000-001/dashboard/native-mobile');
-// });
-
-test('should populate the checkboxes with existing data', async (t) => {
+test('should populate the operating systems description textarea with existing data', async (t) => {
   await pageSetup(t, 200, mobileOperatingSystemsMarketingData);
-  const operatingSystemsQuestion = Selector('[data-test-id="question-operating-systems"]');
-  const appleIOSCheckbox = operatingSystemsQuestion.find('.nhsuk-checkboxes__item:nth-child(1)');
-  const androidCheckbox = operatingSystemsQuestion.find('.nhsuk-checkboxes__item:nth-child(2)');
-  const otherCheckbox = operatingSystemsQuestion.find('.nhsuk-checkboxes__item:nth-child(3)');
-
   const descriptionQuestion = Selector('[data-test-id="question-operating-systems-description"]');
 
   await t
-    .expect(appleIOSCheckbox.find('input:checked').exists).ok()
-    .expect(androidCheckbox.find('input:checked').exists).ok()
-    .expect(otherCheckbox.find('input:checked').exists).ok()
     .expect(descriptionQuestion.find('textarea').value).eql(mobileOperatingSystemsMarketingData['operating-systems-description']);
 });
 
-test('should show error summary and validation for operating systems description question when it exceed the maxLength', async (t) => {
+test('should show error summary and validation for operating systems description question when it exceeds the maxLength', async (t) => {
   const question = 'operating-systems-description';
   await pageSetup(t);
   nock('http://localhost:8080')
@@ -166,6 +145,32 @@ test('should go to anchor when clicking the operating systems description error 
     .click(errorSummaryList.find('li:nth-child(1) a'))
     .expect(getLocation()).contains(`/S100000-001/section/${sectionId}#${question}`);
 });
+
+test('should render the submit button', async (t) => {
+  await pageSetup(t);
+  const submitButton = Selector('[data-test-id="section-submit-button"]');
+  await t
+    .expect(submitButton.find('button').count).eql(1);
+});
+
+// test('should go to the native mobile dashboard when clicking the submit button', async (t) => {
+//   await pageSetup(t, 200, mobileOperatingSystemsMarketingData);
+
+//   nock('http://localhost:8080')
+//     .put(sectionApiUrl)
+//     .reply(200, mobileOperatingSystemsMarketingData);
+
+//   nock('http://localhost:8080')
+//     .get('/api/v1/Solutions/S100000-001/sections/native-mobile')
+//     .reply(200, {});
+
+//   const submitButton = Selector('[data-test-id="section-submit-button"] button');
+
+//   await t
+//     .expect(submitButton.exists).ok()
+//     .click(submitButton)
+//     .expect(getLocation()).contains('/S100000-001/dashboard/native-mobile');
+// });
 
 test('should render the return to all sections link', async (t) => {
   await pageSetup(t);
