@@ -26,7 +26,7 @@ const pageSetup = async (t, responseStatus = 200, responseBody = {}) => {
   await t.navigateTo(`http://localhost:1234/S100000-001/section/${sectionId}`);
 };
 
-fixture('Show mobile operating systems')
+fixture.only('Show mobile operating systems')
   .afterEach(async (t) => {
     const isDone = nock.isDone();
     if (!isDone) {
@@ -62,12 +62,18 @@ test('should render the operating systems question', async (t) => {
   const question = 'operating-systems';
   const expectedOperatingSystems = sectionManifest.questions[question];
   await pageSetup(t);
-  const opertingSystemsQuestion = Selector(`[data-test-id="question-${question}"]`);
+  const operatingSystemsQuestion = Selector(`[data-test-id="question-${question}"]`);
+  const appleIOSCheckbox = operatingSystemsQuestion.find('.nhsuk-checkboxes__item:nth-child(1)');
+  const androidCheckbox = operatingSystemsQuestion.find('.nhsuk-checkboxes__item:nth-child(2)');
+  const otherCheckbox = operatingSystemsQuestion.find('.nhsuk-checkboxes__item:nth-child(3)');
   await t
-    .expect(opertingSystemsQuestion.find('.nhsuk-fieldset__legend').innerText).eql(expectedOperatingSystems.mainAdvice)
-    .expect(opertingSystemsQuestion.find('.nhsuk-hint').innerText).eql(expectedOperatingSystems.additionalAdvice)
-    .expect(opertingSystemsQuestion.find('.nhsuk-checkboxes').count).eql(1)
-    .expect(opertingSystemsQuestion.find('.nhsuk-checkboxes__item').count).eql(3);
+    .expect(operatingSystemsQuestion.find('.nhsuk-fieldset__legend').innerText).eql(expectedOperatingSystems.mainAdvice)
+    .expect(operatingSystemsQuestion.find('.nhsuk-hint').innerText).eql(expectedOperatingSystems.additionalAdvice)
+    .expect(operatingSystemsQuestion.find('.nhsuk-checkboxes').count).eql(1)
+    .expect(operatingSystemsQuestion.find('.nhsuk-checkboxes__item').count).eql(3)
+    .expect(appleIOSCheckbox.innerText).eql(expectedOperatingSystems.options['apple-ios'])
+    .expect(androidCheckbox.innerText).eql(expectedOperatingSystems.options.android)
+    .expect(otherCheckbox.innerText).eql(expectedOperatingSystems.options.other);
 });
 
 test('should populate the operating systems checkboxes with existing data', async (t) => {
@@ -80,7 +86,7 @@ test('should populate the operating systems checkboxes with existing data', asyn
   await t
     .expect(appleIOSCheckbox.find('input:checked').exists).ok()
     .expect(androidCheckbox.find('input:checked').exists).ok()
-    .expect(otherCheckbox.find('input:checked').exists).ok()
+    .expect(otherCheckbox.find('input:checked').exists).ok();
 });
 
 test('should render the operating systems description question', async (t) => {
@@ -103,7 +109,7 @@ test('should populate the operating systems description textarea with existing d
     .expect(descriptionQuestion.find('textarea').value).eql(mobileOperatingSystemsMarketingData['operating-systems-description']);
 });
 
-test('should show error summary and validation for operating systems description question when it exceeds the maxLength', async (t) => {
+test('should show error summary and validation for operating systems description when it exceeds the maxLength', async (t) => {
   const question = 'operating-systems-description';
   await pageSetup(t);
   nock('http://localhost:8080')
@@ -128,6 +134,33 @@ test('should show error summary and validation for operating systems description
     .expect(errorSummaryList.find('li:nth-child(1) a').getAttribute('href')).eql('#operating-systems-description')
     .expect(operatingSystemsDescription.find('.nhsuk-textarea--error').exists).ok()
     .expect(operatingSystemsDescription.find('.nhsuk-error-message').innerText).eql(`Error:\n${expectedDescription.errorResponse.maxLength}`);
+});
+
+test('should show error summary and validation for operating systems is mandatory', async (t) => {
+  const question = 'operating-systems';
+  await pageSetup(t);
+
+  nock('http://localhost:8080')
+    .put(sectionApiUrl)
+    .reply(400, {
+      required: [question],
+    });
+
+  const errorSummary = Selector('[data-test-id="error-summary"]');
+  const errorSummaryList = Selector('.nhsuk-error-summary__list');
+  const clientApplicationTypesQuestion = Selector(`[data-test-id="question-${question}"]`);
+  const submitButton = Selector('[data-test-id="section-submit-button"]');
+
+  await t
+    .expect(errorSummary.exists).notOk()
+    .click(submitButton.find('button'))
+    .expect(errorSummary.exists).ok()
+    .expect(errorSummaryList.find('li').count).eql(1)
+    .expect(errorSummaryList.find('li:nth-child(1)').innerText).eql(sectionManifest.questions[question].errorResponse.required)
+    .expect(errorSummaryList.find('li:nth-child(1) a').getAttribute('href')).eql(`#${question}`)
+
+    .expect(clientApplicationTypesQuestion.find('[data-test-id="checkbox-options-error"]').exists).ok()
+    .expect(clientApplicationTypesQuestion.find('.nhsuk-error-message').innerText).eql(`Error:\n${sectionManifest.questions[question].errorResponse.required}`);
 });
 
 test('should go to anchor when clicking the operating systems description error link', async (t) => {
