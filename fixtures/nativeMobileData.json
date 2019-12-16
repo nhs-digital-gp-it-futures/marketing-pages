@@ -1,0 +1,32 @@
+{
+  "sections": {
+    "mobile-operating-systems": {
+      "status": "INCOMPLETE",
+      "requirement": "Mandatory"
+    },
+    "mobile-first": {
+      "status": "INCOMPLETE",
+      "requirement": "Mandatory"
+    },
+    "mobile-memory-and-storage": {
+      "status": "INCOMPLETE",
+      "requirement": "Mandatory"
+    },
+    "mobile-connection-details": {
+      "status": "INCOMPLETE",
+      "requirement": "Optional"
+    },
+    "mobile-components-and-device-capabilities": {
+      "status": "INCOMPLETE",
+      "requirement": "Optional"
+    },
+    "mobile-hardware-requirements": {
+      "status": "INCOMPLETE",
+      "requirement": "Optional"
+    },
+  "mobile-additional-information": {
+      "status": "INCOMPLETE",
+      "requirement": "Optional"
+    }
+  }
+}

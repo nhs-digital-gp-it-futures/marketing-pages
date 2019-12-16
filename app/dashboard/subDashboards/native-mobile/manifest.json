@@ -1,0 +1,43 @@
+{
+  "id":"native-mobile-dashboard-page",
+  "title": "Native mobile or tablet",
+  "mainAdvice": "Add further detail about your native mobile or tablet application.",
+  "additionalAdvice": [
+    "If your application is designed for native or tablet, please complete the sections below to provide information to the user about your client application"
+  ],
+  "sectionGroups": {
+    "native-mobile-sections": {
+      "title": "Native mobile or tablet sections",
+      "sections": {
+        "mobile-operating-systems": {
+          "title": "Supported operating systems",
+          "type": "section"
+        },
+        "mobile-first": {
+          "title": "Mobile first",
+          "type": "section"
+        },
+        "mobile-memory-and-storage": {
+          "title": "Memory and storage",
+          "type": "section"
+        },
+        "mobile-connection-details": {
+          "title": "Connection-details",
+          "type": "section"
+        },
+        "mobile-components-and-device-capabilities": {
+          "title": "Third party components and device capabilities",
+          "type": "section"
+        },
+        "mobile-hardware-requirements": {
+          "title": "Hardware-requirements",
+          "type": "section"
+        },
+        "mobile-additional-information": {
+          "title": "Additional information",
+          "type": "section"
+        }
+      }
+    }
+  }
+}
