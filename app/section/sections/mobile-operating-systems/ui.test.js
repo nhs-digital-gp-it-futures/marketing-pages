@@ -26,7 +26,7 @@ const pageSetup = async (t, responseStatus = 200, responseBody = {}) => {
   await t.navigateTo(`http://localhost:1234/S100000-001/section/${sectionId}`);
 };
 
-fixture.only('Show mobile operating systems')
+fixture('Show mobile operating systems')
   .afterEach(async (t) => {
     const isDone = nock.isDone();
     if (!isDone) {

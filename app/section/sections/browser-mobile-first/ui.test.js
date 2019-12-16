@@ -76,7 +76,8 @@ test('should render the submit button', async (t) => {
   const submitButton = Selector('[data-test-id="section-submit-button"]');
 
   await t
-    .expect(submitButton.find('button').count).eql(1);
+    .expect(submitButton.find('button').count).eql(1)
+    .expect(submitButton.find('button').innerText).eql('Save and return');
 });
 
 test('should goto the browser based dashboard when clicking the submit button', async (t) => {
