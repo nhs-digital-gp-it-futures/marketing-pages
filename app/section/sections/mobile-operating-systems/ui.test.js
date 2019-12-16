@@ -183,7 +183,8 @@ test('should render the submit button', async (t) => {
   await pageSetup(t);
   const submitButton = Selector('[data-test-id="section-submit-button"]');
   await t
-    .expect(submitButton.find('button').count).eql(1);
+    .expect(submitButton.find('button').count).eql(1)
+    .expect(submitButton.find('button').innerText).eql(sectionManifest.submitText);
 });
 
 // test('should go to the native mobile dashboard when clicking the submit button', async (t) => {
@@ -202,7 +203,7 @@ test('should render the submit button', async (t) => {
 //   await t
 //     .expect(submitButton.exists).ok()
 //     .click(submitButton)
-//     .expect(getLocation()).contains('/S100000-001/dashboard/native-mobile');
+//     .expect(getLocation()).contains(sectionManifest.successfulSubmitResponsePath);
 // });
 
 test('should render the return to all sections link', async (t) => {
