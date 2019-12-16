@@ -68,7 +68,7 @@ test('should render all the advice of the section', async (t) => {
     .expect(additionalAdvice.innerText).eql(expectedAdditionalAdvice);
 });
 
-test('should render the warning advise', async (t) => {
+test('should render the warning advice', async (t) => {
   await pageSetup(t);
 
   const warningAdvice = Selector('[data-test-id="section-warning-advice"]');

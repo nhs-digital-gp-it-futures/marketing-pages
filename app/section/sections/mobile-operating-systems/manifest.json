@@ -1,0 +1,30 @@
+{
+  "id": "mobile-operating-systems",
+  "title": "Native mobile or tablet - supported operating systems",
+  "mainAdvice": "Answer the following questions about your native mobile or tablet Solution",
+  "additionalAdvice": [
+    "This information is displayed on the Marketing page for buyers to view."
+  ],
+  "questions": {
+    "operating-systems": {
+      "mainAdvice": "What devices or operating systems are supported? Select all that apply",
+      "additionalAdvice": "Provide the details you would like to be point of contact for this Solution.",
+      "type": "checkbox-options",
+      "options": {
+        "apple-ios": "Apple IOS",
+        "android": "Android",
+        "other": "Other"
+      }
+    },
+    "operating-systems-description": {
+      "mainAdvice": "Description of supported operating systems (optional)",
+      "additionalAdvice": "Add further description of any context, exceptions or devices your Solution supports.",
+      "footerAdvice": "You can enter up to 500 characters",
+      "type": "textarea-field",
+      "errorResponse": {
+        "maxLength": "Description of supported operating systems is over the character limit"
+      }
+    }
+  },
+  "submitText" : "Save and return"
+}
