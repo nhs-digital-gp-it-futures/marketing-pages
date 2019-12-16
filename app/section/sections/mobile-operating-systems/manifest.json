@@ -8,7 +8,7 @@
   "questions": {
     "operating-systems": {
       "mainAdvice": "What devices or operating systems are supported? Select all that apply",
-      "additionalAdvice": "Provide the details you would like to be point of contact for this Solution.",
+      "additionalAdvice": "If your Solution is mobile or tablet based, please select below all the operating systems your Solution supports.",
       "type": "checkbox-options",
       "options": {
         "apple-ios": "Apple IOS",
