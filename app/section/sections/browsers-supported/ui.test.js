@@ -2,7 +2,6 @@ import nock from 'nock';
 import { Selector, ClientFunction } from 'testcafe';
 import { ManifestProvider } from '../../../manifestProvider';
 import dashboardWithCompleteSections from '../../../../fixtures/dashboardWithCompleteSections.json';
-import aBrowserBasedFixture from '../../../../fixtures/aBrowserBasedData.json';
 
 const browserSupportedMarketingData = {
   'supported-browsers': [
