@@ -22,7 +22,7 @@
           "type": "section"
         },
         "mobile-connection-details": {
-          "title": "Connection-details",
+          "title": "Connection details",
           "type": "section"
         },
         "mobile-components-and-device-capabilities": {
@@ -30,7 +30,7 @@
           "type": "section"
         },
         "mobile-hardware-requirements": {
-          "title": "Hardware-requirements",
+          "title": "Hardware requirements",
           "type": "section"
         },
         "mobile-additional-information": {

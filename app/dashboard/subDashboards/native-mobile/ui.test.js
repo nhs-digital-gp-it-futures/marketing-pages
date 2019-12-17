@@ -14,7 +14,7 @@ const pageSetup = async (t) => {
   await t.navigateTo('http://localhost:1234/S100000-001/dashboard/native-mobile');
 };
 
-fixture.only('Show native mobile dashboard page')
+fixture('Show native mobile dashboard page')
   .afterEach(async (t) => {
     const isDone = nock.isDone();
     if (!isDone) {
@@ -92,7 +92,7 @@ test('should render all the sections for native mobile sections section group', 
     .eql('INCOMPLETE')
 
     .expect(connectionDetails.find('[data-test-id="dashboard-section-title"]').innerText)
-    .eql('Connection-details')
+    .eql('Connection details')
     .expect(connectionDetails.find('[data-test-id="dashboard-section-title"] a').getAttribute('href'))
     .eql('/S100000-001/section/mobile-connection-details')
     .expect(connectionDetails.find('[data-test-id="dashboard-section-requirement"]').innerText)
@@ -110,7 +110,7 @@ test('should render all the sections for native mobile sections section group', 
     .eql('INCOMPLETE')
 
     .expect(hardwareRequirements.find('[data-test-id="dashboard-section-title"]').innerText)
-    .eql('Hardware-requirements')
+    .eql('Hardware- quirements')
     .expect(hardwareRequirements.find('[data-test-id="dashboard-section-title"] a').getAttribute('href'))
     .eql('/S100000-001/section/mobile-hardware-requirements')
     .expect(hardwareRequirements.find('[data-test-id="dashboard-section-requirement"]').innerText)
@@ -128,6 +128,7 @@ test('should render all the sections for native mobile sections section group', 
     .eql('INCOMPLETE');
 });
 
+// TODO remove .skip the ui for that page is done
 test.skip('should navigate the user to supported operation systems page when clicking on supported operation systems dashboard row', async (t) => {
   await pageSetup(t);
 
@@ -144,6 +145,7 @@ test.skip('should navigate the user to supported operation systems page when cli
     .expect(getLocation()).contains('S100000-001/section/mobile-operating-systems');
 });
 
+// TODO remove .skip the ui for that page is done
 test.skip('should navigate the user to the mobile first page when clicking on the mobile first dashboard row', async (t) => {
   await pageSetup(t);
 
@@ -160,6 +162,7 @@ test.skip('should navigate the user to the mobile first page when clicking on th
   .expect(getLocation()).contains('S100000-001/section/mobile-first');
 });
 
+// TODO remove .skip the ui for that page is done
 test.skip('should navigate the user to memory and storage page when clicking on memory and storage dashboard row', async (t) => {
   await pageSetup(t);
 
@@ -176,6 +179,7 @@ test.skip('should navigate the user to memory and storage page when clicking on 
     .expect(getLocation()).contains('S100000-001/section/mobile-memory-and-storage');
 });
 
+// TODO remove .skip the ui for that page is done
 test.skip('should navigate the user to the connection details page when clicking on the connection details dashboard row', async (t) => {
   await pageSetup(t);
 
@@ -192,6 +196,7 @@ test.skip('should navigate the user to the connection details page when clicking
     .expect(getLocation()).contains('S100000-001/section/mobile-connection-details');
 });
 
+// TODO remove .skip the ui for that page is done
 test.skip('should navigate the user to device capabilities page when clicking on device capabilities dashboard row', async (t) => {
   await pageSetup(t);
 
@@ -208,6 +213,7 @@ test.skip('should navigate the user to device capabilities page when clicking on
     .expect(getLocation()).contains('S100000-001/section/mobile-components-and-device-capabilities');
 });
 
+// TODO remove .skip the ui for that page is done
 test.skip('should navigate the user to hardware requirements page when clicking on hardware requirements dashboard row', async (t) => {
   await pageSetup(t);
 
@@ -224,6 +230,7 @@ test.skip('should navigate the user to hardware requirements page when clicking 
     .expect(getLocation()).contains('S100000-001/section/mobile-hardware-requirements');
 });
 
+// TODO remove .skip the ui for that page is done
 test.skip('should navigate the user to additional information page when clicking on additional information dashboard row', async (t) => {
   await pageSetup(t);
 
