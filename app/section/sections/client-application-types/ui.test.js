@@ -82,12 +82,18 @@ test('should render the select supported client application types question', asy
   await pageSetup(t);
 
   const clientApplicationTypesQuestion = Selector('[data-test-id="question-client-application-types"]');
+  const browerBasedCheckbox = clientApplicationTypesQuestion.find('.nhsuk-checkboxes__item:nth-child(1)');
+  const nativeMobileCheckbox = clientApplicationTypesQuestion.find('.nhsuk-checkboxes__item:nth-child(2)');
+  const nativeDesktopCheckbox = clientApplicationTypesQuestion.find('.nhsuk-checkboxes__item:nth-child(3)');
 
   await t
     .expect(clientApplicationTypesQuestion.find('.nhsuk-fieldset__legend').innerText).eql('Select the client application types your Solution supports *')
     .expect(clientApplicationTypesQuestion.find('.nhsuk-hint').innerText).eql('Check all the options that are relevant to you. You will be required to provide further information for each client application type you select.')
     .expect(clientApplicationTypesQuestion.find('.nhsuk-checkboxes').count).eql(1)
-    .expect(clientApplicationTypesQuestion.find('.nhsuk-checkboxes__item').count).eql(3);
+    .expect(clientApplicationTypesQuestion.find('.nhsuk-checkboxes__item').count).eql(3)
+    .expect(browerBasedCheckbox.innerText).eql('Browser based')
+    .expect(nativeMobileCheckbox.innerText).eql('Native mobile or tablet')
+    .expect(nativeDesktopCheckbox.innerText).eql('Native desktop');
 });
 
 test('should populate the checkboxes with existing data', async (t) => {
