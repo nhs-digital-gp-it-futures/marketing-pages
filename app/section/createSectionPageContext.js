@@ -9,11 +9,11 @@ export const createSectionPageContext = (
 
   const context = {
     title: sectionManifest.title,
-    submitActionUrl: `/${solutionId}/section/${sectionManifest.id}`,
+    submitActionUrl: `/solution/${solutionId}/section/${sectionManifest.id}`,
     mainAdvice: sectionManifest.mainAdvice,
     additionalAdvice: sectionManifest.additionalAdvice,
     warningAdvice: sectionManifest.warningAdvice || undefined,
-    returnToDashboardUrl: `/${solutionId}`,
+    returnToDashboardUrl: `/solution/${solutionId}`,
     submitText: sectionManifest.submitText,
     errors,
     questions,

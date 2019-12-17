@@ -35,7 +35,7 @@ const createSectionsContext = (
         : { errors: undefined, sections: undefined };
 
       const sectionContext = {
-        URL: `/${solutionId}/${manifestSection.type}/${manifestSectionId}`,
+        URL: `/solution/${solutionId}/${manifestSection.type}/${manifestSectionId}`,
         id: manifestSectionId,
         title: manifestSection.title,
         status: doesDataExistForSection
@@ -106,9 +106,9 @@ export const createDashboardPageContext = (
     title: dashboardManifest.title,
     mainAdvice: dashboardManifest.mainAdvice,
     additionalAdvice: dashboardManifest.additionalAdvice,
-    previewUrl: `/${solutionId}/preview`,
-    submitForModerationUrl: `/${solutionId}/submitForModeration`,
-    returnToDashboardUrl: `/${solutionId}`,
+    previewUrl: `/solution/${solutionId}/preview`,
+    submitForModerationUrl: `/solution/${solutionId}/submitForModeration`,
+    returnToDashboardUrl: `/solution/${solutionId}`,
     errors: errors && errors.length > 0 ? errors : undefined,
     sectionGroups,
   };

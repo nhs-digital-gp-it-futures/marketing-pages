@@ -40,7 +40,7 @@ describe('dashboard page', () => {
 
   it('should render the preview button at the top of the page', (done) => {
     const context = {
-      previewUrl: '/S100000-001/preview',
+      previewUrl: '/solution/S100000-001/preview',
     };
 
     const dummyApp = testHarness().createComponentDummyApp(template, context);
@@ -51,7 +51,7 @@ describe('dashboard page', () => {
 
         expect($('[data-test-id="dashboard-preview-button"] a').length).toEqual(1);
         expect($('[data-test-id="dashboard-preview-button"] a').text().trim()).toEqual('Preview Marketing page');
-        expect($('[data-test-id="dashboard-preview-button"] a').attr('href')).toEqual('/S100000-001/preview');
+        expect($('[data-test-id="dashboard-preview-button"] a').attr('href')).toEqual('/solution/S100000-001/preview');
 
         done();
       });
@@ -81,7 +81,7 @@ describe('dashboard page', () => {
 
   it('should render the Submit for moderation button at the bottom of the page', (done) => {
     const context = {
-      submitForModerationUrl: '/S100000-001/submitForModeration',
+      submitForModerationUrl: '/solution/S100000-001/submitForModeration',
     };
 
     const dummyApp = testHarness().createComponentDummyApp(template, context);
@@ -92,7 +92,7 @@ describe('dashboard page', () => {
 
         expect($('[data-test-id="dashboard-submit-for-moderation-button"] a').length).toEqual(1);
         expect($('[data-test-id="dashboard-submit-for-moderation-button"] a').text().trim()).toEqual('Submit for moderation');
-        expect($('[data-test-id="dashboard-submit-for-moderation-button"] a').attr('href')).toEqual('/S100000-001/submitForModeration');
+        expect($('[data-test-id="dashboard-submit-for-moderation-button"] a').attr('href')).toEqual('/solution/S100000-001/submitForModeration');
 
         done();
       });

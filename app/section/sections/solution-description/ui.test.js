@@ -23,7 +23,7 @@ const mocks = (withMarketingData) => {
 
 const pageSetup = async (t, withMarketingData = false) => {
   mocks(withMarketingData);
-  await t.navigateTo('http://localhost:1234/S100000-001/section/solution-description');
+  await t.navigateTo('http://localhost:1234/solution/S100000-001/section/solution-description');
 };
 
 fixture('Show Solution Description page')
@@ -187,7 +187,7 @@ test('should goto anchor when clicking the solution summary required summary err
     .expect(errorSummaryList.find('li:nth-child(1) a').count).eql(1)
     .expect(errorSummaryList.find('li:nth-child(1) a').getAttribute('href')).eql('#summary')
     .click(errorSummaryList.find('li:nth-child(1) a'))
-    .expect(getLocation()).contains('/S100000-001/section/solution-description#summary');
+    .expect(getLocation()).contains('/solution/S100000-001/section/solution-description#summary');
 });
 
 test('should goto anchor when clicking the solution summary max length summary error link', async (t) => {
@@ -212,7 +212,7 @@ test('should goto anchor when clicking the solution summary max length summary e
     .expect(errorSummaryList.find('li:nth-child(1) a').count).eql(1)
     .expect(errorSummaryList.find('li:nth-child(1) a').getAttribute('href')).eql('#summary')
     .click(errorSummaryList.find('li:nth-child(1) a'))
-    .expect(getLocation()).contains('/S100000-001/section/solution-description#summary');
+    .expect(getLocation()).contains('/solution/S100000-001/section/solution-description#summary');
 });
 
 test('should goto anchor when clicking the description summary error link', async (t) => {
@@ -237,7 +237,7 @@ test('should goto anchor when clicking the description summary error link', asyn
     .expect(errorSummaryList.find('li:nth-child(1) a').count).eql(1)
     .expect(errorSummaryList.find('li:nth-child(1) a').getAttribute('href')).eql('#description')
     .click(errorSummaryList.find('li:nth-child(1) a'))
-    .expect(getLocation()).contains('/S100000-001/section/solution-description#description');
+    .expect(getLocation()).contains('/solution/S100000-001/section/solution-description#description');
 });
 
 test('should goto anchor when clicking the abourt url error link', async (t) => {
@@ -262,7 +262,7 @@ test('should goto anchor when clicking the abourt url error link', async (t) => 
     .expect(errorSummaryList.find('li:nth-child(1) a').count).eql(1)
     .expect(errorSummaryList.find('li:nth-child(1) a').getAttribute('href')).eql('#link')
     .click(errorSummaryList.find('li:nth-child(1) a'))
-    .expect(getLocation()).contains('/S100000-001/section/solution-description#link');
+    .expect(getLocation()).contains('/solution/S100000-001/section/solution-description#link');
 });
 
 test('should show error summary and validation for Summary indicating it is mandatory', async (t) => {
@@ -314,5 +314,5 @@ test('should return to the marketing data dashboard when the return to all secti
   await t
     .click(link.find('a'))
     .expect(getLocation()).notContains('section')
-    .expect(getLocation()).contains('S100000-001');
+    .expect(getLocation()).contains('/solution/S100000-001');
 });

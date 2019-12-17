@@ -4,7 +4,7 @@ describe('createPostSectionResponse', () => {
   it('should create a context from the section manifest', () => {
     const expectedContext = {
       success: true,
-      redirectUrl: '/some-solution-id',
+      redirectUrl: '/solution/some-solution-id',
     };
 
     const sectionManifest = {};
@@ -17,7 +17,7 @@ describe('createPostSectionResponse', () => {
   it('should create a context from the sub section manifest', () => {
     const expectedContext = {
       success: true,
-      redirectUrl: '/some-solution-id/some-parent-section-id',
+      redirectUrl: '/solution/some-solution-id/some-parent-section-id',
     };
 
     const sectionManifest = {

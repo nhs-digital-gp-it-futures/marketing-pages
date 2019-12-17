@@ -18,7 +18,7 @@ const mocks = (initalDashboard) => {
 
 const pageSetup = async (t, initalDashboard = true) => {
   mocks(initalDashboard);
-  await t.navigateTo('http://localhost:1234/S100000-001');
+  await t.navigateTo('http://localhost:1234/solution/S100000-001');
 };
 
 fixture('Show marketing dashboard page')
@@ -54,7 +54,7 @@ test('should render the preview page button', async (t) => {
   await t
     .expect(previewButton.innerText).eql('Preview Marketing page')
     .click(previewButton)
-    .expect(getLocation()).contains('S100000-001/preview');
+    .expect(getLocation()).contains('/solution/S100000-001/preview');
 });
 
 test('should render the Submit for moderation button', async (t) => {
@@ -75,7 +75,7 @@ test('should render the Submit for moderation button', async (t) => {
   await t
     .expect(submitForModerationButton.innerText).eql('Submit for moderation')
     .click(submitForModerationButton)
-    .expect(getLocation()).contains('S100000-001');
+    .expect(getLocation()).contains('/solution/S100000-001');
 });
 
 test('should render the About your solution section group', async (t) => {
@@ -231,7 +231,7 @@ test('clicking on the solution description section link should navigate the user
 
   await t
     .click(theSolutionDescriptionSection.find('a'))
-    .expect(getLocation()).contains('S100000-001/section/solution-description');
+    .expect(getLocation()).contains('/solution/S100000-001/section/solution-description');
 });
 
 
@@ -249,7 +249,7 @@ test('clicking on the feature section link should navigate the user to the featu
 
   await t
     .click(theFeatureSection.find('a'))
-    .expect(getLocation()).contains('S100000-001/section/features');
+    .expect(getLocation()).contains('/solution/S100000-001/section/features');
 });
 
 test('clicking on the client application type section link should navigate the user to the client application type page', async (t) => {
@@ -266,7 +266,7 @@ test('clicking on the client application type section link should navigate the u
 
   await t
     .click(theClientApplicationTypeSection.find('a'))
-    .expect(getLocation()).contains('S100000-001/section/client-application-type');
+    .expect(getLocation()).contains('/solution/S100000-001/section/client-application-type');
 });
 
 test('clicking on the contact details section link should navigate the user to contact details page', async (t) => {
@@ -283,7 +283,7 @@ test('clicking on the contact details section link should navigate the user to c
 
   await t
     .click(contactDetailsSection.find('a'))
-    .expect(getLocation()).contains('S100000-001/section/contact-details');
+    .expect(getLocation()).contains('/solution/S100000-001/section/contact-details');
 });
 
 test('should render the Error summary containing all the sections that failed the SubmitForReview', async (t) => {
@@ -316,9 +316,9 @@ test('should render the Error summary containing all the sections that failed th
 
     .expect(solutionDescriptionError.innerText).eql('Solution description is a mandatory section')
     .click(solutionDescriptionError.find('a'))
-    .expect(getLocation()).contains('S100000-001/submitForModeration#solution-description')
+    .expect(getLocation()).contains('/solution/S100000-001/submitForModeration#solution-description')
 
     .expect(clientApplicationTypeError.innerText).eql('Client application type is a mandatory section')
     .click(clientApplicationTypeError.find('a'))
-    .expect(getLocation()).contains('S100000-001/submitForModeration#client-application-types');
+    .expect(getLocation()).contains('/solution/S100000-001/submitForModeration#client-application-types');
 });

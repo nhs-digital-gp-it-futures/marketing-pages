@@ -25,7 +25,7 @@ const mocks = (withMarketingData) => {
 
 const pageSetup = async (t, withMarketingData = false) => {
   mocks(withMarketingData);
-  await t.navigateTo('http://localhost:1234/S100000-001/section/features');
+  await t.navigateTo('http://localhost:1234/solution/S100000-001/section/features');
 };
 
 fixture('Show Feature page')
@@ -124,7 +124,7 @@ test('should allow posting an empty form and navigate back to the dashboard when
   await t
     .click(submitButton.find('button'))
     .expect(getLocation()).notContains('section')
-    .expect(getLocation()).contains('S100000-001');
+    .expect(getLocation()).contains('/solution/S100000-001');
 });
 
 test('should show validation for fields exceeding the maxLength', async (t) => {
@@ -190,7 +190,7 @@ test('should goto anchor when clicking the feature max length summary error link
     .expect(errorSummaryList.find('li:nth-child(1) a').count).eql(1)
     .expect(errorSummaryList.find('li:nth-child(1) a').getAttribute('href')).eql('#listing-1')
     .click(errorSummaryList.find('li:nth-child(1) a'))
-    .expect(getLocation()).contains('/S100000-001/section/features#listing-1');
+    .expect(getLocation()).contains('/solution/S100000-001/section/features#listing-1');
 });
 
 test('should render the return to all sections link', async (t) => {
@@ -216,5 +216,5 @@ test('should return to the marketing data dashboard when the return to all secti
   await t
     .click(link.find('a'))
     .expect(getLocation()).notContains('section')
-    .expect(getLocation()).contains('S100000-001');
+    .expect(getLocation()).contains('/solution/S100000-001');
 });
