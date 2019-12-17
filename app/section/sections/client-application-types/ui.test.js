@@ -68,7 +68,7 @@ test('should render all the advice of the section', async (t) => {
     .expect(additionalAdvice.innerText).eql(expectedAdditionalAdvice);
 });
 
-test('should render the warning advise', async (t) => {
+test('should render the warning advice', async (t) => {
   await pageSetup(t);
 
   const warningAdvice = Selector('[data-test-id="section-warning-advice"]');
@@ -82,12 +82,18 @@ test('should render the select supported client application types question', asy
   await pageSetup(t);
 
   const clientApplicationTypesQuestion = Selector('[data-test-id="question-client-application-types"]');
+  const browerBasedCheckbox = clientApplicationTypesQuestion.find('.nhsuk-checkboxes__item:nth-child(1)');
+  const nativeMobileCheckbox = clientApplicationTypesQuestion.find('.nhsuk-checkboxes__item:nth-child(2)');
+  const nativeDesktopCheckbox = clientApplicationTypesQuestion.find('.nhsuk-checkboxes__item:nth-child(3)');
 
   await t
     .expect(clientApplicationTypesQuestion.find('.nhsuk-fieldset__legend').innerText).eql('Select the client application types your Solution supports *')
     .expect(clientApplicationTypesQuestion.find('.nhsuk-hint').innerText).eql('Check all the options that are relevant to you. You will be required to provide further information for each client application type you select.')
     .expect(clientApplicationTypesQuestion.find('.nhsuk-checkboxes').count).eql(1)
-    .expect(clientApplicationTypesQuestion.find('.nhsuk-checkboxes__item').count).eql(3);
+    .expect(clientApplicationTypesQuestion.find('.nhsuk-checkboxes__item').count).eql(3)
+    .expect(browerBasedCheckbox.innerText).eql('Browser based')
+    .expect(nativeMobileCheckbox.innerText).eql('Native mobile or tablet')
+    .expect(nativeDesktopCheckbox.innerText).eql('Native desktop');
 });
 
 test('should populate the checkboxes with existing data', async (t) => {
@@ -110,7 +116,8 @@ test('should render the submit button', async (t) => {
   const submitButton = Selector('[data-test-id="section-submit-button"]');
 
   await t
-    .expect(submitButton.find('button').count).eql(1);
+    .expect(submitButton.find('button').count).eql(1)
+    .expect(submitButton.find('button').innerText).eql('Save and return to all sections');
 });
 
 test('should show error summary and validation for client application type is mandatory', async (t) => {

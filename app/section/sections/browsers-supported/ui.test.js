@@ -2,7 +2,6 @@ import nock from 'nock';
 import { Selector, ClientFunction } from 'testcafe';
 import { ManifestProvider } from '../../../manifestProvider';
 import dashboardWithCompleteSections from '../../../../fixtures/dashboardWithCompleteSections.json';
-import aBrowserBasedFixture from '../../../../fixtures/aBrowserBasedData.json';
 
 const browserSupportedMarketingData = {
   'supported-browsers': [
@@ -73,12 +72,28 @@ test('should render the supported browsers question', async (t) => {
   await pageSetup(t);
 
   const supportedBrowsersQuestion = Selector('[data-test-id="question-supported-browsers"]');
+  const chromeCheckbox = supportedBrowsersQuestion.find('.nhsuk-checkboxes__item:nth-child(1)');
+  const edgeCheckbox = supportedBrowsersQuestion.find('.nhsuk-checkboxes__item:nth-child(2)');
+  const firefoxCheckbox = supportedBrowsersQuestion.find('.nhsuk-checkboxes__item:nth-child(3)');
+  const operaCheckbox = supportedBrowsersQuestion.find('.nhsuk-checkboxes__item:nth-child(4)');
+  const safariCheckbox = supportedBrowsersQuestion.find('.nhsuk-checkboxes__item:nth-child(5)');
+  const chromiumCheckbox = supportedBrowsersQuestion.find('.nhsuk-checkboxes__item:nth-child(6)');
+  const ie11Checkbox = supportedBrowsersQuestion.find('.nhsuk-checkboxes__item:nth-child(7)');
+  const ie10Checkbox = supportedBrowsersQuestion.find('.nhsuk-checkboxes__item:nth-child(8)');
 
   await t
     .expect(supportedBrowsersQuestion.find('.nhsuk-fieldset__legend').innerText).eql('What browsers are supported? Select all that apply*')
     .expect(supportedBrowsersQuestion.find('.nhsuk-hint').innerText).eql('If your Solution is browser based, please select below all the browsers your Solution supports.')
     .expect(supportedBrowsersQuestion.find('.nhsuk-checkboxes').count).eql(1)
-    .expect(supportedBrowsersQuestion.find('.nhsuk-checkboxes__item').count).eql(8);
+    .expect(supportedBrowsersQuestion.find('.nhsuk-checkboxes__item').count).eql(8)
+    .expect(chromeCheckbox.innerText).eql('Google Chrome')
+    .expect(edgeCheckbox.innerText).eql('Microsoft Edge')
+    .expect(firefoxCheckbox.innerText).eql('Mozilla Firefox')
+    .expect(operaCheckbox.innerText).eql('Opera')
+    .expect(safariCheckbox.innerText).eql('Safari')
+    .expect(chromiumCheckbox.innerText).eql('Chromium')
+    .expect(ie11Checkbox.innerText).eql('Internet Explorer 11')
+    .expect(ie10Checkbox.innerText).eql('Internet Explorer 10');
 });
 
 test('should render the mobile responsive question', async (t) => {
@@ -99,7 +114,8 @@ test('should render the submit button', async (t) => {
   const submitButton = Selector('[data-test-id="section-submit-button"]');
 
   await t
-    .expect(submitButton.find('button').count).eql(1);
+    .expect(submitButton.find('button').count).eql(1)
+    .expect(submitButton.find('button').innerText).eql('Save and return');
 });
 
 test('should populate the questions with existing data', async (t) => {

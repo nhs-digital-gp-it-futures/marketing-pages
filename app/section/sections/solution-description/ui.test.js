@@ -118,7 +118,8 @@ test('should render the submit button', async (t) => {
   const submitButton = Selector('[data-test-id="section-submit-button"]');
 
   await t
-    .expect(submitButton.find('button').count).eql(1);
+    .expect(submitButton.find('button').count).eql(1)
+    .expect(submitButton.find('button').innerText).eql('Save and return to all sections');
 });
 
 test('should show error summary and validation for questions when they exceed the maxLength', async (t) => {
