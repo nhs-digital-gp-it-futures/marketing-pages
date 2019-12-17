@@ -23,7 +23,7 @@ const mocks = (responseStatus, responseBody) => {
 
 const pageSetup = async (t, responseStatus = 200, responseBody = {}) => {
   mocks(responseStatus, responseBody);
-  await t.navigateTo(`http://localhost:1234/S100000-001/section/${sectionId}`);
+  await t.navigateTo(`http://localhost:1234/solution/S100000-001/section/${sectionId}`);
 };
 
 fixture('Show mobile operating systems')
@@ -176,7 +176,7 @@ test('should go to anchor when clicking the operating systems description error 
   await t
     .click(submitButton.find('button'))
     .click(errorSummaryList.find('li:nth-child(1) a'))
-    .expect(getLocation()).contains(`/S100000-001/section/${sectionId}#${question}`);
+    .expect(getLocation()).contains(`/solution/S100000-001/section/${sectionId}#${question}`);
 });
 
 test('should render the submit button', async (t) => {
@@ -222,5 +222,5 @@ test('should return to the marketing data dashboard when the return to all secti
   await t
     .click(link)
     .expect(getLocation()).notContains('section')
-    .expect(getLocation()).contains('S100000-001');
+    .expect(getLocation()).contains('/solution/S100000-001');
 });

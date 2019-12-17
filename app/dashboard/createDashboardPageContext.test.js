@@ -3,16 +3,16 @@ import { createDashboardPageContext } from './createDashboardPageContext';
 describe('createDashboardPageContext', () => {
   it('should create a context from the manifest and the marketingData', () => {
     const expectedContext = {
-      previewUrl: '/some-solution-id/preview',
-      submitForModerationUrl: '/some-solution-id/submitForModeration',
-      returnToDashboardUrl: '/some-solution-id',
+      previewUrl: '/solution/some-solution-id/preview',
+      submitForModerationUrl: '/solution/some-solution-id/submitForModeration',
+      returnToDashboardUrl: '/solution/some-solution-id',
       sectionGroups: [
         {
           id: 'some-section-group-id',
           title: 'Some section group',
           sections: [
             {
-              URL: '/some-solution-id/section/some-section-id',
+              URL: '/solution/some-solution-id/section/some-section-id',
               id: 'some-section-id',
               title: 'Some section',
               requirement: 'Mandatory',
@@ -53,16 +53,16 @@ describe('createDashboardPageContext', () => {
 
   it('should create a context with sub sections from the manifest and no existing marketingData', () => {
     const expectedContext = {
-      previewUrl: '/some-solution-id/preview',
-      submitForModerationUrl: '/some-solution-id/submitForModeration',
-      returnToDashboardUrl: '/some-solution-id',
+      previewUrl: '/solution/some-solution-id/preview',
+      submitForModerationUrl: '/solution/some-solution-id/submitForModeration',
+      returnToDashboardUrl: '/solution/some-solution-id',
       sectionGroups: [
         {
           id: 'some-section-group-id',
           title: 'Some section group',
           sections: [
             {
-              URL: '/some-solution-id/section/some-section-id',
+              URL: '/solution/some-solution-id/section/some-section-id',
               id: 'some-section-id',
               title: 'Some section',
               requirement: 'Mandatory',
@@ -70,14 +70,14 @@ describe('createDashboardPageContext', () => {
               isActive: true,
               sections: [
                 {
-                  URL: '/some-solution-id/dashboard/some-first-sub-section-id',
+                  URL: '/solution/some-solution-id/dashboard/some-first-sub-section-id',
                   id: 'some-first-sub-section-id',
                   title: 'Some first sub section',
                   defaultMessage: 'some default message',
                   isActive: false,
                 },
                 {
-                  URL: '/some-solution-id/dashboard/some-second-sub-section-id',
+                  URL: '/solution/some-solution-id/dashboard/some-second-sub-section-id',
                   id: 'some-second-sub-section-id',
                   title: 'Some second sub section',
                   defaultMessage: 'some default message',
@@ -132,16 +132,16 @@ describe('createDashboardPageContext', () => {
 
   it('should create a context with sub sections from the manifest and with existing marketingData', () => {
     const expectedContext = {
-      previewUrl: '/some-solution-id/preview',
-      submitForModerationUrl: '/some-solution-id/submitForModeration',
-      returnToDashboardUrl: '/some-solution-id',
+      previewUrl: '/solution/some-solution-id/preview',
+      submitForModerationUrl: '/solution/some-solution-id/submitForModeration',
+      returnToDashboardUrl: '/solution/some-solution-id',
       sectionGroups: [
         {
           id: 'some-section-group-id',
           title: 'Some section group',
           sections: [
             {
-              URL: '/some-solution-id/section/some-section-id',
+              URL: '/solution/some-solution-id/section/some-section-id',
               id: 'some-section-id',
               title: 'Some section',
               requirement: 'Mandatory',
@@ -149,14 +149,14 @@ describe('createDashboardPageContext', () => {
               isActive: true,
               sections: [
                 {
-                  URL: '/some-solution-id/dashboard/some-first-sub-section-id',
+                  URL: '/solution/some-solution-id/dashboard/some-first-sub-section-id',
                   id: 'some-first-sub-section-id',
                   title: 'Some first sub section',
                   defaultMessage: 'some default message',
                   isActive: false,
                 },
                 {
-                  URL: '/some-solution-id/dashboard/some-second-sub-section-id',
+                  URL: '/solution/some-solution-id/dashboard/some-second-sub-section-id',
                   id: 'some-second-sub-section-id',
                   title: 'Some second sub section',
                   defaultMessage: 'some default message',
@@ -218,9 +218,9 @@ describe('createDashboardPageContext', () => {
 
   it('should create a context from the manifest, marketingData and any validationErrors', () => {
     const expectedContext = {
-      previewUrl: '/some-solution-id/preview',
-      submitForModerationUrl: '/some-solution-id/submitForModeration',
-      returnToDashboardUrl: '/some-solution-id',
+      previewUrl: '/solution/some-solution-id/preview',
+      submitForModerationUrl: '/solution/some-solution-id/submitForModeration',
+      returnToDashboardUrl: '/solution/some-solution-id',
       errors: [
         {
           text: 'some-section-id is a required section',
@@ -233,7 +233,7 @@ describe('createDashboardPageContext', () => {
           title: 'Some section group',
           sections: [
             {
-              URL: '/some-solution-id/section/some-section-id',
+              URL: '/solution/some-solution-id/section/some-section-id',
               id: 'some-section-id',
               title: 'Some section',
               requirement: 'Mandatory',
@@ -282,9 +282,9 @@ describe('createDashboardPageContext', () => {
 
   it('should create a context with sub sections from the manifest and validationErrors', () => {
     const expectedContext = {
-      previewUrl: '/some-solution-id/preview',
-      submitForModerationUrl: '/some-solution-id/submitForModeration',
-      returnToDashboardUrl: '/some-solution-id',
+      previewUrl: '/solution/some-solution-id/preview',
+      submitForModerationUrl: '/solution/some-solution-id/submitForModeration',
+      returnToDashboardUrl: '/solution/some-solution-id',
       errors: [
         {
           text: 'some-first-sub-section-id is a required sub section',
@@ -297,7 +297,7 @@ describe('createDashboardPageContext', () => {
           title: 'Some section group',
           sections: [
             {
-              URL: '/some-solution-id/section/some-section-id',
+              URL: '/solution/some-solution-id/section/some-section-id',
               id: 'some-section-id',
               title: 'Some section',
               requirement: 'Mandatory',
@@ -305,7 +305,7 @@ describe('createDashboardPageContext', () => {
               isActive: true,
               sections: [
                 {
-                  URL: '/some-solution-id/dashboard/some-first-sub-section-id',
+                  URL: '/solution/some-solution-id/dashboard/some-first-sub-section-id',
                   id: 'some-first-sub-section-id',
                   title: 'Some first sub section',
                   defaultMessage: 'some default message',
@@ -314,7 +314,7 @@ describe('createDashboardPageContext', () => {
                   status: 'INCOMPLETE',
                 },
                 {
-                  URL: '/some-solution-id/dashboard/some-second-sub-section-id',
+                  URL: '/solution/some-solution-id/dashboard/some-second-sub-section-id',
                   id: 'some-second-sub-section-id',
                   title: 'Some second sub section',
                   defaultMessage: 'some default message',

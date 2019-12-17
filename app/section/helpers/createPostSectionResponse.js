@@ -1,7 +1,7 @@
 const createRedirectUrl = (
   solutionId, successfulSubmitResponsePath,
 ) => {
-  const defaultUrl = `/${solutionId}`;
+  const defaultUrl = `/solution/${solutionId}`;
 
   if (successfulSubmitResponsePath) {
     return `${defaultUrl}/${successfulSubmitResponsePath}`;

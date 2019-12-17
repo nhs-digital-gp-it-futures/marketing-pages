@@ -22,7 +22,7 @@ const mocks = (withMarketingData) => {
 
 const pageSetup = async (t, withMarketingData = false) => {
   mocks(withMarketingData);
-  await t.navigateTo('http://localhost:1234/S100000-001/section/connectivity-and-resolution');
+  await t.navigateTo('http://localhost:1234/solution/S100000-001/section/connectivity-and-resolution');
 };
 
 fixture('Show Connectivity And Resolution page')
@@ -156,7 +156,7 @@ test('should goto anchor when clicking the minimum connection speed summary erro
   await t
     .click(submitButton.find('button'))
     .click(errorSummaryList.find('li:nth-child(1) a'))
-    .expect(getLocation()).contains('/S100000-001/section/connectivity-and-resolution#minimum-connection-speed');
+    .expect(getLocation()).contains('/solution/S100000-001/section/connectivity-and-resolution#minimum-connection-speed');
 });
 
 test('should goto the browser based dashboard when clicking the submit button', async (t) => {
@@ -176,7 +176,7 @@ test('should goto the browser based dashboard when clicking the submit button', 
   await t
     .expect(submitButton.exists).ok()
     .click(submitButton)
-    .expect(getLocation()).contains('/S100000-001/dashboard/browser-based');
+    .expect(getLocation()).contains('/solution/S100000-001/dashboard/browser-based');
 });
 
 test('should render the return to all sections link', async (t) => {
@@ -202,5 +202,5 @@ test('should return to the marketing data dashboard when the return to all secti
   await t
     .click(link.find('a'))
     .expect(getLocation()).notContains('section')
-    .expect(getLocation()).contains('S100000-001');
+    .expect(getLocation()).contains('/solution/S100000-001');
 });

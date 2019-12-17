@@ -8,7 +8,13 @@ import { errorHandler } from './error/errorHandler';
 
 const router = express.Router();
 
-router.get('/:solutionId', async (req, res, next) => {
+router.get('/healthcheck', async (req, res) => {
+  logger.info('navigating to healthcheck page');
+
+  res.send('Marketing pages is Running!!!');
+});
+
+router.get('/solution/:solutionId', async (req, res, next) => {
   const { solutionId } = req.params;
   logger.info(`navigating to Solution ${solutionId} dashboard`);
   try {
@@ -19,7 +25,7 @@ router.get('/:solutionId', async (req, res, next) => {
   }
 });
 
-router.get('/:solutionId/dashboard/:sectionId', async (req, res, next) => {
+router.get('/solution/:solutionId/dashboard/:sectionId', async (req, res, next) => {
   const { solutionId, sectionId } = req.params;
   logger.info(`navigating to Solution ${solutionId} dashboard: section ${sectionId}`);
   try {
@@ -31,7 +37,7 @@ router.get('/:solutionId/dashboard/:sectionId', async (req, res, next) => {
 });
 
 
-router.get('/:solutionId/section/:sectionId', async (req, res, next) => {
+router.get('/solution/:solutionId/section/:sectionId', async (req, res, next) => {
   const { solutionId, sectionId } = req.params;
   logger.info(`navigating to Solution ${solutionId}: section ${sectionId}`);
   try {
@@ -42,7 +48,7 @@ router.get('/:solutionId/section/:sectionId', async (req, res, next) => {
   }
 });
 
-router.post('/:solutionId/section/:sectionId', async (req, res, next) => {
+router.post('/solution/:solutionId/section/:sectionId', async (req, res, next) => {
   const { solutionId, sectionId } = req.params;
   const sectionPostData = req.body;
   try {
@@ -60,7 +66,7 @@ router.post('/:solutionId/section/:sectionId', async (req, res, next) => {
   }
 });
 
-router.get('/:solutionId/preview', async (req, res, next) => {
+router.get('/solution/:solutionId/preview', async (req, res, next) => {
   const { solutionId } = req.params;
   logger.info(`navigating to Solution ${solutionId} preview`);
   try {
@@ -71,12 +77,12 @@ router.get('/:solutionId/preview', async (req, res, next) => {
   }
 });
 
-router.get('/:solutionId/submitForModeration', async (req, res, next) => {
+router.get('/solution/:solutionId/submitForModeration', async (req, res, next) => {
   const { solutionId } = req.params;
   try {
     const response = await postSubmitForModeration(solutionId);
     if (response.success) {
-      res.redirect(`/${solutionId}`);
+      res.redirect(`/solution/${solutionId}`);
     } else {
       const context = await getMarketingPageDashboardContext(solutionId, response);
       res.render('dashboard/template', context);

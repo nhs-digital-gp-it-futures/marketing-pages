@@ -17,7 +17,7 @@ const mocks = (existingData) => {
 
 const pageSetup = async (t, existingData = false) => {
   mocks(existingData);
-  await t.navigateTo('http://localhost:1234/S100000-001/preview');
+  await t.navigateTo('http://localhost:1234/solution/S100000-001/preview');
 };
 
 fixture('Show marketing preview page')

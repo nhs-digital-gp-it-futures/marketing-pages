@@ -15,7 +15,7 @@ const mocks = (responseStatus, responseBody) => {
 
 const pageSetup = async (t, responseStatus = 200, responseBody = {}) => {
   mocks(responseStatus, responseBody);
-  await t.navigateTo('http://localhost:1234/S100000-001/section/browser-mobile-first');
+  await t.navigateTo('http://localhost:1234/solution/S100000-001/section/browser-mobile-first');
 };
 
 fixture('Show browser mobile first page')
@@ -97,7 +97,7 @@ test('should goto the browser based dashboard when clicking the submit button', 
   await t
     .expect(submitButton.exists).ok()
     .click(submitButton)
-    .expect(getLocation()).contains('/S100000-001/dashboard/browser-based');
+    .expect(getLocation()).contains('/solution/S100000-001/dashboard/browser-based');
 });
 
 test('should populate the questions with existing data', async (t) => {
@@ -181,5 +181,5 @@ test('should return to the marketing data dashboard when the return to all secti
   await t
     .click(link)
     .expect(getLocation()).notContains('section')
-    .expect(getLocation()).contains('S100000-001');
+    .expect(getLocation()).contains('/solution/S100000-001');
 });

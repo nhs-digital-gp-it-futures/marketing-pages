@@ -34,7 +34,7 @@ const mocks = (withMarketingData) => {
 
 const pageSetup = async (t, withMarketingData = false) => {
   mocks(withMarketingData);
-  await t.navigateTo('http://localhost:1234/S100000-001/section/contact-details');
+  await t.navigateTo('http://localhost:1234/solution/S100000-001/section/contact-details');
 };
 
 fixture('Show Contact Details page')
@@ -204,5 +204,5 @@ test('should return to the marketing data dashboard when the return to all secti
   await t
     .click(link.find('a'))
     .expect(getLocation()).notContains('section')
-    .expect(getLocation()).contains('S100000-001');
+    .expect(getLocation()).contains('/solution/S100000-001');
 });

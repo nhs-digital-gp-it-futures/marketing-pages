@@ -25,7 +25,7 @@ const mocks = (withMarketingData) => {
 
 const pageSetup = async (t, withMarketingData = false) => {
   mocks(withMarketingData);
-  await t.navigateTo('http://localhost:1234/S100000-001/section/client-application-types');
+  await t.navigateTo('http://localhost:1234/solution/S100000-001/section/client-application-types');
 };
 
 fixture('Show Client Application Type page')
@@ -168,7 +168,7 @@ test('should goto anchor when clicking the client application types required sum
     .expect(errorSummaryList.find('li:nth-child(1) a').count).eql(1)
     .expect(errorSummaryList.find('li:nth-child(1) a').getAttribute('href')).eql('#client-application-types')
     .click(errorSummaryList.find('li:nth-child(1) a'))
-    .expect(getLocation()).contains('/S100000-001/section/client-application-types#client-application-types');
+    .expect(getLocation()).contains('/solution/S100000-001/section/client-application-types#client-application-types');
 });
 
 test('should render the return to all sections link', async (t) => {
@@ -194,5 +194,5 @@ test('should return to the marketing data dashboard when the return to all secti
   await t
     .click(link.find('a'))
     .expect(getLocation()).notContains('section')
-    .expect(getLocation()).contains('S100000-001');
+    .expect(getLocation()).contains('/solution/S100000-001');
 });
