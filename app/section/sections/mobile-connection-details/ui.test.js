@@ -115,10 +115,10 @@ test('should populate the checkboxes with existing data', async (t) => {
   pageSetup(t, true);
 
   const clientApplicationTypesQuestion = Selector('[data-test-id="question-connection-types"]');
-  const nativeMobileCheckbox = clientApplicationTypesQuestion.find('.nhsuk-checkboxes__item:nth-child(2)');
+  const threeGCheckbox = clientApplicationTypesQuestion.find('.nhsuk-checkboxes__item:nth-child(2)');
 
   await t
-    .expect(nativeMobileCheckbox.find('input:checked').exists).ok()
+    .expect(threeGCheckbox.find('input:checked').exists).ok()
 });
 
 test('should render description of connection question', async (t) => {
