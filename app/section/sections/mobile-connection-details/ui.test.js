@@ -22,7 +22,7 @@ const mocks = (withMarketingData) => {
 
 const pageSetup = async (t, withMarketingData = false) => {
   mocks(withMarketingData);
-  await t.navigateTo('http://localhost:1234/S100000-001/section/mobile-connection-details');
+  await t.navigateTo('http://localhost:1234/solution/S100000-001/section/mobile-connection-details');
 };
 
 fixture.only('Mobile connection details page')
@@ -74,17 +74,27 @@ test('should render connection speed question', async (t) => {
     .expect(minimumConnectionSpeedQuestion.find('option').count).eql(13);
 });
 
+test('should populate connection speed question with existing data', async (t) => {
+  pageSetup(t, true);
+
+  const minimumConnectionSpeedQuestion = Selector('[data-test-id="combobox-options-minimum-connection-speed"]');
+
+  await t
+    .expect(minimumConnectionSpeedQuestion.find('option[selected]').exists).ok()
+    .expect(minimumConnectionSpeedQuestion.find('option[selected]').getAttribute('value')).eql('3Mbps')
+});
+
 test('should render the connection type question', async (t) => {
   await pageSetup(t);
 
   const connectionType = Selector('[data-test-id="question-connection-types"]');
-  const GprsCheckbox = connectionType.find('.nhsuk-checkboxes__item:nth-child(1)');
-  const ThreeGCheckbox = connectionType.find('.nhsuk-checkboxes__item:nth-child(2)');
-  const LTECheckbox = connectionType.find('.nhsuk-checkboxes__item:nth-child(3)');
-  const FourGCHeckbox = connectionType.find('.nhsuk-checkboxes__item:nth-child(4)');
-  const FiveGCHeckbox = connectionType.find('.nhsuk-checkboxes__item:nth-child(5)');
-  const BluetoothCheckbox = connectionType.find('.nhsuk-checkboxes__item:nth-child(6)');
-  const WifiCheckbox = connectionType.find('.nhsuk-checkboxes__item:nth-child(7)');
+  const gprsCheckbox = connectionType.find('.nhsuk-checkboxes__item:nth-child(1)');
+  const threeGCheckbox = connectionType.find('.nhsuk-checkboxes__item:nth-child(2)');
+  const lteCheckbox = connectionType.find('.nhsuk-checkboxes__item:nth-child(3)');
+  const fourGCHeckbox = connectionType.find('.nhsuk-checkboxes__item:nth-child(4)');
+  const fiveGCHeckbox = connectionType.find('.nhsuk-checkboxes__item:nth-child(5)');
+  const bluetoothCheckbox = connectionType.find('.nhsuk-checkboxes__item:nth-child(6)');
+  const wifiCheckbox = connectionType.find('.nhsuk-checkboxes__item:nth-child(7)');
 
   await t
     .expect(connectionType.find('.nhsuk-fieldset__legend').innerText).eql('What connection types are supported? (optional)')
@@ -92,13 +102,25 @@ test('should render the connection type question', async (t) => {
     .expect(connectionType.find('.nhsuk-checkboxes').count).eql(1)
     .expect(connectionType.find('.nhsuk-checkboxes__item').count).eql(7)
 
-    .expect(GprsCheckbox.innerText).eql('GPRS')
-    .expect(ThreeGCheckbox.innerText).eql('3G')
-    .expect(LTECheckbox.innerText).eql('LTE')
-    .expect(FourGCHeckbox.innerText).eql('4G')
-    .expect(FiveGCHeckbox.innerText).eql('5G')
-    .expect(BluetoothCheckbox.innerText).eql('Bluetooth')
-    .expect(WifiCheckbox.innerText).eql('Wifi')
+    .expect(gprsCheckbox.innerText).eql('GPRS')
+    .expect(threeGCheckbox.innerText).eql('3G')
+    .expect(lteCheckbox.innerText).eql('LTE')
+    .expect(fourGCHeckbox.innerText).eql('4G')
+    .expect(fiveGCHeckbox.innerText).eql('5G')
+    .expect(bluetoothCheckbox.innerText).eql('Bluetooth')
+    .expect(wifiCheckbox.innerText).eql('Wifi')
+});
+
+
+
+test('should populate the checkboxes with existing data', async (t) => {
+  pageSetup(t, true);
+
+  const clientApplicationTypesQuestion = Selector('[data-test-id="question-connection-types"]');
+  const nativeMobileCheckbox = clientApplicationTypesQuestion.find('.nhsuk-checkboxes__item:nth-child(2)');
+
+  await t
+    .expect(nativeMobileCheckbox.find('input:checked').exists).ok()
 });
 
 test('should render description of connection question', async (t) => {
@@ -155,7 +177,7 @@ test('should return to the marketing data dashboard when the return to all secti
   await t
     .click(link.find('a'))
     .expect(getLocation()).notContains('section')
-    .expect(getLocation()).contains('S100000-001');
+    .expect(getLocation()).contains('solution/S100000-001');
 });
 
 test('should goto the native mobile dashboard when clicking the submit button', async (t) => {
