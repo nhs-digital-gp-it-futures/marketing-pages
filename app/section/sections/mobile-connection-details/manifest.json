@@ -1,0 +1,55 @@
+{
+  "id": "mobile-connection-details",
+  "title": "Native mobile or tablet - connection details",
+  "mainAdvice": "Answer the following questions about your mobile or tablet based Solution",
+  "additionalAdvice": [
+    "This information will be visible to buyers on your Solution page."
+  ],
+  "questions": {
+    "minimum-connection-speed": {
+      "mainAdvice": "Select the minimum connection speed required for your Solution to function? (optional)",
+      "additionalAdvice": "Please select below the minimum bandwidth requirement.",
+      "type": "combobox-options",
+      "options": {
+        "": "Please select",
+        "0.5Mbps": "0.5Mbps",
+        "1Mbps": "1Mbps",
+        "1.5Mbps": "1.5Mbps",
+        "2Mbps": "2Mbps",
+        "3Mbps": "3Mbps",
+        "5Mbps": "5Mbps",
+        "8Mbps": "8Mbps",
+        "10Mbps": "10Mbps",
+        "15Mbps": "15Mbps",
+        "20Mbps": "20Mbps",
+        "30Mbps": "30Mbps",
+        "Higher than 30Mbps": "Higher than 30Mbps"
+      }
+    },
+    "connection-types": {
+      "mainAdvice": "What connection types are supported? (optional)",
+      "additionalAdvice": "Please select below all the connection types your solution supports",
+      "type": "checkbox-options",
+      "options": {
+        "GPRS": "GPRS",
+        "3G": "3G",
+        "LTE": "LTE",
+        "4G": "4G",
+        "5G": "5G",
+        "Bluetooth": "Bluetooth",
+        "Wifi": "Wifi"
+      }
+    },
+    "connection-requirements-description": {
+      "mainAdvice": "Description of connection requirements (optional)",
+      "additionalAdvice": "Add further description of connectivity for your Solution.",
+      "footerAdvice": "You can enter up to 300 characters",
+      "type": "textarea-field",
+      "errorResponse": {
+        "maxLength": "Additional information is over the character limit"
+      }
+    }
+  },
+  "submitText" : "Save and return",
+  "successfulSubmitResponsePath" : "dashboard/native-mobile"
+}
