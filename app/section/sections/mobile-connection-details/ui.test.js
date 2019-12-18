@@ -91,8 +91,8 @@ test('should render the connection type question', async (t) => {
   const gprsCheckbox = connectionType.find('.nhsuk-checkboxes__item:nth-child(1)');
   const threeGCheckbox = connectionType.find('.nhsuk-checkboxes__item:nth-child(2)');
   const lteCheckbox = connectionType.find('.nhsuk-checkboxes__item:nth-child(3)');
-  const fourGCHeckbox = connectionType.find('.nhsuk-checkboxes__item:nth-child(4)');
-  const fiveGCHeckbox = connectionType.find('.nhsuk-checkboxes__item:nth-child(5)');
+  const fourGCheckbox = connectionType.find('.nhsuk-checkboxes__item:nth-child(4)');
+  const fiveGCheckbox = connectionType.find('.nhsuk-checkboxes__item:nth-child(5)');
   const bluetoothCheckbox = connectionType.find('.nhsuk-checkboxes__item:nth-child(6)');
   const wifiCheckbox = connectionType.find('.nhsuk-checkboxes__item:nth-child(7)');
 
@@ -105,13 +105,11 @@ test('should render the connection type question', async (t) => {
     .expect(gprsCheckbox.innerText).eql('GPRS')
     .expect(threeGCheckbox.innerText).eql('3G')
     .expect(lteCheckbox.innerText).eql('LTE')
-    .expect(fourGCHeckbox.innerText).eql('4G')
-    .expect(fiveGCHeckbox.innerText).eql('5G')
+    .expect(fourGCheckbox.innerText).eql('4G')
+    .expect(fiveGCheckbox.innerText).eql('5G')
     .expect(bluetoothCheckbox.innerText).eql('Bluetooth')
     .expect(wifiCheckbox.innerText).eql('Wifi')
 });
-
-
 
 test('should populate the checkboxes with existing data', async (t) => {
   pageSetup(t, true);
@@ -126,13 +124,13 @@ test('should populate the checkboxes with existing data', async (t) => {
 test('should render description of connection question', async (t) => {
   await pageSetup(t);
 
-  const additionalInformation = Selector('[data-test-id="question-connection-requirements-description"]');
+  const connectionRequirementDescription = Selector('[data-test-id="question-connection-requirements-description"]');
 
   await t
-    .expect(additionalInformation.find('label.nhsuk-label').innerText).eql('Description of connection requirements (optional)')
-    .expect(additionalInformation.find('span.nhsuk-hint').innerText).eql('Add further description of connectivity for your Solution.')
-    .expect(additionalInformation.find('textarea').count).eql(1)
-    .expect(additionalInformation.find('[data-test-id="textarea-field-footer"]').innerText).eql('You can enter up to 300 characters');
+    .expect(connectionRequirementDescription.find('label.nhsuk-label').innerText).eql('Description of connection requirements (optional)')
+    .expect(connectionRequirementDescription.find('span.nhsuk-hint').innerText).eql('Add further description of connectivity for your Solution.')
+    .expect(connectionRequirementDescription.find('textarea').count).eql(1)
+    .expect(connectionRequirementDescription.find('[data-test-id="textarea-field-footer"]').innerText).eql('You can enter up to 300 characters');
 });
 
 test('should populate the text fields with existing data', async (t) => {
@@ -197,5 +195,5 @@ test('should goto the native mobile dashboard when clicking the submit button', 
 
   await t
     .click(submitButton)
-    .expect(getLocation()).contains('/S100000-001/dashboard/native-mobile');
+    .expect(getLocation()).contains('solution/S100000-001/dashboard/native-mobile');
 });
