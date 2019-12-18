@@ -25,7 +25,7 @@ const pageSetup = async (t, withMarketingData = false) => {
   await t.navigateTo('http://localhost:1234/solution/S100000-001/section/mobile-connection-details');
 };
 
-fixture.only('Mobile connection details page')
+fixture('Mobile connection details page')
   .afterEach(async (t) => {
     const isDone = nock.isDone();
     if (!isDone) {
