@@ -1,34 +1,30 @@
 .bc-c-section-list__task-requirement {
-  //for small screen
-  @media (max-width: 641px) {
-    display: block;
+  @include mq($until: tablet) {
     margin-left: nhsuk-spacing(3);
   }
 }
 
 .bc-c-section-list__items-sub-section {
-  padding-left: 30px;
-  // for small screen
-  @media (max-width: 641px) {
-    padding-left: 0;
+  @include mq($from: desktop) {
+    padding-left: 30px;
   }
   // only needed for subsection alignment
   .bc-c-section-list__task-requirement {
-    margin-left: -(nhsuk-spacing(4));
-    // for small screen
-    @media (max-width: 641px) {
-      display: block;
-      margin-left: nhsuk-spacing(3);
+    margin-left: nhsuk-spacing(3);
+    @include mq($from: tablet, $until: desktop) {
+      margin-left: 0;
+    }
+    @include mq($from: desktop) {
+      margin-left: -(nhsuk-spacing(4));
     }
   }
+
 }
 
 .bc-c-section-list__items {
   list-style: none;
-  padding-left: 30px;
-  // fro small screen
-  @media (max-width: 641px) {
-    padding-left: 0;
+  @include mq($from: desktop) {
+    padding-left: 30px;
   }
 }
 
@@ -61,7 +57,7 @@
   margin-bottom: nhsuk-spacing(2);
   margin-left: nhsuk-spacing(3);
   display: inline-block;
-  @media (min-width: 641px) {
+  @include mq($from: tablet) {
     float: right;
     margin-top: 0;
     margin-bottom: 0;
