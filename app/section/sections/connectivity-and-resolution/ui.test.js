@@ -56,7 +56,7 @@ test('should render main advice of section', async (t) => {
 test('should render all the advice of the section', async (t) => {
   pageSetup(t);
 
-  const sectionManifest = new ManifestProvider().getSectionManifest('connectivity-and-resolution');
+  const sectionManifest = new ManifestProvider().getSectionManifest({ sectionId: 'connectivity-and-resolution' });
   const expectedAdditionalAdvice = sectionManifest.additionalAdvice.join('\n\n');
 
   const additionalAdvice = Selector('[data-test-id="section-additional-advice"]');

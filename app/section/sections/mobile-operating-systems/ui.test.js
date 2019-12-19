@@ -11,7 +11,7 @@ const mobileOperatingSystemsMarketingData = {
   'operating-systems-description': 'Text for description',
 };
 
-const sectionManifest = new ManifestProvider().getSectionManifest(sectionId);
+const sectionManifest = new ManifestProvider().getSectionManifest({ sectionId });
 
 const getLocation = ClientFunction(() => document.location.href);
 

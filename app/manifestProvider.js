@@ -17,8 +17,13 @@ export class ManifestProvider {
     return this.subDashboardManifest;
   }
 
-  getSectionManifest(sectionName) {
-    this.sectionManifestRaw = fs.readFileSync(`./app/section/sections/${sectionName}/manifest.json`);
+  getSectionManifest({
+    dashboardId,
+    sectionId,
+  }) {
+    const pathToSectionManifest = dashboardId ? `${dashboardId}/${sectionId}` : `${sectionId}`;
+
+    this.sectionManifestRaw = fs.readFileSync(`./app/section/sections/${pathToSectionManifest}/manifest.json`);
 
     this.sectionManifest = JSON.parse(this.sectionManifestRaw);
 

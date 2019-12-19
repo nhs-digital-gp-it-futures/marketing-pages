@@ -25,23 +25,11 @@ router.get('/solution/:solutionId', async (req, res, next) => {
   }
 });
 
-router.get('/solution/:solutionId/dashboard/:dashboardId', async (req, res, next) => {
-  const { solutionId, dashboardId } = req.params;
-  logger.info(`navigating to Solution ${solutionId} dashboard: ${dashboardId}`);
-  try {
-    const context = await getSubDashboardPageContext(solutionId, dashboardId);
-    res.render('dashboard/subDashboards/template', context);
-  } catch (err) {
-    next(err);
-  }
-});
-
-
 router.get('/solution/:solutionId/section/:sectionId', async (req, res, next) => {
   const { solutionId, sectionId } = req.params;
   logger.info(`navigating to Solution ${solutionId}: section ${sectionId}`);
   try {
-    const context = await getSectionPageContext(solutionId, sectionId);
+    const context = await getSectionPageContext({ solutionId, sectionId });
     res.render('section/template', context);
   } catch (err) {
     next(err);
@@ -61,6 +49,28 @@ router.post('/solution/:solutionId/section/:sectionId', async (req, res, next) =
       );
       res.render('section/template', context);
     }
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.get('/solution/:solutionId/dashboard/:dashboardId', async (req, res, next) => {
+  const { solutionId, dashboardId } = req.params;
+  logger.info(`navigating to Solution ${solutionId} dashboard: ${dashboardId}`);
+  try {
+    const context = await getSubDashboardPageContext(solutionId, dashboardId);
+    res.render('dashboard/subDashboards/template', context);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.get('/solution/:solutionId/dashboard/:dashboardId/section/:sectionId', async (req, res, next) => {
+  const { solutionId, dashboardId, sectionId } = req.params;
+  logger.info(`navigating to Solution ${solutionId}: dashboard ${dashboardId}: section ${sectionId}`);
+  try {
+    const context = await getSectionPageContext({ solutionId, dashboardId, sectionId });
+    res.render('section/template', context);
   } catch (err) {
     next(err);
   }
