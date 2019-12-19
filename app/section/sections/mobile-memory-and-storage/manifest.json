@@ -19,6 +19,9 @@
         "4GB": "4GB",
         "8GB": "8GB",
         "16GB or higher": "16GB or higher"
+      },
+      "errorResponse": {
+        "required": "Minimum memory requirement is a mandatory question"
       }
     },
     "storage-requirements-description": {
@@ -27,7 +30,8 @@
       "footerAdvice": "You can enter up to 300 characters",
       "type": "textarea-field",
       "errorResponse": {
-        "maxLength": "Additional information is over the character limit"
+        "required": "Storage requirement description is a mandatory question",
+        "maxLength": "Storage requirement description is over the character limit"
       }
     }
   },
