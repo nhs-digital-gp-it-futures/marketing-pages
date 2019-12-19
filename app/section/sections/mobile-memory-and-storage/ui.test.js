@@ -107,6 +107,26 @@ test('should show error summary and validation for minimum memory requirement in
     .expect(minimumMemoryRequirement.find('.nhsuk-error-message').innerText).eql('Error:\nMinimum memory requirement is a mandatory question');
 });
 
+test('should goto anchor when clicking the minimum memory requirement required summary error link', async (t) => {
+  await pageSetup(t);
+
+  nock('http://localhost:8080')
+    .put('/api/v1/Solutions/S100000-001/sections/mobile-memory-and-storage')
+    .reply(400, {
+      required: ['minimum-memory-requirement'],
+    });
+
+  const errorSummaryList = Selector('.nhsuk-error-summary__list');
+  const submitButton = Selector('[data-test-id="section-submit-button"]');
+
+  const getLocation = ClientFunction(() => document.location.href);
+
+  await t
+    .click(submitButton.find('button'))
+    .click(errorSummaryList.find('li:nth-child(1) a'))
+    .expect(getLocation()).contains('/solution/S100000-001/section/mobile-memory-and-storage#minimum-memory-requirement');
+});
+
 test('should render storage requirements description question', async (t) => {
   await pageSetup(t);
 
@@ -153,6 +173,26 @@ test('should show error summary and validation for storage requirements descript
     .expect(storageRequirementsDescription.find('.nhsuk-error-message').innerText).eql('Error:\nStorage requirement description is a mandatory question');
 });
 
+test('should goto anchor when clicking the storage requirements description required summary error link', async (t) => {
+  await pageSetup(t);
+
+  nock('http://localhost:8080')
+    .put('/api/v1/Solutions/S100000-001/sections/mobile-memory-and-storage')
+    .reply(400, {
+      required: ['storage-requirements-description'],
+    });
+
+  const errorSummaryList = Selector('.nhsuk-error-summary__list');
+  const submitButton = Selector('[data-test-id="section-submit-button"]');
+
+  const getLocation = ClientFunction(() => document.location.href);
+
+  await t
+    .click(submitButton.find('button'))
+    .click(errorSummaryList.find('li:nth-child(1) a'))
+    .expect(getLocation()).contains('/solution/S100000-001/section/mobile-memory-and-storage#storage-requirements-description');
+});
+
 test('should show error summary and validation for storage requirements description question it exceeds the maxLength', async (t) => {
   await pageSetup(t);
 
@@ -162,9 +202,6 @@ test('should show error summary and validation for storage requirements descript
       maxLength: ['storage-requirements-description'],
     });
 
-  const oneHundredCharacters = '0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789';
-  const threeHundredCharacters = oneHundredCharacters.repeat(3);
-
   const errorSummary = Selector('[data-test-id="error-summary"]');
   const errorSummaryList = Selector('.nhsuk-error-summary__list');
   const storageRequirementsDescription = Selector('[data-test-id="question-storage-requirements-description"]');
@@ -173,7 +210,6 @@ test('should show error summary and validation for storage requirements descript
 
   await t
     .expect(errorSummary.exists).notOk()
-    .typeText(storageRequirementsDescription, `${threeHundredCharacters}0`, { paste: true })
     .click(submitButton.find('button'))
     .expect(errorSummary.exists).ok()
     .expect(errorSummaryList.find('li').count).eql(1)
@@ -181,6 +217,26 @@ test('should show error summary and validation for storage requirements descript
     .expect(errorSummaryList.find('li:nth-child(1) a').getAttribute('href')).eql('#storage-requirements-description')
     .expect(storageRequirementsDescription.find('.nhsuk-textarea--error').exists).ok()
     .expect(storageRequirementsDescription.find('.nhsuk-error-message').innerText).eql('Error:\nStorage requirement description is over the character limit')
+});
+
+test('should goto anchor when clicking the storage requirements description maxlength summary error link', async (t) => {
+  await pageSetup(t);
+
+  nock('http://localhost:8080')
+    .put('/api/v1/Solutions/S100000-001/sections/mobile-memory-and-storage')
+    .reply(400, {
+      maxLength: ['storage-requirements-description'],
+    });
+
+  const errorSummaryList = Selector('.nhsuk-error-summary__list');
+  const submitButton = Selector('[data-test-id="section-submit-button"]');
+
+  const getLocation = ClientFunction(() => document.location.href);
+
+  await t
+    .click(submitButton.find('button'))
+    .click(errorSummaryList.find('li:nth-child(1) a'))
+    .expect(getLocation()).contains('/solution/S100000-001/section/mobile-memory-and-storage#storage-requirements-description');
 });
 
 test('should render the submit button', async (t) => {
