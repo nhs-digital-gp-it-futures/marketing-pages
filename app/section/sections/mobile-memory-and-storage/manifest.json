@@ -1,0 +1,36 @@
+{
+  "id": "mobile-memory-and-storage",
+  "title": "Native mobile or tablet - memory and storage requirements",
+  "mainAdvice": "Answer the following questions about your mobile or tablet based Solution",
+  "additionalAdvice": [
+    "This information will be visible to buyers on your Solution page."
+  ],
+  "questions": {
+    "minimum-memory-requirement": {
+      "mainAdvice": "Select the minimum memory requirement for your Solution to function?",
+      "additionalAdvice": "Please select below the minimum memory requirement.",
+      "type": "combobox-options",
+      "options": {
+        "": "Please select",
+        "256MB": "256MB",
+        "512MB": "512MB",
+        "1GB": "1GB",
+        "2GB": "2GB",
+        "4GB": "4GB",
+        "8GB": "8GB",
+        "16GB or higher": "16GB or higher"
+      }
+    },
+    "storage-requirements-description": {
+      "mainAdvice": "Description of storage requirements",
+      "additionalAdvice": "Add further information about the storage requirements needed for your Solution to function.",
+      "footerAdvice": "You can enter up to 300 characters",
+      "type": "textarea-field",
+      "errorResponse": {
+        "maxLength": "Additional information is over the character limit"
+      }
+    }
+  },
+  "submitText" : "Save and return",
+  "successfulSubmitResponsePath" : "dashboard/native-mobile"
+}
