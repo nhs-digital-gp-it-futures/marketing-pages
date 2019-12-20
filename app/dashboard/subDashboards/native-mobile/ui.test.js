@@ -145,8 +145,7 @@ test.skip('should navigate the user to supported operation systems page when cli
     .expect(getLocation()).contains('S100000-001/section/mobile-operating-systems');
 });
 
-// TODO remove .skip the ui for that page is done
-test.skip('should navigate the user to the mobile first page when clicking on the mobile first dashboard row', async (t) => {
+test('should navigate the user to the mobile first page when clicking on the mobile first dashboard row', async (t) => {
   await pageSetup(t);
 
   nock('http://localhost:8080')
@@ -162,8 +161,7 @@ test.skip('should navigate the user to the mobile first page when clicking on th
     .expect(getLocation()).contains('S100000-001/section/mobile-first');
 });
 
-// TODO remove .skip the ui for that page is done
-test.skip('should navigate the user to memory and storage page when clicking on memory and storage dashboard row', async (t) => {
+test('should navigate the user to memory and storage page when clicking on memory and storage dashboard row', async (t) => {
   await pageSetup(t);
 
   nock('http://localhost:8080')
@@ -179,8 +177,7 @@ test.skip('should navigate the user to memory and storage page when clicking on 
     .expect(getLocation()).contains('S100000-001/section/mobile-memory-and-storage');
 });
 
-// TODO remove .skip the ui for that page is done
-test.skip('should navigate the user to the connection details page when clicking on the connection details dashboard row', async (t) => {
+test('should navigate the user to the connection details page when clicking on the connection details dashboard row', async (t) => {
   await pageSetup(t);
 
   nock('http://localhost:8080')
