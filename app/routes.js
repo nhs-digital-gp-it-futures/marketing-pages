@@ -38,15 +38,17 @@ router.get('/solution/:solutionId/section/:sectionId', async (req, res, next) =>
 
 router.post('/solution/:solutionId/section/:sectionId', async (req, res, next) => {
   const { solutionId, sectionId } = req.params;
-  const sectionPostData = req.body;
+  const sectionData = req.body;
   try {
-    const response = await postSection(solutionId, sectionId, sectionPostData);
+    const response = await postSection({
+      solutionId, sectionId, sectionData,
+    });
     if (response.success) {
       res.redirect(response.redirectUrl);
     } else {
-      const context = await getSectionPageErrorContext(
-        solutionId, sectionId, sectionPostData, response,
-      );
+      const context = await getSectionPageErrorContext({
+        solutionId, sectionId, sectionData, validationErrors: response,
+      });
       res.render('section/template', context);
     }
   } catch (err) {
@@ -71,6 +73,26 @@ router.get('/solution/:solutionId/dashboard/:dashboardId/section/:sectionId', as
   try {
     const context = await getSectionPageContext({ solutionId, dashboardId, sectionId });
     res.render('section/template', context);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.post('/solution/:solutionId/dashboard/:dashboardId/section/:sectionId', async (req, res, next) => {
+  const { solutionId, dashboardId, sectionId } = req.params;
+  const sectionData = req.body;
+  try {
+    const response = await postSection({
+      solutionId, sectionId, sectionData, dashboardId,
+    });
+    if (response.success) {
+      res.redirect(response.redirectUrl);
+    } else {
+      const context = await getSectionPageErrorContext({
+        solutionId, sectionId, sectionData, validationErrors: response, dashboardId,
+      });
+      res.render('section/template', context);
+    }
   } catch (err) {
     next(err);
   }

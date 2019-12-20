@@ -67,7 +67,7 @@ test('should render all the sections for native mobile sections section group', 
     .expect(supportedOperatingSystems.find('[data-test-id="dashboard-section-title"]').innerText)
     .eql('Supported operating systems')
     .expect(supportedOperatingSystems.find('[data-test-id="dashboard-section-title"] a').getAttribute('href'))
-    .eql('/solution/S100000-001/section/mobile-operating-systems')
+    .eql('/solution/S100000-001/dashboard/native-mobile/section/mobile-operating-systems')
     .expect(supportedOperatingSystems.find('[data-test-id="dashboard-section-requirement"]').innerText)
     .eql('Mandatory')
     .expect(supportedOperatingSystems.find('[data-test-id="dashboard-section-status"]').innerText)
@@ -76,7 +76,7 @@ test('should render all the sections for native mobile sections section group', 
     .expect(mobileFirstSection.find('[data-test-id="dashboard-section-title"]').innerText)
     .eql('Mobile first')
     .expect(mobileFirstSection.find('[data-test-id="dashboard-section-title"] a').getAttribute('href'))
-    .eql('/solution/S100000-001/section/mobile-first')
+    .eql('/solution/S100000-001/dashboard/native-mobile/section/mobile-first')
     .expect(mobileFirstSection.find('[data-test-id="dashboard-section-requirement"]').innerText)
     .eql('Mandatory')
     .expect(mobileFirstSection.find('[data-test-id="dashboard-section-status"]').innerText)
@@ -85,7 +85,7 @@ test('should render all the sections for native mobile sections section group', 
     .expect(memoryAndStorage.find('[data-test-id="dashboard-section-title"]').innerText)
     .eql('Memory and storage')
     .expect(memoryAndStorage.find('[data-test-id="dashboard-section-title"] a').getAttribute('href'))
-    .eql('/solution/S100000-001/section/mobile-memory-and-storage')
+    .eql('/solution/S100000-001/dashboard/native-mobile/section/mobile-memory-and-storage')
     .expect(memoryAndStorage.find('[data-test-id="dashboard-section-requirement"]').innerText)
     .eql('Mandatory')
     .expect(memoryAndStorage.find('[data-test-id="dashboard-section-status"]').innerText)
@@ -94,7 +94,7 @@ test('should render all the sections for native mobile sections section group', 
     .expect(connectionDetails.find('[data-test-id="dashboard-section-title"]').innerText)
     .eql('Connection details')
     .expect(connectionDetails.find('[data-test-id="dashboard-section-title"] a').getAttribute('href'))
-    .eql('/solution/S100000-001/section/mobile-connection-details')
+    .eql('/solution/S100000-001/dashboard/native-mobile/section/mobile-connection-details')
     .expect(connectionDetails.find('[data-test-id="dashboard-section-requirement"]').innerText)
     .eql('Optional')
     .expect(connectionDetails.find('[data-test-id="dashboard-section-status"]').innerText)
@@ -103,7 +103,7 @@ test('should render all the sections for native mobile sections section group', 
     .expect(deviceCapabilities.find('[data-test-id="dashboard-section-title"]').innerText)
     .eql('Third party components and device capabilities')
     .expect(deviceCapabilities.find('[data-test-id="dashboard-section-title"] a').getAttribute('href'))
-    .eql('/solution/S100000-001/section/mobile-components-and-device-capabilities')
+    .eql('/solution/S100000-001/dashboard/native-mobile/section/mobile-components-and-device-capabilities')
     .expect(deviceCapabilities.find('[data-test-id="dashboard-section-requirement"]').innerText)
     .eql('Optional')
     .expect(deviceCapabilities.find('[data-test-id="dashboard-section-status"]').innerText)
@@ -112,7 +112,7 @@ test('should render all the sections for native mobile sections section group', 
     .expect(hardwareRequirements.find('[data-test-id="dashboard-section-title"]').innerText)
     .eql('Hardware requirements')
     .expect(hardwareRequirements.find('[data-test-id="dashboard-section-title"] a').getAttribute('href'))
-    .eql('/solution/S100000-001/section/mobile-hardware-requirements')
+    .eql('/solution/S100000-001/dashboard/native-mobile/section/mobile-hardware-requirements')
     .expect(hardwareRequirements.find('[data-test-id="dashboard-section-requirement"]').innerText)
     .eql('Optional')
     .expect(hardwareRequirements.find('[data-test-id="dashboard-section-status"]').innerText)
@@ -121,7 +121,7 @@ test('should render all the sections for native mobile sections section group', 
     .expect(additionalInformation.find('[data-test-id="dashboard-section-title"]').innerText)
     .eql('Additional information')
     .expect(additionalInformation.find('[data-test-id="dashboard-section-title"] a').getAttribute('href'))
-    .eql('/solution/S100000-001/section/mobile-additional-information')
+    .eql('/solution/S100000-001/dashboard/native-mobile/section/mobile-additional-information')
     .expect(additionalInformation.find('[data-test-id="dashboard-section-requirement"]').innerText)
     .eql('Optional')
     .expect(additionalInformation.find('[data-test-id="dashboard-section-status"]').innerText)
@@ -142,7 +142,7 @@ test.skip('should navigate the user to supported operation systems page when cli
 
   await t
     .click(browsersSupportedSection.find('a'))
-    .expect(getLocation()).contains('S100000-001/section/mobile-operating-systems');
+    .expect(getLocation()).contains('S100000-001/dashboard/native-mobile/section/mobile-operating-systems');
 });
 
 // TODO remove .skip the ui for that page is done
@@ -159,7 +159,7 @@ test.skip('should navigate the user to the mobile first page when clicking on th
 
   await t
     .click(mobileFirstSection)
-    .expect(getLocation()).contains('S100000-001/section/mobile-first');
+    .expect(getLocation()).contains('S100000-001/dashboard/native-mobile/section/mobile-first');
 });
 
 // TODO remove .skip the ui for that page is done
@@ -176,7 +176,7 @@ test.skip('should navigate the user to memory and storage page when clicking on 
 
   await t
     .click(memoryAndStorage.find('a'))
-    .expect(getLocation()).contains('S100000-001/section/mobile-memory-and-storage');
+    .expect(getLocation()).contains('S100000-001/dashboard/native-mobile/section/mobile-memory-and-storage');
 });
 
 // TODO remove .skip the ui for that page is done
@@ -193,7 +193,7 @@ test.skip('should navigate the user to the connection details page when clicking
 
   await t
     .click(connectionDetails.find('a'))
-    .expect(getLocation()).contains('S100000-001/section/mobile-connection-details');
+    .expect(getLocation()).contains('S100000-001/dashboard/native-mobile/section/mobile-connection-details');
 });
 
 // TODO remove .skip the ui for that page is done
@@ -210,7 +210,7 @@ test.skip('should navigate the user to device capabilities page when clicking on
 
   await t
     .click(deviceCapabilities.find('a'))
-    .expect(getLocation()).contains('S100000-001/section/mobile-components-and-device-capabilities');
+    .expect(getLocation()).contains('S100000-001/dashboard/native-mobile/section/mobile-components-and-device-capabilities');
 });
 
 // TODO remove .skip the ui for that page is done
@@ -227,7 +227,7 @@ test.skip('should navigate the user to hardware requirements page when clicking 
 
   await t
     .click(hardwareRequirements.find('a'))
-    .expect(getLocation()).contains('S100000-001/section/mobile-hardware-requirements');
+    .expect(getLocation()).contains('S100000-001/dashboard/native-mobile/section/mobile-hardware-requirements');
 });
 
 // TODO remove .skip the ui for that page is done
@@ -244,7 +244,7 @@ test.skip('should navigate the user to additional information page when clicking
 
   await t
     .click(hardwareRequirements.find('a'))
-    .expect(getLocation()).contains('S100000-001/section/mobile-additional-information');
+    .expect(getLocation()).contains('S100000-001/dashboard/native-mobile/section/mobile-additional-information');
 });
 
 test('should render the return to all sections link', async (t) => {

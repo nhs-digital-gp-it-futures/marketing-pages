@@ -1,6 +1,6 @@
 import nock from 'nock';
 import { Selector, ClientFunction } from 'testcafe';
-import dashboardWithCompleteSections from '../../../../fixtures/dashboardWithCompleteSections.json';
+import dashboardWithCompleteSections from '../../../../../fixtures/dashboardWithCompleteSections.json';
 
 const additionalInformationData = {
   'additional-information': 'The solution additional information',
@@ -20,7 +20,7 @@ const mocks = (withMarketingData) => {
 
 const pageSetup = async (t, withMarketingData = false) => {
   mocks(withMarketingData);
-  await t.navigateTo('http://localhost:1234/solution/S100000-001/section/browser-additional-information');
+  await t.navigateTo('http://localhost:1234/solution/S100000-001/dashboard/browser-based/section/browser-additional-information');
 };
 
 fixture('Show Additional Information page')
@@ -136,7 +136,7 @@ test('should goto anchor when clicking the additional information required error
     .expect(errorSummary.exists).notOk()
     .click(submitButton)
     .click(errorSummaryList.find('li:nth-child(1) a'))
-    .expect(getLocation()).contains('/solution/S100000-001/section/browser-additional-information#additional-information');
+    .expect(getLocation()).contains('/solution/S100000-001/dashboard/browser-based/section/browser-additional-information#additional-information');
 });
 
 test('should render the return to all sections link', async (t) => {

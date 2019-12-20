@@ -1,7 +1,7 @@
 import nock from 'nock';
 import { Selector, ClientFunction } from 'testcafe';
-import { ManifestProvider } from '../../../manifestProvider';
-import dashboardWithCompleteSections from '../../../../fixtures/dashboardWithCompleteSections.json';
+import { ManifestProvider } from '../../../../manifestProvider';
+import dashboardWithCompleteSections from '../../../../../fixtures/dashboardWithCompleteSections.json';
 
 const browserHardwareRequirementMarketingData = {
   'hardware-requirements-description': 'Some hardware requirement detail',
@@ -21,7 +21,7 @@ const mocks = (withMarketingData) => {
 
 const pageSetup = async (t, withMarketingData = false) => {
   mocks(withMarketingData);
-  await t.navigateTo('http://localhost:1234/solution/S100000-001/section/browser-hardware-requirements');
+  await t.navigateTo('http://localhost:1234/solution/S100000-001/dashboard/browser-based/section/browser-hardware-requirements');
 };
 
 fixture('Show browser hardware requirement page')
@@ -55,7 +55,7 @@ test('should render main advice of section', async (t) => {
 test('should render all the advice of the section', async (t) => {
   await pageSetup(t);
 
-  const sectionManifest = new ManifestProvider().getSectionManifest({ sectionId: 'browser-hardware-requirements' });
+  const sectionManifest = new ManifestProvider().getSectionManifest({ dashboardId: 'browser-based', sectionId: 'browser-hardware-requirements' });
   const expectedAdditionalAdvice = sectionManifest.additionalAdvice.join('\n\n');
 
   const additionalAdvice = Selector('[data-test-id="section-additional-advice"]');
@@ -104,9 +104,6 @@ test('should show error summary and validation for questions when they exceed th
       maxLength: ['hardware-requirements-description'],
     });
 
-  const oneHundredCharacters = '0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789';
-  const fiveHundredCharacters = oneHundredCharacters.repeat(5);
-
   const errorSummary = Selector('[data-test-id="error-summary"]');
   const errorSummaryList = Selector('.nhsuk-error-summary__list');
   const hardwareRequirementsQuestion = Selector('[data-test-id="question-hardware-requirements-description"]');
@@ -114,7 +111,6 @@ test('should show error summary and validation for questions when they exceed th
 
   await t
     .expect(errorSummary.exists).notOk()
-    .typeText(hardwareRequirementsQuestion, `${fiveHundredCharacters}0`, { paste: true })
     .click(submitButton.find('button'))
     .expect(errorSummary.exists).ok()
     .expect(errorSummaryList.find('li').count).eql(1)
@@ -146,7 +142,7 @@ test('should goto anchor when clicking the hardware requirement max length summa
     .expect(errorSummaryList.find('li:nth-child(1) a').count).eql(1)
     .expect(errorSummaryList.find('li:nth-child(1) a').getAttribute('href')).eql('#hardware-requirements-description')
     .click(errorSummaryList.find('li:nth-child(1) a'))
-    .expect(getLocation()).contains('/solution/S100000-001/section/browser-hardware-requirements#hardware-requirements-description');
+    .expect(getLocation()).contains('/solution/S100000-001/dashboard/browser-based/section/browser-hardware-requirements#hardware-requirements-description');
 });
 
 test('should render the return to all sections link', async (t) => {

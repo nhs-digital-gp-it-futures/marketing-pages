@@ -12,9 +12,12 @@ export const getSubDashboardPageContext = async (solutionId, dashboardId) => {
   const sectionData = await axios.get(endpoint);
   if (sectionData && sectionData.data) {
     const { sections } = sectionData.data;
-    const context = createDashboardPageContext(
-      solutionId, dashboardManifest, sections,
-    );
+    const context = createDashboardPageContext({
+      solutionId,
+      dashboardManifest,
+      marketingDataSections: sections,
+      dashboardId,
+    });
     return context;
   }
   throw new Error('No data returned');

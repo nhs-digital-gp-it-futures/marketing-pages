@@ -23,7 +23,9 @@ const transformationStratergy = {
   },
 };
 
-export const transformSectionData = (sectionId, sectionManifest, sectionData) => {
+export const transformSectionData = ({
+  sectionId, sectionManifest, sectionData,
+}) => {
   if (transformationStratergy[sectionId]) {
     const transformedSectionData = {};
 

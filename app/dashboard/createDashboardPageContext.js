@@ -16,26 +16,30 @@ const addErrors = (manifestSectionId, manifestSection, validationErrors) => {
   return addedErrors;
 };
 
-const createSectionsContext = (
-  solutionId, manifestSections, marketingDataSections, validationErrors,
-) => {
+const createSectionsContext = ({
+  solutionId, manifestSections, marketingDataSections, validationErrors, dashboardId,
+}) => {
   const { errorsAcc: errors, sectionsAcc: sections } = Object.entries(manifestSections)
     .reduce(({ errorsAcc, sectionsAcc }, [manifestSectionId, manifestSection]) => {
       const doesDataExistForSection = !!(marketingDataSections
         && marketingDataSections[manifestSectionId]);
 
       const { errors: subSectionErrors, sections: subSections } = manifestSection.sections
-        ? createSectionsContext(
+        ? createSectionsContext({
           solutionId,
-          manifestSection.sections,
-          marketingDataSections[manifestSectionId].sections,
+          manifestSections: manifestSection.sections,
+          marketingDataSections: marketingDataSections[manifestSectionId].sections,
           validationErrors,
           errorsAcc,
-        )
+        })
         : { errors: undefined, sections: undefined };
 
+      const sectionPath = dashboardId
+        ? `/solution/${solutionId}/dashboard/${dashboardId}/${manifestSection.type}/${manifestSectionId}`
+        : `/solution/${solutionId}/${manifestSection.type}/${manifestSectionId}`;
+
       const sectionContext = {
-        URL: `/solution/${solutionId}/${manifestSection.type}/${manifestSectionId}`,
+        URL: sectionPath,
         id: manifestSectionId,
         title: manifestSection.title,
         status: doesDataExistForSection
@@ -64,17 +68,21 @@ const createSectionsContext = (
   };
 };
 
-const createSectionGroupsContext = (
-  solutionId, sectionGroups, marketingDataSections, validationErrors,
-) => {
+const createSectionGroupsContext = ({
+  solutionId, sectionGroups, marketingDataSections, validationErrors, dashboardId,
+}) => {
   const {
     errorsAcc: errors,
     sectionGroupsAcc: sectionGroupsContext,
   } = Object.entries(sectionGroups)
     .reduce(({ errorsAcc, sectionGroupsAcc }, [sectionGroupId, sectionGroup]) => {
-      const { errors: sectionErrors, sections } = createSectionsContext(
-        solutionId, sectionGroup.sections, marketingDataSections, validationErrors,
-      );
+      const { errors: sectionErrors, sections } = createSectionsContext({
+        solutionId,
+        manifestSections: sectionGroup.sections,
+        marketingDataSections,
+        validationErrors,
+        dashboardId,
+      });
 
       const sectionGroupContext = {
         id: sectionGroupId,
@@ -95,12 +103,16 @@ const createSectionGroupsContext = (
 };
 
 
-export const createDashboardPageContext = (
-  solutionId, dashboardManifest, marketingDataSections, validationErrors,
-) => {
-  const { errors, sectionGroups } = createSectionGroupsContext(
-    solutionId, dashboardManifest.sectionGroups, marketingDataSections, validationErrors,
-  );
+export const createDashboardPageContext = ({
+  solutionId, dashboardManifest, marketingDataSections, validationErrors, dashboardId,
+}) => {
+  const { errors, sectionGroups } = createSectionGroupsContext({
+    solutionId,
+    sectionGroups: dashboardManifest.sectionGroups,
+    marketingDataSections,
+    validationErrors,
+    dashboardId,
+  });
 
   const context = {
     title: dashboardManifest.title,

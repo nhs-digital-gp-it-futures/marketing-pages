@@ -1,7 +1,7 @@
 import nock from 'nock';
 import { Selector, ClientFunction } from 'testcafe';
-import { ManifestProvider } from '../../../manifestProvider';
-import dashboardWithCompleteSections from '../../../../fixtures/dashboardWithCompleteSections.json';
+import { ManifestProvider } from '../../../../manifestProvider';
+import dashboardWithCompleteSections from '../../../../../fixtures/dashboardWithCompleteSections.json';
 
 const pluginsOrExtensionsMarketingData = {
   'plugins-required': 'Yes',
@@ -22,7 +22,7 @@ const mocks = (withMarketingData) => {
 
 const pageSetup = async (t, withMarketingData = false) => {
   mocks(withMarketingData);
-  await t.navigateTo('http://localhost:1234/solution/S100000-001/section/plug-ins-or-extensions');
+  await t.navigateTo('http://localhost:1234/solution/S100000-001/dashboard/browser-based/section/plug-ins-or-extensions');
 };
 
 fixture('Show Plug-ins Or Extensions page')
@@ -56,7 +56,7 @@ test('should render main advice of section', async (t) => {
 test('should render all the advice of the section', async (t) => {
   await pageSetup(t);
 
-  const sectionManifest = new ManifestProvider().getSectionManifest({ sectionId: 'plug-ins-or-extensions' });
+  const sectionManifest = new ManifestProvider().getSectionManifest({ dashboardId: 'browser-based', sectionId: 'plug-ins-or-extensions' });
   const expectedAdditionalAdvice = sectionManifest.additionalAdvice.join('\n\n');
 
   const additionalAdvice = Selector('[data-test-id="section-additional-advice"]');
@@ -125,9 +125,6 @@ test('should show error summary and validation for questions when they exceed th
       maxLength: ['plugins-detail'],
     });
 
-  const oneHundredCharacters = '0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789';
-  const fiveHundredCharacters = oneHundredCharacters.repeat(5);
-
   const errorSummary = Selector('[data-test-id="error-summary"]');
   const errorSummaryList = Selector('.nhsuk-error-summary__list');
   const pluginsDetailQuestion = Selector('[data-test-id="question-plugins-detail"]');
@@ -135,7 +132,6 @@ test('should show error summary and validation for questions when they exceed th
 
   await t
     .expect(errorSummary.exists).notOk()
-    .typeText(pluginsDetailQuestion, `${fiveHundredCharacters}0`, { paste: true })
     .click(submitButton.find('button'))
     .expect(errorSummary.exists).ok()
     .expect(errorSummaryList.find('li').count).eql(1)
@@ -193,7 +189,7 @@ test('should goto anchor when clicking the plugin required summary error link', 
     .expect(errorSummaryList.find('li:nth-child(1) a').count).eql(1)
     .expect(errorSummaryList.find('li:nth-child(1) a').getAttribute('href')).eql('#plugins-required')
     .click(errorSummaryList.find('li:nth-child(1) a'))
-    .expect(getLocation()).contains('/solution/S100000-001/section/plug-ins-or-extensions#plugins-required');
+    .expect(getLocation()).contains('/solution/S100000-001/dashboard/browser-based/section/plug-ins-or-extensions#plugins-required');
 });
 
 test('should goto anchor when clicking the plugin detail summary error link', async (t) => {
@@ -218,7 +214,7 @@ test('should goto anchor when clicking the plugin detail summary error link', as
     .expect(errorSummaryList.find('li:nth-child(1) a').count).eql(1)
     .expect(errorSummaryList.find('li:nth-child(1) a').getAttribute('href')).eql('#plugins-detail')
     .click(errorSummaryList.find('li:nth-child(1) a'))
-    .expect(getLocation()).contains('/solution/S100000-001/section/plug-ins-or-extensions#plugins-detail');
+    .expect(getLocation()).contains('/solution/S100000-001/dashboard/browser-based/section/plug-ins-or-extensions#plugins-detail');
 });
 
 test('should render the return to all sections link', async (t) => {

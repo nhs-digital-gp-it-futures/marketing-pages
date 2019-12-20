@@ -18,27 +18,31 @@ export const getSectionPageContext = async ({
   const sectionData = await axios.get(endpoint);
   if (sectionData && sectionData) {
     const formData = sectionData.data;
-    const context = createSectionPageContext(solutionId, sectionManifest, formData);
+    const context = createSectionPageContext({
+      solutionId, sectionManifest, formData, dashboardId,
+    });
     return context;
   }
   throw new Error('No data returned');
 };
 
-export const getSectionPageErrorContext = async (
-  solutionId, sectionId, sectionData, validationErrors,
-) => {
-  const sectionManifest = new ManifestProvider().getSectionManifest({ sectionId });
+export const getSectionPageErrorContext = async ({
+  solutionId, sectionId, sectionData, validationErrors, dashboardId,
+}) => {
+  const sectionManifest = new ManifestProvider().getSectionManifest({ dashboardId, sectionId });
 
-  const context = createSectionPageContext(
-    solutionId, sectionManifest, sectionData, validationErrors,
-  );
+  const context = createSectionPageContext({
+    solutionId, sectionManifest, formData: sectionData, validationErrors, dashboardId,
+  });
 
   return context;
 };
 
-export const postSection = async (solutionId, sectionId, sectionData) => {
-  const sectionManifest = new ManifestProvider().getSectionManifest({ sectionId });
-  const transformedSectionData = transformSectionData(sectionId, sectionManifest, sectionData);
+export const postSection = async ({
+  solutionId, sectionId, sectionData, dashboardId,
+}) => {
+  const sectionManifest = new ManifestProvider().getSectionManifest({ sectionId, dashboardId });
+  const transformedSectionData = transformSectionData({ sectionId, sectionManifest, sectionData });
   try {
     const endpoint = `${apiHost}/api/v1/Solutions/${solutionId}/sections/${sectionId}`;
     logger.info(`api called: [PUT] ${endpoint}`);

@@ -1,7 +1,7 @@
 import nock from 'nock';
 import { Selector, ClientFunction } from 'testcafe';
-import { ManifestProvider } from '../../../manifestProvider';
-import dashboardWithCompleteSections from '../../../../fixtures/dashboardWithCompleteSections.json';
+import { ManifestProvider } from '../../../../manifestProvider';
+import dashboardWithCompleteSections from '../../../../../fixtures/dashboardWithCompleteSections.json';
 
 const sectionId = 'mobile-operating-systems';
 const sectionApiUrl = `/api/v1/Solutions/S100000-001/sections/${sectionId}`;
@@ -11,7 +11,7 @@ const mobileOperatingSystemsMarketingData = {
   'operating-systems-description': 'Text for description',
 };
 
-const sectionManifest = new ManifestProvider().getSectionManifest({ sectionId });
+const sectionManifest = new ManifestProvider().getSectionManifest({ dashboardId: 'native-mobile', sectionId });
 
 const getLocation = ClientFunction(() => document.location.href);
 
@@ -23,7 +23,7 @@ const mocks = (responseStatus, responseBody) => {
 
 const pageSetup = async (t, responseStatus = 200, responseBody = {}) => {
   mocks(responseStatus, responseBody);
-  await t.navigateTo(`http://localhost:1234/solution/S100000-001/section/${sectionId}`);
+  await t.navigateTo(`http://localhost:1234/solution/S100000-001/dashboard/native-mobile/section/${sectionId}`);
 };
 
 fixture('Show mobile operating systems')
@@ -176,7 +176,7 @@ test('should go to anchor when clicking the operating systems description error 
   await t
     .click(submitButton.find('button'))
     .click(errorSummaryList.find('li:nth-child(1) a'))
-    .expect(getLocation()).contains(`/solution/S100000-001/section/${sectionId}#${question}`);
+    .expect(getLocation()).contains(`/solution/S100000-001/dashboard/native-mobile/section/${sectionId}#${question}`);
 });
 
 test('should render the submit button', async (t) => {
