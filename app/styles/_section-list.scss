@@ -18,7 +18,6 @@
       margin-left: -(nhsuk-spacing(4));
     }
   }
-
 }
 
 .bc-c-section-list__items {
@@ -56,10 +55,9 @@
   display: inline-block;
   margin-bottom: nhsuk-spacing(2);
   margin-left: nhsuk-spacing(3);
-  display: inline-block;
   @include mq($from: tablet) {
     float: right;
-    margin-top: 0;
     margin-bottom: 0;
+    margin-top: 0;
   }
 }
