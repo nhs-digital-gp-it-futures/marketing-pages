@@ -9,13 +9,10 @@ const mobileFirstMarketingData = {
   'mobile-first-design': 'Yes',
 };
 
-const fieldLengthMap = {};
-
 runTestSuite({
   data: mobileFirstMarketingData,
   sectionApiUrl,
   sectionId,
-  fieldLengthMap,
   clientUrl,
   parentSectionApiUrl,
 });
