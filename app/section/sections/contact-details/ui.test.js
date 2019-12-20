@@ -1,12 +1,11 @@
 import nock from 'nock';
 import { Selector, ClientFunction } from 'testcafe';
 import dashboardWithCompleteSections from '../../../../fixtures/dashboardWithCompleteSections.json';
+import { ManifestProvider } from '../../../manifestProvider';
 
 // TODO: add new test framework after error summary work is complete
 // import { runTestSuite } from '../../../test-utils/runTestSuite';
 
-// const sectionApiUrl = '/api/v1/Solutions/S100000-001/sections/contact-details';
-// const clientUrl = 'http://localhost:1234/solution/S100000-001/section/contact-details';
 
 const contactDetailsMarketingData = {
   'contact-1': {
@@ -53,12 +52,7 @@ fixture('Show Contact Details page')
   });
 
 // TODO: add new test framework after error summary work is complete
-// runTestSuite({
-//   data: contactDetailsMarketingData,
-//   sectionApiUrl,
-//   sectionId: 'contact-details',
-//   clientUrl,
-// });
+// runTestSuite()
 
 test('should render the Contact details page title', async (t) => {
   await pageSetup(t);
@@ -80,7 +74,6 @@ test('should render main advice of section', async (t) => {
 
 test('should render all the advice of section', async (t) => {
   await pageSetup(t);
-
   const sectionManifest = new ManifestProvider().getSectionManifest({ sectionId: 'contact-details' });
   const expectedAdditionalAdvice = sectionManifest.additionalAdvice.join('\n\n');
 

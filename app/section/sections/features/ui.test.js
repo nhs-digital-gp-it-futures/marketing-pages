@@ -1,7 +1,6 @@
 import { runTestSuite } from '../../../test-utils/runTestSuite';
 
 const sectionId = 'features';
-const sectionApiUrl = `/api/v1/Solutions/S100000-001/sections/${sectionId}`;
 const clientUrl = `http://localhost:1234/solution/S100000-001/section/${sectionId}`;
 
 const featuresMarketingData = {
@@ -14,7 +13,6 @@ const featuresMarketingData = {
 
 runTestSuite({
   data: featuresMarketingData,
-  sectionApiUrl,
   sectionId,
   clientUrl,
 });
