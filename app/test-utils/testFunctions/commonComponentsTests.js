@@ -37,11 +37,8 @@ const submitButtonTest = ({ pageSetup, sectionManifest }) => {
     await pageSetup({ t });
     const submitButton = Selector('[data-test-id="section-submit-button"]');
     await t
-      .expect(submitButton.find('button').count).eql(1);
-    if (sectionManifest.submitText) {
-      await t
-        .expect(submitButton.find('button').innerText).eql(sectionManifest.submitText);
-    }
+      .expect(submitButton.find('button').count).eql(1)
+      .expect(submitButton.find('button').innerText).eql(sectionManifest.submitText);
   });
 };
 
