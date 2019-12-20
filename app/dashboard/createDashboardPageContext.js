@@ -30,7 +30,6 @@ const createSectionsContext = ({
           manifestSections: manifestSection.sections,
           marketingDataSections: marketingDataSections[manifestSectionId].sections,
           validationErrors,
-          errorsAcc,
         })
         : { errors: undefined, sections: undefined };
 
