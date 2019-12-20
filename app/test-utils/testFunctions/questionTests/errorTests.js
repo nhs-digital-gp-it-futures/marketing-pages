@@ -76,6 +76,10 @@ const maxLengthErrorTest = ({
         await t
           .expect(renderedQuestion.find('.nhsuk-textarea--error').exists).ok();
       }
+      if (questionType === 'text-field') {
+        await t
+          .expect(renderedQuestion.find('.nhsuk-input--error').exists).ok();
+      }
     });
   }
 };
