@@ -34,36 +34,36 @@
 
 .bc-c-inset-text {
   border-left: $nhsuk-border-width-inset-text solid $color_nhsuk-blue;
-  margin-top: nhsuk-spacing(3);
   margin-left: 0;
+  margin-top: nhsuk-spacing(3);
   max-width: 100%;
   padding: 0;
   .bc-c-section-list__item:first-child {
-    border-top: none;
+    border-top: 0;
   }
 }
 
 .bc-c-section-list__item {
-  padding-top: nhsuk-spacing(2);
-  padding-bottom: nhsuk-spacing(2);
   list-style: none;
+  padding-bottom: nhsuk-spacing(2);
+  padding-top: nhsuk-spacing(2);
 }
 
 .bc-c-section-list__item:after {
-    content: "";
-    display: block;
-    clear: both;
+  clear: both;
+  content: '';
+  display: block;
 }
 
 .bc-c-section-list__task-tag {
   @extend .bc-c-tag;
-  margin-top: nhsuk-spacing(2);
+  display: inline-block;
   margin-bottom: nhsuk-spacing(2);
   margin-left: nhsuk-spacing(3);
-  display: inline-block;
+  margin-top: nhsuk-spacing(2);
   @media (min-width: 641px) {
     float: right;
-    margin-top: 0;
     margin-bottom: 0;
+    margin-top: 0;
   }
 }
