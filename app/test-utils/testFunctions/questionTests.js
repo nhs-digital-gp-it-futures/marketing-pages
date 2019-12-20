@@ -11,7 +11,6 @@ export const runQuestionTests = ({
   sectionManifest,
   data,
   sectionId,
-  apiLocalhost,
   sectionParent,
   dashboardId,
 }) => {
@@ -61,7 +60,6 @@ export const runQuestionTests = ({
           sectionManifest: sectionManifest.questions[question],
           data,
           sectionId,
-          apiLocalhost,
           sectionParent: question,
         });
       });
@@ -83,7 +81,6 @@ export const runQuestionTests = ({
         questionId,
         questionData,
         sectionId,
-        apiLocalhost,
         sectionParent,
         dashboardId,
       });

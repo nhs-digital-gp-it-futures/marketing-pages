@@ -1,5 +1,6 @@
 import { Selector, ClientFunction } from 'testcafe';
 import nock from 'nock';
+import { apiLocalhost, apiUrl } from '../../config';
 
 const getLocation = ClientFunction(() => document.location.href);
 
@@ -9,7 +10,6 @@ const goToAnchorFromErrorSummary = ({
   questionId,
   errorType,
   sectionManifest,
-  apiLocalhost,
   dashboardId,
 }) => {
   test(`should go to anchor when clicking the ${questionId} summary error link`, async (t) => {
@@ -19,7 +19,7 @@ const goToAnchorFromErrorSummary = ({
     // bulletpoint-list numbers the input fields so it is not just the question id e.g. listing-1
     if (questionType === 'bulletpoint-list') modifiedQuestionId = `${questionId}-1`;
     nock(apiLocalhost)
-      .put(`/api/v1/Solutions/S100000-001/sections/${sectionId}`)
+      .put(`${apiUrl}/${sectionId}`)
       .reply(400, {
         [errorType]: [modifiedQuestionId],
       });
@@ -34,7 +34,7 @@ const goToAnchorFromErrorSummary = ({
       .expect(errorSummary.exists).ok()
       .expect(errorSummaryList.find('li:nth-child(1) a').count).eql(1)
       .expect(errorSummaryList.find('li:nth-child(1) a').getAttribute('href')).eql(`#${modifiedQuestionId}`)
-      .click(errorSummaryList.find('li:nth-child(1) a'))
+      .click(errorSummaryList.find('li:nth-child(1) a'));
     if (dashboardId) {
       await t
         .expect(getLocation()).contains(`/solution/S100000-001/dashboard/${dashboardId}/section/${sectionId}#${modifiedQuestionId}`);
@@ -49,7 +49,6 @@ const maxLengthErrorTest = ({
   pageSetup,
   sectionManifest,
   questionId,
-  apiLocalhost,
   errorType,
   sectionId,
 }) => {
@@ -58,7 +57,7 @@ const maxLengthErrorTest = ({
       const questionType = sectionManifest.questions[questionId].type;
       await pageSetup({ t });
       nock(apiLocalhost)
-        .put(`/api/v1/Solutions/S100000-001/sections/${sectionId}`)
+        .put(`${apiUrl}/${sectionId}`)
         .reply(400, {
           // bulletpoint-list numbers the input fields so it is not just the question id
           maxLength: [questionType === 'bulletpoint-list' ? `${questionId}-1` : questionId],
@@ -95,14 +94,13 @@ const mandatoryErrorTest = ({
   sectionManifest,
   questionId,
   sectionId,
-  apiLocalhost,
   errorType,
 }) => {
   if (errorType === 'required') {
     test(`should show error summary and validation for ${questionId} question indicating it is mandatory`, async (t) => {
       await pageSetup({ t });
       nock(apiLocalhost)
-        .put(`/api/v1/Solutions/S100000-001/sections/${sectionId}`)
+        .put(`${apiUrl}/${sectionId}`)
         .reply(400, {
           required: [questionId],
         });
@@ -133,7 +131,6 @@ export const runErrorTests = ({
   questionId,
   sectionId,
   questionData,
-  apiLocalhost,
   dashboardId,
 }) => {
   Object.keys(questionData.errorResponse).forEach((errorType) => {
@@ -142,14 +139,12 @@ export const runErrorTests = ({
       sectionManifest,
       questionId,
       sectionId,
-      apiLocalhost,
     });
     maxLengthErrorTest({
       pageSetup,
       sectionManifest,
       questionId,
       sectionId,
-      apiLocalhost,
     });
     goToAnchorFromErrorSummary({
       pageSetup,
@@ -157,7 +152,6 @@ export const runErrorTests = ({
       questionId,
       sectionId,
       errorType,
-      apiLocalhost,
       dashboardId,
     });
   });

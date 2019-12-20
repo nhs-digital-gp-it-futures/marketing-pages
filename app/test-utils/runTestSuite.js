@@ -2,20 +2,19 @@ import nock from 'nock';
 import { ManifestProvider } from '../manifestProvider';
 import { runCommonComponentsTests } from './testFunctions/commonComponentsTests';
 import { runQuestionTests } from './testFunctions/questionTests';
-
-const apiLocalhost = 'http://localhost:8080';
+import { apiLocalhost, apiUrl, clientLocalhost } from './config';
 
 export const runTestSuite = async ({
   data,
   sectionId,
   dashboardId,
 }) => {
-  const clientUrl = dashboardId ? `http://localhost:1234/solution/S100000-001/dashboard/${dashboardId}/section/${sectionId}`
-    : `http://localhost:1234/solution/S100000-001/section/${sectionId}`;
+  const clientUrl = dashboardId ? `${clientLocalhost}/dashboard/${dashboardId}/section/${sectionId}`
+    : `${clientLocalhost}/section/${sectionId}`;
 
   const mocks = (responseStatus, responseBody) => {
     nock(apiLocalhost)
-      .get(`/api/v1/Solutions/S100000-001/sections/${sectionId}`)
+      .get(`${apiUrl}/${sectionId}`)
       .reply(responseStatus, responseBody);
   };
 
@@ -45,7 +44,6 @@ export const runTestSuite = async ({
     sectionId,
     data,
     dashboardId,
-    apiLocalhost,
   });
 
   runQuestionTests({
@@ -53,7 +51,6 @@ export const runTestSuite = async ({
     sectionManifest,
     data,
     sectionId,
-    apiLocalhost,
     dashboardId,
   });
 };

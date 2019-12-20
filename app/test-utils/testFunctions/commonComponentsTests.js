@@ -1,6 +1,7 @@
 import { Selector, ClientFunction } from 'testcafe';
 import nock from 'nock';
 import dashboardWithCompleteSections from '../../../fixtures/dashboardWithCompleteSections.json';
+import { apiLocalhost, apiUrl } from '../config';
 
 const getLocation = ClientFunction(() => document.location.href);
 
@@ -53,17 +54,16 @@ const submitButtonClickedTest = ({
   sectionId,
   data,
   sectionManifest,
-  apiLocalhost,
   dashboardId,
 }) => {
   if (sectionManifest.successfulSubmitResponsePath) {
     test(`should go to ${sectionManifest.successfulSubmitResponsePath} when clicking the submit button`, async (t) => {
       await pageSetup({ t, responseBody: data });
       nock(apiLocalhost)
-        .put(`/api/v1/Solutions/S100000-001/sections/${sectionId}`)
+        .put(`${apiUrl}/${sectionId}`)
         .reply(200, data);
       nock(apiLocalhost)
-        .get(`/api/v1/Solutions/S100000-001/sections/${dashboardId}`)
+        .get(`${apiUrl}/${dashboardId}`)
         .reply(200, {});
 
       const submitButton = Selector('[data-test-id="section-submit-button"] button');
@@ -86,7 +86,7 @@ const sectionsLinkTest = ({ pageSetup }) => {
   });
 };
 
-const sectionsLinkClickedTest = ({ pageSetup, apiLocalhost }) => {
+const sectionsLinkClickedTest = ({ pageSetup }) => {
   test('should return to the marketing data dashboard when the return to all sections is clicked', async (t) => {
     await pageSetup({ t });
     nock(apiLocalhost)
@@ -106,7 +106,6 @@ export const runCommonComponentsTests = ({
   sectionManifest,
   sectionId,
   data,
-  apiLocalhost,
   dashboardId,
 }) => {
   titleTest({ pageSetup, sectionManifest });
@@ -118,9 +117,8 @@ export const runCommonComponentsTests = ({
     sectionId,
     data,
     sectionManifest,
-    apiLocalhost,
     dashboardId,
   });
   sectionsLinkTest({ pageSetup });
-  sectionsLinkClickedTest({ pageSetup, apiLocalhost });
+  sectionsLinkClickedTest({ pageSetup });
 };
