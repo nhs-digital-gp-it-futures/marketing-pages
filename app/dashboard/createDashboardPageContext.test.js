@@ -403,7 +403,7 @@ describe('createDashboardPageContext', () => {
             {
               URL: '/solution/some-solution-id/dashboard/some-sub-dashboard/section/sub-section-two',
               id: 'sub-section-two',
-              title: 'Sub section one',
+              title: 'Sub section two',
               isActive: false,
             },
             {
@@ -429,7 +429,7 @@ describe('createDashboardPageContext', () => {
               type: 'section',
             },
             'sub-section-two': {
-              title: 'Sub section one',
+              title: 'Sub section two',
               type: 'section',
             },
             'sub-section-three': {
@@ -443,6 +443,70 @@ describe('createDashboardPageContext', () => {
 
 
     const context = createDashboardPageContext({ solutionId: 'some-solution-id', dashboardManifest, dashboardId: 'some-sub-dashboard' });
+
+    expect(context).toEqual(expectedContext);
+  });
+
+  it('should create a context with the url of the section without the dashboard id when not provided', () => {
+    const expectedContext = {
+      title: 'Dashboard',
+      previewUrl: '/solution/some-solution-id/preview',
+      submitForModerationUrl: '/solution/some-solution-id/submitForModeration',
+      returnToDashboardUrl: '/solution/some-solution-id',
+      sectionGroups: [
+        {
+          id: 'dashboard-sections',
+          title: 'dashboard sections',
+          sections: [
+            {
+              URL: '/solution/some-solution-id/section/section-one',
+              id: 'section-one',
+              title: 'section one',
+              isActive: false,
+            },
+            {
+              URL: '/solution/some-solution-id/section/section-two',
+              id: 'section-two',
+              title: 'section two',
+              isActive: false,
+            },
+            {
+              URL: '/solution/some-solution-id/section/section-three',
+              id: 'section-three',
+              title: 'section three',
+              isActive: false,
+            },
+          ],
+        },
+      ],
+    };
+
+    const dashboardManifest = {
+      id: 'some-dashboard-page',
+      title: 'Dashboard',
+      sectionGroups: {
+        'dashboard-sections': {
+          title: 'dashboard sections',
+          sections: {
+            'section-one': {
+              title: 'section one',
+              type: 'section',
+            },
+            'section-two': {
+              title: 'section two',
+              type: 'section',
+            },
+            'section-three': {
+              title: 'section three',
+              type: 'section',
+            },
+          },
+        },
+      },
+    };
+
+
+    const context = createDashboardPageContext({ solutionId: 'some-solution-id', dashboardManifest });
 
     expect(context).toEqual(expectedContext);
   });
