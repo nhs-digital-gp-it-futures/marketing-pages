@@ -2,7 +2,7 @@ import nock from 'nock';
 import { ManifestProvider } from '../manifestProvider';
 import { runCommonComponentsTests } from './testFunctions/commonComponentsTests';
 import { runQuestionTests } from './testFunctions/questionTests';
-import { apiLocalhost, apiUrl, clientLocalhost } from './config';
+import { apiLocalhost, apiPath, clientLocalhost } from './config';
 
 export const runTestSuite = async ({
   data,
@@ -14,7 +14,7 @@ export const runTestSuite = async ({
 
   const mocks = (responseStatus, responseBody) => {
     nock(apiLocalhost)
-      .get(`${apiUrl}/${sectionId}`)
+      .get(`${apiPath}/${sectionId}`)
       .reply(responseStatus, responseBody);
   };
 

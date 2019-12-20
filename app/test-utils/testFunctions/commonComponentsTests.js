@@ -1,7 +1,7 @@
 import { Selector, ClientFunction } from 'testcafe';
 import nock from 'nock';
 import dashboardWithCompleteSections from '../../../fixtures/dashboardWithCompleteSections.json';
-import { apiLocalhost, apiUrl } from '../config';
+import { apiLocalhost, apiPath } from '../config';
 
 const getLocation = ClientFunction(() => document.location.href);
 
@@ -60,10 +60,10 @@ const submitButtonClickedTest = ({
     test(`should go to ${sectionManifest.successfulSubmitResponsePath} when clicking the submit button`, async (t) => {
       await pageSetup({ t, responseBody: data });
       nock(apiLocalhost)
-        .put(`${apiUrl}/${sectionId}`)
+        .put(`${apiPath}/${sectionId}`)
         .reply(200, data);
       nock(apiLocalhost)
-        .get(`${apiUrl}/${dashboardId}`)
+        .get(`${apiPath}/${dashboardId}`)
         .reply(200, {});
 
       const submitButton = Selector('[data-test-id="section-submit-button"] button');

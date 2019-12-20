@@ -1,6 +1,6 @@
 import { Selector, ClientFunction } from 'testcafe';
 import nock from 'nock';
-import { apiLocalhost, apiUrl } from '../../config';
+import { apiLocalhost, apiPath } from '../../config';
 
 const getLocation = ClientFunction(() => document.location.href);
 
@@ -19,7 +19,7 @@ const goToAnchorFromErrorSummary = ({
     // bulletpoint-list numbers the input fields so it is not just the question id e.g. listing-1
     if (questionType === 'bulletpoint-list') modifiedQuestionId = `${questionId}-1`;
     nock(apiLocalhost)
-      .put(`${apiUrl}/${sectionId}`)
+      .put(`${apiPath}/${sectionId}`)
       .reply(400, {
         [errorType]: [modifiedQuestionId],
       });
@@ -57,7 +57,7 @@ const maxLengthErrorTest = ({
       const questionType = sectionManifest.questions[questionId].type;
       await pageSetup({ t });
       nock(apiLocalhost)
-        .put(`${apiUrl}/${sectionId}`)
+        .put(`${apiPath}/${sectionId}`)
         .reply(400, {
           // bulletpoint-list numbers the input fields so it is not just the question id
           maxLength: [questionType === 'bulletpoint-list' ? `${questionId}-1` : questionId],
@@ -100,7 +100,7 @@ const mandatoryErrorTest = ({
     test(`should show error summary and validation for ${questionId} question indicating it is mandatory`, async (t) => {
       await pageSetup({ t });
       nock(apiLocalhost)
-        .put(`${apiUrl}/${sectionId}`)
+        .put(`${apiPath}/${sectionId}`)
         .reply(400, {
           required: [questionId],
         });
