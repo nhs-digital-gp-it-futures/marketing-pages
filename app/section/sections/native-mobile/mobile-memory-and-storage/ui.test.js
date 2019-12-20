@@ -1,10 +1,10 @@
 import nock from 'nock';
 import { Selector, ClientFunction } from 'testcafe';
-import dashboardWithCompleteSections from '../../../../fixtures/dashboardWithCompleteSections.json';
+import dashboardWithCompleteSections from '../../../../../fixtures/dashboardWithCompleteSections.json';
 
 const mobileMemoryAndStorageData = {
-  "minimum-memory-requirement": "256MB",
-  "storage-requirements-description": "Some storage requirements description"
+  'minimum-memory-requirement': '256MB',
+  'storage-requirements-description': 'Some storage requirements description',
 };
 
 const mocks = (withMarketingData) => {
@@ -21,7 +21,7 @@ const mocks = (withMarketingData) => {
 
 const pageSetup = async (t, withMarketingData = false) => {
   mocks(withMarketingData);
-  await t.navigateTo('http://localhost:1234/solution/S100000-001/section/mobile-memory-and-storage');
+  await t.navigateTo('http://localhost:1234/solution/S100000-001/dashboard/native-mobile/section/mobile-memory-and-storage');
 };
 
 fixture('Mobile memory and storage page')
@@ -79,7 +79,7 @@ test('should populate minimum memory requirement question with existing data', a
 
   await t
     .expect(minimumMemoryRequirementQuestion.find('option[selected]').exists).ok()
-    .expect(minimumMemoryRequirementQuestion.find('option[selected]').getAttribute('value')).eql('256MB')
+    .expect(minimumMemoryRequirementQuestion.find('option[selected]').getAttribute('value')).eql('256MB');
 });
 
 test('should show error summary and validation for minimum memory requirement indicating it is mandatory', async (t) => {
@@ -124,7 +124,7 @@ test('should goto anchor when clicking the minimum memory requirement required s
   await t
     .click(submitButton.find('button'))
     .click(errorSummaryList.find('li:nth-child(1) a'))
-    .expect(getLocation()).contains('/solution/S100000-001/section/mobile-memory-and-storage#minimum-memory-requirement');
+    .expect(getLocation()).contains('/solution/S100000-001/dashboard/native-mobile/section/mobile-memory-and-storage#minimum-memory-requirement');
 });
 
 test('should render storage requirements description question', async (t) => {
@@ -190,7 +190,7 @@ test('should goto anchor when clicking the storage requirements description requ
   await t
     .click(submitButton.find('button'))
     .click(errorSummaryList.find('li:nth-child(1) a'))
-    .expect(getLocation()).contains('/solution/S100000-001/section/mobile-memory-and-storage#storage-requirements-description');
+    .expect(getLocation()).contains('/solution/S100000-001/dashboard/native-mobile/section/mobile-memory-and-storage#storage-requirements-description');
 });
 
 test('should show error summary and validation for storage requirements description question it exceeds the maxLength', async (t) => {
@@ -216,7 +216,7 @@ test('should show error summary and validation for storage requirements descript
     .expect(errorSummaryList.find('li:nth-child(1)').innerText).eql('Storage requirement description is over the character limit')
     .expect(errorSummaryList.find('li:nth-child(1) a').getAttribute('href')).eql('#storage-requirements-description')
     .expect(storageRequirementsDescription.find('.nhsuk-textarea--error').exists).ok()
-    .expect(storageRequirementsDescription.find('.nhsuk-error-message').innerText).eql('Error:\nStorage requirement description is over the character limit')
+    .expect(storageRequirementsDescription.find('.nhsuk-error-message').innerText).eql('Error:\nStorage requirement description is over the character limit');
 });
 
 test('should goto anchor when clicking the storage requirements description maxlength summary error link', async (t) => {
@@ -236,7 +236,7 @@ test('should goto anchor when clicking the storage requirements description maxl
   await t
     .click(submitButton.find('button'))
     .click(errorSummaryList.find('li:nth-child(1) a'))
-    .expect(getLocation()).contains('/solution/S100000-001/section/mobile-memory-and-storage#storage-requirements-description');
+    .expect(getLocation()).contains('/solution/S100000-001/dashboard/native-mobile/section/mobile-memory-and-storage#storage-requirements-description');
 });
 
 test('should render the submit button', async (t) => {

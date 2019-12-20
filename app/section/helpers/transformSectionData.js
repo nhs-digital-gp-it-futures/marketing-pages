@@ -21,6 +21,11 @@ const transformationStratergy = {
       transform: questionValue => arrayTransformation(questionValue),
     },
   },
+  'mobile-operating-systems': {
+    'operating-systems': {
+      transform: questionValue => arrayTransformation(questionValue),
+    },
+  },
 };
 
 export const transformSectionData = ({
