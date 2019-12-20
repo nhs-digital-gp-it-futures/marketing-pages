@@ -64,7 +64,7 @@ describe('comboboxOptions', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        const comboboxComponent = $('[data-test-id=combobox-options-fieldId]');
+        const comboboxComponent = $('[data-test-id=question-fieldId]');
         const combobox = comboboxComponent.find('select');
 
         expect(combobox.length).toEqual(1);
@@ -99,7 +99,7 @@ describe('comboboxOptions', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        const comboboxComponent = $('[data-test-id=combobox-options-fieldId]');
+        const comboboxComponent = $('[data-test-id=question-fieldId]');
         const combobox = comboboxComponent.find('select');
 
         expect(combobox.find('option').length).toEqual(2);
@@ -138,7 +138,7 @@ describe('comboboxOptions', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        const comboboxComponent = $('[data-test-id=combobox-options-fieldId]');
+        const comboboxComponent = $('[data-test-id=question-fieldId]');
         const combobox = comboboxComponent.find('select');
 
         expect(combobox.find('option').length).toEqual(2);
@@ -177,7 +177,7 @@ describe('comboboxOptions', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        const comboboxComponent = $('[data-test-id=combobox-options-fieldId]');
+        const comboboxComponent = $('[data-test-id=question-fieldId]');
         const combobox = comboboxComponent.find('select');
 
         expect(combobox.find('option').length).toEqual(2);
@@ -219,7 +219,7 @@ describe('comboboxOptions', () => {
       .then((res) => {
         const $ = cheerio.load(res.text);
 
-        const comboboxComponent = $('[data-test-id=combobox-options-fieldId]');
+        const comboboxComponent = $('[data-test-id=question-fieldId]');
 
         expect(comboboxComponent.length).toEqual(1);
         expect(comboboxComponent.find('select.nhsuk-select--error').length).toEqual(1);

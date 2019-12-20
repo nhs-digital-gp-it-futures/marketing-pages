@@ -9,7 +9,7 @@
   "questions": {
     "plugins-required": {   
       "mainAdvice": "Are any plug-ins or browser extensions required?*",
-      "additionalAdvice": "Please select below if your Solution requires any plug-ins or browser extentions.",
+      "additionalAdvice": "Please select below if your Solution requires any plug-ins or browser extensions.",
       "type": "radiobutton-options",
       "options": {
         "Yes": "Yes",

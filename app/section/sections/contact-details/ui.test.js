@@ -1,7 +1,11 @@
 import nock from 'nock';
 import { Selector, ClientFunction } from 'testcafe';
-import { ManifestProvider } from '../../../manifestProvider';
 import dashboardWithCompleteSections from '../../../../fixtures/dashboardWithCompleteSections.json';
+import { ManifestProvider } from '../../../manifestProvider';
+
+// TODO: add new test framework after error summary work is complete
+// import { runTestSuite } from '../../../test-utils/runTestSuite';
+
 
 const contactDetailsMarketingData = {
   'contact-1': {
@@ -47,6 +51,9 @@ fixture('Show Contact Details page')
     await t.expect(isDone).ok('Not all nock interceptors were used!');
   });
 
+// TODO: add new test framework after error summary work is complete
+// runTestSuite()
+
 test('should render the Contact details page title', async (t) => {
   await pageSetup(t);
 
@@ -67,7 +74,6 @@ test('should render main advice of section', async (t) => {
 
 test('should render all the advice of section', async (t) => {
   await pageSetup(t);
-
   const sectionManifest = new ManifestProvider().getSectionManifest({ sectionId: 'contact-details' });
   const expectedAdditionalAdvice = sectionManifest.additionalAdvice.join('\n\n');
 
@@ -179,7 +185,6 @@ test('should render the submit button', async (t) => {
     .expect(submitButton.find('button').count).eql(1)
     .expect(submitButton.find('button').innerText).eql('Save and return to all sections');
 });
-
 
 test('should render the return to all sections link', async (t) => {
   await pageSetup(t);
