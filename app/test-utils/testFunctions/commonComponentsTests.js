@@ -5,31 +5,37 @@ import dashboardWithCompleteSections from '../../../fixtures/dashboardWithComple
 const getLocation = ClientFunction(() => document.location.href);
 
 const titleTest = ({ pageSetup, sectionManifest }) => {
-  test('should render the page title', async (t) => {
-    await pageSetup({ t });
-    const title = Selector('[data-test-id="section-title"]');
-    await t
-      .expect(title.innerText).eql(sectionManifest.title);
-  });
+  if (sectionManifest.title) {
+    test('should render the page title', async (t) => {
+      await pageSetup({ t });
+      const title = Selector('[data-test-id="section-title"]');
+      await t
+        .expect(title.innerText).eql(sectionManifest.title);
+    });
+  }
 };
 
 const mainAdviceTest = ({ pageSetup, sectionManifest }) => {
-  test('should render main advice of section', async (t) => {
-    await pageSetup({ t });
-    const mainAdvice = Selector('[data-test-id="section-main-advice"]');
-    await t
-      .expect(mainAdvice.innerText).eql(sectionManifest.mainAdvice);
-  });
+  if (sectionManifest.mainAdvice) {
+    test('should render main advice of section', async (t) => {
+      await pageSetup({ t });
+      const mainAdvice = Selector('[data-test-id="section-main-advice"]');
+      await t
+        .expect(mainAdvice.innerText).eql(sectionManifest.mainAdvice);
+    });
+  }
 };
 
 const allAdviceTest = ({ pageSetup, sectionManifest }) => {
-  test('should render all the advice of the section', async (t) => {
-    await pageSetup({ t });
-    const expectedAdditionalAdvice = sectionManifest.additionalAdvice.join('\n\n');
-    const additionalAdvice = Selector('[data-test-id="section-additional-advice"]');
-    await t
-      .expect(additionalAdvice.innerText).eql(expectedAdditionalAdvice);
-  });
+  if (sectionManifest.additionalAdvice) {
+    test('should render all the advice of the section', async (t) => {
+      await pageSetup({ t });
+      const expectedAdditionalAdvice = sectionManifest.additionalAdvice.join('\n\n');
+      const additionalAdvice = Selector('[data-test-id="section-additional-advice"]');
+      await t
+        .expect(additionalAdvice.innerText).eql(expectedAdditionalAdvice);
+    });
+  }
 };
 
 const submitButtonTest = ({ pageSetup, sectionManifest }) => {
@@ -50,21 +56,23 @@ const submitButtonClickedTest = ({
   parentSectionApiUrl,
   apiLocalhost,
 }) => {
-  test(`should go to ${sectionManifest.successfulSubmitResponsePath} when clicking the submit button`, async (t) => {
-    await pageSetup({ t, responseBody: data });
-    nock(apiLocalhost)
-      .put(sectionApiUrl)
-      .reply(200, data);
-    nock(apiLocalhost)
-      .get(parentSectionApiUrl)
-      .reply(200, {});
+  if (sectionManifest.successfulSubmitResponsePath) {
+    test(`should go to ${sectionManifest.successfulSubmitResponsePath} when clicking the submit button`, async (t) => {
+      await pageSetup({ t, responseBody: data });
+      nock(apiLocalhost)
+        .put(sectionApiUrl)
+        .reply(200, data);
+      nock(apiLocalhost)
+        .get(parentSectionApiUrl)
+        .reply(200, {});
 
-    const submitButton = Selector('[data-test-id="section-submit-button"] button');
-    await t
-      .expect(submitButton.exists).ok()
-      .click(submitButton)
-      .expect(getLocation()).contains(`/solution/S100000-001/${sectionManifest.successfulSubmitResponsePath}`);
-  });
+      const submitButton = Selector('[data-test-id="section-submit-button"] button');
+      await t
+        .expect(submitButton.exists).ok()
+        .click(submitButton)
+        .expect(getLocation()).contains(`/solution/S100000-001/${sectionManifest.successfulSubmitResponsePath}`);
+    });
+  }
 };
 
 const sectionsLinkTest = ({ pageSetup }) => {
@@ -99,20 +107,18 @@ export const runCommonComponentsTests = ({
   parentSectionApiUrl,
   apiLocalhost,
 }) => {
-  if (sectionManifest.title) titleTest({ pageSetup, sectionManifest });
-  if (sectionManifest.mainAdvice) mainAdviceTest({ pageSetup, sectionManifest });
-  if (sectionManifest.additionalAdvice) allAdviceTest({ pageSetup, sectionManifest });
+  titleTest({ pageSetup, sectionManifest });
+  mainAdviceTest({ pageSetup, sectionManifest });
+  allAdviceTest({ pageSetup, sectionManifest });
   submitButtonTest({ pageSetup, sectionManifest });
-  if (sectionManifest.successfulSubmitResponsePath) {
-    submitButtonClickedTest({
-      pageSetup,
-      sectionApiUrl,
-      data,
-      sectionManifest,
-      parentSectionApiUrl,
-      apiLocalhost,
-    });
-  }
+  submitButtonClickedTest({
+    pageSetup,
+    sectionApiUrl,
+    data,
+    sectionManifest,
+    parentSectionApiUrl,
+    apiLocalhost,
+  });
   sectionsLinkTest({ pageSetup });
   sectionsLinkClickedTest({ pageSetup, apiLocalhost });
 };
