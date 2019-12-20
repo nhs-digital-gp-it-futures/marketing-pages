@@ -1,4 +1,4 @@
-import { runTestSuite } from '../../../test-utils/runTestSuite';
+import { runTestSuite } from '../../../../test-utils/runTestSuite';
 
 const sectionId = 'mobile-first';
 const sectionApiUrl = `/api/v1/Solutions/S100000-001/sections/${sectionId}`;
