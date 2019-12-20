@@ -11,13 +11,14 @@ module.exports = {
     "array-callback-return": "off",
     "linebreak-style": "off",
     "no-console": 1,
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": ["**/test-utils/**"]}]
   },
   "globals": {
     "fixture": "readonly"
   },
   "overrides": [
     {
-      "files": ["**/*ui.test.js"],
+      "files": ["**/test-utils/**"],
         "rules": {
           "newline-per-chained-call": 0
         }
