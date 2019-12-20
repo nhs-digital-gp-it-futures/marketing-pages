@@ -26,6 +26,11 @@ const transformationStratergy = {
       transform: questionValue => arrayTransformation(questionValue),
     },
   },
+  'mobile-connection-details': {
+    'connection-types': {
+      transform: questionValue => arrayTransformation(questionValue),
+    },
+  },
 };
 
 export const transformSectionData = ({
