@@ -117,6 +117,7 @@ test('when existing marketing data - The client application type section and bro
   const browserBasedExpandaleSectionTable = Selector('[data-test-id="view-section-table-browser-based"]');
   const supportedBrowsersRow = browserBasedExpandaleSectionTable.find('[data-test-id="view-section-table-row-supported-browsers"]');
   const mobileResponsiveRow = browserBasedExpandaleSectionTable.find('[data-test-id="view-section-table-row-mobile-responsive"]');
+  const mobileFirstRow = browserBasedExpandaleSectionTable.find('[data-test-id="view-section-table-row-mobile-first-design"]');
   const pluginsRequiredRow = browserBasedExpandaleSectionTable.find('[data-test-id="view-section-table-row-plugins-required"]');
   const pluginsDetailRow = browserBasedExpandaleSectionTable.find('[data-test-id="view-section-table-row-plugins-detail"]');
   const minimumConnectionRow = browserBasedExpandaleSectionTable.find('[data-test-id="view-section-table-row-minimum-connection-speed"]');
@@ -142,6 +143,10 @@ test('when existing marketing data - The client application type section and bro
     .expect(mobileResponsiveRow.find('div[data-test-id="view-section-table-row-component"]').innerText).eql('Yes')
     .expect(mobileResponsiveRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok()
 
+    .expect(mobileFirstRow.find('div[data-test-id="view-section-table-row-title"]').innerText).eql('Designed with a mobile first approach')
+    .expect(mobileFirstRow.find('div[data-test-id="view-section-table-row-component"]').innerText).eql('Yes')
+    .expect(mobileFirstRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok()
+
     .expect(pluginsRequiredRow.find('div[data-test-id="view-section-table-row-title"]').innerText).eql('Plug-ins or extensions required')
     .expect(pluginsRequiredRow.find('div[data-test-id="view-section-table-row-component"]').innerText).eql('Yes')
     .expect(pluginsRequiredRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok()
@@ -165,4 +170,62 @@ test('when existing marketing data - The client application type section and bro
     .expect(additionalInformationRow.find('div[data-test-id="view-section-table-row-title"]').innerText).eql('Additional information')
     .expect(additionalInformationRow.find('div[data-test-id="view-section-table-row-component"]').innerText).eql('Some browser additional information')
     .expect(additionalInformationRow.find('div[data-test-id="view-section-table-row-vertical"]').exists).ok();
+});
+
+test('when existing marketing data - The client application type section and native-mobile section should be rendered', async (t) => {
+  pageSetup(t, true);
+
+  const clientApplicationTypesSection = Selector('[data-test-id="view-client-application-types"]');
+  const nativeMobileExpandableSection = Selector('[data-test-id="view-section-native-mobile"]');
+  const nativeMobileExpandaleSectionTable = Selector('[data-test-id="view-section-table-native-mobile"]');
+  const operatingSystemRow = nativeMobileExpandaleSectionTable.find('[data-test-id="view-section-table-row-operating-systems"]');
+  const operatingSystemDescriptionRow = nativeMobileExpandaleSectionTable.find('[data-test-id="view-section-table-row-operating-systems-description"]');
+  const mobileFirstRow = nativeMobileExpandaleSectionTable.find('[data-test-id="view-section-table-row-mobile-first-design"]');
+  const minimumMemoryRow = nativeMobileExpandaleSectionTable.find('[data-test-id="view-section-table-row-minimum-memory-requirement"]');
+  const storageDescriptionRow = nativeMobileExpandaleSectionTable.find('[data-test-id="view-section-table-row-storage-requirements-description"]');
+  const minimumConnectionRow = nativeMobileExpandaleSectionTable.find('[data-test-id="view-section-table-row-minimum-connection-speed"]');
+  const connectionRequirementsRow = nativeMobileExpandaleSectionTable.find('[data-test-id="view-section-table-row-connection-types"]');
+  const connectionDescriptionRow = nativeMobileExpandaleSectionTable.find('[data-test-id="view-section-table-row-connection-requirements-description"]');
+
+  await t
+    .expect(clientApplicationTypesSection.exists).ok()
+    .expect(clientApplicationTypesSection.find('h3').innerText).eql('Client application type')
+
+    .expect(nativeMobileExpandableSection.exists).ok()
+    .expect(nativeMobileExpandableSection.innerText).eql('Native mobile or tablet application')
+    .expect(nativeMobileExpandableSection.find('details[open]').exists).notOk()
+    .click(nativeMobileExpandableSection.find('summary'))
+    .expect(nativeMobileExpandableSection.find('details[open]').exists).ok()
+
+    .expect(operatingSystemRow.find('div[data-test-id="view-section-table-row-title"]').innerText).eql('Supported operating systems')
+    .expect(operatingSystemRow.find('div[data-test-id="view-section-table-row-component"]').innerText).eql('Apple IOS\nAndroid\nOther')
+    .expect(operatingSystemRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok()
+
+    .expect(operatingSystemDescriptionRow.find('div[data-test-id="view-section-table-row-title"]').innerText).eql('Additional operating system information')
+    .expect(operatingSystemDescriptionRow.find('div[data-test-id="view-section-table-row-component"]').innerText).eql('Android 4.1 and above, IOS 10.6 and above.')
+    .expect(operatingSystemDescriptionRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok()
+
+    .expect(mobileFirstRow.find('div[data-test-id="view-section-table-row-title"]').innerText).eql('Designed with a mobile first approach')
+    .expect(mobileFirstRow.find('div[data-test-id="view-section-table-row-component"]').innerText).eql('Yes')
+    .expect(mobileFirstRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok()
+
+    .expect(minimumMemoryRow.find('div[data-test-id="view-section-table-row-title"]').innerText).eql('Minimum memory requirement')
+    .expect(minimumMemoryRow.find('div[data-test-id="view-section-table-row-component"]').innerText).eql('4GB')
+    .expect(minimumMemoryRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok()
+
+    .expect(storageDescriptionRow.find('div[data-test-id="view-section-table-row-title"]').innerText).eql('Additional storage requirements')
+    .expect(storageDescriptionRow.find('div[data-test-id="view-section-table-row-component"]').innerText).eql('You will need at least 4GB of free space on each device the application is installed. It is advised to use an external SD card for additional storage.')
+    .expect(storageDescriptionRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok()
+
+    .expect(minimumConnectionRow.find('div[data-test-id="view-section-table-row-title"]').innerText).eql('Minimum connection speed required')
+    .expect(minimumConnectionRow.find('div[data-test-id="view-section-table-row-component"]').innerText).eql('1Mbps')
+    .expect(minimumConnectionRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok()
+
+    .expect(connectionRequirementsRow.find('div[data-test-id="view-section-table-row-title"]').innerText).eql('Connection types supported')
+    .expect(connectionRequirementsRow.find('div[data-test-id="view-section-table-row-component"]').innerText).eql('GPRS\n3G\n4G\nWifi')
+    .expect(connectionRequirementsRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok()
+
+    .expect(connectionDescriptionRow.find('div[data-test-id="view-section-table-row-title"]').innerText).eql('Additional information about connection types')
+    .expect(connectionDescriptionRow.find('div[data-test-id="view-section-table-row-component"]').innerText).eql('Average data usage will vary depending on application activity.')
+    .expect(connectionDescriptionRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok();
 });
