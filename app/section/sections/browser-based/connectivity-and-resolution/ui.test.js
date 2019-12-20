@@ -1,7 +1,6 @@
 import { runTestSuite } from '../../../../test-utils/runTestSuite';
 
 const sectionId = 'connectivity-and-resolution';
-const clientUrl = `http://localhost:1234/solution/S100000-001/dashboard/browser-based/section/${sectionId}`;
 const dashboardId = 'browser-based';
 
 const connectivityAndResolutionMarketingData = {
@@ -12,6 +11,5 @@ const connectivityAndResolutionMarketingData = {
 runTestSuite({
   data: connectivityAndResolutionMarketingData,
   sectionId,
-  clientUrl,
   dashboardId,
 });

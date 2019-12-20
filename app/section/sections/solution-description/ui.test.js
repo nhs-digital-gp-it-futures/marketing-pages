@@ -1,7 +1,6 @@
 import { runTestSuite } from '../../../test-utils/runTestSuite';
 
 const sectionId = 'solution-description';
-const clientUrl = `http://localhost:1234/solution/S100000-001/section/${sectionId}`;
 
 const solutionDescriptionMarketingData = {
   summary: 'The solution summary',
@@ -12,5 +11,4 @@ const solutionDescriptionMarketingData = {
 runTestSuite({
   data: solutionDescriptionMarketingData,
   sectionId,
-  clientUrl,
 });

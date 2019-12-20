@@ -1,7 +1,6 @@
 import { runTestSuite } from '../../../../test-utils/runTestSuite';
 
 const sectionId = 'mobile-connection-details';
-const clientUrl = `http://localhost:1234/solution/S100000-001/dashboard/native-mobile/section/${sectionId}`;
 const dashboardId = 'native-mobile';
 
 const mobileConnectionData = {
@@ -13,6 +12,5 @@ const mobileConnectionData = {
 runTestSuite({
   data: mobileConnectionData,
   sectionId,
-  clientUrl,
   dashboardId,
 });

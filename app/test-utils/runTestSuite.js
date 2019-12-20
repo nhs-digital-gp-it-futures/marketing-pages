@@ -8,9 +8,11 @@ const apiLocalhost = 'http://localhost:8080';
 export const runTestSuite = async ({
   data,
   sectionId,
-  clientUrl,
   dashboardId,
 }) => {
+  const clientUrl = dashboardId ? `http://localhost:1234/solution/S100000-001/dashboard/${dashboardId}/section/${sectionId}`
+    : `http://localhost:1234/solution/S100000-001/section/${sectionId}`;
+
   const mocks = (responseStatus, responseBody) => {
     nock(apiLocalhost)
       .get(`/api/v1/Solutions/S100000-001/sections/${sectionId}`)
