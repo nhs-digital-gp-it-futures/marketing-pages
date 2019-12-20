@@ -6,7 +6,6 @@ import dashboardWithCompleteSections from '../../../../fixtures/dashboardWithCom
 
 // const sectionApiUrl = '/api/v1/Solutions/S100000-001/sections/contact-details';
 // const clientUrl = 'http://localhost:1234/solution/S100000-001/section/contact-details';
-// const fieldLengthMap = {};
 
 const contactDetailsMarketingData = {
   'contact-1': {
@@ -57,7 +56,6 @@ fixture('Show Contact Details page')
 //   data: contactDetailsMarketingData,
 //   sectionApiUrl,
 //   sectionId: 'contact-details',
-//   fieldLengthMap,
 //   clientUrl,
 // });
 

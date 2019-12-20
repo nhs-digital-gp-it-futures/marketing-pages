@@ -10,13 +10,10 @@ const mobileOperatingSystemsMarketingData = {
   'operating-systems-description': 'Text for description',
 };
 
-const fieldLengthMap = { 'operating-systems-description': 1000 };
-
 runTestSuite({
   data: mobileOperatingSystemsMarketingData,
   sectionApiUrl,
   sectionId,
-  fieldLengthMap,
   clientUrl,
   parentSectionApiUrl,
 });

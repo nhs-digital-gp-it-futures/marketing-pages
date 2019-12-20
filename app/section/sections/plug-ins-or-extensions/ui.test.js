@@ -10,13 +10,10 @@ const pluginsOrExtensionsMarketingData = {
   'plugins-detail': 'Some plugin and extension detail',
 };
 
-const fieldLengthMap = { 'plugins-detail': 500 };
-
 runTestSuite({
   data: pluginsOrExtensionsMarketingData,
   sectionApiUrl,
   sectionId,
-  fieldLengthMap,
   clientUrl,
   parentSectionApiUrl,
 });

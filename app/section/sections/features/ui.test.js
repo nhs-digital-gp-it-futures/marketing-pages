@@ -12,12 +12,9 @@ const featuresMarketingData = {
   ],
 };
 
-const fieldLengthMap = { listing: 100 };
-
 runTestSuite({
   data: featuresMarketingData,
   sectionApiUrl,
   sectionId,
   clientUrl,
-  fieldLengthMap,
 });

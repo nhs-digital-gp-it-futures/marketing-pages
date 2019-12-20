@@ -10,13 +10,10 @@ const additionalInformationData = {
   'additional-information': 'The solution additional information',
 };
 
-const fieldLengthMap = { 'additional-information': 500 };
-
 runTestSuite({
   data: additionalInformationData,
   sectionApiUrl,
   sectionId,
-  fieldLengthMap,
   clientUrl,
   parentSectionApiUrl,
 });

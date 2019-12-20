@@ -9,13 +9,10 @@ const browserHardwareRequirementMarketingData = {
   'hardware-requirements-description': 'Some hardware requirement detail',
 };
 
-const fieldLengthMap = { 'hardware-requirements-description': 500 };
-
 runTestSuite({
   data: browserHardwareRequirementMarketingData,
   sectionApiUrl,
   sectionId,
-  fieldLengthMap,
   clientUrl,
   parentSectionApiUrl,
 });

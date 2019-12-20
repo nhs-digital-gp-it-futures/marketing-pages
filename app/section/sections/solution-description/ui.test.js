@@ -10,13 +10,9 @@ const solutionDescriptionMarketingData = {
   link: 'The solution link',
 };
 
-// not sure what maxLength of link is
-const fieldLengthMap = { summary: 300, description: 1000, link: 50 };
-
 runTestSuite({
   data: solutionDescriptionMarketingData,
   sectionApiUrl,
   sectionId,
   clientUrl,
-  fieldLengthMap,
 });

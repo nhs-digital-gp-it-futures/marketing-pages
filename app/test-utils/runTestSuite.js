@@ -9,7 +9,6 @@ export const runTestSuite = async ({
   data,
   sectionApiUrl,
   sectionId,
-  fieldLengthMap = {},
   clientUrl,
   parentSectionApiUrl,
 }) => {
@@ -53,7 +52,6 @@ export const runTestSuite = async ({
     sectionManifest,
     sectionApiUrl,
     data,
-    fieldLengthMap,
     sectionId,
     apiLocalhost,
   });

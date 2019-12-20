@@ -44,7 +44,6 @@ const maxLengthErrorTest = ({
   sectionManifest,
   questionId,
   sectionApiUrl,
-  fieldLength,
   apiLocalhost,
 }) => {
   test(`should show error summary and validation for ${questionId} question when it exceeds the maxLength`, async (t) => {
@@ -65,7 +64,7 @@ const maxLengthErrorTest = ({
 
     await t
       .expect(errorSummary.exists).notOk()
-      .typeText(renderedQuestion, `${'x'.repeat(fieldLength + 1)}`, { paste: true })
+      .typeText(renderedQuestion, `${'x'.repeat(501)}`, { paste: true })
       .click(submitButton.find('button'))
       .expect(errorSummary.exists).ok()
       .expect(errorSummaryList.find('li').count).eql(1)
@@ -119,7 +118,6 @@ export const runErrorTests = ({
   questionId,
   sectionApiUrl,
   questionData,
-  fieldLengthMap,
   sectionId,
   apiLocalhost,
   sectionParent,
@@ -135,13 +133,11 @@ export const runErrorTests = ({
       });
     }
     if (errorType === 'maxLength') {
-      const fieldLength = fieldLengthMap[questionId];
       maxLengthErrorTest({
         pageSetup,
         sectionManifest,
         questionId,
         sectionApiUrl,
-        fieldLength,
         apiLocalhost,
       });
     }
