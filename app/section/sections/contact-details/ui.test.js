@@ -1,6 +1,7 @@
 import nock from 'nock';
 import { Selector, ClientFunction } from 'testcafe';
 import dashboardWithCompleteSections from '../../../../fixtures/dashboardWithCompleteSections.json';
+
 // TODO: add new test framework after error summary work is complete
 // import { runTestSuite } from '../../../test-utils/runTestSuite';
 
@@ -58,6 +59,36 @@ fixture('Show Contact Details page')
 //   sectionId: 'contact-details',
 //   clientUrl,
 // });
+
+test('should render the Contact details page title', async (t) => {
+  await pageSetup(t);
+
+  const title = Selector('[data-test-id="section-title"]');
+
+  await t
+    .expect(title.innerText).eql('Contact details');
+});
+
+test('should render main advice of section', async (t) => {
+  await pageSetup(t);
+
+  const mainAdvice = Selector('[data-test-id="section-main-advice"]');
+
+  await t
+    .expect(mainAdvice.innerText).eql('Provide the following contact details to allow the buyer to contact you.');
+});
+
+test('should render all the advice of section', async (t) => {
+  await pageSetup(t);
+
+  const sectionManifest = new ManifestProvider().getSectionManifest({ sectionId: 'contact-details' });
+  const expectedAdditionalAdvice = sectionManifest.additionalAdvice.join('\n\n');
+
+  const additionalAdvice = Selector('[data-test-id="section-additional-advice"]');
+
+  await t
+    .expect(additionalAdvice.innerText).eql(expectedAdditionalAdvice);
+});
 
 test('should render the contact 1 question', async (t) => {
   await pageSetup(t);

@@ -8,7 +8,7 @@ describe('transformSectionData', () => {
 
     const sectionManifest = {};
 
-    const transformedSectionData = transformSectionData('some-section-id', sectionManifest, sectionData);
+    const transformedSectionData = transformSectionData({ sectionId: 'some-section-id', sectionManifest, sectionData });
 
     expect(transformedSectionData).toEqual(sectionData);
   });
@@ -25,7 +25,7 @@ describe('transformSectionData', () => {
       },
     };
 
-    const transformedSectionData = transformSectionData('client-application-types', sectionManifest, sectionData);
+    const transformedSectionData = transformSectionData({ sectionId: 'client-application-types', sectionManifest, sectionData });
 
     expect(transformedSectionData).toEqual(sectionData);
   });
@@ -42,7 +42,7 @@ describe('transformSectionData', () => {
         'client-application-types': ['some first value', 'some second value'],
       };
 
-      const transformedSectionData = transformSectionData('client-application-types', sectionManifest, sectionData);
+      const transformedSectionData = transformSectionData({ sectionId: 'client-application-types', sectionManifest, sectionData });
 
       expect(transformedSectionData).toEqual(sectionData);
     });
@@ -56,7 +56,7 @@ describe('transformSectionData', () => {
         'client-application-types': 'some first value',
       };
 
-      const transformedSectionData = transformSectionData('client-application-types', sectionManifest, sectionData);
+      const transformedSectionData = transformSectionData({ sectionId: 'client-application-types', sectionManifest, sectionData });
 
       expect(transformedSectionData).toEqual(expectedTransformedSectionData);
     });
@@ -68,7 +68,7 @@ describe('transformSectionData', () => {
 
       const sectionData = {};
 
-      const transformedSectionData = transformSectionData('client-application-types', sectionManifest, sectionData);
+      const transformedSectionData = transformSectionData({ sectionId: 'client-application-types', sectionManifest, sectionData });
 
       expect(transformedSectionData).toEqual(expectedTransformedSectionData);
     });
