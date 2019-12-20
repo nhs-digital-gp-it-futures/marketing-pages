@@ -13,7 +13,7 @@ export const runQuestionTests = ({
   data,
   sectionId,
   apiLocalhost,
-  sectionParent = null,
+  sectionParent,
 }) => {
   Object.keys(sectionManifest.questions).forEach(async (questionId) => {
     const questionData = sectionManifest.questions[questionId];
