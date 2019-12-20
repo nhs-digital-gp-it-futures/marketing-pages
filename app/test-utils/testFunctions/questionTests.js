@@ -9,11 +9,11 @@ import { runComboboxTests } from './questionTests/comboboxTests';
 export const runQuestionTests = ({
   pageSetup,
   sectionManifest,
-  sectionApiUrl,
   data,
   sectionId,
   apiLocalhost,
   sectionParent,
+  dashboardId,
 }) => {
   Object.keys(sectionManifest.questions).forEach(async (questionId) => {
     const questionData = sectionManifest.questions[questionId];
@@ -59,7 +59,6 @@ export const runQuestionTests = ({
         runQuestionTests({
           pageSetup,
           sectionManifest: sectionManifest.questions[question],
-          sectionApiUrl,
           data,
           sectionId,
           apiLocalhost,
@@ -82,11 +81,11 @@ export const runQuestionTests = ({
         pageSetup,
         sectionManifest,
         questionId,
-        sectionApiUrl,
         questionData,
         sectionId,
         apiLocalhost,
         sectionParent,
+        dashboardId,
       });
     }
   });

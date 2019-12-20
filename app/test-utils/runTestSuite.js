@@ -7,14 +7,13 @@ const apiLocalhost = 'http://localhost:8080';
 
 export const runTestSuite = async ({
   data,
-  sectionApiUrl,
   sectionId,
   clientUrl,
-  parentSectionApiUrl,
+  dashboardId,
 }) => {
   const mocks = (responseStatus, responseBody) => {
     nock(apiLocalhost)
-      .get(sectionApiUrl)
+      .get(`/api/v1/Solutions/S100000-001/sections/${sectionId}`)
       .reply(responseStatus, responseBody);
   };
 
@@ -27,7 +26,7 @@ export const runTestSuite = async ({
     await t.navigateTo(clientUrl);
   };
 
-  const sectionManifest = new ManifestProvider().getSectionManifest(sectionId);
+  const sectionManifest = new ManifestProvider().getSectionManifest({ sectionId, dashboardId });
 
   fixture(`Show ${sectionManifest.title} page`)
     .afterEach(async (t) => {
@@ -41,18 +40,18 @@ export const runTestSuite = async ({
   runCommonComponentsTests({
     pageSetup,
     sectionManifest,
-    sectionApiUrl,
+    sectionId,
     data,
-    parentSectionApiUrl,
+    dashboardId,
     apiLocalhost,
   });
 
   runQuestionTests({
     pageSetup,
     sectionManifest,
-    sectionApiUrl,
     data,
     sectionId,
     apiLocalhost,
+    dashboardId,
   });
 };
