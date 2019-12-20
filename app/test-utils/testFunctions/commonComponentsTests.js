@@ -67,10 +67,12 @@ const submitButtonClickedTest = ({
         .reply(200, {});
 
       const submitButton = Selector('[data-test-id="section-submit-button"] button');
+
       await t
         .expect(submitButton.exists).ok()
         .click(submitButton)
-        .expect(getLocation()).contains(`/solution/S100000-001/${sectionManifest.successfulSubmitResponsePath}`);
+        .expect(getLocation()).contains(`/solution/S100000-001/${sectionManifest.successfulSubmitResponsePath}`)
+        .expect(getLocation()).notContains(`/${sectionId}`);
     });
   }
 };
@@ -105,6 +107,7 @@ export const runCommonComponentsTests = ({
   sectionId,
   data,
   apiLocalhost,
+  dashboardId,
 }) => {
   titleTest({ pageSetup, sectionManifest });
   mainAdviceTest({ pageSetup, sectionManifest });
@@ -116,6 +119,7 @@ export const runCommonComponentsTests = ({
     data,
     sectionManifest,
     apiLocalhost,
+    dashboardId,
   });
   sectionsLinkTest({ pageSetup });
   sectionsLinkClickedTest({ pageSetup, apiLocalhost });
