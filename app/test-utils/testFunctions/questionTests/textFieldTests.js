@@ -39,7 +39,7 @@ const populateTextFieldTest = ({
     const renderedQuestion = Selector(`[data-test-id="question-${modifiedQuestionId}"]`);
     if (sectionParent) {
       await t
-        .expect(renderedQuestion.find('input').value).eql(data[sectionParent][questionId]); 
+        .expect(renderedQuestion.find('input').value).eql(data[sectionParent][questionId]);
     } else {
       await t
         .expect(renderedQuestion.find('input').value).eql(data[questionId]);
