@@ -64,7 +64,6 @@ const maxLengthErrorTest = ({
 
     await t
       .expect(errorSummary.exists).notOk()
-      .typeText(renderedQuestion, `${'x'.repeat(501)}`, { paste: true })
       .click(submitButton.find('button'))
       .expect(errorSummary.exists).ok()
       .expect(errorSummaryList.find('li').count).eql(1)
