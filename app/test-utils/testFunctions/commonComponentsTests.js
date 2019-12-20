@@ -94,7 +94,7 @@ const sectionsLinkClickedTest = ({ pageSetup, apiLocalhost }) => {
   });
 };
 
-export const runGeneralSectionTests = ({
+export const runCommonComponentsTests = ({
   pageSetup,
   sectionManifest,
   sectionApiUrl,

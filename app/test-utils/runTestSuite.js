@@ -1,6 +1,6 @@
 import nock from 'nock';
 import { ManifestProvider } from '../manifestProvider';
-import { runGeneralSectionTests } from './testFunctions/commonSectionTests';
+import { runCommonComponentsTests } from './testFunctions/commonComponentsTests';
 import { runQuestionTests } from './testFunctions/questionTests';
 
 const apiLocalhost = 'http://localhost:8080';
@@ -39,7 +39,7 @@ export const runTestSuite = async ({
       await t.expect(isDone).ok('Not all nock interceptors were used!');
     });
 
-  runGeneralSectionTests({
+  runCommonComponentsTests({
     pageSetup,
     sectionManifest,
     sectionApiUrl,
