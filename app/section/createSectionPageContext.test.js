@@ -35,7 +35,9 @@ describe('createSectionPageContext', () => {
       submitText: 'some-submit-text',
     };
 
-    const context = createSectionPageContext('some-solution-id', sectionManifest);
+    const context = createSectionPageContext({
+      solutionId: 'some-solution-id', sectionManifest,
+    });
 
     expect(context).toEqual(expectedContext);
   });
@@ -82,7 +84,34 @@ describe('createSectionPageContext', () => {
       },
     };
 
-    const context = createSectionPageContext('some-solution-id', sectionManifest, formData, validationErrors);
+    const context = createSectionPageContext({
+      solutionId: 'some-solution-id', sectionManifest, formData, validationErrors,
+    });
+
+    expect(context).toEqual(expectedContext);
+  });
+
+  it('should create submitActionPath with the dashboardId provided', () => {
+    const expectedContext = {
+      submitActionUrl: '/solution/some-solution-id/dashboard/some-dashboard-id/section/some-section-id',
+      questions: [
+        {
+          id: 'some-question-id',
+        },
+      ],
+      returnToDashboardUrl: '/solution/some-solution-id',
+    };
+
+    const sectionManifest = {
+      id: 'some-section-id',
+      questions: {
+        'some-question-id': {},
+      },
+    };
+
+    const context = createSectionPageContext({
+      solutionId: 'some-solution-id', sectionManifest, dashboardId: 'some-dashboard-id',
+    });
 
     expect(context).toEqual(expectedContext);
   });

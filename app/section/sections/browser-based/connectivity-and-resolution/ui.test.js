@@ -1,7 +1,7 @@
 import nock from 'nock';
 import { Selector, ClientFunction } from 'testcafe';
-import { ManifestProvider } from '../../../manifestProvider';
-import dashboardWithCompleteSections from '../../../../fixtures/dashboardWithCompleteSections.json';
+import { ManifestProvider } from '../../../../manifestProvider';
+import dashboardWithCompleteSections from '../../../../../fixtures/dashboardWithCompleteSections.json';
 
 const connectivityAndResolutionMarketingData = {
   'minimum-connection-speed': '1Mbps',
@@ -22,7 +22,7 @@ const mocks = (withMarketingData) => {
 
 const pageSetup = async (t, withMarketingData = false) => {
   mocks(withMarketingData);
-  await t.navigateTo('http://localhost:1234/solution/S100000-001/section/connectivity-and-resolution');
+  await t.navigateTo('http://localhost:1234/solution/S100000-001/dashboard/browser-based/section/connectivity-and-resolution');
 };
 
 fixture('Show Connectivity And Resolution page')
@@ -56,7 +56,7 @@ test('should render main advice of section', async (t) => {
 test('should render all the advice of the section', async (t) => {
   pageSetup(t);
 
-  const sectionManifest = new ManifestProvider().getSectionManifest('connectivity-and-resolution');
+  const sectionManifest = new ManifestProvider().getSectionManifest({ dashboardId: 'browser-based', sectionId: 'connectivity-and-resolution' });
   const expectedAdditionalAdvice = sectionManifest.additionalAdvice.join('\n\n');
 
   const additionalAdvice = Selector('[data-test-id="section-additional-advice"]');
@@ -156,7 +156,7 @@ test('should goto anchor when clicking the minimum connection speed summary erro
   await t
     .click(submitButton.find('button'))
     .click(errorSummaryList.find('li:nth-child(1) a'))
-    .expect(getLocation()).contains('/solution/S100000-001/section/connectivity-and-resolution#minimum-connection-speed');
+    .expect(getLocation()).contains('/solution/S100000-001/dashboard/browser-based/section/connectivity-and-resolution#minimum-connection-speed');
 });
 
 test('should goto the browser based dashboard when clicking the submit button', async (t) => {

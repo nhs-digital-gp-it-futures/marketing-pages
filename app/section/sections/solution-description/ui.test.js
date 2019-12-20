@@ -57,7 +57,7 @@ test('should render main advice of section', async (t) => {
 test('should render all the advice of the section', async (t) => {
   await pageSetup(t);
 
-  const sectionManifest = new ManifestProvider().getSectionManifest('solution-description');
+  const sectionManifest = new ManifestProvider().getSectionManifest({ sectionId: 'solution-description' });
   const expectedAdditionalAdvice = sectionManifest.additionalAdvice.join('\n\n');
 
   const additionalAdvice = Selector('[data-test-id="section-additional-advice"]');
@@ -131,10 +131,6 @@ test('should show error summary and validation for questions when they exceed th
       maxLength: ['summary', 'description', 'link'],
     });
 
-  const oneHundredCharacters = '0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789';
-  const threeHundredCharacters = oneHundredCharacters.repeat(3);
-  const thousandCharacters = oneHundredCharacters.repeat(10);
-
   const errorSummary = Selector('[data-test-id="error-summary"]');
   const errorSummaryList = Selector('.nhsuk-error-summary__list');
   const solutionSummary = Selector('[data-test-id="question-summary"]');
@@ -145,9 +141,6 @@ test('should show error summary and validation for questions when they exceed th
 
   await t
     .expect(errorSummary.exists).notOk()
-    .typeText(solutionSummary, `${threeHundredCharacters}0`, { paste: true })
-    .typeText(solutionDescription, `${thousandCharacters}0`, { paste: true })
-    .typeText(solutionLink, `${thousandCharacters}0`, { paste: true })
     .click(submitButton.find('button'))
     .expect(errorSummary.exists).ok()
     .expect(errorSummaryList.find('li').count).eql(3)

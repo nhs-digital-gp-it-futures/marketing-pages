@@ -1,11 +1,11 @@
 import nock from 'nock';
 import { Selector, ClientFunction } from 'testcafe';
-import dashboardWithCompleteSections from '../../../../fixtures/dashboardWithCompleteSections.json';
+import dashboardWithCompleteSections from '../../../../../fixtures/dashboardWithCompleteSections.json';
 
 const mobileConnectionData = {
-  "minimum-connection-speed": "3Mbps",
-  "connection-types": ["3G"],
-  "connection-requirements-description": "Text"
+  'minimum-connection-speed': '3Mbps',
+  'connection-types': ['3G'],
+  'connection-requirements-description': 'Text',
 };
 
 const mocks = (withMarketingData) => {
@@ -22,7 +22,7 @@ const mocks = (withMarketingData) => {
 
 const pageSetup = async (t, withMarketingData = false) => {
   mocks(withMarketingData);
-  await t.navigateTo('http://localhost:1234/solution/S100000-001/section/mobile-connection-details');
+  await t.navigateTo('http://localhost:1234/solution/S100000-001/dashboard/native-mobile/section/mobile-connection-details');
 };
 
 fixture('Mobile connection details page')
@@ -81,7 +81,7 @@ test('should populate connection speed question with existing data', async (t) =
 
   await t
     .expect(minimumConnectionSpeedQuestion.find('option[selected]').exists).ok()
-    .expect(minimumConnectionSpeedQuestion.find('option[selected]').getAttribute('value')).eql('3Mbps')
+    .expect(minimumConnectionSpeedQuestion.find('option[selected]').getAttribute('value')).eql('3Mbps');
 });
 
 test('should render the connection type question', async (t) => {
@@ -108,7 +108,7 @@ test('should render the connection type question', async (t) => {
     .expect(fourGCheckbox.innerText).eql('4G')
     .expect(fiveGCheckbox.innerText).eql('5G')
     .expect(bluetoothCheckbox.innerText).eql('Bluetooth')
-    .expect(wifiCheckbox.innerText).eql('Wifi')
+    .expect(wifiCheckbox.innerText).eql('Wifi');
 });
 
 test('should populate the checkboxes with existing data', async (t) => {
@@ -118,7 +118,7 @@ test('should populate the checkboxes with existing data', async (t) => {
   const threeGCheckbox = clientApplicationTypesQuestion.find('.nhsuk-checkboxes__item:nth-child(2)');
 
   await t
-    .expect(threeGCheckbox.find('input:checked').exists).ok()
+    .expect(threeGCheckbox.find('input:checked').exists).ok();
 });
 
 test('should render description of connection question', async (t) => {

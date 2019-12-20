@@ -1,7 +1,7 @@
 import nock from 'nock';
 import { Selector, ClientFunction } from 'testcafe';
-import { ManifestProvider } from '../../../manifestProvider';
-import dashboardWithCompleteSections from '../../../../fixtures/dashboardWithCompleteSections.json';
+import { ManifestProvider } from '../../../../manifestProvider';
+import dashboardWithCompleteSections from '../../../../../fixtures/dashboardWithCompleteSections.json';
 
 const browserSupportedMarketingData = {
   'supported-browsers': [
@@ -25,7 +25,7 @@ const mocks = (withMarketingData) => {
 
 const pageSetup = async (t, withMarketingData = false) => {
   mocks(withMarketingData);
-  await t.navigateTo('http://localhost:1234/solution/S100000-001/section/browsers-supported');
+  await t.navigateTo('http://localhost:1234/solution/S100000-001/dashboard/browser-based/section/browsers-supported');
 };
 
 fixture('Show Browsers Supported page')
@@ -59,7 +59,7 @@ test('should render main advice of section', async (t) => {
 test('should render all the advice of the section', async (t) => {
   await pageSetup(t);
 
-  const sectionManifest = new ManifestProvider().getSectionManifest('browsers-supported');
+  const sectionManifest = new ManifestProvider().getSectionManifest({ dashboardId: 'browser-based', sectionId: 'browsers-supported' });
   const expectedAdditionalAdvice = sectionManifest.additionalAdvice.join('\n\n');
 
   const additionalAdvice = Selector('[data-test-id="section-additional-advice"]');
@@ -155,7 +155,7 @@ test('should render the validation errors indicating the supported browsers and 
     .put('/api/v1/Solutions/S100000-001/sections/browsers-supported')
     .reply(400, {
       required: ['supported-browsers', 'mobile-responsive'],
-  });
+    });
 
   await pageSetup(t);
 
@@ -203,7 +203,7 @@ test('should goto anchor when clicking the supported browsers required summary e
     .expect(errorSummaryList.find('li:nth-child(1) a').count).eql(1)
     .expect(errorSummaryList.find('li:nth-child(1) a').getAttribute('href')).eql('#supported-browsers')
     .click(errorSummaryList.find('li:nth-child(1) a'))
-    .expect(getLocation()).contains('/solution/S100000-001/section/browsers-supported#supported-browsers');
+    .expect(getLocation()).contains('/solution/S100000-001/dashboard/browser-based/section/browsers-supported#supported-browsers');
 });
 
 test('should goto anchor when clicking the mobile-responsive required summary error link', async (t) => {
@@ -228,7 +228,7 @@ test('should goto anchor when clicking the mobile-responsive required summary er
     .expect(errorSummaryList.find('li:nth-child(1) a').count).eql(1)
     .expect(errorSummaryList.find('li:nth-child(1) a').getAttribute('href')).eql('#mobile-responsive')
     .click(errorSummaryList.find('li:nth-child(1) a'))
-    .expect(getLocation()).contains('/solution/S100000-001/section/browsers-supported#mobile-responsive');
+    .expect(getLocation()).contains('/solution/S100000-001/dashboard/browser-based/section/browsers-supported#mobile-responsive');
 });
 
 test('should render the return to all sections link', async (t) => {

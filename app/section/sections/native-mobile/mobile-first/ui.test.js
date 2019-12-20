@@ -1,24 +1,30 @@
 import nock from 'nock';
 import { Selector, ClientFunction } from 'testcafe';
-import { ManifestProvider } from '../../../manifestProvider';
-import dashboardWithCompleteSections from '../../../../fixtures/dashboardWithCompleteSections.json';
+import { ManifestProvider } from '../../../../manifestProvider';
+import dashboardWithCompleteSections from '../../../../../fixtures/dashboardWithCompleteSections.json';
 
-const browserMobileFirstMarketingData = {
+const mobileFirstMarketingData = {
   'mobile-first-design': 'Yes',
 };
 
-const mocks = (responseStatus, responseBody) => {
-  nock('http://localhost:8080')
-    .get('/api/v1/Solutions/S100000-001/sections/browser-mobile-first')
-    .reply(responseStatus, responseBody);
+const mocks = (withMarketingData) => {
+  if (withMarketingData) {
+    nock('http://localhost:8080')
+      .get('/api/v1/Solutions/S100000-001/sections/mobile-first')
+      .reply(200, mobileFirstMarketingData);
+  } else {
+    nock('http://localhost:8080')
+      .get('/api/v1/Solutions/S100000-001/sections/mobile-first')
+      .reply(200, {});
+  }
 };
 
-const pageSetup = async (t, responseStatus = 200, responseBody = {}) => {
-  mocks(responseStatus, responseBody);
-  await t.navigateTo('http://localhost:1234/solution/S100000-001/section/browser-mobile-first');
+const pageSetup = async (t, withMarketingData = false) => {
+  mocks(withMarketingData);
+  await t.navigateTo('http://localhost:1234/solution/S100000-001/dashboard/native-mobile/section/mobile-first');
 };
 
-fixture('Show browser mobile first page')
+fixture('Show Mobile First page')
   .afterEach(async (t) => {
     const isDone = nock.isDone();
     if (!isDone) {
@@ -28,13 +34,13 @@ fixture('Show browser mobile first page')
     await t.expect(isDone).ok('Not all nock interceptors were used!');
   });
 
-test('should render the browser mobile first page title', async (t) => {
+test('should render the Mobile First page title', async (t) => {
   await pageSetup(t);
 
   const title = Selector('[data-test-id="section-title"]');
 
   await t
-    .expect(title.innerText).eql('Browser based - mobile first');
+    .expect(title.innerText).eql('Native mobile or tablet - mobile first');
 });
 
 test('should render main advice of section', async (t) => {
@@ -43,13 +49,13 @@ test('should render main advice of section', async (t) => {
   const mainAdvice = Selector('[data-test-id="section-main-advice"]');
 
   await t
-    .expect(mainAdvice.innerText).eql('Answer the following questions about your browser based Solution');
+    .expect(mainAdvice.innerText).eql('Answer the following questions about your native mobile or tablet Solution');
 });
 
 test('should render all the advice of the section', async (t) => {
   await pageSetup(t);
 
-  const sectionManifest = new ManifestProvider().getSectionManifest('browser-mobile-first');
+  const sectionManifest = new ManifestProvider().getSectionManifest({ dashboardId: 'native-mobile', sectionId: 'mobile-first' });
   const expectedAdditionalAdvice = sectionManifest.additionalAdvice.join('\n\n');
 
   const additionalAdvice = Selector('[data-test-id="section-additional-advice"]');
@@ -61,13 +67,13 @@ test('should render all the advice of the section', async (t) => {
 test('should render the mobile first design question', async (t) => {
   await pageSetup(t);
 
-  const pluginsRequiredQuestion = Selector('[data-test-id="question-mobile-first-design"]');
+  const mobileFirstDesignQuestion = Selector('[data-test-id="question-mobile-first-design"]');
 
   await t
-    .expect(pluginsRequiredQuestion.find('.nhsuk-fieldset__legend').innerText).eql('Was this Solution design with a mobile first approach?')
-    .expect(pluginsRequiredQuestion.find('.nhsuk-hint').innerText).eql('Please select from the options below.')
-    .expect(pluginsRequiredQuestion.find('.nhsuk-radios').count).eql(1)
-    .expect(pluginsRequiredQuestion.find('.nhsuk-radios__item').count).eql(2);
+    .expect(mobileFirstDesignQuestion.find('.nhsuk-fieldset__legend').innerText).eql('Was this Solution design with a mobile first approach?')
+    .expect(mobileFirstDesignQuestion.find('.nhsuk-hint').innerText).eql('Please select from the options below.')
+    .expect(mobileFirstDesignQuestion.find('.nhsuk-radios').count).eql(1)
+    .expect(mobileFirstDesignQuestion.find('.nhsuk-radios__item').count).eql(2);
 });
 
 test('should render the submit button', async (t) => {
@@ -76,36 +82,15 @@ test('should render the submit button', async (t) => {
   const submitButton = Selector('[data-test-id="section-submit-button"]');
 
   await t
-    .expect(submitButton.find('button').count).eql(1)
-    .expect(submitButton.find('button').innerText).eql('Save and return');
-});
-
-test('should goto the browser based dashboard when clicking the submit button', async (t) => {
-  await pageSetup(t, 200, browserMobileFirstMarketingData);
-
-  nock('http://localhost:8080')
-    .put('/api/v1/Solutions/S100000-001/sections/browser-mobile-first')
-    .reply(200, browserMobileFirstMarketingData);
-
-  nock('http://localhost:8080')
-    .get('/api/v1/Solutions/S100000-001/sections/browser-based')
-    .reply(200, {});
-
-  const submitButton = Selector('[data-test-id="section-submit-button"] button');
-  const getLocation = ClientFunction(() => document.location.href);
-
-  await t
-    .expect(submitButton.exists).ok()
-    .click(submitButton)
-    .expect(getLocation()).contains('/solution/S100000-001/dashboard/browser-based');
+    .expect(submitButton.find('button').count).eql(1);
 });
 
 test('should populate the questions with existing data', async (t) => {
-  pageSetup(t, 200, browserMobileFirstMarketingData);
+  pageSetup(t, true);
 
-  const pluginsRequiredQuestion = Selector('[data-test-id="question-mobile-first-design"]');
-  const yesRadiobutton = pluginsRequiredQuestion.find('.nhsuk-radios__item:nth-child(1)');
-  const noRadiobutton = pluginsRequiredQuestion.find('.nhsuk-radios__item:nth-child(2)');
+  const mobileFirstDesignQuestion = Selector('[data-test-id="question-mobile-first-design"]');
+  const yesRadiobutton = mobileFirstDesignQuestion.find('.nhsuk-radios__item:nth-child(1)');
+  const noRadiobutton = mobileFirstDesignQuestion.find('.nhsuk-radios__item:nth-child(2)');
 
   await t
     .expect(yesRadiobutton.find('input:checked').exists).ok()
@@ -116,7 +101,7 @@ test('should show error summary and validation for mobile first design question 
   await pageSetup(t);
 
   nock('http://localhost:8080')
-    .put('/api/v1/Solutions/S100000-001/sections/browser-mobile-first')
+    .put('/api/v1/Solutions/S100000-001/sections/mobile-first')
     .reply(400, {
       required: ['mobile-first-design'],
     });
@@ -138,24 +123,29 @@ test('should show error summary and validation for mobile first design question 
     .expect(mobileFirstDesignQuestion.find('.nhsuk-error-message').innerText).eql('Error:\nPlease select whether or not this solution was designed with a mobile first approach');
 });
 
-test('should goto anchor when clicking the mobile first design summary error link', async (t) => {
+test('should goto anchor when clicking the mobile first summary error link', async (t) => {
   await pageSetup(t);
 
   nock('http://localhost:8080')
-    .put('/api/v1/Solutions/S100000-001/sections/browser-mobile-first')
+    .put('/api/v1/Solutions/S100000-001/sections/mobile-first')
     .reply(400, {
       required: ['mobile-first-design'],
     });
 
+  const errorSummary = Selector('[data-test-id="error-summary"]');
   const errorSummaryList = Selector('.nhsuk-error-summary__list');
   const submitButton = Selector('[data-test-id="section-submit-button"]');
 
   const getLocation = ClientFunction(() => document.location.href);
 
   await t
+    .expect(errorSummary.exists).notOk()
     .click(submitButton.find('button'))
+    .expect(errorSummary.exists).ok()
+    .expect(errorSummaryList.find('li:nth-child(1) a').count).eql(1)
+    .expect(errorSummaryList.find('li:nth-child(1) a').getAttribute('href')).eql('#mobile-first-design')
     .click(errorSummaryList.find('li:nth-child(1) a'))
-    .expect(getLocation()).contains('/S100000-001/section/browser-mobile-first#mobile-first-design');
+    .expect(getLocation()).contains('/solution/S100000-001/dashboard/native-mobile/section/mobile-first#mobile-first-design');
 });
 
 test('should render the return to all sections link', async (t) => {

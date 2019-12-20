@@ -12,9 +12,12 @@ export const getMarketingPageDashboardContext = async (solutionId, validationErr
   const dashboardDataRaw = await axios.get(endpoint);
   if (dashboardDataRaw && dashboardDataRaw.data) {
     const dashboardData = dashboardDataRaw.data;
-    const context = createDashboardPageContext(
-      solutionId, dashboardManifest, dashboardData.sections, validationErrors,
-    );
+    const context = createDashboardPageContext({
+      solutionId,
+      dashboardManifest,
+      marketingDataSections: dashboardData.sections,
+      validationErrors,
+    });
     return context;
   }
   throw new Error('No data returned');
