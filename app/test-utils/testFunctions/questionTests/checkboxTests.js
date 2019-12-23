@@ -30,10 +30,14 @@ const populateCheckboxTest = ({
   test(`should populate the ${questionId} checkbox question with existing data`, async (t) => {
     const expectedQuestion = sectionManifest.questions[questionId];
     const selectedOptions = data[questionId];
+    const questionSelector = Selector(`[data-test-id="question-${questionId}"]`);
+
     await pageSetup({ t, responseBody: data });
+
+    await t.expect(questionSelector.find('input:checked').count).eql(selectedOptions.length);
+
     Object.keys(expectedQuestion.options).forEach(async (option) => {
-      const text = expectedQuestion.options[option];
-      const checkbox = Selector(`[data-test-id="question-${questionId}"] .nhsuk-checkboxes__item`).withText(text);
+      const checkbox = questionSelector.find('.nhsuk-checkboxes__item').withText(option);
       if (selectedOptions.includes(option)) {
         await t
           .expect(checkbox.find('input:checked').exists).ok();

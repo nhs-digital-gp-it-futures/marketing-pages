@@ -4,7 +4,7 @@ const sectionId = 'mobile-operating-systems';
 const dashboardId = 'native-mobile';
 
 const mobileOperatingSystemsMarketingData = {
-  'operating-systems': ['apple-ios', 'android', 'other'],
+  'operating-systems': ['Apple IOS', 'Android'],
   'operating-systems-description': 'Text for description',
 };
 
