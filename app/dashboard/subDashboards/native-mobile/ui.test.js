@@ -128,12 +128,11 @@ test('should render all the sections for native mobile sections section group', 
     .eql('INCOMPLETE');
 });
 
-// TODO remove .skip the ui for that page is done
-test.skip('should navigate the user to supported operation systems page when clicking on supported operation systems dashboard row', async (t) => {
+test('should navigate the user to supported operation systems page when clicking on supported operation systems dashboard row', async (t) => {
   await pageSetup(t);
 
   nock('http://localhost:8080')
-    .get('/api/v1/Solutions/S100000-001/sections/supported-operating-systems')
+    .get('/api/v1/Solutions/S100000-001/sections/mobile-operating-systems')
     .reply(200, {});
 
   const getLocation = ClientFunction(() => document.location.href);
