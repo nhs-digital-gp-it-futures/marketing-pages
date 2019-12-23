@@ -11,9 +11,9 @@
       "additionalAdvice": "If your Solution is mobile or tablet based, please select below all the operating systems your Solution supports.",
       "type": "checkbox-options",
       "options": {
-        "apple-ios": "Apple IOS",
-        "android": "Android",
-        "other": "Other"
+        "Apple IOS": "Apple IOS",
+        "Android": "Android",
+        "Other": "Other"
       },
       "errorResponse": {
         "required": "Supported devices or operating systems is a mandatory question"
