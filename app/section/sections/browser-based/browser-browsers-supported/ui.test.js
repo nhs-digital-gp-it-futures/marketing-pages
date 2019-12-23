@@ -1,6 +1,6 @@
 import { runTestSuite } from '../../../../test-utils/runTestSuite';
 
-const sectionId = 'browsers-supported';
+const sectionId = 'browser-browsers-supported';
 const dashboardId = 'browser-based';
 
 const browserSupportedMarketingData = {

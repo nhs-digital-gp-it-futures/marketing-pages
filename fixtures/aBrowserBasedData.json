@@ -1,6 +1,6 @@
 {
   "sections": {
-    "browsers-supported": {
+    "browser-browsers-supported": {
       "status": "INCOMPLETE",
       "requirement": "Mandatory"
     },
@@ -8,11 +8,11 @@
       "status": "INCOMPLETE",
       "requirement": "Mandatory"
     },
-    "plug-ins-or-extensions": {
+    "browser-plug-ins-or-extensions": {
       "status": "INCOMPLETE",
       "requirement": "Mandatory"
     },
-    "connectivity-and-resolution": {
+    "browser-connectivity-and-resolution": {
       "status": "INCOMPLETE",
       "requirement": "Mandatory"
     },

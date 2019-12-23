@@ -1,6 +1,6 @@
 import { runTestSuite } from '../../../../test-utils/runTestSuite';
 
-const sectionId = 'connectivity-and-resolution';
+const sectionId = 'browser-connectivity-and-resolution';
 const dashboardId = 'browser-based';
 
 const connectivityAndResolutionMarketingData = {
