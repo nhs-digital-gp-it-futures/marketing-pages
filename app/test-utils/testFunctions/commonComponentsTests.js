@@ -60,10 +60,10 @@ const submitButtonClickedTest = ({
     test(`should go to ${sectionManifest.successfulSubmitResponsePath} when clicking the submit button`, async (t) => {
       await pageSetup({ t, responseBody: data });
       nock(apiLocalhost)
-        .put(`${apiPath}/${sectionId}`)
+        .put(`${apiPath}/sections/${sectionId}`)
         .reply(200, data);
       nock(apiLocalhost)
-        .get(`${apiPath}/${dashboardId}`)
+        .get(`${apiPath}/dashboards/${dashboardId}`)
         .reply(200, {});
 
       const submitButton = Selector('[data-test-id="section-submit-button"] button');

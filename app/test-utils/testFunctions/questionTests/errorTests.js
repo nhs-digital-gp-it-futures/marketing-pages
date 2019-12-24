@@ -19,7 +19,7 @@ const goToAnchorFromErrorSummary = ({
     // bulletpoint-list numbers the input fields so it is not just the question id e.g. listing-1
     if (questionType === 'bulletpoint-list') modifiedQuestionId = `${questionId}-1`;
     nock(apiLocalhost)
-      .put(`${apiPath}/${sectionId}`)
+      .put(`${apiPath}/sections/${sectionId}`)
       .reply(400, {
         [errorType]: [modifiedQuestionId],
       });

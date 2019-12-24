@@ -9,7 +9,7 @@
     "browser-based-sections": {
       "title": "Browser based sections",
       "sections": {
-        "browsers-supported": {
+        "browser-browsers-supported": {
           "title": "Browsers supported",
           "type": "section"
         },
@@ -17,11 +17,11 @@
           "title": "Mobile first",
           "type": "section"
         },
-        "plug-ins-or-extensions": {
+        "browser-plug-ins-or-extensions": {
           "title": "Plug-ins or extensions",
           "type": "section"
         },
-        "connectivity-and-resolution": {
+        "browser-connectivity-and-resolution": {
           "title": "Connectivity and resolution",
           "type": "section"
         },

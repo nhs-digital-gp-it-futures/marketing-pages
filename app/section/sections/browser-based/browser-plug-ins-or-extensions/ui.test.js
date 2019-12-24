@@ -1,6 +1,6 @@
 import { runTestSuite } from '../../../../test-utils/runTestSuite';
 
-const sectionId = 'plug-ins-or-extensions';
+const sectionId = 'browser-plug-ins-or-extensions';
 const dashboardId = 'browser-based';
 
 const pluginsOrExtensionsMarketingData = {

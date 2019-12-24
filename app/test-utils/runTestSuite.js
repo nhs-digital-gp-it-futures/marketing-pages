@@ -14,7 +14,7 @@ export const runTestSuite = async ({
 
   const mocks = (responseStatus, responseBody) => {
     nock(apiLocalhost)
-      .get(`${apiPath}/${sectionId}`)
+      .get(`${apiPath}/sections/${sectionId}`)
       .reply(responseStatus, responseBody);
   };
 

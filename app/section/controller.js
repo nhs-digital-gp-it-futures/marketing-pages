@@ -49,8 +49,13 @@ export const postSection = async ({
     await axios.put(endpoint, transformedSectionData);
 
     const response = createPostSectionResponse(solutionId, sectionManifest);
+
     return response;
   } catch (error) {
-    return error.response.data;
+    if (error.response.status === 400) {
+      return error.response.data;
+    }
+    logger.error(`postSection: unrecognised response ${JSON.stringify(error.response.data, null, 2)}`);
+    throw error;
   }
 };

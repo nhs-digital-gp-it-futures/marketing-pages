@@ -5,7 +5,7 @@ import aBrowserBasedFixture from '../../../../fixtures/aBrowserBasedData.json';
 
 const mocks = () => {
   nock('http://localhost:8080')
-    .get('/api/v1/Solutions/S100000-001/sections/browser-based')
+    .get('/api/v1/Solutions/S100000-001/dashboards/browser-based')
     .reply(200, aBrowserBasedFixture);
 };
 
@@ -55,10 +55,10 @@ test('should render all the sections for the Browser based sections section grou
   await pageSetup(t);
 
   const browserBasedSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-browser-based-sections"]');
-  const browsersSupportedSection = browserBasedSectionGroup.find('[data-test-id="dashboard-section-browsers-supported"]');
+  const browsersSupportedSection = browserBasedSectionGroup.find('[data-test-id="dashboard-section-browser-browsers-supported"]');
   const mobileFirstSection = browserBasedSectionGroup.find('[data-test-id="dashboard-section-browser-mobile-first"]');
-  const pluginsOrExtensionsSection = browserBasedSectionGroup.find('[data-test-id="dashboard-section-plug-ins-or-extensions"]');
-  const connectivityAndResolutionSection = browserBasedSectionGroup.find('[data-test-id="dashboard-section-connectivity-and-resolution"]');
+  const pluginsOrExtensionsSection = browserBasedSectionGroup.find('[data-test-id="dashboard-section-browser-plug-ins-or-extensions"]');
+  const connectivityAndResolutionSection = browserBasedSectionGroup.find('[data-test-id="dashboard-section-browser-connectivity-and-resolution"]');
   const hardwareRequirementsSection = browserBasedSectionGroup.find('[data-test-id="dashboard-section-browser-hardware-requirements"]');
   const additionalInformationSection = browserBasedSectionGroup.find('[data-test-id="dashboard-section-browser-additional-information"]');
 
@@ -66,7 +66,7 @@ test('should render all the sections for the Browser based sections section grou
     .expect(browsersSupportedSection.find('[data-test-id="dashboard-section-title"]').innerText)
     .eql('Browsers supported')
     .expect(browsersSupportedSection.find('[data-test-id="dashboard-section-title"] a').getAttribute('href'))
-    .eql('/solution/S100000-001/dashboard/browser-based/section/browsers-supported')
+    .eql('/solution/S100000-001/dashboard/browser-based/section/browser-browsers-supported')
     .expect(browsersSupportedSection.find('[data-test-id="dashboard-section-requirement"]').innerText)
     .eql('Mandatory')
     .expect(browsersSupportedSection.find('[data-test-id="dashboard-section-status"]').innerText)
@@ -84,7 +84,7 @@ test('should render all the sections for the Browser based sections section grou
     .expect(pluginsOrExtensionsSection.find('[data-test-id="dashboard-section-title"]').innerText)
     .eql('Plug-ins or extensions')
     .expect(pluginsOrExtensionsSection.find('[data-test-id="dashboard-section-title"] a').getAttribute('href'))
-    .eql('/solution/S100000-001/dashboard/browser-based/section/plug-ins-or-extensions')
+    .eql('/solution/S100000-001/dashboard/browser-based/section/browser-plug-ins-or-extensions')
     .expect(pluginsOrExtensionsSection.find('[data-test-id="dashboard-section-requirement"]').innerText)
     .eql('Mandatory')
     .expect(pluginsOrExtensionsSection.find('[data-test-id="dashboard-section-status"]').innerText)
@@ -93,7 +93,7 @@ test('should render all the sections for the Browser based sections section grou
     .expect(connectivityAndResolutionSection.find('[data-test-id="dashboard-section-title"]').innerText)
     .eql('Connectivity and resolution')
     .expect(connectivityAndResolutionSection.find('[data-test-id="dashboard-section-title"] a').getAttribute('href'))
-    .eql('/solution/S100000-001/dashboard/browser-based/section/connectivity-and-resolution')
+    .eql('/solution/S100000-001/dashboard/browser-based/section/browser-connectivity-and-resolution')
     .expect(connectivityAndResolutionSection.find('[data-test-id="dashboard-section-requirement"]').innerText)
     .eql('Mandatory')
     .expect(connectivityAndResolutionSection.find('[data-test-id="dashboard-section-status"]').innerText)
@@ -122,17 +122,17 @@ test('should navigate the user to the browsers supported page when clicking on t
   await pageSetup(t);
 
   nock('http://localhost:8080')
-    .get('/api/v1/Solutions/S100000-001/sections/browsers-supported')
+    .get('/api/v1/Solutions/S100000-001/sections/browser-browsers-supported')
     .reply(200, {});
 
   const getLocation = ClientFunction(() => document.location.href);
 
   const browserBasedSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-browser-based-sections"]');
-  const browsersSupportedSection = browserBasedSectionGroup.find('[data-test-id="dashboard-section-browsers-supported"]');
+  const browsersSupportedSection = browserBasedSectionGroup.find('[data-test-id="dashboard-section-browser-browsers-supported"]');
 
   await t
     .click(browsersSupportedSection.find('a'))
-    .expect(getLocation()).contains('/solution/S100000-001/dashboard/browser-based/section/browsers-supported');
+    .expect(getLocation()).contains('/solution/S100000-001/dashboard/browser-based/section/browser-browsers-supported');
 });
 
 test('should navigate the user to the mobile first page when clicking on the mobile first dashboard row', async (t) => {
@@ -156,34 +156,34 @@ test('should navigate the user to the plug-ins or extensions page when clicking 
   await pageSetup(t);
 
   nock('http://localhost:8080')
-    .get('/api/v1/Solutions/S100000-001/sections/plug-ins-or-extensions')
+    .get('/api/v1/Solutions/S100000-001/sections/browser-plug-ins-or-extensions')
     .reply(200, {});
 
   const getLocation = ClientFunction(() => document.location.href);
 
   const browserBasedSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-browser-based-sections"]');
-  const pluginsOrExtensionsSection = browserBasedSectionGroup.find('[data-test-id="dashboard-section-plug-ins-or-extensions"]');
+  const pluginsOrExtensionsSection = browserBasedSectionGroup.find('[data-test-id="dashboard-section-browser-plug-ins-or-extensions"]');
 
   await t
     .click(pluginsOrExtensionsSection.find('a'))
-    .expect(getLocation()).contains('/solution/S100000-001/dashboard/browser-based/section/plug-ins-or-extensions');
+    .expect(getLocation()).contains('/solution/S100000-001/dashboard/browser-based/section/browser-plug-ins-or-extensions');
 });
 
 test('should navigate the user to the connectivity and resolution page when clicking on the connectivity and resolution dashboard row', async (t) => {
   await pageSetup(t);
 
   nock('http://localhost:8080')
-    .get('/api/v1/Solutions/S100000-001/sections/connectivity-and-resolution')
+    .get('/api/v1/Solutions/S100000-001/sections/browser-connectivity-and-resolution')
     .reply(200, {});
 
   const getLocation = ClientFunction(() => document.location.href);
 
   const browserBasedSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-browser-based-sections"]');
-  const connectivityAndResolutionSection = browserBasedSectionGroup.find('[data-test-id="dashboard-section-connectivity-and-resolution"]');
+  const connectivityAndResolutionSection = browserBasedSectionGroup.find('[data-test-id="dashboard-section-browser-connectivity-and-resolution"]');
 
   await t
     .click(connectivityAndResolutionSection.find('a'))
-    .expect(getLocation()).contains('/solution/S100000-001/dashboard/browser-based/section/connectivity-and-resolution');
+    .expect(getLocation()).contains('/solution/S100000-001/dashboard/browser-based/section/browser-connectivity-and-resolution');
 });
 
 test('should navigate the user to the hardware requirements page when clicking on the hardware requirements dashboard row', async (t) => {

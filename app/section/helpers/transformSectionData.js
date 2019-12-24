@@ -16,17 +16,17 @@ const transformationStratergy = {
       transform: questionValue => arrayTransformation(questionValue),
     },
   },
-  'browsers-supported': {
+  'browser-browsers-supported': {
     'supported-browsers': {
       transform: questionValue => arrayTransformation(questionValue),
     },
   },
-  'mobile-operating-systems': {
+  'native-mobile-operating-systems': {
     'operating-systems': {
       transform: questionValue => arrayTransformation(questionValue),
     },
   },
-  'mobile-connection-details': {
+  'native-mobile-connection-details': {
     'connection-types': {
       transform: questionValue => arrayTransformation(questionValue),
     },

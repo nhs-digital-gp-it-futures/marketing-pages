@@ -1,6 +1,6 @@
 import { runTestSuite } from '../../../../test-utils/runTestSuite';
 
-const sectionId = 'mobile-operating-systems';
+const sectionId = 'native-mobile-operating-systems';
 const dashboardId = 'native-mobile';
 
 const mobileOperatingSystemsMarketingData = {
