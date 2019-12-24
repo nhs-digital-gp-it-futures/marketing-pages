@@ -1,6 +1,6 @@
 import { runTestSuite } from '../../../../test-utils/runTestSuite';
 
-const sectionId = 'mobile-memory-and-storage';
+const sectionId = 'native-mobile-memory-and-storage';
 const dashboardId = 'native-mobile';
 
 const mobileMemoryAndStorageData = {

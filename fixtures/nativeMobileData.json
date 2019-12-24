@@ -1,30 +1,30 @@
 {
   "sections": {
-    "mobile-operating-systems": {
+    "native-mobile-operating-systems": {
       "status": "INCOMPLETE",
       "requirement": "Mandatory"
     },
-    "mobile-first": {
+    "native-mobile-first": {
       "status": "INCOMPLETE",
       "requirement": "Mandatory"
     },
-    "mobile-memory-and-storage": {
+    "native-mobile-memory-and-storage": {
       "status": "INCOMPLETE",
       "requirement": "Mandatory"
     },
-    "mobile-connection-details": {
+    "native-mobile-connection-details": {
       "status": "INCOMPLETE",
       "requirement": "Optional"
     },
-    "mobile-components-and-device-capabilities": {
+    "native-mobile-components-and-device-capabilities": {
       "status": "INCOMPLETE",
       "requirement": "Optional"
     },
-    "mobile-hardware-requirements": {
+    "native-mobile-hardware-requirements": {
       "status": "INCOMPLETE",
       "requirement": "Optional"
     },
-    "mobile-additional-information": {
+    "native-mobile-additional-information": {
       "status": "INCOMPLETE",
       "requirement": "Optional"
     }

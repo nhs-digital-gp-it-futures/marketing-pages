@@ -9,31 +9,31 @@
     "native-mobile-sections": {
       "title": "Native mobile or tablet sections",
       "sections": {
-        "mobile-operating-systems": {
+        "native-mobile-operating-systems": {
           "title": "Supported operating systems",
           "type": "section"
         },
-        "mobile-first": {
+        "native-mobile-first": {
           "title": "Mobile first",
           "type": "section"
         },
-        "mobile-memory-and-storage": {
+        "native-mobile-memory-and-storage": {
           "title": "Memory and storage",
           "type": "section"
         },
-        "mobile-connection-details": {
+        "native-mobile-connection-details": {
           "title": "Connection details",
           "type": "section"
         },
-        "mobile-components-and-device-capabilities": {
+        "native-mobile-components-and-device-capabilities": {
           "title": "Third party components and device capabilities",
           "type": "section"
         },
-        "mobile-hardware-requirements": {
+        "native-mobile-hardware-requirements": {
           "title": "Hardware requirements",
           "type": "section"
         },
-        "mobile-additional-information": {
+        "native-mobile-additional-information": {
           "title": "Additional information",
           "type": "section"
         }

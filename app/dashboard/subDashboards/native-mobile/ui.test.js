@@ -55,19 +55,19 @@ test('should render all the sections for native mobile sections section group', 
   await pageSetup(t);
 
   const browserBasedSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-native-mobile-sections"]');
-  const supportedOperatingSystems = browserBasedSectionGroup.find('[data-test-id="dashboard-section-mobile-operating-systems"]');
-  const mobileFirstSection = browserBasedSectionGroup.find('[data-test-id="dashboard-section-mobile-first"]');
-  const memoryAndStorage = browserBasedSectionGroup.find('[data-test-id="dashboard-section-mobile-memory-and-storage"]');
-  const connectionDetails = browserBasedSectionGroup.find('[data-test-id="dashboard-section-mobile-connection-details"]');
-  const deviceCapabilities = browserBasedSectionGroup.find('[data-test-id="dashboard-section-mobile-components-and-device-capabilities"]');
-  const hardwareRequirements = browserBasedSectionGroup.find('[data-test-id="dashboard-section-mobile-hardware-requirements"]');
-  const additionalInformation = browserBasedSectionGroup.find('[data-test-id="dashboard-section-mobile-additional-information"]');
+  const supportedOperatingSystems = browserBasedSectionGroup.find('[data-test-id="dashboard-section-native-mobile-operating-systems"]');
+  const mobileFirstSection = browserBasedSectionGroup.find('[data-test-id="dashboard-section-native-mobile-first"]');
+  const memoryAndStorage = browserBasedSectionGroup.find('[data-test-id="dashboard-section-native-mobile-memory-and-storage"]');
+  const connectionDetails = browserBasedSectionGroup.find('[data-test-id="dashboard-section-native-mobile-connection-details"]');
+  const deviceCapabilities = browserBasedSectionGroup.find('[data-test-id="dashboard-section-native-mobile-components-and-device-capabilities"]');
+  const hardwareRequirements = browserBasedSectionGroup.find('[data-test-id="dashboard-section-native-mobile-hardware-requirements"]');
+  const additionalInformation = browserBasedSectionGroup.find('[data-test-id="dashboard-section-native-mobile-additional-information"]');
 
   await t
     .expect(supportedOperatingSystems.find('[data-test-id="dashboard-section-title"]').innerText)
     .eql('Supported operating systems')
     .expect(supportedOperatingSystems.find('[data-test-id="dashboard-section-title"] a').getAttribute('href'))
-    .eql('/solution/S100000-001/dashboard/native-mobile/section/mobile-operating-systems')
+    .eql('/solution/S100000-001/dashboard/native-mobile/section/native-mobile-operating-systems')
     .expect(supportedOperatingSystems.find('[data-test-id="dashboard-section-requirement"]').innerText)
     .eql('Mandatory')
     .expect(supportedOperatingSystems.find('[data-test-id="dashboard-section-status"]').innerText)
@@ -76,7 +76,7 @@ test('should render all the sections for native mobile sections section group', 
     .expect(mobileFirstSection.find('[data-test-id="dashboard-section-title"]').innerText)
     .eql('Mobile first')
     .expect(mobileFirstSection.find('[data-test-id="dashboard-section-title"] a').getAttribute('href'))
-    .eql('/solution/S100000-001/dashboard/native-mobile/section/mobile-first')
+    .eql('/solution/S100000-001/dashboard/native-mobile/section/native-mobile-first')
     .expect(mobileFirstSection.find('[data-test-id="dashboard-section-requirement"]').innerText)
     .eql('Mandatory')
     .expect(mobileFirstSection.find('[data-test-id="dashboard-section-status"]').innerText)
@@ -85,7 +85,7 @@ test('should render all the sections for native mobile sections section group', 
     .expect(memoryAndStorage.find('[data-test-id="dashboard-section-title"]').innerText)
     .eql('Memory and storage')
     .expect(memoryAndStorage.find('[data-test-id="dashboard-section-title"] a').getAttribute('href'))
-    .eql('/solution/S100000-001/dashboard/native-mobile/section/mobile-memory-and-storage')
+    .eql('/solution/S100000-001/dashboard/native-mobile/section/native-mobile-memory-and-storage')
     .expect(memoryAndStorage.find('[data-test-id="dashboard-section-requirement"]').innerText)
     .eql('Mandatory')
     .expect(memoryAndStorage.find('[data-test-id="dashboard-section-status"]').innerText)
@@ -94,7 +94,7 @@ test('should render all the sections for native mobile sections section group', 
     .expect(connectionDetails.find('[data-test-id="dashboard-section-title"]').innerText)
     .eql('Connection details')
     .expect(connectionDetails.find('[data-test-id="dashboard-section-title"] a').getAttribute('href'))
-    .eql('/solution/S100000-001/dashboard/native-mobile/section/mobile-connection-details')
+    .eql('/solution/S100000-001/dashboard/native-mobile/section/native-mobile-connection-details')
     .expect(connectionDetails.find('[data-test-id="dashboard-section-requirement"]').innerText)
     .eql('Optional')
     .expect(connectionDetails.find('[data-test-id="dashboard-section-status"]').innerText)
@@ -103,7 +103,7 @@ test('should render all the sections for native mobile sections section group', 
     .expect(deviceCapabilities.find('[data-test-id="dashboard-section-title"]').innerText)
     .eql('Third party components and device capabilities')
     .expect(deviceCapabilities.find('[data-test-id="dashboard-section-title"] a').getAttribute('href'))
-    .eql('/solution/S100000-001/dashboard/native-mobile/section/mobile-components-and-device-capabilities')
+    .eql('/solution/S100000-001/dashboard/native-mobile/section/native-mobile-components-and-device-capabilities')
     .expect(deviceCapabilities.find('[data-test-id="dashboard-section-requirement"]').innerText)
     .eql('Optional')
     .expect(deviceCapabilities.find('[data-test-id="dashboard-section-status"]').innerText)
@@ -112,7 +112,7 @@ test('should render all the sections for native mobile sections section group', 
     .expect(hardwareRequirements.find('[data-test-id="dashboard-section-title"]').innerText)
     .eql('Hardware requirements')
     .expect(hardwareRequirements.find('[data-test-id="dashboard-section-title"] a').getAttribute('href'))
-    .eql('/solution/S100000-001/dashboard/native-mobile/section/mobile-hardware-requirements')
+    .eql('/solution/S100000-001/dashboard/native-mobile/section/native-mobile-hardware-requirements')
     .expect(hardwareRequirements.find('[data-test-id="dashboard-section-requirement"]').innerText)
     .eql('Optional')
     .expect(hardwareRequirements.find('[data-test-id="dashboard-section-status"]').innerText)
@@ -121,7 +121,7 @@ test('should render all the sections for native mobile sections section group', 
     .expect(additionalInformation.find('[data-test-id="dashboard-section-title"]').innerText)
     .eql('Additional information')
     .expect(additionalInformation.find('[data-test-id="dashboard-section-title"] a').getAttribute('href'))
-    .eql('/solution/S100000-001/dashboard/native-mobile/section/mobile-additional-information')
+    .eql('/solution/S100000-001/dashboard/native-mobile/section/native-mobile-additional-information')
     .expect(additionalInformation.find('[data-test-id="dashboard-section-requirement"]').innerText)
     .eql('Optional')
     .expect(additionalInformation.find('[data-test-id="dashboard-section-status"]').innerText)
@@ -132,64 +132,64 @@ test('should navigate the user to supported operation systems page when clicking
   await pageSetup(t);
 
   nock('http://localhost:8080')
-    .get('/api/v1/Solutions/S100000-001/sections/mobile-operating-systems')
+    .get('/api/v1/Solutions/S100000-001/sections/native-mobile-operating-systems')
     .reply(200, {});
 
   const getLocation = ClientFunction(() => document.location.href);
 
-  const browsersSupportedSection = Selector('[data-test-id="dashboard-section-mobile-operating-systems"]');
+  const browsersSupportedSection = Selector('[data-test-id="dashboard-section-native-mobile-operating-systems"]');
 
   await t
     .click(browsersSupportedSection.find('a'))
-    .expect(getLocation()).contains('S100000-001/dashboard/native-mobile/section/mobile-operating-systems');
+    .expect(getLocation()).contains('S100000-001/dashboard/native-mobile/section/native-mobile-operating-systems');
 });
 
 test('should navigate the user to the mobile first page when clicking on the mobile first dashboard row', async (t) => {
   await pageSetup(t);
 
   nock('http://localhost:8080')
-    .get('/api/v1/Solutions/S100000-001/sections/mobile-first')
+    .get('/api/v1/Solutions/S100000-001/sections/native-mobile-first')
     .reply(200, {});
 
   const getLocation = ClientFunction(() => document.location.href);
 
-  const mobileFirstSection = Selector('[data-test-id="dashboard-section-mobile-first"] a');
+  const mobileFirstSection = Selector('[data-test-id="dashboard-section-native-mobile-first"] a');
 
   await t
     .click(mobileFirstSection)
-    .expect(getLocation()).contains('S100000-001/dashboard/native-mobile/section/mobile-first');
+    .expect(getLocation()).contains('S100000-001/dashboard/native-mobile/section/native-mobile-first');
 });
 
 test('should navigate the user to memory and storage page when clicking on memory and storage dashboard row', async (t) => {
   await pageSetup(t);
 
   nock('http://localhost:8080')
-    .get('/api/v1/Solutions/S100000-001/sections/mobile-memory-and-storage')
+    .get('/api/v1/Solutions/S100000-001/sections/native-mobile-memory-and-storage')
     .reply(200, {});
 
   const getLocation = ClientFunction(() => document.location.href);
 
-  const memoryAndStorage = Selector('[data-test-id="dashboard-section-mobile-memory-and-storage"]');
+  const memoryAndStorage = Selector('[data-test-id="dashboard-section-native-mobile-memory-and-storage"]');
 
   await t
     .click(memoryAndStorage.find('a'))
-    .expect(getLocation()).contains('S100000-001/dashboard/native-mobile/section/mobile-memory-and-storage');
+    .expect(getLocation()).contains('S100000-001/dashboard/native-mobile/section/native-mobile-memory-and-storage');
 });
 
 test('should navigate the user to the connection details page when clicking on the connection details dashboard row', async (t) => {
   await pageSetup(t);
 
   nock('http://localhost:8080')
-    .get('/api/v1/Solutions/S100000-001/sections/mobile-connection-details')
+    .get('/api/v1/Solutions/S100000-001/sections/native-mobile-connection-details')
     .reply(200, {});
 
   const getLocation = ClientFunction(() => document.location.href);
 
-  const connectionDetails = Selector('[data-test-id="dashboard-section-mobile-connection-details"]');
+  const connectionDetails = Selector('[data-test-id="dashboard-section-native-mobile-connection-details"]');
 
   await t
     .click(connectionDetails.find('a'))
-    .expect(getLocation()).contains('S100000-001/dashboard/native-mobile/section/mobile-connection-details');
+    .expect(getLocation()).contains('S100000-001/dashboard/native-mobile/section/native-mobile-connection-details');
 });
 
 // TODO remove .skip the ui for that page is done
@@ -197,16 +197,16 @@ test.skip('should navigate the user to device capabilities page when clicking on
   await pageSetup(t);
 
   nock('http://localhost:8080')
-    .get('/api/v1/Solutions/S100000-001/sections/mobile-components-and-device-capabilities')
+    .get('/api/v1/Solutions/S100000-001/sections/native-mobile-components-and-device-capabilities')
     .reply(200, {});
 
   const getLocation = ClientFunction(() => document.location.href);
 
-  const deviceCapabilities = Selector('[data-test-id="dashboard-section-mobile-components-and-device-capabilities"]');
+  const deviceCapabilities = Selector('[data-test-id="dashboard-section-native-mobile-components-and-device-capabilities"]');
 
   await t
     .click(deviceCapabilities.find('a'))
-    .expect(getLocation()).contains('S100000-001/dashboard/native-mobile/section/mobile-components-and-device-capabilities');
+    .expect(getLocation()).contains('S100000-001/dashboard/native-mobile/section/native-mobile-components-and-device-capabilities');
 });
 
 // TODO remove .skip the ui for that page is done
@@ -214,16 +214,16 @@ test.skip('should navigate the user to hardware requirements page when clicking 
   await pageSetup(t);
 
   nock('http://localhost:8080')
-    .get('/api/v1/Solutions/S100000-001/sections/mobile-hardware-requirements')
+    .get('/api/v1/Solutions/S100000-001/sections/native-mobile-hardware-requirements')
     .reply(200, {});
 
   const getLocation = ClientFunction(() => document.location.href);
 
-  const hardwareRequirements = Selector('[data-test-id="dashboard-section-mobile-hardware-requirements"]');
+  const hardwareRequirements = Selector('[data-test-id="dashboard-section-native-mobile-hardware-requirements"]');
 
   await t
     .click(hardwareRequirements.find('a'))
-    .expect(getLocation()).contains('S100000-001/dashboard/native-mobile/section/mobile-hardware-requirements');
+    .expect(getLocation()).contains('S100000-001/dashboard/native-mobile/section/native-mobile-hardware-requirements');
 });
 
 // TODO remove .skip the ui for that page is done
@@ -231,16 +231,16 @@ test.skip('should navigate the user to additional information page when clicking
   await pageSetup(t);
 
   nock('http://localhost:8080')
-    .get('/api/v1/Solutions/S100000-001/sections/mobile-additional-information')
+    .get('/api/v1/Solutions/S100000-001/sections/native-mobile-additional-information')
     .reply(200, {});
 
   const getLocation = ClientFunction(() => document.location.href);
 
-  const hardwareRequirements = Selector('[data-test-id="dashboard-section-mobile-additional-information"]');
+  const hardwareRequirements = Selector('[data-test-id="dashboard-section-native-mobile-additional-information"]');
 
   await t
     .click(hardwareRequirements.find('a'))
-    .expect(getLocation()).contains('S100000-001/dashboard/native-mobile/section/mobile-additional-information');
+    .expect(getLocation()).contains('S100000-001/dashboard/native-mobile/section/native-mobile-additional-information');
 });
 
 test('should render the return to all sections link', async (t) => {
