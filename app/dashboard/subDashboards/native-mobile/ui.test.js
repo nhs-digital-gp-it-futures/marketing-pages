@@ -5,7 +5,7 @@ import aNativeMobileFixture from '../../../../fixtures/nativeMobileData.json';
 
 const mocks = () => {
   nock('http://localhost:8080')
-    .get('/api/v1/Solutions/S100000-001/sections/native-mobile')
+    .get('/api/v1/Solutions/S100000-001/dashboards/native-mobile')
     .reply(200, aNativeMobileFixture);
 };
 

@@ -5,7 +5,7 @@ import aBrowserBasedFixture from '../../../../fixtures/aBrowserBasedData.json';
 
 const mocks = () => {
   nock('http://localhost:8080')
-    .get('/api/v1/Solutions/S100000-001/sections/browser-based')
+    .get('/api/v1/Solutions/S100000-001/dashboards/browser-based')
     .reply(200, aBrowserBasedFixture);
 };
 
