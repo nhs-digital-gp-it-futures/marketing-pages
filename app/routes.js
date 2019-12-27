@@ -112,11 +112,13 @@ router.get('/solution/:solutionId/preview', async (req, res, next) => {
 router.get('/solution/:solutionId/submitForModeration', async (req, res, next) => {
   const { solutionId } = req.params;
   try {
-    const response = await postSubmitForModeration(solutionId);
+    const response = await postSubmitForModeration({ solutionId });
     if (response.success) {
       res.redirect(`/solution/${solutionId}`);
     } else {
-      const context = await getMarketingPageDashboardContext({ solutionId, validationErrors: response });
+      const context = await getMarketingPageDashboardContext(
+        { solutionId, validationErrors: response },
+      );
       res.render('dashboard/template', context);
     }
   } catch (err) {

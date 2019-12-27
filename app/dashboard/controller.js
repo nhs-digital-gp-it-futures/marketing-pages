@@ -23,7 +23,7 @@ export const getMarketingPageDashboardContext = async ({ solutionId, validationE
   throw new Error('No data returned');
 };
 
-export const postSubmitForModeration = async (solutionId) => {
+export const postSubmitForModeration = async ({ solutionId }) => {
   try {
     const endpoint = `${apiHost}/api/v1/Solutions/${solutionId}/SubmitForReview`;
     logger.info(`api called: [PUT] ${endpoint}`);
