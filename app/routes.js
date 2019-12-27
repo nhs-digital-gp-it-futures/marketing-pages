@@ -102,7 +102,7 @@ router.get('/solution/:solutionId/preview', async (req, res, next) => {
   const { solutionId } = req.params;
   logger.info(`navigating to Solution ${solutionId} preview`);
   try {
-    const context = await getPreviewPageContext(solutionId);
+    const context = await getPreviewPageContext({ solutionId });
     res.render('preview/template', context);
   } catch (err) {
     next(err);
