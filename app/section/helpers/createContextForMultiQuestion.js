@@ -7,9 +7,12 @@ export const createContextForMultiQuestion = (
 ) => {
   const innerQuestionFormData = formData && formData[questionId];
 
-  const { errorForQuestion, questions } = createQuestionsContext(
-    questionManifest, innerQuestionFormData, validationErrors, questionId,
-  );
+  const { errorForQuestion, questions } = createQuestionsContext({
+    sectionManifest: questionManifest,
+    formData: innerQuestionFormData,
+    validationErrors,
+    parentQuestionId: questionId,
+  });
 
   const questionContext = {
     ...commonQuestionContext(questionId, questionManifest),

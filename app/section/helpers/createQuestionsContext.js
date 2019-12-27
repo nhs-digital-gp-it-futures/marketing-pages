@@ -57,9 +57,9 @@ const createQuestionTypeContext = {
   },
 };
 
-export const createQuestionsContext = (
+export const createQuestionsContext = ({
   sectionManifest, formData, validationErrors, parentQuestionId,
-) => {
+}) => {
   const {
     errorsAcc: errors,
     questionsAcc: questionsContext,

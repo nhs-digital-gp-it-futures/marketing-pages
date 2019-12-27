@@ -3,9 +3,9 @@ import { createQuestionsContext } from './helpers/createQuestionsContext';
 export const createSectionPageContext = ({
   solutionId, sectionManifest, formData, validationErrors, dashboardId,
 }) => {
-  const { errors, questions } = createQuestionsContext(
+  const { errors, questions } = createQuestionsContext({
     sectionManifest, formData, validationErrors,
-  );
+  });
 
   const submitActionPath = dashboardId
     ? `/solution/${solutionId}/dashboard/${dashboardId}/section/${sectionManifest.id}`
