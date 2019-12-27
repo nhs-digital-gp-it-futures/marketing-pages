@@ -7,51 +7,51 @@ import { commonQuestionContext } from './commonQuestionContext';
 
 const createQuestionTypeContext = {
   'bulletpoint-list': {
-    create: (
+    create: ({
       questionId, questionManifest, formData, validationErrors, parentQuestionId,
-    ) => createQuestionsContextForBulletpointList(
+    }) => createQuestionsContextForBulletpointList(
       questionId, questionManifest, formData, validationErrors, parentQuestionId,
     ),
   },
   'checkbox-options': {
-    create: (
+    create: ({
       questionId, questionManifest, formData, validationErrors, parentQuestionId,
-    ) => createQuestionsContextForOptions(
+    }) => createQuestionsContextForOptions(
       questionId, questionManifest, formData, validationErrors, parentQuestionId,
     ),
   },
   'radiobutton-options': {
-    create: (
+    create: ({
       questionId, questionManifest, formData, validationErrors, parentQuestionId,
-    ) => createQuestionsContextForOptions(
+    }) => createQuestionsContextForOptions(
       questionId, questionManifest, formData, validationErrors, parentQuestionId,
     ),
   },
   'combobox-options': {
-    create: (
+    create: ({
       questionId, questionManifest, formData, validationErrors, parentQuestionId,
-    ) => createQuestionsContextForOptions(
+    }) => createQuestionsContextForOptions(
       questionId, questionManifest, formData, validationErrors, parentQuestionId,
     ),
   },
   'textarea-field': {
-    create: (
+    create: ({
       questionId, questionManifest, formData, validationErrors, parentQuestionId,
-    ) => createContextForTextInputsQuestion(
+    }) => createContextForTextInputsQuestion(
       questionId, questionManifest, formData, validationErrors, parentQuestionId,
     ),
   },
   'text-field': {
-    create: (
+    create: ({
       questionId, questionManifest, formData, validationErrors, parentQuestionId,
-    ) => createContextForTextInputsQuestion(
+    }) => createContextForTextInputsQuestion(
       questionId, questionManifest, formData, validationErrors, parentQuestionId,
     ),
   },
   'multi-question': {
-    create: (
+    create: ({
       questionId, questionManifest, formData, validationErrors, parentQuestionId,
-    ) => createContextForMultiQuestion(
+    }) => createContextForMultiQuestion(
       questionId, questionManifest, formData, validationErrors, parentQuestionId,
     ),
   },
@@ -69,9 +69,9 @@ export const createQuestionsContext = ({
         const {
           errorForQuestion,
           questionContext,
-        } = createQuestionTypeContext[questionManifest.type].create(
+        } = createQuestionTypeContext[questionManifest.type].create({
           questionId, questionManifest, formData, validationErrors, parentQuestionId,
-        );
+        });
 
         return {
           errorsAcc: errorForQuestion
