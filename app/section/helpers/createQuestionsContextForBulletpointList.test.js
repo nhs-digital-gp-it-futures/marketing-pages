@@ -25,7 +25,9 @@ describe('when the question type is a bulletpoint-list', () => {
       maxItems: 3,
     };
 
-    const context = createQuestionsContextForBulletpointList('some-question-id', questionManifest);
+    const context = createQuestionsContextForBulletpointList({
+      questionId: 'some-question-id', questionManifest,
+    });
 
     expect(context).toEqual(expectedContext);
   });
@@ -65,7 +67,9 @@ describe('when the question type is a bulletpoint-list', () => {
       maxItems: 3,
     };
 
-    const context = createQuestionsContextForBulletpointList('some-question-id', questionManifest, formData);
+    const context = createQuestionsContextForBulletpointList({
+      questionId: 'some-question-id', questionManifest, formData,
+    });
 
     expect(context).toEqual(expectedContext);
   });
@@ -128,7 +132,9 @@ describe('when the question type is a bulletpoint-list', () => {
       },
     };
 
-    const context = createQuestionsContextForBulletpointList('some-question-id', questionManifest, formData, validationErrors);
+    const context = createQuestionsContextForBulletpointList({
+      questionId: 'some-question-id', questionManifest, formData, validationErrors,
+    });
 
     expect(context).toEqual(expectedContext);
   });

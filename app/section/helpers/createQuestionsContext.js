@@ -9,9 +9,9 @@ const createQuestionTypeContext = {
   'bulletpoint-list': {
     create: ({
       questionId, questionManifest, formData, validationErrors, parentQuestionId,
-    }) => createQuestionsContextForBulletpointList(
+    }) => createQuestionsContextForBulletpointList({
       questionId, questionManifest, formData, validationErrors, parentQuestionId,
-    ),
+    }),
   },
   'checkbox-options': {
     create: ({
