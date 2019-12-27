@@ -18,7 +18,7 @@ router.get('/solution/:solutionId', async (req, res, next) => {
   const { solutionId } = req.params;
   logger.info(`navigating to Solution ${solutionId} dashboard`);
   try {
-    const context = await getMarketingPageDashboardContext(solutionId);
+    const context = await getMarketingPageDashboardContext({ solutionId });
     res.render('dashboard/template', context);
   } catch (err) {
     next(err);
@@ -116,7 +116,7 @@ router.get('/solution/:solutionId/submitForModeration', async (req, res, next) =
     if (response.success) {
       res.redirect(`/solution/${solutionId}`);
     } else {
-      const context = await getMarketingPageDashboardContext(solutionId, response);
+      const context = await getMarketingPageDashboardContext({ solutionId, validationErrors: response });
       res.render('dashboard/template', context);
     }
   } catch (err) {

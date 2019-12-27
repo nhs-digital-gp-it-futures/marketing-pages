@@ -4,7 +4,7 @@ import { createDashboardPageContext } from './createDashboardPageContext';
 import { apiHost } from '../config';
 import logger from '../logger';
 
-export const getMarketingPageDashboardContext = async (solutionId, validationErrors) => {
+export const getMarketingPageDashboardContext = async ({ solutionId, validationErrors }) => {
   const dashboardManifest = new ManifestProvider().getDashboardManifest();
 
   const endpoint = `${apiHost}/api/v1/Solutions/${solutionId}/dashboard`;
