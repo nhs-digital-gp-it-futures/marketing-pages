@@ -9,7 +9,7 @@ export const getPreviewPageContext = async ({ solutionId }) => {
   const previewDataRaw = await axios.get(endpoint);
   if (previewDataRaw && previewDataRaw.data) {
     const previewData = previewDataRaw.data;
-    const context = createPreviewPageContext(previewData);
+    const context = createPreviewPageContext({ previewData });
     return context;
   }
   throw new Error('No data returned');
