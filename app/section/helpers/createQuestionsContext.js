@@ -82,7 +82,7 @@ export const createQuestionsContext = ({
 
       return {
         errorsAcc,
-        questionsAcc: questionsAcc.concat(commonQuestionContext(questionId, questionManifest)),
+        questionsAcc: questionsAcc.concat(commonQuestionContext({ questionId, questionManifest })),
       };
     }, { errorsAcc: [], questionsAcc: [] });
 

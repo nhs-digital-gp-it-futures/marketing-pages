@@ -15,7 +15,7 @@ export const createContextForMultiQuestion = ({
   });
 
   const questionContext = {
-    ...commonQuestionContext(questionId, questionManifest),
+    ...commonQuestionContext({ questionId, questionManifest }),
     questions,
   };
 

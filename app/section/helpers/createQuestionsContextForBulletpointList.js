@@ -9,7 +9,7 @@ export const createQuestionsContextForBulletpointList = ({
   );
 
   const questionContext = {
-    ...commonQuestionContext(questionId, questionManifest),
+    ...commonQuestionContext({ questionId, questionManifest }),
     fields,
   };
 

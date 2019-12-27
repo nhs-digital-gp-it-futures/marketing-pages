@@ -10,7 +10,7 @@ export const createQuestionsContextForOptions = ({
   );
 
   const questionContext = {
-    ...commonQuestionContext(questionId, questionManifest),
+    ...commonQuestionContext({ questionId, questionManifest }),
     options: generateOptions(questionId, questionManifest.options, formData, questionManifest.type),
     error: errorForQuestion ? { message: errorForQuestion.text } : undefined,
   };
