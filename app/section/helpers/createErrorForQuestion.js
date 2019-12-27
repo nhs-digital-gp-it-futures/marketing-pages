@@ -1,6 +1,6 @@
-export const createErrorForQuestion = (
+export const createErrorForQuestion = ({
   questionId, questionManifest, validationErrors,
-) => {
+}) => {
   if (validationErrors && questionManifest && questionManifest.errorResponse) {
     const errorForQuestion = Object.entries(validationErrors)
       .reduce((errorForQuestionAcc, [errorType, erroredQuestions]) => {

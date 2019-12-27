@@ -5,9 +5,9 @@ import { commonQuestionContext } from './commonQuestionContext';
 export const createContextForTextInputsQuestion = ({
   questionId, questionManifest, formData, validationErrors, parentQuestionId,
 }) => {
-  const errorForQuestion = createErrorForQuestion(
+  const errorForQuestion = createErrorForQuestion({
     questionId, questionManifest, validationErrors,
-  );
+  });
 
   const questionContext = {
     ...commonQuestionContext({ questionId, questionManifest, parentQuestionId }),

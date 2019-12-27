@@ -11,7 +11,9 @@ export const generateFields = (
     } = Array(questionManifest.maxItems).fill().reduce(({ errorsAcc, fieldsAcc }, _, i) => {
       const fieldId = `${questionId}-${i + 1}`;
 
-      const errorForField = createErrorForField(fieldId, questionManifest, validationErrors);
+      const errorForField = createErrorForField({
+        questionId: fieldId, questionManifest, validationErrors,
+      });
 
       const field = {
         id: fieldId,

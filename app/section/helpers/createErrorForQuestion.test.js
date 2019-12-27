@@ -8,7 +8,9 @@ describe('createErrorForQuestion', () => {
 
     const validationErrors = undefined;
 
-    const error = createErrorForQuestion('some-question-id', questionManifest, validationErrors);
+    const error = createErrorForQuestion({
+      questionId: 'some-question-id', questionManifest, validationErrors,
+    });
 
     expect(error).toEqual(expectedError);
   });
@@ -22,7 +24,9 @@ describe('createErrorForQuestion', () => {
       someErrorType: ['some-question-id'],
     };
 
-    const error = createErrorForQuestion('some-question-id', questionManifest, validationErrors);
+    const error = createErrorForQuestion({
+      questionId: 'some-question-id', questionManifest, validationErrors,
+    });
 
     expect(error).toEqual(expectedError);
   });
@@ -36,7 +40,9 @@ describe('createErrorForQuestion', () => {
       someErrorType: ['some-question-id'],
     };
 
-    const error = createErrorForQuestion('some-question-id', questionManifest, validationErrors);
+    const error = createErrorForQuestion({
+      questionId: 'some-question-id', questionManifest, validationErrors,
+    });
 
     expect(error).toEqual(expectedError);
   });
@@ -57,7 +63,9 @@ describe('createErrorForQuestion', () => {
       someErrorType: ['some-question-id'],
     };
 
-    const error = createErrorForQuestion('some-question-id', questionManifest, validationErrors);
+    const error = createErrorForQuestion({
+      questionId: 'some-question-id', questionManifest, validationErrors,
+    });
 
     expect(error).toEqual(expectedError);
   });
