@@ -36,7 +36,9 @@ describe('createContextForMultiQuestion', () => {
     };
 
 
-    const context = createContextForMultiQuestion('some-parent-id', questionManifest);
+    const context = createContextForMultiQuestion({
+      questionId: 'some-parent-id', questionManifest,
+    });
 
     expect(context).toEqual(expectedContext);
   });
@@ -84,7 +86,9 @@ describe('createContextForMultiQuestion', () => {
       },
     };
 
-    const context = createContextForMultiQuestion('some-parent-id', questionManifest, formData);
+    const context = createContextForMultiQuestion({
+      questionId: 'some-parent-id', questionManifest, formData,
+    });
 
     expect(context).toEqual(expectedContext);
   });

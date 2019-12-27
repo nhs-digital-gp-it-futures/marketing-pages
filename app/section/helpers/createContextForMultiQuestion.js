@@ -2,9 +2,9 @@
 import { createQuestionsContext } from './createQuestionsContext';
 import { commonQuestionContext } from './commonQuestionContext';
 
-export const createContextForMultiQuestion = (
+export const createContextForMultiQuestion = ({
   questionId, questionManifest, formData, validationErrors,
-) => {
+}) => {
   const innerQuestionFormData = formData && formData[questionId];
 
   const { errorForQuestion, questions } = createQuestionsContext({

@@ -51,9 +51,9 @@ const createQuestionTypeContext = {
   'multi-question': {
     create: ({
       questionId, questionManifest, formData, validationErrors, parentQuestionId,
-    }) => createContextForMultiQuestion(
+    }) => createContextForMultiQuestion({
       questionId, questionManifest, formData, validationErrors, parentQuestionId,
-    ),
+    }),
   },
 };
 
