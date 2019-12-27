@@ -48,7 +48,7 @@ export const postSection = async ({
     logger.info(`api called: [PUT] ${endpoint}`);
     await axios.put(endpoint, transformedSectionData);
 
-    const response = createPostSectionResponse(solutionId, sectionManifest);
+    const response = createPostSectionResponse({ solutionId, sectionManifest });
 
     return response;
   } catch (error) {
