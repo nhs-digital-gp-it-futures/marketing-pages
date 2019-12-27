@@ -60,7 +60,7 @@ router.get('/solution/:solutionId/dashboard/:dashboardId', async (req, res, next
   const { solutionId, dashboardId } = req.params;
   logger.info(`navigating to Solution ${solutionId} dashboard: ${dashboardId}`);
   try {
-    const context = await getSubDashboardPageContext(solutionId, dashboardId);
+    const context = await getSubDashboardPageContext({ solutionId, dashboardId });
     res.render('dashboard/subDashboards/template', context);
   } catch (err) {
     next(err);
