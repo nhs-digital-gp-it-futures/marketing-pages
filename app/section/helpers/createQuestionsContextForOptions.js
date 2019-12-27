@@ -2,9 +2,9 @@ import { generateOptions } from './generateOptions';
 import { createErrorForQuestion } from './createErrorForQuestion';
 import { commonQuestionContext } from './commonQuestionContext';
 
-export const createQuestionsContextForOptions = (
+export const createQuestionsContextForOptions = ({
   questionId, questionManifest, formData, validationErrors,
-) => {
+}) => {
   const errorForQuestion = createErrorForQuestion(
     questionId, questionManifest, validationErrors,
   );

@@ -16,23 +16,23 @@ const createQuestionTypeContext = {
   'checkbox-options': {
     create: ({
       questionId, questionManifest, formData, validationErrors, parentQuestionId,
-    }) => createQuestionsContextForOptions(
+    }) => createQuestionsContextForOptions({
       questionId, questionManifest, formData, validationErrors, parentQuestionId,
-    ),
+    }),
   },
   'radiobutton-options': {
     create: ({
       questionId, questionManifest, formData, validationErrors, parentQuestionId,
-    }) => createQuestionsContextForOptions(
+    }) => createQuestionsContextForOptions({
       questionId, questionManifest, formData, validationErrors, parentQuestionId,
-    ),
+    }),
   },
   'combobox-options': {
     create: ({
       questionId, questionManifest, formData, validationErrors, parentQuestionId,
-    }) => createQuestionsContextForOptions(
+    }) => createQuestionsContextForOptions({
       questionId, questionManifest, formData, validationErrors, parentQuestionId,
-    ),
+    }),
   },
   'textarea-field': {
     create: ({

@@ -32,7 +32,9 @@ describe('when the question type is of type checkbox-options or radiobutton-opti
       },
     };
 
-    const context = createQuestionsContextForOptions('some-question-id', questionManifest);
+    const context = createQuestionsContextForOptions({
+      questionId: 'some-question-id', questionManifest,
+    });
 
     expect(context).toEqual(expectedContext);
   });
@@ -77,7 +79,9 @@ describe('when the question type is of type checkbox-options or radiobutton-opti
       ],
     };
 
-    const context = createQuestionsContextForOptions('some-question-id', questionManifest, formData);
+    const context = createQuestionsContextForOptions({
+      questionId: 'some-question-id', questionManifest, formData,
+    });
 
     expect(context).toEqual(expectedContext);
   });
@@ -120,7 +124,9 @@ describe('when the question type is of type checkbox-options or radiobutton-opti
       ],
     };
 
-    const context = createQuestionsContextForOptions('some-question-id', questionManifest, formData);
+    const context = createQuestionsContextForOptions({
+      questionId: 'some-question-id', questionManifest, formData,
+    });
 
     expect(context).toEqual(expectedContext);
   });
@@ -172,7 +178,9 @@ describe('when the question type is of type checkbox-options or radiobutton-opti
       required: ['some-question-id'],
     };
 
-    const context = createQuestionsContextForOptions('some-question-id', questionManifest, formData, validationErrors);
+    const context = createQuestionsContextForOptions({
+      questionId: 'some-question-id', questionManifest, formData, validationErrors,
+    });
 
     expect(context).toEqual(expectedContext);
   });
