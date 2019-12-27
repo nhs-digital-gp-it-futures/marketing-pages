@@ -37,16 +37,16 @@ const createQuestionTypeContext = {
   'textarea-field': {
     create: ({
       questionId, questionManifest, formData, validationErrors, parentQuestionId,
-    }) => createContextForTextInputsQuestion(
+    }) => createContextForTextInputsQuestion({
       questionId, questionManifest, formData, validationErrors, parentQuestionId,
-    ),
+    }),
   },
   'text-field': {
     create: ({
       questionId, questionManifest, formData, validationErrors, parentQuestionId,
-    }) => createContextForTextInputsQuestion(
+    }) => createContextForTextInputsQuestion({
       questionId, questionManifest, formData, validationErrors, parentQuestionId,
-    ),
+    }),
   },
   'multi-question': {
     create: ({

@@ -2,9 +2,9 @@ import { getFormDataValue } from './formData';
 import { createErrorForQuestion } from './createErrorForQuestion';
 import { commonQuestionContext } from './commonQuestionContext';
 
-export const createContextForTextInputsQuestion = (
+export const createContextForTextInputsQuestion = ({
   questionId, questionManifest, formData, validationErrors, parentQuestionId,
-) => {
+}) => {
   const errorForQuestion = createErrorForQuestion(
     questionId, questionManifest, validationErrors,
   );
