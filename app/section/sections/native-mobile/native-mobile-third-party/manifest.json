@@ -1,0 +1,30 @@
+{
+  "id": "native-mobile-third-party",
+  "title": "Native mobile or tablet - third party components and device capabilities",
+  "mainAdvice": "Answer the following questions about your mobile or tablet based Solution",
+  "additionalAdvice": [
+    "This information will be visible to buyers on your Solution page."
+  ],
+  "questions": {
+    "third-party-components": {
+      "mainAdvice": "Describe any third party components (optional)",
+      "additionalAdvice": "Add any information about the third party components required for your Solution to function.",
+      "footerAdvice": "You can enter up to 500 characters",
+      "type": "textarea-field",
+      "errorResponse": {
+        "maxLength": "Third party components is over the character limit"
+      }
+    },
+    "device-capabilities": {
+      "mainAdvice": "Describe any device capabilities (optional)",
+      "additionalAdvice": "Add any information about the device capabilities required for your Solution to function.",
+      "footerAdvice": "You can enter up to 500 characters",
+      "type": "textarea-field",
+      "errorResponse": {
+        "maxLength": "Device capabilities is over the character limit"
+      }
+    }
+  },
+  "submitText" : "Save and return",
+  "successfulSubmitResponsePath" : "dashboard/native-mobile"
+}

@@ -186,6 +186,8 @@ test('when existing marketing data - The client application type section and nat
   const minimumConnectionRow = nativeMobileExpandaleSectionTable.find('[data-test-id="view-section-table-row-minimum-connection-speed"]');
   const connectionRequirementsRow = nativeMobileExpandaleSectionTable.find('[data-test-id="view-section-table-row-connection-types"]');
   const connectionDescriptionRow = nativeMobileExpandaleSectionTable.find('[data-test-id="view-section-table-row-connection-requirements-description"]');
+  const thirdPartyComponentsRow = nativeMobileExpandaleSectionTable.find('[data-test-id="view-section-table-row-third-party-components"]');
+  const deviceCapabilitiesRow = nativeMobileExpandaleSectionTable.find('[data-test-id="view-section-table-row-device-capabilities"]');
   const additionalInformationRow = nativeMobileExpandaleSectionTable.find('[data-test-id="view-section-table-row-additional-information"]');
 
   await t
@@ -229,6 +231,14 @@ test('when existing marketing data - The client application type section and nat
     .expect(connectionDescriptionRow.find('div[data-test-id="view-section-table-row-title"]').innerText).eql('Additional information about connection types')
     .expect(connectionDescriptionRow.find('div[data-test-id="view-section-table-row-component"]').innerText).eql('Average data usage will vary depending on application activity.')
     .expect(connectionDescriptionRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok()
+
+    .expect(thirdPartyComponentsRow.find('div[data-test-id="view-section-table-row-title"]').innerText).eql('Third party components required')
+    .expect(thirdPartyComponentsRow.find('div[data-test-id="view-section-table-row-component"]').innerText).eql('The application supports and requires an authenticator on each device the application is installed. You will need a software-based authenticator that implements a two-step verification service.')
+    .expect(thirdPartyComponentsRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok()
+
+    .expect(deviceCapabilitiesRow.find('div[data-test-id="view-section-table-row-title"]').innerText).eql('Device capabilities required')
+    .expect(deviceCapabilitiesRow.find('div[data-test-id="view-section-table-row-component"]').innerText).eql('In order to use our file hosting services, the application will require permission to access device storage.')
+    .expect(deviceCapabilitiesRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok()
 
     .expect(additionalInformationRow.find('div[data-test-id="view-section-table-row-title"]').innerText).eql('Additional information')
     .expect(additionalInformationRow.find('div[data-test-id="view-section-table-row-component"]').innerText).eql('It is possible that it may install on other platforms or versions not listed in this section. However, support is limited to systems that meet the minimum requirements.')

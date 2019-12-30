@@ -59,7 +59,7 @@ test('should render all the sections for native mobile sections section group', 
   const mobileFirstSection = browserBasedSectionGroup.find('[data-test-id="dashboard-section-native-mobile-first"]');
   const memoryAndStorage = browserBasedSectionGroup.find('[data-test-id="dashboard-section-native-mobile-memory-and-storage"]');
   const connectionDetails = browserBasedSectionGroup.find('[data-test-id="dashboard-section-native-mobile-connection-details"]');
-  const deviceCapabilities = browserBasedSectionGroup.find('[data-test-id="dashboard-section-native-mobile-components-and-device-capabilities"]');
+  const thirdParty = browserBasedSectionGroup.find('[data-test-id="dashboard-section-native-mobile-third-party"]');
   const hardwareRequirements = browserBasedSectionGroup.find('[data-test-id="dashboard-section-native-mobile-hardware-requirements"]');
   const additionalInformation = browserBasedSectionGroup.find('[data-test-id="dashboard-section-native-mobile-additional-information"]');
 
@@ -100,13 +100,13 @@ test('should render all the sections for native mobile sections section group', 
     .expect(connectionDetails.find('[data-test-id="dashboard-section-status"]').innerText)
     .eql('INCOMPLETE')
 
-    .expect(deviceCapabilities.find('[data-test-id="dashboard-section-title"]').innerText)
+    .expect(thirdParty.find('[data-test-id="dashboard-section-title"]').innerText)
     .eql('Third party components and device capabilities')
-    .expect(deviceCapabilities.find('[data-test-id="dashboard-section-title"] a').getAttribute('href'))
-    .eql('/solution/S100000-001/dashboard/native-mobile/section/native-mobile-components-and-device-capabilities')
-    .expect(deviceCapabilities.find('[data-test-id="dashboard-section-requirement"]').innerText)
+    .expect(thirdParty.find('[data-test-id="dashboard-section-title"] a').getAttribute('href'))
+    .eql('/solution/S100000-001/dashboard/native-mobile/section/native-mobile-third-party')
+    .expect(thirdParty.find('[data-test-id="dashboard-section-requirement"]').innerText)
     .eql('Optional')
-    .expect(deviceCapabilities.find('[data-test-id="dashboard-section-status"]').innerText)
+    .expect(thirdParty.find('[data-test-id="dashboard-section-status"]').innerText)
     .eql('INCOMPLETE')
 
     .expect(hardwareRequirements.find('[data-test-id="dashboard-section-title"]').innerText)
@@ -192,21 +192,20 @@ test('should navigate the user to the connection details page when clicking on t
     .expect(getLocation()).contains('S100000-001/dashboard/native-mobile/section/native-mobile-connection-details');
 });
 
-// TODO remove .skip the ui for that page is done
-test.skip('should navigate the user to device capabilities page when clicking on device capabilities dashboard row', async (t) => {
+test('should navigate the user to third party page when clicking on third party dashboard row', async (t) => {
   await pageSetup(t);
 
   nock('http://localhost:8080')
-    .get('/api/v1/Solutions/S100000-001/sections/native-mobile-components-and-device-capabilities')
+    .get('/api/v1/Solutions/S100000-001/sections/native-mobile-third-party')
     .reply(200, {});
 
   const getLocation = ClientFunction(() => document.location.href);
 
-  const deviceCapabilities = Selector('[data-test-id="dashboard-section-native-mobile-components-and-device-capabilities"]');
+  const deviceCapabilities = Selector('[data-test-id="dashboard-section-native-mobile-third-party"]');
 
   await t
     .click(deviceCapabilities.find('a'))
-    .expect(getLocation()).contains('S100000-001/dashboard/native-mobile/section/native-mobile-components-and-device-capabilities');
+    .expect(getLocation()).contains('S100000-001/dashboard/native-mobile/section/native-mobile-third-party');
 });
 
 // TODO remove .skip the ui for that page is done
