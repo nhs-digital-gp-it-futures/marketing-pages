@@ -6,7 +6,7 @@ export const createContextForTextInputsQuestion = ({
   questionId, questionManifest, formData, validationErrors, parentQuestionId,
 }) => {
   const errorForQuestion = createErrorForQuestion({
-    questionId, questionManifest, validationErrors,
+    questionId, questionManifest, validationErrors, parentQuestionId,
   });
 
   const questionContext = {

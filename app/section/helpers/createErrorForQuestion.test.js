@@ -69,4 +69,30 @@ describe('createErrorForQuestion', () => {
 
     expect(error).toEqual(expectedError);
   });
+
+  it('should return error with the parentQuestionId for href', () => {
+    const expectedError = {
+      text: 'some error message',
+      href: '#some-parent-id[some-question-id]',
+    };
+
+    const questionManifest = {
+      errorResponse: {
+        someErrorType: 'some error message',
+      },
+    };
+
+    const validationErrors = {
+      'some-question-id': 'someErrorType',
+    };
+
+    const error = createErrorForQuestion({
+      questionId: 'some-question-id',
+      questionManifest,
+      validationErrors,
+      parentQuestionId: 'some-parent-id',
+    });
+
+    expect(error).toEqual(expectedError);
+  });
 });
