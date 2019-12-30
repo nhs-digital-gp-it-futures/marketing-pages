@@ -4,7 +4,7 @@ describe('getExistingDataIfAvailable', () => {
   it('should return undefined if the exisitingDataForSection provided is undefined', () => {
     const exisitingDataForSection = undefined;
 
-    const existingDataForField = getExistingDataForFieldIfAvailable({exisitingDataForSection, questionId: 'some-question-id', index: 0 });
+    const existingDataForField = getExistingDataForFieldIfAvailable({ exisitingDataForSection, questionId: 'some-question-id', index: 0 });
 
     expect(existingDataForField).toEqual(undefined);
   });
@@ -12,7 +12,7 @@ describe('getExistingDataIfAvailable', () => {
   it('should return undefined if the exisitingDataForSection provided is an empty object', () => {
     const exisitingDataForSection = {};
 
-    const existingDataForField = getExistingDataForFieldIfAvailable({ exisitingDataForSection, questionId: 'some-question-id', index: 0});
+    const existingDataForField = getExistingDataForFieldIfAvailable({ exisitingDataForSection, questionId: 'some-question-id', index: 0 });
 
     expect(existingDataForField).toEqual(undefined);
   });

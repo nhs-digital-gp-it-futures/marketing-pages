@@ -1,4 +1,6 @@
-export const getExistingDataForFieldIfAvailable = ({ exisitingDataForSection, questionId, index }) => (
+export const getExistingDataForFieldIfAvailable = ({
+  exisitingDataForSection, questionId, index,
+}) => (
   exisitingDataForSection
     && exisitingDataForSection[questionId]
     && exisitingDataForSection[questionId][index]
