@@ -226,8 +226,7 @@ test.skip('should navigate the user to hardware requirements page when clicking 
     .expect(getLocation()).contains('S100000-001/dashboard/native-mobile/section/native-mobile-hardware-requirements');
 });
 
-// TODO remove .skip the ui for that page is done
-test.skip('should navigate the user to additional information page when clicking on additional information dashboard row', async (t) => {
+test('should navigate the user to additional information page when clicking on additional information dashboard row', async (t) => {
   await pageSetup(t);
 
   nock('http://localhost:8080')

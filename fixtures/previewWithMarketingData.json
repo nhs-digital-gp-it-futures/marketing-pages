@@ -24,7 +24,7 @@
       "sections": {
         "browser-based": {
           "sections": {
-            "browser-browsers-supported": {          
+            "browser-browsers-supported": {
               "answers": {
                 "supported-browsers": [
                   "Google Chrome",
@@ -86,6 +86,11 @@
                 "minimum-connection-speed": "1Mbps",
                 "connection-types": ["GPRS","3G","4G","Wifi"],
                 "connection-requirements-description": "Average data usage will vary depending on application activity."
+              }
+            },
+            "native-mobile-additional-information": {
+              "answers": {
+                "additional-information": "It is possible that it may install on other platforms or versions not listed in this section. However, support is limited to systems that meet the minimum requirements."
               }
             }
           }
