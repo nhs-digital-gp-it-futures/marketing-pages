@@ -12,7 +12,7 @@ export const createContextForTextInputsQuestion = ({
   const questionContext = {
     ...commonQuestionContext({ questionId, questionManifest, parentQuestionId }),
     rows: questionManifest.rows,
-    data: getFormDataValue(questionId, formData),
+    data: getFormDataValue({ key: questionId, formData }),
     error: errorForQuestion ? { message: errorForQuestion.text } : undefined,
   };
 

@@ -5,7 +5,7 @@ describe('getFormDataValue', () => {
     const formData = {
       'some-key': 'some-value',
     };
-    const result = getFormDataValue('some-key', formData);
+    const result = getFormDataValue({ key: 'some-key', formData });
 
     expect(result).toEqual('some-value');
   });
@@ -14,13 +14,13 @@ describe('getFormDataValue', () => {
     const formData = {
       'some-key': ['some-value', 'some-other-value'],
     };
-    const result = getFormDataValue('some-key', formData);
+    const result = getFormDataValue({ key: 'some-key', formData });
 
     expect(result).toEqual(['some-value', 'some-other-value']);
   });
 
   it('should return undefined when form data is undefined', () => {
-    const result = getFormDataValue('some-key', undefined);
+    const result = getFormDataValue({ key: 'some-key' });
 
     expect(result).toEqual(undefined);
   });
@@ -29,14 +29,14 @@ describe('getFormDataValue', () => {
     const formData = {
       'some-key': 'some-value',
     };
-    const result = getFormDataValue(undefined, formData);
+    const result = getFormDataValue({ formData });
 
     expect(result).toEqual(undefined);
   });
 
   it('should return undefined when form data is empty', () => {
     const formData = {};
-    const result = getFormDataValue('some-key', formData);
+    const result = getFormDataValue({ key: 'some-key', formData });
 
     expect(result).toEqual(undefined);
   });
@@ -45,7 +45,7 @@ describe('getFormDataValue', () => {
     const formData = {
       'some-other-key': 'some-value',
     };
-    const result = getFormDataValue('some-key', formData);
+    const result = getFormDataValue({ key: 'some-key', formData });
 
     expect(result).toEqual(undefined);
   });
