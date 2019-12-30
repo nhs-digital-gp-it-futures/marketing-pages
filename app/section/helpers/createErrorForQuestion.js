@@ -1,4 +1,4 @@
-export const createErrorForQuestionNew = ({
+export const createErrorForQuestion = ({
   questionId, questionManifest, validationErrors,
 }) => {
   if (validationErrors && questionManifest && questionManifest.errorResponse) {

@@ -1,6 +1,6 @@
-import { createErrorForQuestionNew } from './createErrorForQuestion';
+import { createErrorForQuestion } from './createErrorForQuestion';
 
-describe('createErrorForQuestionNew', () => {
+describe('createErrorForQuestion', () => {
   it('should return undefined if validationErrors is undefined', () => {
     const expectedError = undefined;
 
@@ -8,7 +8,7 @@ describe('createErrorForQuestionNew', () => {
 
     const validationErrors = undefined;
 
-    const error = createErrorForQuestionNew({
+    const error = createErrorForQuestion({
       questionId: 'some-question-id', questionManifest, validationErrors,
     });
 
@@ -24,7 +24,7 @@ describe('createErrorForQuestionNew', () => {
       'some-question-id': 'someErrorType',
     };
 
-    const error = createErrorForQuestionNew({
+    const error = createErrorForQuestion({
       questionId: 'some-question-id', questionManifest, validationErrors,
     });
 
@@ -40,7 +40,7 @@ describe('createErrorForQuestionNew', () => {
       'some-question-id': 'someErrorType',
     };
 
-    const error = createErrorForQuestionNew({
+    const error = createErrorForQuestion({
       questionId: 'some-question-id', questionManifest, validationErrors,
     });
 
@@ -63,7 +63,7 @@ describe('createErrorForQuestionNew', () => {
       'some-question-id': 'someErrorType',
     };
 
-    const error = createErrorForQuestionNew({
+    const error = createErrorForQuestion({
       questionId: 'some-question-id', questionManifest, validationErrors,
     });
 

@@ -1,5 +1,5 @@
 import { getExistingDataForFieldIfAvailable } from './getExistingDataForFieldIfAvailable';
-import { createErrorForQuestionNew as createErrorForField } from './createErrorForQuestion';
+import { createErrorForQuestion as createErrorForField } from './createErrorForQuestion';
 
 export const generateFields = ({
   questionId, questionManifest, exisitingDataForSection, validationErrors,
