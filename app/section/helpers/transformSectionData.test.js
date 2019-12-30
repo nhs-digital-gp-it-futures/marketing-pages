@@ -1,74 +1,138 @@
 import { transformSectionData } from './transformSectionData';
 
 describe('transformSectionData', () => {
-  it('should return the sectionData provided as is if no strategy for the section has been defined', () => {
+  it('should return the sectionData provided as is if the question does not exist in the manifest', () => {
     const sectionData = {
-      'some-question-id': 'Some data',
-    };
-
-    const sectionManifest = {};
-
-    const transformedSectionData = transformSectionData({ sectionId: 'some-section-id', sectionManifest, sectionData });
-
-    expect(transformedSectionData).toEqual(sectionData);
-  });
-
-  it('should return the sectionData provided as is if no strategy for the question has been defined', () => {
-    const sectionData = {
-      'some-question-id': 'Some data',
+      'some-question-id-1': 'Some data',
+      'some-question-id-2': 'Some data',
     };
 
     const sectionManifest = {
       questions: {
-        'some-question-id': {},
-        'some-other-question-id': {},
+        'some-other-question-id': {
+        },
       },
     };
 
-    const transformedSectionData = transformSectionData({ sectionId: 'client-application-types', sectionManifest, sectionData });
+    const transformedSectionData = transformSectionData({ sectionManifest, sectionData });
 
     expect(transformedSectionData).toEqual(sectionData);
   });
 
-  describe('when a transformation stratergy does exist for the section and question', () => {
+  it('should return the sectionData provided as is if the question does exist but there is no transform strategy for the question type', () => {
+    const sectionData = {
+      'some-question-id-1': 'Some data',
+      'some-question-id-2': 'Some data',
+    };
+
     const sectionManifest = {
       questions: {
-        'client-application-types': {},
+        'some-question-id-1': {
+          type: 'some-type',
+        },
       },
     };
 
+    const transformedSectionData = transformSectionData({ sectionManifest, sectionData });
+
+    expect(transformedSectionData).toEqual(sectionData);
+  });
+
+  describe('when a transformation stratergy does exist for the question', () => {
     it('should return the sectionData provided as is if the sectionData is an array of strings', () => {
       const sectionData = {
-        'client-application-types': ['some first value', 'some second value'],
+        'some-question-id-1': ['some first value', 'some second value'],
       };
 
-      const transformedSectionData = transformSectionData({ sectionId: 'client-application-types', sectionManifest, sectionData });
+      const sectionManifest = {
+        questions: {
+          'some-question-id-1': {
+            type: 'checkbox-options',
+          },
+        },
+      };
+
+      const transformedSectionData = transformSectionData({ sectionManifest, sectionData });
 
       expect(transformedSectionData).toEqual(sectionData);
     });
 
     it('should return the transformed sectionData as an array string of one when the section data is just a string', () => {
       const expectedTransformedSectionData = {
-        'client-application-types': ['some first value'],
+        'some-question-id-1': ['some first value'],
       };
 
       const sectionData = {
-        'client-application-types': 'some first value',
+        'some-question-id-1': 'some first value',
       };
 
-      const transformedSectionData = transformSectionData({ sectionId: 'client-application-types', sectionManifest, sectionData });
+      const sectionManifest = {
+        questions: {
+          'some-question-id-1': {
+            type: 'checkbox-options',
+          },
+        },
+      };
+
+      const transformedSectionData = transformSectionData({ sectionManifest, sectionData });
 
       expect(transformedSectionData).toEqual(expectedTransformedSectionData);
     });
 
     it('should return the transformed sectionData of the question as an empty array', () => {
       const expectedTransformedSectionData = {
-        'client-application-types': [],
+        'some-question-id-1': [],
       };
 
       const sectionData = {};
 
-      const transformedSectionData = transformSectionData({ sectionId: 'client-application-types', sectionManifest, sectionData });
+      const sectionManifest = {
+        questions: {
+          'some-question-id-1': {
+            type: 'checkbox-options',
+          },
+        },
+      };
+
+      const transformedSectionData = transformSectionData({ sectionManifest, sectionData });
+
+      expect(transformedSectionData).toEqual(expectedTransformedSectionData);
+    });
+
+    it('should return the transformed sectionData for a mixture of questions to transform', () => {
+      const expectedTransformedSectionData = {
+        'some-question-id-1': [],
+        'some-question-id-2': ['one-value'],
+        'some-question-id-3': '',
+        'some-question-id-4': ['first-value', 'second-value'],
+        'some-question-id-5': 'some-simple-value',
+      };
+
+      const sectionData = {
+        'some-question-id-2': 'one-value',
+        'some-question-id-3': '',
+        'some-question-id-4': ['first-value', 'second-value'],
+        'some-question-id-5': 'some-simple-value',
+      };
+
+      const sectionManifest = {
+        questions: {
+          'some-question-id-1': {
+            type: 'checkbox-options',
+          },
+          'some-question-id-2': {
+            type: 'checkbox-options',
+          },
+          'some-question-id-4': {
+            type: 'checkbox-options',
+          },
+          'some-question-id-5': {
+            type: 'text-field',
+          },
+        },
+      };
+
+      const transformedSectionData = transformSectionData({ sectionManifest, sectionData });
 
       expect(transformedSectionData).toEqual(expectedTransformedSectionData);
     });

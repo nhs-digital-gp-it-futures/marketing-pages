@@ -11,45 +11,23 @@ const arrayTransformation = (questionValue) => {
 };
 
 const transformationStratergy = {
-  'client-application-types': {
-    'client-application-types': {
-      transform: questionValue => arrayTransformation(questionValue),
-    },
-  },
-  'browser-browsers-supported': {
-    'supported-browsers': {
-      transform: questionValue => arrayTransformation(questionValue),
-    },
-  },
-  'native-mobile-operating-systems': {
-    'operating-systems': {
-      transform: questionValue => arrayTransformation(questionValue),
-    },
-  },
-  'native-mobile-connection-details': {
-    'connection-types': {
-      transform: questionValue => arrayTransformation(questionValue),
-    },
+  'checkbox-options': {
+    transform: questionValue => arrayTransformation(questionValue),
   },
 };
 
 export const transformSectionData = ({
-  sectionId, sectionManifest, sectionData,
-}) => {
-  if (transformationStratergy[sectionId]) {
-    const transformedSectionData = {};
-
-    Object.keys(sectionManifest.questions).map((questionId) => {
-      if (transformationStratergy[sectionId][questionId]) {
-        const transformedQuestionValue = transformationStratergy[sectionId][questionId]
-          .transform(sectionData[questionId]);
-        transformedSectionData[questionId] = transformedQuestionValue;
-      } else {
-        transformedSectionData[questionId] = sectionData[questionId];
-      }
+  sectionManifest, sectionData,
+}) => Object.entries(sectionManifest.questions)
+  .reduce((transformedSectionData, [questionId, questionManifest]) => {
+    if (transformationStratergy[questionManifest.type]) {
+      return ({
+        ...transformedSectionData,
+        [questionId]: transformationStratergy[questionManifest.type]
+          .transform(sectionData[questionId]),
+      });
+    }
+    return ({
+      ...transformedSectionData,
     });
-
-    return transformedSectionData;
-  }
-  return sectionData;
-};
+  }, { ...sectionData });

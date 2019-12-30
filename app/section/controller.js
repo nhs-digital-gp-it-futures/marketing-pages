@@ -42,7 +42,7 @@ export const postSection = async ({
   solutionId, sectionId, sectionData, dashboardId,
 }) => {
   const sectionManifest = new ManifestProvider().getSectionManifest({ dashboardId, sectionId });
-  const transformedSectionData = transformSectionData({ sectionId, sectionManifest, sectionData });
+  const transformedSectionData = transformSectionData({ sectionManifest, sectionData });
   try {
     const endpoint = `${apiHost}/api/v1/Solutions/${solutionId}/sections/${sectionId}`;
     logger.info(`api called: [PUT] ${endpoint}`);
