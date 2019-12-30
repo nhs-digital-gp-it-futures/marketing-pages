@@ -1,9 +1,9 @@
 import { getExistingDataForFieldIfAvailable } from './getExistingDataForFieldIfAvailable';
 import { createErrorForQuestion as createErrorForField } from './createErrorForQuestion';
 
-export const generateFields = (
+export const generateFields = ({
   questionId, questionManifest, exisitingDataForSection, validationErrors,
-) => {
+}) => {
   if (questionManifest && questionManifest.maxItems && questionManifest.maxItems > 0) {
     const {
       errorsAcc: errors,
