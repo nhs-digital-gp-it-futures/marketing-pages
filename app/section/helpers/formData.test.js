@@ -56,7 +56,7 @@ describe('doesFormDataContainValue', () => {
     const formData = {
       'some-key': 'some-value',
     };
-    const result = doesFormDataContainValue('some-key', 'some-value', formData);
+    const result = doesFormDataContainValue({ key: 'some-key', value: 'some-value', formData });
 
     expect(result).toEqual(true);
   });
@@ -65,7 +65,7 @@ describe('doesFormDataContainValue', () => {
     const formData = {
       'some-key': ['some-value', 'some-other-value'],
     };
-    const result = doesFormDataContainValue('some-key', 'some-other-value', formData);
+    const result = doesFormDataContainValue({ key: 'some-key', value: 'some-other-value', formData });
 
     expect(result).toEqual(true);
   });
@@ -74,7 +74,7 @@ describe('doesFormDataContainValue', () => {
     const formData = {
       'some-key': ['first-value', 'second-value'],
     };
-    const result = doesFormDataContainValue('some-key', 'some-value', formData);
+    const result = doesFormDataContainValue({ key: 'some-key', value: 'some-value', formData });
 
     expect(result).toEqual(false);
   });
@@ -83,13 +83,13 @@ describe('doesFormDataContainValue', () => {
     const formData = {
       'some-key': [],
     };
-    const result = doesFormDataContainValue('some-key', 'some-value', formData);
+    const result = doesFormDataContainValue({ key: 'some-key', value: 'some-value', formData });
 
     expect(result).toEqual(false);
   });
 
   it('should return false when the form data is undefined', () => {
-    const result = doesFormDataContainValue('some-key', 'some-value', undefined);
+    const result = doesFormDataContainValue({ key: 'some-key', value: 'some-value', formData: undefined });
 
     expect(result).toEqual(false);
   });
@@ -98,7 +98,7 @@ describe('doesFormDataContainValue', () => {
     const formData = {
       'some-key': 'some-value',
     };
-    const result = doesFormDataContainValue(undefined, 'some-value', formData);
+    const result = doesFormDataContainValue({ key: undefined, value: 'some-value', formData });
 
     expect(result).toEqual(false);
   });
@@ -107,7 +107,7 @@ describe('doesFormDataContainValue', () => {
     const formData = {
       'some-key': 'some-value',
     };
-    const result = doesFormDataContainValue('some-key', undefined, formData);
+    const result = doesFormDataContainValue({ key: 'some-key', value: undefined, formData });
 
     expect(result).toEqual(false);
   });

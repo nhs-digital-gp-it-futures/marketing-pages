@@ -5,7 +5,7 @@ const populateQuestionOption = (
 ) => {
   const populatedOption = questionOption;
 
-  if (doesFormDataContainValue(questionId, questionOption.value, formData)) {
+  if (doesFormDataContainValue({ key: questionId, value: questionOption.value, formData })) {
     if (questionType === 'combobox-options') {
       return {
         ...questionOption,
