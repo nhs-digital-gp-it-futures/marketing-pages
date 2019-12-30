@@ -18,7 +18,7 @@ router.get('/solution/:solutionId', async (req, res, next) => {
   const { solutionId } = req.params;
   logger.info(`navigating to Solution ${solutionId} dashboard`);
   try {
-    const context = await getMarketingPageDashboardContext(solutionId);
+    const context = await getMarketingPageDashboardContext({ solutionId });
     res.render('dashboard/template', context);
   } catch (err) {
     next(err);
@@ -60,7 +60,7 @@ router.get('/solution/:solutionId/dashboard/:dashboardId', async (req, res, next
   const { solutionId, dashboardId } = req.params;
   logger.info(`navigating to Solution ${solutionId} dashboard: ${dashboardId}`);
   try {
-    const context = await getSubDashboardPageContext(solutionId, dashboardId);
+    const context = await getSubDashboardPageContext({ solutionId, dashboardId });
     res.render('dashboard/subDashboards/template', context);
   } catch (err) {
     next(err);
@@ -102,7 +102,7 @@ router.get('/solution/:solutionId/preview', async (req, res, next) => {
   const { solutionId } = req.params;
   logger.info(`navigating to Solution ${solutionId} preview`);
   try {
-    const context = await getPreviewPageContext(solutionId);
+    const context = await getPreviewPageContext({ solutionId });
     res.render('preview/template', context);
   } catch (err) {
     next(err);
@@ -112,11 +112,13 @@ router.get('/solution/:solutionId/preview', async (req, res, next) => {
 router.get('/solution/:solutionId/submitForModeration', async (req, res, next) => {
   const { solutionId } = req.params;
   try {
-    const response = await postSubmitForModeration(solutionId);
+    const response = await postSubmitForModeration({ solutionId });
     if (response.success) {
       res.redirect(`/solution/${solutionId}`);
     } else {
-      const context = await getMarketingPageDashboardContext(solutionId, response);
+      const context = await getMarketingPageDashboardContext({
+        solutionId, validationErrors: response,
+      });
       res.render('dashboard/template', context);
     }
   } catch (err) {

@@ -19,7 +19,7 @@ describe('createPreviewPageContext', () => {
       },
     };
 
-    const context = createPreviewPageContext(previewData);
+    const context = createPreviewPageContext({ previewData });
 
     expect(context).toEqual(expectedContext);
   });

@@ -5,7 +5,7 @@ const populateQuestionOption = (
 ) => {
   const populatedOption = questionOption;
 
-  if (doesFormDataContainValue(questionId, questionOption.value, formData)) {
+  if (doesFormDataContainValue({ key: questionId, value: questionOption.value, formData })) {
     if (questionType === 'combobox-options') {
       return {
         ...questionOption,
@@ -28,9 +28,9 @@ const createOptions = options => options
         value: optionId,
       }));
 
-export const generateOptions = (
+export const generateOptions = ({
   questionId, options, formData, questionType,
-) => {
+}) => {
   if (options) {
     const createdOptions = createOptions(options);
 

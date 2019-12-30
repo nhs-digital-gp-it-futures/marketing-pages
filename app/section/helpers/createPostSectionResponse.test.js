@@ -9,7 +9,7 @@ describe('createPostSectionResponse', () => {
 
     const sectionManifest = {};
 
-    const context = createPostSectionResponse('some-solution-id', sectionManifest);
+    const context = createPostSectionResponse({ solutionId: 'some-solution-id', sectionManifest });
 
     expect(context).toEqual(expectedContext);
   });
@@ -24,7 +24,7 @@ describe('createPostSectionResponse', () => {
       successfulSubmitResponsePath: 'some-parent-section-id',
     };
 
-    const context = createPostSectionResponse('some-solution-id', sectionManifest);
+    const context = createPostSectionResponse({ solutionId: 'some-solution-id', sectionManifest });
 
     expect(context).toEqual(expectedContext);
   });

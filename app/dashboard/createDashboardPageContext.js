@@ -1,4 +1,4 @@
-const addErrors = (manifestSectionId, manifestSection, validationErrors) => {
+const addErrors = ({ manifestSectionId, manifestSection, validationErrors }) => {
   const addedErrors = [];
 
   if (validationErrors) {
@@ -50,7 +50,7 @@ const createSectionsContext = ({
         sections: subSections,
       };
 
-      const errorsForSection = addErrors(manifestSectionId, manifestSection, validationErrors);
+      const errorsForSection = addErrors({ manifestSectionId, manifestSection, validationErrors });
       const accumulatedErrors = subSectionErrors
         ? errorsAcc.concat(subSectionErrors).concat(errorsForSection)
         : errorsAcc.concat(errorsForSection);

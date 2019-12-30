@@ -1,4 +1,4 @@
-export const createPreviewPageContext = (previewData) => {
+export const createPreviewPageContext = ({ previewData }) => {
   const context = {
     sections: previewData.sections,
   };

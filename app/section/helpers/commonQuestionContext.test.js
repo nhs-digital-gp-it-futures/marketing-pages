@@ -18,7 +18,9 @@ describe('commonQuestionContext', () => {
     };
 
 
-    const context = commonQuestionContext('some-question-id', questionManifest);
+    const context = commonQuestionContext({
+      questionId: 'some-question-id', questionManifest,
+    });
 
     expect(context).toEqual(expectedContext);
   });
@@ -40,7 +42,11 @@ describe('commonQuestionContext', () => {
     };
 
 
-    const context = commonQuestionContext('some-question-id', questionManifest, 'parentQuestionId');
+    const context = commonQuestionContext({
+      questionId: 'some-question-id',
+      questionManifest,
+      parentQuestionId: 'parentQuestionId',
+    });
 
     expect(context).toEqual(expectedContext);
   });

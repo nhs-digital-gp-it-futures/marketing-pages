@@ -25,7 +25,7 @@ describe('createQuestionsContext', () => {
       },
     };
 
-    const context = createQuestionsContext(sectionManifest);
+    const context = createQuestionsContext({ sectionManifest });
 
     expect(context).toEqual(expectedContext);
   });
@@ -57,7 +57,7 @@ describe('createQuestionsContext', () => {
       },
     };
 
-    const context = createQuestionsContext(sectionManifest);
+    const context = createQuestionsContext({ sectionManifest });
 
     expect(context).toEqual(expectedContext);
   });
@@ -89,7 +89,7 @@ describe('createQuestionsContext', () => {
       },
     };
 
-    const context = createQuestionsContext(sectionManifest);
+    const context = createQuestionsContext({ sectionManifest });
 
     expect(context).toEqual(expectedContext);
   });
@@ -121,7 +121,7 @@ describe('createQuestionsContext', () => {
       },
     };
 
-    const context = createQuestionsContext(sectionManifest);
+    const context = createQuestionsContext({ sectionManifest });
 
     expect(context).toEqual(expectedContext);
   });
@@ -146,7 +146,7 @@ describe('createQuestionsContext', () => {
       },
     };
 
-    const context = createQuestionsContext(sectionManifest);
+    const context = createQuestionsContext({ sectionManifest });
 
     expect(context).toEqual(expectedContext);
   });
@@ -169,7 +169,7 @@ describe('createQuestionsContext', () => {
       },
     };
 
-    const context = createQuestionsContext(sectionManifest);
+    const context = createQuestionsContext({ sectionManifest });
 
     expect(context).toEqual(expectedContext);
   });
@@ -203,7 +203,7 @@ describe('createQuestionsContext', () => {
       },
     };
 
-    const context = createQuestionsContext(sectionManifest);
+    const context = createQuestionsContext({ sectionManifest });
 
     expect(context).toEqual(expectedContext);
   });
@@ -233,7 +233,7 @@ describe('createQuestionsContext', () => {
       },
     };
 
-    const context = createQuestionsContext(sectionManifest);
+    const context = createQuestionsContext({ sectionManifest });
 
     expect(context).toEqual(expectedContext);
   });
@@ -277,7 +277,9 @@ describe('createQuestionsContext', () => {
       maxLength: ['some-question-id'],
     };
 
-    const context = createQuestionsContext(sectionManifest, formData, validationErrors);
+    const context = createQuestionsContext({
+      sectionManifest, formData, validationErrors,
+    });
 
     expect(context).toEqual(expectedContext);
   });
@@ -348,7 +350,9 @@ describe('createQuestionsContext', () => {
       required: ['some-other-question-id'],
     };
 
-    const context = createQuestionsContext(sectionManifest, formData, validationErrors);
+    const context = createQuestionsContext({
+      sectionManifest, formData, validationErrors,
+    });
 
     expect(context).toEqual(expectedContext);
   });

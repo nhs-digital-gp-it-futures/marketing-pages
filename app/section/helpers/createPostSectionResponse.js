@@ -1,6 +1,6 @@
-const createRedirectUrl = (
+const createRedirectUrl = ({
   solutionId, successfulSubmitResponsePath,
-) => {
+}) => {
   const defaultUrl = `/solution/${solutionId}`;
 
   if (successfulSubmitResponsePath) {
@@ -10,10 +10,12 @@ const createRedirectUrl = (
   return defaultUrl;
 };
 
-export const createPostSectionResponse = (solutionId, sectionManifest) => {
+export const createPostSectionResponse = ({ solutionId, sectionManifest }) => {
   const response = {
     success: true,
-    redirectUrl: createRedirectUrl(solutionId, sectionManifest.successfulSubmitResponsePath),
+    redirectUrl: createRedirectUrl({
+      solutionId, successfulSubmitResponsePath: sectionManifest.successfulSubmitResponsePath,
+    }),
   };
 
   return response;

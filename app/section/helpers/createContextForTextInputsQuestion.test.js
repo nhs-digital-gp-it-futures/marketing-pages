@@ -15,7 +15,9 @@ describe('createContextForTextInputsQuestion', () => {
       rows: 10,
     };
 
-    const context = createContextForTextInputsQuestion('some-question-id', questionManifest);
+    const context = createContextForTextInputsQuestion({
+      questionId:'some-question-id', questionManifest,
+    });
 
     expect(context).toEqual(expectedContext);
   });
@@ -39,7 +41,9 @@ describe('createContextForTextInputsQuestion', () => {
       rows: 10,
     };
 
-    const context = createContextForTextInputsQuestion('some-question-id', questionManifest, formData);
+    const context = createContextForTextInputsQuestion({
+      questionId: 'some-question-id', questionManifest, formData,
+    });
 
     expect(context).toEqual(expectedContext);
   });
@@ -77,7 +81,9 @@ describe('createContextForTextInputsQuestion', () => {
       },
     };
 
-    const context = createContextForTextInputsQuestion('some-question-id', questionManifest, formData, validationErrors);
+    const context = createContextForTextInputsQuestion({
+      questionId: 'some-question-id', questionManifest, formData, validationErrors,
+    });
 
     expect(context).toEqual(expectedContext);
   });

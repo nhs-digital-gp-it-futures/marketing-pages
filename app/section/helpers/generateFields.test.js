@@ -6,7 +6,7 @@ describe('generateFields', () => {
 
     const questionManifest = undefined;
 
-    const fields = generateFields('some-question-id', questionManifest);
+    const fields = generateFields({ questionId: 'some-question-id', questionManifest });
 
     expect(fields).toEqual(expectedGeneratedFields);
   });
@@ -16,7 +16,7 @@ describe('generateFields', () => {
 
     const questionManifest = {};
 
-    const fields = generateFields('some-question-id', questionManifest);
+    const fields = generateFields({ questionId: 'some-question-id', questionManifest });
 
     expect(fields).toEqual(expectedGeneratedFields);
   });
@@ -28,7 +28,7 @@ describe('generateFields', () => {
       maxItems: 0,
     };
 
-    const fields = generateFields('some-question-id', questionManifest);
+    const fields = generateFields({ questionId: 'some-question-id', questionManifest });
 
     expect(fields).toEqual(expectedGeneratedFields);
   });
@@ -46,7 +46,7 @@ describe('generateFields', () => {
       maxItems: 1,
     };
 
-    const fields = generateFields('some-question-id', questionManifest);
+    const fields = generateFields({ questionId: 'some-question-id', questionManifest });
 
     expect(fields).toEqual(expectedGeneratedFields);
   });
@@ -70,7 +70,7 @@ describe('generateFields', () => {
       maxItems: 3,
     };
 
-    const fields = generateFields('some-question-id', questionManifest);
+    const fields = generateFields({ questionId: 'some-question-id', questionManifest });
 
     expect(fields).toEqual(expectedGeneratedFields);
   });
@@ -102,7 +102,7 @@ describe('generateFields', () => {
       ],
     };
 
-    const fields = generateFields('some-question-id', questionManifest, exisitingDataForSection);
+    const fields = generateFields({ questionId: 'some-question-id', questionManifest, exisitingDataForSection });
 
     expect(fields).toEqual(expectedGeneratedFields);
   });
@@ -151,7 +151,9 @@ describe('generateFields', () => {
       ],
     };
 
-    const fields = generateFields('some-question-id', questionManifest, exisitingDataForSection, validationErrors);
+    const fields = generateFields({
+      questionId: 'some-question-id', questionManifest, exisitingDataForSection, validationErrors,
+    });
 
     expect(fields).toEqual(expectedGeneratedFields);
   });

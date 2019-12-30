@@ -2,17 +2,20 @@
 import { createQuestionsContext } from './createQuestionsContext';
 import { commonQuestionContext } from './commonQuestionContext';
 
-export const createContextForMultiQuestion = (
+export const createContextForMultiQuestion = ({
   questionId, questionManifest, formData, validationErrors,
-) => {
+}) => {
   const innerQuestionFormData = formData && formData[questionId];
 
-  const { errorForQuestion, questions } = createQuestionsContext(
-    questionManifest, innerQuestionFormData, validationErrors, questionId,
-  );
+  const { errorForQuestion, questions } = createQuestionsContext({
+    sectionManifest: questionManifest,
+    formData: innerQuestionFormData,
+    validationErrors,
+    parentQuestionId: questionId,
+  });
 
   const questionContext = {
-    ...commonQuestionContext(questionId, questionManifest),
+    ...commonQuestionContext({ questionId, questionManifest }),
     questions,
   };
 
