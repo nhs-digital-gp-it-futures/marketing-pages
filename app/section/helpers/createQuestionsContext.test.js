@@ -274,7 +274,7 @@ describe('createQuestionsContext', () => {
     };
 
     const validationErrors = {
-      maxLength: ['some-question-id'],
+      'some-question-id': 'maxLength',
     };
 
     const context = createQuestionsContext({
@@ -346,8 +346,8 @@ describe('createQuestionsContext', () => {
     };
 
     const validationErrors = {
-      maxLength: ['some-question-id'],
-      required: ['some-other-question-id'],
+      'some-question-id': 'maxLength',
+      'some-other-question-id': 'required',
     };
 
     const context = createQuestionsContext({

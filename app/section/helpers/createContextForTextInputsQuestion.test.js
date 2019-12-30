@@ -70,7 +70,7 @@ describe('createContextForTextInputsQuestion', () => {
     };
 
     const validationErrors = {
-      required: ['some-question-id'],
+      'some-question-id': 'required',
     };
 
     const questionManifest = {

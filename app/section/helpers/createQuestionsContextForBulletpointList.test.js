@@ -121,7 +121,8 @@ describe('when the question type is a bulletpoint-list', () => {
     };
 
     const validationErrors = {
-      maxLength: ['some-question-id-2', 'some-question-id-3'],
+      'some-question-id-2': 'maxLength',
+      'some-question-id-3': 'maxLength',
     };
 
     const questionManifest = {

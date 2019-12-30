@@ -175,7 +175,7 @@ describe('when the question type is of type checkbox-options or radiobutton-opti
     const formData = {};
 
     const validationErrors = {
-      required: ['some-question-id'],
+      'some-question-id': 'required',
     };
 
     const context = createQuestionsContextForOptions({

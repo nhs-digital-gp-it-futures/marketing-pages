@@ -69,7 +69,7 @@ describe('createSectionPageContext', () => {
     };
 
     const validationErrors = {
-      maxLength: ['fieldId'],
+      fieldId: 'maxLength',
     };
 
     const sectionManifest = {
