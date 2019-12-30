@@ -6,7 +6,7 @@ describe('generateOptions', () => {
 
     const options = undefined;
 
-    const generatedOptions = generateOptions('some-question-id', options);
+    const generatedOptions = generateOptions({ questionId: 'some-question-id', options });
 
     expect(generatedOptions).toEqual(expectedOptions);
   });
@@ -33,7 +33,7 @@ describe('generateOptions', () => {
       'option 3': 'option 3',
     };
 
-    const generatedOptions = generateOptions('some-question-id', options);
+    const generatedOptions = generateOptions({ questionId: 'some-question-id', options });
 
     expect(generatedOptions).toEqual(expectedOptions);
   });
@@ -70,7 +70,7 @@ describe('generateOptions', () => {
       ],
     };
 
-    const generatedOptions = generateOptions('some-question-id', options, formData);
+    const generatedOptions = generateOptions({ questionId: 'some-question-id', options, formData });
 
     expect(generatedOptions).toEqual(expectedOptions);
   });
@@ -105,7 +105,7 @@ describe('generateOptions', () => {
       ],
     };
 
-    const generatedOptions = generateOptions('some-question-id', options, formData, 'combobox-options');
+    const generatedOptions = generateOptions({ questionId: 'some-question-id', options, formData, questionType: 'combobox-options' });
 
     expect(generatedOptions).toEqual(expectedOptions);
   });

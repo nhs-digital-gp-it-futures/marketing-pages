@@ -28,9 +28,9 @@ const createOptions = options => options
         value: optionId,
       }));
 
-export const generateOptions = (
+export const generateOptions = ({
   questionId, options, formData, questionType,
-) => {
+}) => {
   if (options) {
     const createdOptions = createOptions(options);
 
