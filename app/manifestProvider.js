@@ -7,18 +7,13 @@ export class ManifestProvider {
     return this.dashboardManifest;
   }
 
-  getSubDashboardManifest({
-    dashboardId,
-  }) {
+  getSubDashboardManifest({ dashboardId }) {
     this.subDashboardManifestRaw = fs.readFileSync(`./app/dashboard/subDashboards/${dashboardId}/manifest.json`);
     this.subDashboardManifest = JSON.parse(this.subDashboardManifestRaw);
     return this.subDashboardManifest;
   }
 
-  getSectionManifest({
-    dashboardId,
-    sectionId,
-  }) {
+  getSectionManifest({ dashboardId, sectionId }) {
     const pathToSectionManifest = dashboardId ? `${dashboardId}/${sectionId}` : `${sectionId}`;
     this.sectionManifestRaw = fs.readFileSync(`./app/section/sections/${pathToSectionManifest}/manifest.json`);
     this.sectionManifest = JSON.parse(this.sectionManifestRaw);
