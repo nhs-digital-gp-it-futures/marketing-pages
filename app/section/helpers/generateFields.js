@@ -17,7 +17,7 @@ export const generateFields = ({
 
       const field = {
         id: fieldId,
-        data: getExistingDataForFieldIfAvailable(exisitingDataForSection, questionId, i),
+        data: getExistingDataForFieldIfAvailable({ exisitingDataForSection, questionId, index: i }),
         error: errorForField ? { message: errorForField.text } : undefined,
       };
 
