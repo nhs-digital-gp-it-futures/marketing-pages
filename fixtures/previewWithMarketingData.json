@@ -88,6 +88,12 @@
                 "connection-requirements-description": "Average data usage will vary depending on application activity."
               }
             },
+            "native-mobile-third-party": {
+              "answers": {
+                "third-party-components": "The application supports and requires an authenticator on each device the application is installed. You will need a software-based authenticator that implements a two-step verification service.",
+                "device-capabilities": "In order to use our file hosting services, the application will require permission to access device storage."
+              }
+            },
             "native-mobile-additional-information": {
               "answers": {
                 "additional-information": "It is possible that it may install on other platforms or versions not listed in this section. However, support is limited to systems that meet the minimum requirements."
