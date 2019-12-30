@@ -1,11 +1,11 @@
 import { getFormDataValue } from './formData';
-import { createErrorForQuestion } from './createErrorForQuestion';
+import { createErrorForQuestionNew } from './createErrorForQuestion';
 import { commonQuestionContext } from './commonQuestionContext';
 
 export const createContextForTextInputsQuestion = ({
   questionId, questionManifest, formData, validationErrors, parentQuestionId,
 }) => {
-  const errorForQuestion = createErrorForQuestion({
+  const errorForQuestion = createErrorForQuestionNew({
     questionId, questionManifest, validationErrors,
   });
 

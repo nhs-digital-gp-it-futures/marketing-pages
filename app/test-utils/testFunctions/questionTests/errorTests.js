@@ -21,7 +21,7 @@ const goToAnchorFromErrorSummary = ({
     nock(apiLocalhost)
       .put(`${apiPath}/sections/${sectionId}`)
       .reply(400, {
-        [errorType]: [modifiedQuestionId],
+        [modifiedQuestionId]: errorType,
       });
 
     const errorSummary = Selector('[data-test-id="error-summary"]');
@@ -56,11 +56,13 @@ const maxLengthErrorTest = ({
     test(`should show error summary and validation for ${questionId} question when it exceeds the maxLength`, async (t) => {
       const questionType = sectionManifest.questions[questionId].type;
       await pageSetup({ t });
+      const questionIdBasedOnType = questionType === 'bulletpoint-list' ? `${questionId}-1` : questionId;
+
       nock(apiLocalhost)
         .put(`${apiPath}/${sectionId}`)
         .reply(400, {
           // bulletpoint-list numbers the input fields so it is not just the question id
-          maxLength: [questionType === 'bulletpoint-list' ? `${questionId}-1` : questionId],
+          [questionIdBasedOnType]: 'maxLength',
         });
 
       const errorSummary = Selector('[data-test-id="error-summary"]');
@@ -102,7 +104,7 @@ const mandatoryErrorTest = ({
       nock(apiLocalhost)
         .put(`${apiPath}/${sectionId}`)
         .reply(400, {
-          required: [questionId],
+          [questionId]: 'required',
         });
 
       const expectedQuestion = sectionManifest.questions[questionId];
