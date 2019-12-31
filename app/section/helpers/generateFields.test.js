@@ -142,7 +142,7 @@ describe('generateFields', () => {
     };
 
     const validationErrors = {
-      maxLength: ['some-question-id-2'],
+      'some-question-id-2': 'maxLength',
     };
 
     const exisitingDataForSection = {
