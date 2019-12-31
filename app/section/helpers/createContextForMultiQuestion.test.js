@@ -5,7 +5,7 @@ describe('createContextForMultiQuestion', () => {
     const expectedContext = {
       questionContext: {
         id: 'some-parent-id',
-        type: 'mult-question',
+        type: 'multi-question',
         mainAdvice: 'some main advice',
         additionalAdvice: 'some additional advice',
         questions: [
@@ -22,7 +22,7 @@ describe('createContextForMultiQuestion', () => {
     };
 
     const questionManifest = {
-      type: 'mult-question',
+      type: 'multi-question',
       mainAdvice: 'some main advice',
       additionalAdvice: 'some additional advice',
       questions: {
@@ -47,7 +47,7 @@ describe('createContextForMultiQuestion', () => {
     const expectedContext = {
       questionContext: {
         id: 'some-parent-id',
-        type: 'mult-question',
+        type: 'multi-question',
         mainAdvice: 'some main advice',
         additionalAdvice: 'some additional advice',
         questions: [
@@ -66,7 +66,7 @@ describe('createContextForMultiQuestion', () => {
     };
 
     const questionManifest = {
-      type: 'mult-question',
+      type: 'multi-question',
       mainAdvice: 'some main advice',
       additionalAdvice: 'some additional advice',
       questions: {
@@ -107,7 +107,7 @@ describe('createContextForMultiQuestion', () => {
       ],
       questionContext: {
         id: 'some-parent-id',
-        type: 'mult-question',
+        type: 'multi-question',
         mainAdvice: 'some main advice',
         additionalAdvice: 'some additional advice',
         questions: [
@@ -132,7 +132,7 @@ describe('createContextForMultiQuestion', () => {
     };
 
     const questionManifest = {
-      type: 'mult-question',
+      type: 'multi-question',
       mainAdvice: 'some main advice',
       additionalAdvice: 'some additional advice',
       questions: {
