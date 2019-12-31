@@ -211,3 +211,82 @@ test('should populate the contacts with existing data', async (t) => {
     .expect(theQuestions.find('[data-test-id="question-contact-2[email-address]"]').find('input').value).eql('bruce.banner@avengers.com')
     .expect(theQuestions.find('[data-test-id="question-contact-2[department-name]"]').find('input').value).eql('Eco Warrior');
 });
+
+test('should show error summary and validation for contact-1 First name indicating max length', async (t) => {
+  pageSetup(t, true);
+
+  nock('http://localhost:8080')
+    .put('/api/v1/Solutions/S100000-001/sections/contact-details')
+    .reply(400, {
+      'contact-1': {
+        'first-name': 'maxLength',
+      },
+    });
+
+  const errorSummary = Selector('[data-test-id="error-summary"]');
+  const errorSummaryList = Selector('.nhsuk-error-summary__list');
+  const renderedQuestion = Selector('[data-test-id="question-contact-1[first-name]"]');
+  const submitButton = Selector('[data-test-id="section-submit-button"]');
+
+  await t
+    .expect(errorSummary.exists).notOk()
+    .click(submitButton.find('button'))
+    .expect(errorSummary.exists).ok()
+    .expect(errorSummaryList.find('li').count).eql(1)
+    .expect(errorSummaryList.find('li:nth-child(1)').innerText).eql('First name over the character limit')
+    .expect(errorSummaryList.find('li:nth-child(1) a').getAttribute('href')).eql('#contact-1[first-name]')
+    .expect(renderedQuestion.find('[data-test-id="text-field-input-error"]').exists).ok()
+    .expect(renderedQuestion.find('.nhsuk-error-message').innerText).eql('Error:\nFirst name over the character limit');
+});
+
+test('should show error summary and validation for contact-2 First name indicating max length', async (t) => {
+  pageSetup(t, true);
+
+  nock('http://localhost:8080')
+    .put('/api/v1/Solutions/S100000-001/sections/contact-details')
+    .reply(400, {
+      'contact-2': {
+        'first-name': 'maxLength',
+      },
+    });
+
+  const errorSummary = Selector('[data-test-id="error-summary"]');
+  const errorSummaryList = Selector('.nhsuk-error-summary__list');
+  const renderedQuestion = Selector('[data-test-id="question-contact-2[first-name]"]');
+  const submitButton = Selector('[data-test-id="section-submit-button"]');
+
+  await t
+    .expect(errorSummary.exists).notOk()
+    .click(submitButton.find('button'))
+    .expect(errorSummary.exists).ok()
+    .expect(errorSummaryList.find('li').count).eql(1)
+    .expect(errorSummaryList.find('li:nth-child(1)').innerText).eql('First name over the character limit')
+    .expect(errorSummaryList.find('li:nth-child(1) a').getAttribute('href')).eql('#contact-2[first-name]')
+    .expect(renderedQuestion.find('[data-test-id="text-field-input-error"]').exists).ok()
+    .expect(renderedQuestion.find('.nhsuk-error-message').innerText).eql('Error:\nFirst name over the character limit');
+});
+
+test('should go to anchor when clicking the first name summary error link', async (t) => {
+  pageSetup(t, true);
+
+  nock('http://localhost:8080')
+    .put('/api/v1/Solutions/S100000-001/sections/contact-details')
+    .reply(400, {
+      'contact-1': {
+        'first-name': 'maxLength',
+      },
+    });
+
+  const getLocation = ClientFunction(() => document.location.href);
+
+  const errorSummary = Selector('[data-test-id="error-summary"]');
+  const errorSummaryList = Selector('.nhsuk-error-summary__list');
+  const submitButton = Selector('[data-test-id="section-submit-button"]');
+
+  await t
+    .expect(errorSummary.exists).notOk()
+    .click(submitButton.find('button'))
+    .expect(errorSummary.exists).ok()
+    .click(errorSummaryList.find('li:nth-child(1) a'))
+    .expect(getLocation()).contains('#contact-1[first-name]');
+});
