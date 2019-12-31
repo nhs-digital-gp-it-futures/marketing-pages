@@ -188,6 +188,7 @@ test('when existing marketing data - The client application type section and nat
   const connectionDescriptionRow = nativeMobileExpandaleSectionTable.find('[data-test-id="view-section-table-row-connection-requirements-description"]');
   const thirdPartyComponentsRow = nativeMobileExpandaleSectionTable.find('[data-test-id="view-section-table-row-third-party-components"]');
   const deviceCapabilitiesRow = nativeMobileExpandaleSectionTable.find('[data-test-id="view-section-table-row-device-capabilities"]');
+  const hardwareRequirementsRow = nativeMobileExpandaleSectionTable.find('[data-test-id="view-section-table-row-hardware-requirements"]');
   const additionalInformationRow = nativeMobileExpandaleSectionTable.find('[data-test-id="view-section-table-row-additional-information"]');
 
   await t
@@ -239,6 +240,10 @@ test('when existing marketing data - The client application type section and nat
     .expect(deviceCapabilitiesRow.find('div[data-test-id="view-section-table-row-title"]').innerText).eql('Device capabilities required')
     .expect(deviceCapabilitiesRow.find('div[data-test-id="view-section-table-row-component"]').innerText).eql('In order to use our file hosting services, the application will require permission to access device storage.')
     .expect(deviceCapabilitiesRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok()
+
+    .expect(hardwareRequirementsRow.find('div[data-test-id="view-section-table-row-title"]').innerText).eql('Hardware requirements')
+    .expect(hardwareRequirementsRow.find('div[data-test-id="view-section-table-row-component"]').innerText).eql('To fully utilise our print functionality within the application, you will need a WiFi or Bluetooth connected printer to connect and print documents straight from the device.')
+    .expect(hardwareRequirementsRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok()
 
     .expect(additionalInformationRow.find('div[data-test-id="view-section-table-row-title"]').innerText).eql('Additional information')
     .expect(additionalInformationRow.find('div[data-test-id="view-section-table-row-component"]').innerText).eql('It is possible that it may install on other platforms or versions not listed in this section. However, support is limited to systems that meet the minimum requirements.')
