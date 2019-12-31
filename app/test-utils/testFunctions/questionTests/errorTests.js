@@ -62,7 +62,7 @@ const maxLengthErrorTest = ({
       const questionIdBasedOnType = questionType === 'bulletpoint-list' ? `${questionId}-1` : questionId;
 
       nock(apiLocalhost)
-        .put(`${apiPath}/${sectionId}`)
+        .put(`${apiPath}/sections/${sectionId}`)
         .reply(400, {
           [questionIdBasedOnType]: 'maxLength',
         });
@@ -104,7 +104,7 @@ const mandatoryErrorTest = ({
     test(`should show error summary and validation for ${questionId} question indicating it is mandatory`, async (t) => {
       await pageSetup({ t });
       nock(apiLocalhost)
-        .put(`${apiPath}/${sectionId}`)
+        .put(`${apiPath}/sections/${sectionId}`)
         .reply(400, {
           [questionId]: 'required',
         });
@@ -143,12 +143,14 @@ export const runErrorTests = ({
       sectionManifest,
       questionId,
       sectionId,
+      errorType,
     });
     maxLengthErrorTest({
       pageSetup,
       sectionManifest,
       questionId,
       sectionId,
+      errorType,
     });
     goToAnchorFromErrorSummary({
       pageSetup,
