@@ -60,7 +60,7 @@ const submitButtonClickedTest = async ({
     await test(`should go to ${sectionManifest.successfulSubmitResponsePath} when clicking the submit button`, async (t) => {
       await pageSetup({ t, responseBody: data });
       nock(apiLocalhost)
-        .put(`${apiPath}/sections/${sectionId}`)
+        .put(`${apiPath}/sections/${sectionId}`, data)
         .reply(200, data);
       nock(apiLocalhost)
         .get(`${apiPath}/dashboards/${dashboardId}`)
