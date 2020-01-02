@@ -23,7 +23,7 @@ createTestcafe('localhost')
     return tc.createRunner()
       .src([testsToRun])
       .browsers(browserToRun)
-      .concurrency(2)
+      .concurrency(1)
       .reporter(['spec', {
         name: 'nunit',
         output: 'integration-test-report.xml',
