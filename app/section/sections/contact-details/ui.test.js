@@ -41,15 +41,14 @@ const pageSetup = async (t, withMarketingData = false) => {
   await t.navigateTo('http://localhost:1234/solution/S100000-001/section/contact-details');
 };
 
-fixture('Show Contact Details page')
-  .afterEach(async (t) => {
-    const isDone = nock.isDone();
-    if (!isDone) {
-      nock.cleanAll();
-    }
-
-    await t.expect(isDone).ok('Not all nock interceptors were used!');
-  });
+fixture('Show Contact Details page');
+// .afterEach(async (t) => {
+// const isDone = nock.isDone();
+// if (!isDone) {
+//   nock.cleanAll();
+// }
+// await t.expect(isDone).ok('Not all nock interceptors were used!');
+// });
 
 // TODO: add new test framework after error summary work is complete
 // runTestSuite()
