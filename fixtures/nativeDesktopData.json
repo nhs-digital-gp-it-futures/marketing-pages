@@ -1,0 +1,28 @@
+{
+  "sections": {
+    "native-desktop-operating-systems": {
+      "status": "INCOMPLETE",
+      "requirement": "Mandatory"
+    },
+    "native-desktop-connection-details": {
+      "status": "INCOMPLETE",
+      "requirement": "Mandatory"
+    },
+    "native-desktop-memory-and-storage": {
+      "status": "INCOMPLETE",
+      "requirement": "Mandatory"
+    },
+    "native-desktop-third-party": {
+      "status": "INCOMPLETE",
+      "requirement": "Optional"
+    },
+    "native-desktop-hardware-requirements": {
+      "status": "INCOMPLETE",
+      "requirement": "Optional"
+    },
+    "native-desktop-additional-information": {
+      "status": "INCOMPLETE",
+      "requirement": "Optional"
+    }
+  }
+}
