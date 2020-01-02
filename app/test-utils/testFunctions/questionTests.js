@@ -14,7 +14,7 @@ export const runQuestionTests = ({
   sectionParent,
   dashboardId,
 }) => {
-  Object.keys(sectionManifest.questions).forEach(async (questionId) => {
+  Object.keys(sectionManifest.questions).map(async (questionId) => {
     const questionData = sectionManifest.questions[questionId];
     const questionType = questionData.type;
     if (questionType === 'radiobutton-options') {
@@ -54,14 +54,12 @@ export const runQuestionTests = ({
         data,
       });
     } else if (questionType === 'multi-question') {
-      Object.keys(sectionManifest.questions).forEach((question) => {
-        runQuestionTests({
-          pageSetup,
-          sectionManifest: sectionManifest.questions[question],
-          data,
-          sectionId,
-          sectionParent: question,
-        });
+      runQuestionTests({
+        pageSetup,
+        sectionManifest: sectionManifest.questions[questionId],
+        data,
+        sectionId,
+        sectionParent: questionId,
       });
     } else if (questionType === 'combobox-options') {
       runComboboxTests({
