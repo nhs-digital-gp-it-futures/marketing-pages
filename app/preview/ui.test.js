@@ -20,15 +20,14 @@ const pageSetup = async (t, existingData = false) => {
   await t.navigateTo('http://localhost:1234/solution/S100000-001/preview');
 };
 
-fixture('Show marketing preview page')
-  .afterEach(async (t) => {
-    const isDone = nock.isDone();
-    if (!isDone) {
-      nock.cleanAll();
-    }
-
-    await t.expect(isDone).ok('Not all nock interceptors were used!');
-  });
+fixture('Show marketing preview page');
+// .afterEach(async (t) => {
+// const isDone = nock.isDone();
+// if (!isDone) {
+//   nock.cleanAll();
+// }
+// await t.expect(isDone).ok('Not all nock interceptors were used!');
+// });
 
 test('should render the marketing preview page title', async (t) => {
   await pageSetup(t);
@@ -111,7 +110,6 @@ test('when no existing marketing data - The client-application-types section sho
 
 test('when existing marketing data - The client application type section and browser-based section should be rendered', async (t) => {
   pageSetup(t, true);
-
   const clientApplicationTypesSection = Selector('[data-test-id="view-client-application-types"]');
   const browserBasedExpandableSection = Selector('[data-test-id="view-section-browser-based"]');
   const browserBasedExpandaleSectionTable = Selector('[data-test-id="view-section-table-browser-based"]');
