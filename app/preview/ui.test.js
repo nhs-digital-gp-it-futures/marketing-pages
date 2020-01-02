@@ -2,7 +2,7 @@ import nock from 'nock';
 import { Selector } from 'testcafe';
 import previewWithNoMarketingData from '../../fixtures/previewWithNoMarketingData.json';
 import previewWithMarketingData from '../../fixtures/previewWithMarketingData.json';
-import { apiLocalhost, apiPath } from '../test-utils/config';
+import { apiLocalhost, apiPath, clientLocalhost } from '../test-utils/config';
 
 const mocks = (existingData) => {
   if (!existingData) {
@@ -18,7 +18,7 @@ const mocks = (existingData) => {
 
 const pageSetup = async (t, existingData = false) => {
   mocks(existingData);
-  await t.navigateTo('http://localhost:1234/solution/S100000-001/preview');
+  await t.navigateTo(`${clientLocalhost}/preview`);
 };
 
 fixture('Show marketing preview page')
@@ -83,7 +83,7 @@ test('when no existing marketing data - The features section should not be rende
     .expect(featuresSection.exists).notOk();
 });
 
-test('when existing marketing data - The features section should rendered and the features displayed', async (t) => {
+test('when existing marketing data - The features section should be rendered and the features displayed', async (t) => {
   pageSetup(t, true);
 
   const featuresSection = Selector('[data-test-id="view-features"]');
