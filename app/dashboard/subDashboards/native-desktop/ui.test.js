@@ -1,12 +1,12 @@
 import nock from 'nock';
 import { Selector, ClientFunction } from 'testcafe';
 import dashboardWithCompleteSections from '../../../../fixtures/dashboardWithCompleteSections.json';
-import aNativeDesktopFixture from '../../../../fixtures/nativeDesktopData.json';
+import nativeDesktopFixture from './fixtureData.json';
 
 const mocks = () => {
   nock('http://localhost:8080')
     .get('/api/v1/Solutions/S100000-001/dashboards/native-desktop')
-    .reply(200, aNativeDesktopFixture);
+    .reply(200, nativeDesktopFixture);
 };
 
 const pageSetup = async (t) => {

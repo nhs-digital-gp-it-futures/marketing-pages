@@ -1,13 +1,13 @@
 import nock from 'nock';
 import { Selector, ClientFunction } from 'testcafe';
 import dashboardWithCompleteSections from '../../../../fixtures/dashboardWithCompleteSections.json';
-import aBrowserBasedFixture from '../../../../fixtures/aBrowserBasedData.json';
+import browserBasedFixture from './fixtureData.json';
 import { apiLocalhost, apiPath, clientLocalhost } from '../../../test-utils/config';
 
 const mocks = () => {
   nock(apiLocalhost)
     .get(`${apiPath}/dashboards/browser-based`)
-    .reply(200, aBrowserBasedFixture);
+    .reply(200, browserBasedFixture);
 };
 
 const pageSetup = async (t) => {

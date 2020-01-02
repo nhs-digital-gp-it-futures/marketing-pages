@@ -1,13 +1,13 @@
 import nock from 'nock';
 import { Selector, ClientFunction } from 'testcafe';
 import dashboardWithCompleteSections from '../../../../fixtures/dashboardWithCompleteSections.json';
-import aNativeMobileFixture from '../../../../fixtures/nativeMobileData.json';
+import nativeMobileFixture from './fixtureData.json';
 import { apiLocalhost, apiPath, clientLocalhost } from '../../../test-utils/config';
 
 const mocks = () => {
   nock(apiLocalhost)
     .get(`${apiPath}/dashboards/native-mobile`)
-    .reply(200, aNativeMobileFixture);
+    .reply(200, nativeMobileFixture);
 };
 
 const pageSetup = async (t) => {
