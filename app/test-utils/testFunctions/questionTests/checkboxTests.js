@@ -30,14 +30,17 @@ const populateCheckboxTest = async ({
   await test(`should populate the ${questionId} checkbox question with existing data`, async (t) => {
     const expectedQuestion = sectionManifest.questions[questionId];
     const selectedOptions = data[questionId];
-    const questionSelector = Selector(`[data-test-id="question-${questionId}"]`);
+    const questionSelector = await Selector(`[data-test-id="question-${questionId}"]`);
 
     await pageSetup({ t, responseBody: data });
 
-    await t.expect(questionSelector.find('input:checked').count).eql(selectedOptions.length);
+    await t
+      .expect(questionSelector.find('input:checked').count).eql(selectedOptions.length);
 
-    await Promise.all(Object.keys(expectedQuestion.options).forEach(async (option) => {
-      const checkbox = questionSelector.find('.nhsuk-checkboxes__item').withText(option);
+    await Promise.all(Object.keys(expectedQuestion.options).map(async (option) => {
+      const optionText = expectedQuestion.options[option];
+      const checkbox = await Selector(`[data-test-id="question-${questionId}"]`).find('.nhsuk-checkboxes__item').withText(optionText);
+
       if (selectedOptions.includes(option)) {
         await t
           .expect(checkbox.find('input:checked').exists).ok();
