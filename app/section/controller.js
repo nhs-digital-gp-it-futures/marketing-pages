@@ -45,7 +45,9 @@ export const postSection = async ({
   const transformedSectionData = transformSectionData({ sectionManifest, sectionData });
   try {
     const endpoint = `${apiHost}/api/v1/Solutions/${solutionId}/sections/${sectionId}`;
-    logger.info(`api called: [PUT] ${endpoint}`);
+
+    logger.info(`api called: [PUT] ${endpoint}: ${JSON.stringify(transformedSectionData)}`);
+
     await axios.put(endpoint, transformedSectionData);
 
     const response = createPostSectionResponse({ solutionId, sectionManifest });
