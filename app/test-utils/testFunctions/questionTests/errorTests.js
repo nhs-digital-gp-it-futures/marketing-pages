@@ -11,6 +11,7 @@ const goToAnchorFromErrorSummary = async ({
   errorType,
   sectionManifest,
   dashboardId,
+  errorPostBody,
 }) => {
   await test(`should go to anchor when clicking the ${questionId} summary error link`, async (t) => {
     await pageSetup({ t });
@@ -18,9 +19,8 @@ const goToAnchorFromErrorSummary = async ({
 
     // bulletpoint-list numbers the input fields so it is not just the question id
     const questionIdBasedOnType = questionType === 'bulletpoint-list' ? `${questionId}-1` : questionId;
-
     nock(apiLocalhost)
-      .put(`${apiPath}/sections/${sectionId}`)
+      .put(`${apiPath}/sections/${sectionId}`, errorPostBody)
       .reply(400, {
         [questionIdBasedOnType]: errorType,
       });
@@ -51,6 +51,7 @@ const maxLengthErrorTest = async ({
   questionId,
   errorType,
   sectionId,
+  errorPostBody,
 }) => {
   if (errorType === 'maxLength') {
     await test(`should show error summary and validation for ${questionId} question when it exceeds the maxLength`, async (t) => {
@@ -61,7 +62,7 @@ const maxLengthErrorTest = async ({
       const questionIdBasedOnType = questionType === 'bulletpoint-list' ? `${questionId}-1` : questionId;
 
       nock(apiLocalhost)
-        .put(`${apiPath}/sections/${sectionId}`)
+        .put(`${apiPath}/sections/${sectionId}`, errorPostBody)
         .reply(400, {
           [questionIdBasedOnType]: 'maxLength',
         });
@@ -98,12 +99,13 @@ const mandatoryErrorTest = async ({
   questionId,
   sectionId,
   errorType,
+  errorPostBody,
 }) => {
   if (errorType === 'required') {
     await test(`should show error summary and validation for ${questionId} question indicating it is mandatory`, async (t) => {
       await pageSetup({ t });
       nock(apiLocalhost)
-        .put(`${apiPath}/sections/${sectionId}`)
+        .put(`${apiPath}/sections/${sectionId}`, errorPostBody)
         .reply(400, {
           [questionId]: 'required',
         });
@@ -136,6 +138,15 @@ export const runErrorTests = async ({
   questionData,
   dashboardId,
 }) => {
+  const errorPostBody = Object.keys(sectionManifest.questions).reduce((acc, question) => {
+    const questionType = sectionManifest.questions[question].type;
+    if (questionType === 'radiobutton-options') acc[question] = null;
+    else if (questionType === 'checkbox-options') acc[question] = [];
+    else if (questionType === 'bulletpoint-list') acc[question] = new Array(sectionManifest.questions[question].maxItems).fill('');
+    else acc[question] = '';
+    return acc;
+  }, {});
+
   await Promise.all(Object.keys(questionData.errorResponse).map((errorType) => {
     mandatoryErrorTest({
       pageSetup,
@@ -143,6 +154,7 @@ export const runErrorTests = async ({
       questionId,
       sectionId,
       errorType,
+      errorPostBody,
     });
     maxLengthErrorTest({
       pageSetup,
@@ -150,6 +162,7 @@ export const runErrorTests = async ({
       questionId,
       sectionId,
       errorType,
+      errorPostBody,
     });
     goToAnchorFromErrorSummary({
       pageSetup,
@@ -158,6 +171,7 @@ export const runErrorTests = async ({
       sectionId,
       errorType,
       dashboardId,
+      errorPostBody,
     });
   }));
 };
