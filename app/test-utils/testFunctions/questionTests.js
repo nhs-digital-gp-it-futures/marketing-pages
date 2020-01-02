@@ -71,8 +71,7 @@ export const runQuestionTests = async ({
         data,
       });
     } else {
-      console.log('TODO: add missing question type to tests');
-      return;
+      throw new Error('TODO: add missing question type to tests');
     }
     if (questionData.errorResponse) {
       runErrorTests({
