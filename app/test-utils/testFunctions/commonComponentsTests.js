@@ -5,9 +5,9 @@ import { apiLocalhost, apiPath } from '../config';
 
 const getLocation = ClientFunction(() => document.location.href);
 
-const titleTest = ({ pageSetup, sectionManifest }) => {
+const titleTest = async ({ pageSetup, sectionManifest }) => {
   if (sectionManifest.title) {
-    test('should render the page title', async (t) => {
+    await test('should render the page title', async (t) => {
       await pageSetup({ t });
       const title = Selector('[data-test-id="section-title"]');
       await t
@@ -16,9 +16,9 @@ const titleTest = ({ pageSetup, sectionManifest }) => {
   }
 };
 
-const mainAdviceTest = ({ pageSetup, sectionManifest }) => {
+const mainAdviceTest = async ({ pageSetup, sectionManifest }) => {
   if (sectionManifest.mainAdvice) {
-    test('should render main advice of section', async (t) => {
+    await test('should render main advice of section', async (t) => {
       await pageSetup({ t });
       const mainAdvice = Selector('[data-test-id="section-main-advice"]');
       await t
@@ -27,9 +27,9 @@ const mainAdviceTest = ({ pageSetup, sectionManifest }) => {
   }
 };
 
-const allAdviceTest = ({ pageSetup, sectionManifest }) => {
+const allAdviceTest = async ({ pageSetup, sectionManifest }) => {
   if (sectionManifest.additionalAdvice) {
-    test('should render all the advice of the section', async (t) => {
+    await test('should render all the advice of the section', async (t) => {
       await pageSetup({ t });
       const expectedAdditionalAdvice = sectionManifest.additionalAdvice.join('\n\n');
       const additionalAdvice = Selector('[data-test-id="section-additional-advice"]');
@@ -39,8 +39,8 @@ const allAdviceTest = ({ pageSetup, sectionManifest }) => {
   }
 };
 
-const submitButtonTest = ({ pageSetup, sectionManifest }) => {
-  test('should render the submit button', async (t) => {
+const submitButtonTest = async ({ pageSetup, sectionManifest }) => {
+  await test('should render the submit button', async (t) => {
     await pageSetup({ t });
     const submitButton = Selector('[data-test-id="section-submit-button"]');
     await t
@@ -49,7 +49,7 @@ const submitButtonTest = ({ pageSetup, sectionManifest }) => {
   });
 };
 
-const submitButtonClickedTest = ({
+const submitButtonClickedTest = async ({
   pageSetup,
   sectionId,
   data,
@@ -57,7 +57,7 @@ const submitButtonClickedTest = ({
   dashboardId,
 }) => {
   if (sectionManifest.successfulSubmitResponsePath) {
-    test(`should go to ${sectionManifest.successfulSubmitResponsePath} when clicking the submit button`, async (t) => {
+    await test(`should go to ${sectionManifest.successfulSubmitResponsePath} when clicking the submit button`, async (t) => {
       await pageSetup({ t, responseBody: data });
       nock(apiLocalhost)
         .put(`${apiPath}/sections/${sectionId}`)
@@ -77,8 +77,8 @@ const submitButtonClickedTest = ({
   }
 };
 
-const sectionsLinkTest = ({ pageSetup }) => {
-  test('should render the return to all sections link', async (t) => {
+const sectionsLinkTest = async ({ pageSetup }) => {
+  await test('should render the return to all sections link', async (t) => {
     await pageSetup({ t });
     const link = Selector('[data-test-id="section-back-link"] a');
     await t
@@ -86,8 +86,8 @@ const sectionsLinkTest = ({ pageSetup }) => {
   });
 };
 
-const sectionsLinkClickedTest = ({ pageSetup }) => {
-  test('should return to the marketing data dashboard when the return to all sections is clicked', async (t) => {
+const sectionsLinkClickedTest = async ({ pageSetup }) => {
+  await test('should return to the marketing data dashboard when the return to all sections is clicked', async (t) => {
     await pageSetup({ t });
     nock(apiLocalhost)
       .get('/api/v1/Solutions/S100000-001/dashboard')
@@ -101,24 +101,26 @@ const sectionsLinkClickedTest = ({ pageSetup }) => {
   });
 };
 
-export const runCommonComponentsTests = ({
+export const runCommonComponentsTests = async ({
   pageSetup,
   sectionManifest,
   sectionId,
   data,
   dashboardId,
 }) => {
-  titleTest({ pageSetup, sectionManifest });
-  mainAdviceTest({ pageSetup, sectionManifest });
-  allAdviceTest({ pageSetup, sectionManifest });
-  submitButtonTest({ pageSetup, sectionManifest });
-  submitButtonClickedTest({
-    pageSetup,
-    sectionId,
-    data,
-    sectionManifest,
-    dashboardId,
-  });
-  sectionsLinkTest({ pageSetup });
-  sectionsLinkClickedTest({ pageSetup });
+  await Promise.all([
+    titleTest({ pageSetup, sectionManifest }),
+    mainAdviceTest({ pageSetup, sectionManifest }),
+    allAdviceTest({ pageSetup, sectionManifest }),
+    submitButtonTest({ pageSetup, sectionManifest }),
+    submitButtonClickedTest({
+      pageSetup,
+      sectionId,
+      data,
+      sectionManifest,
+      dashboardId,
+    }),
+    sectionsLinkTest({ pageSetup }),
+    sectionsLinkClickedTest({ pageSetup }),
+  ]);
 };

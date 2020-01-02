@@ -6,7 +6,7 @@ import { runBulletpointListTests } from './questionTests/bulletpointListTests';
 import { runErrorTests } from './questionTests/errorTests';
 import { runComboboxTests } from './questionTests/comboboxTests';
 
-export const runQuestionTests = ({
+export const runQuestionTests = async ({
   pageSetup,
   sectionManifest,
   data,
@@ -14,7 +14,7 @@ export const runQuestionTests = ({
   sectionParent,
   dashboardId,
 }) => {
-  Object.keys(sectionManifest.questions).forEach(async (questionId) => {
+  await Promise.all([Object.keys(sectionManifest.questions).map(async (questionId) => {
     const questionData = sectionManifest.questions[questionId];
     const questionType = questionData.type;
     if (questionType === 'radiobutton-options') {
@@ -54,7 +54,7 @@ export const runQuestionTests = ({
         data,
       });
     } else if (questionType === 'multi-question') {
-      Object.keys(sectionManifest.questions).forEach((question) => {
+      await Promise.all([Object.keys(sectionManifest.questions).map((question) => {
         runQuestionTests({
           pageSetup,
           sectionManifest: sectionManifest.questions[question],
@@ -62,7 +62,7 @@ export const runQuestionTests = ({
           sectionId,
           sectionParent: question,
         });
-      });
+      })]);
     } else if (questionType === 'combobox-options') {
       runComboboxTests({
         pageSetup,
@@ -85,5 +85,5 @@ export const runQuestionTests = ({
         dashboardId,
       });
     }
-  });
+  })]);
 };

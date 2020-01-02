@@ -4,7 +4,7 @@ import { apiLocalhost, apiPath } from '../../config';
 
 const getLocation = ClientFunction(() => document.location.href);
 
-const goToAnchorFromErrorSummary = ({
+const goToAnchorFromErrorSummary = async ({
   pageSetup,
   sectionId,
   questionId,
@@ -12,7 +12,7 @@ const goToAnchorFromErrorSummary = ({
   sectionManifest,
   dashboardId,
 }) => {
-  test(`should go to anchor when clicking the ${questionId} summary error link`, async (t) => {
+  await test(`should go to anchor when clicking the ${questionId} summary error link`, async (t) => {
     await pageSetup({ t });
     const questionType = sectionManifest.questions[questionId].type;
 
@@ -32,7 +32,6 @@ const goToAnchorFromErrorSummary = ({
     await t
       .expect(errorSummary.exists).notOk()
       .click(submitButton.find('button'))
-      .expect(errorSummary.exists).ok()
       .expect(errorSummaryList.find('li:nth-child(1) a').count).eql(1)
       .expect(errorSummaryList.find('li:nth-child(1) a').getAttribute('href')).eql(`#${questionIdBasedOnType}`)
       .click(errorSummaryList.find('li:nth-child(1) a'));
@@ -46,7 +45,7 @@ const goToAnchorFromErrorSummary = ({
   });
 };
 
-const maxLengthErrorTest = ({
+const maxLengthErrorTest = async ({
   pageSetup,
   sectionManifest,
   questionId,
@@ -54,7 +53,7 @@ const maxLengthErrorTest = ({
   sectionId,
 }) => {
   if (errorType === 'maxLength') {
-    test(`should show error summary and validation for ${questionId} question when it exceeds the maxLength`, async (t) => {
+    await test(`should show error summary and validation for ${questionId} question when it exceeds the maxLength`, async (t) => {
       const questionType = sectionManifest.questions[questionId].type;
       await pageSetup({ t });
 
@@ -93,7 +92,7 @@ const maxLengthErrorTest = ({
   }
 };
 
-const mandatoryErrorTest = ({
+const mandatoryErrorTest = async ({
   pageSetup,
   sectionManifest,
   questionId,
@@ -101,7 +100,7 @@ const mandatoryErrorTest = ({
   errorType,
 }) => {
   if (errorType === 'required') {
-    test(`should show error summary and validation for ${questionId} question indicating it is mandatory`, async (t) => {
+    await test(`should show error summary and validation for ${questionId} question indicating it is mandatory`, async (t) => {
       await pageSetup({ t });
       nock(apiLocalhost)
         .put(`${apiPath}/sections/${sectionId}`)
@@ -129,7 +128,7 @@ const mandatoryErrorTest = ({
   }
 };
 
-export const runErrorTests = ({
+export const runErrorTests = async ({
   pageSetup,
   sectionManifest,
   questionId,
@@ -137,7 +136,7 @@ export const runErrorTests = ({
   questionData,
   dashboardId,
 }) => {
-  Object.keys(questionData.errorResponse).forEach((errorType) => {
+  await Promise.all(Object.keys(questionData.errorResponse).map((errorType) => {
     mandatoryErrorTest({
       pageSetup,
       sectionManifest,
@@ -160,5 +159,5 @@ export const runErrorTests = ({
       errorType,
       dashboardId,
     });
-  });
+  }));
 };

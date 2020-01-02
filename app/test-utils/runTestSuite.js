@@ -38,19 +38,20 @@ export const runTestSuite = async ({
       await t.expect(isDone).ok('Not all nock interceptors were used!');
     });
 
-  runCommonComponentsTests({
-    pageSetup,
-    sectionManifest,
-    sectionId,
-    data,
-    dashboardId,
-  });
-
-  runQuestionTests({
-    pageSetup,
-    sectionManifest,
-    data,
-    sectionId,
-    dashboardId,
-  });
+  await Promise.all([
+    runCommonComponentsTests({
+      pageSetup,
+      sectionManifest,
+      sectionId,
+      data,
+      dashboardId,
+    }),
+    runQuestionTests({
+      pageSetup,
+      sectionManifest,
+      data,
+      sectionId,
+      dashboardId,
+    }),
+  ]);
 };

@@ -1,11 +1,11 @@
 import { Selector } from 'testcafe';
 
-export const comboboxTest = ({
+export const comboboxTest = async ({
   pageSetup,
   sectionManifest,
   questionId,
 }) => {
-  test(`should render the ${questionId} combobox question`, async (t) => {
+  await test(`should render the ${questionId} combobox question`, async (t) => {
     await pageSetup({ t });
     const renderedQuestion = Selector(`[data-test-id="question-${questionId}"]`);
     const expectedQuestion = sectionManifest.questions[questionId];
@@ -15,21 +15,21 @@ export const comboboxTest = ({
       .expect(renderedQuestion.find('.nhsuk-hint').innerText).eql(expectedQuestion.additionalAdvice)
       .expect(renderedQuestion.find('select').exists).ok()
       .expect(renderedQuestion.find('option').count).eql(options.length);
-    options.forEach(async (option) => {
+    await Promise.all(options.map(async (option) => {
       const text = expectedQuestion.options[option];
       const renderedOption = Selector(`[data-test-id="question-${questionId}"] .nhsuk-select option`).withText(text);
       await t
-        .expect(renderedOption.innerText).eql(text);
-    });
+        .expect(renderedOption.exists).ok();
+    }));
   });
 };
 
-const populateComboboxTest = ({
+const populateComboboxTest = async ({
   pageSetup,
   questionId,
   data,
 }) => {
-  test(`should populate the ${questionId} combobox question with existing data`, async (t) => {
+  await test(`should populate the ${questionId} combobox question with existing data`, async (t) => {
     pageSetup({ t, responseBody: data });
     const renderedQuestion = Selector(`[data-test-id="question-${questionId}"]`);
     await t
@@ -38,20 +38,22 @@ const populateComboboxTest = ({
   });
 };
 
-export const runComboboxTests = ({
+export const runComboboxTests = async ({
   pageSetup,
   sectionManifest,
   questionId,
   data,
 }) => {
-  comboboxTest({
-    pageSetup,
-    sectionManifest,
-    questionId,
-  });
-  populateComboboxTest({
-    pageSetup,
-    questionId,
-    data,
-  });
+  await Promise.all([
+    comboboxTest({
+      pageSetup,
+      sectionManifest,
+      questionId,
+    }),
+    populateComboboxTest({
+      pageSetup,
+      questionId,
+      data,
+    }),
+  ]);
 };
