@@ -2,15 +2,16 @@ import nock from 'nock';
 import { Selector } from 'testcafe';
 import previewWithNoMarketingData from '../../fixtures/previewWithNoMarketingData.json';
 import previewWithMarketingData from '../../fixtures/previewWithMarketingData.json';
+import { apiLocalhost, apiPath } from '../test-utils/config';
 
 const mocks = (existingData) => {
   if (!existingData) {
-    nock('http://localhost:8080')
-      .get('/api/v1/Solutions/S100000-001/preview')
+    nock(apiLocalhost)
+      .get(`${apiPath}/preview`)
       .reply(200, previewWithNoMarketingData);
   } else {
-    nock('http://localhost:8080')
-      .get('/api/v1/Solutions/S100000-001/preview')
+    nock(apiLocalhost)
+      .get(`${apiPath}/preview`)
       .reply(200, previewWithMarketingData);
   }
 };
