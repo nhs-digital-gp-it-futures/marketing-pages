@@ -3,22 +3,23 @@ import { Selector, ClientFunction } from 'testcafe';
 import dashboardWithIncompleteSections from '../../fixtures/dashboardWithIncompleteSections.json';
 import dashboardWithCompleteSections from '../../fixtures/dashboardWithCompleteSections.json';
 import previewWithMarketingData from '../../fixtures/previewWithMarketingData.json';
+import { apiLocalhost, apiPath, clientLocalhost } from '../test-utils/config';
 
 const mocks = (initalDashboard) => {
   if (initalDashboard) {
-    nock('http://localhost:8080')
-      .get('/api/v1/Solutions/S100000-001/dashboard')
+    nock(apiLocalhost)
+      .get(`${apiPath}/dashboard`)
       .reply(200, dashboardWithIncompleteSections);
   } else {
-    nock('http://localhost:8080')
-      .get('/api/v1/Solutions/S100000-001/dashboard')
+    nock(apiLocalhost)
+      .get(`${apiPath}/dashboard`)
       .reply(200, dashboardWithCompleteSections);
   }
 };
 
 const pageSetup = async (t, initalDashboard = true) => {
   mocks(initalDashboard);
-  await t.navigateTo('http://localhost:1234/solution/S100000-001');
+  await t.navigateTo(`${clientLocalhost}`);
 };
 
 fixture('Show marketing dashboard page')
@@ -43,8 +44,8 @@ test('should render the marketing dashboard page title', async (t) => {
 test('should render the preview page button', async (t) => {
   await pageSetup(t);
 
-  nock('http://localhost:8080')
-    .get('/api/v1/Solutions/S100000-001/preview')
+  nock(apiLocalhost)
+    .get(`${apiPath}/preview`)
     .reply(200, previewWithMarketingData);
 
   const getLocation = ClientFunction(() => document.location.href);
@@ -60,12 +61,12 @@ test('should render the preview page button', async (t) => {
 test('should render the Submit for moderation button', async (t) => {
   await pageSetup(t);
 
-  nock('http://localhost:8080')
-    .put('/api/v1/Solutions/S100000-001/SubmitForReview')
+  nock(apiLocalhost)
+    .put(`${apiPath}/SubmitForReview`)
     .reply(204, {});
 
-  nock('http://localhost:8080')
-    .get('/api/v1/Solutions/S100000-001/dashboard')
+  nock(apiLocalhost)
+    .get(`${apiPath}/dashboard`)
     .reply(200, dashboardWithIncompleteSections);
 
   const getLocation = ClientFunction(() => document.location.href);
@@ -220,8 +221,8 @@ test('should render all the sub sections for the client application type section
 test('clicking on the solution description section link should navigate the user to the solution description page', async (t) => {
   await pageSetup(t);
 
-  nock('http://localhost:8080')
-    .get('/api/v1/Solutions/S100000-001/sections/solution-description')
+  nock(apiLocalhost)
+    .get(`${apiPath}/sections/solution-description`)
     .reply(200, {});
 
   const getLocation = ClientFunction(() => document.location.href);
@@ -238,8 +239,8 @@ test('clicking on the solution description section link should navigate the user
 test('clicking on the feature section link should navigate the user to the features page', async (t) => {
   await pageSetup(t);
 
-  nock('http://localhost:8080')
-    .get('/api/v1/Solutions/S100000-001/sections/features')
+  nock(apiLocalhost)
+    .get(`${apiPath}/sections/features`)
     .reply(200, {});
 
   const getLocation = ClientFunction(() => document.location.href);
@@ -255,8 +256,8 @@ test('clicking on the feature section link should navigate the user to the featu
 test('clicking on the client application type section link should navigate the user to the client application type page', async (t) => {
   await pageSetup(t);
 
-  nock('http://localhost:8080')
-    .get('/api/v1/Solutions/S100000-001/sections/client-application-types')
+  nock(apiLocalhost)
+    .get(`${apiPath}/sections/client-application-types`)
     .reply(200, {});
 
   const getLocation = ClientFunction(() => document.location.href);
@@ -272,8 +273,8 @@ test('clicking on the client application type section link should navigate the u
 test('clicking on the contact details section link should navigate the user to contact details page', async (t) => {
   await pageSetup(t);
 
-  nock('http://localhost:8080')
-    .get('/api/v1/Solutions/S100000-001/sections/contact-details')
+  nock(apiLocalhost)
+    .get(`${apiPath}/sections/contact-details`)
     .reply(200, {});
 
   const getLocation = ClientFunction(() => document.location.href);
@@ -293,12 +294,12 @@ test('should render the Error summary containing all the sections that failed th
     required: ['solution-description', 'client-application-types'],
   };
 
-  nock('http://localhost:8080')
-    .put('/api/v1/Solutions/S100000-001/SubmitForReview')
+  nock(apiLocalhost)
+    .put(`${apiPath}/SubmitForReview`)
     .reply(400, submitForReviewError);
 
-  nock('http://localhost:8080')
-    .get('/api/v1/Solutions/S100000-001/dashboard')
+  nock(apiLocalhost)
+    .get(`${apiPath}/dashboard`)
     .reply(200, dashboardWithIncompleteSections);
 
   const getLocation = ClientFunction(() => document.location.href);
