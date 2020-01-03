@@ -54,15 +54,13 @@ export const runQuestionTests = async ({
         data,
       });
     } else if (questionType === 'multi-question') {
-      await Promise.all([Object.keys(sectionManifest.questions).map((question) => {
-        runQuestionTests({
-          pageSetup,
-          sectionManifest: sectionManifest.questions[question],
-          data,
-          sectionId,
-          sectionParent: question,
-        });
-      })]);
+      runQuestionTests({
+        pageSetup,
+        sectionManifest: sectionManifest.questions[questionId],
+        data,
+        sectionId,
+        sectionParent: questionId,
+      });
     } else if (questionType === 'combobox-options') {
       runComboboxTests({
         pageSetup,

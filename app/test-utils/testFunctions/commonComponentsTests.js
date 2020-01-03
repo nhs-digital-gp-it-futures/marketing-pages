@@ -90,7 +90,7 @@ const sectionsLinkClickedTest = async ({ pageSetup }) => {
   await test('should return to the marketing data dashboard when the return to all sections is clicked', async (t) => {
     await pageSetup({ t });
     nock(apiLocalhost)
-      .get('/api/v1/Solutions/S100000-001/dashboard')
+      .get(`${apiPath}/dashboard`)
       .reply(200, dashboardWithCompleteSections);
     const link = Selector('[data-test-id="section-back-link"] a');
 

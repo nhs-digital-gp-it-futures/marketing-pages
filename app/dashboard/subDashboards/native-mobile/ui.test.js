@@ -2,16 +2,17 @@ import nock from 'nock';
 import { Selector, ClientFunction } from 'testcafe';
 import dashboardWithCompleteSections from '../../../../fixtures/dashboardWithCompleteSections.json';
 import aNativeMobileFixture from '../../../../fixtures/nativeMobileData.json';
+import { apiLocalhost, apiPath, clientLocalhost } from '../../../test-utils/config';
 
 const mocks = () => {
-  nock('http://localhost:8080')
-    .get('/api/v1/Solutions/S100000-001/dashboards/native-mobile')
+  nock(apiLocalhost)
+    .get(`${apiPath}/dashboards/native-mobile`)
     .reply(200, aNativeMobileFixture);
 };
 
 const pageSetup = async (t) => {
   mocks();
-  await t.navigateTo('http://localhost:1234/solution/S100000-001/dashboard/native-mobile');
+  await t.navigateTo(`${clientLocalhost}/dashboard/native-mobile`);
 };
 
 fixture('Show native mobile dashboard page');
@@ -130,8 +131,8 @@ test('should render all the sections for native mobile sections section group', 
 test('should navigate the user to supported operation systems page when clicking on supported operation systems dashboard row', async (t) => {
   await pageSetup(t);
 
-  nock('http://localhost:8080')
-    .get('/api/v1/Solutions/S100000-001/sections/native-mobile-operating-systems')
+  nock(apiLocalhost)
+    .get(`${apiPath}/sections/native-mobile-operating-systems`)
     .reply(200, {});
 
   const getLocation = ClientFunction(() => document.location.href);
@@ -146,8 +147,8 @@ test('should navigate the user to supported operation systems page when clicking
 test('should navigate the user to the mobile first page when clicking on the mobile first dashboard row', async (t) => {
   await pageSetup(t);
 
-  nock('http://localhost:8080')
-    .get('/api/v1/Solutions/S100000-001/sections/native-mobile-first')
+  nock(apiLocalhost)
+    .get(`${apiPath}/sections/native-mobile-first`)
     .reply(200, {});
 
   const getLocation = ClientFunction(() => document.location.href);
@@ -162,8 +163,8 @@ test('should navigate the user to the mobile first page when clicking on the mob
 test('should navigate the user to memory and storage page when clicking on memory and storage dashboard row', async (t) => {
   await pageSetup(t);
 
-  nock('http://localhost:8080')
-    .get('/api/v1/Solutions/S100000-001/sections/native-mobile-memory-and-storage')
+  nock(apiLocalhost)
+    .get(`${apiPath}/sections/native-mobile-memory-and-storage`)
     .reply(200, {});
 
   const getLocation = ClientFunction(() => document.location.href);
@@ -178,8 +179,8 @@ test('should navigate the user to memory and storage page when clicking on memor
 test('should navigate the user to the connection details page when clicking on the connection details dashboard row', async (t) => {
   await pageSetup(t);
 
-  nock('http://localhost:8080')
-    .get('/api/v1/Solutions/S100000-001/sections/native-mobile-connection-details')
+  nock(apiLocalhost)
+    .get(`${apiPath}/sections/native-mobile-connection-details`)
     .reply(200, {});
 
   const getLocation = ClientFunction(() => document.location.href);
@@ -194,8 +195,8 @@ test('should navigate the user to the connection details page when clicking on t
 test('should navigate the user to third party page when clicking on third party dashboard row', async (t) => {
   await pageSetup(t);
 
-  nock('http://localhost:8080')
-    .get('/api/v1/Solutions/S100000-001/sections/native-mobile-third-party')
+  nock(apiLocalhost)
+    .get(`${apiPath}/sections/native-mobile-third-party`)
     .reply(200, {});
 
   const getLocation = ClientFunction(() => document.location.href);
@@ -210,8 +211,8 @@ test('should navigate the user to third party page when clicking on third party 
 test('should navigate the user to hardware requirements page when clicking on hardware requirements dashboard row', async (t) => {
   await pageSetup(t);
 
-  nock('http://localhost:8080')
-    .get('/api/v1/Solutions/S100000-001/sections/native-mobile-hardware-requirements')
+  nock(apiLocalhost)
+    .get(`${apiPath}/sections/native-mobile-hardware-requirements`)
     .reply(200, {});
 
   const getLocation = ClientFunction(() => document.location.href);
@@ -226,8 +227,8 @@ test('should navigate the user to hardware requirements page when clicking on ha
 test('should navigate the user to additional information page when clicking on additional information dashboard row', async (t) => {
   await pageSetup(t);
 
-  nock('http://localhost:8080')
-    .get('/api/v1/Solutions/S100000-001/sections/native-mobile-additional-information')
+  nock(apiLocalhost)
+    .get(`${apiPath}/sections/native-mobile-additional-information`)
     .reply(200, {});
 
   const getLocation = ClientFunction(() => document.location.href);
@@ -252,8 +253,8 @@ test('should render the return to all sections link', async (t) => {
 test('should return to the marketing data dashboard when the return to all sections is clicked', async (t) => {
   await pageSetup(t);
 
-  nock('http://localhost:8080')
-    .get('/api/v1/Solutions/S100000-001/dashboard')
+  nock(apiLocalhost)
+    .get(`${apiPath}/dashboard`)
     .reply(200, dashboardWithCompleteSections);
 
   const getLocation = ClientFunction(() => document.location.href);
