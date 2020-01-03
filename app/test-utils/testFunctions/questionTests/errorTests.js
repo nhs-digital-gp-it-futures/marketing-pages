@@ -104,13 +104,13 @@ const errorTests = ({
       break;
     }
     default: {
-      console.log(`Unimplemented error type, test run aborted. Please write implementation for ${errorType}`);
+      console.error(`Unimplemented error type, test run aborted. Please write implementation for ${errorType}`);
       return;
     }
   }
   test(errorMessage, async (t) => {
     await pageSetup({ t });
-    const selectors = getCommonAttributes({
+    const attributes = getCommonAttributes({
       sectionManifest,
       questionId,
       parentQuestionId,
@@ -122,7 +122,7 @@ const errorTests = ({
       responseBodyBasedOnType,
       expectedErrorMessage,
       expectedAnchorLink,
-    } = selectors;
+    } = attributes;
 
     nock(apiLocalhost)
       .put(`${apiPath}/sections/${sectionId}`)
