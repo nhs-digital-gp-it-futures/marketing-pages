@@ -10,14 +10,14 @@ const arrayTransformation = (questionValue) => {
   return [questionValue];
 };
 
-const radioButtonTransformation = questionValue => (questionValue || null);
+const emptyValueTransformation = questionValue => (questionValue || null);
 
 const transformationStratergy = {
   'checkbox-options': {
     transform: questionValue => arrayTransformation(questionValue),
   },
   'radiobutton-options': {
-    transform: questionValue => radioButtonTransformation(questionValue),
+    transform: questionValue => emptyValueTransformation(questionValue),
   },
 };
 
