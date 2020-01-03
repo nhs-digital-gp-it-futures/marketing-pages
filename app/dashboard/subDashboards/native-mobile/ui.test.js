@@ -1,13 +1,13 @@
 import nock from 'nock';
 import { Selector, ClientFunction } from 'testcafe';
 import dashboardWithCompleteSections from '../../../../fixtures/dashboardWithCompleteSections.json';
-import aNativeMobileFixture from '../../../../fixtures/nativeMobileData.json';
+import nativeMobileFixture from './fixtureData.json';
 import { apiLocalhost, apiPath, clientLocalhost } from '../../../test-utils/config';
 
 const mocks = () => {
   nock(apiLocalhost)
     .get(`${apiPath}/dashboards/native-mobile`)
-    .reply(200, aNativeMobileFixture);
+    .reply(200, nativeMobileFixture);
 };
 
 const pageSetup = async (t) => {
@@ -128,7 +128,7 @@ test('should render all the sections for native mobile sections section group', 
     .eql('INCOMPLETE');
 });
 
-test('should navigate the user to supported operation systems page when clicking on supported operation systems dashboard row', async (t) => {
+test('should navigate the user to supported operating systems page when clicking on supported operating systems dashboard row', async (t) => {
   await pageSetup(t);
 
   nock(apiLocalhost)
@@ -137,10 +137,10 @@ test('should navigate the user to supported operation systems page when clicking
 
   const getLocation = ClientFunction(() => document.location.href);
 
-  const browsersSupportedSection = Selector('[data-test-id="dashboard-section-native-mobile-operating-systems"]');
+  const supportedOperatingSystemsSection = Selector('[data-test-id="dashboard-section-native-mobile-operating-systems"]');
 
   await t
-    .click(browsersSupportedSection.find('a'))
+    .click(supportedOperatingSystemsSection.find('a'))
     .expect(getLocation()).contains('S100000-001/dashboard/native-mobile/section/native-mobile-operating-systems');
 });
 
@@ -169,10 +169,10 @@ test('should navigate the user to memory and storage page when clicking on memor
 
   const getLocation = ClientFunction(() => document.location.href);
 
-  const memoryAndStorage = Selector('[data-test-id="dashboard-section-native-mobile-memory-and-storage"]');
+  const memoryAndStorageSection = Selector('[data-test-id="dashboard-section-native-mobile-memory-and-storage"]');
 
   await t
-    .click(memoryAndStorage.find('a'))
+    .click(memoryAndStorageSection.find('a'))
     .expect(getLocation()).contains('S100000-001/dashboard/native-mobile/section/native-mobile-memory-and-storage');
 });
 
@@ -185,10 +185,10 @@ test('should navigate the user to the connection details page when clicking on t
 
   const getLocation = ClientFunction(() => document.location.href);
 
-  const connectionDetails = Selector('[data-test-id="dashboard-section-native-mobile-connection-details"]');
+  const connectionDetailsSection = Selector('[data-test-id="dashboard-section-native-mobile-connection-details"]');
 
   await t
-    .click(connectionDetails.find('a'))
+    .click(connectionDetailsSection.find('a'))
     .expect(getLocation()).contains('S100000-001/dashboard/native-mobile/section/native-mobile-connection-details');
 });
 
@@ -201,10 +201,10 @@ test('should navigate the user to third party page when clicking on third party 
 
   const getLocation = ClientFunction(() => document.location.href);
 
-  const deviceCapabilities = Selector('[data-test-id="dashboard-section-native-mobile-third-party"]');
+  const thirdPartySection = Selector('[data-test-id="dashboard-section-native-mobile-third-party"]');
 
   await t
-    .click(deviceCapabilities.find('a'))
+    .click(thirdPartySection.find('a'))
     .expect(getLocation()).contains('S100000-001/dashboard/native-mobile/section/native-mobile-third-party');
 });
 
@@ -217,10 +217,10 @@ test('should navigate the user to hardware requirements page when clicking on ha
 
   const getLocation = ClientFunction(() => document.location.href);
 
-  const hardwareRequirements = Selector('[data-test-id="dashboard-section-native-mobile-hardware-requirements"]');
+  const hardwareRequirementsSection = Selector('[data-test-id="dashboard-section-native-mobile-hardware-requirements"]');
 
   await t
-    .click(hardwareRequirements.find('a'))
+    .click(hardwareRequirementsSection.find('a'))
     .expect(getLocation()).contains('S100000-001/dashboard/native-mobile/section/native-mobile-hardware-requirements');
 });
 
@@ -233,10 +233,10 @@ test('should navigate the user to additional information page when clicking on a
 
   const getLocation = ClientFunction(() => document.location.href);
 
-  const hardwareRequirements = Selector('[data-test-id="dashboard-section-native-mobile-additional-information"]');
+  const additionalInformationSection = Selector('[data-test-id="dashboard-section-native-mobile-additional-information"]');
 
   await t
-    .click(hardwareRequirements.find('a'))
+    .click(additionalInformationSection.find('a'))
     .expect(getLocation()).contains('S100000-001/dashboard/native-mobile/section/native-mobile-additional-information');
 });
 
