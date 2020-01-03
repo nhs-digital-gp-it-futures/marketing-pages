@@ -1,7 +1,7 @@
 import { Selector } from 'testcafe';
 
-const textAreaTest = ({ pageSetup, sectionManifest, questionId }) => {
-  test(`should render the ${questionId} text area question`, async (t) => {
+const textAreaTest = async ({ pageSetup, sectionManifest, questionId }) => {
+  await test(`should render the ${questionId} text area question`, async (t) => {
     await pageSetup({ t });
     const renderedQuestion = Selector(`[data-test-id="question-${questionId}"]`);
     const expectedQuestion = sectionManifest.questions[questionId];
@@ -13,8 +13,8 @@ const textAreaTest = ({ pageSetup, sectionManifest, questionId }) => {
   });
 };
 
-const populateTextAreaTest = ({ pageSetup, questionId, data }) => {
-  test(`should populate the ${questionId} text area question with existing data`, async (t) => {
+const populateTextAreaTest = async ({ pageSetup, questionId, data }) => {
+  await test(`should populate the ${questionId} text area question with existing data`, async (t) => {
     await pageSetup({ t, responseBody: data });
     const renderedQuestion = Selector(`[data-test-id="question-${questionId}"]`);
     await t
@@ -22,12 +22,14 @@ const populateTextAreaTest = ({ pageSetup, questionId, data }) => {
   });
 };
 
-export const runtextAreaTests = ({
+export const runtextAreaTests = async ({
   pageSetup,
   sectionManifest,
   questionId,
   data,
 }) => {
-  textAreaTest({ pageSetup, sectionManifest, questionId });
-  populateTextAreaTest({ pageSetup, questionId, data });
+  await Promise.all([
+    textAreaTest({ pageSetup, sectionManifest, questionId }),
+    populateTextAreaTest({ pageSetup, questionId, data }),
+  ]);
 };

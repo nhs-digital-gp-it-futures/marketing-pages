@@ -1,7 +1,7 @@
 import { Selector } from 'testcafe';
 
-const checkboxTest = ({ pageSetup, sectionManifest, questionId }) => {
-  test(`should render the ${questionId} checkbox question`, async (t) => {
+const checkboxTest = async ({ pageSetup, sectionManifest, questionId }) => {
+  await test(`should render the ${questionId} checkbox question`, async (t) => {
     await pageSetup({ t });
     const renderedQuestion = Selector(`[data-test-id="question-${questionId}"]`);
     const expectedQuestion = sectionManifest.questions[questionId];
@@ -12,32 +12,35 @@ const checkboxTest = ({ pageSetup, sectionManifest, questionId }) => {
       .expect(renderedQuestion.find('.nhsuk-checkboxes').count).eql(1)
       .expect(renderedQuestion.find('.nhsuk-checkboxes__item').count).eql(options.length);
 
-    options.forEach(async (option) => {
+    await Promise.all(options.map(async (option) => {
       const text = expectedQuestion.options[option];
-      const checkbox = Selector(`[data-test-id="question-${questionId}"] .nhsuk-checkboxes__item`).withText(text);
+      const checkbox = await Selector(`[data-test-id="question-${questionId}"] .nhsuk-checkboxes__item`).withText(text);
       await t
-        .expect(checkbox.innerText).eql(text);
-    });
+        .expect(checkbox.exists).ok();
+    }));
   });
 };
 
-const populateCheckboxTest = ({
+const populateCheckboxTest = async ({
   pageSetup,
   sectionManifest,
   questionId,
   data,
 }) => {
-  test(`should populate the ${questionId} checkbox question with existing data`, async (t) => {
+  await test(`should populate the ${questionId} checkbox question with existing data`, async (t) => {
     const expectedQuestion = sectionManifest.questions[questionId];
     const selectedOptions = data[questionId];
-    const questionSelector = Selector(`[data-test-id="question-${questionId}"]`);
+    const questionSelector = await Selector(`[data-test-id="question-${questionId}"]`);
 
     await pageSetup({ t, responseBody: data });
 
-    await t.expect(questionSelector.find('input:checked').count).eql(selectedOptions.length);
+    await t
+      .expect(questionSelector.find('input:checked').count).eql(selectedOptions.length);
 
-    Object.keys(expectedQuestion.options).forEach(async (option) => {
-      const checkbox = questionSelector.find('.nhsuk-checkboxes__item').withText(option);
+    await Promise.all(Object.keys(expectedQuestion.options).map(async (option) => {
+      const optionText = expectedQuestion.options[option];
+      const checkbox = await Selector(`[data-test-id="question-${questionId}"]`).find('.nhsuk-checkboxes__item').withText(optionText);
+
       if (selectedOptions.includes(option)) {
         await t
           .expect(checkbox.find('input:checked').exists).ok();
@@ -45,20 +48,22 @@ const populateCheckboxTest = ({
         await t
           .expect(checkbox.find('input:checked').exists).notOk();
       }
-    });
+    }));
   });
 };
-export const runCheckboxTests = ({
+export const runCheckboxTests = async ({
   pageSetup,
   sectionManifest,
   questionId,
   data,
 }) => {
-  checkboxTest({ pageSetup, sectionManifest, questionId });
-  populateCheckboxTest({
-    pageSetup,
-    sectionManifest,
-    questionId,
-    data,
-  });
+  await Promise.all([
+    checkboxTest({ pageSetup, sectionManifest, questionId }),
+    populateCheckboxTest({
+      pageSetup,
+      sectionManifest,
+      questionId,
+      data,
+    }),
+  ]);
 };

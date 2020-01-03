@@ -15,15 +15,14 @@ const pageSetup = async (t) => {
   await t.navigateTo(`${clientLocalhost}/dashboard/native-mobile`);
 };
 
-fixture('Show native mobile dashboard page')
-  .afterEach(async (t) => {
-    const isDone = nock.isDone();
-    if (!isDone) {
-      nock.cleanAll();
-    }
-
-    await t.expect(isDone).ok('Not all nock interceptors were used!');
-  });
+fixture('Show native mobile dashboard page');
+// .afterEach(async (t) => {
+// const isDone = nock.isDone();
+// if (!isDone) {
+//   nock.cleanAll();
+// }
+// await t.expect(isDone).ok('Not all nock interceptors were used!');
+// });
 
 test('should render the native mobile dashboard page title', async (t) => {
   await pageSetup(t);
@@ -244,9 +243,10 @@ test('should navigate the user to additional information page when clicking on a
 test('should render the return to all sections link', async (t) => {
   await pageSetup(t);
 
-  const link = Selector('[data-test-id="sub-dashboard-back-link"] a');
+  const link = Selector('[data-test-id="sub-dashboard-back-link"] div a');
 
   await t
+    .expect(link.exists).ok()
     .expect(link.innerText).eql('Return to all sections');
 });
 
@@ -259,9 +259,10 @@ test('should return to the marketing data dashboard when the return to all secti
 
   const getLocation = ClientFunction(() => document.location.href);
 
-  const link = Selector('[data-test-id="sub-dashboard-back-link"] a');
+  const link = Selector('[data-test-id="sub-dashboard-back-link"] div a');
 
   await t
+    .expect(link.exists).ok()
     .click(link)
     .expect(getLocation()).notContains('section')
     .expect(getLocation()).contains('S100000-001');

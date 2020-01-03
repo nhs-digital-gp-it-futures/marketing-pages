@@ -1,6 +1,6 @@
 import { Selector } from 'testcafe';
 
-const textFieldTest = ({
+const textFieldTest = async ({
   pageSetup,
   sectionManifest,
   questionId,
@@ -8,7 +8,7 @@ const textFieldTest = ({
 }) => {
   let modifiedQuestionId = questionId;
   if (sectionParent) modifiedQuestionId = `${sectionParent}[${questionId}]`;
-  test(`should render ${modifiedQuestionId} text field`, async (t) => {
+  await test(`should render ${modifiedQuestionId} text field`, async (t) => {
     await pageSetup({ t });
     const renderedQuestion = Selector(`[data-test-id="question-${modifiedQuestionId}"]`);
     const expectedQuestion = sectionManifest.questions[questionId];
@@ -26,7 +26,7 @@ const textFieldTest = ({
   });
 };
 
-const populateTextFieldTest = ({
+const populateTextFieldTest = async ({
   pageSetup,
   questionId,
   data,
@@ -34,7 +34,7 @@ const populateTextFieldTest = ({
 }) => {
   let modifiedQuestionId = questionId;
   if (sectionParent) modifiedQuestionId = `${sectionParent}[${questionId}]`;
-  test(`should populate the ${modifiedQuestionId} text field question with existing data`, async (t) => {
+  await test(`should populate the ${modifiedQuestionId} text field question with existing data`, async (t) => {
     await pageSetup({ t, responseBody: data });
     const renderedQuestion = Selector(`[data-test-id="question-${modifiedQuestionId}"]`);
     if (sectionParent) {
@@ -47,23 +47,25 @@ const populateTextFieldTest = ({
   });
 };
 
-export const runTextFieldTests = ({
+export const runTextFieldTests = async ({
   pageSetup,
   sectionManifest,
   questionId,
   data,
   sectionParent,
 }) => {
-  textFieldTest({
-    pageSetup,
-    sectionManifest,
-    questionId,
-    sectionParent,
-  });
-  populateTextFieldTest({
-    pageSetup,
-    questionId,
-    data,
-    sectionParent,
-  });
+  await Promise.all([
+    textFieldTest({
+      pageSetup,
+      sectionManifest,
+      questionId,
+      sectionParent,
+    }),
+    populateTextFieldTest({
+      pageSetup,
+      questionId,
+      data,
+      sectionParent,
+    }),
+  ]);
 };

@@ -6,15 +6,16 @@ import { runBulletpointListTests } from './questionTests/bulletpointListTests';
 import { runErrorTests } from './questionTests/errorTests';
 import { runComboboxTests } from './questionTests/comboboxTests';
 
-export const runQuestionTests = ({
+export const runQuestionTests = async ({
   pageSetup,
   sectionManifest,
   data,
   sectionId,
   sectionParent,
   dashboardId,
+  errorPostBodyData,
 }) => {
-  Object.keys(sectionManifest.questions).map(async (questionId) => {
+  await Promise.all([Object.keys(sectionManifest.questions).map(async (questionId) => {
     const questionData = sectionManifest.questions[questionId];
     const questionType = questionData.type;
     if (questionType === 'radiobutton-options') {
@@ -60,6 +61,7 @@ export const runQuestionTests = ({
         data,
         sectionId,
         sectionParent: questionId,
+        errorPostBodyData,
       });
     } else if (questionType === 'combobox-options') {
       runComboboxTests({
@@ -69,8 +71,7 @@ export const runQuestionTests = ({
         data,
       });
     } else {
-      console.log('TODO: add missing question type to tests');
-      return;
+      throw new Error('TODO: add missing question type to tests');
     }
     if (questionData.errorResponse) {
       runErrorTests({
@@ -81,7 +82,8 @@ export const runQuestionTests = ({
         sectionId,
         sectionParent,
         dashboardId,
+        errorPostBodyData,
       });
     }
-  });
+  })]);
 };

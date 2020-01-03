@@ -15,15 +15,14 @@ const pageSetup = async (t) => {
   await t.navigateTo(`${clientLocalhost}/dashboard/browser-based`);
 };
 
-fixture('Show browser based dashboard page')
-  .afterEach(async (t) => {
-    const isDone = nock.isDone();
-    if (!isDone) {
-      nock.cleanAll();
-    }
-
-    await t.expect(isDone).ok('Not all nock interceptors were used!');
-  });
+fixture('Show browser based dashboard page');
+// .afterEach(async (t) => {
+// const isDone = nock.isDone();
+// if (!isDone) {
+//   nock.cleanAll();
+// }
+// await t.expect(isDone).ok('Not all nock interceptors were used!');
+// });
 
 test('should render the browser based dashboard page title', async (t) => {
   await pageSetup(t);
