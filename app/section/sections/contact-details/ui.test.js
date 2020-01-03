@@ -19,7 +19,25 @@ const contactDetailsMarketingData = {
   },
 };
 
+const errorPostBodyData = {
+  'contact-1': {
+    'first-name': '',
+    'last-name': '',
+    'phone-number': '',
+    'email-address': '',
+    'department-name': '',
+  },
+  'contact-2': {
+    'first-name': '',
+    'last-name': '',
+    'phone-number': '',
+    'email-address': '',
+    'department-name': '',
+  },
+};
+
 runTestSuite({
   data: contactDetailsMarketingData,
   sectionId,
+  errorPostBodyData,
 });

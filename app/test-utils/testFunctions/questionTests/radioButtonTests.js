@@ -1,7 +1,7 @@
 import { Selector } from 'testcafe';
 
-const radioButtonsTest = ({ pageSetup, sectionManifest, questionId }) => {
-  test(`should render the ${questionId} radio buttons question`, async (t) => {
+const radioButtonsTest = async ({ pageSetup, sectionManifest, questionId }) => {
+  await test(`should render the ${questionId} radio buttons question`, async (t) => {
     await pageSetup({ t });
     const renderedQuestion = Selector(`[data-test-id="question-${questionId}"]`);
     const expectedQuestion = sectionManifest.questions[questionId];
@@ -12,26 +12,26 @@ const radioButtonsTest = ({ pageSetup, sectionManifest, questionId }) => {
       .expect(renderedQuestion.find('.nhsuk-radios').count).eql(1)
       .expect(renderedQuestion.find('.nhsuk-radios__item').count).eql(numberOfRadioButtons);
 
-    Object.keys(expectedQuestion.options).map(async (option) => {
+    await Promise.all(Object.keys(expectedQuestion.options).map(async (option) => {
       const text = expectedQuestion.options[option];
-      const checkbox = Selector(`[data-test-id="question-${questionId}"] .nhsuk-radios__item`).withText(text);
+      const checkbox = await Selector(`[data-test-id="question-${questionId}"] .nhsuk-radios__item`).withText(text);
       await t
-        .expect(checkbox.innerText).eql(expectedQuestion.options[option]);
-    });
+        .expect(checkbox.exists).ok();
+    }));
   });
 };
 
-const populateRadioButtonsTest = ({
+const populateRadioButtonsTest = async ({
   pageSetup,
   sectionManifest,
   questionId,
   data,
 }) => {
-  test(`should populate the ${questionId} radio buttons question with existing data`, async (t) => {
+  await test(`should populate the ${questionId} radio buttons question with existing data`, async (t) => {
     const expectedQuestion = sectionManifest.questions[questionId];
     const selectedOption = expectedQuestion.options[data[questionId]];
     await pageSetup({ t, responseBody: data });
-    Object.keys(expectedQuestion.options).map(async (option) => {
+    await Promise.all(Object.keys(expectedQuestion.options).map(async (option) => {
       const text = expectedQuestion.options[option];
       if (text === selectedOption) {
         const radioButton = Selector(`[data-test-id="question-${questionId}"] .nhsuk-radios__item`).withText(text);
@@ -42,21 +42,23 @@ const populateRadioButtonsTest = ({
         await t
           .expect(radioButton.find('input:checked').exists).notOk();
       }
-    });
+    }));
   });
 };
 
-export const runRadioButtonTests = ({
+export const runRadioButtonTests = async ({
   pageSetup,
   sectionManifest,
   questionId,
   data,
 }) => {
-  radioButtonsTest({ pageSetup, sectionManifest, questionId });
-  populateRadioButtonsTest({
-    pageSetup,
-    sectionManifest,
-    questionId,
-    data,
-  });
+  await Promise.all([
+    radioButtonsTest({ pageSetup, sectionManifest, questionId }),
+    populateRadioButtonsTest({
+      pageSetup,
+      sectionManifest,
+      questionId,
+      data,
+    }),
+  ]);
 };

@@ -48,6 +48,7 @@ const errorTests = ({
   questionId,
   sectionId,
   errorType,
+  errorPostBody,
   dashboardId,
   parentQuestionId,
 }) => {
@@ -69,7 +70,7 @@ const errorTests = ({
     await pageSetup({ t });
 
     await nock(apiLocalhost)
-      .put(`${apiPath}/sections/${sectionId}`)
+      .put(`${apiPath}/sections/${sectionId}`, errorPostBody)
       .reply(400, responseBody);
 
     const errorSummary = Selector('[data-test-id="error-summary"]');
@@ -124,7 +125,7 @@ const errorTests = ({
   });
 };
 
-export const runErrorTests = ({
+export const runErrorTests = async ({
   pageSetup,
   sectionManifest,
   questionId,
@@ -132,8 +133,20 @@ export const runErrorTests = ({
   sectionParent,
   questionData,
   dashboardId,
+  errorPostBodyData,
 }) => {
-  Object.keys(questionData.errorResponse).forEach((errorType) => {
+  const getErrorPostBody = manifest => Object.keys(manifest.questions).reduce((acc, question) => {
+    const questionType = manifest.questions[question].type;
+    if (questionType === 'radiobutton-options') acc[question] = null;
+    else if (questionType === 'checkbox-options') acc[question] = [];
+    else if (questionType === 'bulletpoint-list') acc[question] = new Array(manifest.questions[question].maxItems).fill('');
+    else acc[question] = '';
+    return acc;
+  }, {});
+
+  const errorPostBody = errorPostBodyData || getErrorPostBody(sectionManifest);
+
+  await Promise.all(Object.keys(questionData.errorResponse).map((errorType) => {
     errorTests({
       pageSetup,
       sectionManifest,
@@ -141,7 +154,8 @@ export const runErrorTests = ({
       sectionId,
       errorType,
       dashboardId,
+      errorPostBody,
       parentQuestionId: sectionParent,
     });
-  });
+  }));
 };
