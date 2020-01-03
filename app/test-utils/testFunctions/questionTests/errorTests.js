@@ -10,9 +10,11 @@ const getCommonAttributes = ({
   parentQuestionId,
   errorType,
 }) => {
-  const questionType = sectionManifest.questions[questionId].type;
+  const expectedQuestion = sectionManifest.questions[questionId];
+  const questionType = expectedQuestion.type;
   const questionIdBasedOnType = questionType === 'bulletpoint-list' ? `${questionId}-1` : questionId;
   const questionIdBasedOnParentId = parentQuestionId ? `${parentQuestionId}[${questionIdBasedOnType}]` : questionIdBasedOnType;
+
   const responseBodyBasedOnType = parentQuestionId
     ? {
       [parentQuestionId]: {
@@ -22,67 +24,22 @@ const getCommonAttributes = ({
     : {
       [questionIdBasedOnType]: errorType,
     };
+
   const renderedQuestionSelector = questionType === 'bulletpoint-list'
     ? `field-error-${questionIdBasedOnParentId}`
     : `question-${questionIdBasedOnParentId}`;
-  const expectedQuestion = sectionManifest.questions[questionId];
+
   const expectedErrorMessage = expectedQuestion.errorResponse[errorType];
   const expectedAnchorLink = `#${questionIdBasedOnParentId}`;
 
   return {
+    questionId: questionIdBasedOnParentId,
     questionType,
-    questionIdBasedOnParentId,
-    responseBodyBasedOnType,
+    responseBody: responseBodyBasedOnType,
     renderedQuestionSelector,
-    expectedQuestion,
     expectedErrorMessage,
     expectedAnchorLink,
   };
-};
-
-const goToAnchorFromErrorSummary = ({
-  pageSetup,
-  sectionId,
-  questionId,
-  errorType,
-  sectionManifest,
-  dashboardId,
-  parentQuestionId,
-}) => {
-  test(`should go to anchor when clicking the ${questionId} summary error link`, async (t) => {
-    await pageSetup({ t });
-    const selectors = getCommonAttributes({
-      sectionManifest,
-      questionId,
-      parentQuestionId,
-      errorType,
-    });
-
-    const { responseBodyBasedOnType, expectedAnchorLink } = selectors;
-
-    nock(apiLocalhost)
-      .put(`${apiPath}/sections/${sectionId}`)
-      .reply(400, responseBodyBasedOnType);
-
-    const errorSummary = Selector('[data-test-id="error-summary"]');
-    const errorSummaryList = Selector('.nhsuk-error-summary__list');
-    const submitButton = Selector('[data-test-id="section-submit-button"]');
-
-    await t
-      .expect(errorSummary.exists).notOk()
-      .click(submitButton.find('button'))
-      .expect(errorSummary.exists).ok()
-      .expect(errorSummaryList.find('li:nth-child(1) a').count).eql(1)
-      .expect(errorSummaryList.find('li:nth-child(1) a').getAttribute('href')).eql(expectedAnchorLink)
-      .click(errorSummaryList.find('li:nth-child(1) a'));
-    if (dashboardId) {
-      await t
-        .expect(getLocation()).contains(`/solution/S100000-001/dashboard/${dashboardId}/section/${sectionId}${expectedAnchorLink}`);
-    } else {
-      await t
-        .expect(getLocation()).contains(`/solution/S100000-001/section/${sectionId}${expectedAnchorLink}`);
-    }
-  });
 };
 
 const errorTests = ({
@@ -91,42 +48,29 @@ const errorTests = ({
   questionId,
   sectionId,
   errorType,
+  dashboardId,
   parentQuestionId,
 }) => {
-  let errorMessage;
-  switch (errorType) {
-    case 'required': {
-      errorMessage = `should show error summary and validation for ${questionId} question indicating it is mandatory`;
-      break;
-    }
-    case 'maxLength': {
-      errorMessage = `should show error summary and validation for ${questionId} question when it exceeds the maxLength`;
-      break;
-    }
-    default: {
-      console.error(`Unimplemented error type, test run aborted. Please write implementation for ${errorType}`);
-      return;
-    }
-  }
-  test(errorMessage, async (t) => {
-    await pageSetup({ t });
-    const attributes = getCommonAttributes({
-      sectionManifest,
-      questionId,
-      parentQuestionId,
-      errorType,
-    });
-    const {
-      questionType,
-      renderedQuestionSelector,
-      responseBodyBasedOnType,
-      expectedErrorMessage,
-      expectedAnchorLink,
-    } = attributes;
+  const {
+    questionId: questionIdToRun,
+    questionType,
+    renderedQuestionSelector,
+    responseBody,
+    expectedErrorMessage,
+    expectedAnchorLink,
+  } = getCommonAttributes({
+    sectionManifest,
+    questionId,
+    parentQuestionId,
+    errorType,
+  });
 
-    nock(apiLocalhost)
+  test(`should show error summary and validation for ${questionIdToRun} question indicating it is ${errorType}`, async (t) => {
+    await pageSetup({ t });
+
+    await nock(apiLocalhost)
       .put(`${apiPath}/sections/${sectionId}`)
-      .reply(400, responseBodyBasedOnType);
+      .reply(400, responseBody);
 
     const errorSummary = Selector('[data-test-id="error-summary"]');
     const errorSummaryList = Selector('.nhsuk-error-summary__list');
@@ -151,6 +95,33 @@ const errorTests = ({
         .expect(renderedQuestion.find('.nhsuk-input--error').exists).ok();
     }
   });
+
+  test(`should go to anchor when clicking the ${questionIdToRun} error link`, async (t) => {
+    await pageSetup({ t });
+
+    nock(apiLocalhost)
+      .put(`${apiPath}/sections/${sectionId}`)
+      .reply(400, responseBody);
+
+    const errorSummary = Selector('[data-test-id="error-summary"]');
+    const errorSummaryList = Selector('.nhsuk-error-summary__list');
+    const submitButton = Selector('[data-test-id="section-submit-button"]');
+
+    await t
+      .expect(errorSummary.exists).notOk()
+      .click(submitButton.find('button'))
+      .expect(errorSummary.exists).ok()
+      .expect(errorSummaryList.find('li:nth-child(1) a').count).eql(1)
+      .expect(errorSummaryList.find('li:nth-child(1) a').getAttribute('href')).eql(expectedAnchorLink)
+      .click(errorSummaryList.find('li:nth-child(1) a'));
+    if (dashboardId) {
+      await t
+        .expect(getLocation()).contains(`/solution/S100000-001/dashboard/${dashboardId}/section/${sectionId}${expectedAnchorLink}`);
+    } else {
+      await t
+        .expect(getLocation()).contains(`/solution/S100000-001/section/${sectionId}${expectedAnchorLink}`);
+    }
+  });
 };
 
 export const runErrorTests = ({
@@ -164,14 +135,6 @@ export const runErrorTests = ({
 }) => {
   Object.keys(questionData.errorResponse).forEach((errorType) => {
     errorTests({
-      pageSetup,
-      sectionManifest,
-      questionId,
-      sectionId,
-      errorType,
-      parentQuestionId: sectionParent,
-    });
-    goToAnchorFromErrorSummary({
       pageSetup,
       sectionManifest,
       questionId,
