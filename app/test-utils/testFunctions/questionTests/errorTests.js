@@ -32,8 +32,8 @@ const goToAnchorFromErrorSummary = async ({
       };
 
     nock(apiLocalhost)
-    .put(`${apiPath}/sections/${sectionId}`, errorPostBody)
-    .reply(400, responseBodyBasedOnType);
+      .put(`${apiPath}/sections/${sectionId}`, errorPostBody)
+      .reply(400, responseBodyBasedOnType);
 
     const errorSummary = Selector('[data-test-id="error-summary"]');
     const errorSummaryList = Selector('.nhsuk-error-summary__list');
@@ -62,8 +62,8 @@ const maxLengthErrorTest = async ({
   questionId,
   errorType,
   sectionId,
-errorPostBody,  
-parentQuestionId,
+  errorPostBody,
+  parentQuestionId,
 }) => {
   if (errorType === 'maxLength') {
     await test(`should show error summary and validation for ${questionId} question when it exceeds the maxLength`, async (t) => {
@@ -189,15 +189,18 @@ export const runErrorTests = async ({
   sectionParent,
   questionData,
   dashboardId,
+  errorPostBodyData,
 }) => {
-  const errorPostBody = Object.keys(sectionManifest.questions).reduce((acc, question) => {
-    const questionType = sectionManifest.questions[question].type;
+  const getErrorPostBody = manifest => Object.keys(manifest.questions).reduce((acc, question) => {
+    const questionType = manifest.questions[question].type;
     if (questionType === 'radiobutton-options') acc[question] = null;
     else if (questionType === 'checkbox-options') acc[question] = [];
-    else if (questionType === 'bulletpoint-list') acc[question] = new Array(sectionManifest.questions[question].maxItems).fill('');
+    else if (questionType === 'bulletpoint-list') acc[question] = new Array(manifest.questions[question].maxItems).fill('');
     else acc[question] = '';
     return acc;
   }, {});
+
+  const errorPostBody = errorPostBodyData || getErrorPostBody(sectionManifest);
 
   await Promise.all(Object.keys(questionData.errorResponse).map((errorType) => {
     mandatoryErrorTest({

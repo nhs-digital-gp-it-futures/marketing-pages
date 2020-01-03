@@ -13,6 +13,7 @@ export const runQuestionTests = async ({
   sectionId,
   sectionParent,
   dashboardId,
+  errorPostBodyData,
 }) => {
   await Promise.all([Object.keys(sectionManifest.questions).map(async (questionId) => {
     const questionData = sectionManifest.questions[questionId];
@@ -60,6 +61,7 @@ export const runQuestionTests = async ({
         data,
         sectionId,
         sectionParent: questionId,
+        errorPostBodyData,
       });
     } else if (questionType === 'combobox-options') {
       runComboboxTests({
@@ -80,6 +82,7 @@ export const runQuestionTests = async ({
         sectionId,
         sectionParent,
         dashboardId,
+        errorPostBodyData,
       });
     }
   })]);

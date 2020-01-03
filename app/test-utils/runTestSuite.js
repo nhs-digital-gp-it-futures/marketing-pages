@@ -8,6 +8,7 @@ export const runTestSuite = async ({
   data,
   sectionId,
   dashboardId,
+  errorPostBodyData,
 }) => {
   const clientUrl = dashboardId ? `${clientLocalhost}/dashboard/${dashboardId}/section/${sectionId}`
     : `${clientLocalhost}/section/${sectionId}`;
@@ -52,6 +53,7 @@ export const runTestSuite = async ({
       data,
       sectionId,
       dashboardId,
+      errorPostBodyData,
     }),
   ]);
 };
