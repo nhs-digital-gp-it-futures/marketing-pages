@@ -183,12 +183,11 @@ test('should navigate the user to third party page when clicking on third party 
     .expect(getLocation()).contains('S100000-001/dashboard/native-desktop/section/native-desktop-third-party');
 });
 
-// TODO: Remove skip when page complete.
-test.skip('should navigate the user to hardware requirements page when clicking on hardware requirements dashboard row', async (t) => {
+test('should navigate the user to hardware requirements page when clicking on hardware requirements dashboard row', async (t) => {
   await pageSetup(t);
 
   nock(apiLocalhost)
-    .get(`${apiPath}/sections/native-desktop-hardware-requirement`)
+    .get(`${apiPath}/sections/native-desktop-hardware-requirements`)
     .reply(200, {});
 
   const getLocation = ClientFunction(() => document.location.href);
