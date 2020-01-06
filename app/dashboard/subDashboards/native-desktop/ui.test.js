@@ -135,8 +135,7 @@ test('should navigate the user to supported operating systems page when clicking
     .expect(getLocation()).contains('S100000-001/dashboard/native-desktop/section/native-desktop-operating-systems');
 });
 
-// TODO: Remove skip when page complete.
-test.skip('should navigate the user to the connection details page when clicking on the connection details dashboard row', async (t) => {
+test('should navigate the user to the connection details page when clicking on the connection details dashboard row', async (t) => {
   await pageSetup(t);
 
   nock(apiLocalhost)
