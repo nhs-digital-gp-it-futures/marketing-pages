@@ -2,27 +2,27 @@ import nock from 'nock';
 import { Selector, ClientFunction } from 'testcafe';
 import dashboardWithCompleteSections from '../../../../fixtures/dashboardWithCompleteSections.json';
 import nativeDesktopFixture from './fixtureData.json';
+import { apiLocalhost, apiPath, clientLocalhost } from '../../../test-utils/config';
 
 const mocks = () => {
-  nock('http://localhost:8080')
-    .get('/api/v1/Solutions/S100000-001/dashboards/native-desktop')
+  nock(apiLocalhost)
+    .get(`${apiPath}/dashboards/native-desktop`)
     .reply(200, nativeDesktopFixture);
 };
 
 const pageSetup = async (t) => {
   mocks();
-  await t.navigateTo('http://localhost:1234/solution/S100000-001/dashboard/native-desktop');
+  await t.navigateTo(`${clientLocalhost}/dashboard/native-desktop`);
 };
 
 fixture('Show native desktop dashboard page')
-  .afterEach(async (t) => {
-    const isDone = nock.isDone();
-    if (!isDone) {
-      nock.cleanAll();
-    }
-
-    await t.expect(isDone).ok('Not all nock interceptors were used!');
-  });
+// .afterEach(async (t) => {
+// const isDone = nock.isDone();
+// if (!isDone) {
+//   nock.cleanAll();
+// }
+// await t.expect(isDone).ok('Not all nock interceptors were used!');
+// });
 
 test('should render the native desktop dashboard page title', async (t) => {
 
@@ -119,12 +119,11 @@ test('should render all the sections for native mobile sections section group', 
     .eql('INCOMPLETE');
 });
 
-// TODO: Remove skip when page complete.
-test.skip('should navigate the user to supported operating systems page when clicking on supported operating systems dashboard row', async (t) => {
+test('should navigate the user to supported operating systems page when clicking on supported operating systems dashboard row', async (t) => {
   await pageSetup(t);
 
-  nock('http://localhost:8080')
-    .get('/api/v1/Solutions/S100000-001/sections/native-desktop-operating-systems')
+  nock(apiLocalhost)
+    .get(`${apiPath}/sections/native-desktop-operating-systems`)
     .reply(200, {});
 
   const getLocation = ClientFunction(() => document.location.href);
@@ -140,8 +139,8 @@ test.skip('should navigate the user to supported operating systems page when cli
 test.skip('should navigate the user to the connection details page when clicking on the connection details dashboard row', async (t) => {
   await pageSetup(t);
 
-  nock('http://localhost:8080')
-    .get('/api/v1/Solutions/S100000-001/sections/native-desktop-connection-details')
+  nock(apiLocalhost)
+    .get(`${apiPath}/sections/native-desktop-connection-details`)
     .reply(200, {});
 
   const getLocation = ClientFunction(() => document.location.href);
@@ -157,8 +156,8 @@ test.skip('should navigate the user to the connection details page when clicking
 test.skip('should navigate the user to memory and storage page when clicking on memory and storage dashboard row', async (t) => {
   await pageSetup(t);
 
-  nock('http://localhost:8080')
-    .get('/api/v1/Solutions/S100000-001/sections/native-desktop-memory-and-storage')
+  nock(apiLocalhost)
+    .get(`${apiPath}/sections/native-desktop-memory-and-storage`)
     .reply(200, {});
 
   const getLocation = ClientFunction(() => document.location.href);
@@ -174,8 +173,8 @@ test.skip('should navigate the user to memory and storage page when clicking on 
 test.skip('should navigate the user to third party page when clicking on third party dashboard row', async (t) => {
   await pageSetup(t);
 
-  nock('http://localhost:8080')
-    .get('/api/v1/Solutions/S100000-001/sections/native-desktop-third-party')
+  nock(apiLocalhost)
+    .get(`${apiPath}/sections/native-desktop-third-party`)
     .reply(200, {});
 
   const getLocation = ClientFunction(() => document.location.href);
@@ -191,8 +190,8 @@ test.skip('should navigate the user to third party page when clicking on third p
 test.skip('should navigate the user to hardware requirements page when clicking on hardware requirements dashboard row', async (t) => {
   await pageSetup(t);
 
-  nock('http://localhost:8080')
-    .get('/api/v1/Solutions/S100000-001/sections/native-desktop-hardware-requirements')
+  nock(apiLocalhost)
+    .get(`${apiPath}/sections/native-desktop-hardware-requirement`)
     .reply(200, {});
 
   const getLocation = ClientFunction(() => document.location.href);
@@ -208,8 +207,8 @@ test.skip('should navigate the user to hardware requirements page when clicking 
 test.skip('should navigate the user to additional information page when clicking on additional information dashboard row', async (t) => {
   await pageSetup(t);
 
-  nock('http://localhost:8080')
-    .get('/api/v1/Solutions/S100000-001/sections/native-desktop-additional-information')
+  nock(apiLocalhost)
+    .get(`${apiPath}/sections/native-desktop-additional-information`)
     .reply(200, {});
 
   const getLocation = ClientFunction(() => document.location.href);
@@ -233,15 +232,16 @@ test('should render the return to all sections link', async (t) => {
 test('should return to the marketing data dashboard when the return to all sections is clicked', async (t) => {
   await pageSetup(t);
 
-  nock('http://localhost:8080')
-    .get('/api/v1/Solutions/S100000-001/dashboard')
+  nock(apiLocalhost)
+    .get(`${apiPath}/dashboard`)
     .reply(200, dashboardWithCompleteSections);
 
   const getLocation = ClientFunction(() => document.location.href);
 
-  const link = Selector('[data-test-id="sub-dashboard-back-link"] a');
+  const link = Selector('[data-test-id="sub-dashboard-back-link"] div a');
 
   await t
+    .expect(link.exists).ok()
     .click(link)
     .expect(getLocation()).notContains('section')
     .expect(getLocation()).contains('S100000-001');

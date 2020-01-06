@@ -105,6 +105,44 @@
               }
             }
           }
+        },
+        "native-desktop": {
+          "sections": {
+            "native-desktop-operating-systems": {
+              "answers": {
+                "operating-systems-description": "Windows 7 and above."
+              }
+            },
+            "native-desktop-connection-details": {
+              "answers": {
+                "minimum-connection-speed": "2Mbps"
+              }
+            },
+            "native-desktop-memory-and-storage": {
+              "answers": {
+                "minimum-memory-requirement": "4GB",
+                "storage-requirements-description": "You will need at least 2.5GB of free space on each device the application is installed.",
+                "minimum-cpu": "Intel Core i5-4460 (3.4GHz) Quad-core or Better.",
+                "recommended-resolution": "16:9 - 1920 x 1080"
+              }
+            },
+            "native-desktop-third-party": {
+              "answers": {
+                "third-party-components": "To fully utilise the letter template functionality, you will need a fully licensed version of Microsoft Word 2013 or higher.",
+                "device-capabilities": "In order to use our branded wireless Dictaphone, the device will require Bluetooth."
+              }
+            },
+            "native-desktop-hardware-requirements": {
+              "answers": {
+                "hardware-requirements": "To fully utilise the transcribing functionality within the application, you will need to purchase our branded wireless Dictaphone."
+              }
+            },
+            "native-desktop-additional-information": {
+              "answers": {
+                "additional-information": "It is possible that it may install on other platforms or versions not listed in this section. However, support is limited to systems that meet the minimum requirements."
+              }
+            }
+          }
         }
       }
     }
