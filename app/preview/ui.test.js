@@ -248,3 +248,71 @@ test('when existing marketing data - The client application type section and nat
     .expect(additionalInformationRow.find('div[data-test-id="view-section-table-row-component"]').innerText).eql('It is possible that it may install on other platforms or versions not listed in this section. However, support is limited to systems that meet the minimum requirements.')
     .expect(additionalInformationRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok();
 });
+
+test('when existing marketing data - The client application type section and native-desktop section should be rendered', async (t) => {
+  pageSetup(t, true);
+
+  const clientApplicationTypesSection = Selector('[data-test-id="view-client-application-types"]');
+  const nativeDesktopExpandableSection = Selector('[data-test-id="view-section-native-desktop"]');
+  const nativeDesktopExpandableSectionTable = Selector('[data-test-id="view-section-table-native-desktop"]');
+  const operatingSystemDescriptionRow = nativeDesktopExpandableSectionTable.find('[data-test-id="view-section-table-row-operating-systems-description"]');
+  const minimumConnectionRow = nativeDesktopExpandableSectionTable.find('[data-test-id="view-section-table-row-minimum-connection-speed"]');
+  const minimumMemoryRow = nativeDesktopExpandableSectionTable.find('[data-test-id="view-section-table-row-minimum-memory-requirement"]');
+  const storageDescriptionRow = nativeDesktopExpandableSectionTable.find('[data-test-id="view-section-table-row-storage-requirements-description"]');
+  const minimumCPURow = nativeDesktopExpandableSectionTable.find('[data-test-id="view-section-table-row-minimum-cpu"]');
+  const recommendedResolutionRow = nativeDesktopExpandableSectionTable.find('[data-test-id="view-section-table-row-recommended-resolution"]');
+  const thirdPartyComponentsRow = nativeDesktopExpandableSectionTable.find('[data-test-id="view-section-table-row-third-party-components"]');
+  const deviceCapabilitiesRow = nativeDesktopExpandableSectionTable.find('[data-test-id="view-section-table-row-device-capabilities"]');
+  const hardwareRequirementsRow = nativeDesktopExpandableSectionTable.find('[data-test-id="view-section-table-row-hardware-requirements"]');
+  const additionalInformationRow = nativeDesktopExpandableSectionTable.find('[data-test-id="view-section-table-row-additional-information"]');
+
+  await t
+    .expect(clientApplicationTypesSection.exists).ok()
+    .expect(clientApplicationTypesSection.find('h3').innerText).eql('Client application type')
+
+    .expect(nativeDesktopExpandableSection.exists).ok()
+    .expect(nativeDesktopExpandableSection.innerText).eql('Native desktop application')
+    .expect(nativeDesktopExpandableSection.find('details[open]').exists).notOk()
+    .click(nativeDesktopExpandableSection.find('summary'))
+    .expect(nativeDesktopExpandableSection.find('details[open]').exists).ok()
+
+    .expect(operatingSystemDescriptionRow.find('div[data-test-id="view-section-table-row-title"]').innerText).eql('Supported operating systems')
+    .expect(operatingSystemDescriptionRow.find('div[data-test-id="view-section-table-row-component"]').innerText).eql('Windows 7 and above.')
+    .expect(operatingSystemDescriptionRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok()
+
+    .expect(minimumConnectionRow.find('div[data-test-id="view-section-table-row-title"]').innerText).eql('Minimum connection speed required')
+    .expect(minimumConnectionRow.find('div[data-test-id="view-section-table-row-component"]').innerText).eql('2Mbps')
+    .expect(minimumConnectionRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok()
+
+    .expect(minimumMemoryRow.find('div[data-test-id="view-section-table-row-title"]').innerText).eql('Minimum memory requirement')
+    .expect(minimumMemoryRow.find('div[data-test-id="view-section-table-row-component"]').innerText).eql('4GB')
+    .expect(minimumMemoryRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok()
+
+    .expect(storageDescriptionRow.find('div[data-test-id="view-section-table-row-title"]').innerText).eql('Additional storage requirements')
+    .expect(storageDescriptionRow.find('div[data-test-id="view-section-table-row-component"]').innerText).eql('You will need at least 2.5GB of free space on each device the application is installed.')
+    .expect(storageDescriptionRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok()
+
+    .expect(minimumCPURow.find('div[data-test-id="view-section-table-row-title"]').innerText).eql('Minimum necessary CPU power')
+    .expect(minimumCPURow.find('div[data-test-id="view-section-table-row-component"]').innerText).eql('Intel Core i5-4460 (3.4GHz) Quad-core or Better.')
+    .expect(minimumCPURow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok()
+
+    .expect(recommendedResolutionRow.find('div[data-test-id="view-section-table-row-title"]').innerText).eql('Recommended desktop aspect ratio and screen resolution')
+    .expect(recommendedResolutionRow.find('div[data-test-id="view-section-table-row-component"]').innerText).eql('16:9 - 1920 x 1080')
+    .expect(recommendedResolutionRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok()
+
+    .expect(thirdPartyComponentsRow.find('div[data-test-id="view-section-table-row-title"]').innerText).eql('Third party components required')
+    .expect(thirdPartyComponentsRow.find('div[data-test-id="view-section-table-row-component"]').innerText).eql('To fully utilise the letter template functionality, you will need a fully licensed version of Microsoft Word 2013 or higher.')
+    .expect(thirdPartyComponentsRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok()
+
+    .expect(deviceCapabilitiesRow.find('div[data-test-id="view-section-table-row-title"]').innerText).eql('Device capabilities required')
+    .expect(deviceCapabilitiesRow.find('div[data-test-id="view-section-table-row-component"]').innerText).eql('In order to use our branded wireless Dictaphone, the device will require Bluetooth.')
+    .expect(deviceCapabilitiesRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok()
+
+    .expect(hardwareRequirementsRow.find('div[data-test-id="view-section-table-row-title"]').innerText).eql('Hardware requirements')
+    .expect(hardwareRequirementsRow.find('div[data-test-id="view-section-table-row-component"]').innerText).eql('To fully utilise the transcribing functionality within the application, you will need to purchase our branded wireless Dictaphone.')
+    .expect(hardwareRequirementsRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok()
+
+    .expect(additionalInformationRow.find('div[data-test-id="view-section-table-row-title"]').innerText).eql('Additional information')
+    .expect(additionalInformationRow.find('div[data-test-id="view-section-table-row-component"]').innerText).eql('It is possible that it may install on other platforms or versions not listed in this section. However, support is limited to systems that meet the minimum requirements.')
+    .expect(additionalInformationRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok();
+});

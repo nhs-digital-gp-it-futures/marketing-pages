@@ -1,0 +1,22 @@
+{
+  "id": "native-desktop-operating-systems",
+  "title": "Native desktop - supported operating systems",
+  "mainAdvice": "Answer the following questions about your desktop based Solution",
+  "additionalAdvice": [
+    "This information will be visible to buyers on your Solution page."
+  ],
+  "questions": {
+    "operating-systems-description": {
+      "mainAdvice": "Description of supported operating systems",
+      "additionalAdvice": "Provide details of the operating systems the Solution supports.",
+      "footerAdvice": "You can enter up to 1000 characters",
+      "type": "textarea-field",
+      "errorResponse": {
+        "maxLength": "Description of supported operating systems is over the character limit",
+        "required": "Description of supported operating systems is a mandatory question"
+      }
+    }
+  },
+  "submitText" : "Save and return",
+  "successfulSubmitResponsePath" : "dashboard/native-desktop"
+}
