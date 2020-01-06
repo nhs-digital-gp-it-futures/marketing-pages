@@ -1,0 +1,77 @@
+{
+  "id": "native-desktop-connection-details",
+  "title": "Native desktop - memory, storage, processing and aspect ratio",
+  "mainAdvice": "Answer the following questions about your desktop based Solution",
+  "additionalAdvice": [
+    "This information will be visible to buyers on your Solution page."
+  ],
+  "questions": {
+    "minimum-memory-requirement": {
+      "mainAdvice": "Select the minimum memory requirement for your Solution to function?",
+      "additionalAdvice": "Please select below the minimum memory requirement.",
+      "type": "combobox-options",
+      "options": {
+        "": "Please select",
+        "256MB": "256MB",
+        "512MB": "512MB",
+        "1GB": "1GB",
+        "2GB": "2GB",
+        "4GB": "4GB",
+        "8GB": "8GB",
+        "16GB or higher": "16GB or higher"
+      },
+      "errorResponse": {
+        "required": "Minimum memory requirement is a mandatory question"
+      }
+    },
+    "storage-requirements-description": {
+      "mainAdvice": "Description of storage requirements",
+      "additionalAdvice": "Add further information about the storage requirements needed for your Solution to function.",
+      "footerAdvice": "You can enter up to 300 characters",
+      "type": "textarea-field",
+      "errorResponse": {
+        "required": "Storage requirement description is a mandatory question",
+        "maxLength": "Storage requirement description is over the character limit"
+      }
+    },
+    "minimum-cpu": {
+      "mainAdvice": "Minimum necessary CPU power",
+      "additionalAdvice": "Add further information about the minimum CPU power required for your Solution to function.",
+      "footerAdvice": "You can enter up to 300 characters",
+      "type": "textarea-field",
+      "errorResponse": {
+        "required": "Minimum necessary CPU power is a mandatory question",
+        "maxLength": "Minimum necessary CPU power is over the character limit"
+      }
+    },
+    "recommended-resolution": {
+      "mainAdvice": "What is the recommended desktop aspect ratio and screen resolution? (optional)",
+      "additionalAdvice": "Please select below the minimum resolution required for your Solution to function on desktop.",
+      "type": "combobox-options",
+      "options": {
+        "": "Please select",
+        "16:9 - 640 x 360": "16:9 - 640 x 360",
+        "4:3 - 800 x 600": "4:3 - 800 x 600",
+        "4:3 - 1024 x 768": "4:3 - 1024 x 768",
+        "16:9 - 1280 x 720": "16:9 - 1280 x 720",
+        "16:10 - 1280 x 800": "16:10 - 1280 x 800",
+        "5:4 - 1280 x 1024": "5:4 - 1280 x 1024",
+        "16:9 - 1360 x 768": "16:9 - 1360 x 768",
+        "16:9 - 1366 x 768": "16:9 - 1366 x 768",
+        "16:10 - 1440 x 900": "16:10 - 1440 x 900",
+        "16:9 - 1536 x 864": "16:9 - 1536 x 864",
+        "16:9 - 1600 x 900": "16:9 - 1600 x 900",
+        "16:10 - 1680 x 1050": "16:10 - 1680 x 1050",
+        "16:9 - 1920 x 1080": "16:9 - 1920 x 1080",
+        "16:10 - 1920 x 1200": "16:10 - 1920 x 1200",
+        "16:9 - 2048 x 1152": "16:9 - 2048 x 1152",
+        "21:9 - 2560 x 1080": "21:9 - 2560 x 1080",
+        "16:9 - 2560 x 1440": "16:9 - 2560 x 1440",
+        "21:9 - 3440 x 1440": "21:9 - 3440 x 1440",
+        "16:9 - 3840 x 2160": "16:9 - 3840 x 2160"
+      }
+    }
+  },
+  "submitText" : "Save and return",
+  "successfulSubmitResponsePath" : "dashboard/native-desktop"
+}

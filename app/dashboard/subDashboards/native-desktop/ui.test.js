@@ -151,8 +151,7 @@ test('should navigate the user to the connection details page when clicking on t
     .expect(getLocation()).contains('S100000-001/dashboard/native-desktop/section/native-desktop-connection-details');
 });
 
-// TODO: Remove skip when page complete.
-test.skip('should navigate the user to memory and storage page when clicking on memory and storage dashboard row', async (t) => {
+test('should navigate the user to memory and storage page when clicking on memory and storage dashboard row', async (t) => {
   await pageSetup(t);
 
   nock(apiLocalhost)
