@@ -49,7 +49,7 @@ test('when no existing marketing data - The solution description section should 
 });
 
 test('when existing marketing data - The solution description section and all questions should be rendered', async (t) => {
-  await (t, true);
+  await pageSetup(t, true);
 
   const solutionDescriptionSection = Selector('[data-test-id="view-solution-description"]');
   const summaryQuestion = Selector('[data-test-id="view-section-question-summary"]');
