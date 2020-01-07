@@ -18,7 +18,7 @@ const populateBulletpointListTest = async ({
   data,
 }) => {
   await test(`should populate the text fields in ${questionId} question bulletpoint list with existing data`, async (t) => {
-    pageSetup({ t, responseBody: data });
+    await pageSetup({ t, responseBody: data });
     const existingFeatures = data.listing;
     await Promise.all(existingFeatures.map(async (existingFeature, i) => {
       const theField = Selector(`[data-test-id="field-${questionId}-${i + 1}"]`);

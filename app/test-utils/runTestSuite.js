@@ -13,8 +13,8 @@ export const runTestSuite = async ({
   const clientUrl = dashboardId ? `${clientLocalhost}/dashboard/${dashboardId}/section/${sectionId}`
     : `${clientLocalhost}/section/${sectionId}`;
 
-  const mocks = (responseStatus, responseBody) => {
-    nock(apiLocalhost)
+  const mocks = async (responseStatus, responseBody) => {
+    await nock(apiLocalhost)
       .get(`${apiPath}/sections/${sectionId}`)
       .reply(responseStatus, responseBody);
   };
@@ -24,7 +24,7 @@ export const runTestSuite = async ({
     responseStatus = 200,
     responseBody = {},
   }) => {
-    mocks(responseStatus, responseBody);
+    await mocks(responseStatus, responseBody);
     await t.navigateTo(clientUrl);
   };
 

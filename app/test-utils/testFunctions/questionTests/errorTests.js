@@ -100,7 +100,7 @@ const errorTests = ({
   test(`should go to anchor when clicking the ${questionIdToRun} error link`, async (t) => {
     await pageSetup({ t });
 
-    nock(apiLocalhost)
+    await nock(apiLocalhost)
       .put(`${apiPath}/sections/${sectionId}`)
       .reply(400, responseBody);
 

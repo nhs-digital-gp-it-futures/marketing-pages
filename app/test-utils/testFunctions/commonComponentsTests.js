@@ -59,10 +59,10 @@ const submitButtonClickedTest = async ({
   if (sectionManifest.successfulSubmitResponsePath) {
     await test(`should go to ${sectionManifest.successfulSubmitResponsePath} when clicking the submit button`, async (t) => {
       await pageSetup({ t, responseBody: data });
-      nock(apiLocalhost)
+      await nock(apiLocalhost)
         .put(`${apiPath}/sections/${sectionId}`, data)
         .reply(200, data);
-      nock(apiLocalhost)
+      await nock(apiLocalhost)
         .get(`${apiPath}/dashboards/${dashboardId}`)
         .reply(200, {});
 
@@ -89,7 +89,7 @@ const sectionsLinkTest = async ({ pageSetup }) => {
 const sectionsLinkClickedTest = async ({ pageSetup }) => {
   await test('should return to the marketing data dashboard when the return to all sections is clicked', async (t) => {
     await pageSetup({ t });
-    nock(apiLocalhost)
+    await nock(apiLocalhost)
       .get(`${apiPath}/dashboard`)
       .reply(200, dashboardWithCompleteSections);
     const link = Selector('[data-test-id="section-back-link"] a');
