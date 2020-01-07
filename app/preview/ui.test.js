@@ -206,7 +206,7 @@ test('when existing marketing data - The client application type section and nat
 
     .expect(operatingSystemDescriptionRow.find('div[data-test-id="view-section-table-row-title"]').innerText).eql('Additional operating system information')
     .expect(operatingSystemDescriptionRow.find('div[data-test-id="view-section-table-row-component"]').innerText).eql('Android 4.1 and above, IOS 10.6 and above.')
-    .expect(operatingSystemDescriptionRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok()
+    .expect(operatingSystemDescriptionRow.find('div[data-test-id="view-section-table-row-vertical"]').exists).ok()
 
     .expect(mobileFirstRow.find('div[data-test-id="view-section-table-row-title"]').innerText).eql('Designed with a mobile first approach')
     .expect(mobileFirstRow.find('div[data-test-id="view-section-table-row-component"]').innerText).eql('Yes')
