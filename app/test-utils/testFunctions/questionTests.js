@@ -15,7 +15,7 @@ export const runQuestionTests = async ({
   dashboardId,
   errorPostBodyData,
 }) => {
-  await Promise.all([Object.keys(sectionManifest.questions).map(async (questionId) => {
+  Promise.all([Object.keys(sectionManifest.questions).map(async (questionId) => {
     const questionData = sectionManifest.questions[questionId];
     const questionType = questionData.type;
     if (questionType === 'radiobutton-options') {
