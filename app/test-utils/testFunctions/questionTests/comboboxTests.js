@@ -30,7 +30,7 @@ const populateComboboxTest = async ({
   data,
 }) => {
   await test(`should populate the ${questionId} combobox question with existing data`, async (t) => {
-    pageSetup({ t, responseBody: data });
+    await pageSetup({ t, responseBody: data });
     const renderedQuestion = Selector(`[data-test-id="question-${questionId}"]`);
     await t
       .expect(renderedQuestion.find('option[selected]').exists).ok()

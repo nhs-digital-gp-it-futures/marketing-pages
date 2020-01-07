@@ -49,7 +49,7 @@ test('when no existing marketing data - The solution description section should 
 });
 
 test('when existing marketing data - The solution description section and all questions should be rendered', async (t) => {
-  pageSetup(t, true);
+  await (t, true);
 
   const solutionDescriptionSection = Selector('[data-test-id="view-solution-description"]');
   const summaryQuestion = Selector('[data-test-id="view-section-question-summary"]');
@@ -83,7 +83,7 @@ test('when no existing marketing data - The features section should not be rende
 });
 
 test('when existing marketing data - The features section should be rendered and the features displayed', async (t) => {
-  pageSetup(t, true);
+  await pageSetup(t, true);
 
   const featuresSection = Selector('[data-test-id="view-features"]');
 
@@ -110,7 +110,7 @@ test('when no existing marketing data - The client-application-types section sho
 });
 
 test('when existing marketing data - The client application type section and browser-based section should be rendered', async (t) => {
-  pageSetup(t, true);
+  await pageSetup(t, true);
   const clientApplicationTypesSection = Selector('[data-test-id="view-client-application-types"]');
   const browserBasedExpandableSection = Selector('[data-test-id="view-section-browser-based"]');
   const browserBasedExpandaleSectionTable = Selector('[data-test-id="view-section-table-browser-based"]');
@@ -172,7 +172,7 @@ test('when existing marketing data - The client application type section and bro
 });
 
 test('when existing marketing data - The client application type section and native-mobile section should be rendered', async (t) => {
-  pageSetup(t, true);
+  await pageSetup(t, true);
 
   const clientApplicationTypesSection = Selector('[data-test-id="view-client-application-types"]');
   const nativeMobileExpandableSection = Selector('[data-test-id="view-section-native-mobile"]');
@@ -250,7 +250,7 @@ test('when existing marketing data - The client application type section and nat
 });
 
 test('when existing marketing data - The client application type section and native-desktop section should be rendered', async (t) => {
-  pageSetup(t, true);
+  await pageSetup(t, true);
 
   const clientApplicationTypesSection = Selector('[data-test-id="view-client-application-types"]');
   const nativeDesktopExpandableSection = Selector('[data-test-id="view-section-native-desktop"]');
