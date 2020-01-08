@@ -43,9 +43,10 @@ const submitButtonTest = async ({ pageSetup, sectionManifest }) => {
   await test('should render the submit button', async (t) => {
     await pageSetup({ t });
     const submitButton = Selector('[data-test-id="section-submit-button"]');
+    const submitButtonText = await submitButton.find('button').innerText;
     await t
       .expect(submitButton.find('button').count).eql(1)
-      .expect(submitButton.find('button').innerText).eql(sectionManifest.submitText);
+      .expect(submitButtonText.trim()).eql(sectionManifest.submitText);
   });
 };
 
