@@ -82,8 +82,9 @@ const sectionsLinkTest = async ({ pageSetup }) => {
   await test('should render the return to all sections link', async (t) => {
     await pageSetup({ t });
     const link = Selector('[data-test-id="section-back-link"] a');
+    const linkText = await link.innerText;
     await t
-      .expect(link.innerText).eql('Return to all sections');
+      .expect(linkText.trim()).eql('Return to all sections');
   });
 };
 
