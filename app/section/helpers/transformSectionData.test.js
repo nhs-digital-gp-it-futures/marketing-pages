@@ -173,7 +173,7 @@ describe('transformSectionData', () => {
       });
     });
 
-    describe('tex-field', () => {
+    describe('text-field', () => {
       it('should trim whitespace from the string', () => {
         const sectionData = {
           'some-question-id-1': '    some value    ',
