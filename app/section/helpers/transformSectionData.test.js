@@ -123,6 +123,7 @@ describe('transformSectionData', () => {
         expect(transformedSectionData).toEqual(expectedTransformedSectionData);
       });
     });
+
     describe('radiobutton-options', () => {
       it('should return the sectionData provided if it is a string', () => {
         const sectionData = {
@@ -152,6 +153,57 @@ describe('transformSectionData', () => {
         };
         const transformedSectionData = transformSectionData({ sectionManifest, sectionData: {} });
         expect(transformedSectionData).toEqual(sectionData);
+      });
+    });
+
+    describe('textarea-field', () => {
+      it('should trim whitespace from the string', () => {
+        const sectionData = {
+          'some-question-id-1': '    some value    ',
+        };
+        const sectionManifest = {
+          questions: {
+            'some-question-id-1': {
+              type: 'textarea-field',
+            },
+          },
+        };
+        const transformedSectionData = transformSectionData({ sectionManifest, sectionData });
+        expect(transformedSectionData).toEqual({ 'some-question-id-1': 'some value' });
+      });
+    });
+
+    describe('text-field', () => {
+      it('should trim whitespace from the string', () => {
+        const sectionData = {
+          'some-question-id-1': '    some value    ',
+        };
+        const sectionManifest = {
+          questions: {
+            'some-question-id-1': {
+              type: 'text-field',
+            },
+          },
+        };
+        const transformedSectionData = transformSectionData({ sectionManifest, sectionData });
+        expect(transformedSectionData).toEqual({ 'some-question-id-1': 'some value' });
+      });
+    });
+
+    describe('bulletpoint-list', () => {
+      it('should trim whitespace from the string', () => {
+        const sectionData = {
+          'some-question-id-1': ['    some value    ', ''],
+        };
+        const sectionManifest = {
+          questions: {
+            'some-question-id-1': {
+              type: 'bulletpoint-list',
+            },
+          },
+        };
+        const transformedSectionData = transformSectionData({ sectionManifest, sectionData });
+        expect(transformedSectionData).toEqual({ 'some-question-id-1': ['some value', ''] });
       });
     });
   });

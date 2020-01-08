@@ -185,7 +185,7 @@ test('should render all the sub sections for the client application type section
 });
 
 test('should render all the sub sections for the client application type section with requirment and status when all 3 application types have been selected', async (t) => {
-  pageSetup(t, false);
+  await pageSetup(t, false);
 
   const clientApplicationTypeSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-client-application-type"]');
   const clientApplicationTypeSection = clientApplicationTypeSectionGroup.find('[data-test-id="dashboard-section-client-application-types"]');

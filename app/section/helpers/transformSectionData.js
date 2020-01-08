@@ -19,6 +19,15 @@ const transformationStratergy = {
   'radiobutton-options': {
     transform: questionValue => emptyValueTransformation(questionValue),
   },
+  'textarea-field': {
+    transform: questionValue => questionValue.trim(),
+  },
+  'text-field': {
+    transform: questionValue => questionValue.trim(),
+  },
+  'bulletpoint-list': {
+    transform: questionValue => questionValue.map(s => s.trim()),
+  },
 };
 
 export const transformSectionData = ({
