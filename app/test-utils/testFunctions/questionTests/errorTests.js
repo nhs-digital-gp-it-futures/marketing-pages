@@ -86,7 +86,8 @@ const errorTests = ({
       .expect(errorSummaryList.find('li:nth-child(1)').innerText).eql(expectedErrorMessage)
       .expect(errorSummaryList.find('li:nth-child(1) a').getAttribute('href')).eql(`${expectedAnchorLink}`)
       .expect(renderedQuestion.exists).ok()
-      .expect(renderedQuestion.find('.nhsuk-error-message').innerText).eql(`Error:\n${expectedErrorMessage}`);
+      .expect(renderedQuestion.find('.nhsuk-error-message').innerText).contains('Error:')
+      .expect(renderedQuestion.find('.nhsuk-error-message').innerText).contains(expectedErrorMessage);
     if (questionType === 'textarea-field') {
       await t
         .expect(renderedQuestion.find('.nhsuk-textarea--error').exists).ok();

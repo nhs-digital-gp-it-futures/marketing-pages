@@ -31,13 +31,6 @@ export const runTestSuite = async ({
   const sectionManifest = new ManifestProvider().getSectionManifest({ sectionId, dashboardId });
 
   fixture(`Show ${sectionManifest.title} page`);
-// .afterEach(async (t) => {
-//   const isDone = nock.isDone();
-//   if (!isDone) {
-//     nock.cleanAll();
-//   }
-//   await t.expect(isDone).ok('Not all nock interceptors were used!');
-// });
 
   await Promise.all([
     runCommonComponentsTests({

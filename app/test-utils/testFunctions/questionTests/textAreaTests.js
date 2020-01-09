@@ -5,8 +5,9 @@ const textAreaTest = async ({ pageSetup, sectionManifest, questionId }) => {
     await pageSetup({ t });
     const renderedQuestion = Selector(`[data-test-id="question-${questionId}"]`);
     const expectedQuestion = sectionManifest.questions[questionId];
+    const labelText = await renderedQuestion.find('label.nhsuk-label').innerText;
     await t
-      .expect(renderedQuestion.find('label.nhsuk-label').innerText).eql(expectedQuestion.mainAdvice)
+      .expect(labelText.trim()).eql(expectedQuestion.mainAdvice)
       .expect(renderedQuestion.find('span.nhsuk-hint').innerText).eql(expectedQuestion.additionalAdvice)
       .expect(renderedQuestion.find('textarea').count).eql(1)
       .expect(renderedQuestion.find('[data-test-id="textarea-field-footer"]').innerText).eql(expectedQuestion.footerAdvice);

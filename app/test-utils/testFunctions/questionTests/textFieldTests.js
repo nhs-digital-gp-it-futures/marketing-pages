@@ -12,10 +12,11 @@ const textFieldTest = async ({
     await pageSetup({ t });
     const renderedQuestion = Selector(`[data-test-id="question-${modifiedQuestionId}"]`);
     const expectedQuestion = sectionManifest.questions[questionId];
+    const labelText = await renderedQuestion.find('label.nhsuk-label').innerText;
 
     if (expectedQuestion.mainAdvice) {
       await t
-        .expect(renderedQuestion.find('label.nhsuk-label').innerText).eql(expectedQuestion.mainAdvice);
+        .expect(labelText.trim()).eql(expectedQuestion.mainAdvice);
     }
     if (expectedQuestion.additionalAdvice) {
       await t

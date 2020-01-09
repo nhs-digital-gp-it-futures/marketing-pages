@@ -23,13 +23,6 @@ const pageSetup = async (t, initalDashboard = true) => {
 };
 
 fixture('Show marketing dashboard page');
-// .afterEach(async (t) => {
-//   const isDone = nock.isDone();
-//   if (!isDone) {
-//     nock.cleanAll();
-// }
-// await t.expect(isDone).ok('Not all nock interceptors were used!');
-// });
 
 test('should render the marketing dashboard page title', async (t) => {
   await pageSetup(t);
