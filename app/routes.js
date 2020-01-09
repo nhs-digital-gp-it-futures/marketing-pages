@@ -4,7 +4,7 @@ import { getSubDashboardPageContext } from './pages/dashboard/subDashboards/cont
 import { getSectionPageContext, getSectionPageErrorContext, postSection } from './pages/section/controller';
 import { getPreviewPageContext } from './pages/preview/controller';
 import logger from './logger';
-import { errorHandler } from './error/errorHandler';
+import { errorHandler } from './pages/error/errorHandler';
 
 const router = express.Router();
 
@@ -137,7 +137,7 @@ router.use((err, req, res, next) => {
   if (err) {
     const context = errorHandler(err);
     logger.error(context.message);
-    res.render('error/template.njk', context);
+    res.render('pages/error/template.njk', context);
   } else {
     next();
   }
