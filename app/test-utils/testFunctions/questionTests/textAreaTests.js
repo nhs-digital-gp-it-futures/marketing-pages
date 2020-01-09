@@ -6,11 +6,13 @@ const textAreaTest = async ({ pageSetup, sectionManifest, questionId }) => {
     const renderedQuestion = Selector(`[data-test-id="question-${questionId}"]`);
     const expectedQuestion = sectionManifest.questions[questionId];
     const labelText = await renderedQuestion.find('label.nhsuk-label').innerText;
+    const hintText = await renderedQuestion.find('span.nhsuk-hint').innerText;
+    const footerText = await renderedQuestion.find('[data-test-id="textarea-field-footer"]').innerText;
     await t
       .expect(labelText.trim()).eql(expectedQuestion.mainAdvice)
-      .expect(renderedQuestion.find('span.nhsuk-hint').innerText).eql(expectedQuestion.additionalAdvice)
+      .expect(hintText.trim()).eql(expectedQuestion.additionalAdvice)
       .expect(renderedQuestion.find('textarea').count).eql(1)
-      .expect(renderedQuestion.find('[data-test-id="textarea-field-footer"]').innerText).eql(expectedQuestion.footerAdvice);
+      .expect(footerText.trim()).eql(expectedQuestion.footerAdvice);
   });
 };
 
