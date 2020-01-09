@@ -6,9 +6,10 @@ const radioButtonsTest = async ({ pageSetup, sectionManifest, questionId }) => {
     const renderedQuestion = Selector(`[data-test-id="question-${questionId}"]`);
     const expectedQuestion = sectionManifest.questions[questionId];
     const numberOfRadioButtons = Object.keys(expectedQuestion.options).length;
+    const hintText = await renderedQuestion.find('.nhsuk-hint').innerText;
     await t
       .expect(renderedQuestion.find('.nhsuk-fieldset__legend').innerText).eql(expectedQuestion.mainAdvice)
-      .expect(renderedQuestion.find('.nhsuk-hint').innerText).eql(expectedQuestion.additionalAdvice)
+      .expect(hintText.trim()).eql(expectedQuestion.additionalAdvice)
       .expect(renderedQuestion.find('.nhsuk-radios').count).eql(1)
       .expect(renderedQuestion.find('.nhsuk-radios__item').count).eql(numberOfRadioButtons);
 

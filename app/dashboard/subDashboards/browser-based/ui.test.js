@@ -16,13 +16,6 @@ const pageSetup = async (t) => {
 };
 
 fixture('Show browser based dashboard page');
-// .afterEach(async (t) => {
-// const isDone = nock.isDone();
-// if (!isDone) {
-//   nock.cleanAll();
-// }
-// await t.expect(isDone).ok('Not all nock interceptors were used!');
-// });
 
 test('should render the browser based dashboard page title', async (t) => {
   await pageSetup(t);
@@ -224,9 +217,10 @@ test('should render the return to all sections link', async (t) => {
   await pageSetup(t);
 
   const link = Selector('[data-test-id="sub-dashboard-back-link"] a');
+  const linkText = await link.innerText;
 
   await t
-    .expect(link.innerText).eql('Return to all sections');
+    .expect(linkText.trim()).eql('Return to all sections');
 });
 
 test('should return to the marketing data dashboard when the return to all sections is clicked', async (t) => {
