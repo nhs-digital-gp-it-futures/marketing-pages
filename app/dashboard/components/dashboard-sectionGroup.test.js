@@ -34,7 +34,8 @@ describe('dashboard-sectionGroup', () => {
 
   it('should render a section list of 1 if the sectionGroup group only contains the 1 section', (done) => {
     const aSectionGroupWithOneSection = aSectionGroupContext([aSectionContext('Some section')]);
-    const dummyApp = testHarness().createTemplateDummyApp(macroWrapper, aSectionGroupWithOneSection);
+    const dummyApp = testHarness()
+      .createTemplateDummyApp(macroWrapper, aSectionGroupWithOneSection);
 
     request(dummyApp)
       .get('/')
@@ -49,7 +50,8 @@ describe('dashboard-sectionGroup', () => {
 
   it('should render a section list of 2 if the sectionGroup group contains 2 sections', (done) => {
     const aSectionGroupWithTwoSections = aSectionGroupContext([aSectionContext('Some First section'), aSectionContext('Some Second section')]);
-    const dummyApp = testHarness().createTemplateDummyApp(macroWrapper, aSectionGroupWithTwoSections);
+    const dummyApp = testHarness()
+      .createTemplateDummyApp(macroWrapper, aSectionGroupWithTwoSections);
 
     request(dummyApp)
       .get('/')
