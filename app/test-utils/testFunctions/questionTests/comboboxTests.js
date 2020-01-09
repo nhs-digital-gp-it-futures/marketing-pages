@@ -11,9 +11,10 @@ export const comboboxTest = async ({
     const expectedQuestion = sectionManifest.questions[questionId];
     const options = Object.keys(expectedQuestion.options);
     const labelText = await renderedQuestion.find('.nhsuk-label').innerText;
+    const hintText = await renderedQuestion.find('.nhsuk-hint').innerText;
     await t
       .expect(labelText.trim()).eql(expectedQuestion.mainAdvice)
-      .expect(renderedQuestion.find('.nhsuk-hint').innerText).eql(expectedQuestion.additionalAdvice)
+      .expect(hintText.trim()).eql(expectedQuestion.additionalAdvice)
       .expect(renderedQuestion.find('select').exists).ok()
       .expect(renderedQuestion.find('option').count).eql(options.length);
     await Promise.all(options.map(async (option) => {

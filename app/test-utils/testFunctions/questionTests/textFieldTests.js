@@ -13,6 +13,7 @@ const textFieldTest = async ({
     const renderedQuestion = Selector(`[data-test-id="question-${modifiedQuestionId}"]`);
     const expectedQuestion = sectionManifest.questions[questionId];
     const labelText = await renderedQuestion.find('label.nhsuk-label').innerText;
+    const hintText = await renderedQuestion.find('span.nhsuk-hint').innerText;
 
     if (expectedQuestion.mainAdvice) {
       await t
@@ -20,7 +21,7 @@ const textFieldTest = async ({
     }
     if (expectedQuestion.additionalAdvice) {
       await t
-        .expect(renderedQuestion.find('span.nhsuk-hint').innerText).eql(expectedQuestion.additionalAdvice);
+        .expect(hintText.trim()).eql(expectedQuestion.additionalAdvice);
     }
     await t
       .expect(renderedQuestion.find('input').count).eql(1);

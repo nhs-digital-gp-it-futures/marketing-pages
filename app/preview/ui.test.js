@@ -334,7 +334,7 @@ test('when existing marketing data - The client application type section and nat
     .expect(clientApplicationTypesSection.find('h3').innerText).eql('Client application type')
 
     .expect(nativeDesktopExpandableSection.exists).ok()
-    .expect(nativeDesktopExpandableSectionText).eql('Native desktop application')
+    .expect(nativeDesktopExpandableSectionText.trim()).eql('Native desktop application')
     .expect(nativeDesktopExpandableSection.find('details[open]').exists).notOk()
     .click(nativeDesktopExpandableSection.find('summary'))
     .expect(nativeDesktopExpandableSection.find('details[open]').exists).ok()
