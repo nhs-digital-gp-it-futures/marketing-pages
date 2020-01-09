@@ -1,8 +1,8 @@
 import express from 'express';
 import { getMarketingPageDashboardContext, postSubmitForModeration } from './pages/dashboard/controller';
 import { getSubDashboardPageContext } from './pages/dashboard/subDashboards/controller';
-import { getSectionPageContext, getSectionPageErrorContext, postSection } from './section/controller';
-import { getPreviewPageContext } from './preview/controller';
+import { getSectionPageContext, getSectionPageErrorContext, postSection } from './pages/section/controller';
+import { getPreviewPageContext } from './pages/preview/controller';
 import logger from './logger';
 import { errorHandler } from './error/errorHandler';
 
@@ -30,7 +30,7 @@ router.get('/solution/:solutionId/section/:sectionId', async (req, res, next) =>
   logger.info(`navigating to Solution ${solutionId}: section ${sectionId}`);
   try {
     const context = await getSectionPageContext({ solutionId, sectionId });
-    res.render('section/template', context);
+    res.render('pages/section/template', context);
   } catch (err) {
     next(err);
   }
@@ -49,7 +49,7 @@ router.post('/solution/:solutionId/section/:sectionId', async (req, res, next) =
       const context = await getSectionPageErrorContext({
         solutionId, sectionId, sectionData, validationErrors: response,
       });
-      res.render('section/template', context);
+      res.render('pages/section/template', context);
     }
   } catch (err) {
     next(err);
@@ -72,7 +72,7 @@ router.get('/solution/:solutionId/dashboard/:dashboardId/section/:sectionId', as
   logger.info(`navigating to Solution ${solutionId}: dashboard ${dashboardId}: section ${sectionId}`);
   try {
     const context = await getSectionPageContext({ solutionId, dashboardId, sectionId });
-    res.render('section/template', context);
+    res.render('pages/section/template', context);
   } catch (err) {
     next(err);
   }
@@ -91,7 +91,7 @@ router.post('/solution/:solutionId/dashboard/:dashboardId/section/:sectionId', a
       const context = await getSectionPageErrorContext({
         solutionId, sectionId, sectionData, validationErrors: response, dashboardId,
       });
-      res.render('section/template', context);
+      res.render('pages/section/template', context);
     }
   } catch (err) {
     next(err);
@@ -103,7 +103,7 @@ router.get('/solution/:solutionId/preview', async (req, res, next) => {
   logger.info(`navigating to Solution ${solutionId} preview`);
   try {
     const context = await getPreviewPageContext({ solutionId });
-    res.render('preview/template', context);
+    res.render('pages/preview/template', context);
   } catch (err) {
     next(err);
   }
@@ -119,7 +119,7 @@ router.get('/solution/:solutionId/submitForModeration', async (req, res, next) =
       const context = await getMarketingPageDashboardContext({
         solutionId, validationErrors: response,
       });
-      res.render('dashboard/template', context);
+      res.render('pages/dashboard/template', context);
     }
   } catch (err) {
     next(err);
