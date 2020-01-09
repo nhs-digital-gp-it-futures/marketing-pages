@@ -10,7 +10,7 @@
     "build:js": "npm run webpack",
     "clean": "touch public/tmp.txt && rm -rf public/*",
     "lint": "npm run lint:js && npm run lint:css",
-    "lint:js": "eslint app/scripts/**",
+    "lint:js": "eslint '**/*.js' --ignore-pattern node_modules/",
     "lint:css": "sass-lint 'app/**/*.scss' -v -q",
     "nuke": "npm run clean && rm -rf node_modules/",
     "start": "npm run build && babel-node server",
@@ -56,6 +56,7 @@
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.2.0",
     "eslint-plugin-import": "^2.18.2",
+    "husky": "^4.0.3",
     "jest": "^24.8.0",
     "jest-nunit-reporter": "^1.3.1",
     "nock": "^10.0.6",
@@ -76,5 +77,10 @@
   },
   "jestNunitReporter": {
     "outputFilename": "unit-test-report.xml"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "npm run lint"
+    }
   }
 }

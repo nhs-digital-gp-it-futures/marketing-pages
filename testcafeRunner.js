@@ -30,7 +30,7 @@ createTestcafe('localhost')
       }])
       .run();
   })
-  .then((failCount) => {
+  .then(() => {
     server.close();
     testcafe.close();
   });

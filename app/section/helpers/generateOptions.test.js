@@ -105,7 +105,12 @@ describe('generateOptions', () => {
       ],
     };
 
-    const generatedOptions = generateOptions({ questionId: 'some-question-id', options, formData, questionType: 'combobox-options' });
+    const generatedOptions = generateOptions({
+      questionId: 'some-question-id',
+      options,
+      formData,
+      questionType: 'combobox-options',
+    });
 
     expect(generatedOptions).toEqual(expectedOptions);
   });

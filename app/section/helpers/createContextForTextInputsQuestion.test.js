@@ -16,7 +16,7 @@ describe('createContextForTextInputsQuestion', () => {
     };
 
     const context = createContextForTextInputsQuestion({
-      questionId:'some-question-id', questionManifest,
+      questionId: 'some-question-id', questionManifest,
     });
 
     expect(context).toEqual(expectedContext);

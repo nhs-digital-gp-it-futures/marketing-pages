@@ -15,10 +15,9 @@ const pageSetup = async (t) => {
   await t.navigateTo(`${clientLocalhost}/dashboard/native-desktop`);
 };
 
-fixture('Show native desktop dashboard page')
+fixture('Show native desktop dashboard page');
 
 test('should render the native desktop dashboard page title', async (t) => {
-
   await pageSetup(t);
 
   const title = Selector('[data-test-id="sub-dashboard-title"]');
