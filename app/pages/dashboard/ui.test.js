@@ -292,7 +292,6 @@ test('should render the Error summary containing all the sections that failed th
   await t
     .expect(errorSummary.exists).notOk()
     .click(submitForModerationButton)
-  // below is failing - AssertionError: expected false to be truthy
     .expect(errorSummary.exists).ok()
 
     .expect(solutionDescriptionError.innerText).eql('Solution description is a mandatory section')
