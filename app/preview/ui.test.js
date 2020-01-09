@@ -22,13 +22,6 @@ const pageSetup = async (t, existingData = false) => {
 };
 
 fixture('Show marketing preview page');
-// .afterEach(async (t) => {
-// const isDone = nock.isDone();
-// if (!isDone) {
-//   nock.cleanAll();
-// }
-// await t.expect(isDone).ok('Not all nock interceptors were used!');
-// });
 
 test('should render the marketing preview page title', async (t) => {
   await pageSetup(t);
@@ -113,6 +106,7 @@ test('when existing marketing data - The client application type section and bro
   await pageSetup(t, true);
   const clientApplicationTypesSection = Selector('[data-test-id="view-client-application-types"]');
   const browserBasedExpandableSection = Selector('[data-test-id="view-section-browser-based"]');
+  const browserBasedExpandableSectionText = await browserBasedExpandableSection.innerText;
   const browserBasedExpandaleSectionTable = Selector('[data-test-id="view-section-table-browser-based"]');
   const supportedBrowsersRow = browserBasedExpandaleSectionTable.find('[data-test-id="view-section-table-row-supported-browsers"]');
   const mobileResponsiveRow = browserBasedExpandaleSectionTable.find('[data-test-id="view-section-table-row-mobile-responsive"]');
@@ -123,13 +117,12 @@ test('when existing marketing data - The client application type section and bro
   const minimumResolutionRow = browserBasedExpandaleSectionTable.find('[data-test-id="view-section-table-row-minimum-desktop-resolution"]');
   const hardwareRequirementsDescriptionRow = browserBasedExpandaleSectionTable.find('[data-test-id="view-section-table-row-hardware-requirements-description"]');
   const additionalInformationRow = browserBasedExpandaleSectionTable.find('[data-test-id="view-section-table-row-additional-information"]');
-
   await t
     .expect(clientApplicationTypesSection.exists).ok()
     .expect(clientApplicationTypesSection.find('h3').innerText).eql('Client application type')
 
     .expect(browserBasedExpandableSection.exists).ok()
-    .expect(browserBasedExpandableSection.innerText).eql('Browser based application')
+    .expect(browserBasedExpandableSectionText.trim()).eql('Browser based application')
     .expect(browserBasedExpandableSection.find('details[open]').exists).notOk()
     .click(browserBasedExpandableSection.find('summary'))
     .expect(browserBasedExpandableSection.find('details[open]').exists).ok()
@@ -176,6 +169,7 @@ test('when existing marketing data - The client application type section and nat
 
   const clientApplicationTypesSection = Selector('[data-test-id="view-client-application-types"]');
   const nativeMobileExpandableSection = Selector('[data-test-id="view-section-native-mobile"]');
+  const nativeMobileExpandableSectionText = await nativeMobileExpandableSection.innerText;
   const nativeMobileExpandaleSectionTable = Selector('[data-test-id="view-section-table-native-mobile"]');
   const operatingSystemRow = nativeMobileExpandaleSectionTable.find('[data-test-id="view-section-table-row-operating-systems"]');
   const operatingSystemDescriptionRow = nativeMobileExpandaleSectionTable.find('[data-test-id="view-section-table-row-operating-systems-description"]');
@@ -195,7 +189,7 @@ test('when existing marketing data - The client application type section and nat
     .expect(clientApplicationTypesSection.find('h3').innerText).eql('Client application type')
 
     .expect(nativeMobileExpandableSection.exists).ok()
-    .expect(nativeMobileExpandableSection.innerText).eql('Native mobile or tablet application')
+    .expect(nativeMobileExpandableSectionText.trim()).eql('Native mobile or tablet application')
     .expect(nativeMobileExpandableSection.find('details[open]').exists).notOk()
     .click(nativeMobileExpandableSection.find('summary'))
     .expect(nativeMobileExpandableSection.find('details[open]').exists).ok()
@@ -254,6 +248,7 @@ test('when existing marketing data - The client application type section and nat
 
   const clientApplicationTypesSection = Selector('[data-test-id="view-client-application-types"]');
   const nativeDesktopExpandableSection = Selector('[data-test-id="view-section-native-desktop"]');
+  const nativeDesktopExpandableSectionText = await nativeDesktopExpandableSection.innerText;
   const nativeDesktopExpandableSectionTable = Selector('[data-test-id="view-section-table-native-desktop"]');
   const operatingSystemDescriptionRow = nativeDesktopExpandableSectionTable.find('[data-test-id="view-section-table-row-operating-systems-description"]');
   const minimumConnectionRow = nativeDesktopExpandableSectionTable.find('[data-test-id="view-section-table-row-minimum-connection-speed"]');
@@ -271,7 +266,7 @@ test('when existing marketing data - The client application type section and nat
     .expect(clientApplicationTypesSection.find('h3').innerText).eql('Client application type')
 
     .expect(nativeDesktopExpandableSection.exists).ok()
-    .expect(nativeDesktopExpandableSection.innerText).eql('Native desktop application')
+    .expect(nativeDesktopExpandableSectionText).eql('Native desktop application')
     .expect(nativeDesktopExpandableSection.find('details[open]').exists).notOk()
     .click(nativeDesktopExpandableSection.find('summary'))
     .expect(nativeDesktopExpandableSection.find('details[open]').exists).ok()
