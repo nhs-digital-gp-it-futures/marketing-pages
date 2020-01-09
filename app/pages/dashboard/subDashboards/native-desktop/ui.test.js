@@ -1,17 +1,17 @@
 import nock from 'nock';
 import { Selector, ClientFunction } from 'testcafe';
-import dashboardWithCompleteSections from '../../../../fixtures/dashboardWithCompleteSections.json';
+import dashboardWithCompleteSections from '../../../../../fixtures/dashboardWithCompleteSections.json';
 import nativeDesktopFixture from './fixtureData.json';
-import { apiLocalhost, apiPath, clientLocalhost } from '../../../test-utils/config';
+import { apiLocalhost, apiPath, clientLocalhost } from '../../../../test-utils/config';
 
-const mocks = () => {
-  nock(apiLocalhost)
+const mocks = async () => {
+  await nock(apiLocalhost)
     .get(`${apiPath}/dashboards/native-desktop`)
     .reply(200, nativeDesktopFixture);
 };
 
 const pageSetup = async (t) => {
-  mocks();
+  await mocks();
   await t.navigateTo(`${clientLocalhost}/dashboard/native-desktop`);
 };
 

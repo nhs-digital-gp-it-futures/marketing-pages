@@ -1,6 +1,6 @@
 import express from 'express';
-import { getMarketingPageDashboardContext, postSubmitForModeration } from './dashboard/controller';
-import { getSubDashboardPageContext } from './dashboard/subDashboards/controller';
+import { getMarketingPageDashboardContext, postSubmitForModeration } from './pages/dashboard/controller';
+import { getSubDashboardPageContext } from './pages/dashboard/subDashboards/controller';
 import { getSectionPageContext, getSectionPageErrorContext, postSection } from './section/controller';
 import { getPreviewPageContext } from './preview/controller';
 import logger from './logger';
@@ -19,7 +19,7 @@ router.get('/solution/:solutionId', async (req, res, next) => {
   logger.info(`navigating to Solution ${solutionId} dashboard`);
   try {
     const context = await getMarketingPageDashboardContext({ solutionId });
-    res.render('dashboard/template', context);
+    res.render('pages/dashboard/template', context);
   } catch (err) {
     next(err);
   }
@@ -61,7 +61,7 @@ router.get('/solution/:solutionId/dashboard/:dashboardId', async (req, res, next
   logger.info(`navigating to Solution ${solutionId} dashboard: ${dashboardId}`);
   try {
     const context = await getSubDashboardPageContext({ solutionId, dashboardId });
-    res.render('dashboard/subDashboards/template', context);
+    res.render('pages/dashboard/subDashboards/template', context);
   } catch (err) {
     next(err);
   }

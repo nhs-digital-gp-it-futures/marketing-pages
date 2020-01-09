@@ -1,8 +1,8 @@
 import nock from 'nock';
 import { Selector, ClientFunction } from 'testcafe';
-import dashboardWithCompleteSections from '../../../../fixtures/dashboardWithCompleteSections.json';
+import dashboardWithCompleteSections from '../../../../../fixtures/dashboardWithCompleteSections.json';
 import browserBasedFixture from './fixtureData.json';
-import { apiLocalhost, apiPath, clientLocalhost } from '../../../test-utils/config';
+import { apiLocalhost, apiPath, clientLocalhost } from '../../../../test-utils/config';
 
 const mocks = () => {
   nock(apiLocalhost)

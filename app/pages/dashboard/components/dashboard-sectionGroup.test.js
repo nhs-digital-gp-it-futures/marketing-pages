@@ -1,6 +1,6 @@
 import request from 'supertest';
 import cheerio from 'cheerio';
-import { testHarness } from '../../test-utils/testHarness';
+import { testHarness } from '../../../test-utils/testHarness';
 
 const aSectionContext = title => ({
   URL: 'someUrl',
@@ -15,7 +15,7 @@ const aSectionGroupContext = (sections = []) => ({
   },
 });
 
-const macroWrapper = `{% from './dashboard/components/dashboard-sectionGroup.njk' import dashboardSectionGroup %}
+const macroWrapper = `{% from './pages/dashboard/components/dashboard-sectionGroup.njk' import dashboardSectionGroup %}
                         {{ dashboardSectionGroup(sectionGroup) }}`;
 
 describe('dashboard-sectionGroup', () => {

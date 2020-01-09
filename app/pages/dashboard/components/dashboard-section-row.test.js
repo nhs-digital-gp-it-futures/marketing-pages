@@ -1,6 +1,6 @@
 import request from 'supertest';
 import cheerio from 'cheerio';
-import { testHarness } from '../../test-utils/testHarness';
+import { testHarness } from '../../../test-utils/testHarness';
 
 const aSectionContext = (
   id, sections = undefined,
@@ -11,7 +11,7 @@ const aSectionContext = (
   },
 });
 
-const macroWrapper = `{% from './dashboard/components/dashboard-section-row.njk' import dashboardSectionRow %}
+const macroWrapper = `{% from './pages/dashboard/components/dashboard-section-row.njk' import dashboardSectionRow %}
                         {{ dashboardSectionRow(section) }}`;
 
 describe('dashboard-section-row', () => {

@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { ManifestProvider } from '../manifestProvider';
+import { ManifestProvider } from '../../manifestProvider';
 import { createDashboardPageContext } from './createDashboardPageContext';
-import { apiHost } from '../config';
-import logger from '../logger';
+import { apiHost } from '../../config';
+import logger from '../../logger';
 
 export const getMarketingPageDashboardContext = async ({ solutionId, validationErrors }) => {
   const dashboardManifest = new ManifestProvider().getDashboardManifest();

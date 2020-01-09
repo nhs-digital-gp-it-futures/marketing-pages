@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { ManifestProvider } from '../../manifestProvider';
+import { ManifestProvider } from '../../../manifestProvider';
 import { createDashboardPageContext } from '../createDashboardPageContext';
-import logger from '../../logger';
-import { apiHost } from '../../config';
+import logger from '../../../logger';
+import { apiHost } from '../../../config';
 
 export const getSubDashboardPageContext = async ({ solutionId, dashboardId }) => {
   const dashboardManifest = new ManifestProvider().getSubDashboardManifest({ dashboardId });

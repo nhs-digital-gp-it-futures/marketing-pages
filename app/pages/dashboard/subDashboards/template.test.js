@@ -1,8 +1,8 @@
 import request from 'supertest';
 import cheerio from 'cheerio';
-import { testHarness } from '../../test-utils/testHarness';
+import { testHarness } from '../../../test-utils/testHarness';
 
-const template = './dashboard/subDashboards/template.njk';
+const template = './pages/dashboard/subDashboards/template.njk';
 
 describe('sub dashboard page', () => {
   it('should render the title of the sub dashboard', (done) => {
