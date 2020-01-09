@@ -37,7 +37,7 @@ steps:
       testResultsFormat: NUnit
       testResultsFiles: '$(System.DefaultWorkingDirectory)/unit-test-report.xml'
       testRunTitle: Unit test results
-      failTaskOnFailedTests: false
+      failTaskOnFailedTests: true
     condition: succeededOrFailed()
 
   - script: |
@@ -50,7 +50,7 @@ steps:
       testResultsFormat: NUnit
       testResultsFiles: '$(System.DefaultWorkingDirectory)/integration-test-report.xml'
       testRunTitle: Integration test results
-      failTaskOnFailedTests: false
+      failTaskOnFailedTests: true
     condition: succeededOrFailed()
 
   - task: DockerInstaller@0
