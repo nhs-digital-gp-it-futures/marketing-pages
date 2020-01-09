@@ -15,17 +15,9 @@ const pageSetup = async (t) => {
   await t.navigateTo(`${clientLocalhost}/dashboard/native-desktop`);
 };
 
-fixture('Show native desktop dashboard page')
-// .afterEach(async (t) => {
-// const isDone = nock.isDone();
-// if (!isDone) {
-//   nock.cleanAll();
-// }
-// await t.expect(isDone).ok('Not all nock interceptors were used!');
-// });
+fixture('Show native desktop dashboard page');
 
 test('should render the native desktop dashboard page title', async (t) => {
-
   await pageSetup(t);
 
   const title = Selector('[data-test-id="sub-dashboard-title"]');
