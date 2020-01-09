@@ -22,6 +22,8 @@ const pageSetup = async (t, initalDashboard = true) => {
   await t.navigateTo(`${clientLocalhost}`);
 };
 
+const getLocation = ClientFunction(() => document.location.href);
+
 fixture('Show marketing dashboard page');
 
 test('should render the marketing dashboard page title', async (t) => {
@@ -39,8 +41,6 @@ test('should render the preview page button', async (t) => {
   nock(apiLocalhost)
     .get(`${apiPath}/preview`)
     .reply(200, previewWithMarketingData);
-
-  const getLocation = ClientFunction(() => document.location.href);
 
   const previewButton = Selector('[data-test-id="dashboard-preview-button"] a');
 
@@ -60,8 +60,6 @@ test('should render the Submit for moderation button', async (t) => {
   nock(apiLocalhost)
     .get(`${apiPath}/dashboard`)
     .reply(200, dashboardWithIncompleteSections);
-
-  const getLocation = ClientFunction(() => document.location.href);
 
   const submitForModerationButton = Selector('[data-test-id="dashboard-submit-for-moderation-button"] a');
 
@@ -217,8 +215,6 @@ test('clicking on the solution description section link should navigate the user
     .get(`${apiPath}/sections/solution-description`)
     .reply(200, {});
 
-  const getLocation = ClientFunction(() => document.location.href);
-
   const aboutYourSolutionSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-about-your-solution"]');
   const theSolutionDescriptionSection = aboutYourSolutionSectionGroup.find('[data-test-id="dashboard-section-solution-description"]');
 
@@ -235,8 +231,6 @@ test('clicking on the feature section link should navigate the user to the featu
     .get(`${apiPath}/sections/features`)
     .reply(200, {});
 
-  const getLocation = ClientFunction(() => document.location.href);
-
   const aboutYourSolutionSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-about-your-solution"]');
   const theFeatureSection = aboutYourSolutionSectionGroup.find('[data-test-id="dashboard-section-features"]');
 
@@ -252,8 +246,6 @@ test('clicking on the client application type section link should navigate the u
     .get(`${apiPath}/sections/client-application-types`)
     .reply(200, {});
 
-  const getLocation = ClientFunction(() => document.location.href);
-
   const clientApplicationTypeSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-client-application-type"]');
   const theClientApplicationTypeSection = clientApplicationTypeSectionGroup.find('[data-test-id="dashboard-section-client-application-types"]');
 
@@ -268,8 +260,6 @@ test('clicking on the contact details section link should navigate the user to c
   nock(apiLocalhost)
     .get(`${apiPath}/sections/contact-details`)
     .reply(200, {});
-
-  const getLocation = ClientFunction(() => document.location.href);
 
   const aboutYourOrganisationSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-about-your-organisation"]');
   const contactDetailsSection = aboutYourOrganisationSectionGroup.find('[data-test-id="dashboard-section-contact-details"]');
@@ -293,8 +283,6 @@ test('should render the Error summary containing all the sections that failed th
   nock(apiLocalhost)
     .get(`${apiPath}/dashboard`)
     .reply(200, dashboardWithIncompleteSections);
-
-  const getLocation = ClientFunction(() => document.location.href);
 
   const errorSummary = Selector('[data-test-id="error-summary"]');
   const solutionDescriptionError = errorSummary.find('li:nth-child(1)');

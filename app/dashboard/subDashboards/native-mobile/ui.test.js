@@ -15,6 +15,8 @@ const pageSetup = async (t) => {
   await t.navigateTo(`${clientLocalhost}/dashboard/native-mobile`);
 };
 
+const getLocation = ClientFunction(() => document.location.href);
+
 fixture('Show native mobile dashboard page');
 
 test('should render the native mobile dashboard page title', async (t) => {
@@ -128,7 +130,6 @@ test('should navigate the user to supported operating systems page when clicking
     .get(`${apiPath}/sections/native-mobile-operating-systems`)
     .reply(200, {});
 
-  const getLocation = ClientFunction(() => document.location.href);
 
   const supportedOperatingSystemsSection = Selector('[data-test-id="dashboard-section-native-mobile-operating-systems"]');
 
@@ -144,7 +145,6 @@ test('should navigate the user to the mobile first page when clicking on the mob
     .get(`${apiPath}/sections/native-mobile-first`)
     .reply(200, {});
 
-  const getLocation = ClientFunction(() => document.location.href);
 
   const mobileFirstSection = Selector('[data-test-id="dashboard-section-native-mobile-first"] a');
 
@@ -160,7 +160,6 @@ test('should navigate the user to memory and storage page when clicking on memor
     .get(`${apiPath}/sections/native-mobile-memory-and-storage`)
     .reply(200, {});
 
-  const getLocation = ClientFunction(() => document.location.href);
 
   const memoryAndStorageSection = Selector('[data-test-id="dashboard-section-native-mobile-memory-and-storage"]');
 
@@ -176,7 +175,6 @@ test('should navigate the user to the connection details page when clicking on t
     .get(`${apiPath}/sections/native-mobile-connection-details`)
     .reply(200, {});
 
-  const getLocation = ClientFunction(() => document.location.href);
 
   const connectionDetailsSection = Selector('[data-test-id="dashboard-section-native-mobile-connection-details"]');
 
@@ -192,7 +190,6 @@ test('should navigate the user to third party page when clicking on third party 
     .get(`${apiPath}/sections/native-mobile-third-party`)
     .reply(200, {});
 
-  const getLocation = ClientFunction(() => document.location.href);
 
   const thirdPartySection = Selector('[data-test-id="dashboard-section-native-mobile-third-party"]');
 
@@ -208,7 +205,6 @@ test('should navigate the user to hardware requirements page when clicking on ha
     .get(`${apiPath}/sections/native-mobile-hardware-requirements`)
     .reply(200, {});
 
-  const getLocation = ClientFunction(() => document.location.href);
 
   const hardwareRequirementsSection = Selector('[data-test-id="dashboard-section-native-mobile-hardware-requirements"]');
 
@@ -224,7 +220,6 @@ test('should navigate the user to additional information page when clicking on a
     .get(`${apiPath}/sections/native-mobile-additional-information`)
     .reply(200, {});
 
-  const getLocation = ClientFunction(() => document.location.href);
 
   const additionalInformationSection = Selector('[data-test-id="dashboard-section-native-mobile-additional-information"]');
 
@@ -250,7 +245,6 @@ test('should return to the marketing data dashboard when the return to all secti
     .get(`${apiPath}/dashboard`)
     .reply(200, dashboardWithCompleteSections);
 
-  const getLocation = ClientFunction(() => document.location.href);
 
   const link = Selector('[data-test-id="sub-dashboard-back-link"] div a');
 

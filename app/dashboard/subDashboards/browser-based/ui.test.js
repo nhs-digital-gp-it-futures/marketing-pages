@@ -15,6 +15,8 @@ const pageSetup = async (t) => {
   await t.navigateTo(`${clientLocalhost}/dashboard/browser-based`);
 };
 
+const getLocation = ClientFunction(() => document.location.href);
+
 fixture('Show browser based dashboard page');
 
 test('should render the browser based dashboard page title', async (t) => {
@@ -118,8 +120,6 @@ test('should navigate the user to the browsers supported page when clicking on t
     .get(`${apiPath}/sections/browser-browsers-supported`)
     .reply(200, {});
 
-  const getLocation = ClientFunction(() => document.location.href);
-
   const browserBasedSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-browser-based-sections"]');
   const browsersSupportedSection = browserBasedSectionGroup.find('[data-test-id="dashboard-section-browser-browsers-supported"]');
 
@@ -134,8 +134,6 @@ test('should navigate the user to the mobile first page when clicking on the mob
   nock(apiLocalhost)
     .get(`${apiPath}/sections/browser-mobile-first`)
     .reply(200, {});
-
-  const getLocation = ClientFunction(() => document.location.href);
 
   const browserBasedSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-browser-based-sections"]');
   const mobileFirstSection = browserBasedSectionGroup.find('[data-test-id="dashboard-section-browser-mobile-first"]');
@@ -152,8 +150,6 @@ test('should navigate the user to the plug-ins or extensions page when clicking 
     .get(`${apiPath}/sections/browser-plug-ins-or-extensions`)
     .reply(200, {});
 
-  const getLocation = ClientFunction(() => document.location.href);
-
   const browserBasedSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-browser-based-sections"]');
   const pluginsOrExtensionsSection = browserBasedSectionGroup.find('[data-test-id="dashboard-section-browser-plug-ins-or-extensions"]');
 
@@ -168,8 +164,6 @@ test('should navigate the user to the connectivity and resolution page when clic
   nock(apiLocalhost)
     .get(`${apiPath}/sections/browser-connectivity-and-resolution`)
     .reply(200, {});
-
-  const getLocation = ClientFunction(() => document.location.href);
 
   const browserBasedSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-browser-based-sections"]');
   const connectivityAndResolutionSection = browserBasedSectionGroup.find('[data-test-id="dashboard-section-browser-connectivity-and-resolution"]');
@@ -186,8 +180,6 @@ test('should navigate the user to the hardware requirements page when clicking o
     .get(`${apiPath}/sections/browser-hardware-requirements`)
     .reply(200, {});
 
-  const getLocation = ClientFunction(() => document.location.href);
-
   const browserBasedSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-browser-based-sections"]');
   const hardwareRequirementsSection = browserBasedSectionGroup.find('[data-test-id="dashboard-section-browser-hardware-requirements"]');
 
@@ -202,8 +194,6 @@ test('should navigate the user to the additional information page when clicking 
   nock(apiLocalhost)
     .get(`${apiPath}/sections/browser-additional-information`)
     .reply(200, {});
-
-  const getLocation = ClientFunction(() => document.location.href);
 
   const browserBasedSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-browser-based-sections"]');
   const additionalInformationSection = browserBasedSectionGroup.find('[data-test-id="dashboard-section-browser-additional-information"]');
@@ -229,8 +219,6 @@ test('should return to the marketing data dashboard when the return to all secti
   nock(apiLocalhost)
     .get(`${apiPath}/dashboard`)
     .reply(200, dashboardWithCompleteSections);
-
-  const getLocation = ClientFunction(() => document.location.href);
 
   const link = Selector('[data-test-id="sub-dashboard-back-link"] a');
 
