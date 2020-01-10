@@ -16,7 +16,6 @@ describe('errorSummary', () => {
       .get('/')
       .then((res) => {
         const $ = cheerio.load(res.text);
-        console.log($.html())
         expect($('.nhsuk-error-summary h2').text().trim()).toEqual('There is a problem');
 
         done();
