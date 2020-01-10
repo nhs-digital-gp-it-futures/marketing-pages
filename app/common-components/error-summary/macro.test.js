@@ -1,8 +1,8 @@
 import request from 'supertest';
 import cheerio from 'cheerio';
-import { testHarness } from '../test-utils/testHarness';
+import { testHarness } from '../../test-utils/testHarness';
 
-const macroWrapper = `{% from './error-summary.njk' import errorSummary %}
+const macroWrapper = `{% from './common-components/error-summary/macro.njk' import errorSummary %}
                         {{ errorSummary(errors) }}`;
 
 describe('errorSummary', () => {
@@ -16,7 +16,7 @@ describe('errorSummary', () => {
       .get('/')
       .then((res) => {
         const $ = cheerio.load(res.text);
-
+        console.log($.html())
         expect($('.nhsuk-error-summary h2').text().trim()).toEqual('There is a problem');
 
         done();
