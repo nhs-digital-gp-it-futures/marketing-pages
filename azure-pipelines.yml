@@ -15,47 +15,54 @@ pr:
 pool:
   vmImage: 'ubuntu-latest'
 
-steps:
-  - task: NodeTool@0
-    inputs:
-      versionSpec: '10.x'
-    displayName: 'Install Node.js'
+jobs: 
+- job: buildAndTest
+  displayName: Build app and run tests
+  steps:
+    - task: NodeTool@0
+      inputs:
+        versionSpec: '10.x'
+      displayName: 'Install Node.js'
 
-  - script: |
-      npm install -g webpack webpack-cli --save-dev
-      npm install
-    displayName: 'NPM install'
+    - script: |
+        npm install -g webpack webpack-cli --save-dev
+        npm install
+      displayName: 'NPM install'
 
-  - script: |
-      npx webpack --config webpack.config.js
-    displayName: 'NPX Webpack'
+    - script: |
+        npx webpack --config webpack.config.js
+      displayName: 'NPX Webpack'
 
-  - script: |
-      npm run test
-    displayName: 'Unit test'
+    - script: |
+        npm run test
+      displayName: 'Unit test'
 
-  - task: PublishTestResults@2
-    displayName: Publish unit test results
-    inputs:
-      testResultsFormat: NUnit
-      testResultsFiles: '$(System.DefaultWorkingDirectory)/unit-test-report.xml'
-      testRunTitle: Unit test results
-      failTaskOnFailedTests: true
-    condition: succeededOrFailed()
+    - task: PublishTestResults@2
+      displayName: Publish unit test results
+      inputs:
+        testResultsFormat: NUnit
+        testResultsFiles: '$(System.DefaultWorkingDirectory)/unit-test-report.xml'
+        testRunTitle: Unit test results
+        failTaskOnFailedTests: true
+      condition: succeededOrFailed()
 
-  - script: |
-      npm run test:integration
-    displayName: 'Integration test'
+    - script: |
+        npm run test:integration
+      displayName: 'Integration test'
 
-  - task: PublishTestResults@2
-    displayName: Publish integration test results
-    inputs:
-      testResultsFormat: NUnit
-      testResultsFiles: '$(System.DefaultWorkingDirectory)/integration-test-report.xml'
-      testRunTitle: Integration test results
-      failTaskOnFailedTests: true
-    condition: succeededOrFailed()
+    - task: PublishTestResults@2
+      displayName: Publish integration test results
+      inputs:
+        testResultsFormat: NUnit
+        testResultsFiles: '$(System.DefaultWorkingDirectory)/integration-test-report.xml'
+        testRunTitle: Integration test results
+        failTaskOnFailedTests: true
+      condition: succeededOrFailed()
 
+
+- job: dockerBuildAndPush
+  displayName: Build and push docker containers to the acr
+  condition: and(succeeded(), not(eq(variables['build.reason'], 'PullRequest')))
   - task: DockerInstaller@0
     inputs:
       dockerVersion: '18.09.9'
@@ -71,27 +78,24 @@ steps:
 
 #  - task: DockerCompose@0
 #    displayName: 'Push: Dev'
-#    condition: and(succeeded(), not(eq(variables['build.reason'], 'PullRequest')))
 #    inputs:
 #      containerregistrytype: 'Azure Container Registry'
 #      azureSubscription: 'NHSAPP-BuyingCatalogue (Non-Prod)'
 #      azureContainerRegistry: '{"loginServer":"gpitfuturesdevacr.azurecr.io", "id" : "/subscriptions/7b12a8a2-f06f-456f-b6f9-aa2d92e0b2ec/resourceGroups/gpitfutures-dev-rg-acr/providers/Microsoft.ContainerRegistry/registries/gpitfuturesdevacr"}'
 #      dockerComposeFile: '**/docker-compose.yml'
 #      action: 'Push services'
-
-  - task: DockerCompose@0
-    displayName: 'Build: Test'
-    condition: and(succeeded(), not(eq(variables['build.reason'], 'PullRequest')))
-    inputs:
-      containerregistrytype: 'Azure Container Registry'
-      azureSubscription: 'NHSAPP-BuyingCatalogue (Non-Prod)'
-      azureContainerRegistry: '{"loginServer":"gpitfuturestestacr.azurecr.io", "id" : "/subscriptions/7b12a8a2-f06f-456f-b6f9-aa2d92e0b2ec/resourceGroups/gpitfutures-test-rg-acr/providers/Microsoft.ContainerRegistry/registries/gpitfuturestestacr"}'
-      dockerComposeFile: '**/docker-compose.yml'
-      action: 'Build services'
+#
+#  - task: DockerCompose@0
+#    displayName: 'Build: Test'
+#    inputs:
+#      containerregistrytype: 'Azure Container Registry'
+#      azureSubscription: 'NHSAPP-BuyingCatalogue (Non-Prod)'
+#      azureContainerRegistry: '{"loginServer":"gpitfuturestestacr.azurecr.io", "id" : "/subscriptions/7b12a8a2-f06f-456f-b6f9-aa2d92e0b2ec/resourceGroups/gpitfutures-test-rg-acr/providers/Microsoft.ContainerRegistry/registries/gpitfuturestestacr"}'
+#      dockerComposeFile: '**/docker-compose.yml'
+#      action: 'Build services'
 #
 #  - task: DockerCompose@0
 #    displayName: 'Push: Test'
-#    condition: and(succeeded(), not(eq(variables['build.reason'], 'PullRequest')))
 #    inputs:
 #      containerregistrytype: 'Azure Container Registry'
 #      azureSubscription: 'NHSAPP-BuyingCatalogue (Non-Prod)'
@@ -101,7 +105,6 @@ steps:
 #
 #  - task: DockerCompose@0
 #    displayName: 'Build: PreProd'
-#    condition: and(succeeded(), not(eq(variables['build.reason'], 'PullRequest')))
 #    inputs:
 #      containerregistrytype: 'Azure Container Registry'
 #      azureSubscription: 'NHSAPP-BuyingCatalogue (Non-Prod)'
@@ -111,7 +114,6 @@ steps:
 #
 #  - task: DockerCompose@0
 #    displayName: 'Push: PreProd'
-#    condition: and(succeeded(), not(eq(variables['build.reason'], 'PullRequest')))
 #    inputs:
 #      containerregistrytype: 'Azure Container Registry'
 #      azureSubscription: 'NHSAPP-BuyingCatalogue (Non-Prod)'
@@ -121,7 +123,6 @@ steps:
 #
 #  - task: DockerCompose@0
 #    displayName: 'Build: Prod'
-#    condition: and(succeeded(), not(eq(variables['build.reason'], 'PullRequest')))
 #    inputs:
 #      containerregistrytype: 'Azure Container Registry'
 #      azureSubscription: 'NHSAPP-BuyingCatalogue (Prod)'
@@ -131,7 +132,6 @@ steps:
 #
 #  - task: DockerCompose@0
 #    displayName: 'Push: Prod'
-#    condition: and(succeeded(), not(eq(variables['build.reason'], 'PullRequest')))
 #    inputs:
 #      containerregistrytype: 'Azure Container Registry'
 #      azureSubscription: 'NHSAPP-BuyingCatalogue (Prod)'
