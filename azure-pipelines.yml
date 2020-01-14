@@ -5,14 +5,20 @@
 
 trigger:
 - master
+- development
 
 # no PR builds on this file
-pr: none
+pr:
+- master
+- development
 
 pool:
   vmImage: 'ubuntu-latest'
 
-steps:
+jobs: 
+- job: buildAndTest
+  displayName: Build app and run tests
+  steps:
   - task: NodeTool@0
     inputs:
       versionSpec: '10.x'
@@ -53,6 +59,11 @@ steps:
       failTaskOnFailedTests: true
     condition: succeededOrFailed()
 
+
+- job: dockerBuildAndPush
+  displayName: Build and push docker containers to the acr
+  condition: and(succeeded(), not(eq(variables['build.reason'], 'PullRequest')))
+  steps:
   - task: DockerInstaller@0
     inputs:
       dockerVersion: '18.09.9'
