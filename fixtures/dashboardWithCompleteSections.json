@@ -27,6 +27,22 @@
           "status": "COMPLETE"
         }
       }
+    },
+    "public-cloud": {
+      "requirement": "Optional",
+      "status": "COMPLETE"
+    },
+    "private-cloud": {
+      "requirement": "Optional",
+      "status": "COMPLETE"
+    },
+    "hybrid": {
+      "requirement": "Optional",
+      "status": "COMPLETE"
+    },
+    "on-premise": {
+      "requirement": "Optional",
+      "status": "COMPLETE"
     }
   }
 }
