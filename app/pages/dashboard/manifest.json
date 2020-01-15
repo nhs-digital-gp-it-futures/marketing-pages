@@ -55,6 +55,27 @@
         }
       }
     },
+    "hosting-type": {
+      "title": "Hosting type",
+      "sections": {
+        "public-cloud": {
+          "title": "Public cloud",
+          "type": "section"
+        },
+        "private-cloud": {
+          "title": "Private cloud",
+          "type": "section"
+        },
+        "hybrid": {
+          "title": "Hybrid",
+          "type": "section"
+        },
+        "on-premise": {
+          "title": "On premise",
+          "type": "section"
+        }
+      }
+    },
     "about-your-organisation": {
       "title": "About your Organisation",
       "sections": {

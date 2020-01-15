@@ -15,6 +15,22 @@
       "status": "INCOMPLETE",
       "sections": {}
     },
+    "public-cloud": {
+      "requirement": "Optional",
+      "status": "INCOMPLETE"
+    },
+    "private-cloud": {
+      "requirement": "Optional",
+      "status": "INCOMPLETE"
+    },
+    "hybrid": {
+      "requirement": "Optional",
+      "status": "INCOMPLETE"
+    },
+    "on-premise": {
+      "requirement": "Optional",
+      "status": "INCOMPLETE"
+    },
     "contact-details": {
       "requirement": "Optional",
       "status": "INCOMPLETE"
