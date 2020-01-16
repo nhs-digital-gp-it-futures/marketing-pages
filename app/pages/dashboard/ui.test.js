@@ -293,8 +293,7 @@ test('clicking on the client application type section link should navigate the u
     .expect(getLocation()).contains('/solution/S100000-001/section/client-application-type');
 });
 
-// TODO: Remove skip when section complete.
-test.skip('clicking on the hosting type public cloud section link should navigate the user to the hosting type public cloud page', async (t) => {
+test('clicking on the hosting type public cloud section link should navigate the user to the hosting type public cloud page', async (t) => {
   await pageSetup(t);
 
   nock(apiLocalhost)

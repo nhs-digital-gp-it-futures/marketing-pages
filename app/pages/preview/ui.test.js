@@ -379,3 +379,169 @@ test('when existing marketing data - The client application type section and nat
     .expect(additionalInformationRowItems.trim()).eql('It is possible that it may install on other platforms or versions not listed in this section. However, support is limited to systems that meet the minimum requirements.')
     .expect(additionalInformationRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok();
 });
+
+test('when existing marketing data - The hosting type public cloud section should be rendered', async (t) => {
+  await pageSetup(t, true);
+
+  const hostingTypesSection = Selector('[data-test-id="view-hosting-types"]');
+  const hostingTypePublicCloudExpandableSection = Selector('[data-test-id="view-section-hosting-type-public-cloud"]');
+  const hostingTypePublicCloudExpandableSectionText = await hostingTypePublicCloudExpandableSection.innerText;
+  const hostingTypePublicCloudExpandableSectionTable = Selector('[data-test-id="view-section-hosting-type-public-cloud"]');
+
+  const summaryRow = hostingTypePublicCloudExpandableSectionTable.find('[data-test-id="view-section-table-row-summary"]');
+  const summaryRowTitle = await summaryRow.find('div[data-test-id="view-section-table-row-title"]').innerText;
+  const summaryRowSummaryItem = await summaryRow.find('div[data-test-id="view-question-data-text-summary"]').innerText;
+  const summaryRowLinkItem = await summaryRow.find('div[data-test-id="view-question-data-text-link"]').innerText;
+
+  const requiresHSCNRow = hostingTypePublicCloudExpandableSectionTable.find('[data-test-id="view-section-table-row-requires-hscn"]');
+  const requiresHSCNRowItem = await requiresHSCNRow.find('div[data-test-id="view-section-table-row-component"]').innerText;
+
+  await t
+    .expect(hostingTypesSection.exists).ok()
+    .expect(hostingTypesSection.find('h3').innerText).eql('Hosting type')
+
+    .expect(hostingTypePublicCloudExpandableSection.exists).ok()
+    .expect(hostingTypePublicCloudExpandableSectionText.trim()).eql('Public cloud')
+    .expect(hostingTypePublicCloudExpandableSection.find('details[open]').exists).notOk()
+    .click(hostingTypePublicCloudExpandableSection.find('summary'))
+    .expect(hostingTypePublicCloudExpandableSection.find('details[open]').exists).ok()
+
+    .expect(summaryRowTitle.trim()).eql('Summary')
+    .expect(summaryRowSummaryItem.trim()).eql('Our solution uses a combination of private and public cloud suppliers. We store all of our patient confidential data in a data center that we own and manage. We leverage the power of [Public cloud provider] to run our analytical suite and only transfer anonymised or pseudonymised to that provider to support this.')
+    .expect(summaryRowLinkItem.trim()).eql('www.healthcare-pro.co.uk/healthcare-system-1/hybrid-hosting')
+    .expect(summaryRow.find('div[data-test-id="view-section-table-row-vertical"]').exists).ok()
+
+    .expect(requiresHSCNRowItem.trim()).eql('This Solution requires a HSCN/N3 connection')
+    .expect(requiresHSCNRow.find('div[data-test-id="view-section-table-row-vertical"]').exists).ok();
+});
+
+test('when existing marketing data - The hosting type private cloud section should be rendered', async (t) => {
+  await pageSetup(t, true);
+
+  const hostingTypesSection = Selector('[data-test-id="view-hosting-types"]');
+  const hostingTypePrivateCloudExpandableSection = Selector('[data-test-id="view-section-hosting-type-private-cloud"]');
+  const hostingTypePrivateCloudExpandableSectionText = await hostingTypePrivateCloudExpandableSection.innerText;
+  const hostingTypePrivateCloudExpandableSectionTable = Selector('[data-test-id="view-section-hosting-type-private-cloud"]');
+
+  const summaryRow = hostingTypePrivateCloudExpandableSectionTable.find('[data-test-id="view-section-table-row-summary"]');
+  const summaryRowTitle = await summaryRow.find('div[data-test-id="view-section-table-row-title"]').innerText;
+  const summaryRowSummaryItem = await summaryRow.find('div[data-test-id="view-question-data-text-summary"]').innerText;
+  const summaryRowLinkItem = await summaryRow.find('div[data-test-id="view-question-data-text-link"]').innerText;
+
+  const hostingModelRow = hostingTypePrivateCloudExpandableSectionTable.find('[data-test-id="view-section-table-row-hosting-model"]');
+  const hostingModelRowTitle = await hostingModelRow.find('div[data-test-id="view-section-table-row-title"]').innerText;
+  const hostingModelRowItems = await hostingModelRow.find('div[data-test-id="view-section-table-row-component"]').innerText;
+
+  const requiresHSCNRow = hostingTypePrivateCloudExpandableSectionTable.find('[data-test-id="view-section-table-row-requires-hscn"]');
+  const requiresHSCNRowItem = await requiresHSCNRow.find('div[data-test-id="view-section-table-row-component"]').innerText;
+
+  await t
+    .expect(hostingTypesSection.exists).ok()
+    .expect(hostingTypesSection.find('h3').innerText).eql('Hosting type')
+
+    .expect(hostingTypePrivateCloudExpandableSection.exists).ok()
+    .expect(hostingTypePrivateCloudExpandableSectionText.trim()).eql('Private cloud')
+    .expect(hostingTypePrivateCloudExpandableSection.find('details[open]').exists).notOk()
+    .click(hostingTypePrivateCloudExpandableSection.find('summary'))
+    .expect(hostingTypePrivateCloudExpandableSection.find('details[open]').exists).ok()
+
+    .expect(summaryRowTitle.trim()).eql('Summary')
+    .expect(summaryRowSummaryItem.trim()).eql('Our solution uses a combination of private and public cloud suppliers. We store all of our patient confidential data in a data center that we own and manage. We leverage the power of [Public cloud provider] to run our analytical suite and only transfer anonymised or pseudonymised to that provider to support this.')
+    .expect(summaryRowLinkItem.trim()).eql('www.healthcare-pro.co.uk/healthcare-system-1/hybrid-hosting')
+    .expect(summaryRow.find('div[data-test-id="view-section-table-row-vertical"]').exists).ok()
+
+    .expect(hostingModelRowTitle.trim()).eql('Data center hosting model')
+    .expect(hostingModelRowItems.trim()).eql('Our managed data center is hosted in two separate geographical locations, they both comply to the highest standards to ensure that even if one of our data centers suffers an outage, we can ensure that your daily activities are not interrupted. We also create a back up of all of our data every evening and store it separately, so in the result of any catastrophic failure, we can ensure that patient confidential information is kept secure.')
+    .expect(hostingModelRow.find('div[data-test-id="view-section-table-row-vertical"]').exists).ok()
+
+    .expect(requiresHSCNRowItem.trim()).eql('This Solution requires a HSCN/N3 connection')
+    .expect(requiresHSCNRow.find('div[data-test-id="view-section-table-row-vertical"]').exists).ok();
+});
+
+
+test('when existing marketing data - The hosting type hybrid section should be rendered', async (t) => {
+  await pageSetup(t, true);
+
+  const hostingTypesSection = Selector('[data-test-id="view-hosting-types"]');
+  const hostingTypeHybridExpandableSection = Selector('[data-test-id="view-section-hosting-type-hybrid"]');
+  const hostingTypeHybridExpandableSectionText = await hostingTypeHybridExpandableSection.innerText;
+  const hostingTypeHybridExpandableSectionTable = Selector('[data-test-id="view-section-hosting-type-hybrid"]');
+
+  const summaryRow = hostingTypeHybridExpandableSectionTable.find('[data-test-id="view-section-table-row-summary"]');
+  const summaryRowTitle = await summaryRow.find('div[data-test-id="view-section-table-row-title"]').innerText;
+  const summaryRowSummaryItem = await summaryRow.find('div[data-test-id="view-question-data-text-summary"]').innerText;
+  const summaryRowLinkItem = await summaryRow.find('div[data-test-id="view-question-data-text-link"]').innerText;
+
+  const hostingModelRow = hostingTypeHybridExpandableSectionTable.find('[data-test-id="view-section-table-row-hosting-model"]');
+  const hostingModelRowTitle = await hostingModelRow.find('div[data-test-id="view-section-table-row-title"]').innerText;
+  const hostingModelRowItems = await hostingModelRow.find('div[data-test-id="view-section-table-row-component"]').innerText;
+
+  const requiresHSCNRow = hostingTypeHybridExpandableSectionTable.find('[data-test-id="view-section-table-row-requires-hscn"]');
+  const requiresHSCNRowItem = await requiresHSCNRow.find('div[data-test-id="view-section-table-row-component"]').innerText;
+
+  await t
+    .expect(hostingTypesSection.exists).ok()
+    .expect(hostingTypesSection.find('h3').innerText).eql('Hosting type')
+
+    .expect(hostingTypeHybridExpandableSection.exists).ok()
+    .expect(hostingTypeHybridExpandableSectionText.trim()).eql('Hybrid')
+    .expect(hostingTypeHybridExpandableSection.find('details[open]').exists).notOk()
+    .click(hostingTypeHybridExpandableSection.find('summary'))
+    .expect(hostingTypeHybridExpandableSection.find('details[open]').exists).ok()
+
+    .expect(summaryRowTitle.trim()).eql('Summary')
+    .expect(summaryRowSummaryItem.trim()).eql('Our solution uses a combination of private and public cloud suppliers. We store all of our patient confidential data in a data center that we own and manage. We leverage the power of [Public cloud provider] to run our analytical suite and only transfer anonymised or pseudonymised to that provider to support this.')
+    .expect(summaryRowLinkItem.trim()).eql('www.healthcare-pro.co.uk/healthcare-system-1/hybrid-hosting')
+    .expect(summaryRow.find('div[data-test-id="view-section-table-row-vertical"]').exists).ok()
+
+    .expect(hostingModelRowTitle.trim()).eql('Data center hosting model')
+    .expect(hostingModelRowItems.trim()).eql('Our managed data center is hosted in two separate geographical locations, they both comply to the highest standards to ensure that even if one of our data centers suffers an outage, we can ensure that your daily activities are not interrupted. We also create a back up of all of our data every evening and store it separately, so in the result of any catastrophic failure, we can ensure that patient confidential information is kept secure.')
+    .expect(hostingModelRow.find('div[data-test-id="view-section-table-row-vertical"]').exists).ok()
+
+    .expect(requiresHSCNRowItem.trim()).eql('This Solution requires a HSCN/N3 connection')
+    .expect(requiresHSCNRow.find('div[data-test-id="view-section-table-row-vertical"]').exists).ok();
+});
+
+
+test('when existing marketing data - The hosting type on premise section should be rendered', async (t) => {
+  await pageSetup(t, true);
+
+  const hostingTypesSection = Selector('[data-test-id="view-hosting-types"]');
+  const hostingTypeOnPremiseExpandableSection = Selector('[data-test-id="view-section-hosting-type-on-premise"]');
+  const hostingTypeOnPremiseExpandableSectionText = await hostingTypeOnPremiseExpandableSection.innerText;
+  const hostingTypeOnPremiseExpandableSectionTable = Selector('[data-test-id="view-section-hosting-type-on-premise"]');
+
+  const summaryRow = hostingTypeOnPremiseExpandableSectionTable.find('[data-test-id="view-section-table-row-summary"]');
+  const summaryRowTitle = await summaryRow.find('div[data-test-id="view-section-table-row-title"]').innerText;
+  const summaryRowSummaryItem = await summaryRow.find('div[data-test-id="view-question-data-text-summary"]').innerText;
+  const summaryRowLinkItem = await summaryRow.find('div[data-test-id="view-question-data-text-link"]').innerText;
+
+  const hostingModelRow = hostingTypeOnPremiseExpandableSectionTable.find('[data-test-id="view-section-table-row-hosting-model"]');
+  const hostingModelRowTitle = await hostingModelRow.find('div[data-test-id="view-section-table-row-title"]').innerText;
+  const hostingModelRowItems = await hostingModelRow.find('div[data-test-id="view-section-table-row-component"]').innerText;
+
+  const requiresHSCNRow = hostingTypeOnPremiseExpandableSectionTable.find('[data-test-id="view-section-table-row-requires-hscn"]');
+  const requiresHSCNRowItem = await requiresHSCNRow.find('div[data-test-id="view-section-table-row-component"]').innerText;
+
+  await t
+    .expect(hostingTypesSection.exists).ok()
+    .expect(hostingTypesSection.find('h3').innerText).eql('Hosting type')
+
+    .expect(hostingTypeOnPremiseExpandableSection.exists).ok()
+    .expect(hostingTypeOnPremiseExpandableSectionText.trim()).eql('On premise')
+    .expect(hostingTypeOnPremiseExpandableSection.find('details[open]').exists).notOk()
+    .click(hostingTypeOnPremiseExpandableSection.find('summary'))
+    .expect(hostingTypeOnPremiseExpandableSection.find('details[open]').exists).ok()
+
+    .expect(summaryRowTitle.trim()).eql('Summary')
+    .expect(summaryRowSummaryItem.trim()).eql('Our solution uses a combination of private and public cloud suppliers. We store all of our patient confidential data in a data center that we own and manage. We leverage the power of [Public cloud provider] to run our analytical suite and only transfer anonymised or pseudonymised to that provider to support this.')
+    .expect(summaryRowLinkItem.trim()).eql('www.healthcare-pro.co.uk/healthcare-system-1/hybrid-hosting')
+    .expect(summaryRow.find('div[data-test-id="view-section-table-row-vertical"]').exists).ok()
+
+    .expect(hostingModelRowTitle.trim()).eql('Data center hosting model')
+    .expect(hostingModelRowItems.trim()).eql('Our managed data center is hosted in two separate geographical locations, they both comply to the highest standards to ensure that even if one of our data centers suffers an outage, we can ensure that your daily activities are not interrupted. We also create a back up of all of our data every evening and store it separately, so in the result of any catastrophic failure, we can ensure that patient confidential information is kept secure.')
+    .expect(hostingModelRow.find('div[data-test-id="view-section-table-row-vertical"]').exists).ok()
+
+    .expect(requiresHSCNRowItem.trim()).eql('This Solution requires a HSCN/N3 connection')
+    .expect(requiresHSCNRow.find('div[data-test-id="view-section-table-row-vertical"]').exists).ok();
+});
