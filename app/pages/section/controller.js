@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { ManifestProvider } from '../../manifestProvider';
+import { ApiProvider } from '../../apiProvider';
 import { createSectionPageContext } from './createSectionPageContext';
 import { transformSectionData } from './helpers/transformSectionData';
 import { createPostSectionResponse } from './helpers/createPostSectionResponse';
@@ -13,10 +14,8 @@ export const getSectionPageContext = async ({
     dashboardId,
     sectionId,
   });
-  const endpoint = `${apiHost}/api/v1/Solutions/${solutionId}/sections/${sectionId}`;
-  logger.info(`api called: [GET] ${endpoint}`);
-  const sectionData = await axios.get(endpoint);
-  if (sectionData && sectionData) {
+  const sectionData = await new ApiProvider().getSectionData({ solutionId, sectionId });
+  if (sectionData && sectionData.data) {
     const formData = sectionData.data;
     const context = createSectionPageContext({
       solutionId, sectionManifest, formData, dashboardId,
@@ -44,11 +43,9 @@ export const postSection = async ({
   const sectionManifest = new ManifestProvider().getSectionManifest({ dashboardId, sectionId });
   const transformedSectionData = transformSectionData({ sectionManifest, sectionData });
   try {
-    const endpoint = `${apiHost}/api/v1/Solutions/${solutionId}/sections/${sectionId}`;
-
-    logger.info(`api called: [PUT] ${endpoint}: ${JSON.stringify(transformedSectionData)}`);
-
-    await axios.put(endpoint, transformedSectionData);
+    await new ApiProvider().putSectionData({
+      solutionId, sectionId, sectionData: transformedSectionData,
+    });
 
     const response = createPostSectionResponse({ solutionId, sectionManifest });
 
