@@ -338,8 +338,7 @@ test('clicking on the hosting type hybrid section link should navigate the user 
     .expect(getLocation()).contains('/solution/S100000-001/section/hosting-type-hybrid');
 });
 
-// TODO: Remove skip when section complete.
-test.skip('clicking on the hosting type on premise section link should navigate the user to the hosting type on premise page', async (t) => {
+test('clicking on the hosting type on premise section link should navigate the user to the hosting type on premise page', async (t) => {
   await pageSetup(t);
 
   nock(apiLocalhost)
