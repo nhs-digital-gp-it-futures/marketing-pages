@@ -37,6 +37,13 @@ export class ApiProvider {
     return axios.get(endpoint);
   }
 
+  async getPreviewData({ solutionId }) {
+    const endpoint = `${this.apiHost}/api/v1/Solutions/${solutionId}/preview`;
+    logger.info(`api called: [GET] ${endpoint}`);
+
+    return axios.get(endpoint);
+  }
+
   async putSubmitForModeration({ solutionId }) {
     const endpoint = `${this.apiHost}/api/v1/Solutions/${solutionId}/SubmitForReview`;
     logger.info(`api called: [PUT] ${endpoint}`);
