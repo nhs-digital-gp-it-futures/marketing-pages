@@ -28,19 +28,19 @@
         }
       }
     },
-    "public-cloud": {
+    "hosting-type-public-cloud": {
       "requirement": "Optional",
       "status": "COMPLETE"
     },
-    "private-cloud": {
+    "hosting-type-private-cloud": {
       "requirement": "Optional",
       "status": "COMPLETE"
     },
-    "hybrid": {
+    "hosting-type-hybrid": {
       "requirement": "Optional",
       "status": "COMPLETE"
     },
-    "on-premise": {
+    "hosting-type-on-premise": {
       "requirement": "Optional",
       "status": "COMPLETE"
     }

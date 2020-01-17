@@ -58,7 +58,7 @@ describe('preview page', () => {
       });
   });
 
-  it('should render the client-application-types section when provided', (done) => {
+  it('should render the client application types section when provided', (done) => {
     const context = {
       sections: {
         'client-application-types': {},
@@ -72,6 +72,25 @@ describe('preview page', () => {
         const $ = cheerio.load(res.text);
 
         expect($('[data-test-id="view-client-application-types"]').length).toEqual(1);
+
+        done();
+      });
+  });
+
+  it('should render the hosting types section when provided', (done) => {
+    const context = {
+      sections: {
+        'hosting-types': {},
+      },
+    };
+
+    const dummyApp = testHarness().createComponentDummyApp(template, context);
+    request(dummyApp)
+      .get('/')
+      .then((res) => {
+        const $ = cheerio.load(res.text);
+
+        expect($('[data-test-id="view-hosting-types"]').length).toEqual(1);
 
         done();
       });

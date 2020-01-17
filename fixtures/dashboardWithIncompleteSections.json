@@ -15,19 +15,19 @@
       "status": "INCOMPLETE",
       "sections": {}
     },
-    "public-cloud": {
+    "hosting-type-public-cloud": {
       "requirement": "Optional",
       "status": "INCOMPLETE"
     },
-    "private-cloud": {
+    "hosting-type-private-cloud": {
       "requirement": "Optional",
       "status": "INCOMPLETE"
     },
-    "hybrid": {
+    "hosting-type-hybrid": {
       "requirement": "Optional",
       "status": "INCOMPLETE"
     },
-    "on-premise": {
+    "hosting-type-on-premise": {
       "requirement": "Optional",
       "status": "INCOMPLETE"
     },

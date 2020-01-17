@@ -58,19 +58,19 @@
     "hosting-type": {
       "title": "Hosting type",
       "sections": {
-        "public-cloud": {
+        "hosting-type-public-cloud": {
           "title": "Public cloud",
           "type": "section"
         },
-        "private-cloud": {
+        "hosting-type-private-cloud": {
           "title": "Private cloud",
           "type": "section"
         },
-        "hybrid": {
+        "hosting-type-hybrid": {
           "title": "Hybrid",
           "type": "section"
         },
-        "on-premise": {
+        "hosting-type-on-premise": {
           "title": "On premise",
           "type": "section"
         }

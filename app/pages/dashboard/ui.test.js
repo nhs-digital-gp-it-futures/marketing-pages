@@ -212,38 +212,38 @@ test('should render all the sections for the Hosting type section group', async 
   await pageSetup(t);
 
   const hostingTypeSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-hosting-type"]');
-  const publicCloudSection = hostingTypeSectionGroup.find('[data-test-id="dashboard-section-public-cloud"]');
-  const privateCloudSection = hostingTypeSectionGroup.find('[data-test-id="dashboard-section-private-cloud"]');
-  const hybridSection = hostingTypeSectionGroup.find('[data-test-id="dashboard-section-hybrid"]');
-  const onPremiseSection = hostingTypeSectionGroup.find('[data-test-id="dashboard-section-on-premise"]');
+  const hostingTypePublicCloudSection = hostingTypeSectionGroup.find('[data-test-id="dashboard-section-hosting-type-public-cloud"]');
+  const hostingTypePrivateCloudSection = hostingTypeSectionGroup.find('[data-test-id="dashboard-section-hosting-type-private-cloud"]');
+  const hostingTypeHybridSection = hostingTypeSectionGroup.find('[data-test-id="dashboard-section-hosting-type-hybrid"]');
+  const hostingTypeOnPremiseSection = hostingTypeSectionGroup.find('[data-test-id="dashboard-section-hosting-type-on-premise"]');
 
   await t
-    .expect(publicCloudSection.find('[data-test-id="dashboard-section-title"]').innerText)
+    .expect(hostingTypePublicCloudSection.find('[data-test-id="dashboard-section-title"]').innerText)
     .eql('Public cloud')
-    .expect(publicCloudSection.find('[data-test-id="dashboard-section-requirement"]').innerText)
+    .expect(hostingTypePublicCloudSection.find('[data-test-id="dashboard-section-requirement"]').innerText)
     .eql('Optional')
-    .expect(publicCloudSection.find('[data-test-id="dashboard-section-status"]').innerText)
+    .expect(hostingTypePublicCloudSection.find('[data-test-id="dashboard-section-status"]').innerText)
     .eql('INCOMPLETE')
 
-    .expect(privateCloudSection.find('[data-test-id="dashboard-section-title"]').innerText)
+    .expect(hostingTypePrivateCloudSection.find('[data-test-id="dashboard-section-title"]').innerText)
     .eql('Private cloud')
-    .expect(privateCloudSection.find('[data-test-id="dashboard-section-requirement"]').innerText)
+    .expect(hostingTypePrivateCloudSection.find('[data-test-id="dashboard-section-requirement"]').innerText)
     .eql('Optional')
-    .expect(privateCloudSection.find('[data-test-id="dashboard-section-status"]').innerText)
+    .expect(hostingTypePrivateCloudSection.find('[data-test-id="dashboard-section-status"]').innerText)
     .eql('INCOMPLETE')
 
-    .expect(hybridSection.find('[data-test-id="dashboard-section-title"]').innerText)
+    .expect(hostingTypeHybridSection.find('[data-test-id="dashboard-section-title"]').innerText)
     .eql('Hybrid')
-    .expect(hybridSection.find('[data-test-id="dashboard-section-requirement"]').innerText)
+    .expect(hostingTypeHybridSection.find('[data-test-id="dashboard-section-requirement"]').innerText)
     .eql('Optional')
-    .expect(hybridSection.find('[data-test-id="dashboard-section-status"]').innerText)
+    .expect(hostingTypeHybridSection.find('[data-test-id="dashboard-section-status"]').innerText)
     .eql('INCOMPLETE')
 
-    .expect(onPremiseSection.find('[data-test-id="dashboard-section-title"]').innerText)
+    .expect(hostingTypeOnPremiseSection.find('[data-test-id="dashboard-section-title"]').innerText)
     .eql('On premise')
-    .expect(onPremiseSection.find('[data-test-id="dashboard-section-requirement"]').innerText)
+    .expect(hostingTypeOnPremiseSection.find('[data-test-id="dashboard-section-requirement"]').innerText)
     .eql('Optional')
-    .expect(onPremiseSection.find('[data-test-id="dashboard-section-status"]').innerText)
+    .expect(hostingTypeOnPremiseSection.find('[data-test-id="dashboard-section-status"]').innerText)
     .eql('INCOMPLETE');
 });
 
@@ -293,68 +293,67 @@ test('clicking on the client application type section link should navigate the u
     .expect(getLocation()).contains('/solution/S100000-001/section/client-application-type');
 });
 
-// TODO: Remove skip when section complete.
-test.skip('clicking on the public cloud section link should navigate the user to the public cloud page', async (t) => {
+test('clicking on the hosting type public cloud section link should navigate the user to the hosting type public cloud page', async (t) => {
   await pageSetup(t);
 
   nock(apiLocalhost)
-    .get(`${apiPath}/sections/public-cloud`)
+    .get(`${apiPath}/sections/hosting-type-public-cloud`)
     .reply(200, {});
 
   const hostingTypeSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-hosting-type"]');
-  const publicCloudSection = hostingTypeSectionGroup.find('[data-test-id="dashboard-section-public-cloud"]');
+  const hostingTypePublicCloudSection = hostingTypeSectionGroup.find('[data-test-id="dashboard-section-hosting-type-public-cloud"]');
 
   await t
-    .click(publicCloudSection.find('a'))
-    .expect(getLocation()).contains('/solution/S100000-001/section/public-cloud');
+    .click(hostingTypePublicCloudSection.find('a'))
+    .expect(getLocation()).contains('/solution/S100000-001/section/hosting-type-public-cloud');
 });
 
 // TODO: Remove skip when section complete.
-test.skip('clicking on the private cloud section link should navigate the user to the private cloud page', async (t) => {
+test.skip('clicking on the hosting type private cloud section link should navigate the user to the hosting type private cloud page', async (t) => {
   await pageSetup(t);
 
   nock(apiLocalhost)
-    .get(`${apiPath}/sections/private-cloud`)
+    .get(`${apiPath}/sections/hosting-type-private-cloud`)
     .reply(200, {});
 
   const hostingTypeSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-hosting-type"]');
-  const privateCloudSection = hostingTypeSectionGroup.find('[data-test-id="dashboard-section-private-cloud"]');
+  const hostingTypePrivateCloudSection = hostingTypeSectionGroup.find('[data-test-id="dashboard-section-hosting-type-private-cloud"]');
 
   await t
-    .click(privateCloudSection.find('a'))
-    .expect(getLocation()).contains('/solution/S100000-001/section/private-cloud');
+    .click(hostingTypePrivateCloudSection.find('a'))
+    .expect(getLocation()).contains('/solution/S100000-001/section/hosting-type-private-cloud');
 });
 
 // TODO: Remove skip when section complete.
-test.skip('clicking on the hybrid section link should navigate the user to the hybrid page', async (t) => {
+test.skip('clicking on the hosting type hybrid section link should navigate the user to the hosting type hybrid page', async (t) => {
   await pageSetup(t);
 
   nock(apiLocalhost)
-    .get(`${apiPath}/sections/hybrid`)
+    .get(`${apiPath}/sections/hosting-type-hybrid`)
     .reply(200, {});
 
   const hostingTypeSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-hosting-type"]');
-  const hybridSection = hostingTypeSectionGroup.find('[data-test-id="dashboard-section-hybrid"]');
+  const hostingTypeHybridSection = hostingTypeSectionGroup.find('[data-test-id="dashboard-section-hosting-type-hybrid"]');
 
   await t
-    .click(hybridSection.find('a'))
-    .expect(getLocation()).contains('/solution/S100000-001/section/hybrid');
+    .click(hostingTypeHybridSection.find('a'))
+    .expect(getLocation()).contains('/solution/S100000-001/section/hosting-type-hybrid');
 });
 
 // TODO: Remove skip when section complete.
-test.skip('clicking on the on premise section link should navigate the user to the on premise page', async (t) => {
+test.skip('clicking on the hosting type on premise section link should navigate the user to the hosting type on premise page', async (t) => {
   await pageSetup(t);
 
   nock(apiLocalhost)
-    .get(`${apiPath}/sections/on-premise`)
+    .get(`${apiPath}/sections/hosting-type-on-premise`)
     .reply(200, {});
 
   const hostingTypeSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-hosting-type"]');
-  const onPremiseSection = hostingTypeSectionGroup.find('[data-test-id="dashboard-section-on-premise"]');
+  const hostingTypeOnPremiseSection = hostingTypeSectionGroup.find('[data-test-id="dashboard-section-hosting-type-on-premise"]');
 
   await t
-    .click(onPremiseSection.find('a'))
-    .expect(getLocation()).contains('/solution/S100000-001/section/on-premise');
+    .click(hostingTypeOnPremiseSection.find('a'))
+    .expect(getLocation()).contains('/solution/S100000-001/section/hosting-type-on-premise');
 });
 
 test('clicking on the contact details section link should navigate the user to contact details page', async (t) => {
