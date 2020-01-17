@@ -1,0 +1,45 @@
+{
+  "id": "hosting-type-private-cloud",
+  "title": "Private cloud hosting",
+  "mainAdvice": "Answer the following questions about private cloud hosting",
+  "additionalAdvice": [
+    "Provide the buyer with some insight into how the Solution will be stored and accessed."
+  ],
+  "questions": {
+    "summary": {
+      "mainAdvice": "Summarise your requirements (optional)",
+      "additionalAdvice": "Add a description of your Solutions private cloud requirements",
+      "footerAdvice": "You can enter up to 500 characters",
+      "type": "textarea-field",
+      "errorResponse": {
+        "maxLength": "Summarise your requirements is over the character limit"
+      }
+    },
+    "link": {
+      "mainAdvice": "Enter a link to more private cloud information? (optional)",
+      "additionalAdvice": "Buyers will be directed to an external link",
+      "type": "text-field",
+      "errorResponse": {
+        "maxLength": "Link is over the character limit"
+      }
+    },
+    "hosting-model": {
+      "mainAdvice": "Describe your data center hosting model (optional)",
+      "additionalAdvice": "Add an overview of the data center hosting model for your Solution",
+      "footerAdvice": "You can enter up to 1000 characters",
+      "type": "textarea-field",
+      "errorResponse": {
+        "maxLength": "Hosting model description is over the character limit"
+      }
+    },
+    "requires-hscn": {
+      "mainAdvice": "Does the system have HSCN/N3 connectivity? (optional)",
+      "additionalAdvice": "Select whether the Solutions requires a HSCN connection to function",
+      "type": "checkbox-options",
+      "options": {
+        "This Solution requires a HSCN/N3 connection": "This Solution requires a HSCN/N3 connection"
+      }
+    }
+  },
+  "submitText" : "Save and return to all sections"
+}

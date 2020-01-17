@@ -308,8 +308,7 @@ test('clicking on the hosting type public cloud section link should navigate the
     .expect(getLocation()).contains('/solution/S100000-001/section/hosting-type-public-cloud');
 });
 
-// TODO: Remove skip when section complete.
-test.skip('clicking on the hosting type private cloud section link should navigate the user to the hosting type private cloud page', async (t) => {
+test('clicking on the hosting type private cloud section link should navigate the user to the hosting type private cloud page', async (t) => {
   await pageSetup(t);
 
   nock(apiLocalhost)
