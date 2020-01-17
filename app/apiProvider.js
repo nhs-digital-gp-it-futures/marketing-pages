@@ -22,4 +22,10 @@ export class ApiProvider {
 
     return true;
   }
+
+  async getMainDashboardData({ solutionId }) {
+    const endpoint = `${this.apiHost}/api/v1/Solutions/${solutionId}/dashboard`;
+    logger.info(`api called: [GET] ${endpoint}`);
+    return axios.get(endpoint);
+  }
 }
