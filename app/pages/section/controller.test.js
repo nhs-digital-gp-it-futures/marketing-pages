@@ -1,4 +1,4 @@
-import { getSectionPageContext, getSectionPageErrorContext } from './controller';
+import { getSectionPageContext, getSectionPageErrorContext, postSection } from './controller';
 import { ManifestProvider } from '../../manifestProvider';
 import { ApiProvider } from '../../apiProvider';
 
@@ -92,6 +92,64 @@ describe('section controller', () => {
       const context = await getSectionPageErrorContext({ solutionId: 'some-solution-id' });
 
       expect(context).toEqual(expectedContext);
+    });
+  });
+
+  describe('postSection', () => {
+    it('should return the response indicating success and the redirectUrl', async () => {
+      const expectedContext = {
+        success: true,
+        redirectUrl: '/solution/some-solution-id',
+      };
+
+
+      ManifestProvider.prototype.getSectionManifest.mockReturnValue(sectionManifest);
+      ApiProvider.prototype.putSectionData.mockResolvedValue(true);
+
+      const context = await postSection({ solutionId: 'some-solution-id' });
+
+      expect(context).toEqual(expectedContext);
+    });
+
+    it('should return the details of the error thrown by the ApiProvider with a status of 400', async () => {
+      const errorResponse = {
+        response: {
+          status: 400,
+          data: {
+            message: 'something important',
+          },
+        },
+      };
+
+      ManifestProvider.prototype.getSectionManifest.mockReturnValue(sectionManifest);
+      ApiProvider.prototype.putSectionData.mockImplementation(
+        () => Promise.reject(errorResponse),
+      );
+
+      const response = await postSection({ solutionId: 'some-solution-id' });
+      expect(response).toEqual(errorResponse.response.data);
+    });
+
+    it('should throw the error thrown by the ApiProvider when the status is not 400', async () => {
+      const errorResponse = {
+        response: {
+          status: 500,
+          data: {
+            message: 'something important',
+          },
+        },
+      };
+
+      ManifestProvider.prototype.getSectionManifest.mockReturnValue(sectionManifest);
+      ApiProvider.prototype.putSectionData.mockImplementation(
+        () => Promise.reject(errorResponse),
+      );
+
+      try {
+        await postSection({ solutionId: 'some-solution-id' });
+      } catch (err) {
+        expect(err).toEqual(errorResponse);
+      }
     });
   });
 });
