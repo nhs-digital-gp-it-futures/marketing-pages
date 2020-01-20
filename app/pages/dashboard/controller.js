@@ -26,7 +26,6 @@ export const postSubmitForModeration = async ({ solutionId }) => {
       success: true,
     };
   } catch (error) {
-    console.log(`error: ${JSON.stringify(error)}`)
     return error.response.data;
   }
 };
