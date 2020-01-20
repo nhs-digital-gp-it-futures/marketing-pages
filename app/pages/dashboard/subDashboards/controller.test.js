@@ -55,11 +55,21 @@ describe('subDashboards controller', () => {
     };
 
     ManifestProvider.prototype.getSubDashboardManifest.mockReturnValue(dashboardManifest);
-
     ApiProvider.prototype.getSubDashboardData.mockResolvedValue(marketingDataSections);
 
     const context = await getSubDashboardPageContext({ solutionId: 'some-solution-id', dashboardId: 'some-dashboard-id' });
 
     expect(context).toEqual(expectedContext);
+  });
+
+  it('should throw an error when no data is returned from the ApiProvider', async () => {
+    ManifestProvider.prototype.getSubDashboardManifest.mockReturnValue(dashboardManifest);
+    ApiProvider.prototype.getSubDashboardData.mockResolvedValue({});
+
+    try {
+      await getSubDashboardPageContext({ solutionId: 'some-solution-id', dashboardId: 'some-dashboard-id' });
+    } catch (err) {
+      expect(err).toEqual(new Error('No data returned'));
+    }
   });
 });
