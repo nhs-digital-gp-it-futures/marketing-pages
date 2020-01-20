@@ -1,5 +1,5 @@
 import { createLogger, format, transports } from 'winston';
-import { loggerLevel } from './config';
+import { loggerLevel, env } from './config';
 
 const {
   combine,
@@ -20,7 +20,7 @@ const logger = createLogger({
   transports: [
     new transports.Console({
       level: loggerLevel,
-      colourize: (process.env.NODE_ENV === 'development' || !process.env.NODE_ENV),
+      colourize: (env === 'development'),
     }),
   ],
 });
