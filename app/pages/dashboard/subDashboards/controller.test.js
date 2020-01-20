@@ -6,7 +6,7 @@ jest.mock('../../../manifestProvider');
 jest.mock('../../../apiProvider');
 
 describe('subDashboards controller', () => {
-  const dashboardManifest = {
+  const subDashboardManifest = {
     sectionGroups: {
       'some-section-group-id': {
         title: 'Some section group',
@@ -20,7 +20,7 @@ describe('subDashboards controller', () => {
     },
   };
 
-  const marketingDataSections = {
+  const subDashboardData = {
     data: {
       sections: {
         'some-section-id': {
@@ -54,8 +54,8 @@ describe('subDashboards controller', () => {
       ],
     };
 
-    ManifestProvider.prototype.getSubDashboardManifest.mockReturnValue(dashboardManifest);
-    ApiProvider.prototype.getSubDashboardData.mockResolvedValue(marketingDataSections);
+    ManifestProvider.prototype.getSubDashboardManifest.mockReturnValue(subDashboardManifest);
+    ApiProvider.prototype.getSubDashboardData.mockResolvedValue(subDashboardData);
 
     const context = await getSubDashboardPageContext({ solutionId: 'some-solution-id', dashboardId: 'some-dashboard-id' });
 
@@ -63,7 +63,7 @@ describe('subDashboards controller', () => {
   });
 
   it('should throw an error when no data is returned from the ApiProvider', async () => {
-    ManifestProvider.prototype.getSubDashboardManifest.mockReturnValue(dashboardManifest);
+    ManifestProvider.prototype.getSubDashboardManifest.mockReturnValue(subDashboardManifest);
     ApiProvider.prototype.getSubDashboardData.mockResolvedValue({});
 
     try {
