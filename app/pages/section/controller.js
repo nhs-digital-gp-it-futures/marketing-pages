@@ -43,13 +43,21 @@ const postSection = async ({
 }) => {
   const sectionManifest = new ManifestProvider().getSectionManifest({ dashboardId, sectionId });
   const transformedSectionData = transformSectionData({ sectionManifest, sectionData });
-  const endpoint = `${apiHost}/api/v1/Solutions/${solutionId}/sections/${sectionId}`;
+  try {
+    const endpoint = `${apiHost}/api/v1/Solutions/${solutionId}/sections/${sectionId}`;
 
-  logger.info(`api called: [PUT] ${endpoint}: ${JSON.stringify(transformedSectionData)}`);
-  await axios.put(endpoint, transformedSectionData);
+    logger.info(`api called: [PUT] ${endpoint}: ${JSON.stringify(transformedSectionData)}`);
+    await axios.put(endpoint, transformedSectionData);
 
-  const response = createPostSectionResponse({ solutionId, sectionManifest });
-  return response;
+    const response = createPostSectionResponse({ solutionId, sectionManifest });
+    return response;
+  } catch (err) {
+    if (err.response.status === 400) {
+      return err.response.data;
+    }
+    logger.error(err);
+    throw err;
+  }
 };
 
 export {
