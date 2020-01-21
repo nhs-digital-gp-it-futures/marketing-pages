@@ -1,15 +1,11 @@
-import axios from 'axios';
 import { ManifestProvider } from '../../manifestProvider';
+import { ApiProvider } from '../../apiProvider';
 import { createDashboardPageContext } from './createDashboardPageContext';
-import { apiHost } from '../../config';
-import logger from '../../logger';
 
 const getMarketingPageDashboardContext = async ({ solutionId, validationErrors }) => {
   const dashboardManifest = new ManifestProvider().getDashboardManifest();
+  const dashboardDataRaw = await new ApiProvider().getMainDashboardData({ solutionId });
 
-  const endpoint = `${apiHost}/api/v1/Solutions/${solutionId}/dashboard`;
-  logger.info(`api called: [GET] ${endpoint}`);
-  const dashboardDataRaw = await axios.get(endpoint);
   if (dashboardDataRaw && dashboardDataRaw.data) {
     const dashboardData = dashboardDataRaw.data;
     const context = createDashboardPageContext({
@@ -25,9 +21,7 @@ const getMarketingPageDashboardContext = async ({ solutionId, validationErrors }
 
 const postSubmitForModeration = async ({ solutionId }) => {
   try {
-    const endpoint = `${apiHost}/api/v1/Solutions/${solutionId}/SubmitForReview`;
-    logger.info(`api called: [PUT] ${endpoint}`);
-    await axios.put(endpoint, {});
+    await new ApiProvider().putSubmitForModeration({ solutionId });
     return {
       success: true,
     };
