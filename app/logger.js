@@ -1,64 +1,28 @@
-const { createLogger, format, transports } = require('winston');
-const { loggerLevel } = require('./config');
+import { createLogger, format, transports } from 'winston';
+import { loggerLevel, env } from './config';
 
-const logFormat = format.printf(({
-  level,
-  message,
-  label,
+const {
+  combine,
   timestamp,
-}) => `${timestamp} [${label}] ${level}: ${message}`);
+  label,
+  printf,
+  colorize,
+} = format;
+const logFormat = printf(info => `${info.timestamp} [${info.level}] ${info.label} | message: ${info.message} ${info.message.stack ? `: ${info.message.stack}` : ''}`);
 
 const logger = createLogger({
-  level: 'info',
-  format: logFormat,
-  defaultMeta: { service: 'user-service' },
+  format: combine(
+    label({ label: 'marketing-pages' }),
+    timestamp(),
+    colorize(),
+    logFormat,
+  ),
+  transports: [
+    new transports.Console({
+      level: loggerLevel,
+      colourize: (env === 'development'),
+    }),
+  ],
 });
 
-if (process.env.NODE_ENV === 'development' || !process.env.NODE_ENV) {
-  logger.add(new transports.Console({
-    format: format.combine(
-      format.label({ label: 'marketing-pages' }),
-      format.timestamp({ format: 'D/M/YY HH:mm:ss' }),
-      format.colorize(),
-      logFormat,
-    ),
-  }));
-} else {
-  logger.add(
-    new transports.File({
-      filename: 'error.log',
-      level: 'error',
-      format: format.combine(
-        format.label({ label: 'marketing-pages' }),
-        format.timestamp({ format: 'D/M/YY HH:mm:ss' }),
-        logFormat,
-      ),
-    }),
-    new transports.File({
-      filename: 'combined.log',
-      format: format.combine(
-        format.label({ label: 'marketing-pages' }),
-        format.timestamp({ format: 'D/M/YY HH:mm:ss' }),
-        logFormat,
-      ),
-    }),
-  );
-}
-
-export default {
-  info: (message) => {
-    if (loggerLevel === 'info') {
-      logger.log('info', message);
-    }
-  },
-  warn: (message) => {
-    if (loggerLevel === 'info' || loggerLevel === 'warn') {
-      logger.log('warn', message);
-    }
-  },
-  error: (message) => {
-    if (loggerLevel !== 'off') {
-      logger.log('error', message);
-    }
-  },
-};
+export default logger;
