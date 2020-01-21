@@ -43,6 +43,14 @@
     "hosting-type-on-premise": {
       "requirement": "Optional",
       "status": "COMPLETE"
+    },
+    "roadmap": {
+      "requirement": "Optional",
+      "status": "COMPLETE"
+    },
+    "contact-details": {
+      "requirement": "Optional",
+      "status": "COMPLETE"
     }
   }
 }

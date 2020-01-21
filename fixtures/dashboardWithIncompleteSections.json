@@ -31,6 +31,10 @@
       "requirement": "Optional",
       "status": "INCOMPLETE"
     },
+    "roadmap": {
+      "requirement": "Optional",
+      "status": "INCOMPLETE"
+    },
     "contact-details": {
       "requirement": "Optional",
       "status": "INCOMPLETE"
