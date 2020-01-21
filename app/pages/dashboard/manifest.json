@@ -76,6 +76,15 @@
         }
       }
     },
+    "product-roadmap": {
+      "title": "Your product roadmap",
+      "sections": {
+        "roadmap": {
+          "title": "Roadmap",
+          "type": "section"
+        }
+      }
+    },
     "about-your-organisation": {
       "title": "About your Organisation",
       "sections": {

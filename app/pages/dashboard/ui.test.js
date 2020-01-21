@@ -87,6 +87,24 @@ test('should render the Client application type section group', async (t) => {
     .expect(clientApplicationTypeSectionGroup.find('h2').innerText).eql('Client application type');
 });
 
+test('should render the Hosting type section group', async (t) => {
+  await pageSetup(t);
+
+  const hostingTypeSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-hosting-type"]');
+
+  await t
+    .expect(hostingTypeSectionGroup.find('h2').innerText).eql('Hosting type');
+});
+
+test('should render the Your Product roadmap section group', async (t) => {
+  await pageSetup(t);
+
+  const productRoadmapSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-product-roadmap"]');
+
+  await t
+    .expect(productRoadmapSectionGroup.find('h2').innerText).eql('Your product roadmap');
+});
+
 test('should render the About your Organisation section group', async (t) => {
   await pageSetup(t);
 
@@ -95,6 +113,7 @@ test('should render the About your Organisation section group', async (t) => {
   await t
     .expect(aboutYourOrganisationSectionGroup.find('h2').innerText).eql('About your Organisation');
 });
+
 
 test('should render all the sections for the About your solution section group', async (t) => {
   await pageSetup(t);
@@ -130,21 +149,6 @@ test('should render all the sections for the Client application type section gro
     .expect(clientApplicationTypeSectionGroup.find('[data-test-id="dashboard-section-requirement"]').innerText)
     .eql('Mandatory')
     .expect(clientApplicationTypeSectionGroup.find('[data-test-id="dashboard-section-status"]').innerText)
-    .eql('INCOMPLETE');
-});
-
-test('should render all the sections for the About your organisation section group', async (t) => {
-  await pageSetup(t);
-
-  const aboutYourOrganisationSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-about-your-organisation"]');
-  const contactDetailsSection = aboutYourOrganisationSectionGroup.find('[data-test-id="dashboard-section-contact-details"]');
-
-  await t
-    .expect(contactDetailsSection.find('[data-test-id="dashboard-section-title"]').innerText)
-    .eql('Contact details')
-    .expect(contactDetailsSection.find('[data-test-id="dashboard-section-requirement"]').innerText)
-    .eql('Optional')
-    .expect(contactDetailsSection.find('[data-test-id="dashboard-section-status"]').innerText)
     .eql('INCOMPLETE');
 });
 
@@ -247,6 +251,37 @@ test('should render all the sections for the Hosting type section group', async 
     .eql('INCOMPLETE');
 });
 
+test('should render all the sections for the Your product roadmap section group', async (t) => {
+  await pageSetup(t);
+
+  const productRoadmapSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-product-roadmap"]');
+  const roadmapSection = productRoadmapSectionGroup.find('[data-test-id="dashboard-section-roadmap"]');
+
+  await t
+    .expect(roadmapSection.find('[data-test-id="dashboard-section-title"]').innerText)
+    .eql('Roadmap')
+    .expect(roadmapSection.find('[data-test-id="dashboard-section-requirement"]').innerText)
+    .eql('Optional')
+    .expect(roadmapSection.find('[data-test-id="dashboard-section-status"]').innerText)
+    .eql('INCOMPLETE');
+});
+
+test('should render all the sections for the About your organisation section group', async (t) => {
+  await pageSetup(t);
+
+  const aboutYourOrganisationSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-about-your-organisation"]');
+  const contactDetailsSection = aboutYourOrganisationSectionGroup.find('[data-test-id="dashboard-section-contact-details"]');
+
+  await t
+    .expect(contactDetailsSection.find('[data-test-id="dashboard-section-title"]').innerText)
+    .eql('Contact details')
+    .expect(contactDetailsSection.find('[data-test-id="dashboard-section-requirement"]').innerText)
+    .eql('Optional')
+    .expect(contactDetailsSection.find('[data-test-id="dashboard-section-status"]').innerText)
+    .eql('INCOMPLETE');
+});
+
+
 test('clicking on the solution description section link should navigate the user to the solution description page', async (t) => {
   await pageSetup(t);
 
@@ -261,7 +296,6 @@ test('clicking on the solution description section link should navigate the user
     .click(theSolutionDescriptionSection.find('a'))
     .expect(getLocation()).contains('/solution/S100000-001/section/solution-description');
 });
-
 
 test('clicking on the feature section link should navigate the user to the features page', async (t) => {
   await pageSetup(t);
@@ -353,6 +387,22 @@ test('clicking on the hosting type on premise section link should navigate the u
     .expect(getLocation()).contains('/solution/S100000-001/section/hosting-type-on-premise');
 });
 
+// TODO - remove skip once the form has been created
+test.skip('clicking on the roadmap section link should navigate the user to roadmap page', async (t) => {
+  await pageSetup(t);
+
+  nock(apiLocalhost)
+    .get(`${apiPath}/sections/roadmap`)
+    .reply(200, {});
+
+  const productRoadmapSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-product-roadmap"]');
+  const roadmapSection = productRoadmapSectionGroup.find('[data-test-id="dashboard-section-roadmap"]');
+
+  await t
+    .click(roadmapSection.find('a'))
+    .expect(getLocation()).contains('/solution/S100000-001/section/roadmap');
+});
+
 test('clicking on the contact details section link should navigate the user to contact details page', async (t) => {
   await pageSetup(t);
 
@@ -367,6 +417,7 @@ test('clicking on the contact details section link should navigate the user to c
     .click(contactDetailsSection.find('a'))
     .expect(getLocation()).contains('/solution/S100000-001/section/contact-details');
 });
+
 
 test('should render the Error summary containing all the sections that failed the SubmitForReview', async (t) => {
   await pageSetup(t);
