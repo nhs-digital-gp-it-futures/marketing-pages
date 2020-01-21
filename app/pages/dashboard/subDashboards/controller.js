@@ -4,7 +4,7 @@ import { createDashboardPageContext } from '../createDashboardPageContext';
 import logger from '../../../logger';
 import { apiHost } from '../../../config';
 
-export const getSubDashboardPageContext = async ({ solutionId, dashboardId }) => {
+const getSubDashboardPageContext = async ({ solutionId, dashboardId }) => {
   const dashboardManifest = new ManifestProvider().getSubDashboardManifest({ dashboardId });
 
   const endpoint = `${apiHost}/api/v1/Solutions/${solutionId}/dashboards/${dashboardId}`;
@@ -22,3 +22,5 @@ export const getSubDashboardPageContext = async ({ solutionId, dashboardId }) =>
   }
   throw new Error('No data returned');
 };
+
+export { getSubDashboardPageContext };
