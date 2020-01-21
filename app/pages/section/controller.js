@@ -48,11 +48,11 @@ export const postSection = async ({
     const response = createPostSectionResponse({ solutionId, sectionManifest });
 
     return response;
-  } catch (error) {
-    if (error.response.status === 400) {
-      return error.response.data;
+  } catch (err) {
+    if (err.response.status === 400) {
+      return err.response.data;
     }
-    logger.error(`postSection: unrecognised response ${JSON.stringify(error.response.data, null, 2)}`);
-    throw error;
+    logger.error(err);
+    throw err;
   }
 };
