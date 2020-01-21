@@ -47,7 +47,7 @@ router.post('/solution/:solutionId/section/:sectionId', withCatch(async (req, re
   const context = await getSectionPageErrorContext({
     solutionId, sectionId, sectionData, validationErrors: response,
   });
-  res.render('pages/section/template', context);
+  return res.render('pages/section/template', context);
 }));
 
 router.get('/solution/:solutionId/dashboard/:dashboardId', withCatch(async (req, res) => {
@@ -76,7 +76,7 @@ router.post('/solution/:solutionId/dashboard/:dashboardId/section/:sectionId', w
   const context = await getSectionPageErrorContext({
     solutionId, sectionId, sectionData, validationErrors: response, dashboardId,
   });
-  res.render('pages/section/template', context);
+  return res.render('pages/section/template', context);
 }));
 
 router.get('/solution/:solutionId/preview', withCatch(async (req, res) => {
@@ -95,7 +95,7 @@ router.get('/solution/:solutionId/submitForModeration', withCatch(async (req, re
   const context = await getMarketingPageDashboardContext({
     solutionId, validationErrors: response,
   });
-  res.render('pages/dashboard/template', context);
+  return res.render('pages/dashboard/template', context);
 }));
 
 router.get('*', (req, res, next) => next({
@@ -109,7 +109,7 @@ router.use((err, req, res, next) => {
     logger.error(context.message);
     return res.render('pages/error/template.njk', context);
   }
-  next();
+  return next();
 });
 
 module.exports = router;
