@@ -10,7 +10,7 @@
       "footerAdvice": "You can enter up to 1,000 characters",
       "type": "textarea-field",
       "errorResponse": {
-        "maxLength": "Solution Summary is over the character limit"
+        "maxLength": "Summary is over the character limit"
       }
     }
   },
