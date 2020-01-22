@@ -45,10 +45,9 @@ test('when existing marketing data - The solution description section and all qu
   await pageSetup(t, true);
 
   const solutionDescriptionSection = Selector('[data-test-id="view-solution-description"]');
-  const summaryQuestion = Selector('[data-test-id="view-section-question-summary"]');
-  const descriptionQuestion = Selector('[data-test-id="view-section-question-description"]');
-  const linkQuestion = Selector('[data-test-id="view-section-question-link"]');
-
+  const summaryQuestion = solutionDescriptionSection.find('[data-test-id="view-section-question-summary"]');
+  const descriptionQuestion = solutionDescriptionSection.find('[data-test-id="view-section-question-description"]');
+  const linkQuestion = solutionDescriptionSection.find('[data-test-id="view-section-question-link"]');
 
   await t
     .expect(solutionDescriptionSection.exists).ok()
@@ -458,7 +457,6 @@ test('when existing marketing data - The hosting type private cloud section shou
     .expect(requiresHSCNRow.find('div[data-test-id="view-section-table-row-vertical"]').exists).ok();
 });
 
-
 test('when existing marketing data - The hosting type hybrid section should be rendered', async (t) => {
   await pageSetup(t, true);
 
@@ -502,7 +500,6 @@ test('when existing marketing data - The hosting type hybrid section should be r
     .expect(requiresHSCNRow.find('div[data-test-id="view-section-table-row-vertical"]').exists).ok();
 });
 
-
 test('when existing marketing data - The hosting type on premise section should be rendered', async (t) => {
   await pageSetup(t, true);
 
@@ -544,4 +541,27 @@ test('when existing marketing data - The hosting type on premise section should 
 
     .expect(requiresHSCNRowItem.trim()).eql('This Solution requires a HSCN/N3 connection')
     .expect(requiresHSCNRow.find('div[data-test-id="view-section-table-row-vertical"]').exists).ok();
+});
+
+test('when no existing marketing data - The roadmap section should not be rendered', async (t) => {
+  await pageSetup(t);
+
+  const roadmapSection = Selector('[data-test-id="view-roadmap"]');
+
+  await t
+    .expect(roadmapSection.exists).notOk();
+});
+
+test('when existing marketing data - The roadmap section should be rendered', async (t) => {
+  await pageSetup(t, true);
+
+  const roadmapSection = Selector('[data-test-id="view-roadmap"]');
+  const summaryQuestion = roadmapSection.find('[data-test-id="view-section-question-summary"]');
+
+  await t
+    .expect(roadmapSection.exists).ok()
+    .expect(roadmapSection.find('h3').innerText).eql('Roadmap')
+
+    .expect(summaryQuestion.exists).ok()
+    .expect(summaryQuestion.find('[data-test-id="view-question-data-text-summary"]').innerText).eql('The roadmap summary details');
 });
