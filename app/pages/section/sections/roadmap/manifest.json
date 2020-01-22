@@ -1,0 +1,18 @@
+{
+  "id": "roadmap",
+  "title": "Catalogue Solution roadmap",
+  "mainAdvice": "Let buyers know about any future development plans for your Catalogue Solution.",
+  "warningAdvice": "This information will be published on the Buying Catalogue and therefore available to anyone. You should not include anything you consider commercially sensitive.",
+  "questions": {
+    "summary": {
+      "mainAdvice": "Summary (optional)",
+      "additionalAdvice": "Provide information on how and when you plan to enhance your Catalogue Solution.",
+      "footerAdvice": "You can enter up to 1,000 characters",
+      "type": "textarea-field",
+      "errorResponse": {
+        "maxLength": "Solution Summary is over the character limit"
+      }
+    }
+  },
+  "submitText" : "Save and return to all sections"
+}
