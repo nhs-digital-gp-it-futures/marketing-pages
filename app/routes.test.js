@@ -10,42 +10,34 @@ jest.mock('./logger');
 
 const mockDashboardContext = {
   title: 'Dashboard title',
-  mainAdvice: undefined,
-  additionalAdvice: undefined,
   previewUrl: '/',
   submitForModerationUrl: '/',
   returnToDashboardUrl: '/',
-  errors: undefined,
   sectionGroups: [
     {
       id: 'sectiongroup-id',
       title: 'Sectiongroup Title',
-      sections: [],
     },
   ],
 };
+
 const mockSectionContext = {
   title: 'Section Title',
-  submitActionUrl: '/s',
+  submitActionUrl: '/',
   mainAdvice: 'Section Main Advice',
   additionalAdvice: [
     'Section additional advice',
   ],
-  warningAdvice: undefined,
   returnToDashboardUrl: '/',
   submitText: 'submitText',
-  errors: undefined,
   questions: [
     {
       id: 'a-question',
       type: 'bulletpoint-list',
-      mainAdvice: undefined,
-      additionalAdvice: undefined,
-      footerAdvice: undefined,
-      fields: [],
     },
   ],
 };
+
 const mockSectionPostData = {
   'a-question': [
     'bullet 1',
@@ -67,7 +59,6 @@ const mockPostSectionContext = {
   additionalAdvice: [
     'post section additional advice',
   ],
-  warningAdvice: undefined,
   returnToDashboardUrl: '/',
   submitText: 'submitText',
   errors: [
@@ -80,19 +71,15 @@ const mockPostSectionContext = {
     {
       id: 'a-question',
       type: 'bulletpoint-list',
-      mainAdvice: undefined,
-      additionalAdvice: undefined,
-      footerAdvice: undefined,
-      fields: [],
     },
   ],
 };
 const mockPreviewContext = {
   sections: {
-    'solution-description': { answers: [Object] },
-    features: { answers: [Object] },
-    'contact-details': { answers: [Object] },
-    capabilities: { answers: [Object] },
+    'solution-description': { answers: {} },
+    features: { answers: {} },
+    'contact-details': { answers: {} },
+    capabilities: { answers: {} },
   },
 };
 const mockSectionErrorContext = {
