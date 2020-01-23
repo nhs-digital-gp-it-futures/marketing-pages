@@ -35,6 +35,10 @@
       "requirement": "Optional",
       "status": "INCOMPLETE"
     },
+    "about-supplier": {
+      "requirement": "Optional",
+      "status": "INCOMPLETE"
+    },
     "contact-details": {
       "requirement": "Optional",
       "status": "INCOMPLETE"
