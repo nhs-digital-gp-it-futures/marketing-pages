@@ -33,24 +33,13 @@ const mockSectionContext = {
   questions: [
     {
       id: 'a-question',
-      type: 'bulletpoint-list',
+      type: 'text-field',
     },
   ],
 };
 
 const mockSectionPostData = {
-  'a-question': [
-    'bullet 1',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-  ],
+  'a-question': ''
 };
 const mockPostSectionContext = {
   title: 'Post Section Title',
@@ -70,7 +59,7 @@ const mockPostSectionContext = {
   questions: [
     {
       id: 'a-question',
-      type: 'bulletpoint-list',
+      type: 'text-field',
     },
   ],
 };
