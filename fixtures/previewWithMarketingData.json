@@ -181,6 +181,22 @@
       "answers": {
         "summary": "The roadmap summary details"
       }
+    },
+    "contact-details": {
+      "answers": {
+        "contact-1": {
+          "department-name": "One Department",
+          "contact-name": "Contact One",
+          "phone-number": "111111111",
+          "email-address": "contact@one.com"
+        },
+        "contact-2": {
+          "department-name": "Two Department",
+          "contact-name": "Contact Two",
+          "phone-number": "222222222",
+          "email-address": "contact@two.com"
+        }
+      }
     }
   }
 }

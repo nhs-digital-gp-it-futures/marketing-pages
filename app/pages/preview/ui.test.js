@@ -543,6 +543,48 @@ test('when existing marketing data - The hosting type on premise section should 
     .expect(requiresHSCNRow.find('div[data-test-id="view-section-table-row-vertical"]').exists).ok();
 });
 
+test('when no existing marketing data - The contact-details section should not be rendered', async (t) => {
+  await pageSetup(t);
+
+  const contactDetailsSection = Selector('[data-test-id="view-solution-contact-details"]');
+
+  await t
+    .expect(contactDetailsSection.exists).notOk();
+});
+
+test('when existing marketing data - The contact-details section should be rendered', async (t) => {
+  await pageSetup(t, true);
+
+  const contactDetailsSection = Selector('[data-test-id="view-solution-contact-details"]');
+  const contact1Details = contactDetailsSection.find('[data-test-id="view-section-question-contact-1"]');
+  const contact1DepartmentName = contact1Details.find('[data-test-id="view-question-data-text-department-name"]');
+  const contact1ContactName = contact1Details.find('[data-test-id="view-question-data-text-contact-name"]');
+  const contact1PhoneNumber = contact1Details.find('[data-test-id="view-question-data-text-phone-number"]');
+  const contact1EmailAddress = contact1Details.find('[data-test-id="view-question-data-text-email-address"]');
+
+  const contact2Details = contactDetailsSection.find('[data-test-id="view-section-question-contact-2"]');
+  const contact2DepartmentName = contact2Details.find('[data-test-id="view-question-data-text-department-name"]');
+  const contact2ContactName = contact2Details.find('[data-test-id="view-question-data-text-contact-name"]');
+  const contact2PhoneNumber = contact2Details.find('[data-test-id="view-question-data-text-phone-number"]');
+  const contact2EmailAddress = contact2Details.find('[data-test-id="view-question-data-text-email-address"]');
+
+  await t
+    .expect(contactDetailsSection.exists).ok()
+    .expect(contactDetailsSection.find('h3').innerText).eql('Contact details')
+
+    .expect(contact1Details.exists).ok()
+    .expect(contact1DepartmentName.innerText).eql('One Department')
+    .expect(contact1ContactName.innerText).eql('Contact One')
+    .expect(contact1PhoneNumber.innerText).eql('111111111')
+    .expect(contact1EmailAddress.innerText).eql('contact@one.com')
+
+    .expect(contact2Details.exists).ok()
+    .expect(contact2DepartmentName.innerText).eql('Two Department')
+    .expect(contact2ContactName.innerText).eql('Contact Two')
+    .expect(contact2PhoneNumber.innerText).eql('222222222')
+    .expect(contact2EmailAddress.innerText).eql('contact@two.com');
+});
+
 test('when no existing marketing data - The roadmap section should not be rendered', async (t) => {
   await pageSetup(t);
 
