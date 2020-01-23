@@ -387,8 +387,7 @@ test('clicking on the hosting type on premise section link should navigate the u
     .expect(getLocation()).contains('/solution/S100000-001/section/hosting-type-on-premise');
 });
 
-// TODO - remove skip once the form has been created
-test.skip('clicking on the roadmap section link should navigate the user to roadmap page', async (t) => {
+test('clicking on the roadmap section link should navigate the user to roadmap page', async (t) => {
   await pageSetup(t);
 
   nock(apiLocalhost)

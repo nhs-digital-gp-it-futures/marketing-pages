@@ -45,10 +45,9 @@ test('when existing marketing data - The solution description section and all qu
   await pageSetup(t, true);
 
   const solutionDescriptionSection = Selector('[data-test-id="view-solution-description"]');
-  const summaryQuestion = Selector('[data-test-id="view-section-question-summary"]');
-  const descriptionQuestion = Selector('[data-test-id="view-section-question-description"]');
-  const linkQuestion = Selector('[data-test-id="view-section-question-link"]');
-
+  const summaryQuestion = solutionDescriptionSection.find('[data-test-id="view-section-question-summary"]');
+  const descriptionQuestion = solutionDescriptionSection.find('[data-test-id="view-section-question-description"]');
+  const linkQuestion = solutionDescriptionSection.find('[data-test-id="view-section-question-link"]');
 
   await t
     .expect(solutionDescriptionSection.exists).ok()
@@ -458,7 +457,6 @@ test('when existing marketing data - The hosting type private cloud section shou
     .expect(requiresHSCNRow.find('div[data-test-id="view-section-table-row-vertical"]').exists).ok();
 });
 
-
 test('when existing marketing data - The hosting type hybrid section should be rendered', async (t) => {
   await pageSetup(t, true);
 
@@ -502,7 +500,6 @@ test('when existing marketing data - The hosting type hybrid section should be r
     .expect(requiresHSCNRow.find('div[data-test-id="view-section-table-row-vertical"]').exists).ok();
 });
 
-
 test('when existing marketing data - The hosting type on premise section should be rendered', async (t) => {
   await pageSetup(t, true);
 
@@ -544,4 +541,69 @@ test('when existing marketing data - The hosting type on premise section should 
 
     .expect(requiresHSCNRowItem.trim()).eql('This Solution requires a HSCN/N3 connection')
     .expect(requiresHSCNRow.find('div[data-test-id="view-section-table-row-vertical"]').exists).ok();
+});
+
+test('when no existing marketing data - The contact-details section should not be rendered', async (t) => {
+  await pageSetup(t);
+
+  const contactDetailsSection = Selector('[data-test-id="view-solution-contact-details"]');
+
+  await t
+    .expect(contactDetailsSection.exists).notOk();
+});
+
+test('when existing marketing data - The contact-details section should be rendered', async (t) => {
+  await pageSetup(t, true);
+
+  const contactDetailsSection = Selector('[data-test-id="view-solution-contact-details"]');
+  const contact1Details = contactDetailsSection.find('[data-test-id="view-section-question-contact-1"]');
+  const contact1DepartmentName = contact1Details.find('[data-test-id="view-question-data-text-department-name"]');
+  const contact1ContactName = contact1Details.find('[data-test-id="view-question-data-text-contact-name"]');
+  const contact1PhoneNumber = contact1Details.find('[data-test-id="view-question-data-text-phone-number"]');
+  const contact1EmailAddress = contact1Details.find('[data-test-id="view-question-data-text-email-address"]');
+
+  const contact2Details = contactDetailsSection.find('[data-test-id="view-section-question-contact-2"]');
+  const contact2DepartmentName = contact2Details.find('[data-test-id="view-question-data-text-department-name"]');
+  const contact2ContactName = contact2Details.find('[data-test-id="view-question-data-text-contact-name"]');
+  const contact2PhoneNumber = contact2Details.find('[data-test-id="view-question-data-text-phone-number"]');
+  const contact2EmailAddress = contact2Details.find('[data-test-id="view-question-data-text-email-address"]');
+
+  await t
+    .expect(contactDetailsSection.exists).ok()
+    .expect(contactDetailsSection.find('h3').innerText).eql('Contact details')
+
+    .expect(contact1Details.exists).ok()
+    .expect(contact1DepartmentName.innerText).eql('One Department')
+    .expect(contact1ContactName.innerText).eql('Contact One')
+    .expect(contact1PhoneNumber.innerText).eql('111111111')
+    .expect(contact1EmailAddress.innerText).eql('contact@one.com')
+
+    .expect(contact2Details.exists).ok()
+    .expect(contact2DepartmentName.innerText).eql('Two Department')
+    .expect(contact2ContactName.innerText).eql('Contact Two')
+    .expect(contact2PhoneNumber.innerText).eql('222222222')
+    .expect(contact2EmailAddress.innerText).eql('contact@two.com');
+});
+
+test('when no existing marketing data - The roadmap section should not be rendered', async (t) => {
+  await pageSetup(t);
+
+  const roadmapSection = Selector('[data-test-id="view-roadmap"]');
+
+  await t
+    .expect(roadmapSection.exists).notOk();
+});
+
+test('when existing marketing data - The roadmap section should be rendered', async (t) => {
+  await pageSetup(t, true);
+
+  const roadmapSection = Selector('[data-test-id="view-roadmap"]');
+  const summaryQuestion = roadmapSection.find('[data-test-id="view-section-question-summary"]');
+
+  await t
+    .expect(roadmapSection.exists).ok()
+    .expect(roadmapSection.find('h3').innerText).eql('Roadmap')
+
+    .expect(summaryQuestion.exists).ok()
+    .expect(summaryQuestion.find('[data-test-id="view-question-data-text-summary"]').innerText).eql('The roadmap summary details');
 });
