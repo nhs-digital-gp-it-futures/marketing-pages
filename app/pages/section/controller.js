@@ -5,7 +5,7 @@ import { transformSectionData } from './helpers/transformSectionData';
 import { createPostSectionResponse } from './helpers/createPostSectionResponse';
 import logger from '../../logger';
 
-const getSectionPageContext = async ({
+export const getSectionPageContext = async ({
   solutionId, dashboardId, sectionId,
 }) => {
   const sectionManifest = new ManifestProvider().getSectionManifest({
@@ -23,7 +23,7 @@ const getSectionPageContext = async ({
   throw new Error('No data returned');
 };
 
-const getSectionPageErrorContext = async ({
+export const getSectionPageErrorContext = async ({
   solutionId, sectionId, sectionData, validationErrors, dashboardId,
 }) => {
   const sectionManifest = new ManifestProvider().getSectionManifest({ dashboardId, sectionId });
@@ -35,7 +35,7 @@ const getSectionPageErrorContext = async ({
   return context;
 };
 
-const postSection = async ({
+export const postSection = async ({
   solutionId, sectionId, sectionData, dashboardId,
 }) => {
   const sectionManifest = new ManifestProvider().getSectionManifest({ dashboardId, sectionId });
@@ -54,10 +54,4 @@ const postSection = async ({
     logger.error(err);
     throw err;
   }
-};
-
-export {
-  getSectionPageContext,
-  getSectionPageErrorContext,
-  postSection,
 };

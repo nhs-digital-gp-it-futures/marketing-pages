@@ -2,7 +2,7 @@ import { ManifestProvider } from '../../../manifestProvider';
 import { ApiProvider } from '../../../apiProvider';
 import { createDashboardPageContext } from '../createDashboardPageContext';
 
-const getSubDashboardPageContext = async ({ solutionId, dashboardId }) => {
+export const getSubDashboardPageContext = async ({ solutionId, dashboardId }) => {
   const dashboardManifest = new ManifestProvider().getSubDashboardManifest({ dashboardId });
   const sectionData = await new ApiProvider().getSubDashboardData({ solutionId, dashboardId });
 
@@ -18,5 +18,3 @@ const getSubDashboardPageContext = async ({ solutionId, dashboardId }) => {
   }
   throw new Error('No data returned');
 };
-
-export { getSubDashboardPageContext };

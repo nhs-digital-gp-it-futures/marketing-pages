@@ -2,7 +2,7 @@ import { ManifestProvider } from '../../manifestProvider';
 import { ApiProvider } from '../../apiProvider';
 import { createDashboardPageContext } from './createDashboardPageContext';
 
-const getMarketingPageDashboardContext = async ({ solutionId, validationErrors }) => {
+export const getMarketingPageDashboardContext = async ({ solutionId, validationErrors }) => {
   const dashboardManifest = new ManifestProvider().getDashboardManifest();
   const dashboardDataRaw = await new ApiProvider().getMainDashboardData({ solutionId });
 
@@ -19,7 +19,7 @@ const getMarketingPageDashboardContext = async ({ solutionId, validationErrors }
   throw new Error('No data returned');
 };
 
-const postSubmitForModeration = async ({ solutionId }) => {
+export const postSubmitForModeration = async ({ solutionId }) => {
   try {
     await new ApiProvider().putSubmitForModeration({ solutionId });
     return {
@@ -28,9 +28,4 @@ const postSubmitForModeration = async ({ solutionId }) => {
   } catch (error) {
     return error.response.data;
   }
-};
-
-export {
-  getMarketingPageDashboardContext,
-  postSubmitForModeration,
 };

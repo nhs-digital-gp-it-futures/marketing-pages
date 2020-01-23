@@ -1,10 +1,12 @@
-const request = require('supertest');
-const { App } = require('../app');
-const routes = require('../app/routes');
-const dashboardControllers = require('../app/pages/dashboard/controller');
-const sectionControllers = require('../app/pages/section/controller');
-const subsectionControllers = require('../app/pages/dashboard/subDashboards/controller');
-const previewControllers = require('../app/pages/preview/controller');
+import request from 'supertest';
+import { App } from '../app';
+import routes from './routes';
+import * as dashboardControllers from './pages/dashboard/controller';
+import * as sectionControllers from './pages/section/controller';
+import * as subsectionControllers from './pages/dashboard/subDashboards/controller';
+import * as previewControllers from './pages/preview/controller';
+
+jest.mock('./logger');
 
 const mockDashboardContext = {
   title: 'Dashboard title',

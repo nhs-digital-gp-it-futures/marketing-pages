@@ -1,7 +1,7 @@
 import { ApiProvider } from '../../apiProvider';
 import { createPreviewPageContext } from './createPreviewPageContext';
 
-const getPreviewPageContext = async ({ solutionId }) => {
+export const getPreviewPageContext = async ({ solutionId }) => {
   const previewDataRaw = await new ApiProvider().getPreviewData({ solutionId });
 
   if (previewDataRaw && previewDataRaw.data) {
@@ -10,8 +10,4 @@ const getPreviewPageContext = async ({ solutionId }) => {
     return context;
   }
   throw new Error('No data returned');
-};
-
-export {
-  getPreviewPageContext,
 };
