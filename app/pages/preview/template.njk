@@ -4,6 +4,7 @@
 {% from 'sections/view-client-application-types/macro.njk' import viewClientApplicationTypes %}
 {% from 'sections/view-hosting-types/macro.njk' import viewHostingTypes %}
 {% from 'sections/view-solution-contact-details/macro.njk' import viewSolutionContactDetails %}
+{% from 'sections/view-roadmap/macro.njk' import viewRoadmap %}
 
 {% block body %}
 <div class="nhsuk-grid-row">
@@ -23,6 +24,9 @@
       section: {
         sections: sections
       }
+    }) }}
+    {{ viewRoadmap({
+      section: sections['roadmap']
     }) }}
     {{ viewSolutionContactDetails({
       section: sections['contact-details']
