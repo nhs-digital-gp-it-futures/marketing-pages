@@ -48,6 +48,10 @@
       "requirement": "Optional",
       "status": "COMPLETE"
     },
+    "about-supplier": {
+      "requirement": "Optional",
+      "status": "COMPLETE"
+    },
     "contact-details": {
       "requirement": "Optional",
       "status": "COMPLETE"
