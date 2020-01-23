@@ -39,7 +39,7 @@ const mockSectionContext = {
 };
 
 const mockSectionPostData = {
-  'a-question': ''
+  'a-question': '',
 };
 const mockPostSectionContext = {
   title: 'Post Section Title',
