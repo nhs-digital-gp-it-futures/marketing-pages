@@ -102,7 +102,7 @@ const createSectionGroupsContext = ({
 };
 
 
-const createDashboardPageContext = ({
+export const createDashboardPageContext = ({
   solutionId, dashboardManifest, marketingDataSections, validationErrors, dashboardId,
 }) => {
   const { errors, sectionGroups } = createSectionGroupsContext({
@@ -125,8 +125,4 @@ const createDashboardPageContext = ({
   };
 
   return context;
-};
-
-export {
-  createDashboardPageContext,
 };
