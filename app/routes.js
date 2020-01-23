@@ -8,9 +8,9 @@ import { errorHandler } from './pages/error/errorHandler';
 
 const router = express.Router();
 
-const withCatch = controller => async (req, res, next) => {
+const withCatch = route => async (req, res, next) => {
   try {
-    return await controller(req, res, next);
+    return await route(req, res, next);
   } catch (err) {
     return next(err);
   }
