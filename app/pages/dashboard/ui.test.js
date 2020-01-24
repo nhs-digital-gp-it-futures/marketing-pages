@@ -270,9 +270,17 @@ test('should render all the sections for the About your organisation section gro
   await pageSetup(t);
 
   const aboutYourOrganisationSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-about-your-organisation"]');
+  const aboutSupplierSection = aboutYourOrganisationSectionGroup.find('[data-test-id="dashboard-section-about-supplier"]');
   const contactDetailsSection = aboutYourOrganisationSectionGroup.find('[data-test-id="dashboard-section-contact-details"]');
 
   await t
+    .expect(aboutSupplierSection.find('[data-test-id="dashboard-section-title"]').innerText)
+    .eql('About supplier')
+    .expect(aboutSupplierSection.find('[data-test-id="dashboard-section-requirement"]').innerText)
+    .eql('Optional')
+    .expect(aboutSupplierSection.find('[data-test-id="dashboard-section-status"]').innerText)
+    .eql('INCOMPLETE')
+
     .expect(contactDetailsSection.find('[data-test-id="dashboard-section-title"]').innerText)
     .eql('Contact details')
     .expect(contactDetailsSection.find('[data-test-id="dashboard-section-requirement"]').innerText)
@@ -400,6 +408,22 @@ test('clicking on the roadmap section link should navigate the user to roadmap p
   await t
     .click(roadmapSection.find('a'))
     .expect(getLocation()).contains('/solution/S100000-001/section/roadmap');
+});
+
+// TODO: remove skip when the form is complete
+test.skip('clicking on the About supplier section link should navigate the user to About supplier page', async (t) => {
+  await pageSetup(t);
+
+  nock(apiLocalhost)
+    .get(`${apiPath}/sections/about-supplier`)
+    .reply(200, {});
+
+  const aboutYourOrganisationSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-about-your-organisation"]');
+  const aboutSupplierSection = aboutYourOrganisationSectionGroup.find('[data-test-id="dashboard-section-about-supplier"]');
+
+  await t
+    .click(aboutSupplierSection.find('a'))
+    .expect(getLocation()).contains('/solution/S100000-001/section/about-supplier');
 });
 
 test('clicking on the contact details section link should navigate the user to contact details page', async (t) => {

@@ -88,6 +88,10 @@
     "about-your-organisation": {
       "title": "About your Organisation",
       "sections": {
+        "about-supplier": {
+          "title": "About supplier",
+          "type": "section"
+        },
         "contact-details": {
           "title": "Contact details",
           "type": "section"
