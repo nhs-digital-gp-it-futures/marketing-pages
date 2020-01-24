@@ -46,7 +46,6 @@ export const postSection = async ({
     });
 
     const response = createPostSectionResponse({ solutionId, sectionManifest });
-
     return response;
   } catch (err) {
     if (err.response.status === 400) {
