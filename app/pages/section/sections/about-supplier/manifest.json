@@ -1,0 +1,27 @@
+{
+  "id": "about-supplier",
+  "title": "About supplier",
+  "mainAdvice": "Help buyers learn more about your organisation.",
+  "warningAdvice": "If provided, this will be the default ‘supplier description’ on any listing pages for Catalogue Solutions supplied by your organisation. Any changes made will be visible across all your listing pages.",
+  "questions": {
+    "description": {
+      "mainAdvice": "Description (optional)",
+      "additionalAdvice": "Provide information about your organisation, for example its ethos, experience and plans for the future.",
+      "footerAdvice": "You can enter up to 1000 characters",
+      "type": "textarea-field",
+      "rows": 17,
+      "errorResponse": {
+        "maxLength": "Description is over the character limit"
+      }
+    },
+    "link": {
+      "mainAdvice": "Link to more information (optional)",
+      "additionalAdvice": "Provide a URL to a page that gives buyers further information about your organisation.",
+      "type": "text-field",
+      "errorResponse": {
+        "maxLength": "Link is over the character limit"
+      }
+    }
+  },
+  "submitText" : "Save and return to all sections"
+}

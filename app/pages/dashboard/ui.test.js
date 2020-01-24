@@ -410,8 +410,7 @@ test('clicking on the roadmap section link should navigate the user to roadmap p
     .expect(getLocation()).contains('/solution/S100000-001/section/roadmap');
 });
 
-// TODO: remove skip when the form is complete
-test.skip('clicking on the About supplier section link should navigate the user to About supplier page', async (t) => {
+test('clicking on the About supplier section link should navigate the user to About supplier page', async (t) => {
   await pageSetup(t);
 
   nock(apiLocalhost)
