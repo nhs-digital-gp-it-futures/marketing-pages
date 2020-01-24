@@ -543,6 +543,35 @@ test('when existing marketing data - The hosting type on premise section should 
     .expect(requiresHSCNRow.find('div[data-test-id="view-section-table-row-vertical"]').exists).ok();
 });
 
+test('when no existing marketing data - The About supplier section should not be rendered', async (t) => {
+  await pageSetup(t);
+
+  const aboutSupplierSection = Selector('[data-test-id="view-about-supplier"]');
+
+  await t
+    .expect(aboutSupplierSection.exists).notOk();
+});
+
+test('when existing marketing data - The About supplier section and all questions should be rendered', async (t) => {
+  await pageSetup(t, true);
+
+  const aboutSupplierSection = Selector('[data-test-id="view-about-supplier"]');
+  const descriptionQuestion = aboutSupplierSection.find('[data-test-id="view-section-question-description"]');
+  const linkQuestion = aboutSupplierSection.find('[data-test-id="view-section-question-link"]');
+
+  await t
+    .expect(aboutSupplierSection.exists).ok()
+    .expect(aboutSupplierSection.find('h3').innerText).eql('About supplier')
+
+    .expect(descriptionQuestion.exists).ok()
+    .expect(descriptionQuestion.find('[data-test-id="view-question-title"]').exists).notOk()
+    .expect(descriptionQuestion.find('[data-test-id="view-question-data-text-description"]').innerText).eql('The supplier description data')
+
+    .expect(linkQuestion.exists).ok()
+    .expect(linkQuestion.find('[data-test-id="view-question-title"]').exists).notOk()
+    .expect(linkQuestion.find('[data-test-id="view-question-data-link"]').innerText).eql('http://www.supplier.com');
+});
+
 test('when no existing marketing data - The contact-details section should not be rendered', async (t) => {
   await pageSetup(t);
 

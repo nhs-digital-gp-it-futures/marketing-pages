@@ -182,6 +182,12 @@
         "summary": "The roadmap summary details"
       }
     },
+    "about-supplier": {
+      "answers": {
+        "description": "The supplier description data",
+        "link": "http://www.supplier.com"
+      }
+    },
     "contact-details": {
       "answers": {
         "contact-1": {
