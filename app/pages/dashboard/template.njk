@@ -4,7 +4,7 @@
 {% from '../../common-components/error-summary/macro.njk' import errorSummary %}
 
 {% block body %}
-<div class="nhsuk-grid-row">
+<div data-test-id="dashboard" class="nhsuk-grid-row">
   <div class="nhsuk-grid-column-full">
 
     {% if (errors.length > 0) %}
