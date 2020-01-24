@@ -77,10 +77,10 @@ describe('preview page', () => {
       });
   });
 
-  it('should render the hosting types section when provided', (done) => {
+  it('should render the hosting types section when one of the sections is provided', (done) => {
     const context = {
       sections: {
-        'hosting-types': {},
+        'hosting-type-private-cloud': {},
       },
     };
 
