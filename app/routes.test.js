@@ -1,9 +1,9 @@
 import request from 'supertest';
 import { App } from '../app';
 import routes from './routes';
-import * as dashboardControllers from './pages/dashboard/controller';
-import * as sectionControllers from './pages/section/controller';
-import * as subsectionControllers from './pages/dashboard/subDashboards/controller';
+import * as dashboardControllers from './pages/supplier/dashboard/controller';
+import * as sectionControllers from './pages/supplier/section/controller';
+import * as subsectionControllers from './pages/supplier/dashboard/subDashboards/controller';
 import * as previewControllers from './pages/preview/controller';
 
 jest.mock('./logger');
