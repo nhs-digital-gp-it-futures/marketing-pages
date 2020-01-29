@@ -2,7 +2,7 @@ import nock from 'nock';
 import { Selector } from 'testcafe';
 import previewWithNoMarketingData from '../../../fixtures/previewWithNoMarketingData.json';
 import previewWithMarketingData from '../../../fixtures/previewWithMarketingData.json';
-import { apiLocalhost, apiPath, clientLocalhost } from '../../test-utils/config';
+import { apiLocalhost, apiPath } from '../../test-utils/config';
 
 const mocks = (existingData) => {
   if (!existingData) {
