@@ -8,8 +8,8 @@ export const createSectionPageContext = ({
   });
 
   const submitActionPath = dashboardId
-    ? `/solution/${solutionId}/dashboard/${dashboardId}/section/${sectionManifest.id}`
-    : `/solution/${solutionId}/section/${sectionManifest.id}`;
+    ? `/supplier/solution/${solutionId}/dashboard/${dashboardId}/section/${sectionManifest.id}`
+    : `/supplier/solution/${solutionId}/section/${sectionManifest.id}`;
 
   const context = {
     title: sectionManifest.title,
@@ -17,7 +17,7 @@ export const createSectionPageContext = ({
     mainAdvice: sectionManifest.mainAdvice,
     additionalAdvice: sectionManifest.additionalAdvice,
     warningAdvice: sectionManifest.warningAdvice || undefined,
-    returnToDashboardUrl: `/solution/${solutionId}`,
+    returnToDashboardUrl: `/supplier/solution/${solutionId}`,
     submitText: sectionManifest.submitText,
     errors,
     questions,

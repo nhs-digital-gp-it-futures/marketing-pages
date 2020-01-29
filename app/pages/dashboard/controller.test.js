@@ -35,15 +35,15 @@ describe('dashboard controller', () => {
     it('should return the context when the manifest and data from the api is provided', async () => {
       const expectedContext = {
         previewUrl: '/solution/some-solution-id/preview',
-        submitForModerationUrl: '/solution/some-solution-id/submitForModeration',
-        returnToDashboardUrl: '/solution/some-solution-id',
+        submitForModerationUrl: '/supplier/solution/some-solution-id/submitForModeration',
+        returnToDashboardUrl: '/supplier/solution/some-solution-id',
         sectionGroups: [
           {
             id: 'some-section-group-id',
             title: 'Some section group',
             sections: [
               {
-                URL: '/solution/some-solution-id/section/some-section-id',
+                URL: '/supplier/solution/some-solution-id/section/some-section-id',
                 id: 'some-section-id',
                 title: 'Some section',
                 requirement: 'Mandatory',

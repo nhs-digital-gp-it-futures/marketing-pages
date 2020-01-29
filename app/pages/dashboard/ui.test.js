@@ -66,7 +66,7 @@ test('should render the Submit for moderation button', async (t) => {
   await t
     .expect(submitForModerationButton.innerText).eql('Submit for moderation')
     .click(submitForModerationButton)
-    .expect(getLocation()).contains('/solution/S100000-001');
+    .expect(getLocation()).contains('/supplier/solution/S100000-001');
 });
 
 test('should render the About your solution section group', async (t) => {
@@ -302,7 +302,7 @@ test('clicking on the solution description section link should navigate the user
 
   await t
     .click(theSolutionDescriptionSection.find('a'))
-    .expect(getLocation()).contains('/solution/S100000-001/section/solution-description');
+    .expect(getLocation()).contains('/supplier/solution/S100000-001/section/solution-description');
 });
 
 test('clicking on the feature section link should navigate the user to the features page', async (t) => {
@@ -317,7 +317,7 @@ test('clicking on the feature section link should navigate the user to the featu
 
   await t
     .click(theFeatureSection.find('a'))
-    .expect(getLocation()).contains('/solution/S100000-001/section/features');
+    .expect(getLocation()).contains('/supplier/solution/S100000-001/section/features');
 });
 
 test('clicking on the client application type section link should navigate the user to the client application type page', async (t) => {
@@ -332,7 +332,7 @@ test('clicking on the client application type section link should navigate the u
 
   await t
     .click(theClientApplicationTypeSection.find('a'))
-    .expect(getLocation()).contains('/solution/S100000-001/section/client-application-type');
+    .expect(getLocation()).contains('/supplier/solution/S100000-001/section/client-application-type');
 });
 
 test('clicking on the hosting type public cloud section link should navigate the user to the hosting type public cloud page', async (t) => {
@@ -347,7 +347,7 @@ test('clicking on the hosting type public cloud section link should navigate the
 
   await t
     .click(hostingTypePublicCloudSection.find('a'))
-    .expect(getLocation()).contains('/solution/S100000-001/section/hosting-type-public-cloud');
+    .expect(getLocation()).contains('/supplier/solution/S100000-001/section/hosting-type-public-cloud');
 });
 
 test('clicking on the hosting type private cloud section link should navigate the user to the hosting type private cloud page', async (t) => {
@@ -362,7 +362,7 @@ test('clicking on the hosting type private cloud section link should navigate th
 
   await t
     .click(hostingTypePrivateCloudSection.find('a'))
-    .expect(getLocation()).contains('/solution/S100000-001/section/hosting-type-private-cloud');
+    .expect(getLocation()).contains('/supplier/solution/S100000-001/section/hosting-type-private-cloud');
 });
 
 test('clicking on the hosting type hybrid section link should navigate the user to the hosting type hybrid page', async (t) => {
@@ -377,7 +377,7 @@ test('clicking on the hosting type hybrid section link should navigate the user 
 
   await t
     .click(hostingTypeHybridSection.find('a'))
-    .expect(getLocation()).contains('/solution/S100000-001/section/hosting-type-hybrid');
+    .expect(getLocation()).contains('/supplier/solution/S100000-001/section/hosting-type-hybrid');
 });
 
 test('clicking on the hosting type on premise section link should navigate the user to the hosting type on premise page', async (t) => {
@@ -392,7 +392,7 @@ test('clicking on the hosting type on premise section link should navigate the u
 
   await t
     .click(hostingTypeOnPremiseSection.find('a'))
-    .expect(getLocation()).contains('/solution/S100000-001/section/hosting-type-on-premise');
+    .expect(getLocation()).contains('/supplier/solution/S100000-001/section/hosting-type-on-premise');
 });
 
 test('clicking on the roadmap section link should navigate the user to roadmap page', async (t) => {
@@ -407,7 +407,7 @@ test('clicking on the roadmap section link should navigate the user to roadmap p
 
   await t
     .click(roadmapSection.find('a'))
-    .expect(getLocation()).contains('/solution/S100000-001/section/roadmap');
+    .expect(getLocation()).contains('/supplier/solution/S100000-001/section/roadmap');
 });
 
 test('clicking on the About supplier section link should navigate the user to About supplier page', async (t) => {
@@ -422,7 +422,7 @@ test('clicking on the About supplier section link should navigate the user to Ab
 
   await t
     .click(aboutSupplierSection.find('a'))
-    .expect(getLocation()).contains('/solution/S100000-001/section/about-supplier');
+    .expect(getLocation()).contains('/supplier/solution/S100000-001/section/about-supplier');
 });
 
 test('clicking on the contact details section link should navigate the user to contact details page', async (t) => {
@@ -437,7 +437,7 @@ test('clicking on the contact details section link should navigate the user to c
 
   await t
     .click(contactDetailsSection.find('a'))
-    .expect(getLocation()).contains('/solution/S100000-001/section/contact-details');
+    .expect(getLocation()).contains('/supplier/solution/S100000-001/section/contact-details');
 });
 
 

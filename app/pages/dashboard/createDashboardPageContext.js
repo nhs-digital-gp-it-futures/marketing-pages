@@ -34,8 +34,8 @@ const createSectionsContext = ({
         : { errors: undefined, sections: undefined };
 
       const sectionPath = dashboardId
-        ? `/solution/${solutionId}/dashboard/${dashboardId}/${manifestSection.type}/${manifestSectionId}`
-        : `/solution/${solutionId}/${manifestSection.type}/${manifestSectionId}`;
+        ? `/supplier/solution/${solutionId}/dashboard/${dashboardId}/${manifestSection.type}/${manifestSectionId}`
+        : `/supplier/solution/${solutionId}/${manifestSection.type}/${manifestSectionId}`;
 
       const sectionContext = {
         URL: sectionPath,
@@ -118,8 +118,8 @@ export const createDashboardPageContext = ({
     mainAdvice: dashboardManifest.mainAdvice,
     additionalAdvice: dashboardManifest.additionalAdvice,
     previewUrl: `/solution/${solutionId}/preview`,
-    submitForModerationUrl: `/solution/${solutionId}/submitForModeration`,
-    returnToDashboardUrl: `/solution/${solutionId}`,
+    submitForModerationUrl: `/supplier/solution/${solutionId}/submitForModeration`,
+    returnToDashboardUrl: `/supplier/solution/${solutionId}`,
     errors: errors && errors.length > 0 ? errors : undefined,
     sectionGroups,
   };

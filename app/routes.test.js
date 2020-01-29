@@ -95,14 +95,14 @@ describe('GET /healthcheck', () => {
   });
 });
 
-describe('GET /solution/:solutionId', () => {
+describe('GET /supplier/solution/:solutionId', () => {
   it('should return the correct status and text if there is no error', () => {
     dashboardControllers.getMarketingPageDashboardContext = jest.fn()
       .mockImplementation(() => Promise.resolve(mockDashboardContext));
     const app = new App().createApp();
     app.use('/', routes);
     return request(app)
-      .get('/solution/1')
+      .get('/supplier/solution/1')
       .expect(200)
       .then((res) => {
         expect(res.text.includes('data-test-id="dashboard"')).toEqual(true);
@@ -116,7 +116,7 @@ describe('GET /solution/:solutionId', () => {
     const app = new App().createApp();
     app.use('/', routes);
     return request(app)
-      .get('/solution/1')
+      .get('/supplier/solution/1')
       .expect(200)
       .then((res) => {
         expect(res.text.includes('data-test-id="dashboard"')).toEqual(false);
@@ -125,14 +125,14 @@ describe('GET /solution/:solutionId', () => {
   });
 });
 
-describe('GET /solution/:solutionId/section/:sectionId', () => {
+describe('GET /supplier/solution/:solutionId/section/:sectionId', () => {
   it('should return the correct status and text if there is no error', () => {
     sectionControllers.getSectionPageContext = jest.fn()
       .mockImplementation(() => Promise.resolve(mockSectionContext));
     const app = new App().createApp();
     app.use('/', routes);
     return request(app)
-      .get('/solution/1/section/a-section')
+      .get('/supplier/solution/1/section/a-section')
       .expect(200)
       .then((res) => {
         expect(res.text.includes(`<h2 data-test-id="section-title">${mockSectionContext.title}</h2>`)).toEqual(true);
@@ -146,7 +146,7 @@ describe('GET /solution/:solutionId/section/:sectionId', () => {
     const app = new App().createApp();
     app.use('/', routes);
     return request(app)
-      .get('/solution/1')
+      .get('/supplier/solution/1')
       .expect(200)
       .then((res) => {
         expect(res.text.includes(`<h2 data-test-id="section-title">${mockSectionContext.title}</h2>`)).toEqual(false);
@@ -155,7 +155,7 @@ describe('GET /solution/:solutionId/section/:sectionId', () => {
   });
 });
 
-describe('POST /solution/:solutionId/section/:sectionId', () => {
+describe('POST /supplier/solution/:solutionId/section/:sectionId', () => {
   afterEach(() => {
     sectionControllers.postSection.mockReset();
   });
@@ -166,7 +166,7 @@ describe('POST /solution/:solutionId/section/:sectionId', () => {
     const app = new App().createApp();
     app.use('/', routes);
     return request(app)
-      .post('/solution/1/section/features')
+      .post('/supplier/solution/1/section/features')
       .send(mockSectionPostData)
       .expect(302)
       .then((res) => {
@@ -183,7 +183,7 @@ describe('POST /solution/:solutionId/section/:sectionId', () => {
     const app = new App().createApp();
     app.use('/', routes);
     return request(app)
-      .post('/solution/1/section/features')
+      .post('/supplier/solution/1/section/features')
       .send(mockSectionPostData)
       .expect(200)
       .then((res) => {
@@ -200,7 +200,7 @@ describe('POST /solution/:solutionId/section/:sectionId', () => {
     const app = new App().createApp();
     app.use('/', routes);
     return request(app)
-      .post('/solution/1/section/a-section')
+      .post('/supplier/solution/1/section/a-section')
       .send({})
       .expect(200)
       .then((res) => {
@@ -210,14 +210,14 @@ describe('POST /solution/:solutionId/section/:sectionId', () => {
   });
 });
 
-describe('GET /solution/:solutionId/dashboard/:dashboardId', () => {
+describe('GET /supplier/solution/:solutionId/dashboard/:dashboardId', () => {
   it('should return the correct status and text if there is no error', () => {
     subsectionControllers.getSubDashboardPageContext = jest.fn()
       .mockImplementation(() => Promise.resolve(mockDashboardContext));
     const app = new App().createApp();
     app.use('/', routes);
     return request(app)
-      .get('/solution/1/dashboard/a-dashboard')
+      .get('/supplier/solution/1/dashboard/a-dashboard')
       .expect(200)
       .then((res) => {
         expect(res.text.includes(`<h2 data-test-id="sub-dashboard-title">${mockDashboardContext.title}</h2>`)).toEqual(true);
@@ -231,7 +231,7 @@ describe('GET /solution/:solutionId/dashboard/:dashboardId', () => {
     const app = new App().createApp();
     app.use('/', routes);
     return request(app)
-      .get('/solution/1')
+      .get('/supplier/solution/1')
       .expect(200)
       .then((res) => {
         expect(res.text.includes('data-test-id="sub-dashboard-title"')).toEqual(false);
@@ -240,7 +240,7 @@ describe('GET /solution/:solutionId/dashboard/:dashboardId', () => {
   });
 });
 
-describe('GET /solution/:solutionId/dashboard/:dashboardId/section/:sectionId', () => {
+describe('GET /supplier/solution/:solutionId/dashboard/:dashboardId/section/:sectionId', () => {
   afterEach(() => {
     sectionControllers.getSectionPageContext.mockReset();
   });
@@ -250,7 +250,7 @@ describe('GET /solution/:solutionId/dashboard/:dashboardId/section/:sectionId', 
     const app = new App().createApp();
     app.use('/', routes);
     return request(app)
-      .get('/solution/1/dashboard/a-dashboard/section/a-section')
+      .get('/supplier/solution/1/dashboard/a-dashboard/section/a-section')
       .expect(200)
       .then((res) => {
         expect(res.text.includes(`<h2 data-test-id="section-title">${mockSectionContext.title}</h2>`)).toEqual(true);
@@ -263,7 +263,7 @@ describe('GET /solution/:solutionId/dashboard/:dashboardId/section/:sectionId', 
     const app = new App().createApp();
     app.use('/', routes);
     return request(app)
-      .get('/solution/1')
+      .get('/supplier/solution/1')
       .expect(200)
       .then((res) => {
         expect(res.text.includes(`<h2 data-test-id="section-title">${mockSectionContext.title}</h2>`)).toEqual(false);
@@ -272,7 +272,7 @@ describe('GET /solution/:solutionId/dashboard/:dashboardId/section/:sectionId', 
   });
 });
 
-describe('POST /solution/:solutionId/dashboard/:dashboardId/section/:sectionId', () => {
+describe('POST /supplier/solution/:solutionId/dashboard/:dashboardId/section/:sectionId', () => {
   afterEach(() => {
     sectionControllers.postSection.mockReset();
   });
@@ -283,7 +283,7 @@ describe('POST /solution/:solutionId/dashboard/:dashboardId/section/:sectionId',
     const app = new App().createApp();
     app.use('/', routes);
     return request(app)
-      .post('/solution/1/dashboard/features/section/feat')
+      .post('/supplier/solution/1/dashboard/features/section/feat')
       .send(mockSectionPostData)
       .expect(302)
       .then((res) => {
@@ -300,7 +300,7 @@ describe('POST /solution/:solutionId/dashboard/:dashboardId/section/:sectionId',
     const app = new App().createApp();
     app.use('/', routes);
     return request(app)
-      .post('/solution/1/dashboard/features/section/feat')
+      .post('/supplier/solution/1/dashboard/features/section/feat')
       .send(mockSectionPostData)
       .expect(200)
       .then((res) => {
@@ -317,7 +317,7 @@ describe('POST /solution/:solutionId/dashboard/:dashboardId/section/:sectionId',
     const app = new App().createApp();
     app.use('/', routes);
     return request(app)
-      .post('/solution/1/dashboard/a-dashboard/section/a-section')
+      .post('/supplier/solution/1/dashboard/a-dashboard/section/a-section')
       .send({})
       .expect(200)
       .then((res) => {
@@ -327,7 +327,7 @@ describe('POST /solution/:solutionId/dashboard/:dashboardId/section/:sectionId',
   });
 });
 
-describe('GET /solution/:solutionId/preview', () => {
+describe('GET /supplier/solution/:solutionId/preview', () => {
   afterEach(() => {
     previewControllers.getPreviewPageContext.mockReset();
   });
@@ -351,7 +351,7 @@ describe('GET /solution/:solutionId/preview', () => {
     const app = new App().createApp();
     app.use('/', routes);
     return request(app)
-      .get('/solution/1')
+      .get('/supplier/solution/1')
       .expect(200)
       .then((res) => {
         expect(res.text.includes('<h1>Preview Page</h1>')).toEqual(false);

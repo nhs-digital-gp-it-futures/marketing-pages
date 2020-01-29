@@ -61,7 +61,7 @@ test('should render all the sections for native mobile sections section group', 
     .expect(supportedOperatingSystems.find('[data-test-id="dashboard-section-title"]').innerText)
     .eql('Supported operating systems')
     .expect(supportedOperatingSystems.find('[data-test-id="dashboard-section-title"] a').getAttribute('href'))
-    .eql('/solution/S100000-001/dashboard/native-desktop/section/native-desktop-operating-systems')
+    .eql('/supplier/solution/S100000-001/dashboard/native-desktop/section/native-desktop-operating-systems')
     .expect(supportedOperatingSystems.find('[data-test-id="dashboard-section-requirement"]').innerText)
     .eql('Mandatory')
     .expect(supportedOperatingSystems.find('[data-test-id="dashboard-section-status"]').innerText)
@@ -70,7 +70,7 @@ test('should render all the sections for native mobile sections section group', 
     .expect(connectionDetails.find('[data-test-id="dashboard-section-title"]').innerText)
     .eql('Connection details')
     .expect(connectionDetails.find('[data-test-id="dashboard-section-title"] a').getAttribute('href'))
-    .eql('/solution/S100000-001/dashboard/native-desktop/section/native-desktop-connection-details')
+    .eql('/supplier/solution/S100000-001/dashboard/native-desktop/section/native-desktop-connection-details')
     .expect(connectionDetails.find('[data-test-id="dashboard-section-requirement"]').innerText)
     .eql('Mandatory')
     .expect(connectionDetails.find('[data-test-id="dashboard-section-status"]').innerText)
@@ -79,7 +79,7 @@ test('should render all the sections for native mobile sections section group', 
     .expect(memoryAndStorage.find('[data-test-id="dashboard-section-title"]').innerText)
     .eql('Memory, storage, processing and aspect ratio')
     .expect(memoryAndStorage.find('[data-test-id="dashboard-section-title"] a').getAttribute('href'))
-    .eql('/solution/S100000-001/dashboard/native-desktop/section/native-desktop-memory-and-storage')
+    .eql('/supplier/solution/S100000-001/dashboard/native-desktop/section/native-desktop-memory-and-storage')
     .expect(memoryAndStorage.find('[data-test-id="dashboard-section-requirement"]').innerText)
     .eql('Mandatory')
     .expect(memoryAndStorage.find('[data-test-id="dashboard-section-status"]').innerText)
@@ -88,7 +88,7 @@ test('should render all the sections for native mobile sections section group', 
     .expect(thirdParty.find('[data-test-id="dashboard-section-title"]').innerText)
     .eql('Third party components and device capabilities')
     .expect(thirdParty.find('[data-test-id="dashboard-section-title"] a').getAttribute('href'))
-    .eql('/solution/S100000-001/dashboard/native-desktop/section/native-desktop-third-party')
+    .eql('/supplier/solution/S100000-001/dashboard/native-desktop/section/native-desktop-third-party')
     .expect(thirdParty.find('[data-test-id="dashboard-section-requirement"]').innerText)
     .eql('Optional')
     .expect(thirdParty.find('[data-test-id="dashboard-section-status"]').innerText)
@@ -97,7 +97,7 @@ test('should render all the sections for native mobile sections section group', 
     .expect(hardwareRequirements.find('[data-test-id="dashboard-section-title"]').innerText)
     .eql('Hardware requirements')
     .expect(hardwareRequirements.find('[data-test-id="dashboard-section-title"] a').getAttribute('href'))
-    .eql('/solution/S100000-001/dashboard/native-desktop/section/native-desktop-hardware-requirements')
+    .eql('/supplier/solution/S100000-001/dashboard/native-desktop/section/native-desktop-hardware-requirements')
     .expect(hardwareRequirements.find('[data-test-id="dashboard-section-requirement"]').innerText)
     .eql('Optional')
     .expect(hardwareRequirements.find('[data-test-id="dashboard-section-status"]').innerText)
@@ -106,7 +106,7 @@ test('should render all the sections for native mobile sections section group', 
     .expect(additionalInformation.find('[data-test-id="dashboard-section-title"]').innerText)
     .eql('Additional information')
     .expect(additionalInformation.find('[data-test-id="dashboard-section-title"] a').getAttribute('href'))
-    .eql('/solution/S100000-001/dashboard/native-desktop/section/native-desktop-additional-information')
+    .eql('/supplier/solution/S100000-001/dashboard/native-desktop/section/native-desktop-additional-information')
     .expect(additionalInformation.find('[data-test-id="dashboard-section-requirement"]').innerText)
     .eql('Optional')
     .expect(additionalInformation.find('[data-test-id="dashboard-section-status"]').innerText)
@@ -125,7 +125,7 @@ test('should navigate the user to supported operating systems page when clicking
 
   await t
     .click(supportedOperatingSystemsSection.find('a'))
-    .expect(getLocation()).contains('S100000-001/dashboard/native-desktop/section/native-desktop-operating-systems');
+    .expect(getLocation()).contains('/supplier/solution/S100000-001/dashboard/native-desktop/section/native-desktop-operating-systems');
 });
 
 test('should navigate the user to the connection details page when clicking on the connection details dashboard row', async (t) => {
@@ -140,7 +140,7 @@ test('should navigate the user to the connection details page when clicking on t
 
   await t
     .click(connectionDetailsSection.find('a'))
-    .expect(getLocation()).contains('S100000-001/dashboard/native-desktop/section/native-desktop-connection-details');
+    .expect(getLocation()).contains('/supplier/solution/S100000-001/dashboard/native-desktop/section/native-desktop-connection-details');
 });
 
 test('should navigate the user to memory and storage page when clicking on memory and storage dashboard row', async (t) => {
@@ -155,7 +155,7 @@ test('should navigate the user to memory and storage page when clicking on memor
 
   await t
     .click(memoryAndStorageSection.find('a'))
-    .expect(getLocation()).contains('S100000-001/dashboard/native-desktop/section/native-desktop-memory-and-storage');
+    .expect(getLocation()).contains('/supplier/solution/S100000-001/dashboard/native-desktop/section/native-desktop-memory-and-storage');
 });
 
 test('should navigate the user to third party page when clicking on third party dashboard row', async (t) => {
@@ -170,7 +170,7 @@ test('should navigate the user to third party page when clicking on third party 
 
   await t
     .click(thirdPartySection.find('a'))
-    .expect(getLocation()).contains('S100000-001/dashboard/native-desktop/section/native-desktop-third-party');
+    .expect(getLocation()).contains('/supplier/solution/S100000-001/dashboard/native-desktop/section/native-desktop-third-party');
 });
 
 test('should navigate the user to hardware requirements page when clicking on hardware requirements dashboard row', async (t) => {
@@ -185,7 +185,7 @@ test('should navigate the user to hardware requirements page when clicking on ha
 
   await t
     .click(hardwareRequirementsSection.find('a'))
-    .expect(getLocation()).contains('S100000-001/dashboard/native-desktop/section/native-desktop-hardware-requirements');
+    .expect(getLocation()).contains('/supplier/solution/S100000-001/dashboard/native-desktop/section/native-desktop-hardware-requirements');
 });
 
 test('should navigate the user to additional information page when clicking on additional information dashboard row', async (t) => {
@@ -200,7 +200,7 @@ test('should navigate the user to additional information page when clicking on a
 
   await t
     .click(additionalInformationSection.find('a'))
-    .expect(getLocation()).contains('S100000-001/dashboard/native-desktop/section/native-desktop-additional-information');
+    .expect(getLocation()).contains('/supplier/solution/S100000-001/dashboard/native-desktop/section/native-desktop-additional-information');
 });
 
 test('should render the return to all sections link', async (t) => {
@@ -227,5 +227,5 @@ test('should return to the marketing data dashboard when the return to all secti
     .expect(link.exists).ok()
     .click(link)
     .expect(getLocation()).notContains('section')
-    .expect(getLocation()).contains('S100000-001');
+    .expect(getLocation()).contains('/supplier/solution/S100000-001');
 });

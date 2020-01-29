@@ -61,7 +61,7 @@ test('should render all the sections for the Browser based sections section grou
     .expect(browsersSupportedSection.find('[data-test-id="dashboard-section-title"]').innerText)
     .eql('Browsers supported')
     .expect(browsersSupportedSection.find('[data-test-id="dashboard-section-title"] a').getAttribute('href'))
-    .eql('/solution/S100000-001/dashboard/browser-based/section/browser-browsers-supported')
+    .eql('/supplier/solution/S100000-001/dashboard/browser-based/section/browser-browsers-supported')
     .expect(browsersSupportedSection.find('[data-test-id="dashboard-section-requirement"]').innerText)
     .eql('Mandatory')
     .expect(browsersSupportedSection.find('[data-test-id="dashboard-section-status"]').innerText)
@@ -70,7 +70,7 @@ test('should render all the sections for the Browser based sections section grou
     .expect(mobileFirstSection.find('[data-test-id="dashboard-section-title"]').innerText)
     .eql('Mobile first')
     .expect(mobileFirstSection.find('[data-test-id="dashboard-section-title"] a').getAttribute('href'))
-    .eql('/solution/S100000-001/dashboard/browser-based/section/browser-mobile-first')
+    .eql('/supplier/solution/S100000-001/dashboard/browser-based/section/browser-mobile-first')
     .expect(mobileFirstSection.find('[data-test-id="dashboard-section-requirement"]').innerText)
     .eql('Mandatory')
     .expect(mobileFirstSection.find('[data-test-id="dashboard-section-status"]').innerText)
@@ -79,7 +79,7 @@ test('should render all the sections for the Browser based sections section grou
     .expect(pluginsOrExtensionsSection.find('[data-test-id="dashboard-section-title"]').innerText)
     .eql('Plug-ins or extensions')
     .expect(pluginsOrExtensionsSection.find('[data-test-id="dashboard-section-title"] a').getAttribute('href'))
-    .eql('/solution/S100000-001/dashboard/browser-based/section/browser-plug-ins-or-extensions')
+    .eql('/supplier/solution/S100000-001/dashboard/browser-based/section/browser-plug-ins-or-extensions')
     .expect(pluginsOrExtensionsSection.find('[data-test-id="dashboard-section-requirement"]').innerText)
     .eql('Mandatory')
     .expect(pluginsOrExtensionsSection.find('[data-test-id="dashboard-section-status"]').innerText)
@@ -88,7 +88,7 @@ test('should render all the sections for the Browser based sections section grou
     .expect(connectivityAndResolutionSection.find('[data-test-id="dashboard-section-title"]').innerText)
     .eql('Connectivity and resolution')
     .expect(connectivityAndResolutionSection.find('[data-test-id="dashboard-section-title"] a').getAttribute('href'))
-    .eql('/solution/S100000-001/dashboard/browser-based/section/browser-connectivity-and-resolution')
+    .eql('/supplier/solution/S100000-001/dashboard/browser-based/section/browser-connectivity-and-resolution')
     .expect(connectivityAndResolutionSection.find('[data-test-id="dashboard-section-requirement"]').innerText)
     .eql('Mandatory')
     .expect(connectivityAndResolutionSection.find('[data-test-id="dashboard-section-status"]').innerText)
@@ -97,7 +97,7 @@ test('should render all the sections for the Browser based sections section grou
     .expect(hardwareRequirementsSection.find('[data-test-id="dashboard-section-title"]').innerText)
     .eql('Hardware requirements')
     .expect(hardwareRequirementsSection.find('[data-test-id="dashboard-section-title"] a').getAttribute('href'))
-    .eql('/solution/S100000-001/dashboard/browser-based/section/browser-hardware-requirements')
+    .eql('/supplier/solution/S100000-001/dashboard/browser-based/section/browser-hardware-requirements')
     .expect(hardwareRequirementsSection.find('[data-test-id="dashboard-section-requirement"]').innerText)
     .eql('Optional')
     .expect(hardwareRequirementsSection.find('[data-test-id="dashboard-section-status"]').innerText)
@@ -106,7 +106,7 @@ test('should render all the sections for the Browser based sections section grou
     .expect(additionalInformationSection.find('[data-test-id="dashboard-section-title"]').innerText)
     .eql('Additional information')
     .expect(additionalInformationSection.find('[data-test-id="dashboard-section-title"] a').getAttribute('href'))
-    .eql('/solution/S100000-001/dashboard/browser-based/section/browser-additional-information')
+    .eql('/supplier/solution/S100000-001/dashboard/browser-based/section/browser-additional-information')
     .expect(additionalInformationSection.find('[data-test-id="dashboard-section-requirement"]').innerText)
     .eql('Optional')
     .expect(additionalInformationSection.find('[data-test-id="dashboard-section-status"]').innerText)
@@ -125,7 +125,7 @@ test('should navigate the user to the browsers supported page when clicking on t
 
   await t
     .click(browsersSupportedSection.find('a'))
-    .expect(getLocation()).contains('/solution/S100000-001/dashboard/browser-based/section/browser-browsers-supported');
+    .expect(getLocation()).contains('/supplier/solution/S100000-001/dashboard/browser-based/section/browser-browsers-supported');
 });
 
 test('should navigate the user to the mobile first page when clicking on the mobile first dashboard row', async (t) => {
@@ -140,7 +140,7 @@ test('should navigate the user to the mobile first page when clicking on the mob
 
   await t
     .click(mobileFirstSection.find('a'))
-    .expect(getLocation()).contains('/solution/S100000-001/dashboard/browser-based/section/browser-mobile-first');
+    .expect(getLocation()).contains('/supplier/solution/S100000-001/dashboard/browser-based/section/browser-mobile-first');
 });
 
 test('should navigate the user to the plug-ins or extensions page when clicking on the plug-ins or extensions dashboard row', async (t) => {
@@ -155,7 +155,7 @@ test('should navigate the user to the plug-ins or extensions page when clicking 
 
   await t
     .click(pluginsOrExtensionsSection.find('a'))
-    .expect(getLocation()).contains('/solution/S100000-001/dashboard/browser-based/section/browser-plug-ins-or-extensions');
+    .expect(getLocation()).contains('/supplier/solution/S100000-001/dashboard/browser-based/section/browser-plug-ins-or-extensions');
 });
 
 test('should navigate the user to the connectivity and resolution page when clicking on the connectivity and resolution dashboard row', async (t) => {
@@ -170,7 +170,7 @@ test('should navigate the user to the connectivity and resolution page when clic
 
   await t
     .click(connectivityAndResolutionSection.find('a'))
-    .expect(getLocation()).contains('/solution/S100000-001/dashboard/browser-based/section/browser-connectivity-and-resolution');
+    .expect(getLocation()).contains('/supplier/solution/S100000-001/dashboard/browser-based/section/browser-connectivity-and-resolution');
 });
 
 test('should navigate the user to the hardware requirements page when clicking on the hardware requirements dashboard row', async (t) => {
@@ -185,7 +185,7 @@ test('should navigate the user to the hardware requirements page when clicking o
 
   await t
     .click(hardwareRequirementsSection.find('a'))
-    .expect(getLocation()).contains('/solution/S100000-001/dashboard/browser-based/section/browser-hardware-requirements');
+    .expect(getLocation()).contains('/supplier/solution/S100000-001/dashboard/browser-based/section/browser-hardware-requirements');
 });
 
 test('should navigate the user to the additional information page when clicking on the additional information dashboard row', async (t) => {
@@ -200,7 +200,7 @@ test('should navigate the user to the additional information page when clicking 
 
   await t
     .click(additionalInformationSection.find('a'))
-    .expect(getLocation()).contains('/solution/S100000-001/dashboard/browser-based/section/browser-additional-information');
+    .expect(getLocation()).contains('/supplier/solution/S100000-001/dashboard/browser-based/section/browser-additional-information');
 });
 
 test('should render the return to all sections link', async (t) => {
@@ -225,5 +225,5 @@ test('should return to the marketing data dashboard when the return to all secti
   await t
     .click(link)
     .expect(getLocation()).notContains('section')
-    .expect(getLocation()).contains('/solution/S100000-001');
+    .expect(getLocation()).contains('S100000-001');
 });
