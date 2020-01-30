@@ -3,7 +3,7 @@ import { getPreviewPageContext } from './pages/preview/controller';
 import logger from './logger';
 import { errorHandler } from './pages/error/errorHandler';
 import supplierRoutes from './pages/supplier/routes';
-import { withCatch } from './common-components/helpers/routerHelper';
+import { withCatch } from './common/helpers/routerHelper';
 
 const router = express.Router();
 

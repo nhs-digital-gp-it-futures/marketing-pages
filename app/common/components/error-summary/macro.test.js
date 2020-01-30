@@ -1,8 +1,8 @@
 import request from 'supertest';
 import cheerio from 'cheerio';
-import { testHarness } from '../../test-utils/testHarness';
+import { testHarness } from '../../../test-utils/testHarness';
 
-const macroWrapper = `{% from './common-components/error-summary/macro.njk' import errorSummary %}
+const macroWrapper = `{% from './common/components/error-summary/macro.njk' import errorSummary %}
                         {{ errorSummary(errors) }}`;
 
 describe('errorSummary', () => {

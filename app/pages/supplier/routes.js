@@ -3,7 +3,7 @@ import { getMarketingPageDashboardContext, postSubmitForModeration } from './das
 import { getSubDashboardPageContext } from './dashboard/subDashboards/controller';
 import { getSectionPageContext, getSectionPageErrorContext, postSection } from './section/controller';
 import logger from '../../logger';
-import { withCatch } from '../../common-components/helpers/routerHelper';
+import { withCatch } from '../../common/helpers/routerHelper';
 
 const router = express.Router();
 
