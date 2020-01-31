@@ -2,7 +2,7 @@ import nock from 'nock';
 import { Selector, ClientFunction } from 'testcafe';
 import dashboardWithIncompleteSections from '../fixtures/dashboardWithIncompleteSections.json';
 import dashboardWithCompleteSections from '../fixtures/dashboardWithCompleteSections.json';
-import { apiLocalhost, apiPath, clientLocalhost } from '../../../test-utils/config';
+import { apiLocalhost, apiPath } from '../../../test-utils/config';
 import { extractInnerText } from '../../../test-utils/helper';
 
 const mocks = (initalDashboard) => {
