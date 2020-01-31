@@ -3,6 +3,7 @@ import { Selector, ClientFunction } from 'testcafe';
 import dashboardWithCompleteSections from '../../../../../../fixtures/dashboardWithCompleteSections.json';
 import nativeMobileFixture from './fixtureData.json';
 import { apiLocalhost, apiPath, clientLocalhost } from '../../../../../test-utils/config';
+import { extractInnerText } from '../../../../../test-utils/helper';
 
 const mocks = () => {
   nock(apiLocalhost)
@@ -25,7 +26,7 @@ test('should render the native mobile dashboard page title', async (t) => {
   const title = Selector('[data-test-id="sub-dashboard-title"]');
 
   await t
-    .expect(title.innerText).eql('Native mobile or tablet');
+    .expect(await extractInnerText(title)).eql('Native mobile or tablet');
 });
 
 test('should render the native mobile dashboard main advice', async (t) => {
@@ -34,7 +35,7 @@ test('should render the native mobile dashboard main advice', async (t) => {
   const mainAdvice = Selector('[data-test-id="sub-dashboard-main-advice"]');
 
   await t
-    .expect(mainAdvice.innerText).eql('Add further detail about your native mobile or tablet application.');
+    .expect(await extractInnerText(mainAdvice)).eql('Add further detail about your native mobile or tablet application.');
 });
 
 test('should render native mobile section group', async (t) => {
@@ -43,7 +44,7 @@ test('should render native mobile section group', async (t) => {
   const browserBasedSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-native-mobile-sections"]');
 
   await t
-    .expect(browserBasedSectionGroup.find('h2').innerText).eql('Native mobile or tablet sections');
+    .expect(await extractInnerText(browserBasedSectionGroup.find('h2'))).eql('Native mobile or tablet sections');
 });
 
 test('should render all the sections for native mobile sections section group', async (t) => {
@@ -59,67 +60,67 @@ test('should render all the sections for native mobile sections section group', 
   const additionalInformation = browserBasedSectionGroup.find('[data-test-id="dashboard-section-native-mobile-additional-information"]');
 
   await t
-    .expect(supportedOperatingSystems.find('[data-test-id="dashboard-section-title"]').innerText)
+    .expect(await extractInnerText(supportedOperatingSystems.find('[data-test-id="dashboard-section-title"]')))
     .eql('Supported operating systems')
     .expect(supportedOperatingSystems.find('[data-test-id="dashboard-section-title"] a').getAttribute('href'))
     .eql('/supplier/solution/S100000-001/dashboard/native-mobile/section/native-mobile-operating-systems')
-    .expect(supportedOperatingSystems.find('[data-test-id="dashboard-section-requirement"]').innerText)
+    .expect(await extractInnerText(supportedOperatingSystems.find('[data-test-id="dashboard-section-requirement"]')))
     .eql('Mandatory')
-    .expect(supportedOperatingSystems.find('[data-test-id="dashboard-section-status"]').innerText)
+    .expect(await extractInnerText(supportedOperatingSystems.find('[data-test-id="dashboard-section-status"]')))
     .eql('INCOMPLETE')
 
-    .expect(mobileFirstSection.find('[data-test-id="dashboard-section-title"]').innerText)
+    .expect(await extractInnerText(mobileFirstSection.find('[data-test-id="dashboard-section-title"]')))
     .eql('Mobile first')
     .expect(mobileFirstSection.find('[data-test-id="dashboard-section-title"] a').getAttribute('href'))
     .eql('/supplier/solution/S100000-001/dashboard/native-mobile/section/native-mobile-first')
-    .expect(mobileFirstSection.find('[data-test-id="dashboard-section-requirement"]').innerText)
+    .expect(await extractInnerText(mobileFirstSection.find('[data-test-id="dashboard-section-requirement"]')))
     .eql('Mandatory')
-    .expect(mobileFirstSection.find('[data-test-id="dashboard-section-status"]').innerText)
+    .expect(await extractInnerText(mobileFirstSection.find('[data-test-id="dashboard-section-status"]')))
     .eql('INCOMPLETE')
 
-    .expect(memoryAndStorage.find('[data-test-id="dashboard-section-title"]').innerText)
+    .expect(await extractInnerText(memoryAndStorage.find('[data-test-id="dashboard-section-title"]')))
     .eql('Memory and storage')
     .expect(memoryAndStorage.find('[data-test-id="dashboard-section-title"] a').getAttribute('href'))
     .eql('/supplier/solution/S100000-001/dashboard/native-mobile/section/native-mobile-memory-and-storage')
-    .expect(memoryAndStorage.find('[data-test-id="dashboard-section-requirement"]').innerText)
+    .expect(await extractInnerText(memoryAndStorage.find('[data-test-id="dashboard-section-requirement"]')))
     .eql('Mandatory')
-    .expect(memoryAndStorage.find('[data-test-id="dashboard-section-status"]').innerText)
+    .expect(await extractInnerText(memoryAndStorage.find('[data-test-id="dashboard-section-status"]')))
     .eql('INCOMPLETE')
 
-    .expect(connectionDetails.find('[data-test-id="dashboard-section-title"]').innerText)
+    .expect(await extractInnerText(connectionDetails.find('[data-test-id="dashboard-section-title"]')))
     .eql('Connection details')
     .expect(connectionDetails.find('[data-test-id="dashboard-section-title"] a').getAttribute('href'))
     .eql('/supplier/solution/S100000-001/dashboard/native-mobile/section/native-mobile-connection-details')
-    .expect(connectionDetails.find('[data-test-id="dashboard-section-requirement"]').innerText)
+    .expect(await extractInnerText(connectionDetails.find('[data-test-id="dashboard-section-requirement"]')))
     .eql('Optional')
-    .expect(connectionDetails.find('[data-test-id="dashboard-section-status"]').innerText)
+    .expect(await extractInnerText(connectionDetails.find('[data-test-id="dashboard-section-status"]')))
     .eql('INCOMPLETE')
 
-    .expect(thirdParty.find('[data-test-id="dashboard-section-title"]').innerText)
+    .expect(await extractInnerText(thirdParty.find('[data-test-id="dashboard-section-title"]')))
     .eql('Third party components and device capabilities')
     .expect(thirdParty.find('[data-test-id="dashboard-section-title"] a').getAttribute('href'))
     .eql('/supplier/solution/S100000-001/dashboard/native-mobile/section/native-mobile-third-party')
-    .expect(thirdParty.find('[data-test-id="dashboard-section-requirement"]').innerText)
+    .expect(await extractInnerText(thirdParty.find('[data-test-id="dashboard-section-requirement"]')))
     .eql('Optional')
-    .expect(thirdParty.find('[data-test-id="dashboard-section-status"]').innerText)
+    .expect(await extractInnerText(thirdParty.find('[data-test-id="dashboard-section-status"]')))
     .eql('INCOMPLETE')
 
-    .expect(hardwareRequirements.find('[data-test-id="dashboard-section-title"]').innerText)
+    .expect(await extractInnerText(hardwareRequirements.find('[data-test-id="dashboard-section-title"]')))
     .eql('Hardware requirements')
     .expect(hardwareRequirements.find('[data-test-id="dashboard-section-title"] a').getAttribute('href'))
     .eql('/supplier/solution/S100000-001/dashboard/native-mobile/section/native-mobile-hardware-requirements')
-    .expect(hardwareRequirements.find('[data-test-id="dashboard-section-requirement"]').innerText)
+    .expect(await extractInnerText(hardwareRequirements.find('[data-test-id="dashboard-section-requirement"]')))
     .eql('Optional')
-    .expect(hardwareRequirements.find('[data-test-id="dashboard-section-status"]').innerText)
+    .expect(await extractInnerText(hardwareRequirements.find('[data-test-id="dashboard-section-status"]')))
     .eql('INCOMPLETE')
 
-    .expect(additionalInformation.find('[data-test-id="dashboard-section-title"]').innerText)
+    .expect(await extractInnerText(additionalInformation.find('[data-test-id="dashboard-section-title"]')))
     .eql('Additional information')
     .expect(additionalInformation.find('[data-test-id="dashboard-section-title"] a').getAttribute('href'))
     .eql('/supplier/solution/S100000-001/dashboard/native-mobile/section/native-mobile-additional-information')
-    .expect(additionalInformation.find('[data-test-id="dashboard-section-requirement"]').innerText)
+    .expect(await extractInnerText(additionalInformation.find('[data-test-id="dashboard-section-requirement"]')))
     .eql('Optional')
-    .expect(additionalInformation.find('[data-test-id="dashboard-section-status"]').innerText)
+    .expect(await extractInnerText(additionalInformation.find('[data-test-id="dashboard-section-status"]')))
     .eql('INCOMPLETE');
 });
 
@@ -232,10 +233,9 @@ test('should render the return to all sections link', async (t) => {
   await pageSetup(t);
 
   const link = Selector('[data-test-id="sub-dashboard-back-link"] div a');
-  const linkText = await link.innerText;
 
   await t
-    .expect(linkText.trim()).eql('Return to all sections');
+    .expect(await extractInnerText(link)).eql('Return to all sections');
 });
 
 test('should return to the marketing data dashboard when the return to all sections is clicked', async (t) => {
