@@ -49,6 +49,22 @@ describe('GET /solution/:solutionId/preview', () => {
   });
 });
 
+describe('/supplier route', () => {
+  it('should call the supplier route when navigating to /supplier', () => {
+    dashboardControllers.getMarketingPageDashboardContext = jest.fn()
+      .mockImplementation(() => Promise.resolve({}));
+    const app = new App().createApp();
+    app.use('/', routes);
+    return request(app)
+      .get('/supplier/solution/1')
+      .expect(200)
+      .then((res) => {
+        expect(res.text.includes('data-test-id="dashboard"')).toEqual(true);
+        expect(res.text.includes('data-test-id="error-page-title"')).toEqual(false);
+      });
+  });
+});
+
 describe('Error handler', () => {
   it('should return error page if there is an error from /preview', () => {
     previewControllers.getPreviewPageContext = jest.fn().mockImplementation(() => Promise.reject());
@@ -63,7 +79,7 @@ describe('Error handler', () => {
       });
   });
 
-  it('should return error page if there is an error from the supplier route', () => {
+  it('should return error page if there is an error from the /supplier route', () => {
     dashboardControllers.getMarketingPageDashboardContext = jest.fn()
       .mockImplementation(() => Promise.reject());
     const app = new App().createApp();
