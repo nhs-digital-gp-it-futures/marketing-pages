@@ -2,6 +2,7 @@ import { Selector, ClientFunction } from 'testcafe';
 import nock from 'nock';
 import dashboardWithCompleteSections from '../../../fixtures/dashboardWithCompleteSections.json';
 import { apiLocalhost, apiPath } from '../config';
+import { extractInnerText } from '../helper';
 
 const getLocation = ClientFunction(() => document.location.href);
 
@@ -11,7 +12,7 @@ const titleTest = async ({ pageSetup, sectionManifest }) => {
       await pageSetup({ t });
       const title = Selector('[data-test-id="section-title"]');
       await t
-        .expect(title.innerText).eql(sectionManifest.title);
+        .expect(await extractInnerText(title)).eql(sectionManifest.title);
     });
   }
 };
@@ -22,7 +23,7 @@ const mainAdviceTest = async ({ pageSetup, sectionManifest }) => {
       await pageSetup({ t });
       const mainAdvice = Selector('[data-test-id="section-main-advice"]');
       await t
-        .expect(mainAdvice.innerText).eql(sectionManifest.mainAdvice);
+        .expect(await extractInnerText(mainAdvice)).eql(sectionManifest.mainAdvice);
     });
   }
 };
@@ -34,7 +35,7 @@ const allAdviceTest = async ({ pageSetup, sectionManifest }) => {
       const expectedAdditionalAdvice = sectionManifest.additionalAdvice.join('\n\n');
       const additionalAdvice = Selector('[data-test-id="section-additional-advice"]');
       await t
-        .expect(additionalAdvice.innerText).eql(expectedAdditionalAdvice);
+        .expect(await extractInnerText(additionalAdvice)).eql(expectedAdditionalAdvice);
     });
   }
 };
@@ -43,10 +44,10 @@ const submitButtonTest = async ({ pageSetup, sectionManifest }) => {
   await test('should render the submit button', async (t) => {
     await pageSetup({ t });
     const submitButton = Selector('[data-test-id="section-submit-button"]');
-    const submitButtonText = await submitButton.find('button').innerText;
+
     await t
       .expect(submitButton.find('button').count).eql(1)
-      .expect(submitButtonText.trim()).eql(sectionManifest.submitText);
+      .expect(await extractInnerText(submitButton)).eql(sectionManifest.submitText);
   });
 };
 
@@ -82,9 +83,9 @@ const sectionsLinkTest = async ({ pageSetup }) => {
   await test('should render the return to all sections link', async (t) => {
     await pageSetup({ t });
     const link = Selector('[data-test-id="section-back-link"] a');
-    const linkText = await link.innerText;
+
     await t
-      .expect(linkText.trim()).eql('Return to all sections');
+      .expect(await extractInnerText(link)).eql('Return to all sections');
   });
 };
 

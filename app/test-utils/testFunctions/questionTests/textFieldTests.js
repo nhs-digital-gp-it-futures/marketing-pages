@@ -1,4 +1,5 @@
 import { Selector } from 'testcafe';
+import { extractInnerText } from '../../helper';
 
 const textFieldTest = async ({
   pageSetup,
@@ -12,16 +13,16 @@ const textFieldTest = async ({
     await pageSetup({ t });
     const renderedQuestion = Selector(`[data-test-id="question-${modifiedQuestionId}"]`);
     const expectedQuestion = sectionManifest.questions[questionId];
-    const labelText = await renderedQuestion.find('label.nhsuk-label').innerText;
-    const hintText = await renderedQuestion.find('span.nhsuk-hint').innerText;
+    const label = renderedQuestion.find('label.nhsuk-label');
+    const hint = renderedQuestion.find('span.nhsuk-hint');
 
     if (expectedQuestion.mainAdvice) {
       await t
-        .expect(labelText.trim()).eql(expectedQuestion.mainAdvice);
+        .expect(await extractInnerText(label)).eql(expectedQuestion.mainAdvice);
     }
     if (expectedQuestion.additionalAdvice) {
       await t
-        .expect(hintText.trim()).eql(expectedQuestion.additionalAdvice);
+        .expect(await extractInnerText(hint)).eql(expectedQuestion.additionalAdvice);
     }
     await t
       .expect(renderedQuestion.find('input').count).eql(1);
