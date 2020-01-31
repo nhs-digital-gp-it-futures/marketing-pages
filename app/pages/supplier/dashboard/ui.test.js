@@ -4,6 +4,7 @@ import dashboardWithIncompleteSections from '../../../../fixtures/dashboardWithI
 import dashboardWithCompleteSections from '../../../../fixtures/dashboardWithCompleteSections.json';
 import previewWithMarketingData from '../../../../fixtures/previewWithMarketingData.json';
 import { apiLocalhost, apiPath, clientLocalhost } from '../../../test-utils/config';
+import { extractInnerText } from '../../../test-utils/helper';
 
 const mocks = (initalDashboard) => {
   if (initalDashboard) {
@@ -32,7 +33,7 @@ test('should render the marketing dashboard page title', async (t) => {
   const title = Selector('h1');
 
   await t
-    .expect(title.innerText).eql('Marketing Page - Dashboard');
+    .expect(await extractInnerText(title)).eql('Marketing Page - Dashboard');
 });
 
 test('should render the preview page button', async (t) => {
@@ -45,7 +46,7 @@ test('should render the preview page button', async (t) => {
   const previewButton = Selector('[data-test-id="dashboard-preview-button"] a');
 
   await t
-    .expect(previewButton.innerText).eql('Preview Marketing page')
+    .expect(await extractInnerText(previewButton)).eql('Preview Marketing page')
     .click(previewButton)
     .expect(getLocation()).contains('/solution/S100000-001/preview');
 });
@@ -64,7 +65,7 @@ test('should render the Submit for moderation button', async (t) => {
   const submitForModerationButton = Selector('[data-test-id="dashboard-submit-for-moderation-button"] a');
 
   await t
-    .expect(submitForModerationButton.innerText).eql('Submit for moderation')
+    .expect(await extractInnerText(submitForModerationButton)).eql('Submit for moderation')
     .click(submitForModerationButton)
     .expect(getLocation()).contains('/supplier/solution/S100000-001');
 });
@@ -75,7 +76,7 @@ test('should render the About your solution section group', async (t) => {
   const aboutYourSolutionSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-about-your-solution"]');
 
   await t
-    .expect(aboutYourSolutionSectionGroup.find('h2').innerText).eql('About your Solution');
+    .expect(await extractInnerText(aboutYourSolutionSectionGroup.find('h2'))).eql('About your Solution');
 });
 
 test('should render the Client application type section group', async (t) => {
@@ -84,7 +85,7 @@ test('should render the Client application type section group', async (t) => {
   const clientApplicationTypeSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-client-application-type"]');
 
   await t
-    .expect(clientApplicationTypeSectionGroup.find('h2').innerText).eql('Client application type');
+    .expect(await extractInnerText(clientApplicationTypeSectionGroup.find('h2'))).eql('Client application type');
 });
 
 test('should render the Hosting type section group', async (t) => {
@@ -93,7 +94,7 @@ test('should render the Hosting type section group', async (t) => {
   const hostingTypeSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-hosting-type"]');
 
   await t
-    .expect(hostingTypeSectionGroup.find('h2').innerText).eql('Hosting type');
+    .expect(await extractInnerText(hostingTypeSectionGroup.find('h2'))).eql('Hosting type');
 });
 
 test('should render the Your Product roadmap section group', async (t) => {
@@ -102,7 +103,7 @@ test('should render the Your Product roadmap section group', async (t) => {
   const productRoadmapSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-product-roadmap"]');
 
   await t
-    .expect(productRoadmapSectionGroup.find('h2').innerText).eql('Your product roadmap');
+    .expect(await extractInnerText(productRoadmapSectionGroup.find('h2'))).eql('Your product roadmap');
 });
 
 test('should render the About your Organisation section group', async (t) => {
@@ -111,7 +112,7 @@ test('should render the About your Organisation section group', async (t) => {
   const aboutYourOrganisationSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-about-your-organisation"]');
 
   await t
-    .expect(aboutYourOrganisationSectionGroup.find('h2').innerText).eql('About your Organisation');
+    .expect(await extractInnerText(aboutYourOrganisationSectionGroup.find('h2'))).eql('About your Organisation');
 });
 
 
@@ -123,18 +124,18 @@ test('should render all the sections for the About your solution section group',
   const featuresSection = aboutYourSolutionSectionGroup.find('[data-test-id="dashboard-section-features"]');
 
   await t
-    .expect(solutionDescriptionSection.find('[data-test-id="dashboard-section-title"]').innerText)
+    .expect(await extractInnerText(solutionDescriptionSection.find('[data-test-id="dashboard-section-title"]')))
     .eql('Solution description')
-    .expect(solutionDescriptionSection.find('[data-test-id="dashboard-section-requirement"]').innerText)
+    .expect(await extractInnerText(solutionDescriptionSection.find('[data-test-id="dashboard-section-requirement"]')))
     .eql('Mandatory')
-    .expect(solutionDescriptionSection.find('[data-test-id="dashboard-section-status"]').innerText)
+    .expect(await extractInnerText(solutionDescriptionSection.find('[data-test-id="dashboard-section-status"]')))
     .eql('INCOMPLETE')
 
-    .expect(featuresSection.find('[data-test-id="dashboard-section-title"]').innerText)
+    .expect(await extractInnerText(featuresSection.find('[data-test-id="dashboard-section-title"]')))
     .eql('Features')
-    .expect(featuresSection.find('[data-test-id="dashboard-section-requirement"]').innerText)
+    .expect(await extractInnerText(featuresSection.find('[data-test-id="dashboard-section-requirement"]')))
     .eql('Optional')
-    .expect(featuresSection.find('[data-test-id="dashboard-section-status"]').innerText)
+    .expect(await extractInnerText(featuresSection.find('[data-test-id="dashboard-section-status"]')))
     .eql('INCOMPLETE');
 });
 
@@ -144,11 +145,11 @@ test('should render all the sections for the Client application type section gro
   const clientApplicationTypeSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-client-application-type"]');
 
   await t
-    .expect(clientApplicationTypeSectionGroup.find('[data-test-id="dashboard-section-title"]').innerText)
+    .expect(await extractInnerText(clientApplicationTypeSectionGroup.find('[data-test-id="dashboard-section-title"]')))
     .eql('Client application type')
-    .expect(clientApplicationTypeSectionGroup.find('[data-test-id="dashboard-section-requirement"]').innerText)
+    .expect(await extractInnerText(clientApplicationTypeSectionGroup.find('[data-test-id="dashboard-section-requirement"]')))
     .eql('Mandatory')
-    .expect(clientApplicationTypeSectionGroup.find('[data-test-id="dashboard-section-status"]').innerText)
+    .expect(await extractInnerText(clientApplicationTypeSectionGroup.find('[data-test-id="dashboard-section-status"]')))
     .eql('INCOMPLETE');
 });
 
@@ -165,18 +166,18 @@ test('should render all the sub sections for the client application type section
   await t
     .expect(browserBasedSubSection.count).eql(1)
     .expect(browserBasedSubSection.find('a').exists).notOk()
-    .expect(browserBasedSubSection.find('[data-test-id="dashboard-section-title"]').innerText).eql('Browser based')
-    .expect(browserBasedSubSection.find('[data-test-id="dashboard-section-default-message"]').innerText).eql('Select from client application types')
+    .expect(await extractInnerText(browserBasedSubSection.find('[data-test-id="dashboard-section-title"]'))).eql('Browser based')
+    .expect(await extractInnerText(browserBasedSubSection.find('[data-test-id="dashboard-section-default-message"]'))).eql('Select from client application types')
 
     .expect(nativeMobileSubSection.count).eql(1)
     .expect(nativeMobileSubSection.find('a').exists).notOk()
-    .expect(nativeMobileSubSection.find('[data-test-id="dashboard-section-title"]').innerText).eql('Native mobile or tablet')
-    .expect(nativeMobileSubSection.find('[data-test-id="dashboard-section-default-message"]').innerText).eql('Select from client application types')
+    .expect(await extractInnerText(nativeMobileSubSection.find('[data-test-id="dashboard-section-title"]'))).eql('Native mobile or tablet')
+    .expect(await extractInnerText(nativeMobileSubSection.find('[data-test-id="dashboard-section-default-message"]'))).eql('Select from client application types')
 
     .expect(nativeDesktopSubSection.count).eql(1)
     .expect(nativeDesktopSubSection.find('a').exists).notOk()
-    .expect(nativeDesktopSubSection.find('[data-test-id="dashboard-section-title"]').innerText).eql('Native desktop')
-    .expect(nativeDesktopSubSection.find('[data-test-id="dashboard-section-default-message"]').innerText).eql('Select from client application types');
+    .expect(await extractInnerText(nativeDesktopSubSection.find('[data-test-id="dashboard-section-title"]'))).eql('Native desktop')
+    .expect(await extractInnerText(nativeDesktopSubSection.find('[data-test-id="dashboard-section-default-message"]'))).eql('Select from client application types');
 });
 
 test('should render all the sub sections for the client application type section with requirment and status when all 3 application types have been selected', async (t) => {
@@ -192,24 +193,24 @@ test('should render all the sub sections for the client application type section
   await t
     .expect(browserBasedSubSection.count).eql(1)
     .expect(browserBasedSubSection.find('a').exists).ok()
-    .expect(browserBasedSubSection.find('[data-test-id="dashboard-section-title"]').innerText).eql('Browser based')
+    .expect(await extractInnerText(browserBasedSubSection.find('[data-test-id="dashboard-section-title"]'))).eql('Browser based')
     .expect(browserBasedSubSection.find('[data-test-id="dashboard-section-default-message"]').exists).notOk()
-    .expect(browserBasedSubSection.find('[data-test-id="dashboard-section-requirement"]').innerText).eql('Mandatory')
-    .expect(browserBasedSubSection.find('[data-test-id="dashboard-section-status"]').innerText).eql('COMPLETE')
+    .expect(await extractInnerText(browserBasedSubSection.find('[data-test-id="dashboard-section-requirement"]'))).eql('Mandatory')
+    .expect(await extractInnerText(browserBasedSubSection.find('[data-test-id="dashboard-section-status"]'))).eql('COMPLETE')
 
     .expect(nativeMobileSubSection.count).eql(1)
     .expect(nativeMobileSubSection.find('a').exists).ok()
-    .expect(nativeMobileSubSection.find('[data-test-id="dashboard-section-title"]').innerText).eql('Native mobile or tablet')
+    .expect(await extractInnerText(nativeMobileSubSection.find('[data-test-id="dashboard-section-title"]'))).eql('Native mobile or tablet')
     .expect(nativeMobileSubSection.find('[data-test-id="dashboard-section-default-message"]').exists).notOk()
-    .expect(nativeMobileSubSection.find('[data-test-id="dashboard-section-requirement"]').innerText).eql('Mandatory')
-    .expect(nativeMobileSubSection.find('[data-test-id="dashboard-section-status"]').innerText).eql('COMPLETE')
+    .expect(await extractInnerText(nativeMobileSubSection.find('[data-test-id="dashboard-section-requirement"]'))).eql('Mandatory')
+    .expect(await extractInnerText(nativeMobileSubSection.find('[data-test-id="dashboard-section-status"]'))).eql('COMPLETE')
 
     .expect(nativeDesktopSubSection.count).eql(1)
     .expect(nativeDesktopSubSection.find('a').exists).ok()
-    .expect(nativeDesktopSubSection.find('[data-test-id="dashboard-section-title"]').innerText).eql('Native desktop')
+    .expect(await extractInnerText(nativeDesktopSubSection.find('[data-test-id="dashboard-section-title"]'))).eql('Native desktop')
     .expect(nativeDesktopSubSection.find('[data-test-id="dashboard-section-default-message"]').exists).notOk()
-    .expect(nativeDesktopSubSection.find('[data-test-id="dashboard-section-requirement"]').innerText).eql('Mandatory')
-    .expect(nativeDesktopSubSection.find('[data-test-id="dashboard-section-status"]').innerText).eql('COMPLETE');
+    .expect(await extractInnerText(nativeDesktopSubSection.find('[data-test-id="dashboard-section-requirement"]'))).eql('Mandatory')
+    .expect(await extractInnerText(nativeDesktopSubSection.find('[data-test-id="dashboard-section-status"]'))).eql('COMPLETE');
 });
 
 test('should render all the sections for the Hosting type section group', async (t) => {
@@ -222,32 +223,32 @@ test('should render all the sections for the Hosting type section group', async 
   const hostingTypeOnPremiseSection = hostingTypeSectionGroup.find('[data-test-id="dashboard-section-hosting-type-on-premise"]');
 
   await t
-    .expect(hostingTypePublicCloudSection.find('[data-test-id="dashboard-section-title"]').innerText)
+    .expect(await extractInnerText(hostingTypePublicCloudSection.find('[data-test-id="dashboard-section-title"]')))
     .eql('Public cloud')
-    .expect(hostingTypePublicCloudSection.find('[data-test-id="dashboard-section-requirement"]').innerText)
+    .expect(await extractInnerText(hostingTypePublicCloudSection.find('[data-test-id="dashboard-section-requirement"]')))
     .eql('Optional')
-    .expect(hostingTypePublicCloudSection.find('[data-test-id="dashboard-section-status"]').innerText)
+    .expect(await extractInnerText(hostingTypePublicCloudSection.find('[data-test-id="dashboard-section-status"]')))
     .eql('INCOMPLETE')
 
-    .expect(hostingTypePrivateCloudSection.find('[data-test-id="dashboard-section-title"]').innerText)
+    .expect(await extractInnerText(hostingTypePrivateCloudSection.find('[data-test-id="dashboard-section-title"]')))
     .eql('Private cloud')
-    .expect(hostingTypePrivateCloudSection.find('[data-test-id="dashboard-section-requirement"]').innerText)
+    .expect(await extractInnerText(hostingTypePrivateCloudSection.find('[data-test-id="dashboard-section-requirement"]')))
     .eql('Optional')
-    .expect(hostingTypePrivateCloudSection.find('[data-test-id="dashboard-section-status"]').innerText)
+    .expect(await extractInnerText(hostingTypePrivateCloudSection.find('[data-test-id="dashboard-section-status"]')))
     .eql('INCOMPLETE')
 
-    .expect(hostingTypeHybridSection.find('[data-test-id="dashboard-section-title"]').innerText)
+    .expect(await extractInnerText(hostingTypeHybridSection.find('[data-test-id="dashboard-section-title"]')))
     .eql('Hybrid')
-    .expect(hostingTypeHybridSection.find('[data-test-id="dashboard-section-requirement"]').innerText)
+    .expect(await extractInnerText(hostingTypeHybridSection.find('[data-test-id="dashboard-section-requirement"]')))
     .eql('Optional')
-    .expect(hostingTypeHybridSection.find('[data-test-id="dashboard-section-status"]').innerText)
+    .expect(await extractInnerText(hostingTypeHybridSection.find('[data-test-id="dashboard-section-status"]')))
     .eql('INCOMPLETE')
 
-    .expect(hostingTypeOnPremiseSection.find('[data-test-id="dashboard-section-title"]').innerText)
+    .expect(await extractInnerText(hostingTypeOnPremiseSection.find('[data-test-id="dashboard-section-title"]')))
     .eql('On premise')
-    .expect(hostingTypeOnPremiseSection.find('[data-test-id="dashboard-section-requirement"]').innerText)
+    .expect(await extractInnerText(hostingTypeOnPremiseSection.find('[data-test-id="dashboard-section-requirement"]')))
     .eql('Optional')
-    .expect(hostingTypeOnPremiseSection.find('[data-test-id="dashboard-section-status"]').innerText)
+    .expect(await extractInnerText(hostingTypeOnPremiseSection.find('[data-test-id="dashboard-section-status"]')))
     .eql('INCOMPLETE');
 });
 
@@ -258,11 +259,11 @@ test('should render all the sections for the Your product roadmap section group'
   const roadmapSection = productRoadmapSectionGroup.find('[data-test-id="dashboard-section-roadmap"]');
 
   await t
-    .expect(roadmapSection.find('[data-test-id="dashboard-section-title"]').innerText)
+    .expect(await extractInnerText(roadmapSection.find('[data-test-id="dashboard-section-title"]')))
     .eql('Roadmap')
-    .expect(roadmapSection.find('[data-test-id="dashboard-section-requirement"]').innerText)
+    .expect(await extractInnerText(roadmapSection.find('[data-test-id="dashboard-section-requirement"]')))
     .eql('Optional')
-    .expect(roadmapSection.find('[data-test-id="dashboard-section-status"]').innerText)
+    .expect(await extractInnerText(roadmapSection.find('[data-test-id="dashboard-section-status"]')))
     .eql('INCOMPLETE');
 });
 
@@ -274,18 +275,18 @@ test('should render all the sections for the About your organisation section gro
   const contactDetailsSection = aboutYourOrganisationSectionGroup.find('[data-test-id="dashboard-section-contact-details"]');
 
   await t
-    .expect(aboutSupplierSection.find('[data-test-id="dashboard-section-title"]').innerText)
+    .expect(await extractInnerText(aboutSupplierSection.find('[data-test-id="dashboard-section-title"]')))
     .eql('About supplier')
-    .expect(aboutSupplierSection.find('[data-test-id="dashboard-section-requirement"]').innerText)
+    .expect(await extractInnerText(aboutSupplierSection.find('[data-test-id="dashboard-section-requirement"]')))
     .eql('Optional')
-    .expect(aboutSupplierSection.find('[data-test-id="dashboard-section-status"]').innerText)
+    .expect(await extractInnerText(aboutSupplierSection.find('[data-test-id="dashboard-section-status"]')))
     .eql('INCOMPLETE')
 
-    .expect(contactDetailsSection.find('[data-test-id="dashboard-section-title"]').innerText)
+    .expect(await extractInnerText(contactDetailsSection.find('[data-test-id="dashboard-section-title"]')))
     .eql('Contact details')
-    .expect(contactDetailsSection.find('[data-test-id="dashboard-section-requirement"]').innerText)
+    .expect(await extractInnerText(contactDetailsSection.find('[data-test-id="dashboard-section-requirement"]')))
     .eql('Optional')
-    .expect(contactDetailsSection.find('[data-test-id="dashboard-section-status"]').innerText)
+    .expect(await extractInnerText(contactDetailsSection.find('[data-test-id="dashboard-section-status"]')))
     .eql('INCOMPLETE');
 });
 
@@ -441,7 +442,7 @@ test('clicking on the contact details section link should navigate the user to c
 });
 
 
-test('should render the Error summary containing all the sections that failed the SubmitForReview', async (t) => {
+test.only('should render the Error summary containing all the sections that failed the SubmitForReview', async (t) => {
   await pageSetup(t);
 
   const submitForReviewError = {
@@ -457,20 +458,22 @@ test('should render the Error summary containing all the sections that failed th
     .reply(200, dashboardWithIncompleteSections);
 
   const errorSummary = Selector('[data-test-id="error-summary"]');
-  const solutionDescriptionError = errorSummary.find('li:nth-child(1)');
-  const clientApplicationTypeError = errorSummary.find('li:nth-child(2)');
   const submitForModerationButton = Selector('[data-test-id="dashboard-submit-for-moderation-button"] a');
 
   await t
     .expect(errorSummary.exists).notOk()
     .click(submitForModerationButton)
-    .expect(errorSummary.exists).ok()
+    .expect(errorSummary.exists).ok();
 
-    .expect(solutionDescriptionError.innerText).eql('Solution description is a mandatory section')
+  const solutionDescriptionError = errorSummary.find('li:nth-child(1)');
+  const clientApplicationTypeError = errorSummary.find('li:nth-child(2)');
+
+  await t
+    .expect(await extractInnerText(solutionDescriptionError)).eql('Solution description is a mandatory section')
     .click(solutionDescriptionError.find('a'))
     .expect(getLocation()).contains('/solution/S100000-001/submitForModeration#solution-description')
 
-    .expect(clientApplicationTypeError.innerText).eql('Client application type is a mandatory section')
+    .expect(await extractInnerText(clientApplicationTypeError)).eql('Client application type is a mandatory section')
     .click(clientApplicationTypeError.find('a'))
     .expect(getLocation()).contains('/solution/S100000-001/submitForModeration#client-application-types');
 });
