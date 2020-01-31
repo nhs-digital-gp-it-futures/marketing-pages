@@ -1,4 +1,6 @@
 import { Selector } from 'testcafe';
+import { extractInnerText } from '../../helper';
+
 
 const radioButtonsTest = async ({ pageSetup, sectionManifest, questionId }) => {
   await test(`should render the ${questionId} radio buttons question`, async (t) => {
@@ -6,10 +8,11 @@ const radioButtonsTest = async ({ pageSetup, sectionManifest, questionId }) => {
     const renderedQuestion = Selector(`[data-test-id="question-${questionId}"]`);
     const expectedQuestion = sectionManifest.questions[questionId];
     const numberOfRadioButtons = Object.keys(expectedQuestion.options).length;
-    const hintText = await renderedQuestion.find('.nhsuk-hint').innerText;
+    const hint = renderedQuestion.find('.nhsuk-hint');
+
     await t
-      .expect(renderedQuestion.find('.nhsuk-fieldset__legend').innerText).eql(expectedQuestion.mainAdvice)
-      .expect(hintText.trim()).eql(expectedQuestion.additionalAdvice)
+      .expect(await extractInnerText(renderedQuestion.find('.nhsuk-fieldset__legend'))).eql(expectedQuestion.mainAdvice)
+      .expect(await extractInnerText(hint)).eql(expectedQuestion.additionalAdvice)
       .expect(renderedQuestion.find('.nhsuk-radios').count).eql(1)
       .expect(renderedQuestion.find('.nhsuk-radios__item').count).eql(numberOfRadioButtons);
 

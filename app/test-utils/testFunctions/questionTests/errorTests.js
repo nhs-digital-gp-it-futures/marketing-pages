@@ -1,6 +1,7 @@
 import { Selector, ClientFunction } from 'testcafe';
 import nock from 'nock';
 import { apiLocalhost, apiPath } from '../../config';
+import { extractInnerText } from '../../helper';
 
 const getLocation = ClientFunction(() => document.location.href);
 
@@ -74,20 +75,24 @@ const errorTests = ({
       .reply(400, responseBody);
 
     const errorSummary = Selector('[data-test-id="error-summary"]');
-    const errorSummaryList = Selector('.nhsuk-error-summary__list');
-    const renderedQuestion = Selector(`[data-test-id="${renderedQuestionSelector}"]`);
     const submitButton = Selector('[data-test-id="section-submit-button"]');
 
     await t
       .expect(errorSummary.exists).notOk()
       .click(submitButton.find('button'))
-      .expect(errorSummary.exists).ok()
+      .expect(errorSummary.exists).ok();
+
+    const errorSummaryList = Selector('.nhsuk-error-summary__list');
+    const renderedQuestion = Selector(`[data-test-id="${renderedQuestionSelector}"]`);
+
+    await t
       .expect(errorSummaryList.find('li').count).eql(1)
-      .expect(errorSummaryList.find('li:nth-child(1)').innerText).eql(expectedErrorMessage)
+      .expect(await extractInnerText(errorSummaryList.find('li:nth-child(1)'))).eql(expectedErrorMessage)
       .expect(errorSummaryList.find('li:nth-child(1) a').getAttribute('href')).eql(`${expectedAnchorLink}`)
       .expect(renderedQuestion.exists).ok()
-      .expect(renderedQuestion.find('.nhsuk-error-message').innerText).contains('Error:')
-      .expect(renderedQuestion.find('.nhsuk-error-message').innerText).contains(expectedErrorMessage);
+      .expect(await extractInnerText(renderedQuestion.find('.nhsuk-error-message'))).contains('Error:')
+      .expect(await extractInnerText(renderedQuestion.find('.nhsuk-error-message'))).contains(expectedErrorMessage);
+
     if (questionType === 'textarea-field') {
       await t
         .expect(renderedQuestion.find('.nhsuk-textarea--error').exists).ok();

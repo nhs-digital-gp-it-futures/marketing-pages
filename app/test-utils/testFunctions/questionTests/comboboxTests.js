@@ -1,4 +1,5 @@
 import { Selector } from 'testcafe';
+import { extractInnerText } from '../../helper';
 
 export const comboboxTest = async ({
   pageSetup,
@@ -10,11 +11,12 @@ export const comboboxTest = async ({
     const renderedQuestion = Selector(`[data-test-id="question-${questionId}"]`);
     const expectedQuestion = sectionManifest.questions[questionId];
     const options = Object.keys(expectedQuestion.options);
-    const labelText = await renderedQuestion.find('.nhsuk-label').innerText;
-    const hintText = await renderedQuestion.find('.nhsuk-hint').innerText;
+    const label = renderedQuestion.find('.nhsuk-label');
+    const hint = await renderedQuestion.find('.nhsuk-hint');
+
     await t
-      .expect(labelText.trim()).eql(expectedQuestion.mainAdvice)
-      .expect(hintText.trim()).eql(expectedQuestion.additionalAdvice)
+      .expect(await extractInnerText(label)).eql(expectedQuestion.mainAdvice)
+      .expect(await extractInnerText(hint)).eql(expectedQuestion.additionalAdvice)
       .expect(renderedQuestion.find('select').exists).ok()
       .expect(renderedQuestion.find('option').count).eql(options.length);
     await Promise.all(options.map(async (option) => {

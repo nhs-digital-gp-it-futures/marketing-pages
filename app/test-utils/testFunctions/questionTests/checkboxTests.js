@@ -1,4 +1,5 @@
 import { Selector } from 'testcafe';
+import { extractInnerText } from '../../helper';
 
 const checkboxTest = async ({ pageSetup, sectionManifest, questionId }) => {
   await test(`should render the ${questionId} checkbox question`, async (t) => {
@@ -6,10 +7,12 @@ const checkboxTest = async ({ pageSetup, sectionManifest, questionId }) => {
     const renderedQuestion = Selector(`[data-test-id="question-${questionId}"]`);
     const expectedQuestion = sectionManifest.questions[questionId];
     const options = Object.keys(expectedQuestion.options);
-    const hintText = await renderedQuestion.find('.nhsuk-hint').innerText;
+    const label = renderedQuestion.find('.nhsuk-fieldset__legend');
+    const hint = await renderedQuestion.find('.nhsuk-hint');
+
     await t
-      .expect(renderedQuestion.find('.nhsuk-fieldset__legend').innerText).eql(expectedQuestion.mainAdvice)
-      .expect(hintText.trim()).eql(expectedQuestion.additionalAdvice)
+      .expect(await extractInnerText(label)).eql(expectedQuestion.mainAdvice)
+      .expect(await extractInnerText(hint)).eql(expectedQuestion.additionalAdvice)
       .expect(renderedQuestion.find('.nhsuk-checkboxes').count).eql(1)
       .expect(renderedQuestion.find('.nhsuk-checkboxes__item').count).eql(options.length);
 
