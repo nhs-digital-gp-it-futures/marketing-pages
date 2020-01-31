@@ -442,7 +442,7 @@ test('clicking on the contact details section link should navigate the user to c
 });
 
 
-test.only('should render the Error summary containing all the sections that failed the SubmitForReview', async (t) => {
+test('should render the Error summary containing all the sections that failed the SubmitForReview', async (t) => {
   await pageSetup(t);
 
   const submitForReviewError = {
