@@ -3,6 +3,7 @@ import { Selector, ClientFunction } from 'testcafe';
 import dashboardWithCompleteSections from '../../../../../../fixtures/dashboardWithCompleteSections.json';
 import browserBasedFixture from './fixtureData.json';
 import { apiLocalhost, apiPath, clientLocalhost } from '../../../../../test-utils/config';
+import { extractInnerText } from '../../../../../test-utils/helper';
 
 const mocks = () => {
   nock(apiLocalhost)
@@ -25,7 +26,7 @@ test('should render the browser based dashboard page title', async (t) => {
   const title = Selector('[data-test-id="sub-dashboard-title"]');
 
   await t
-    .expect(title.innerText).eql('Browser based');
+    .expect(await extractInnerText(title)).eql('Browser based');
 });
 
 test('should render the browser based dashboard main advice', async (t) => {
@@ -34,7 +35,7 @@ test('should render the browser based dashboard main advice', async (t) => {
   const mainAdvice = Selector('[data-test-id="sub-dashboard-main-advice"]');
 
   await t
-    .expect(mainAdvice.innerText).eql('Add further detail about your browser based application.');
+    .expect(await extractInnerText(mainAdvice)).eql('Add further detail about your browser based application.');
 });
 
 test('should render the Browser based section group', async (t) => {
@@ -43,7 +44,7 @@ test('should render the Browser based section group', async (t) => {
   const browserBasedSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-browser-based-sections"]');
 
   await t
-    .expect(browserBasedSectionGroup.find('h2').innerText).eql('Browser based sections');
+    .expect(await extractInnerText(browserBasedSectionGroup.find('h2'))).eql('Browser based sections');
 });
 
 test('should render all the sections for the Browser based sections section group', async (t) => {
@@ -58,58 +59,58 @@ test('should render all the sections for the Browser based sections section grou
   const additionalInformationSection = browserBasedSectionGroup.find('[data-test-id="dashboard-section-browser-additional-information"]');
 
   await t
-    .expect(browsersSupportedSection.find('[data-test-id="dashboard-section-title"]').innerText)
+    .expect(await extractInnerText(browsersSupportedSection.find('[data-test-id="dashboard-section-title"]')))
     .eql('Browsers supported')
     .expect(browsersSupportedSection.find('[data-test-id="dashboard-section-title"] a').getAttribute('href'))
     .eql('/supplier/solution/S100000-001/dashboard/browser-based/section/browser-browsers-supported')
-    .expect(browsersSupportedSection.find('[data-test-id="dashboard-section-requirement"]').innerText)
+    .expect(await extractInnerText(browsersSupportedSection.find('[data-test-id="dashboard-section-requirement"]')))
     .eql('Mandatory')
-    .expect(browsersSupportedSection.find('[data-test-id="dashboard-section-status"]').innerText)
+    .expect(await extractInnerText(browsersSupportedSection.find('[data-test-id="dashboard-section-status"]')))
     .eql('INCOMPLETE')
 
-    .expect(mobileFirstSection.find('[data-test-id="dashboard-section-title"]').innerText)
+    .expect(await extractInnerText(mobileFirstSection.find('[data-test-id="dashboard-section-title"]')))
     .eql('Mobile first')
     .expect(mobileFirstSection.find('[data-test-id="dashboard-section-title"] a').getAttribute('href'))
     .eql('/supplier/solution/S100000-001/dashboard/browser-based/section/browser-mobile-first')
-    .expect(mobileFirstSection.find('[data-test-id="dashboard-section-requirement"]').innerText)
+    .expect(await extractInnerText(mobileFirstSection.find('[data-test-id="dashboard-section-requirement"]')))
     .eql('Mandatory')
-    .expect(mobileFirstSection.find('[data-test-id="dashboard-section-status"]').innerText)
+    .expect(await extractInnerText(mobileFirstSection.find('[data-test-id="dashboard-section-status"]')))
     .eql('INCOMPLETE')
 
-    .expect(pluginsOrExtensionsSection.find('[data-test-id="dashboard-section-title"]').innerText)
+    .expect(await extractInnerText(pluginsOrExtensionsSection.find('[data-test-id="dashboard-section-title"]')))
     .eql('Plug-ins or extensions')
     .expect(pluginsOrExtensionsSection.find('[data-test-id="dashboard-section-title"] a').getAttribute('href'))
     .eql('/supplier/solution/S100000-001/dashboard/browser-based/section/browser-plug-ins-or-extensions')
-    .expect(pluginsOrExtensionsSection.find('[data-test-id="dashboard-section-requirement"]').innerText)
+    .expect(await extractInnerText(pluginsOrExtensionsSection.find('[data-test-id="dashboard-section-requirement"]')))
     .eql('Mandatory')
-    .expect(pluginsOrExtensionsSection.find('[data-test-id="dashboard-section-status"]').innerText)
+    .expect(await extractInnerText(pluginsOrExtensionsSection.find('[data-test-id="dashboard-section-status"]')))
     .eql('INCOMPLETE')
 
-    .expect(connectivityAndResolutionSection.find('[data-test-id="dashboard-section-title"]').innerText)
+    .expect(await extractInnerText(connectivityAndResolutionSection.find('[data-test-id="dashboard-section-title"]')))
     .eql('Connectivity and resolution')
     .expect(connectivityAndResolutionSection.find('[data-test-id="dashboard-section-title"] a').getAttribute('href'))
     .eql('/supplier/solution/S100000-001/dashboard/browser-based/section/browser-connectivity-and-resolution')
-    .expect(connectivityAndResolutionSection.find('[data-test-id="dashboard-section-requirement"]').innerText)
+    .expect(await extractInnerText(connectivityAndResolutionSection.find('[data-test-id="dashboard-section-requirement"]')))
     .eql('Mandatory')
-    .expect(connectivityAndResolutionSection.find('[data-test-id="dashboard-section-status"]').innerText)
+    .expect(await extractInnerText(connectivityAndResolutionSection.find('[data-test-id="dashboard-section-status"]')))
     .eql('INCOMPLETE')
 
-    .expect(hardwareRequirementsSection.find('[data-test-id="dashboard-section-title"]').innerText)
+    .expect(await extractInnerText(hardwareRequirementsSection.find('[data-test-id="dashboard-section-title"]')))
     .eql('Hardware requirements')
     .expect(hardwareRequirementsSection.find('[data-test-id="dashboard-section-title"] a').getAttribute('href'))
     .eql('/supplier/solution/S100000-001/dashboard/browser-based/section/browser-hardware-requirements')
-    .expect(hardwareRequirementsSection.find('[data-test-id="dashboard-section-requirement"]').innerText)
+    .expect(await extractInnerText(hardwareRequirementsSection.find('[data-test-id="dashboard-section-requirement"]')))
     .eql('Optional')
-    .expect(hardwareRequirementsSection.find('[data-test-id="dashboard-section-status"]').innerText)
+    .expect(await extractInnerText(hardwareRequirementsSection.find('[data-test-id="dashboard-section-status"]')))
     .eql('INCOMPLETE')
 
-    .expect(additionalInformationSection.find('[data-test-id="dashboard-section-title"]').innerText)
+    .expect(await extractInnerText(additionalInformationSection.find('[data-test-id="dashboard-section-title"]')))
     .eql('Additional information')
     .expect(additionalInformationSection.find('[data-test-id="dashboard-section-title"] a').getAttribute('href'))
     .eql('/supplier/solution/S100000-001/dashboard/browser-based/section/browser-additional-information')
-    .expect(additionalInformationSection.find('[data-test-id="dashboard-section-requirement"]').innerText)
+    .expect(await extractInnerText(additionalInformationSection.find('[data-test-id="dashboard-section-requirement"]')))
     .eql('Optional')
-    .expect(additionalInformationSection.find('[data-test-id="dashboard-section-status"]').innerText)
+    .expect(await extractInnerText(additionalInformationSection.find('[data-test-id="dashboard-section-status"]')))
     .eql('INCOMPLETE');
 });
 
@@ -207,10 +208,9 @@ test('should render the return to all sections link', async (t) => {
   await pageSetup(t);
 
   const link = Selector('[data-test-id="sub-dashboard-back-link"] a');
-  const linkText = await link.innerText;
 
   await t
-    .expect(linkText.trim()).eql('Return to all sections');
+    .expect(await extractInnerText(link)).eql('Return to all sections');
 });
 
 test('should return to the marketing data dashboard when the return to all sections is clicked', async (t) => {
