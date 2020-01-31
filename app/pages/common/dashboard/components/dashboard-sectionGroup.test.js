@@ -15,7 +15,7 @@ const aSectionGroupContext = (sections = []) => ({
   },
 });
 
-const macroWrapper = `{% from './pages/supplier/dashboard/components/dashboard-sectionGroup.njk' import dashboardSectionGroup %}
+const macroWrapper = `{% from './pages/common/dashboard/components/dashboard-sectionGroup.njk' import dashboardSectionGroup %}
                         {{ dashboardSectionGroup(sectionGroup) }}`;
 
 describe('dashboard-sectionGroup', () => {

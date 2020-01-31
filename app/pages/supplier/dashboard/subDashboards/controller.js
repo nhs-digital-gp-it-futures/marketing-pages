@@ -1,6 +1,6 @@
 import { ManifestProvider } from '../../../../manifestProvider';
 import { ApiProvider } from '../../../../apiProvider';
-import { createDashboardPageContext } from '../createDashboardPageContext';
+import { createDashboardPageContext } from '../../../common/dashboard/createDashboardPageContext';
 
 export const getSubDashboardPageContext = async ({ solutionId, dashboardId }) => {
   const dashboardManifest = new ManifestProvider().getSubDashboardManifest({ dashboardId });
