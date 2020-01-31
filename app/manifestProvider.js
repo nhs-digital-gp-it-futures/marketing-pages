@@ -7,6 +7,12 @@ export class ManifestProvider {
     return this.dashboardManifest;
   }
 
+  getAuthorityDashboardManifest() {
+    this.dashboardManifestRaw = fs.readFileSync('./app/pages/authority/dashboard/manifest.json');
+    this.dashboardManifest = JSON.parse(this.dashboardManifestRaw);
+    return this.dashboardManifest;
+  }
+
   getSubDashboardManifest({ dashboardId }) {
     this.subDashboardManifestRaw = fs.readFileSync(`./app/pages/supplier/dashboard/subDashboards/${dashboardId}/manifest.json`);
     this.subDashboardManifest = JSON.parse(this.subDashboardManifestRaw);

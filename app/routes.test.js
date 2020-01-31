@@ -3,6 +3,7 @@ import { App } from '../app';
 import routes from './routes';
 import * as previewControllers from './pages/preview/controller';
 import * as dashboardControllers from './pages/supplier/dashboard/controller';
+import * as authorityDashboardControllers from './pages/authority/dashboard/controller';
 
 jest.mock('./logger');
 
@@ -61,6 +62,21 @@ describe('/supplier route', () => {
       .then((res) => {
         expect(res.text.includes('data-test-id="dashboard"')).toEqual(true);
         expect(res.text.includes('data-test-id="error-page-title"')).toEqual(false);
+      });
+  });
+});
+
+describe('/authority route', () => {
+  it('should call the authority route when navigating to /authority', () => {
+    authorityDashboardControllers.getAuthorityMarketingPageDashboardContext = jest.fn()
+      .mockImplementation(() => Promise.resolve({}));
+    const app = new App().createApp();
+    app.use('/', routes);
+    return request(app)
+      .get('/authority/solution/1')
+      .expect(200)
+      .then((res) => {
+        expect(res.text.includes('data-test-id="dashboard"')).toEqual(true);
       });
   });
 });
