@@ -17,7 +17,12 @@ const addErrors = ({ manifestSectionId, manifestSection, validationErrors }) => 
 };
 
 const createSectionsContext = ({
-  solutionId, manifestSections, marketingDataSections, validationErrors, dashboardId,
+  solutionId,
+  manifestSections,
+  marketingDataSections,
+  validationErrors,
+  dashboardId,
+  userContextType,
 }) => {
   const { errorsAcc: errors, sectionsAcc: sections } = Object.entries(manifestSections)
     .reduce(({ errorsAcc, sectionsAcc }, [manifestSectionId, manifestSection]) => {
@@ -30,12 +35,13 @@ const createSectionsContext = ({
           manifestSections: manifestSection.sections,
           marketingDataSections: marketingDataSections[manifestSectionId].sections,
           validationErrors,
+          userContextType,
         })
         : { errors: undefined, sections: undefined };
 
       const sectionPath = dashboardId
-        ? `/supplier/solution/${solutionId}/dashboard/${dashboardId}/${manifestSection.type}/${manifestSectionId}`
-        : `/supplier/solution/${solutionId}/${manifestSection.type}/${manifestSectionId}`;
+        ? `/${userContextType}/solution/${solutionId}/dashboard/${dashboardId}/${manifestSection.type}/${manifestSectionId}`
+        : `/${userContextType}/solution/${solutionId}/${manifestSection.type}/${manifestSectionId}`;
 
       const sectionContext = {
         URL: sectionPath,
@@ -68,7 +74,7 @@ const createSectionsContext = ({
 };
 
 const createSectionGroupsContext = ({
-  solutionId, sectionGroups, marketingDataSections, validationErrors, dashboardId,
+  solutionId, sectionGroups, marketingDataSections, validationErrors, dashboardId, userContextType,
 }) => {
   const {
     errorsAcc: errors,
@@ -81,6 +87,7 @@ const createSectionGroupsContext = ({
         marketingDataSections,
         validationErrors,
         dashboardId,
+        userContextType,
       });
 
       const sectionGroupContext = {
@@ -103,7 +110,7 @@ const createSectionGroupsContext = ({
 
 
 export const createDashboardPageContext = ({
-  solutionId, dashboardManifest, marketingDataSections, validationErrors, dashboardId,
+  solutionId, dashboardManifest, marketingDataSections, validationErrors, dashboardId, userContextType = 'supplier',
 }) => {
   const { errors, sectionGroups } = createSectionGroupsContext({
     solutionId,
@@ -111,15 +118,18 @@ export const createDashboardPageContext = ({
     marketingDataSections,
     validationErrors,
     dashboardId,
+    userContextType,
   });
+
+  const isSupplierContextType = userContextType === 'supplier';
 
   const context = {
     title: dashboardManifest.title,
     mainAdvice: dashboardManifest.mainAdvice,
     additionalAdvice: dashboardManifest.additionalAdvice,
-    previewUrl: `/solution/${solutionId}/preview`,
-    submitForModerationUrl: `/supplier/solution/${solutionId}/submitForModeration`,
-    returnToDashboardUrl: `/supplier/solution/${solutionId}`,
+    previewUrl: isSupplierContextType ? `/solution/${solutionId}/preview` : undefined,
+    submitForModerationUrl: isSupplierContextType ? `/supplier/solution/${solutionId}/submitForModeration` : undefined,
+    returnToDashboardUrl: `/${userContextType}/solution/${solutionId}`,
     errors: errors && errors.length > 0 ? errors : undefined,
     sectionGroups,
   };

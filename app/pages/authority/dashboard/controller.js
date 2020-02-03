@@ -14,6 +14,7 @@ export const getAuthorityMarketingPageDashboardContext = async (
       dashboardManifest,
       marketingDataSections: dashboardData.sections,
       validationErrors,
+      userContextType: 'authority',
     });
     return context;
   }

@@ -18,7 +18,7 @@ const mockDashboardContext = {
   ],
 };
 
-describe('GET /supplier/solution/:solutionId', () => {
+describe('GET /authority/solution/:solutionId', () => {
   it('should return the correct status and text if there is no error', () => {
     dashboardControllers.getAuthorityMarketingPageDashboardContext = jest.fn()
       .mockImplementation(() => Promise.resolve(mockDashboardContext));

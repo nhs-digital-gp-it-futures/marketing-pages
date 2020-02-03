@@ -5,7 +5,7 @@ import { ApiProvider } from '../../../apiProvider';
 jest.mock('../../../manifestProvider');
 jest.mock('../../../apiProvider');
 
-describe('dashboard controller', () => {
+describe('supplier - dashboard controller', () => {
   describe('getMarketingPageDashboardContext', () => {
     const dashboardManifest = {
       sectionGroups: {

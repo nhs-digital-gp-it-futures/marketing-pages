@@ -34,16 +34,14 @@ describe('authority - dashboard controller', () => {
 
     it('should return the context when the manifest and data from the api is provided', async () => {
       const expectedContext = {
-        previewUrl: '/solution/some-solution-id/preview',
-        submitForModerationUrl: '/supplier/solution/some-solution-id/submitForModeration',
-        returnToDashboardUrl: '/supplier/solution/some-solution-id',
+        returnToDashboardUrl: '/authority/solution/some-solution-id',
         sectionGroups: [
           {
             id: 'some-section-group-id',
             title: 'Some section group',
             sections: [
               {
-                URL: '/supplier/solution/some-solution-id/section/some-section-id',
+                URL: '/authority/solution/some-solution-id/section/some-section-id',
                 id: 'some-section-id',
                 title: 'Some section',
                 requirement: 'Mandatory',
@@ -58,7 +56,7 @@ describe('authority - dashboard controller', () => {
       ManifestProvider.prototype.getAuthorityDashboardManifest.mockReturnValue(dashboardManifest);
       ApiProvider.prototype.getAuthorityMainDashboardData.mockResolvedValue(dashboardData);
 
-      const context = await getAuthorityMarketingPageDashboardContext({ solutionId: 'some-solution-id', dashboardId: 'some-dashboard-id' });
+      const context = await getAuthorityMarketingPageDashboardContext({ solutionId: 'some-solution-id' });
 
       expect(context).toEqual(expectedContext);
     });
@@ -68,7 +66,7 @@ describe('authority - dashboard controller', () => {
       ApiProvider.prototype.getAuthorityMainDashboardData.mockResolvedValue({});
 
       try {
-        await getAuthorityMarketingPageDashboardContext({ solutionId: 'some-solution-id', dashboardId: 'some-dashboard-id' });
+        await getAuthorityMarketingPageDashboardContext({ solutionId: 'some-solution-id' });
       } catch (err) {
         expect(err).toEqual(new Error('No data returned'));
       }
