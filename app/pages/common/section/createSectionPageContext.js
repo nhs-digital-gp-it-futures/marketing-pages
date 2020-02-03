@@ -1,4 +1,4 @@
-import { createQuestionsContext } from '../../common/section/helpers/createQuestionsContext';
+import { createQuestionsContext } from './helpers/createQuestionsContext';
 
 export const createSectionPageContext = ({
   solutionId, sectionManifest, formData, validationErrors, dashboardId,

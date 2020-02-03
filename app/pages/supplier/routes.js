@@ -1,7 +1,7 @@
 import express from 'express';
 import { getMarketingPageDashboardContext, postSubmitForModeration } from './dashboard/controller';
 import { getSubDashboardPageContext } from './dashboard/subDashboards/controller';
-import { getSectionPageContext, getSectionPageErrorContext, postSection } from './section/controller';
+import { getSectionPageContext, getSectionPageErrorContext, postSection } from '../common/section/controller';
 import logger from '../../logger';
 import { withCatch } from '../../common/helpers/routerHelper';
 
@@ -18,7 +18,7 @@ router.get('/solution/:solutionId/section/:sectionId', withCatch(async (req, res
   const { solutionId, sectionId } = req.params;
   logger.info(`navigating to Solution ${solutionId}: section ${sectionId}`);
   const context = await getSectionPageContext({ solutionId, sectionId });
-  res.render('pages/supplier/section/template', context);
+  res.render('pages/common/section/template', context);
 }));
 
 router.post('/solution/:solutionId/section/:sectionId', withCatch(async (req, res) => {
@@ -33,7 +33,7 @@ router.post('/solution/:solutionId/section/:sectionId', withCatch(async (req, re
   const context = await getSectionPageErrorContext({
     solutionId, sectionId, sectionData, validationErrors: response,
   });
-  return res.render('pages/supplier/section/template', context);
+  return res.render('pages/common/section/template', context);
 }));
 
 router.get('/solution/:solutionId/dashboard/:dashboardId', withCatch(async (req, res) => {
@@ -47,7 +47,7 @@ router.get('/solution/:solutionId/dashboard/:dashboardId/section/:sectionId', wi
   const { solutionId, dashboardId, sectionId } = req.params;
   logger.info(`navigating to Solution ${solutionId}: dashboard ${dashboardId}: section ${sectionId}`);
   const context = await getSectionPageContext({ solutionId, dashboardId, sectionId });
-  res.render('pages/supplier/section/template', context);
+  res.render('pages/common/section/template', context);
 }));
 
 router.post('/solution/:solutionId/dashboard/:dashboardId/section/:sectionId', withCatch(async (req, res) => {
@@ -62,7 +62,7 @@ router.post('/solution/:solutionId/dashboard/:dashboardId/section/:sectionId', w
   const context = await getSectionPageErrorContext({
     solutionId, sectionId, sectionData, validationErrors: response, dashboardId,
   });
-  return res.render('pages/supplier/section/template', context);
+  return res.render('pages/common/section/template', context);
 }));
 
 router.get('/solution/:solutionId/submitForModeration', withCatch(async (req, res) => {
