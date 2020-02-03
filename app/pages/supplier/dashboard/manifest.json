@@ -14,6 +14,14 @@
         "features": {
           "title": "Features",
           "type": "section"
+        },
+        "integrations": {
+          "title": "Integrations",
+          "type": "section"
+        },
+        "implementation-timescales": {
+          "title": "Implementation timescales",
+          "type": "section"
         }
       }
     },

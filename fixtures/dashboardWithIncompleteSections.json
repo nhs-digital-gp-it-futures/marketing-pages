@@ -10,6 +10,14 @@
       "requirement": "Optional",
       "status": "INCOMPLETE"
     },
+    "integrations": {
+      "requirement": "Optional",
+      "status": "INCOMPLETE"
+    },
+    "implementation-timescales": {
+      "requirement": "Optional",
+      "status": "INCOMPLETE"
+    },
     "client-application-types": {
       "requirement": "Mandatory",
       "status": "INCOMPLETE",
