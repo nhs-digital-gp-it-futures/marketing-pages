@@ -1,0 +1,18 @@
+{
+  "id": "implementation-timescales",
+  "title": "Implementation timescales",
+  "mainAdvice": "Provide a description informing the buyers about the duration it takes to implement this solution",
+  "questions": {
+    "description": {
+      "mainAdvice": "Describe the typical implementation timescales for this Solution",
+      "additionalAdvice": "Add some information describing typical timescales and activities for an implementation. You may also want to address any differences when transitioning from another solution.",
+      "footerAdvice": "You can enter up to 300 characters",
+      "type": "textarea-field",
+      "rows": 17,
+      "errorResponse": {
+        "maxLength": "Description is over the character limit"
+      }
+    }
+  },
+  "submitText" : "Save and return to all sections"
+}

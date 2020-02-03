@@ -93,6 +93,48 @@ test('when existing marketing data - The features section should be rendered and
     .expect(await extractInnerText(featuresSection.find('[data-test-id="view-question-data-bulletlist"]').find('li:nth-child(3)'))).eql('Feature C');
 });
 
+test('when no existing marketing data - The integrations section should not be rendered', async (t) => {
+  await pageSetup(t);
+  const integrationsSection = Selector('[data-test-id="view-integrations"]');
+
+  await t
+    .expect(integrationsSection.exists).notOk();
+});
+
+test('when existing marketing data - The integrations section should be rendered', async (t) => {
+  await pageSetup(t, true);
+
+  const integrationsSection = Selector('[data-test-id="view-integrations"]');
+
+  await t
+    .expect(integrationsSection.exists).ok()
+    .expect(await extractInnerText(integrationsSection.find('h3'))).eql('Integrations')
+
+    .expect(integrationsSection.exists).ok()
+    .expect(await extractInnerText(integrationsSection.find('[data-test-id="view-question-data-text-link"]'))).eql('http://www.link.com');
+});
+
+test('when no existing marketing data - The implementation timescales section should not be rendered', async (t) => {
+  await pageSetup(t);
+  const integrationsSection = Selector('[data-test-id="view-integrations"]');
+
+  await t
+    .expect(integrationsSection.exists).notOk();
+});
+
+test('when existing marketing data - The implementation timescales section should be rendered', async (t) => {
+  await pageSetup(t, true);
+
+  const implementationTimescalesSection = Selector('[data-test-id="view-implementation-timescales"]');
+
+  await t
+    .expect(implementationTimescalesSection.exists).ok()
+    .expect(await extractInnerText(implementationTimescalesSection.find('h3'))).eql('Implementation timescales')
+
+    .expect(implementationTimescalesSection.exists).ok()
+    .expect(await extractInnerText(implementationTimescalesSection.find('[data-test-id="view-question-data-text-description"]'))).eql('Implementations without transition from another Catalogue Solution typically take 3-5 working days, the average is 4. The extent of your configuration requirements will have the greatest impact on these timescales. Your main responsibility will be configuration planning and approval.');
+});
+
 test('when no existing marketing data - The client-application-types section should not be rendered', async (t) => {
   await pageSetup(t);
 
