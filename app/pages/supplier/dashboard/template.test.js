@@ -4,7 +4,7 @@ import { testHarness } from '../../../test-utils/testHarness';
 
 const template = './pages/supplier/dashboard/template.njk';
 
-describe('dashboard page', () => {
+describe('supplier - dashboard page', () => {
   it('should render the title of the dashboard page', (done) => {
     const context = {};
 
