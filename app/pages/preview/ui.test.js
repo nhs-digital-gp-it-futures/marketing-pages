@@ -116,7 +116,7 @@ test('when existing marketing data - The integrations section should be rendered
 
 test('when no existing marketing data - The implementation timescales section should not be rendered', async (t) => {
   await pageSetup(t);
-  const integrationsSection = Selector('[data-test-id="view-integrations"]');
+  const integrationsSection = Selector('[data-test-id="view-implementation-timescales"]');
 
   await t
     .expect(integrationsSection.exists).notOk();
