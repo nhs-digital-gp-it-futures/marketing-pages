@@ -2,7 +2,7 @@ import nock from 'nock';
 import { Selector, ClientFunction } from 'testcafe';
 import dashboardWithIncompleteSections from '../fixtures/dashboardWithIncompleteSections.json';
 import dashboardWithCompleteSections from '../fixtures/dashboardWithCompleteSections.json';
-import { apiLocalhost, apiPath } from '../../../test-utils/config';
+import { apiLocalhost, apiPath, clientLocalhost } from '../../../test-utils/config';
 import { extractInnerText } from '../../../test-utils/helper';
 
 const mocks = (initalDashboard) => {
@@ -19,7 +19,7 @@ const mocks = (initalDashboard) => {
 
 const pageSetup = async (t, initalDashboard = true) => {
   mocks(initalDashboard);
-  await t.navigateTo('http://localhost:1234/authority/solution/S100000-001');
+  await t.navigateTo(`${clientLocalhost}/authority/solution/S100000-001`);
 };
 
 const getLocation = ClientFunction(() => document.location.href);

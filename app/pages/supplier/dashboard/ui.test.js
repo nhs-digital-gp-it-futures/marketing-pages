@@ -20,7 +20,7 @@ const mocks = (initalDashboard) => {
 
 const pageSetup = async (t, initalDashboard = true) => {
   mocks(initalDashboard);
-  await t.navigateTo(`${clientLocalhost}`);
+  await t.navigateTo(`${clientLocalhost}/supplier/solution/S100000-001`);
 };
 
 const getLocation = ClientFunction(() => document.location.href);

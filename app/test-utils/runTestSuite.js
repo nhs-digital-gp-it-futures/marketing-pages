@@ -10,8 +10,8 @@ export const runTestSuite = async ({
   dashboardId,
   errorPostBodyData,
 }) => {
-  const clientUrl = dashboardId ? `${clientLocalhost}/dashboard/${dashboardId}/section/${sectionId}`
-    : `${clientLocalhost}/section/${sectionId}`;
+  const clientUrl = dashboardId ? `${clientLocalhost}/supplier/solution/S100000-001/dashboard/${dashboardId}/section/${sectionId}`
+    : `${clientLocalhost}/supplier/solution/S100000-001/section/${sectionId}`;
 
   const mocks = async (responseStatus, responseBody) => {
     await nock(apiLocalhost)
