@@ -3,6 +3,7 @@ import { getPreviewPageContext } from './pages/preview/controller';
 import logger from './logger';
 import { errorHandler } from './pages/error/errorHandler';
 import supplierRoutes from './pages/supplier/routes';
+import authorityRoutes from './pages/authority/routes';
 import { withCatch } from './common/helpers/routerHelper';
 
 const router = express.Router();
@@ -13,6 +14,8 @@ router.get('/healthcheck', async (req, res) => {
 });
 
 router.use('/supplier', supplierRoutes);
+
+router.use('/authority', authorityRoutes);
 
 router.get('/solution/:solutionId/preview', withCatch(async (req, res) => {
   const { solutionId } = req.params;

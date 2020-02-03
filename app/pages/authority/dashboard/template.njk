@@ -1,0 +1,18 @@
+{% extends 'includes/layout.njk' %}
+{% from 'components/button/macro.njk' import button %}
+{% from '../../common/dashboard/components/dashboard-sectionGroup.njk' import dashboardSectionGroup %}
+{% from '../../../common/components/error-summary/macro.njk' import errorSummary %}
+
+{% block body %}
+<div data-test-id="dashboard" class="nhsuk-grid-row">
+  <div class="nhsuk-grid-column-full">
+
+    <h1>Marketing Page - Authority - Dashboard</h1>
+
+    {% for sectionGroup in sectionGroups %}
+      {{ dashboardSectionGroup(sectionGroup) }}
+    {% endfor %}
+
+  </div>
+</div>
+{% endblock %}

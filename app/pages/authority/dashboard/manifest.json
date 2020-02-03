@@ -1,0 +1,14 @@
+{
+  "id":"authority-page-dashboard",
+  "sectionGroups": {
+    "capabilities": {
+      "title": "Solution Capabilities",
+      "sections": {
+        "capabilities": {
+          "title": "Capabilites",
+          "type": "section"
+        }
+      }
+    }
+  }
+}

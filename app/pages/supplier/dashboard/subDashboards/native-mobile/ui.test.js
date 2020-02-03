@@ -13,7 +13,7 @@ const mocks = () => {
 
 const pageSetup = async (t) => {
   mocks();
-  await t.navigateTo(`${clientLocalhost}/dashboard/native-mobile`);
+  await t.navigateTo(`${clientLocalhost}/supplier/solution/S100000-001/dashboard/native-mobile`);
 };
 
 const getLocation = ClientFunction(() => document.location.href);

@@ -15,7 +15,7 @@ const aSectionContext = (
   },
 });
 
-const macroWrapper = `{% from './pages/supplier/dashboard/components/dashboard-section.njk' import dashboardSection %}
+const macroWrapper = `{% from './pages/common/dashboard/components/dashboard-section.njk' import dashboardSection %}
                             {{ dashboardSection(section) }}`;
 
 describe('dashboard-section', () => {

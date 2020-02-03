@@ -3,6 +3,7 @@ import { App } from '../app';
 import routes from './routes';
 import * as previewControllers from './pages/preview/controller';
 import * as dashboardControllers from './pages/supplier/dashboard/controller';
+import * as authorityDashboardControllers from './pages/authority/dashboard/controller';
 
 jest.mock('./logger');
 
@@ -65,6 +66,21 @@ describe('/supplier route', () => {
   });
 });
 
+describe('/authority route', () => {
+  it('should call the authority route when navigating to /authority', () => {
+    authorityDashboardControllers.getAuthorityMarketingPageDashboardContext = jest.fn()
+      .mockImplementation(() => Promise.resolve({}));
+    const app = new App().createApp();
+    app.use('/', routes);
+    return request(app)
+      .get('/authority/solution/1')
+      .expect(200)
+      .then((res) => {
+        expect(res.text.includes('data-test-id="dashboard"')).toEqual(true);
+      });
+  });
+});
+
 describe('Error handler', () => {
   it('should return error page if there is an error from /preview', () => {
     previewControllers.getPreviewPageContext = jest.fn().mockImplementation(() => Promise.reject());
@@ -86,6 +102,20 @@ describe('Error handler', () => {
     app.use('/', routes);
     return request(app)
       .get('/supplier/solution/1')
+      .expect(200)
+      .then((res) => {
+        expect(res.text.includes('data-test-id="dashboard"')).toEqual(false);
+        expect(res.text.includes('data-test-id="error-page-title"')).toEqual(true);
+      });
+  });
+
+  it('should return error page if there is an error from the /authority route', () => {
+    authorityDashboardControllers.getAuthorityMarketingPageDashboardContext = jest.fn()
+      .mockImplementation(() => Promise.reject());
+    const app = new App().createApp();
+    app.use('/', routes);
+    return request(app)
+      .get('/authority/solution/1')
       .expect(200)
       .then((res) => {
         expect(res.text.includes('data-test-id="dashboard"')).toEqual(false);

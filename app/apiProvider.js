@@ -30,6 +30,13 @@ export class ApiProvider {
     return axios.get(endpoint);
   }
 
+  async getAuthorityMainDashboardData({ solutionId }) {
+    const endpoint = `${this.apiHost}/api/v1/Solutions/${solutionId}/dashboard/authority`;
+    logger.info(`api called: [GET] ${endpoint}`);
+
+    return axios.get(endpoint);
+  }
+
   async getSubDashboardData({ solutionId, dashboardId }) {
     const endpoint = `${this.apiHost}/api/v1/Solutions/${solutionId}/dashboards/${dashboardId}`;
     logger.info(`api called: [GET] ${endpoint}`);
