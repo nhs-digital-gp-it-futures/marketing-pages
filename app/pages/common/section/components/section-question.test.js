@@ -2,7 +2,7 @@ import request from 'supertest';
 import cheerio from 'cheerio';
 import { testHarness } from '../../../../test-utils/testHarness';
 
-const macroWrapper = `{% from './pages/supplier/section/components/section-question.njk' import sectionQuestion %}
+const macroWrapper = `{% from './pages/common/section/components/section-question.njk' import sectionQuestion %}
                         {{ sectionQuestion(question) }}`;
 
 describe('section-question', () => {

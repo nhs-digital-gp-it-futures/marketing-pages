@@ -2,10 +2,10 @@ import request from 'supertest';
 import cheerio from 'cheerio';
 import { testHarness } from '../../../../../test-utils/testHarness';
 
-const macroWrapper = `{% from './pages/supplier/section/components/fields/text-field.njk' import textField %}
-                        {{ textField(question) }}`;
+const macroWrapper = `{% from './pages/common/section/components/fields/checkbox-options.njk' import checkboxOptions %}
+                        {{ checkboxOptions(question) }}`;
 
-describe('textField', () => {
+describe('checkboxOptions', () => {
   it('should render the main advice', (done) => {
     const context = {
       question: {
@@ -22,7 +22,7 @@ describe('textField', () => {
         const $ = cheerio.load(res.text);
 
         const question = $('div[data-test-id="question-fieldId"]');
-        expect(question.find('label.nhsuk-label').text().trim()).toEqual('Some really important main advice');
+        expect(question.find('.nhsuk-fieldset__legend').text().trim()).toEqual('Some really important main advice');
 
         done();
       });
@@ -44,18 +44,28 @@ describe('textField', () => {
         const $ = cheerio.load(res.text);
 
         const question = $('div[data-test-id="question-fieldId"]');
-        expect(question.find('span.nhsuk-hint').text().trim()).toEqual('Some not so important additional advice');
+        expect(question.find('.nhsuk-hint').text().trim()).toEqual('Some not so important additional advice');
 
         done();
       });
   });
 
-  it('should render the input text field', (done) => {
+  it('should render the checkbox options', (done) => {
     const context = {
       question: {
         id: 'fieldId',
         mainAdvice: 'Some really important main advice',
         additionalAdvice: 'Some not so important additional advice',
+        options: [
+          {
+            value: 'first-option',
+            text: 'First Option',
+          },
+          {
+            value: 'second-option',
+            text: 'Second Option',
+          },
+        ],
       },
     };
 
@@ -66,19 +76,31 @@ describe('textField', () => {
         const $ = cheerio.load(res.text);
 
         const question = $('div[data-test-id="question-fieldId"]');
-        expect(question.find('input').length).toEqual(1);
+        expect(question.find('.nhsuk-checkboxes__item').length).toEqual(2);
+        expect(question.find('.nhsuk-checkboxes__item:nth-child(1)').find('input').attr('value')).toEqual('first-option');
+        expect(question.find('.nhsuk-checkboxes__item:nth-child(2)').find('input').attr('value')).toEqual('second-option');
 
         done();
       });
   });
 
-  it('should render the text field with the data populated', (done) => {
+  it('should render the checked checkbox option', (done) => {
     const context = {
       question: {
         id: 'fieldId',
         mainAdvice: 'Some really important main advice',
         additionalAdvice: 'Some not so important additional advice',
-        data: 'Some populated data',
+        options: [
+          {
+            value: 'first-option',
+            text: 'First Option',
+          },
+          {
+            value: 'second-option',
+            text: 'Second Option',
+            checked: true,
+          },
+        ],
       },
     };
 
@@ -89,19 +111,33 @@ describe('textField', () => {
         const $ = cheerio.load(res.text);
 
         const question = $('div[data-test-id="question-fieldId"]');
-        expect(question.find('div[data-test-id="question-fieldId"] input').val()).toEqual('Some populated data');
+        expect(question.find('.nhsuk-checkboxes__item').length).toEqual(2);
+        expect(question.find('.nhsuk-checkboxes__item:nth-child(1)').find('input').attr('checked')).toBeUndefined();
+        expect(question.find('.nhsuk-checkboxes__item:nth-child(1)').find('input').attr('value')).toEqual('first-option');
+        expect(question.find('.nhsuk-checkboxes__item:nth-child(2)').find('input').attr('checked')).toEqual('checked');
+        expect(question.find('.nhsuk-checkboxes__item:nth-child(2)').find('input').attr('value')).toEqual('second-option');
 
         done();
       });
   });
 
-  it('should render the text field as an error if the context provided contains an error', (done) => {
+  it('should render the checkbox option as an error if the context provided contains an error', (done) => {
     const context = {
       question: {
         id: 'fieldId',
         mainAdvice: 'Some really important main advice',
         additionalAdvice: 'Some not so important additional advice',
-        data: 'Some populated data',
+        options: [
+          {
+            value: 'first-option',
+            text: 'First Option',
+          },
+          {
+            value: 'second-option',
+            text: 'Second Option',
+            checked: true,
+          },
+        ],
         error: {
           message: 'Some error message',
         },
@@ -115,33 +151,8 @@ describe('textField', () => {
         const $ = cheerio.load(res.text);
 
         const question = $('div[data-test-id="question-fieldId"]');
-        const inputError = question.find('div[data-test-id="text-field-input-error"] .nhsuk-error-message');
-
-        expect(inputError.length).toEqual(1);
-        expect(inputError.text().trim()).toEqual('Error: Some error message');
-
-        done();
-      });
-  });
-
-  it('should render the footer advice', (done) => {
-    const context = {
-      question: {
-        id: 'fieldId',
-        mainAdvice: 'Some really important main advice',
-        additionalAdvice: 'Some not so important additional advice',
-        footerAdvice: 'Some footer based advice',
-      },
-    };
-
-    const dummyApp = testHarness().createTemplateDummyApp(macroWrapper, context);
-    request(dummyApp)
-      .get('/')
-      .then((res) => {
-        const $ = cheerio.load(res.text);
-
-        const question = $('div[data-test-id="question-fieldId"]');
-        expect(question.find('[data-test-id="text-field-footer"]').text().trim()).toEqual('Some footer based advice');
+        expect(question.find('div[data-test-id="checkbox-options-error"]').length).toEqual(1);
+        expect(question.find('.nhsuk-error-message').text().trim()).toEqual('Error: Some error message');
 
         done();
       });

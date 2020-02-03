@@ -2,7 +2,7 @@ import request from 'supertest';
 import cheerio from 'cheerio';
 import { testHarness } from '../../../../test-utils/testHarness';
 
-const macroWrapper = `{% from './pages/supplier/section/components/multi-question.njk' import multiQuestion %}
+const macroWrapper = `{% from './pages/common/section/components/multi-question.njk' import multiQuestion %}
                         {{ multiQuestion(parentQuestion) }}`;
 
 describe('multi-question', () => {

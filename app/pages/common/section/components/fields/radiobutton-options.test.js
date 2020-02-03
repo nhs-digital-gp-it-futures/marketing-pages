@@ -2,7 +2,7 @@ import request from 'supertest';
 import cheerio from 'cheerio';
 import { testHarness } from '../../../../../test-utils/testHarness';
 
-const macroWrapper = `{% from './pages/supplier/section/components/fields/radiobutton-options.njk' import radiobuttonOptions %}
+const macroWrapper = `{% from './pages/common/section/components/fields/radiobutton-options.njk' import radiobuttonOptions %}
                         {{ radiobuttonOptions(question) }}`;
 
 describe('radiobuttonOptions', () => {

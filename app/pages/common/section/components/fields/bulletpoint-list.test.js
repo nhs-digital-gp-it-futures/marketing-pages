@@ -2,7 +2,7 @@ import request from 'supertest';
 import cheerio from 'cheerio';
 import { testHarness } from '../../../../../test-utils/testHarness';
 
-const macroWrapper = `{% from './pages/supplier/section/components/fields/bulletpoint-list.njk' import bulletpointList %}
+const macroWrapper = `{% from './pages/common/section/components/fields/bulletpoint-list.njk' import bulletpointList %}
                         {{ bulletpointList(question) }}`;
 
 describe('bulletpoint-list', () => {
