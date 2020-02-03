@@ -108,6 +108,20 @@ describe('Error handler', () => {
         expect(res.text.includes('data-test-id="error-page-title"')).toEqual(true);
       });
   });
+
+  it('should return error page if there is an error from the /authority route', () => {
+    authorityDashboardControllers.getAuthorityMarketingPageDashboardContext = jest.fn()
+      .mockImplementation(() => Promise.reject());
+    const app = new App().createApp();
+    app.use('/', routes);
+    return request(app)
+      .get('/authority/solution/1')
+      .expect(200)
+      .then((res) => {
+        expect(res.text.includes('data-test-id="dashboard"')).toEqual(false);
+        expect(res.text.includes('data-test-id="error-page-title"')).toEqual(true);
+      });
+  });
 });
 
 describe('GET *', () => {
