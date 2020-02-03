@@ -1,8 +1,8 @@
 import { ManifestProvider } from '../../../manifestProvider';
 import { ApiProvider } from '../../../apiProvider';
 import { createSectionPageContext } from './createSectionPageContext';
-import { transformSectionData } from './helpers/transformSectionData';
-import { createPostSectionResponse } from './helpers/createPostSectionResponse';
+import { transformSectionData } from '../../common/section/helpers/transformSectionData';
+import { createPostSectionResponse } from '../../common/section/helpers/createPostSectionResponse';
 import logger from '../../../logger';
 
 export const getSectionPageContext = async ({
