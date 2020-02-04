@@ -41,6 +41,13 @@ const createQuestionTypeContext = {
       questionId, questionManifest, formData, validationErrors, parentQuestionId,
     }),
   },
+  'textarea-field-csv': {
+    create: ({
+      questionId, questionManifest, formData, validationErrors, parentQuestionId,
+    }) => createContextForTextInputsQuestion({
+      questionId, questionManifest, formData, validationErrors, parentQuestionId,
+    }),
+  },
   'text-field': {
     create: ({
       questionId, questionManifest, formData, validationErrors, parentQuestionId,

@@ -52,6 +52,29 @@ describe('section-question', () => {
     });
   });
 
+  describe('when question type is textarea-field-csv', () => {
+    it('should render the textarea-field component', (done) => {
+      const context = {
+        question: {
+          id: 'question-id',
+          type: 'textarea-field-csv',
+        },
+      };
+
+      const dummyApp = testHarness().createTemplateDummyApp(macroWrapper, context);
+      request(dummyApp)
+        .get('/')
+        .then((res) => {
+          const $ = cheerio.load(res.text);
+
+          const question = $('div[data-test-id="section-question-textarea-field-csv"] > div');
+          expect(question.length).toEqual(1);
+
+          done();
+        });
+    });
+  });
+
   describe('when question type is text-field', () => {
     it('should render the text-field component', (done) => {
       const context = {

@@ -25,7 +25,7 @@ export const runQuestionTests = async ({
         questionId,
         data,
       });
-    } else if (questionType === 'textarea-field') {
+    } else if (questionType === 'textarea-field' || questionType === 'textarea-field-csv') {
       runtextAreaTests({
         pageSetup,
         sectionManifest,

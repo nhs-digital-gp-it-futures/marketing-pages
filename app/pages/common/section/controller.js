@@ -6,17 +6,18 @@ import { createPostSectionResponse } from './helpers/createPostSectionResponse';
 import logger from '../../../logger';
 
 export const getSectionPageContext = async ({
-  solutionId, dashboardId, sectionId,
+  solutionId, dashboardId, sectionId, userContextType = 'supplier',
 }) => {
   const sectionManifest = new ManifestProvider().getSectionManifest({
     dashboardId,
     sectionId,
+    userContextType,
   });
   const sectionData = await new ApiProvider().getSectionData({ solutionId, sectionId });
   if (sectionData && sectionData.data) {
     const formData = sectionData.data;
     const context = createSectionPageContext({
-      solutionId, sectionManifest, formData, dashboardId,
+      solutionId, sectionManifest, formData, dashboardId, userContextType,
     });
     return context;
   }
@@ -24,28 +25,37 @@ export const getSectionPageContext = async ({
 };
 
 export const getSectionPageErrorContext = async ({
-  solutionId, sectionId, sectionData, validationErrors, dashboardId,
+  solutionId, sectionId, sectionData, validationErrors, dashboardId, userContextType = 'supplier',
 }) => {
-  const sectionManifest = new ManifestProvider().getSectionManifest({ dashboardId, sectionId });
+  const sectionManifest = new ManifestProvider().getSectionManifest({
+    dashboardId, sectionId, userContextType,
+  });
 
   const context = createSectionPageContext({
-    solutionId, sectionManifest, formData: sectionData, validationErrors, dashboardId,
+    solutionId,
+    sectionManifest,
+    formData: sectionData,
+    validationErrors,
+    dashboardId,
+    userContextType,
   });
 
   return context;
 };
 
 export const postSection = async ({
-  solutionId, sectionId, sectionData, dashboardId,
+  solutionId, sectionId, sectionData, dashboardId, userContextType = 'supplier',
 }) => {
-  const sectionManifest = new ManifestProvider().getSectionManifest({ dashboardId, sectionId });
+  const sectionManifest = new ManifestProvider().getSectionManifest({
+    dashboardId, sectionId, userContextType,
+  });
   const transformedSectionData = transformSectionData({ sectionManifest, sectionData });
   try {
     await new ApiProvider().putSectionData({
       solutionId, sectionId, sectionData: transformedSectionData,
     });
 
-    const response = createPostSectionResponse({ solutionId, sectionManifest });
+    const response = createPostSectionResponse({ solutionId, sectionManifest, userContextType });
     return response;
   } catch (err) {
     if (err.response.status === 400) {
