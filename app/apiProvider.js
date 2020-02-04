@@ -23,15 +23,10 @@ export class ApiProvider {
     return true;
   }
 
-  async getMainDashboardData({ solutionId }) {
-    const endpoint = `${this.apiHost}/api/v1/Solutions/${solutionId}/dashboard`;
-    logger.info(`api called: [GET] ${endpoint}`);
-
-    return axios.get(endpoint);
-  }
-
-  async getAuthorityMainDashboardData({ solutionId }) {
-    const endpoint = `${this.apiHost}/api/v1/Solutions/${solutionId}/dashboard/authority`;
+  async getMainDashboardData({ solutionId, userContextType }) {
+    const endpoint = userContextType === 'supplier'
+      ? `${this.apiHost}/api/v1/Solutions/${solutionId}/dashboard`
+      : `${this.apiHost}/api/v1/Solutions/${solutionId}/dashboard/authority`;
     logger.info(`api called: [GET] ${endpoint}`);
 
     return axios.get(endpoint);

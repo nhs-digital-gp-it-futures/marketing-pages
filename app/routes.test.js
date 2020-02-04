@@ -2,8 +2,7 @@ import request from 'supertest';
 import { App } from '../app';
 import routes from './routes';
 import * as previewControllers from './pages/preview/controller';
-import * as dashboardControllers from './pages/supplier/dashboard/controller';
-import * as authorityDashboardControllers from './pages/authority/dashboard/controller';
+import * as dashboardControllers from './pages/common/dashboard/controller';
 
 jest.mock('./logger');
 
@@ -68,7 +67,7 @@ describe('/supplier route', () => {
 
 describe('/authority route', () => {
   it('should call the authority route when navigating to /authority', () => {
-    authorityDashboardControllers.getAuthorityMarketingPageDashboardContext = jest.fn()
+    dashboardControllers.getMarketingPageDashboardContext = jest.fn()
       .mockImplementation(() => Promise.resolve({}));
     const app = new App().createApp();
     app.use('/', routes);
@@ -110,7 +109,7 @@ describe('Error handler', () => {
   });
 
   it('should return error page if there is an error from the /authority route', () => {
-    authorityDashboardControllers.getAuthorityMarketingPageDashboardContext = jest.fn()
+    dashboardControllers.getMarketingPageDashboardContext = jest.fn()
       .mockImplementation(() => Promise.reject());
     const app = new App().createApp();
     app.use('/', routes);

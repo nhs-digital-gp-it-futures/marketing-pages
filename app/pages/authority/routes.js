@@ -1,5 +1,5 @@
 import express from 'express';
-import { getAuthorityMarketingPageDashboardContext } from './dashboard/controller';
+import { getMarketingPageDashboardContext } from '../common/dashboard/controller';
 import { getSectionPageContext, postSection, getSectionPageErrorContext } from '../common/section/controller';
 import logger from '../../logger';
 import { withCatch } from '../../common/helpers/routerHelper';
@@ -9,7 +9,7 @@ const router = express.Router();
 router.get('/solution/:solutionId', withCatch(async (req, res) => {
   const { solutionId } = req.params;
   logger.info(`navigating to Solution ${solutionId} authority dashboard`);
-  const context = await getAuthorityMarketingPageDashboardContext({ solutionId });
+  const context = await getMarketingPageDashboardContext({ solutionId, userContextType: 'authority' });
   res.render('pages/authority/dashboard/template', context);
 }));
 

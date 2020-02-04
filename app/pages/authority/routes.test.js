@@ -1,7 +1,7 @@
 import request from 'supertest';
 import { App } from '../../../app';
 import routes from './routes';
-import * as dashboardControllers from './dashboard/controller';
+import * as dashboardControllers from '../common/dashboard/controller';
 
 jest.mock('../../logger');
 
@@ -20,7 +20,7 @@ const mockDashboardContext = {
 
 describe('GET /authority/solution/:solutionId', () => {
   it('should return the correct status and text if there is no error', () => {
-    dashboardControllers.getAuthorityMarketingPageDashboardContext = jest.fn()
+    dashboardControllers.getMarketingPageDashboardContext = jest.fn()
       .mockImplementation(() => Promise.resolve(mockDashboardContext));
     const app = new App().createApp();
     app.use('/authority', routes);

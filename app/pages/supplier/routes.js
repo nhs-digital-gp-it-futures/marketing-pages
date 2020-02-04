@@ -1,5 +1,5 @@
 import express from 'express';
-import { getMarketingPageDashboardContext, postSubmitForModeration } from './dashboard/controller';
+import { getMarketingPageDashboardContext, postSubmitForModeration } from '../common/dashboard/controller';
 import { getSubDashboardPageContext } from './dashboard/subDashboards/controller';
 import { getSectionPageContext, getSectionPageErrorContext, postSection } from '../common/section/controller';
 import logger from '../../logger';

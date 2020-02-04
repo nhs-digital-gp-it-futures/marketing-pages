@@ -1,7 +1,7 @@
 import request from 'supertest';
 import { App } from '../../../app';
 import routes from './routes';
-import * as dashboardControllers from './dashboard/controller';
+import * as dashboardControllers from '../common/dashboard/controller';
 import * as sectionControllers from '../common/section/controller';
 import * as subsectionControllers from './dashboard/subDashboards/controller';
 

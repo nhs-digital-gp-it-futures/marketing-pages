@@ -1,14 +1,8 @@
 import fs from 'fs';
 
 export class ManifestProvider {
-  getDashboardManifest() {
-    this.dashboardManifestRaw = fs.readFileSync('./app/pages/supplier/dashboard/manifest.json');
-    this.dashboardManifest = JSON.parse(this.dashboardManifestRaw);
-    return this.dashboardManifest;
-  }
-
-  getAuthorityDashboardManifest() {
-    this.dashboardManifestRaw = fs.readFileSync('./app/pages/authority/dashboard/manifest.json');
+  getDashboardManifest({ userContextType }) {
+    this.dashboardManifestRaw = fs.readFileSync(`./app/pages/${userContextType}/dashboard/manifest.json`);
     this.dashboardManifest = JSON.parse(this.dashboardManifestRaw);
     return this.dashboardManifest;
   }
