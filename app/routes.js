@@ -24,11 +24,12 @@ router.get('/solution/:solutionId/preview', withCatch(async (req, res) => {
   res.render('pages/preview/template', context);
 }));
 
-router.get('/solution/:solutionId/document/:documentName', withCatch(async (req, res) => {
+router.get('/solution/:solutionId/document/:documentName', async (req, res) => {
   const { solutionId, documentName } = req.params;
   logger.info(`downloading Solution ${solutionId} document ${documentName}`);
   //TODO: combine document name and sort out downloading from back end.
-}));
+  res.send(`Solution: ${solutionId}, Document ${documentName}`);
+});
 
 router.get('*', (req, res, next) => next({
   status: 404,
