@@ -1,16 +1,25 @@
 export const createPreviewPageContext = ({ previewData }) => {
-  let context = {
-    sections: previewData.sections,
-  };
+  const sections = Object.fromEntries(
+    Object.entries(previewData.sections).map(([key, sectionValue]) => {
+      if (sectionValue.answers && sectionValue.answers['document-name']) {
+        const answerSection = {
+          answers: {
+            ...sectionValue.answers,
+            'document-link': `../document/${sectionValue.answers['document-name']}`,
+          },
+        };
+        delete answerSection.answers['document-name'];
+        return [key, {
+          ...sectionValue,
+          ...answerSection,
+        }];
+      }
+      return [key, sectionValue];
+    }),
+  );
 
-  for(let key in context.sections)
-  { 
-    let section = context.sections[key];
-    if(section.answers && section.answers['document-name'])
-    {
-      section.answers['document-link'] = "document/" + section.answers['document-name'];
-    }
+  const context = {
+    sections,
   };
-
   return context;
 };
