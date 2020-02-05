@@ -29,7 +29,7 @@ describe('createPreviewPageContext', () => {
       sections: {
         'some-section': {
           answers: {
-            'document-link': '../document/document.pdf',
+            'document-link': 'document/document.pdf',
           },
         },
       },
@@ -57,7 +57,7 @@ describe('createPreviewPageContext', () => {
         'some-section': {
           answers: {
             'an-answer': true,
-            'document-link': '../document/document.pdf',
+            'document-link': 'document/document.pdf',
           },
         },
       },
@@ -86,7 +86,7 @@ describe('createPreviewPageContext', () => {
         'first-section': {
           answers: {
             'an-answer': true,
-            'document-link': '../document/document.pdf',
+            'document-link': 'document/document.pdf',
           },
         },
         'second-section': {
@@ -99,7 +99,7 @@ describe('createPreviewPageContext', () => {
         },
         'fourth-section': {
           answers: {
-            'document-link': '../document/document.pdf',
+            'document-link': 'document/document.pdf',
           },
         },
       },

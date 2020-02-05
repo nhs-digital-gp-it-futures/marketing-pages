@@ -5,7 +5,7 @@ export const createPreviewPageContext = ({ previewData }) => {
         const answerSection = {
           answers: {
             ...sectionValue.answers,
-            'document-link': `../document/${sectionValue.answers['document-name']}`,
+            'document-link': `document/${sectionValue.answers['document-name']}`,
           },
         };
         delete answerSection.answers['document-name'];
@@ -18,8 +18,5 @@ export const createPreviewPageContext = ({ previewData }) => {
     }),
   );
 
-  const context = {
-    sections,
-  };
-  return context;
+  return { sections };
 };
