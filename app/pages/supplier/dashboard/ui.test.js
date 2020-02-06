@@ -122,6 +122,8 @@ test('should render all the sections for the About your solution section group',
   const aboutYourSolutionSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-about-your-solution"]');
   const solutionDescriptionSection = aboutYourSolutionSectionGroup.find('[data-test-id="dashboard-section-solution-description"]');
   const featuresSection = aboutYourSolutionSectionGroup.find('[data-test-id="dashboard-section-features"]');
+  const integrationsSection = aboutYourSolutionSectionGroup.find('[data-test-id="dashboard-section-integrations"]');
+  const implementationTimescalesSection = aboutYourSolutionSectionGroup.find('[data-test-id="dashboard-section-implementation-timescales"]');
 
   await t
     .expect(await extractInnerText(solutionDescriptionSection.find('[data-test-id="dashboard-section-title"]')))
@@ -136,6 +138,20 @@ test('should render all the sections for the About your solution section group',
     .expect(await extractInnerText(featuresSection.find('[data-test-id="dashboard-section-requirement"]')))
     .eql('Optional')
     .expect(await extractInnerText(featuresSection.find('[data-test-id="dashboard-section-status"]')))
+    .eql('INCOMPLETE')
+
+    .expect(await extractInnerText(integrationsSection.find('[data-test-id="dashboard-section-title"]')))
+    .eql('Integrations')
+    .expect(await extractInnerText(integrationsSection.find('[data-test-id="dashboard-section-requirement"]')))
+    .eql('Optional')
+    .expect(await extractInnerText(integrationsSection.find('[data-test-id="dashboard-section-status"]')))
+    .eql('INCOMPLETE')
+
+    .expect(await extractInnerText(implementationTimescalesSection.find('[data-test-id="dashboard-section-title"]')))
+    .eql('Implementation timescales')
+    .expect(await extractInnerText(implementationTimescalesSection.find('[data-test-id="dashboard-section-requirement"]')))
+    .eql('Optional')
+    .expect(await extractInnerText(implementationTimescalesSection.find('[data-test-id="dashboard-section-status"]')))
     .eql('INCOMPLETE');
 });
 
@@ -319,6 +335,35 @@ test('clicking on the feature section link should navigate the user to the featu
   await t
     .click(theFeatureSection.find('a'))
     .expect(getLocation()).contains('/supplier/solution/S100000-001/section/features');
+});
+
+test('clicking on the integrations section link should navigate the user to the integrations page', async (t) => {
+  await pageSetup(t);
+
+  nock(apiLocalhost)
+    .get(`${apiPath}/sections/integrations`)
+    .reply(200, {});
+
+  const aboutYourSolutionSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-about-your-solution"]');
+  const integrationsSection = aboutYourSolutionSectionGroup.find('[data-test-id="dashboard-section-integrations"]');
+
+  await t
+    .click(integrationsSection.find('a'))
+    .expect(getLocation()).contains('/solution/S100000-001/section/integrations');
+});
+
+test('clicking on the implementation timescales section link should navigate the user to the implementation timescales page', async (t) => {
+  await pageSetup(t);
+  nock(apiLocalhost)
+    .get(`${apiPath}/sections/implementation-timescales`)
+    .reply(200, {});
+
+  const aboutYourSolutionSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-about-your-solution"]');
+  const implementationTimescalesSection = aboutYourSolutionSectionGroup.find('[data-test-id="dashboard-section-implementation-timescales"]');
+
+  await t
+    .click(implementationTimescalesSection.find('a'))
+    .expect(getLocation()).contains('/solution/S100000-001/section/implementation-timescales');
 });
 
 test('clicking on the client application type section link should navigate the user to the client application type page', async (t) => {

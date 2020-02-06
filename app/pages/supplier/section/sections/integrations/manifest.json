@@ -1,0 +1,18 @@
+{
+  "id": "integrations",
+  "title": "Catalogue Solution integrations",
+  "mainAdvice": "Describe any systems your Catalogue Solution integrates with to exchange data.",
+  "warningAdvice": "If you are providing a URL, it must link to a page detailing all the supplier asserted integrations for your Catalogue Solution. It’s your responsibility to keep this page up-to-date.",
+  "questions": {
+    "link": {
+      "mainAdvice": "Link to supplier asserted integrations (optional)",
+      "additionalAdvice": "Provide a URL to a page that gives information about your own integrations. They may only allow your Catalogue Solution to partially integrate with other systems.",
+      "footerAdvice": "You can enter up to 1000 characters",
+      "type": "text-field",
+      "errorResponse": {
+        "maxLength": "Link is over the character limit"
+      }
+    }
+  },
+  "submitText" : "Save and return to all sections"
+}

@@ -10,6 +10,14 @@
       "requirement": "Optional",
       "status": "COMPLETE"
     },
+    "integrations": {
+      "requirement": "Optional",
+      "status": "COMPLETE"
+    },
+    "implementation-timescales": {
+      "requirement": "Optional",
+      "status": "COMPLETE"
+    },
     "client-application-types": {
       "requirement": "Mandatory",
       "status": "COMPLETE",

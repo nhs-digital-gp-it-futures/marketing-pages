@@ -10,7 +10,9 @@
     <h1>Marketing Page - Authority - Dashboard</h1>
 
     {% for sectionGroup in sectionGroups %}
-      {{ dashboardSectionGroup(sectionGroup) }}
+      {{ dashboardSectionGroup({
+        sectionGroup: sectionGroup
+      }) }}
     {% endfor %}
 
   </div>
