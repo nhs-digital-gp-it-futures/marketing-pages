@@ -3,7 +3,7 @@ import { createTestHarness } from '../../../../test-utils/testHarness';
 const setup = {
   component: {
     name: 'sectionQuestion',
-    path: 'pages/supplier/section/components/section-question.njk',
+    path: 'pages/common/section/components/section-question.njk',
   },
 };
 
@@ -45,26 +45,21 @@ describe('section-question', () => {
   });
 
   describe('when question type is textarea-field-csv', () => {
-    it('should render the textarea-field component', (done) => {
+    it('should render the textarea-field component', createTestHarness(setup, (harness) => {
       const context = {
-        question: {
-          id: 'question-id',
-          type: 'textarea-field-csv',
+        params: {
+          question: {
+            id: 'question-id',
+            type: 'textarea-field-csv',
+          },
         },
       };
 
-      const dummyApp = testHarness().createTemplateDummyApp(macroWrapper, context);
-      request(dummyApp)
-        .get('/')
-        .then((res) => {
-          const $ = cheerio.load(res.text);
-
-          const question = $('div[data-test-id="section-question-textarea-field-csv"] > div');
-          expect(question.length).toEqual(1);
-
-          done();
-        });
-    });
+      harness.request(context, ($) => {
+        const question = $('div[data-test-id="section-question-textarea-field-csv"] > div');
+        expect(question.length).toEqual(1);
+      });
+    }));
   });
 
   describe('when question type is text-field', () => {

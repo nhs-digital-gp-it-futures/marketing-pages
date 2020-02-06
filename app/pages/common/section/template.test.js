@@ -2,7 +2,7 @@ import { createTestHarness } from '../../../test-utils/testHarness';
 
 const setup = {
   template: {
-    path: 'pages/supplier/section/template.njk',
+    path: 'pages/common/section/template.njk',
   },
 };
 

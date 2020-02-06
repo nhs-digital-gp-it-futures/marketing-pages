@@ -3,7 +3,7 @@ import { createTestHarness } from '../../../../../test-utils/testHarness';
 const setup = {
   component: {
     name: 'textareaField',
-    path: 'pages/supplier/section/components/fields/textarea-field.njk',
+    path: 'pages/common/section/components/fields/textarea-field.njk',
   },
 };
 

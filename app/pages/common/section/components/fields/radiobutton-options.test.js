@@ -3,7 +3,7 @@ import { createTestHarness } from '../../../../../test-utils/testHarness';
 const setup = {
   component: {
     name: 'radiobuttonOptions',
-    path: 'pages/supplier/section/components/fields/radiobutton-options.njk',
+    path: 'pages/common/section/components/fields/radiobutton-options.njk',
   },
 };
 

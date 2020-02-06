@@ -43,6 +43,7 @@ describe('GET /solution/:solutionId/preview', () => {
       .get('/solution/1/preview')
       .expect(200)
       .then((res) => {
+        console.log(res.text)
         expect(res.text.includes('<h1>Preview Page</h1>')).toEqual(true);
         expect(res.text.includes('data-test-id="error-page-title"')).toEqual(false);
       });

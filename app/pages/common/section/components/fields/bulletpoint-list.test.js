@@ -3,7 +3,7 @@ import { createTestHarness } from '../../../../../test-utils/testHarness';
 const setup = {
   component: {
     name: 'bulletpointList',
-    path: 'pages/supplier/section/components/fields/bulletpoint-list.njk',
+    path: 'pages/common/section/components/fields/bulletpoint-list.njk',
   },
 };
 

@@ -3,7 +3,7 @@ import { createTestHarness } from '../../../../test-utils/testHarness';
 const setup = {
   component: {
     name: 'multiQuestion',
-    path: 'pages/supplier/section/components/multi-question.njk',
+    path: 'pages/common/section/components/multi-question.njk',
   },
 };
 

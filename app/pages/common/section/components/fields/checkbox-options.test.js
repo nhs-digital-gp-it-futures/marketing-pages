@@ -3,7 +3,7 @@ import { createTestHarness } from '../../../../../test-utils/testHarness';
 const setup = {
   component: {
     name: 'checkboxOptions',
-    path: 'pages/supplier/section/components/fields/checkbox-options.njk',
+    path: 'pages/common/section/components/fields/checkbox-options.njk',
   },
 };
 
