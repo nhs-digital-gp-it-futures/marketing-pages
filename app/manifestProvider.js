@@ -1,14 +1,8 @@
 import fs from 'fs';
 
 export class ManifestProvider {
-  getDashboardManifest() {
-    this.dashboardManifestRaw = fs.readFileSync('./app/pages/supplier/dashboard/manifest.json');
-    this.dashboardManifest = JSON.parse(this.dashboardManifestRaw);
-    return this.dashboardManifest;
-  }
-
-  getAuthorityDashboardManifest() {
-    this.dashboardManifestRaw = fs.readFileSync('./app/pages/authority/dashboard/manifest.json');
+  getDashboardManifest({ userContextType }) {
+    this.dashboardManifestRaw = fs.readFileSync(`./app/pages/${userContextType}/dashboard/manifest.json`);
     this.dashboardManifest = JSON.parse(this.dashboardManifestRaw);
     return this.dashboardManifest;
   }
@@ -19,9 +13,9 @@ export class ManifestProvider {
     return this.subDashboardManifest;
   }
 
-  getSectionManifest({ dashboardId, sectionId }) {
+  getSectionManifest({ dashboardId, sectionId, userContextType }) {
     const pathToSectionManifest = dashboardId ? `${dashboardId}/${sectionId}` : `${sectionId}`;
-    this.sectionManifestRaw = fs.readFileSync(`./app/pages/supplier/section/sections/${pathToSectionManifest}/manifest.json`);
+    this.sectionManifestRaw = fs.readFileSync(`./app/pages/${userContextType}/section/sections/${pathToSectionManifest}/manifest.json`);
     this.sectionManifest = JSON.parse(this.sectionManifestRaw);
     return this.sectionManifest;
   }

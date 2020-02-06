@@ -209,22 +209,22 @@ test('should render all the sub sections for the client application type section
   await t
     .expect(browserBasedSubSection.count).eql(1)
     .expect(browserBasedSubSection.find('a').exists).ok()
-    .expect(await extractInnerText(browserBasedSubSection.find('[data-test-id="dashboard-section-title"]'))).eql('Browser based')
     .expect(browserBasedSubSection.find('[data-test-id="dashboard-section-default-message"]').exists).notOk()
+    .expect(await extractInnerText(browserBasedSubSection.find('[data-test-id="dashboard-section-title"]'))).eql('Browser based')
     .expect(await extractInnerText(browserBasedSubSection.find('[data-test-id="dashboard-section-requirement"]'))).eql('Mandatory')
     .expect(await extractInnerText(browserBasedSubSection.find('[data-test-id="dashboard-section-status"]'))).eql('COMPLETE')
 
     .expect(nativeMobileSubSection.count).eql(1)
     .expect(nativeMobileSubSection.find('a').exists).ok()
-    .expect(await extractInnerText(nativeMobileSubSection.find('[data-test-id="dashboard-section-title"]'))).eql('Native mobile or tablet')
     .expect(nativeMobileSubSection.find('[data-test-id="dashboard-section-default-message"]').exists).notOk()
+    .expect(await extractInnerText(nativeMobileSubSection.find('[data-test-id="dashboard-section-title"]'))).eql('Native mobile or tablet')
     .expect(await extractInnerText(nativeMobileSubSection.find('[data-test-id="dashboard-section-requirement"]'))).eql('Mandatory')
     .expect(await extractInnerText(nativeMobileSubSection.find('[data-test-id="dashboard-section-status"]'))).eql('COMPLETE')
 
     .expect(nativeDesktopSubSection.count).eql(1)
     .expect(nativeDesktopSubSection.find('a').exists).ok()
-    .expect(await extractInnerText(nativeDesktopSubSection.find('[data-test-id="dashboard-section-title"]'))).eql('Native desktop')
     .expect(nativeDesktopSubSection.find('[data-test-id="dashboard-section-default-message"]').exists).notOk()
+    .expect(await extractInnerText(nativeDesktopSubSection.find('[data-test-id="dashboard-section-title"]'))).eql('Native desktop')
     .expect(await extractInnerText(nativeDesktopSubSection.find('[data-test-id="dashboard-section-requirement"]'))).eql('Mandatory')
     .expect(await extractInnerText(nativeDesktopSubSection.find('[data-test-id="dashboard-section-status"]'))).eql('COMPLETE');
 });

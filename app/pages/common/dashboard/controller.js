@@ -1,10 +1,14 @@
 import { ManifestProvider } from '../../../manifestProvider';
 import { ApiProvider } from '../../../apiProvider';
-import { createDashboardPageContext } from '../../common/dashboard/createDashboardPageContext';
+import { createDashboardPageContext } from './createDashboardPageContext';
 
-export const getMarketingPageDashboardContext = async ({ solutionId, validationErrors }) => {
-  const dashboardManifest = new ManifestProvider().getDashboardManifest();
-  const dashboardDataRaw = await new ApiProvider().getMainDashboardData({ solutionId });
+export const getMarketingPageDashboardContext = async ({
+  solutionId, validationErrors, userContextType = 'supplier',
+}) => {
+  const dashboardManifest = new ManifestProvider().getDashboardManifest({ userContextType });
+  const dashboardDataRaw = await new ApiProvider().getMainDashboardData({
+    solutionId, userContextType,
+  });
 
   if (dashboardDataRaw && dashboardDataRaw.data) {
     const dashboardData = dashboardDataRaw.data;
@@ -13,6 +17,7 @@ export const getMarketingPageDashboardContext = async ({ solutionId, validationE
       dashboardManifest,
       marketingDataSections: dashboardData.sections,
       validationErrors,
+      userContextType,
     });
     return context;
   }

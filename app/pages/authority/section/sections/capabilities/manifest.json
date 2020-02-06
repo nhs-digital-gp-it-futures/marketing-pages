@@ -1,0 +1,14 @@
+{
+  "id": "capabilities",
+  "title": "Capabilities",
+  "mainAdvice": "Capabilites this solution meets.",
+  "questions": {
+    "capabilities": {
+      "mainAdvice": "Paste the csv this solution meets",
+      "additionalAdvice": "If you paste nothing you get nothing",
+      "type": "textarea-field-csv",
+      "footerAdvice": "You can paste your csv here"
+    }
+  },
+  "submitText" : "Save and return to all sections"
+}

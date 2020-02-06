@@ -1,6 +1,7 @@
 import { Selector, ClientFunction } from 'testcafe';
 import nock from 'nock';
 import dashboardWithCompleteSections from '../../../fixtures/dashboardWithCompleteSections.json';
+import authorityDashboardWithCompleteSections from '../../pages/authority/fixtures/dashboardWithCompleteSections.json';
 import { apiLocalhost, apiPath } from '../config';
 import { extractInnerText } from '../helper';
 
@@ -89,12 +90,18 @@ const sectionsLinkTest = async ({ pageSetup }) => {
   });
 };
 
-const sectionsLinkClickedTest = async ({ pageSetup }) => {
+const sectionsLinkClickedTest = async ({ pageSetup, userContextType }) => {
   await test('should return to the marketing data dashboard when the return to all sections is clicked', async (t) => {
     await pageSetup({ t });
+
+    const isSupplier = userContextType === 'supplier';
+    const dashboardEndpoint = isSupplier ? `${apiPath}/dashboard` : `${apiPath}/dashboard/authority`;
+    const dasboardData = isSupplier ? dashboardWithCompleteSections : authorityDashboardWithCompleteSections;
+
     await nock(apiLocalhost)
-      .get(`${apiPath}/dashboard`)
-      .reply(200, dashboardWithCompleteSections);
+      .get(dashboardEndpoint)
+      .reply(200, dasboardData);
+
     const link = Selector('[data-test-id="section-back-link"] a');
 
     await t
@@ -110,6 +117,7 @@ export const runCommonComponentsTests = async ({
   sectionId,
   data,
   dashboardId,
+  userContextType,
 }) => {
   await Promise.all([
     titleTest({ pageSetup, sectionManifest }),
@@ -124,6 +132,6 @@ export const runCommonComponentsTests = async ({
       dashboardId,
     }),
     sectionsLinkTest({ pageSetup }),
-    sectionsLinkClickedTest({ pageSetup }),
+    sectionsLinkClickedTest({ pageSetup, userContextType }),
   ]);
 };

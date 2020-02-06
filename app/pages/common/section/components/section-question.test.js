@@ -3,7 +3,7 @@ import { createTestHarness } from '../../../../test-utils/testHarness';
 const setup = {
   component: {
     name: 'sectionQuestion',
-    path: 'pages/supplier/section/components/section-question.njk',
+    path: 'pages/common/section/components/section-question.njk',
   },
 };
 
@@ -39,6 +39,24 @@ describe('section-question', () => {
 
       harness.request(context, ($) => {
         const question = $('div[data-test-id="section-question-textarea-field"] > div');
+        expect(question.length).toEqual(1);
+      });
+    }));
+  });
+
+  describe('when question type is textarea-field-csv', () => {
+    it('should render the textarea-field component', createTestHarness(setup, (harness) => {
+      const context = {
+        params: {
+          question: {
+            id: 'question-id',
+            type: 'textarea-field-csv',
+          },
+        },
+      };
+
+      harness.request(context, ($) => {
+        const question = $('div[data-test-id="section-question-textarea-field-csv"] > div');
         expect(question.length).toEqual(1);
       });
     }));

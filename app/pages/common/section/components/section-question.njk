@@ -15,6 +15,10 @@
       {{ textareaField(params) }}
     {% endif %}
 
+    {% if (params.question.type === 'textarea-field-csv') %}
+      {{ textareaField(params) }}
+    {% endif %}
+
     {% if (params.question.type === 'text-field') %}
       {{ textField(params) }}
     {% endif %}

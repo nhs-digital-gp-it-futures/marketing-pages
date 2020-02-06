@@ -60,15 +60,14 @@ test('should render all the sections for the Capabilities section group', async 
     .eql('INCOMPLETE');
 });
 
-// TODO: undo when the capabilities pages is created
-test.skip('clicking on the capability section link should navigate the user to the capabilities page', async (t) => {
+test('clicking on the capability section link should navigate the user to the capabilities page', async (t) => {
   await pageSetup(t);
 
   nock(apiLocalhost)
     .get(`${apiPath}/sections/capabilites`)
     .reply(200, {});
 
-  const capabilitiesSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-about-your-solution"]');
+  const capabilitiesSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-capabilities"]');
   const capabilitiesSection = capabilitiesSectionGroup.find('[data-test-id="dashboard-section-capabilities"]');
 
   await t

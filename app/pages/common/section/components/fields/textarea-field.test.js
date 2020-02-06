@@ -2,12 +2,12 @@ import { createTestHarness } from '../../../../../test-utils/testHarness';
 
 const setup = {
   component: {
-    name: 'textField',
-    path: 'pages/supplier/section/components/fields/text-field.njk',
+    name: 'textareaField',
+    path: 'pages/common/section/components/fields/textarea-field.njk',
   },
 };
 
-describe('textField', () => {
+describe('textarea', () => {
   it('should render the main advice', createTestHarness(setup, (harness) => {
     const context = {
       params: {
@@ -42,7 +42,7 @@ describe('textField', () => {
     });
   }));
 
-  it('should render the input text field', createTestHarness(setup, (harness) => {
+  it('should render the text area', createTestHarness(setup, (harness) => {
     const context = {
       params: {
         question: {
@@ -55,11 +55,28 @@ describe('textField', () => {
 
     harness.request(context, ($) => {
       const question = $('div[data-test-id="question-fieldId"]');
-      expect(question.find('input').length).toEqual(1);
+      expect(question.find('textarea').length).toEqual(1);
     });
   }));
 
-  it('should render the text field with the data populated', createTestHarness(setup, (harness) => {
+  it('should render the text area with specific amount of rows as specified in the context', createTestHarness(setup, (harness) => {
+    const context = {
+      params: {
+        question: {
+          id: 'fieldId',
+          rows: 10,
+        },
+      },
+    };
+
+    harness.request(context, ($) => {
+      const question = $('div[data-test-id="question-fieldId"]');
+      expect(question.find('textarea').attr('rows')).toEqual(' 10 ');
+    });
+  }));
+
+
+  it('should render the text area with the data populated', createTestHarness(setup, (harness) => {
     const context = {
       params: {
         question: {
@@ -73,11 +90,11 @@ describe('textField', () => {
 
     harness.request(context, ($) => {
       const question = $('div[data-test-id="question-fieldId"]');
-      expect(question.find('div[data-test-id="question-fieldId"] input').val()).toEqual('Some populated data');
+      expect(question.find('textarea').val()).toEqual('Some populated data');
     });
   }));
 
-  it('should render the text field as an error if the context provided contains an error', createTestHarness(setup, (harness) => {
+  it('should render the textarea-field as an error if the context provided contains an error', createTestHarness(setup, (harness) => {
     const context = {
       params: {
         question: {
@@ -94,10 +111,8 @@ describe('textField', () => {
 
     harness.request(context, ($) => {
       const question = $('div[data-test-id="question-fieldId"]');
-      const inputError = question.find('div[data-test-id="text-field-input-error"] .nhsuk-error-message');
-
-      expect(inputError.length).toEqual(1);
-      expect(inputError.text().trim()).toEqual('Error: Some error message');
+      expect(question.find('.nhsuk-error-message').text().trim()).toEqual('Error: Some error message');
+      expect(question.find('div[data-test-id="textarea-field-error"]').length).toEqual(1);
     });
   }));
 
@@ -115,7 +130,7 @@ describe('textField', () => {
 
     harness.request(context, ($) => {
       const question = $('div[data-test-id="question-fieldId"]');
-      expect(question.find('[data-test-id="text-field-footer"]').text().trim()).toEqual('Some footer based advice');
+      expect(question.find('[data-test-id="textarea-field-footer"]').text().trim()).toEqual('Some footer based advice');
     });
   }));
 });

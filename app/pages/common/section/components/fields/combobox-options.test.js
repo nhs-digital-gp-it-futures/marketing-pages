@@ -3,7 +3,7 @@ import { createTestHarness } from '../../../../../test-utils/testHarness';
 const setup = {
   component: {
     name: 'comboboxOptions',
-    path: 'pages/supplier/section/components/fields/combobox-options.njk',
+    path: 'pages/common/section/components/fields/combobox-options.njk',
   },
 };
 
