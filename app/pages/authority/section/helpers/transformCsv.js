@@ -1,14 +1,22 @@
 import csvtojson from 'csvtojson';
 
-export const transformCsv = async ({ csv }) => {
+const formatting = {
+  capabilities: csvRow => csvRow['Capability ID'],
+  epics: (csvRow) => {
+    if (csvRow['Epic ID'] && csvRow['Epic Final Assessment Result']) {
+      return { [csvRow['Epic ID']]: csvRow['Epic Final Assessment Result'] };
+    }
+    return undefined;
+  },
+};
+
+export const transformCsv = async ({ questionId, csv }) => {
   if (!csv.trim().length) return [];
 
-  const json = await csvtojson({ trim: true }).fromString(csv);
-
-  return json.reduce((acc, ref) => {
-    if (ref['Capability ID']) {
-      acc.push(ref['Capability ID']);
-    }
+  const json = await csvtojson({ trim: true, ignoreEmpty: true }).fromString(csv);
+  return json.reduce((acc, csvRow) => {
+    const formattedValue = formatting[questionId](csvRow);
+    if (formattedValue) acc.push(formattedValue);
     return acc;
   }, []);
 };
