@@ -17,6 +17,7 @@ export const getMarketingPageDashboardContext = async ({
       dashboardManifest,
       marketingDataSections: dashboardData.sections,
       validationErrors,
+      userContextType,
     });
     return context;
   }
