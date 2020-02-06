@@ -1,11 +1,11 @@
 {% from 'components/error-summary/macro.njk' import errorSummary as nhsErrorSummary %}
 
-{% macro errorSummary(errors) %}
+{% macro errorSummary(params) %}
   <div data-test-id="error-summary">
     {{ nhsErrorSummary({
       "titleText": "There is a problem",
       "descriptionText": "To complete this page, resolve the following errors;",
-      "errorList": errors
+      "errorList": params.errors
     }) }}
   </div>
 {% endmacro %}
