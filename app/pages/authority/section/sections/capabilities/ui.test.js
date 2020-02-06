@@ -3,7 +3,7 @@ import { runTestSuite } from '../../../../../test-utils/runTestSuite';
 const sectionId = 'capabilities';
 
 const capabilitiesMarketingData = {
-  capabilities: 'capability stuff',
+  capabilities: '',
 };
 
 runTestSuite({
