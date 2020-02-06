@@ -24,12 +24,6 @@
       {% endfor %}
     </div>
 
-    {% if (warningAdvice) %}
-      <div data-test-id="section-warning-advice" class="bc-c-inset-text nhsuk-u-padding-left-2">
-        <p>{{ warningAdvice }}</p>
-      </div>
-    {% endif %}
-
     <form method="post" action="{{ submitActionUrl }}">
       {% for question in questions %}
         {% if question.type === 'multi-question' %}
@@ -42,6 +36,12 @@
           }) }}
         {% endif %}
       {% endfor %}
+
+      {% if (warningAdvice) %}
+        <div data-test-id="section-warning-advice" class="bc-c-inset-text nhsuk-u-padding-left-2">
+          <p>{{ warningAdvice }}</p>
+        </div>
+      {% endif %}
 
       <div data-test-id="section-submit-button">
         {{ button({
