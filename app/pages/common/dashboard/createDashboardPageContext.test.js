@@ -514,6 +514,7 @@ describe('createDashboardPageContext', () => {
     it('should create a context from the manifest and the marketingData', () => {
       const expectedContext = {
         returnToDashboardUrl: '/authority/solution/some-solution-id',
+        previewUrl: '/solution/some-solution-id/preview',
         sectionGroups: [
           {
             id: 'some-section-group-id',
