@@ -53,7 +53,7 @@ test('should render all the sections for the Capabilities section group', async 
 
   await t
     .expect(await extractInnerText(capabilitiesSection.find('[data-test-id="dashboard-section-title"]')))
-    .eql('Capabilites')
+    .eql('Capabilities')
     .expect(await extractInnerText(capabilitiesSection.find('[data-test-id="dashboard-section-requirement"]')))
     .eql('Mandatory')
     .expect(await extractInnerText(capabilitiesSection.find('[data-test-id="dashboard-section-status"]')))
@@ -64,7 +64,7 @@ test('clicking on the capability section link should navigate the user to the ca
   await pageSetup(t);
 
   nock(apiLocalhost)
-    .get(`${apiPath}/sections/capabilites`)
+    .get(`${apiPath}/sections/capabilities`)
     .reply(200, {});
 
   const capabilitiesSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-capabilities"]');

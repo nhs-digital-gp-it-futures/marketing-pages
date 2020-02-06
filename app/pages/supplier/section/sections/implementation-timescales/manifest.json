@@ -6,7 +6,7 @@
     "description": {
       "mainAdvice": "Describe the typical implementation timescales for this Solution",
       "additionalAdvice": "Add some information describing typical timescales and activities for an implementation. You may also want to address any differences when transitioning from another solution.",
-      "footerAdvice": "You can enter up to 300 characters",
+      "footerAdvice": "You can enter up to 1000 characters",
       "type": "textarea-field",
       "errorResponse": {
         "maxLength": "Description is over the character limit"
