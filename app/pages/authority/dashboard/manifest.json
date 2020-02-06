@@ -5,10 +5,14 @@
       "title": "Solution Capabilities",
       "sections": {
         "capabilities": {
-          "title": "Capabilites",
+          "title": "Capabilities",
+          "type": "section"
+        },
+        "epics": {
+          "title": "Epics",
           "type": "section"
         }
-      }
+      } 
     }
   }
 }
