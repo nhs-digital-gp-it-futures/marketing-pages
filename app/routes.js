@@ -6,7 +6,6 @@ import supplierRoutes from './pages/supplier/routes';
 import authorityRoutes from './pages/authority/routes';
 import { withCatch } from './common/helpers/routerHelper';
 
-
 const router = express.Router();
 
 router.get('/healthcheck', async (req, res) => {
