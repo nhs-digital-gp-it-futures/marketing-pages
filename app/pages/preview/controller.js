@@ -11,3 +11,7 @@ export const getPreviewPageContext = async ({ solutionId }) => {
   }
   throw new Error('No data returned');
 };
+
+export const getDocument = async ({ solutionId, documentName }) => (
+  new ApiProvider().getDocument({ solutionId, documentName })
+);

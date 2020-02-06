@@ -189,7 +189,8 @@
     },
     "roadmap": {
       "answers": {
-        "summary": "The roadmap summary details"
+        "summary": "The roadmap summary details",
+        "document-name": "roadmap.pdf"
       }
     },
     "about-supplier": {
