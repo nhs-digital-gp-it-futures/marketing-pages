@@ -5,30 +5,30 @@
 {% from './fields/radiobutton-options.njk' import radiobuttonOptions %}
 {% from './fields/combobox-options.njk' import comboboxOptions %}
 
-{% macro sectionQuestion(question) %}
-  <div data-test-id="section-question-{{ question.type }}">
-    {% if (question.type === 'bulletpoint-list') %}
-      {{ bulletpointList(question) }}
+{% macro sectionQuestion(params) %}
+  <div data-test-id="section-question-{{ params.question.type }}">
+    {% if (params.question.type === 'bulletpoint-list') %}
+      {{ bulletpointList(params) }}
     {% endif %}
 
-    {% if (question.type === 'textarea-field') %}
-      {{ textareaField(question) }}
+    {% if (params.question.type === 'textarea-field') %}
+      {{ textareaField(params) }}
     {% endif %}
 
-    {% if (question.type === 'text-field') %}
-      {{ textField(question) }}
+    {% if (params.question.type === 'text-field') %}
+      {{ textField(params) }}
     {% endif %}
 
-    {% if (question.type === 'checkbox-options') %}
-      {{ checkboxOptions(question) }}
+    {% if (params.question.type === 'checkbox-options') %}
+      {{ checkboxOptions(params) }}
     {% endif %}
 
-    {% if (question.type === 'radiobutton-options') %}
-      {{ radiobuttonOptions(question) }}
+    {% if (params.question.type === 'radiobutton-options') %}
+      {{ radiobuttonOptions(params) }}
     {% endif %}
 
-    {% if (question.type === 'combobox-options') %}
-      {{ comboboxOptions(question) }}
+    {% if (params.question.type === 'combobox-options') %}
+      {{ comboboxOptions(params) }}
     {% endif %}
   </div>
 {% endmacro %}

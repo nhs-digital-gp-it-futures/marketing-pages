@@ -1,26 +1,21 @@
-import request from 'supertest';
-import cheerio from 'cheerio';
-import { testHarness } from '../../../test-utils/testHarness';
+import { createTestHarness } from '../../../test-utils/testHarness';
 
-const template = './pages/authority/dashboard/template.njk';
+const setup = {
+  template: {
+    path: 'pages/authority/dashboard/template.njk',
+  },
+};
 
 describe('authority - dashboard page', () => {
-  it('should render the title of the authority dashboard page', (done) => {
+  it('should render the title of the authority dashboard page', createTestHarness(setup, (harness) => {
     const context = {};
 
-    const dummyApp = testHarness().createComponentDummyApp(template, context);
-    request(dummyApp)
-      .get('/')
-      .then((res) => {
-        const $ = cheerio.load(res.text);
+    harness.request(context, ($) => {
+      expect($('h1').text().trim()).toEqual('Marketing Page - Authority - Dashboard');
+    });
+  }));
 
-        expect($('h1').text().trim()).toEqual('Marketing Page - Authority - Dashboard');
-
-        done();
-      });
-  });
-
-  it('should render the sectionGroups on the dashboard page', (done) => {
+  it('should render the sectionGroups on the dashboard page', createTestHarness(setup, (harness) => {
     const context = {
       sectionGroups: [
         {
@@ -30,15 +25,8 @@ describe('authority - dashboard page', () => {
       ],
     };
 
-    const dummyApp = testHarness().createComponentDummyApp(template, context);
-    request(dummyApp)
-      .get('/')
-      .then((res) => {
-        const $ = cheerio.load(res.text);
-
-        expect($('[data-test-id^="dashboard-sectionGroup"]').length).toEqual(1);
-
-        done();
-      });
-  });
+    harness.request(context, ($) => {
+      expect($('[data-test-id^="dashboard-sectionGroup"]').length).toEqual(1);
+    });
+  }));
 });
