@@ -8,8 +8,10 @@
   <div class="nhsuk-grid-column-full">
 
     {% if (errors.length > 0) %}
-      {{ errorSummary(errors) }}
-    {% endif %}  
+      {{ errorSummary({
+        errors: errors
+      }) }}
+    {% endif %}
 
     <h1>Marketing Page - Dashboard</h1>
     <div data-test-id="dashboard-preview-button">
@@ -21,7 +23,9 @@
     </div>
 
     {% for sectionGroup in sectionGroups %}
-      {{ dashboardSectionGroup(sectionGroup) }}
+      {{ dashboardSectionGroup({
+        sectionGroup: sectionGroup
+      }) }}
     {% endfor %}
 
     <br/>

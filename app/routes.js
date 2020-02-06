@@ -27,7 +27,7 @@ router.get('/solution/:solutionId/preview', withCatch(async (req, res) => {
 router.get('/solution/:solutionId/document/:documentName', async (req, res) => {
   const { solutionId, documentName } = req.params;
   logger.info(`downloading Solution ${solutionId} document ${documentName}`);
-  //TODO: combine document name and sort out downloading from back end.
+  // TODO: combine document name and sort out downloading from back end.
   res.send(`Solution: ${solutionId}, Document ${documentName}`);
 });
 

@@ -1,40 +1,40 @@
 {% from 'components/radios/macro.njk' import radios %}
 
-{% macro radiobuttonOptions(question) %}
-  <div id="question-{{ question.id }}" data-test-id="question-{{ question.id }}">
-    {% if (question.error) %}
+{% macro radiobuttonOptions(params) %}
+  <div id="question-{{ params.question.id }}" data-test-id="question-{{ params.question.id }}">
+    {% if (params.question.error) %}
       <div data-test-id="radiobutton-options-error">
         {{ radios({
-          "idPrefix": question.id,
-          "name": question.id,
+          "idPrefix": params.question.id,
+          "name": params.question.id,
           "errorMessage": {
-            "text": question.error.message
+            "text": params.question.error.message
           },
           "fieldset": {
             "legend": {
-              "text": question.mainAdvice
+              "text": params.question.mainAdvice
             }
           },
           "hint": {
-            "text": question.additionalAdvice
+            "text": params.question.additionalAdvice
           },
-          "items": question.options
+          "items": params.question.options
         }) }}
       </div>
     {% else %}
       <div data-test-id="radiobutton-options">
         {{ radios({
-          "idPrefix": question.id,
-          "name": question.id,
+          "idPrefix": params.question.id,
+          "name": params.question.id,
           "fieldset": {
             "legend": {
-              "text": question.mainAdvice
+              "text": params.question.mainAdvice
             }
           },
           "hint": {
-            "text": question.additionalAdvice
+            "text": params.question.additionalAdvice
           },
-          "items": question.options
+          "items": params.question.options
         }) }}
       </div>
     {% endif %}

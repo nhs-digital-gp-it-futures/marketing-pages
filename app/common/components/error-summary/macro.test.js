@@ -1,94 +1,77 @@
-import request from 'supertest';
-import cheerio from 'cheerio';
-import { testHarness } from '../../../test-utils/testHarness';
+import { createTestHarness } from '../../../test-utils/testHarness';
 
-const macroWrapper = `{% from './common/components/error-summary/macro.njk' import errorSummary %}
-                        {{ errorSummary(errors) }}`;
+const setup = {
+  component: {
+    name: 'errorSummary',
+    path: 'common/components/error-summary/macro.njk',
+  },
+};
 
 describe('errorSummary', () => {
-  it('should render the error summary title', (done) => {
+  it('should render the error summary title', createTestHarness(setup, (harness) => {
     const context = {
-      errors: [],
+      params: {
+        errors: [],
+      },
     };
 
-    const dummyApp = testHarness().createTemplateDummyApp(macroWrapper, context);
-    request(dummyApp)
-      .get('/')
-      .then((res) => {
-        const $ = cheerio.load(res.text);
-        expect($('.nhsuk-error-summary h2').text().trim()).toEqual('There is a problem');
+    harness.request(context, ($) => {
+      expect($('.nhsuk-error-summary h2').text().trim()).toEqual('There is a problem');
+    });
+  }));
 
-        done();
-      });
-  });
-
-  it('should render the error summary body', (done) => {
+  it('should render the error summary body', createTestHarness(setup, (harness) => {
     const context = {
-      errors: [],
+      params: {
+        errors: [],
+      },
     };
 
-    const dummyApp = testHarness().createTemplateDummyApp(macroWrapper, context);
-    request(dummyApp)
-      .get('/')
-      .then((res) => {
-        const $ = cheerio.load(res.text);
+    harness.request(context, ($) => {
+      expect($('.nhsuk-error-summary p').text().trim()).toEqual('To complete this page, resolve the following errors;');
+    });
+  }));
 
-        expect($('.nhsuk-error-summary p').text().trim()).toEqual('To complete this page, resolve the following errors;');
-
-        done();
-      });
-  });
-
-  it('should render the one error if the context only contains a single error', (done) => {
+  it('should render the one error if the context only contains a single error', createTestHarness(setup, (harness) => {
     const context = {
-      errors: [
-        {
-          text: 'This is the first error',
-          href: '#link-to-first-error',
-        },
-      ],
+      params: {
+        errors: [
+          {
+            text: 'This is the first error',
+            href: '#link-to-first-error',
+          },
+        ],
+      },
     };
 
-    const dummyApp = testHarness().createTemplateDummyApp(macroWrapper, context);
-    request(dummyApp)
-      .get('/')
-      .then((res) => {
-        const $ = cheerio.load(res.text);
+    harness.request(context, ($) => {
+      expect($('ul li a').text().trim()).toEqual('This is the first error');
+      expect($('ul li a').attr('href')).toEqual('#link-to-first-error');
+    });
+  }));
 
-        expect($('ul li a').text().trim()).toEqual('This is the first error');
-        expect($('ul li a').attr('href')).toEqual('#link-to-first-error');
-
-        done();
-      });
-  });
-
-  it('should render multiple errors if the context contains multiple errors', (done) => {
+  it('should render multiple errors if the context contains multiple errors', createTestHarness(setup, (harness) => {
     const context = {
-      errors: [
-        {
-          text: 'This is the first error',
-          href: '#link-to-first-error',
-        },
-        {
-          text: 'This is the second error',
-          href: '#link-to-second-error',
-        },
-        {
-          text: 'This is the third error',
-          href: '#link-to-third-error',
-        },
-      ],
+      params: {
+        errors: [
+          {
+            text: 'This is the first error',
+            href: '#link-to-first-error',
+          },
+          {
+            text: 'This is the second error',
+            href: '#link-to-second-error',
+          },
+          {
+            text: 'This is the third error',
+            href: '#link-to-third-error',
+          },
+        ],
+      },
     };
 
-    const dummyApp = testHarness().createTemplateDummyApp(macroWrapper, context);
-    request(dummyApp)
-      .get('/')
-      .then((res) => {
-        const $ = cheerio.load(res.text);
-
-        expect($('ul li').length).toEqual(3);
-
-        done();
-      });
-  });
+    harness.request(context, ($) => {
+      expect($('ul li').length).toEqual(3);
+    });
+  }));
 });
