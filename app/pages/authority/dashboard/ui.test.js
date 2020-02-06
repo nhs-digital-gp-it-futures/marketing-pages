@@ -2,6 +2,7 @@ import nock from 'nock';
 import { Selector, ClientFunction } from 'testcafe';
 import dashboardWithIncompleteSections from '../fixtures/dashboardWithIncompleteSections.json';
 import dashboardWithCompleteSections from '../fixtures/dashboardWithCompleteSections.json';
+import previewWithMarketingData from '../../../../fixtures/previewWithMarketingData.json';
 import { apiLocalhost, apiPath, clientLocalhost } from '../../../test-utils/config';
 import { extractInnerText } from '../../../test-utils/helper';
 
@@ -33,6 +34,21 @@ test('should render the marketing authority dashboard page title', async (t) => 
 
   await t
     .expect(await extractInnerText(title)).eql('Marketing Page - Authority - Dashboard');
+});
+
+test('should render the preview page button', async (t) => {
+  await pageSetup(t);
+
+  nock(apiLocalhost)
+    .get(`${apiPath}/preview`)
+    .reply(200, previewWithMarketingData);
+
+  const previewButton = Selector('[data-test-id="dashboard-preview-button"] a');
+
+  await t
+    .expect(await extractInnerText(previewButton)).eql('Preview Marketing page')
+    .click(previewButton)
+    .expect(getLocation()).contains('/solution/S100000-001/preview');
 });
 
 test('should render the Capabilities section group', async (t) => {
