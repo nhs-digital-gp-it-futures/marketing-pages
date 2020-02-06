@@ -7,17 +7,12 @@
         "capabilities": {
           "title": "Capabilites",
           "type": "section"
-        }
-      } 
-    },
-    "epics": {
-      "title": "Solution Epics",
-      "sections": {
+        },
         "epics": {
           "title": "Epics",
           "type": "section"
         }
-      }
+      } 
     }
   }
 }
