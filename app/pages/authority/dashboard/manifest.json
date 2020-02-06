@@ -7,8 +7,12 @@
         "capabilities": {
           "title": "Capabilities",
           "type": "section"
+        },
+        "epics": {
+          "title": "Epics",
+          "type": "section"
         }
-      }
+      } 
     }
   }
 }

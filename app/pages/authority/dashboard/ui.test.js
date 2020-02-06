@@ -66,6 +66,7 @@ test('should render all the sections for the Capabilities section group', async 
 
   const capabilitiesSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-capabilities"]');
   const capabilitiesSection = capabilitiesSectionGroup.find('[data-test-id="dashboard-section-capabilities"]');
+  const epicsSection = capabilitiesSectionGroup.find('[data-test-id="dashboard-section-epics"]');
 
   await t
     .expect(await extractInnerText(capabilitiesSection.find('[data-test-id="dashboard-section-title"]')))
@@ -73,6 +74,12 @@ test('should render all the sections for the Capabilities section group', async 
     .expect(await extractInnerText(capabilitiesSection.find('[data-test-id="dashboard-section-requirement"]')))
     .eql('Mandatory')
     .expect(await extractInnerText(capabilitiesSection.find('[data-test-id="dashboard-section-status"]')))
+    .eql('INCOMPLETE')
+    .expect(await extractInnerText(epicsSection.find('[data-test-id="dashboard-section-title"]')))
+    .eql('Epics')
+    .expect(await extractInnerText(epicsSection.find('[data-test-id="dashboard-section-requirement"]')))
+    .eql('Mandatory')
+    .expect(await extractInnerText(epicsSection.find('[data-test-id="dashboard-section-status"]')))
     .eql('INCOMPLETE');
 });
 
@@ -89,4 +96,19 @@ test('clicking on the capability section link should navigate the user to the ca
   await t
     .click(capabilitiesSection.find('a'))
     .expect(getLocation()).contains('/authority/solution/S100000-001/section/capabilities');
+});
+
+test.skip('clicking on the epics section link should navigate the user to the epics page', async (t) => {
+  await pageSetup(t);
+
+  nock(apiLocalhost)
+    .get(`${apiPath}/sections/epics`)
+    .reply(200, {});
+
+  const capabilitiesSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-capabilities"]');
+  const epicsSection = capabilitiesSectionGroup.find('[data-test-id="dashboard-section-epics"]');
+
+  await t
+    .click(epicsSection.find('a'))
+    .expect(getLocation()).contains('/authority/solution/S100000-001/section/epics');
 });

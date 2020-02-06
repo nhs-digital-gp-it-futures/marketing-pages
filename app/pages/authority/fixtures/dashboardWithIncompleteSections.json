@@ -3,6 +3,10 @@
     "capabilities": {
       "requirement": "Mandatory",
       "status": "INCOMPLETE"
+    },
+    "epics": {
+      "requirement": "Mandatory",
+      "status": "INCOMPLETE"
     }
   }
 }
