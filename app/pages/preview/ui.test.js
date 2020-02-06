@@ -572,11 +572,16 @@ test('when existing marketing data - The roadmap section should be rendered', as
 
   const roadmapSection = Selector('[data-test-id="view-roadmap"]');
   const summaryQuestion = roadmapSection.find('[data-test-id="view-section-question-summary"]');
+  const documentLink = roadmapSection.find('[data-test-id="view-section-question-document-link"]');
 
   await t
     .expect(roadmapSection.exists).ok()
     .expect(await extractInnerText(roadmapSection.find('h3'))).eql('Roadmap')
 
     .expect(summaryQuestion.exists).ok()
-    .expect(await extractInnerText(summaryQuestion.find('[data-test-id="view-question-data-text-summary"]'))).eql('The roadmap summary details');
+    .expect(await extractInnerText(summaryQuestion.find('[data-test-id="view-question-data-text-summary"]'))).eql('The roadmap summary details')
+
+    .expect(documentLink.exists).ok()
+    .expect(await extractInnerText(documentLink.find('[data-test-id="view-question-data-link-document-link"]'))).eql('View roadmap')
+    .expect(await documentLink.find('[data-test-id="view-question-data-link-document-link"] > a').getAttribute('href')).eql('document/roadmap.pdf');
 });
