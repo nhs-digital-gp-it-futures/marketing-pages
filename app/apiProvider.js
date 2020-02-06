@@ -1,10 +1,11 @@
 import axios from 'axios';
-import { apiHost } from './config';
+import { apiHost, documentHost } from './config';
 import logger from './logger';
 
 export class ApiProvider {
   constructor() {
     this.apiHost = apiHost;
+    this.documentHost = documentHost;
   }
 
   async getSectionData({ solutionId, sectionId }) {
@@ -52,5 +53,11 @@ export class ApiProvider {
     await axios.put(endpoint, {});
 
     return true;
+  }
+
+  async getDocument({ solutionId, documentName }) {
+    const endpoint = `${this.documentHost}/api/v1/Solutions/${solutionId}/documents/${documentName}`;
+    logger.info(`api called: [GET] ${endpoint}`);
+    return axios.get(endpoint, { responseType: 'stream' });
   }
 }

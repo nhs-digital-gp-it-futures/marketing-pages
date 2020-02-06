@@ -1,4 +1,4 @@
-import { getPreviewPageContext } from './controller';
+import { getPreviewPageContext, getDocument } from './controller';
 import { ApiProvider } from '../../apiProvider';
 
 jest.mock('../../apiProvider');
@@ -39,5 +39,15 @@ describe('preview controller', () => {
     } catch (err) {
       expect(err).toEqual(new Error('No data returned'));
     }
+  });
+
+  it('should return the document when a document is returned by the ApiProvider', async () => {
+    const expectedDocument = 'Hello';
+
+    ApiProvider.prototype.getDocument.mockResolvedValue(expectedDocument);
+
+    const document = await getDocument({ solutionId: 'some-solution-id', documentName: 'some-document-name' });
+
+    expect(document).toEqual(expectedDocument);
   });
 });
