@@ -49,7 +49,7 @@ export const postSection = async ({
   const sectionManifest = new ManifestProvider().getSectionManifest({
     dashboardId, sectionId, userContextType,
   });
-  const transformedSectionData = transformSectionData({ sectionManifest, sectionData });
+  const transformedSectionData = await transformSectionData({ sectionManifest, sectionData });
   try {
     await new ApiProvider().putSectionData({
       solutionId, sectionId, sectionData: transformedSectionData,
