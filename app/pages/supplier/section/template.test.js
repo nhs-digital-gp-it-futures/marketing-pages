@@ -1,46 +1,34 @@
-import request from 'supertest';
-import cheerio from 'cheerio';
-import { testHarness } from '../../../test-utils/testHarness';
+import { createTestHarness } from '../../../test-utils/testHarness';
 
-const template = './pages/supplier/section/template.njk';
+const setup = {
+  template: {
+    path: 'pages/supplier/section/template.njk',
+  },
+};
 
 describe('section page', () => {
-  it('should render the title of the section', (done) => {
+  it('should render the title of the section', createTestHarness(setup, (harness) => {
     const context = {
       title: 'Title of the section',
     };
 
-    const dummyApp = testHarness().createComponentDummyApp(template, context);
-    request(dummyApp)
-      .get('/')
-      .then((res) => {
-        const $ = cheerio.load(res.text);
+    harness.request(context, ($) => {
+      expect($('h2[data-test-id="section-title"]').text().trim()).toEqual('Title of the section');
+    });
+  }));
 
-        expect($('h2[data-test-id="section-title"]').text().trim()).toEqual('Title of the section');
-
-        done();
-      });
-  });
-
-  it('should render the main advice of the section', (done) => {
+  it('should render the main advice of the section', createTestHarness(setup, (harness) => {
     const context = {
       title: 'Title of the section',
       mainAdvice: 'This is the main advice for this section',
     };
 
-    const dummyApp = testHarness().createComponentDummyApp(template, context);
-    request(dummyApp)
-      .get('/')
-      .then((res) => {
-        const $ = cheerio.load(res.text);
+    harness.request(context, ($) => {
+      expect($('h4[data-test-id="section-main-advice"]').text().trim()).toEqual('This is the main advice for this section');
+    });
+  }));
 
-        expect($('h4[data-test-id="section-main-advice"]').text().trim()).toEqual('This is the main advice for this section');
-
-        done();
-      });
-  });
-
-  it('should render any additional advice of the section', (done) => {
+  it('should render any additional advice of the section', createTestHarness(setup, (harness) => {
     const context = {
       title: 'Title of the section',
       additionalAdvice: [
@@ -49,56 +37,35 @@ describe('section page', () => {
       ],
     };
 
-    const dummyApp = testHarness().createComponentDummyApp(template, context);
-    request(dummyApp)
-      .get('/')
-      .then((res) => {
-        const $ = cheerio.load(res.text);
-
-        context.additionalAdvice.map((advice, idx) => {
-          expect($(`div[data-test-id="section-additional-advice"] p:nth-child(${idx + 1})`).text().trim()).toEqual(advice);
-        });
-
-        done();
+    harness.request(context, ($) => {
+      context.additionalAdvice.map((advice, idx) => {
+        expect($(`div[data-test-id="section-additional-advice"] p:nth-child(${idx + 1})`).text().trim()).toEqual(advice);
       });
-  });
+    });
+  }));
 
-  it('should render the error summary if errors', (done) => {
+  it('should render the error summary if errors', createTestHarness(setup, (harness) => {
     const context = {
       title: 'Title of the section',
       errors: [{}],
     };
 
-    const dummyApp = testHarness().createComponentDummyApp(template, context);
-    request(dummyApp)
-      .get('/')
-      .then((res) => {
-        const $ = cheerio.load(res.text);
+    harness.request(context, ($) => {
+      expect($('[data-test-id="error-summary"]').length).toEqual(1);
+    });
+  }));
 
-        expect($('[data-test-id="error-summary"]').length).toEqual(1);
-
-        done();
-      });
-  });
-
-  it('should not render the error summary if no errors', (done) => {
+  it('should not render the error summary if no errors', createTestHarness(setup, (harness) => {
     const context = {
       title: 'Title of the section',
     };
 
-    const dummyApp = testHarness().createComponentDummyApp(template, context);
-    request(dummyApp)
-      .get('/')
-      .then((res) => {
-        const $ = cheerio.load(res.text);
+    harness.request(context, ($) => {
+      expect($('[data-test-id="error-summary"]').length).toEqual(0);
+    });
+  }));
 
-        expect($('[data-test-id="error-summary"]').length).toEqual(0);
-
-        done();
-      });
-  });
-
-  it('should render all the questions for the section', (done) => {
+  it('should render all the questions for the section', createTestHarness(setup, (harness) => {
     const context = {
       title: 'Title of the section',
       questions: [
@@ -108,19 +75,12 @@ describe('section page', () => {
       ],
     };
 
-    const dummyApp = testHarness().createComponentDummyApp(template, context);
-    request(dummyApp)
-      .get('/')
-      .then((res) => {
-        const $ = cheerio.load(res.text);
+    harness.request(context, ($) => {
+      expect($('div[data-test-id="section-question-text-field"]').length).toEqual(3);
+    });
+  }));
 
-        expect($('div[data-test-id="section-question-text-field"]').length).toEqual(3);
-
-        done();
-      });
-  });
-
-  it('should render a multi-question', (done) => {
+  it('should render a multi-question', createTestHarness(setup, (harness) => {
     const context = {
       questions: [
         {
@@ -135,69 +95,41 @@ describe('section page', () => {
       ],
     };
 
-    const dummyApp = testHarness().createComponentDummyApp(template, context);
-    request(dummyApp)
-      .get('/')
-      .then((res) => {
-        const $ = cheerio.load(res.text);
+    harness.request(context, ($) => {
+      expect($('div[data-test-id="question-parent-question-id"]').length).toEqual(1);
+    });
+  }));
 
-        expect($('div[data-test-id="question-parent-question-id"]').length).toEqual(1);
-
-        done();
-      });
-  });
-
-  it('should render a button to submit the form', (done) => {
+  it('should render a button to submit the form', createTestHarness(setup, (harness) => {
     const context = {
       title: 'Title of the section',
     };
 
-    const dummyApp = testHarness().createComponentDummyApp(template, context);
-    request(dummyApp)
-      .get('/')
-      .then((res) => {
-        const $ = cheerio.load(res.text);
+    harness.request(context, ($) => {
+      expect($('[data-test-id="section-submit-button"] button').length).toEqual(1);
+    });
+  }));
 
-        expect($('[data-test-id="section-submit-button"] button').length).toEqual(1);
-
-        done();
-      });
-  });
-
-  it('should render the warning advise', (done) => {
+  it('should render the warning advise', createTestHarness(setup, (harness) => {
     const context = {
       title: 'Title of the section',
       warningAdvice: 'Some warning advice',
     };
 
-    const dummyApp = testHarness().createComponentDummyApp(template, context);
-    request(dummyApp)
-      .get('/')
-      .then((res) => {
-        const $ = cheerio.load(res.text);
+    harness.request(context, ($) => {
+      expect($('[data-test-id="section-warning-advice"]').length).toEqual(1);
+      expect($('[data-test-id="section-warning-advice"]').text().trim()).toEqual('Some warning advice');
+    });
+  }));
 
-        expect($('[data-test-id="section-warning-advice"]').length).toEqual(1);
-        expect($('[data-test-id="section-warning-advice"]').text().trim()).toEqual('Some warning advice');
-
-        done();
-      });
-  });
-
-  it('should render the return to all sections link', (done) => {
+  it('should render the return to all sections link', createTestHarness(setup, (harness) => {
     const context = {
       title: 'Title of the section',
     };
 
-    const dummyApp = testHarness().createComponentDummyApp(template, context);
-    request(dummyApp)
-      .get('/')
-      .then((res) => {
-        const $ = cheerio.load(res.text);
-
-        expect($('[data-test-id="section-back-link"] a').length).toEqual(1);
-        expect($('[data-test-id="section-back-link"] a').text().trim()).toEqual('Return to all sections');
-
-        done();
-      });
-  });
+    harness.request(context, ($) => {
+      expect($('[data-test-id="section-back-link"] a').length).toEqual(1);
+      expect($('[data-test-id="section-back-link"] a').text().trim()).toEqual('Return to all sections');
+    });
+  }));
 });

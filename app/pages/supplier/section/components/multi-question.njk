@@ -1,25 +1,27 @@
 {% from 'components/label/macro.njk' import label %}
 {% from './section-question.njk' import sectionQuestion %}
 
-{% macro multiQuestion(parentQuestion) %}
-  <div data-test-id="question-{{ parentQuestion.id }}">
+{% macro multiQuestion(params) %}
+  <div data-test-id="question-{{ params.parentQuestion.id }}">
 
     <div data-test-id="multi-question-main-advice">
       {{ label({
         "classes": "nhsuk-label--s",
-        "text": parentQuestion.mainAdvice
+        "text": params.parentQuestion.mainAdvice
       }) }}
     </div>
 
     <div data-test-id="multi-question-additional-advice">
       {{ label({
-        "text": parentQuestion.additionalAdvice
+        "text": params.parentQuestion.additionalAdvice
       }) }}
     </div>
 
     <div data-test-id="multi-question-questions">
-      {% for question in parentQuestion.questions %}
-        {{ sectionQuestion(question) }}
+      {% for question in params.parentQuestion.questions %}
+        {{ sectionQuestion({
+          question: question
+        }) }}
       {% endfor %}
     </div>
   </div>

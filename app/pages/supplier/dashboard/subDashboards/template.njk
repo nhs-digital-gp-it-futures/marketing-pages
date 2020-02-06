@@ -16,7 +16,9 @@
     </div>
 
     {% for sectionGroup in sectionGroups %}
-      {{ dashboardSectionGroup(sectionGroup, loop.index) }}
+      {{ dashboardSectionGroup({
+        sectionGroup: sectionGroup
+      }, loop.index) }}
     {% endfor %}
 
     <br/>

@@ -1,45 +1,45 @@
 {% from 'components/label/macro.njk' import label %}
 {% from 'components/textarea/macro.njk' import textarea %}
 
-{% macro textareaField(question) %}
-  <div data-test-id="question-{{ question.id }}">
-    {% if (question.error) %}
+{% macro textareaField(params) %}
+  <div data-test-id="question-{{ params.question.id }}">
+    {% if (params.question.error) %}
       <div data-test-id="textarea-field-error">
         {{ textarea({
-          "id": question.id,
-          "name": question.id,
+          "id": params.question.id,
+          "name": params.question.id,
           "label": {
-            "text": question.mainAdvice
+            "text": params.question.mainAdvice
           },
           "hint": {
-            "text": question.additionalAdvice
+            "text": params.question.additionalAdvice
           },
-          "value": question.data,
-          "rows": question.rows,
+          "value": params.question.data,
+          "rows": params.question.rows,
           "errorMessage": {
-            "text": question.error.message
+            "text": params.question.error.message
           }
         }) }}
       </div>
     {% else %}
       <div data-test-id="textarea-field">
         {{ textarea({
-          "id": question.id,
-          "name": question.id,
+          "id": params.question.id,
+          "name": params.question.id,
           "label": {
-            "text": question.mainAdvice
+            "text": params.question.mainAdvice
           },
           "hint": {
-            "text": question.additionalAdvice
+            "text": params.question.additionalAdvice
           },
-          "value": question.data,
-          "rows": question.rows
+          "value": params.question.data,
+          "rows": params.question.rows
         }) }}
       </div>
     {% endif %}
     <div data-test-id="textarea-field-footer">
       {{ label({
-        "text": question.footerAdvice
+        "text": params.question.footerAdvice
       }) }}
     </div>
     <br/>

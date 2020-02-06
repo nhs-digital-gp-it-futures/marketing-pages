@@ -9,9 +9,11 @@
 <div class="nhsuk-grid-row">
   <div class="nhsuk-grid-column-full">
     {% if (errors.length > 0) %}
-      {{ errorSummary(errors) }}
-    {% endif %}  
-    
+      {{ errorSummary({
+        errors: errors
+      }) }}
+    {% endif %}
+
     <h2 data-test-id="section-title">{{ title }}</h2>
     <h4 data-test-id="section-main-advice">{{ mainAdvice }}</h4>
     <div data-test-id="section-additional-advice">
@@ -22,21 +24,25 @@
       {% endfor %}
     </div>
 
-    {% if (warningAdvice) %}
-      <div data-test-id="section-warning-advice" class="bc-c-inset-text nhsuk-u-padding-left-2">
-        <p>{{ warningAdvice }}</p>
-      </div>
-    {% endif %}  
-
     <form method="post" action="{{ submitActionUrl }}">
       {% for question in questions %}
         {% if question.type === 'multi-question' %}
-          {{ multiQuestion(question) }}
+          {{ multiQuestion({
+            parentQuestion: question
+          }) }}
         {% else %}
-          {{ sectionQuestion(question) }}
+          {{ sectionQuestion({
+            question: question
+          }) }}
         {% endif %}
       {% endfor %}
-      
+
+      {% if (warningAdvice) %}
+        <div data-test-id="section-warning-advice" class="bc-c-inset-text nhsuk-u-padding-left-2">
+          <p>{{ warningAdvice }}</p>
+        </div>
+      {% endif %}
+
       <div data-test-id="section-submit-button">
         {{ button({
           "text": submitText
