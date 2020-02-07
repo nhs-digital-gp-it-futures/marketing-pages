@@ -14,7 +14,7 @@ const arrayTransformation = (questionValue) => {
 
 const emptyValueTransformation = questionValue => (questionValue || null);
 
-const transformationStratergy = {
+const transformationStrategy = {
   'checkbox-options': {
     transform: ({ questionValue }) => arrayTransformation(questionValue),
   },
@@ -25,7 +25,7 @@ const transformationStratergy = {
     transform: ({ questionValue }) => questionValue.trim(),
   },
   'textarea-field-csv': {
-    transform: ({ questionValue: csv }) => transformCsv({ csv }),
+    transform: ({ questionId, questionValue: csv }) => transformCsv({ questionId, csv }),
   },
   'text-field': {
     transform: ({ questionValue }) => questionValue.trim(),
@@ -39,12 +39,12 @@ export const transformSectionData = async ({
   sectionManifest, sectionData,
 }) => Object.entries(sectionManifest.questions)
   .reduce(async (transformedSectionData, [questionId, questionManifest]) => {
-    if (!transformationStratergy[questionManifest.type]) {
+    if (!transformationStrategy[questionManifest.type]) {
       return transformedSectionData;
     }
 
-    const transformedData = await transformationStratergy[questionManifest.type]
-      .transform({ questionValue: sectionData[questionId] });
+    const transformedData = await transformationStrategy[questionManifest.type]
+      .transform({ questionId, questionValue: sectionData[questionId] });
 
     return ({
       ...await transformedSectionData,

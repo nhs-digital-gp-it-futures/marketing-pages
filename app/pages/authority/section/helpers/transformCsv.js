@@ -1,22 +1,19 @@
 import csvtojson from 'csvtojson';
 
-const formatting = {
+const formatStrategy = {
   capabilities: csvRow => csvRow['Capability ID'],
-  epics: (csvRow) => {
-    if (csvRow['Epic ID'] && csvRow['Epic Final Assessment Result']) {
-      return { [csvRow['Epic ID']]: csvRow['Epic Final Assessment Result'] };
-    }
-    return undefined;
-  },
+  epics: csvRow => (csvRow['Epic ID'] && csvRow['Epic Final Assessment Result'] ? ({ [csvRow['Epic ID']]: csvRow['Epic Final Assessment Result'] }) : undefined),
 };
 
 export const transformCsv = async ({ questionId, csv }) => {
   if (!csv.trim().length) return [];
 
   const json = await csvtojson({ trim: true, ignoreEmpty: true }).fromString(csv);
-  return json.reduce((acc, csvRow) => {
-    const formattedValue = formatting[questionId](csvRow);
-    if (formattedValue) acc.push(formattedValue);
+  return json.reduce((acc, csvRowJson) => {
+    if (formatStrategy[questionId]) {
+      const formattedValue = formatStrategy[questionId](csvRowJson);
+      if (formattedValue) acc.push(formattedValue);
+    }
     return acc;
   }, []);
 };

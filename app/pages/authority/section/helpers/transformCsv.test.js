@@ -14,8 +14,7 @@ describe('transformCsv', () => {
     it('should transform a single csv capability mapping', async () => {
       const expectedTransform = ['C1'];
       const questionId = 'capabilities';
-      const csv = `SolutionID,Capability ID
-      100000-001,C1`;
+      const csv = 'SolutionID,Capability ID\r\n100000-001,C1';
 
       const transformedData = await transformCsv({ questionId, csv });
 
@@ -47,8 +46,7 @@ describe('transformCsv', () => {
     it('should transform a single csv epics mapping', async () => {
       const expectedTransform = [{ C20E13: 'Not Evidenced' }];
       const questionId = 'epics';
-      const csv = `Supplier ID,Solution ID,Additional Service ID,Capability ID,Epic ID,Level,Epic Final Assessment Result
-      10000,10000-001,,C20,C20E13,May,Not Evidenced`;
+      const csv = 'ID,Solution ID,Additional Service ID,Capability ID,Epic ID,Level,Epic Final Assessment Result\r\n10000,10000-001,,C20,C20E13,May,Not Evidenced';
 
       const transformedData = await transformCsv({ questionId, csv });
 
@@ -69,10 +67,7 @@ describe('transformCsv', () => {
       const expectedTransform = [{ C20E11: 'Passed' }];
       const questionId = 'epics';
 
-      const csv = `Supplier ID,Solution ID,Additional Service ID,Capability ID,Epic ID,Level,Epic Final Assessment Result
-      10000,10000-001,,C20,,May,Not Evidenced
-      10000,10000-001,,C20,C20E11,Must,Passed
-      10000,10000-001,,C20,C20E12,May,`;
+      const csv = 'Supplier ID,Solution ID,Additional Service ID,Capability ID,Epic ID,Level,Epic Final Assessment Result\r\n10000,10000-001,,C20,,May,Not Evidenced\r\n10000,10000-001,,C20,C20E11,Must,Passed\r\n10000,10000-001,,C20,C20E12,May,';
       const transformedData = await transformCsv({ questionId, csv });
 
       expect(transformedData).toEqual(expectedTransform);
