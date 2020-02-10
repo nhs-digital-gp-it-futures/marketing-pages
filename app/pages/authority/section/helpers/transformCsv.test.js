@@ -59,7 +59,7 @@ describe('transformCsv', () => {
     it('should transform multiple csv epics mappings', async () => {
       const expectedTransform = [{
         'epic-id': 'C20E13',
-        'assessment-result': 'Not Evidenced'
+        'assessment-result': 'Not Evidenced',
       }, {
         'epic-id': 'C20E11',
         'assessment-result': 'Passed',
