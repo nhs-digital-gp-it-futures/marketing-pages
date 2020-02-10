@@ -52,14 +52,14 @@ test('when existing marketing data - The solution description section and all qu
 
   await t
     .expect(solutionDescriptionSection.exists).ok()
-    .expect(await extractInnerText(solutionDescriptionSection.find('h3'))).eql('Solution description')
+    .expect(await extractInnerText(solutionDescriptionSection.find('h3'))).eql('Description')
 
     .expect(summaryQuestion.exists).ok()
     .expect(await extractInnerText(summaryQuestion.find('[data-test-id="view-question-title"]'))).eql('Summary')
     .expect(await extractInnerText(summaryQuestion.find('[data-test-id="view-question-data-text-summary"]'))).eql('The solution summary')
 
     .expect(descriptionQuestion.exists).ok()
-    .expect(await extractInnerText(descriptionQuestion.find('[data-test-id="view-question-title"]'))).eql('About the solution')
+    .expect(await extractInnerText(descriptionQuestion.find('[data-test-id="view-question-title"]'))).eql('Full description')
     .expect(await extractInnerText(descriptionQuestion.find('[data-test-id="view-question-data-text-description"]'))).eql('The solution description')
 
     .expect(linkQuestion.exists).ok()
@@ -169,7 +169,7 @@ test('when existing marketing data - The client application type section and bro
     .click(browserBasedExpandableSection.find('summary'))
     .expect(browserBasedExpandableSection.find('details[open]').exists).ok()
 
-    .expect(await extractInnerText(supportedBrowsersRow.find('div[data-test-id="view-section-table-row-title"]'))).eql('Browsers Supported')
+    .expect(await extractInnerText(supportedBrowsersRow.find('div[data-test-id="view-section-table-row-title"]'))).eql('Supported browser types')
     .expect(await extractInnerText(supportedBrowsersRow.find('div[data-test-id="view-section-table-row-component"]'))).contains('Google Chrome')
     .expect(await extractInnerText(supportedBrowsersRow.find('div[data-test-id="view-section-table-row-component"]'))).contains('Mozilla Firefox')
     .expect(supportedBrowsersRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok()
@@ -178,7 +178,7 @@ test('when existing marketing data - The client application type section and bro
     .expect(await extractInnerText(mobileResponsiveRow.find('div[data-test-id="view-section-table-row-component"]'))).eql('Yes')
     .expect(mobileResponsiveRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok()
 
-    .expect(await extractInnerText(mobileFirstRow.find('div[data-test-id="view-section-table-row-title"]'))).eql('Designed with a mobile first approach')
+    .expect(await extractInnerText(mobileFirstRow.find('div[data-test-id="view-section-table-row-title"]'))).eql('Mobile first approach')
     .expect(await extractInnerText(mobileFirstRow.find('div[data-test-id="view-section-table-row-component"]'))).eql('Yes')
     .expect(mobileFirstRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok()
 
@@ -186,15 +186,15 @@ test('when existing marketing data - The client application type section and bro
     .expect(await extractInnerText(pluginsRequiredRow.find('div[data-test-id="view-section-table-row-component"]'))).eql('Yes')
     .expect(pluginsRequiredRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok()
 
-    .expect(await extractInnerText(pluginsDetailRow.find('div[data-test-id="view-section-table-row-title"]'))).eql('Plug-ins or extensions information')
+    .expect(await extractInnerText(pluginsDetailRow.find('div[data-test-id="view-section-table-row-title"]'))).eql('Additional information about plug-ins or extensions')
     .expect(await extractInnerText(pluginsDetailRow.find('div[data-test-id="view-section-table-row-component"]'))).eql('The plugin detail')
-    .expect(pluginsDetailRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok()
+    .expect(pluginsDetailRow.find('div[data-test-id="view-section-table-row-vertical"]').exists).ok()
 
-    .expect(await extractInnerText(minimumConnectionRow.find('div[data-test-id="view-section-table-row-title"]'))).eql('Minimum connection speed required')
+    .expect(await extractInnerText(minimumConnectionRow.find('div[data-test-id="view-section-table-row-title"]'))).eql('Minimum connection speed')
     .expect(await extractInnerText(minimumConnectionRow.find('div[data-test-id="view-section-table-row-component"]'))).eql('1Mbps')
     .expect(minimumConnectionRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok()
 
-    .expect(await extractInnerText(minimumResolutionRow.find('div[data-test-id="view-section-table-row-title"]'))).eql('Recommended desktop aspect ratio and screen resolution')
+    .expect(await extractInnerText(minimumResolutionRow.find('div[data-test-id="view-section-table-row-title"]'))).eql('Screen resolution and aspect ratio')
     .expect(await extractInnerText(minimumResolutionRow.find('div[data-test-id="view-section-table-row-component"]'))).eql('4:3 800 x 600')
     .expect(minimumResolutionRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok()
 
@@ -242,23 +242,23 @@ test('when existing marketing data - The client application type section and nat
     .expect(await extractInnerText(operatingSystemRow.find('div[data-test-id="view-section-table-row-component"]'))).contains('Other')
     .expect(operatingSystemRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok()
 
-    .expect(await extractInnerText(operatingSystemDescriptionRow.find('div[data-test-id="view-section-table-row-title"]'))).eql('Additional operating system information')
+    .expect(await extractInnerText(operatingSystemDescriptionRow.find('div[data-test-id="view-section-table-row-title"]'))).eql('Description of supported operating systems')
     .expect(await extractInnerText(operatingSystemDescriptionRow.find('div[data-test-id="view-section-table-row-component"]'))).eql('Android 4.1 and above, IOS 10.6 and above.')
     .expect(operatingSystemDescriptionRow.find('div[data-test-id="view-section-table-row-vertical"]').exists).ok()
 
-    .expect(await extractInnerText(mobileFirstRow.find('div[data-test-id="view-section-table-row-title"]'))).eql('Designed with a mobile first approach')
+    .expect(await extractInnerText(mobileFirstRow.find('div[data-test-id="view-section-table-row-title"]'))).eql('Mobile first approach')
     .expect(await extractInnerText(mobileFirstRow.find('div[data-test-id="view-section-table-row-component"]'))).eql('Yes')
     .expect(mobileFirstRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok()
 
-    .expect(await extractInnerText(minimumMemoryRow.find('div[data-test-id="view-section-table-row-title"]'))).eql('Minimum memory requirement')
+    .expect(await extractInnerText(minimumMemoryRow.find('div[data-test-id="view-section-table-row-title"]'))).eql('Memory size')
     .expect(await extractInnerText(minimumMemoryRow.find('div[data-test-id="view-section-table-row-component"]'))).eql('4GB')
     .expect(minimumMemoryRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok()
 
-    .expect(await extractInnerText(storageDescriptionRow.find('div[data-test-id="view-section-table-row-title"]'))).eql('Additional storage requirements')
+    .expect(await extractInnerText(storageDescriptionRow.find('div[data-test-id="view-section-table-row-title"]'))).eql('Storage space')
     .expect(await extractInnerText(storageDescriptionRow.find('div[data-test-id="view-section-table-row-component"]'))).eql('You will need at least 4GB of free space on each device the application is installed. It is advised to use an external SD card for additional storage.')
     .expect(storageDescriptionRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok()
 
-    .expect(await extractInnerText(minimumConnectionRow.find('div[data-test-id="view-section-table-row-title"]'))).eql('Minimum connection speed required')
+    .expect(await extractInnerText(minimumConnectionRow.find('div[data-test-id="view-section-table-row-title"]'))).eql('Minimum connection speed')
     .expect(await extractInnerText(minimumConnectionRow.find('div[data-test-id="view-section-table-row-component"]'))).eql('1Mbps')
     .expect(minimumConnectionRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok()
 
@@ -269,25 +269,25 @@ test('when existing marketing data - The client application type section and nat
     .expect(await extractInnerText(connectionRequirementsRow.find('div[data-test-id="view-section-table-row-component"]'))).contains('Wifi')
     .expect(connectionRequirementsRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok()
 
-    .expect(await extractInnerText(connectionDescriptionRow.find('div[data-test-id="view-section-table-row-title"]'))).eql('Additional information about connection types')
+    .expect(await extractInnerText(connectionDescriptionRow.find('div[data-test-id="view-section-table-row-title"]'))).eql('Connection requirements')
     .expect(await extractInnerText(connectionDescriptionRow.find('div[data-test-id="view-section-table-row-component"]'))).eql('Average data usage will vary depending on application activity.')
     .expect(connectionDescriptionRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok()
 
-    .expect(await extractInnerText(thirdPartyComponentsRow.find('div[data-test-id="view-section-table-row-title"]'))).eql('Third party components required')
+    .expect(await extractInnerText(thirdPartyComponentsRow.find('div[data-test-id="view-section-table-row-title"]'))).eql('Third-party components')
     .expect(await extractInnerText(thirdPartyComponentsRow.find('div[data-test-id="view-section-table-row-component"]'))).eql('The application supports and requires an authenticator on each device the application is installed. You will need a software-based authenticator that implements a two-step verification service.')
-    .expect(thirdPartyComponentsRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok()
+    .expect(thirdPartyComponentsRow.find('div[data-test-id="view-section-table-row-vertical"]').exists).ok()
 
-    .expect(await extractInnerText(deviceCapabilitiesRow.find('div[data-test-id="view-section-table-row-title"]'))).eql('Device capabilities required')
+    .expect(await extractInnerText(deviceCapabilitiesRow.find('div[data-test-id="view-section-table-row-title"]'))).eql('Device capabilities')
     .expect(await extractInnerText(deviceCapabilitiesRow.find('div[data-test-id="view-section-table-row-component"]'))).eql('In order to use our file hosting services, the application will require permission to access device storage.')
-    .expect(deviceCapabilitiesRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok()
+    .expect(deviceCapabilitiesRow.find('div[data-test-id="view-section-table-row-vertical"]').exists).ok()
 
     .expect(await extractInnerText(hardwareRequirementsRow.find('div[data-test-id="view-section-table-row-title"]'))).eql('Hardware requirements')
     .expect(await extractInnerText(hardwareRequirementsRow.find('div[data-test-id="view-section-table-row-component"]'))).eql('To fully utilise our print functionality within the application, you will need a WiFi or Bluetooth connected printer to connect and print documents straight from the device.')
-    .expect(hardwareRequirementsRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok()
+    .expect(hardwareRequirementsRow.find('div[data-test-id="view-section-table-row-vertical"]').exists).ok()
 
     .expect(await extractInnerText(additionalInformationRow.find('div[data-test-id="view-section-table-row-title"]'))).eql('Additional information')
     .expect(await extractInnerText(additionalInformationRow.find('div[data-test-id="view-section-table-row-component"]'))).eql('It is possible that it may install on other platforms or versions not listed in this section. However, support is limited to systems that meet the minimum requirements.')
-    .expect(additionalInformationRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok();
+    .expect(additionalInformationRow.find('div[data-test-id="view-section-table-row-vertical"]').exists).ok();
 });
 
 test('when existing marketing data - The client application type section and native-desktop section should be rendered', async (t) => {
@@ -319,43 +319,43 @@ test('when existing marketing data - The client application type section and nat
 
     .expect(await extractInnerText(operatingSystemDescriptionRow.find('div[data-test-id="view-section-table-row-title"]'))).eql('Supported operating systems')
     .expect(await extractInnerText(operatingSystemDescriptionRow.find('div[data-test-id="view-section-table-row-component"]'))).eql('Windows 7 and above.')
-    .expect(operatingSystemDescriptionRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok()
+    .expect(operatingSystemDescriptionRow.find('div[data-test-id="view-section-table-row-vertical"]').exists).ok()
 
-    .expect(await extractInnerText(minimumConnectionRow.find('div[data-test-id="view-section-table-row-title"]'))).eql('Minimum connection speed required')
+    .expect(await extractInnerText(minimumConnectionRow.find('div[data-test-id="view-section-table-row-title"]'))).eql('Minimum connection speed')
     .expect(await extractInnerText(minimumConnectionRow.find('div[data-test-id="view-section-table-row-component"]'))).eql('2Mbps')
     .expect(minimumConnectionRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok()
 
-    .expect(await extractInnerText(minimumMemoryRow.find('div[data-test-id="view-section-table-row-title"]'))).eql('Minimum memory requirement')
+    .expect(await extractInnerText(minimumMemoryRow.find('div[data-test-id="view-section-table-row-title"]'))).eql('Memory size')
     .expect(await extractInnerText(minimumMemoryRow.find('div[data-test-id="view-section-table-row-component"]'))).eql('4GB')
     .expect(minimumMemoryRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok()
 
-    .expect(await extractInnerText(storageDescriptionRow.find('div[data-test-id="view-section-table-row-title"]'))).eql('Additional storage requirements')
+    .expect(await extractInnerText(storageDescriptionRow.find('div[data-test-id="view-section-table-row-title"]'))).eql('Storage space')
     .expect(await extractInnerText(storageDescriptionRow.find('div[data-test-id="view-section-table-row-component"]'))).eql('You will need at least 2.5GB of free space on each device the application is installed.')
     .expect(storageDescriptionRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok()
 
-    .expect(await extractInnerText(minimumCPURow.find('div[data-test-id="view-section-table-row-title"]'))).eql('Minimum necessary CPU power')
+    .expect(await extractInnerText(minimumCPURow.find('div[data-test-id="view-section-table-row-title"]'))).eql('Processing power')
     .expect(await extractInnerText(minimumCPURow.find('div[data-test-id="view-section-table-row-component"]'))).eql('Intel Core i5-4460 (3.4GHz) Quad-core or Better.')
     .expect(minimumCPURow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok()
 
-    .expect(await extractInnerText(recommendedResolutionRow.find('div[data-test-id="view-section-table-row-title"]'))).eql('Recommended desktop aspect ratio and screen resolution')
+    .expect(await extractInnerText(recommendedResolutionRow.find('div[data-test-id="view-section-table-row-title"]'))).eql('Screen resolution and aspect ratio')
     .expect(await extractInnerText(recommendedResolutionRow.find('div[data-test-id="view-section-table-row-component"]'))).eql('16:9 - 1920 x 1080')
     .expect(recommendedResolutionRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok()
 
-    .expect(await extractInnerText(thirdPartyComponentsRow.find('div[data-test-id="view-section-table-row-title"]'))).eql('Third party components required')
+    .expect(await extractInnerText(thirdPartyComponentsRow.find('div[data-test-id="view-section-table-row-title"]'))).eql('Third-party components')
     .expect(await extractInnerText(thirdPartyComponentsRow.find('div[data-test-id="view-section-table-row-component"]'))).eql('To fully utilise the letter template functionality, you will need a fully licensed version of Microsoft Word 2013 or higher.')
-    .expect(thirdPartyComponentsRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok()
+    .expect(thirdPartyComponentsRow.find('div[data-test-id="view-section-table-row-vertical"]').exists).ok()
 
-    .expect(await extractInnerText(deviceCapabilitiesRow.find('div[data-test-id="view-section-table-row-title"]'))).eql('Device capabilities required')
+    .expect(await extractInnerText(deviceCapabilitiesRow.find('div[data-test-id="view-section-table-row-title"]'))).eql('Device capabilities')
     .expect(await extractInnerText(deviceCapabilitiesRow.find('div[data-test-id="view-section-table-row-component"]'))).eql('In order to use our branded wireless Dictaphone, the device will require Bluetooth.')
-    .expect(deviceCapabilitiesRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok()
+    .expect(deviceCapabilitiesRow.find('div[data-test-id="view-section-table-row-vertical"]').exists).ok()
 
     .expect(await extractInnerText(hardwareRequirementsRow.find('div[data-test-id="view-section-table-row-title"]'))).eql('Hardware requirements')
     .expect(await extractInnerText(hardwareRequirementsRow.find('div[data-test-id="view-section-table-row-component"]'))).eql('To fully utilise the transcribing functionality within the application, you will need to purchase our branded wireless Dictaphone.')
-    .expect(hardwareRequirementsRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok()
+    .expect(hardwareRequirementsRow.find('div[data-test-id="view-section-table-row-vertical"]').exists).ok()
 
     .expect(await extractInnerText(additionalInformationRow.find('div[data-test-id="view-section-table-row-title"]'))).eql('Additional information')
     .expect(await extractInnerText(additionalInformationRow.find('div[data-test-id="view-section-table-row-component"]'))).eql('It is possible that it may install on other platforms or versions not listed in this section. However, support is limited to systems that meet the minimum requirements.')
-    .expect(additionalInformationRow.find('div[data-test-id="view-section-table-row-horizontal"]').exists).ok();
+    .expect(additionalInformationRow.find('div[data-test-id="view-section-table-row-vertical"]').exists).ok();
 });
 
 test('when existing marketing data - The hosting type public cloud section should be rendered', async (t) => {
