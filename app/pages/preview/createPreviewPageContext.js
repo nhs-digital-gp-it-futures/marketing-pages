@@ -1,5 +1,13 @@
-export const createPreviewPageContext = ({ previewData }) => {
-  const sections = Object.fromEntries(
+export const createPreviewPageContext = ({ previewData, userContextType = 'supplier' }) => ({
+  solutionHeader: {
+    id: previewData.id,
+    name: previewData.name,
+    supplierName: previewData.supplierName,
+    isFoundation: previewData.isFoundation,
+    lastUpdated: previewData.lastUpdated,
+  },
+  returnToDashboardUrl: `/${userContextType}/solution/${previewData.id}`,
+  sections: Object.fromEntries(
     Object.entries(previewData.sections).map(([key, sectionValue]) => {
       if (sectionValue.answers && sectionValue.answers['document-name']) {
         const answerSection = {
@@ -16,7 +24,5 @@ export const createPreviewPageContext = ({ previewData }) => {
       }
       return [key, sectionValue];
     }),
-  );
-
-  return { sections };
-};
+  ),
+});
