@@ -8,10 +8,19 @@ const setup = {
 
 describe('preview page', () => {
   it('should render the title of the preview page', createTestHarness(setup, (harness) => {
-    const context = {};
+    const context = {
+      solutionHeader: {
+        id: '100000-001',
+        name: 'Write on Time',
+        supplierName: 'Really Kool Corporation',
+        isFoundation: true,
+        lastUpdated: '1996-03-15T10:00:00',
+      },
+      returnToDashboardUrl: '/supplier/solution/100000-001',
+    };
 
     harness.request(context, ($) => {
-      expect($('h1').text().trim()).toEqual('Preview Page');
+      expect($('h1').text().trim()).toEqual('Write on Time');
     });
   }));
 

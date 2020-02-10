@@ -7,6 +7,14 @@ import * as dashboardControllers from './pages/common/dashboard/controller';
 jest.mock('./logger');
 
 const mockPreviewContext = {
+  solutionHeader: {
+    id: '100000-001',
+    name: 'Write on Time',
+    supplierName: 'Really Kool Corporation',
+    isFoundation: true,
+    lastUpdated: '1996-03-15T10:00:00',
+  },
+  returnToDashboardUrl: '/supplier/solution/100000-001',
   sections: {
     'solution-description': { answers: {} },
     features: { answers: {} },
@@ -43,7 +51,7 @@ describe('GET /solution/:solutionId/preview', () => {
       .get('/solution/1/preview')
       .expect(200)
       .then((res) => {
-        expect(res.text.includes('<h1>Preview Page</h1>')).toEqual(true);
+        expect(res.text.includes('<h1 data-test-id="view-solution-page-solution-name" class="nhsuk-u-margin-bottom-2">Write on Time</h1>')).toEqual(true);
         expect(res.text.includes('data-test-id="error-page-title"')).toEqual(false);
       });
   });

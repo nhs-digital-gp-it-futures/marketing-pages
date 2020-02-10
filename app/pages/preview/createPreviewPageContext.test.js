@@ -1,8 +1,36 @@
 import { createPreviewPageContext } from './createPreviewPageContext';
 
+const expectedContext = {
+  solutionHeader: {
+    id: '100000-001',
+    name: 'Write on Time',
+    supplierName: 'Really Kool Corporation',
+    isFoundation: true,
+    lastUpdated: '1996-03-15T10:00:00',
+  },
+  returnToDashboardUrl: '/supplier/solution/100000-001',
+};
+
+const previewData = {
+  id: '100000-001',
+  name: 'Write on Time',
+  supplierName: 'Really Kool Corporation',
+  isFoundation: true,
+  lastUpdated: '1996-03-15T10:00:00',
+};
+
 describe('createPreviewPageContext', () => {
   it('should return the sections provided in the previewData', () => {
-    const expectedContext = {
+    const newExpectedContext = {
+      ...expectedContext,
+      sections: {
+        'some-section': {
+          answers: {},
+        },
+      },
+    };
+    const newPreviewData = {
+      ...previewData,
       sections: {
         'some-section': {
           answers: {},
@@ -10,22 +38,14 @@ describe('createPreviewPageContext', () => {
       },
     };
 
-    const previewData = {
-      id: 'some-solution',
-      sections: {
-        'some-section': {
-          answers: {},
-        },
-      },
-    };
+    const context = createPreviewPageContext({ previewData: newPreviewData });
 
-    const context = createPreviewPageContext({ previewData });
-
-    expect(context).toEqual(expectedContext);
+    expect(context).toEqual(newExpectedContext);
   });
 
   it('should create documentLink for all documentName', () => {
-    const expectedContext = {
+    const newExpectedContext = {
+      ...expectedContext,
       sections: {
         'some-section': {
           answers: {
@@ -35,8 +55,8 @@ describe('createPreviewPageContext', () => {
       },
     };
 
-    const previewData = {
-      id: 'some-solution',
+    const newPreviewData = {
+      ...previewData,
       sections: {
         'some-section': {
           answers: {
@@ -46,13 +66,14 @@ describe('createPreviewPageContext', () => {
       },
     };
 
-    const context = createPreviewPageContext({ previewData });
+    const context = createPreviewPageContext({ previewData: newPreviewData });
 
-    expect(context).toEqual(expectedContext);
+    expect(context).toEqual(newExpectedContext);
   });
 
   it('should maintain other properties', () => {
-    const expectedContext = {
+    const newExpectedContext = {
+      ...expectedContext,
       sections: {
         'some-section': {
           answers: {
@@ -63,8 +84,8 @@ describe('createPreviewPageContext', () => {
       },
     };
 
-    const previewData = {
-      id: 'some-solution',
+    const newPreviewData = {
+      ...previewData,
       sections: {
         'some-section': {
           answers: {
@@ -75,13 +96,14 @@ describe('createPreviewPageContext', () => {
       },
     };
 
-    const context = createPreviewPageContext({ previewData });
+    const context = createPreviewPageContext({ previewData: newPreviewData });
 
-    expect(context).toEqual(expectedContext);
+    expect(context).toEqual(newExpectedContext);
   });
 
   it('should manage multiple sections', () => {
-    const expectedContext = {
+    const newExpectedContext = {
+      ...expectedContext,
       sections: {
         'first-section': {
           answers: {
@@ -105,8 +127,8 @@ describe('createPreviewPageContext', () => {
       },
     };
 
-    const previewData = {
-      id: 'some-solution',
+    const newPreviewData = {
+      ...previewData,
       sections: {
         'first-section': {
           answers: {
@@ -130,8 +152,8 @@ describe('createPreviewPageContext', () => {
       },
     };
 
-    const context = createPreviewPageContext({ previewData });
+    const context = createPreviewPageContext({ previewData: newPreviewData });
 
-    expect(context).toEqual(expectedContext);
+    expect(context).toEqual(newExpectedContext);
   });
 });

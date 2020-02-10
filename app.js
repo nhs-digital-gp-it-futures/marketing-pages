@@ -6,6 +6,7 @@ const compression = require('compression');
 const express = require('express');
 const nunjucks = require('nunjucks');
 const bodyParser = require('body-parser');
+const dateFilter = require('nunjucks-date-filter');
 
 // Local dependencies
 const config = require('./app/config');
@@ -43,12 +44,13 @@ class App {
       path.join(__dirname, 'node_modules/nhsuk-frontend/packages/'),
     ];
 
-    nunjucks.configure(appViews, {
+    const env = nunjucks.configure(appViews, {
       autoescape: true,
       express: this.app,
       noCache: true,
     });
 
+    env.addFilter('dateTime', dateFilter);
     return this.app;
   }
 }

@@ -37,7 +37,7 @@
       "additionalAdvice": "Select whether the Solutions requires a HSCN connection to function",
       "type": "checkbox-options",
       "options": {
-        "This Solution requires a HSCN/N3 connection": "This Solution requires a HSCN/N3 connection"
+        "End user devices must be connected to HSCN/N3": "Yes, devices must be connected to HSCN/N3"
       }
     }
   },
