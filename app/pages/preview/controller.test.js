@@ -6,7 +6,11 @@ jest.mock('../../apiProvider');
 describe('preview controller', () => {
   const previewData = {
     data: {
-      id: 'some-solution',
+      id: '100000-001',
+      name: 'Write on Time',
+      supplierName: 'Really Kool Corporation',
+      isFoundation: true,
+      lastUpdated: '1996-03-15T10:00:00',
       sections: {
         'some-section': {
           answers: {},
@@ -17,6 +21,14 @@ describe('preview controller', () => {
 
   it('should return the context when preview data is returned by the ApiProvider', async () => {
     const expectedContext = {
+      solutionHeader: {
+        id: '100000-001',
+        name: 'Write on Time',
+        supplierName: 'Really Kool Corporation',
+        isFoundation: true,
+        lastUpdated: '1996-03-15T10:00:00',
+      },
+      returnToDashboardUrl: '/supplier/solution/100000-001',
       sections: {
         'some-section': {
           answers: {},
@@ -26,7 +38,7 @@ describe('preview controller', () => {
 
     ApiProvider.prototype.getPreviewData.mockResolvedValue(previewData);
 
-    const context = await getPreviewPageContext({ solutionId: 'some-solution-id' });
+    const context = await getPreviewPageContext({ solutionId: '100000-001' });
 
     expect(context).toEqual(expectedContext);
   });
