@@ -24,13 +24,58 @@ const pageSetup = async (t, existingData = false) => {
 
 fixture('Show marketing preview page');
 
-test('should render the marketing preview page title', async (t) => {
+test('should render the marketing preview page back link', async (t) => {
   await pageSetup(t);
 
-  const title = Selector('h1');
+  const backLink = Selector('[data-test-id="view-solution-page-back-link"]');
 
   await t
-    .expect(await extractInnerText(title)).eql('Preview Page');
+    .expect(await extractInnerText(backLink)).eql('Go back to previous page');
+});
+
+test('should render the marketing preview page foundation tag', async (t) => {
+  await pageSetup(t);
+
+  const foundationTag = Selector('[data-test-id="view-solution-foundation"]');
+
+  await t
+    .expect(await extractInnerText(foundationTag)).eql('Foundation Solution Set');
+});
+
+test('should render the marketing preview page solution name', async (t) => {
+  await pageSetup(t);
+
+  const solutionName = Selector('[data-test-id="view-solution-page-solution-name"]');
+
+  await t
+    .expect(await extractInnerText(solutionName)).eql('Write on Time');
+});
+
+test('should render the marketing preview page supplier name', async (t) => {
+  await pageSetup(t);
+
+  const supplierName = Selector('[data-test-id="view-solution-page-supplier-name"]');
+
+  await t
+    .expect(await extractInnerText(supplierName)).eql('Really Kool Corporation');
+});
+
+test('should render the marketing preview page supplier name', async (t) => {
+  await pageSetup(t);
+
+  const solutionId = Selector('[data-test-id="view-solution-page-solution-id"]');
+
+  await t
+    .expect(await extractInnerText(solutionId)).eql('Solution ID: 100000-001');
+});
+
+test('should render the marketing preview page last updated date', async (t) => {
+  await pageSetup(t);
+
+  const lastUpdated = Selector('[data-test-id="view-solution-page-last-updated"]');
+
+  await t
+    .expect(await extractInnerText(lastUpdated)).eql('Solution information last updated: 15 March 1996');
 });
 
 test('when no existing marketing data - The solution description section should not be rendered', async (t) => {
