@@ -48,6 +48,42 @@ describe('preview page', () => {
     });
   }));
 
+  describe('integrations', () => {
+    it('should render the integrations section if link is provided', createTestHarness(setup, (harness) => {
+      const context = {
+        sections: {
+          integrations: {
+            answers: {
+              link: 'link.com',
+            },
+          },
+        },
+      };
+
+      harness.request(context, ($) => {
+        expect($('[data-test-id="view-integrations"]').length).toEqual(1);
+        expect($('[data-test-id="view-question-data-text-link-supplier-integrations"]').length).toEqual(1);
+      });
+    }));
+
+    it('should render the integrations section document-link is provided', createTestHarness(setup, (harness) => {
+      const context = {
+        sections: {
+          integrations: {
+            answers: {
+              'document-link': 'document.pdf',
+            },
+          },
+        },
+      };
+
+      harness.request(context, ($) => {
+        expect($('[data-test-id="view-integrations"]').length).toEqual(1);
+        expect($('[data-test-id="view-question-data-text-link-authority-integrations"]').length).toEqual(1);
+      });
+    }));
+  });
+
   it('should render the client application types section when provided', createTestHarness(setup, (harness) => {
     const context = {
       sections: {

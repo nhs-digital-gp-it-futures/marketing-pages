@@ -33,7 +33,8 @@
     },
     "integrations": {
       "answers": {
-        "link": "http://www.link.com"
+        "link": "http://www.link.com",
+        "document-name": "integration.pdf"
       }
     },
     "implementation-timescales": {
