@@ -150,12 +150,16 @@ test('when existing marketing data - The capabilities section should be rendered
 
   const capabilitiesSection = Selector('[data-test-id="view-capabilities"]');
   const capabilitiesExpandableSection = Selector('[data-test-id="view-section-capabilities"]');
+  const capabilitiesTitle = await extractInnerText(capabilitiesSection.find('[data-test-id="view-section-table-row-capabilities"]'));
+  const capabilitiesTitleParts = capabilitiesTitle.split(/\n/);
 
   await t
     .expect(capabilitiesSection.exists).ok()
     .expect(await extractInnerText(capabilitiesSection.find('h3'))).eql('Capabilities met - NHS assured')
     .expect(capabilitiesSection.find('[data-test-id="view-section-table-row-capabilities"]').exists).ok()
-    .expect(await extractInnerText(capabilitiesSection.find('[data-test-id="view-section-table-row-capabilities"]'))).eql('Example capability, 1.0.1\nDescribes the capability.\nHow this capability was met')
+    .expect(capabilitiesTitleParts[0]).eql('Example capability, 1.0.1')
+    .expect(capabilitiesTitleParts[1]).eql('Describes the capability.')
+    .expect(capabilitiesTitleParts[2]).eql('How this capability was met')
     .expect(capabilitiesSection.find('[data-test-id="view-question-data-text-description"]').exists).ok()
     .expect(await extractInnerText(capabilitiesSection.find('[data-test-id="view-question-data-text-description"]'))).eql('Describes the capability.')
     .expect(capabilitiesExpandableSection.exists).ok()
