@@ -21,6 +21,16 @@
         ]
       }
     },
+    "capabilities": {
+      "answers": {
+        "capabilities-met": [{
+            "name": "Example capability",
+            "version": "1.0.1",
+            "description": "Describes the capability.",
+            "link": "https://link-to-capability.com"
+          }]
+      }
+    },
     "integrations": {
       "answers": {
         "link": "http://www.link.com",

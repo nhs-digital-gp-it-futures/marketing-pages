@@ -107,4 +107,25 @@ describe('preview page', () => {
       expect($('[data-test-id="view-hosting-types"]').length).toEqual(1);
     });
   }));
+
+  it('should render the capabilities section when provided', createTestHarness(setup, (harness) => {
+    const context = {
+      sections: {
+        capabilities: {
+          answers: {
+            'capabilities-met': [{
+              name: 'Communicate With Practice - Citizen',
+              version: '1.0.1',
+              description: 'Supports secure and trusted electronic communications between Citizens and the Practice. Integrates with Patient Information Maintenance.',
+              link: 'https://gpitbjss.atlassian.net/wiki/spaces/GPITF/pages/1391134188/Communicate+With+Practice+-+Citizen',
+            }],
+          },
+        },
+      },
+    };
+
+    harness.request(context, ($) => {
+      expect($('[data-test-id="view-capabilities"]').length).toEqual(1);
+    });
+  }));
 });

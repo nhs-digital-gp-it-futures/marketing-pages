@@ -129,13 +129,44 @@ test('when existing marketing data - The features section should be rendered and
     .expect(featuresSection.exists).ok()
     .expect(await extractInnerText(featuresSection.find('h3'))).eql('Features')
 
-    .expect(featuresSection.exists).ok()
     .expect(featuresSection.find('[data-test-id="view-question-title"]').exists).notOk()
     .expect(featuresSection.find('[data-test-id="view-question-data-bulletlist"]').exists).ok()
     .expect(featuresSection.find('[data-test-id="view-question-data-bulletlist"]').find('li').count).eql(3)
     .expect(await extractInnerText(featuresSection.find('[data-test-id="view-question-data-bulletlist"]').find('li:nth-child(1)'))).eql('Feature A')
     .expect(await extractInnerText(featuresSection.find('[data-test-id="view-question-data-bulletlist"]').find('li:nth-child(2)'))).eql('Feature B')
     .expect(await extractInnerText(featuresSection.find('[data-test-id="view-question-data-bulletlist"]').find('li:nth-child(3)'))).eql('Feature C');
+});
+
+test('when no existing marketing data - The capabilities section should not be rendered', async (t) => {
+  await pageSetup(t);
+  const featuresSection = Selector('[data-test-id="view-capabilities"]');
+
+  await t
+    .expect(featuresSection.exists).notOk();
+});
+
+test('when existing marketing data - The capabilities section should be rendered and the capabilities displayed', async (t) => {
+  await pageSetup(t, true);
+
+  const capabilitiesSection = Selector('[data-test-id="view-capabilities"]');
+  const capabilitiesExpandableSection = Selector('[data-test-id="view-section-capabilities"]');
+  const capabilitiesTitle = await extractInnerText(capabilitiesSection.find('[data-test-id="view-section-table-row-capabilities"]'));
+  const capabilitiesTitleParts = capabilitiesTitle.split(/\n/);
+
+  await t
+    .expect(capabilitiesSection.exists).ok()
+    .expect(await extractInnerText(capabilitiesSection.find('h3'))).eql('Capabilities met - NHS assured')
+    .expect(capabilitiesSection.find('[data-test-id="view-section-table-row-capabilities"]').exists).ok()
+    .expect(capabilitiesTitleParts[0].trim()).eql('Example capability, 1.0.1')
+    .expect(capabilitiesTitleParts[1].trim()).eql('Describes the capability.')
+    .expect(capabilitiesTitleParts[2].trim()).eql('How this capability was met')
+    .expect(capabilitiesSection.find('[data-test-id="view-question-data-text-description"]').exists).ok()
+    .expect(await extractInnerText(capabilitiesSection.find('[data-test-id="view-question-data-text-description"]'))).eql('Describes the capability.')
+    .expect(capabilitiesExpandableSection.exists).ok()
+    .expect(capabilitiesExpandableSection.find('details[open]').exists).notOk()
+    .click(capabilitiesExpandableSection.find('summary'))
+    .expect(capabilitiesExpandableSection.find('details[open]').exists).ok()
+    .expect(await capabilitiesExpandableSection.find('[data-test-id="view-question-data-text-link"] > a').getAttribute('href')).eql('https://link-to-capability.com');
 });
 
 test('when no existing marketing data - The integrations section should not be rendered', async (t) => {
