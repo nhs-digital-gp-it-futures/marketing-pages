@@ -154,9 +154,8 @@ test('when existing marketing data - The integrations section should be rendered
   await t
     .expect(integrationsSection.exists).ok()
     .expect(await extractInnerText(integrationsSection.find('h3'))).eql('Integrations')
-
-    .expect(integrationsSection.exists).ok()
-    .expect(await extractInnerText(integrationsSection.find('[data-test-id="view-question-data-text-link"]'))).eql('http://www.link.com');
+    .expect(await extractInnerText(integrationsSection.find('[data-test-id="view-question-data-text-link-authority-integrations"]'))).eql('View NHS assured integrations')
+    .expect(await extractInnerText(integrationsSection.find('[data-test-id="view-question-data-text-link-supplier-integrations"]'))).eql('http://www.link.com');
 });
 
 test('when no existing marketing data - The implementation timescales section should not be rendered', async (t) => {

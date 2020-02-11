@@ -62,16 +62,16 @@ describe('preview page', () => {
 
       harness.request(context, ($) => {
         expect($('[data-test-id="view-integrations"]').length).toEqual(1);
-        expect($('[data-test-id="view-question-data-text-link"]').length).toEqual(1);
+        expect($('[data-test-id="view-question-data-text-link-supplier-integrations"]').length).toEqual(1);
       });
     }));
 
-    it('should render the integrations section document-name is provided', createTestHarness(setup, (harness) => {
+    it('should render the integrations section document-link is provided', createTestHarness(setup, (harness) => {
       const context = {
         sections: {
           integrations: {
             answers: {
-              'document-name': 'document.pdf',
+              'document-link': 'document.pdf',
             },
           },
         },
