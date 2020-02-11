@@ -150,11 +150,13 @@ test('when existing marketing data - The integrations section should be rendered
   await pageSetup(t, true);
 
   const integrationsSection = Selector('[data-test-id="view-integrations"]');
+  const documentLink = integrationsSection.find('[data-test-id="view-question-data-text-link-authority-integrations"]');
 
   await t
     .expect(integrationsSection.exists).ok()
     .expect(await extractInnerText(integrationsSection.find('h3'))).eql('Integrations')
-    .expect(await extractInnerText(integrationsSection.find('[data-test-id="view-question-data-text-link-authority-integrations"]'))).eql('View NHS assured integrations')
+    .expect(await extractInnerText(documentLink)).eql('View NHS assured integrations')
+    .expect(await documentLink.find('a').getAttribute('href')).eql('document/integration.pdf')
     .expect(await extractInnerText(integrationsSection.find('[data-test-id="view-question-data-text-link-supplier-integrations"]'))).eql('http://www.link.com');
 });
 
