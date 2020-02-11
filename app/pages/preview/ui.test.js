@@ -241,7 +241,7 @@ test('when existing marketing data - The client application type section and bro
     .expect(await extractInnerText(clientApplicationTypesSection.find('h3'))).eql('Client application type')
 
     .expect(browserBasedExpandableSection.exists).ok()
-    .expect(await extractInnerText(browserBasedExpandableSection)).eql('Browser based application')
+    .expect(await extractInnerText(browserBasedExpandableSection)).eql('Browser-based application')
     .expect(browserBasedExpandableSection.find('details[open]').exists).notOk()
     .click(browserBasedExpandableSection.find('summary'))
     .expect(browserBasedExpandableSection.find('details[open]').exists).ok()
