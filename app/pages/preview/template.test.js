@@ -117,7 +117,7 @@ describe('preview page', () => {
               name: 'Communicate With Practice - Citizen',
               version: '1.0.1',
               description: 'Supports secure and trusted electronic communications between Citizens and the Practice. Integrates with Patient Information Maintenance.',
-              link: 'https://gpitbjss.atlassian.net/wiki/spaces/GPITF/pages/1391134188/Communicate+With+Practice+-+Citizen'
+              link: 'https://gpitbjss.atlassian.net/wiki/spaces/GPITF/pages/1391134188/Communicate+With+Practice+-+Citizen',
             }],
           },
         },
