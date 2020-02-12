@@ -132,39 +132,39 @@ test('Client-application-types section should not be rendered', async (t) => {
 });
 
 test('Hosting type - public cloud section should not be rendered', async (t) => {
-  await pageSetup(t, true);
+  await pageSetup(t);
 
   const hostingTypesSection = Selector('[data-test-id="view-hosting-types"]');
 
   await t
-    .expect(hostingTypesSection.exists).notOk()
+    .expect(hostingTypesSection.exists).notOk();
 });
 
 test('Hosting type - private cloud section should not be rendered', async (t) => {
-  await pageSetup(t, true);
+  await pageSetup(t);
 
   const hostingTypesSection = Selector('[data-test-id="view-hosting-types"]');
 
   await t
-    .expect(hostingTypesSection.exists).notOk()
+    .expect(hostingTypesSection.exists).notOk();
 });
 
 test('Hosting type - hybrid section should not be rendered', async (t) => {
-  await pageSetup(t, true);
+  await pageSetup(t);
 
   const hostingTypesSection = Selector('[data-test-id="view-hosting-types"]');
 
   await t
-    .expect(hostingTypesSection.exists).notOk()
+    .expect(hostingTypesSection.exists).notOk();
 });
 
 test('Hosting type - on premise section should not be rendered', async (t) => {
-  await pageSetup(t, true);
+  await pageSetup(t);
 
   const hostingTypesSection = Selector('[data-test-id="view-hosting-types"]');
 
   await t
-    .expect(hostingTypesSection.exists).ok()
+    .expect(hostingTypesSection.exists).notOk();
 });
 
 test('About supplier section should not be rendered', async (t) => {
