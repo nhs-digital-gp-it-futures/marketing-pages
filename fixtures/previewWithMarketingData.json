@@ -211,6 +211,11 @@
         "link": "http://www.supplier.com"
       }
     },
+    "learn-more": {
+      "answers": {
+        "document-name": "solution.pdf"
+      }
+    },
     "contact-details": {
       "answers": {
         "contact-1": {

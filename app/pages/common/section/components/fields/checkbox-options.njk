@@ -1,7 +1,7 @@
 {% from 'components/checkboxes/macro.njk' import checkboxes %}
 
 {% macro checkboxOptions(params) %}
-  <div id="question-{{ params.question.id }}" data-test-id="question-{{ params.question.id }}">
+  <div id="{{ params.question.id }}" data-test-id="question-{{ params.question.id }}">
     {% if (params.question.error) %}
       <div data-test-id="checkbox-options-error">
         {{ checkboxes({
