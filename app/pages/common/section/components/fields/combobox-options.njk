@@ -1,7 +1,7 @@
 {% from 'components/select/macro.njk' import select %}
 
 {% macro comboboxOptions(params) %}
-  <div id="question-{{ params.question.id }}" data-test-id="question-{{ params.question.id }}">
+  <div id="{{ params.question.id }}" data-test-id="question-{{ params.question.id }}">
     {% if (params.question.error) %}
       <div data-test-id="combobox-options-error">
         {{ select({
