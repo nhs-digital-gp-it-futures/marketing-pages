@@ -22,7 +22,7 @@ const pageSetup = async (t, existingData = false) => {
   await t.navigateTo(`${clientLocalhost}/solution/S100000-001/preview`);
 };
 
-fixture('Show marketing preview page');
+fixture('Show marketing preview page - heading components');
 
 test('should render the marketing preview page back link', async (t) => {
   await pageSetup(t);
@@ -78,7 +78,10 @@ test('should render the marketing preview page last updated date', async (t) => 
     .expect(await extractInnerText(lastUpdated)).eql('Solution information last updated: 15 March 1996');
 });
 
-test('when no existing marketing data - The solution description section should not be rendered', async (t) => {
+
+fixture('Show marketing preview page - no existing marketing data');
+
+test('Solution description section should not be rendered', async (t) => {
   await pageSetup(t);
 
   const solutionDescriptionSection = Selector('[data-test-id="view-solution-description"]');
@@ -87,7 +90,114 @@ test('when no existing marketing data - The solution description section should 
     .expect(solutionDescriptionSection.exists).notOk();
 });
 
-test('when existing marketing data - The solution description section and all questions should be rendered', async (t) => {
+test('Features section should not be rendered', async (t) => {
+  await pageSetup(t);
+  const featuresSection = Selector('[data-test-id="view-features"]');
+
+  await t
+    .expect(featuresSection.exists).notOk();
+});
+
+test('Capabilities section should not be rendered', async (t) => {
+  await pageSetup(t);
+  const featuresSection = Selector('[data-test-id="view-capabilities"]');
+
+  await t
+    .expect(featuresSection.exists).notOk();
+});
+
+test('Integrations section should not be rendered', async (t) => {
+  await pageSetup(t);
+  const integrationsSection = Selector('[data-test-id="view-integrations"]');
+
+  await t
+    .expect(integrationsSection.exists).notOk();
+});
+
+test('Implementation timescales section should not be rendered', async (t) => {
+  await pageSetup(t);
+  const integrationsSection = Selector('[data-test-id="view-implementation-timescales"]');
+
+  await t
+    .expect(integrationsSection.exists).notOk();
+});
+
+test('Client-application-types section should not be rendered', async (t) => {
+  await pageSetup(t);
+
+  const clientApplicationTypesSection = Selector('[data-test-id="view-client-application-types"]');
+
+  await t
+    .expect(clientApplicationTypesSection.exists).notOk();
+});
+
+test('Hosting type - public cloud section should not be rendered', async (t) => {
+  await pageSetup(t);
+
+  const hostingTypesSection = Selector('[data-test-id="view-hosting-types"]');
+
+  await t
+    .expect(hostingTypesSection.exists).notOk();
+});
+
+test('Hosting type - private cloud section should not be rendered', async (t) => {
+  await pageSetup(t);
+
+  const hostingTypesSection = Selector('[data-test-id="view-hosting-types"]');
+
+  await t
+    .expect(hostingTypesSection.exists).notOk();
+});
+
+test('Hosting type - hybrid section should not be rendered', async (t) => {
+  await pageSetup(t);
+
+  const hostingTypesSection = Selector('[data-test-id="view-hosting-types"]');
+
+  await t
+    .expect(hostingTypesSection.exists).notOk();
+});
+
+test('Hosting type - on premise section should not be rendered', async (t) => {
+  await pageSetup(t);
+
+  const hostingTypesSection = Selector('[data-test-id="view-hosting-types"]');
+
+  await t
+    .expect(hostingTypesSection.exists).notOk();
+});
+
+test('About supplier section should not be rendered', async (t) => {
+  await pageSetup(t);
+
+  const aboutSupplierSection = Selector('[data-test-id="view-about-supplier"]');
+
+  await t
+    .expect(aboutSupplierSection.exists).notOk();
+});
+
+test('Contact-details section should not be rendered', async (t) => {
+  await pageSetup(t);
+
+  const contactDetailsSection = Selector('[data-test-id="view-solution-contact-details"]');
+
+  await t
+    .expect(contactDetailsSection.exists).notOk();
+});
+
+test('Roadmap section should not be rendered', async (t) => {
+  await pageSetup(t);
+
+  const roadmapSection = Selector('[data-test-id="view-roadmap"]');
+
+  await t
+    .expect(roadmapSection.exists).notOk();
+});
+
+
+fixture('Show marketing preview page - with existing marketing data');
+
+test('Solution description section and all questions should be rendered', async (t) => {
   await pageSetup(t, true);
 
   const solutionDescriptionSection = Selector('[data-test-id="view-solution-description"]');
@@ -112,15 +222,7 @@ test('when existing marketing data - The solution description section and all qu
     .expect(await extractInnerText(linkQuestion.find('[data-test-id="view-question-data-link"]'))).eql('The solution link');
 });
 
-test('when no existing marketing data - The features section should not be rendered', async (t) => {
-  await pageSetup(t);
-  const featuresSection = Selector('[data-test-id="view-features"]');
-
-  await t
-    .expect(featuresSection.exists).notOk();
-});
-
-test('when existing marketing data - The features section should be rendered and the features displayed', async (t) => {
+test('Features section should be rendered and the features displayed', async (t) => {
   await pageSetup(t, true);
 
   const featuresSection = Selector('[data-test-id="view-features"]');
@@ -137,15 +239,7 @@ test('when existing marketing data - The features section should be rendered and
     .expect(await extractInnerText(featuresSection.find('[data-test-id="view-question-data-bulletlist"]').find('li:nth-child(3)'))).eql('Feature C');
 });
 
-test('when no existing marketing data - The capabilities section should not be rendered', async (t) => {
-  await pageSetup(t);
-  const featuresSection = Selector('[data-test-id="view-capabilities"]');
-
-  await t
-    .expect(featuresSection.exists).notOk();
-});
-
-test('when existing marketing data - The capabilities section should be rendered and the capabilities displayed', async (t) => {
+test('Capabilities section should be rendered and the capabilities displayed', async (t) => {
   await pageSetup(t, true);
 
   const capabilitiesSection = Selector('[data-test-id="view-capabilities"]');
@@ -169,15 +263,7 @@ test('when existing marketing data - The capabilities section should be rendered
     .expect(await capabilitiesExpandableSection.find('[data-test-id="view-question-data-text-link"] > a').getAttribute('href')).eql('https://link-to-capability.com');
 });
 
-test('when no existing marketing data - The integrations section should not be rendered', async (t) => {
-  await pageSetup(t);
-  const integrationsSection = Selector('[data-test-id="view-integrations"]');
-
-  await t
-    .expect(integrationsSection.exists).notOk();
-});
-
-test('when existing marketing data - The integrations section should be rendered', async (t) => {
+test('Integrations section should be rendered', async (t) => {
   await pageSetup(t, true);
 
   const integrationsSection = Selector('[data-test-id="view-integrations"]');
@@ -191,15 +277,7 @@ test('when existing marketing data - The integrations section should be rendered
     .expect(await extractInnerText(integrationsSection.find('[data-test-id="view-question-data-text-link-supplier-integrations"]'))).eql('http://www.link.com');
 });
 
-test('when no existing marketing data - The implementation timescales section should not be rendered', async (t) => {
-  await pageSetup(t);
-  const integrationsSection = Selector('[data-test-id="view-implementation-timescales"]');
-
-  await t
-    .expect(integrationsSection.exists).notOk();
-});
-
-test('when existing marketing data - The implementation timescales section should be rendered', async (t) => {
+test('Implementation timescales section should be rendered', async (t) => {
   await pageSetup(t, true);
 
   const implementationTimescalesSection = Selector('[data-test-id="view-implementation-timescales"]');
@@ -207,21 +285,10 @@ test('when existing marketing data - The implementation timescales section shoul
   await t
     .expect(implementationTimescalesSection.exists).ok()
     .expect(await extractInnerText(implementationTimescalesSection.find('h3'))).eql('Implementation timescales')
-
-    .expect(implementationTimescalesSection.exists).ok()
     .expect(await extractInnerText(implementationTimescalesSection.find('[data-test-id="view-question-data-text-description"]'))).eql('Implementations without transition from another Catalogue Solution typically take 3-5 working days, the average is 4. The extent of your configuration requirements will have the greatest impact on these timescales. Your main responsibility will be configuration planning and approval.');
 });
 
-test('when no existing marketing data - The client-application-types section should not be rendered', async (t) => {
-  await pageSetup(t);
-
-  const clientApplicationTypesSection = Selector('[data-test-id="view-client-application-types"]');
-
-  await t
-    .expect(clientApplicationTypesSection.exists).notOk();
-});
-
-test('when existing marketing data - The client application type section and browser-based section should be rendered', async (t) => {
+test('Client application type - browser-based section should be rendered', async (t) => {
   await pageSetup(t, true);
   const clientApplicationTypesSection = Selector('[data-test-id="view-client-application-types"]');
   const browserBasedExpandableSection = Selector('[data-test-id="view-section-browser-based"]');
@@ -284,7 +351,7 @@ test('when existing marketing data - The client application type section and bro
     .expect(additionalInformationRow.find('div[data-test-id="view-section-table-row-vertical"]').exists).ok();
 });
 
-test('when existing marketing data - The client application type section and native-mobile section should be rendered', async (t) => {
+test('Client application type - native-mobile section should be rendered', async (t) => {
   await pageSetup(t, true);
 
   const clientApplicationTypesSection = Selector('[data-test-id="view-client-application-types"]');
@@ -367,7 +434,7 @@ test('when existing marketing data - The client application type section and nat
     .expect(additionalInformationRow.find('div[data-test-id="view-section-table-row-vertical"]').exists).ok();
 });
 
-test('when existing marketing data - The client application type section and native-desktop section should be rendered', async (t) => {
+test('Client application type - native-desktop section should be rendered', async (t) => {
   await pageSetup(t, true);
 
   const clientApplicationTypesSection = Selector('[data-test-id="view-client-application-types"]');
@@ -435,7 +502,7 @@ test('when existing marketing data - The client application type section and nat
     .expect(additionalInformationRow.find('div[data-test-id="view-section-table-row-vertical"]').exists).ok();
 });
 
-test('when existing marketing data - The hosting type public cloud section should be rendered', async (t) => {
+test('Hosting type - public cloud section should be rendered', async (t) => {
   await pageSetup(t, true);
 
   const hostingTypesSection = Selector('[data-test-id="view-hosting-types"]');
@@ -464,7 +531,7 @@ test('when existing marketing data - The hosting type public cloud section shoul
     .expect(requiresHSCNRow.find('div[data-test-id="view-section-table-row-vertical"]').exists).ok();
 });
 
-test('when existing marketing data - The hosting type private cloud section should be rendered', async (t) => {
+test('Hosting type - private cloud section should be rendered', async (t) => {
   await pageSetup(t, true);
 
   const hostingTypesSection = Selector('[data-test-id="view-hosting-types"]');
@@ -498,7 +565,7 @@ test('when existing marketing data - The hosting type private cloud section shou
     .expect(requiresHSCNRow.find('div[data-test-id="view-section-table-row-vertical"]').exists).ok();
 });
 
-test('when existing marketing data - The hosting type hybrid section should be rendered', async (t) => {
+test('Hosting type - hybrid section should be rendered', async (t) => {
   await pageSetup(t, true);
 
   const hostingTypesSection = Selector('[data-test-id="view-hosting-types"]');
@@ -531,7 +598,7 @@ test('when existing marketing data - The hosting type hybrid section should be r
     .expect(requiresHSCNRow.find('div[data-test-id="view-section-table-row-vertical"]').exists).ok();
 });
 
-test('when existing marketing data - The hosting type on premise section should be rendered', async (t) => {
+test('Hosting type - on premise section should be rendered', async (t) => {
   await pageSetup(t, true);
 
   const hostingTypesSection = Selector('[data-test-id="view-hosting-types"]');
@@ -564,16 +631,7 @@ test('when existing marketing data - The hosting type on premise section should 
     .expect(requiresHSCNRow.find('div[data-test-id="view-section-table-row-vertical"]').exists).ok();
 });
 
-test('when no existing marketing data - The About supplier section should not be rendered', async (t) => {
-  await pageSetup(t);
-
-  const aboutSupplierSection = Selector('[data-test-id="view-about-supplier"]');
-
-  await t
-    .expect(aboutSupplierSection.exists).notOk();
-});
-
-test('when existing marketing data - The About supplier section and all questions should be rendered', async (t) => {
+test('About supplier section and all questions should be rendered', async (t) => {
   await pageSetup(t, true);
 
   const aboutSupplierSection = Selector('[data-test-id="view-about-supplier"]');
@@ -593,16 +651,7 @@ test('when existing marketing data - The About supplier section and all question
     .expect(await extractInnerText(linkQuestion.find('[data-test-id="view-question-data-link"]'))).eql('http://www.supplier.com');
 });
 
-test('when no existing marketing data - The contact-details section should not be rendered', async (t) => {
-  await pageSetup(t);
-
-  const contactDetailsSection = Selector('[data-test-id="view-solution-contact-details"]');
-
-  await t
-    .expect(contactDetailsSection.exists).notOk();
-});
-
-test('when existing marketing data - The contact-details section should be rendered', async (t) => {
+test('Contact-details section should be rendered', async (t) => {
   await pageSetup(t, true);
 
   const contactDetailsSection = Selector('[data-test-id="view-solution-contact-details"]');
@@ -635,16 +684,7 @@ test('when existing marketing data - The contact-details section should be rende
     .expect(await extractInnerText(contact2EmailAddress)).eql('contact@two.com');
 });
 
-test('when no existing marketing data - The roadmap section should not be rendered', async (t) => {
-  await pageSetup(t);
-
-  const roadmapSection = Selector('[data-test-id="view-roadmap"]');
-
-  await t
-    .expect(roadmapSection.exists).notOk();
-});
-
-test('when existing marketing data - The roadmap section should be rendered', async (t) => {
+test('Roadmap section should be rendered', async (t) => {
   await pageSetup(t, true);
 
   const roadmapSection = Selector('[data-test-id="view-roadmap"]');
