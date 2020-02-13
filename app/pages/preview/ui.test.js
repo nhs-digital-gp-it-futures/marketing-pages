@@ -194,6 +194,15 @@ test('Roadmap section should not be rendered', async (t) => {
     .expect(roadmapSection.exists).notOk();
 });
 
+test('Learn More section should not be rendered', async (t) => {
+  await pageSetup(t);
+
+  const learnMoreSection = Selector('[data-test-id="view-learn-more"]');
+
+  await t
+    .expect(learnMoreSection.exists).notOk();
+});
+
 
 fixture('Show marketing preview page - with existing marketing data');
 
@@ -700,5 +709,20 @@ test('Roadmap section should be rendered', async (t) => {
 
     .expect(documentLink.exists).ok()
     .expect(await extractInnerText(documentLink.find('[data-test-id="view-question-data-link-document-link"]'))).eql('View roadmap')
-    .expect(await documentLink.find('[data-test-id="view-question-data-link-document-link"] > a').getAttribute('href')).eql('document/roadmap.pdf');
+    .expect(documentLink.find('[data-test-id="view-question-data-link-document-link"] > a').getAttribute('href')).eql('document/roadmap.pdf');
+});
+
+test('Learn More section should be rendered', async (t) => {
+  await pageSetup(t, true);
+
+  const learnMoreSection = Selector('[data-test-id="view-learn-more"]');
+  const documentLink = learnMoreSection.find('[data-test-id="view-section-question-document-link"] a');
+
+  await t
+    .expect(learnMoreSection.exists).ok()
+    .expect(await extractInnerText(learnMoreSection.find('h3'))).eql('Learn more')
+
+    .expect(documentLink.exists).ok()
+    .expect(await extractInnerText(documentLink)).eql('Download this PDF')
+    .expect(documentLink.getAttribute('href')).eql('document/solution.pdf');
 });

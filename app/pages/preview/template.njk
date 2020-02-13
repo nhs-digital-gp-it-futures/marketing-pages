@@ -1,64 +1,19 @@
 {% extends 'includes/layout.njk' %}
-{% from 'sections/view-solution-header/macro.njk' import viewSolutionHeader %}
-{% from 'sections/view-solution-description/macro.njk' import viewSolutionDescription %}
-{% from 'sections/view-features/macro.njk' import viewFeatures %}
-{% from 'sections/view-integrations/macro.njk' import viewIntegrations %}
-{% from 'sections/view-implementation-timescales/macro.njk' import viewImplementationTimescales %}
-{% from 'sections/view-client-application-types/macro.njk' import viewClientApplicationTypes %}
-{% from 'sections/view-hosting-types/macro.njk' import viewHostingTypes %}
-{% from 'sections/view-solution-contact-details/macro.njk' import viewSolutionContactDetails %}
-{% from 'sections/view-roadmap/macro.njk' import viewRoadmap %}
-{% from 'sections/view-about-supplier/macro.njk' import viewAboutSupplier %}
-{% from 'sections/view-capabilities/macro.njk' import viewCapabilities %}
+{% from 'sections/view-solution/macro.njk' import viewSolution %}
 {% from 'components/back-link/macro.njk' import backLink %}
-{% from 'components/tag/macro.njk' import tag %}
 
 {% block body %}
-
-  <div data-test-id="view-solution-page-back-link" class="nhsuk-u-margin-bottom-5">
-    {{ backLink({
-      "href": returnToDashboardUrl,
-      "text": "Go back to previous page"
-    }) }}
-  </div>
-
-  {{ viewSolutionHeader(solutionHeader) }}
-
-  <div class="nhsuk-grid-row">
-    <div class="nhsuk-grid-column-full">
-      {{ viewSolutionDescription({
-        section: sections['solution-description']
+  <div class="nhsuk-width-container nhsuk-u-margin-top-5">
+    <div data-test-id="view-solution-page-back-link" class="nhsuk-u-margin-bottom-5">
+      {{ backLink({
+        "href": returnToDashboardUrl,
+        "text": "Go back to previous page"
       }) }}
-      {{ viewFeatures({
-        section: sections['features']
-      }) }}
-      {{ viewCapabilities({
-        capabilities: sections.capabilities.answers['capabilities-met']
-      }) }}
-      {{ viewIntegrations({
-        section: sections
-      }) }}
-      {{ viewImplementationTimescales({
-        section: sections['implementation-timescales']
-      }) }}
-      {{ viewClientApplicationTypes({
-        section: sections['client-application-types']
-      }) }}
-      {{ viewHostingTypes({
-        section: {
-          sections: sections
-        }
-      }) }}
-      {{ viewRoadmap({
-        section: sections['roadmap']
-      }) }}
-      {{ viewAboutSupplier({
-        section: sections['about-supplier']
-      }) }}
-      {{ viewSolutionContactDetails({
-        section: sections['contact-details']
-      }) }}
-
     </div>
+
+    {{ viewSolution({
+      sections: sections,
+      solutionHeader: solutionHeader
+    }) }}
   </div>
 {% endblock %}
