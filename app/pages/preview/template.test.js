@@ -16,6 +16,7 @@ describe('preview page', () => {
       const backLink = $('[data-test-id="view-solution-page-back-link"] a');
       expect(backLink.length).toEqual(1);
       expect(backLink.text().trim()).toEqual('Go back to previous page');
+      expect(backLink.attr('href')).toEqual('/supplier/solution/100000-001');
     });
   }));
 
@@ -32,7 +33,7 @@ describe('preview page', () => {
     };
 
     harness.request(context, ($) => {
-      expect($('h1').text().trim()).toEqual('Write on Time');
+      expect($('[data-test-id="view-solution-header"]').length).toBe(1);
     });
   }));
 });
