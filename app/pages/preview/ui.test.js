@@ -723,6 +723,6 @@ test('Learn More section should be rendered', async (t) => {
     .expect(await extractInnerText(learnMoreSection.find('h3'))).eql('Learn more')
 
     .expect(documentLink.exists).ok()
-    .expect(await extractInnerText(documentLink)).eql('Download this PDF')
+    .expect(await extractInnerText(documentLink)).eql('Download PDF')
     .expect(documentLink.getAttribute('href')).eql('document/solution.pdf');
 });
