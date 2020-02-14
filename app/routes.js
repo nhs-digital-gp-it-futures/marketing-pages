@@ -16,13 +16,6 @@ router.use('/supplier', supplierRoutes);
 
 router.use('/authority', authorityRoutes);
 
-router.get('/solution/:solutionId/document/:documentName', async (req, res) => {
-  const { solutionId, documentName } = req.params;
-  logger.info(`downloading Solution ${solutionId} document ${documentName}`);
-  const response = await getDocument({ solutionId, documentName });
-  response.data.pipe(res);
-});
-
 router.get('*', (req, res, next) => next({
   status: 404,
   message: 'Incorrect url - please check it is valid and try again',
