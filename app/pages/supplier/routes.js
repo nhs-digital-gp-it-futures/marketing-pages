@@ -4,8 +4,10 @@ import { getSubDashboardPageContext } from './dashboard/subDashboards/controller
 import { getSectionPageContext, getSectionPageErrorContext, postSection } from '../common/section/controller';
 import logger from '../../logger';
 import { withCatch } from '../../common/helpers/routerHelper';
+import { getPreviewPageContext } from '../common/preview/controller';
 
 const router = express.Router();
+const userContextType = 'supplier';
 
 router.get('/solution/:solutionId', withCatch(async (req, res) => {
   const { solutionId } = req.params;
@@ -75,6 +77,13 @@ router.get('/solution/:solutionId/submitForModeration', withCatch(async (req, re
     solutionId, validationErrors: response,
   });
   return res.render('pages/supplier/dashboard/template', context);
+}));
+
+router.get('/solution/:solutionId/preview', withCatch(async (req, res) => {
+  const { solutionId } = req.params;
+  logger.info(`navigating to Solution ${solutionId} preview`);
+  const context = await getPreviewPageContext({ solutionId, userContextType });
+  res.render('pages/common/preview/template', context);
 }));
 
 module.exports = router;

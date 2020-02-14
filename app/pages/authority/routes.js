@@ -3,8 +3,10 @@ import { getMarketingPageDashboardContext } from '../common/dashboard/controller
 import { getSectionPageContext, postSection, getSectionPageErrorContext } from '../common/section/controller';
 import logger from '../../logger';
 import { withCatch } from '../../common/helpers/routerHelper';
+import { getPreviewPageContext } from '../common/preview/controller';
 
 const router = express.Router();
+const userContextType = 'authority';
 
 router.get('/solution/:solutionId', withCatch(async (req, res) => {
   const { solutionId } = req.params;
@@ -33,6 +35,13 @@ router.post('/solution/:solutionId/section/:sectionId', withCatch(async (req, re
     solutionId, sectionId, sectionData, validationErrors: response, userContextType: 'authority',
   });
   return res.render('pages/common/section/template', context);
+}));
+
+router.get('/solution/:solutionId/preview', withCatch(async (req, res) => {
+  const { solutionId } = req.params;
+  logger.info(`navigating to Solution ${solutionId} preview`);
+  const context = await getPreviewPageContext({ solutionId, userContextType });
+  res.render('pages/common/preview/template', context);
 }));
 
 module.exports = router;

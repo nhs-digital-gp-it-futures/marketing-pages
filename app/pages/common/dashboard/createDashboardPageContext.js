@@ -127,7 +127,7 @@ export const createDashboardPageContext = ({
     title: dashboardManifest.title,
     mainAdvice: dashboardManifest.mainAdvice,
     additionalAdvice: dashboardManifest.additionalAdvice,
-    previewUrl: `/solution/${solutionId}/preview`,
+    previewUrl: `/${userContextType}/solution/${solutionId}/preview`,
     submitForModerationUrl: isSupplierContextType ? `/supplier/solution/${solutionId}/submitForModeration` : undefined,
     returnToDashboardUrl: `/${userContextType}/solution/${solutionId}`,
     errors: errors && errors.length > 0 ? errors : undefined,

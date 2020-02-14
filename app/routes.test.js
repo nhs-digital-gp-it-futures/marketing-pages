@@ -1,7 +1,7 @@
 import request from 'supertest';
 import { App } from '../app';
 import routes from './routes';
-import * as previewControllers from './pages/preview/controller';
+import * as previewControllers from './pages/common/preview/controller';
 import * as dashboardControllers from './pages/common/dashboard/controller';
 
 jest.mock('./logger');
@@ -48,7 +48,7 @@ describe('GET /solution/:solutionId/preview', () => {
     const app = new App().createApp();
     app.use('/', routes);
     return request(app)
-      .get('/solution/1/preview')
+      .get('/supplier/solution/1/preview')
       .expect(200)
       .then((res) => {
         expect(res.text.includes('<h1 data-test-id="view-solution-page-solution-name" class="nhsuk-u-margin-bottom-2">Write on Time</h1>')).toEqual(true);

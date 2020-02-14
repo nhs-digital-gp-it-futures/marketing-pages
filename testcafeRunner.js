@@ -9,14 +9,14 @@ app.use('/', routes);
 const server = app.listen('1234');
 
 const browserFromArgs = process.argv.slice(2, 3);
-const browserToRun = browserFromArgs.length > 0 ? browserFromArgs : 'chrome:headless';
+const browserToRun = browserFromArgs.length > 0 ? browserFromArgs : 'chrome';
 
 const testFromArgs = process.argv.slice(3, 4);
 const testsToRun = testFromArgs ? `**/*${testFromArgs}*/ui.test.js` : '**/*ui.test.js';
 
-let concurrency = 4;
-let stopOnFirstFail = true;
-let quarantineMode = true;
+let concurrency = 1;
+let stopOnFirstFail = false;
+let quarantineMode = false;
 if (env === 'pipeline' || browserFromArgs.length > 0) {
   concurrency = 1;
   stopOnFirstFail = false;

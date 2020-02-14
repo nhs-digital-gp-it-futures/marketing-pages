@@ -1,5 +1,5 @@
 import express from 'express';
-import { getPreviewPageContext, getDocument } from './pages/preview/controller';
+import { getPreviewPageContext, getDocument } from './pages/common/preview/controller';
 import logger from './logger';
 import { errorHandler } from './pages/error/errorHandler';
 import supplierRoutes from './pages/supplier/routes';
@@ -16,13 +16,6 @@ router.get('/healthcheck', async (req, res) => {
 router.use('/supplier', supplierRoutes);
 
 router.use('/authority', authorityRoutes);
-
-router.get('/solution/:solutionId/preview', withCatch(async (req, res) => {
-  const { solutionId } = req.params;
-  logger.info(`navigating to Solution ${solutionId} preview`);
-  const context = await getPreviewPageContext({ solutionId });
-  res.render('pages/preview/template', context);
-}));
 
 router.get('/solution/:solutionId/document/:documentName', async (req, res) => {
   const { solutionId, documentName } = req.params;
