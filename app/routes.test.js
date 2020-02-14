@@ -1,7 +1,6 @@
 import request from 'supertest';
 import { App } from '../app';
 import routes from './routes';
-import * as previewControllers from './pages/common/preview/controller';
 import * as dashboardControllers from './pages/common/dashboard/controller';
 
 jest.mock('./logger');

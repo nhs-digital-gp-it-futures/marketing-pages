@@ -1,5 +1,4 @@
 import express from 'express';
-import { getDocument } from './pages/common/preview/controller';
 import logger from './logger';
 import { errorHandler } from './pages/error/errorHandler';
 import supplierRoutes from './pages/supplier/routes';
