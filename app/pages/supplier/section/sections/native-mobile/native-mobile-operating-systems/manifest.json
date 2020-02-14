@@ -22,7 +22,7 @@
     "operating-systems-description": {
       "mainAdvice": "Description of supported operating systems (optional)",
       "additionalAdvice": "Add further description of any context, exceptions or devices your Solution supports.",
-      "footerAdvice": "You can enter up to 1000 characters",
+      "footerAdvice": "You can enter up to 1,000 characters",
       "type": "textarea-field",
       "errorResponse": {
         "maxLength": "Description of supported operating systems is over the character limit"

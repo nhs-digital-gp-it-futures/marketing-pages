@@ -7,7 +7,7 @@
     "description": {
       "mainAdvice": "Description (optional)",
       "additionalAdvice": "Provide information about your organisation, for example its ethos, experience and plans for the future.",
-      "footerAdvice": "You can enter up to 1000 characters",
+      "footerAdvice": "You can enter up to 1,000 characters",
       "type": "textarea-field",
       "rows": 17,
       "errorResponse": {

@@ -26,7 +26,7 @@
     "hosting-model": {
       "mainAdvice": "Describe your data center hosting model (optional)",
       "additionalAdvice": "Add an overview of the data center hosting model for your Solution",
-      "footerAdvice": "You can enter up to 1000 characters",
+      "footerAdvice": "You can enter up to 1,000 characters",
       "type": "textarea-field",
       "errorResponse": {
         "maxLength": "Hosting model description is over the character limit"
