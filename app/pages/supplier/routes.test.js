@@ -4,6 +4,7 @@ import routes from './routes';
 import * as dashboardControllers from '../common/dashboard/controller';
 import * as sectionControllers from '../common/section/controller';
 import * as subsectionControllers from './dashboard/subDashboards/controller';
+import * as previewControllers from '../common/preview/controller';
 
 jest.mock('../../logger');
 
@@ -35,6 +36,23 @@ const mockSectionContext = {
       type: 'text-field',
     },
   ],
+};
+
+const mockPreviewContext = {
+  solutionHeader: {
+    id: '100000-001',
+    name: 'Write on Time',
+    supplierName: 'Really Kool Corporation',
+    isFoundation: true,
+    lastUpdated: '1996-03-15T10:00:00',
+  },
+  returnToDashboardUrl: '/supplier/solution/100000-001',
+  sections: {
+    'solution-description': { answers: {} },
+    features: { answers: {} },
+    'contact-details': { answers: {} },
+    capabilities: { answers: {} },
+  },
 };
 
 const mockSectionPostData = {
@@ -217,6 +235,26 @@ describe('POST /supplier/solution/:solutionId/dashboard/:dashboardId/section/:se
         expect(res.text.includes(`<h2 data-test-id="section-title">${mockSectionErrorContext.title}</h2>`)).toEqual(true);
         expect(res.text.includes('data-test-id="error-page-title"')).toEqual(false);
         sectionControllers.getSectionPageErrorContext.mockReset();
+      });
+  });
+});
+
+describe('GET /solution/:solutionId/preview', () => {
+  afterEach(() => {
+    previewControllers.getPreviewPageContext.mockReset();
+  });
+
+  it('should return the correct status and text if there is no error', () => {
+    previewControllers.getPreviewPageContext = jest.fn()
+      .mockImplementation(() => Promise.resolve(mockPreviewContext));
+    const app = new App().createApp();
+    app.use('/supplier', routes);
+    return request(app)
+      .get('/supplier/solution/1/preview')
+      .expect(200)
+      .then((res) => {
+        expect(res.text.includes('<h1 data-test-id="view-solution-page-solution-name" class="nhsuk-u-margin-bottom-2">Write on Time</h1>')).toEqual(true);
+        expect(res.text.includes('data-test-id="error-page-title"')).toEqual(false);
       });
   });
 });

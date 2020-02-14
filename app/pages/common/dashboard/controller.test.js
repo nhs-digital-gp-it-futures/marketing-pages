@@ -34,7 +34,7 @@ describe('supplier - dashboard controller', () => {
 
     it('should return the context when the manifest and data from the api is provided', async () => {
       const expectedContext = {
-        previewUrl: '/solution/some-solution-id/preview',
+        previewUrl: '/supplier/solution/some-solution-id/preview',
         submitForModerationUrl: '/supplier/solution/some-solution-id/submitForModeration',
         returnToDashboardUrl: '/supplier/solution/some-solution-id',
         sectionGroups: [

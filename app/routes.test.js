@@ -1,27 +1,9 @@
 import request from 'supertest';
 import { App } from '../app';
 import routes from './routes';
-import * as previewControllers from './pages/preview/controller';
 import * as dashboardControllers from './pages/common/dashboard/controller';
 
 jest.mock('./logger');
-
-const mockPreviewContext = {
-  solutionHeader: {
-    id: '100000-001',
-    name: 'Write on Time',
-    supplierName: 'Really Kool Corporation',
-    isFoundation: true,
-    lastUpdated: '1996-03-15T10:00:00',
-  },
-  returnToDashboardUrl: '/supplier/solution/100000-001',
-  sections: {
-    'solution-description': { answers: {} },
-    features: { answers: {} },
-    'contact-details': { answers: {} },
-    capabilities: { answers: {} },
-  },
-};
 
 describe('GET /healthcheck', () => {
   it('should return the correct status and text', () => {
@@ -33,26 +15,6 @@ describe('GET /healthcheck', () => {
       .expect(200)
       .then((res) => {
         expect(res.text).toBe('Marketing pages is Running!!!');
-      });
-  });
-});
-
-describe('GET /solution/:solutionId/preview', () => {
-  afterEach(() => {
-    previewControllers.getPreviewPageContext.mockReset();
-  });
-
-  it('should return the correct status and text if there is no error', () => {
-    previewControllers.getPreviewPageContext = jest.fn()
-      .mockImplementation(() => Promise.resolve(mockPreviewContext));
-    const app = new App().createApp();
-    app.use('/', routes);
-    return request(app)
-      .get('/solution/1/preview')
-      .expect(200)
-      .then((res) => {
-        expect(res.text.includes('<h1 data-test-id="view-solution-page-solution-name" class="nhsuk-u-margin-bottom-2">Write on Time</h1>')).toEqual(true);
-        expect(res.text.includes('data-test-id="error-page-title"')).toEqual(false);
       });
   });
 });
@@ -89,19 +51,6 @@ describe('/authority route', () => {
 });
 
 describe('Error handler', () => {
-  it('should return error page if there is an error from /preview', () => {
-    previewControllers.getPreviewPageContext = jest.fn().mockImplementation(() => Promise.reject());
-    const app = new App().createApp();
-    app.use('/', routes);
-    return request(app)
-      .get('/solution/1/preview')
-      .expect(200)
-      .then((res) => {
-        expect(res.text.includes('<h1>Preview Page</h1>')).toEqual(false);
-        expect(res.text.includes('data-test-id="error-page-title"')).toEqual(true);
-      });
-  });
-
   it('should return error page if there is an error from the /supplier route', () => {
     dashboardControllers.getMarketingPageDashboardContext = jest.fn()
       .mockImplementation(() => Promise.reject());
@@ -132,10 +81,6 @@ describe('Error handler', () => {
 });
 
 describe('GET *', () => {
-  afterEach(() => {
-    previewControllers.getPreviewPageContext.mockReset();
-  });
-
   it('should return error page if url cannot be matched', () => {
     const app = new App().createApp();
     app.use('/', routes);

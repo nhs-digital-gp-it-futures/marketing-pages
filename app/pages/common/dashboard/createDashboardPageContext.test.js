@@ -4,7 +4,7 @@ describe('createDashboardPageContext', () => {
   describe('when the userContextType is supplier', () => {
     it('should create a context from the manifest and the marketingData', () => {
       const expectedContext = {
-        previewUrl: '/solution/some-solution-id/preview',
+        previewUrl: '/supplier/solution/some-solution-id/preview',
         submitForModerationUrl: '/supplier/solution/some-solution-id/submitForModeration',
         returnToDashboardUrl: '/supplier/solution/some-solution-id',
         sectionGroups: [
@@ -54,7 +54,7 @@ describe('createDashboardPageContext', () => {
 
     it('should create a context with sub sections from the manifest and no existing marketingData', () => {
       const expectedContext = {
-        previewUrl: '/solution/some-solution-id/preview',
+        previewUrl: '/supplier/solution/some-solution-id/preview',
         submitForModerationUrl: '/supplier/solution/some-solution-id/submitForModeration',
         returnToDashboardUrl: '/supplier/solution/some-solution-id',
         sectionGroups: [
@@ -132,7 +132,7 @@ describe('createDashboardPageContext', () => {
 
     it('should create a context with sub sections from the manifest and with existing marketingData', () => {
       const expectedContext = {
-        previewUrl: '/solution/some-solution-id/preview',
+        previewUrl: '/supplier/solution/some-solution-id/preview',
         submitForModerationUrl: '/supplier/solution/some-solution-id/submitForModeration',
         returnToDashboardUrl: '/supplier/solution/some-solution-id',
         sectionGroups: [
@@ -218,7 +218,7 @@ describe('createDashboardPageContext', () => {
 
     it('should create a context from the manifest, marketingData and any validationErrors', () => {
       const expectedContext = {
-        previewUrl: '/solution/some-solution-id/preview',
+        previewUrl: '/supplier/solution/some-solution-id/preview',
         submitForModerationUrl: '/supplier/solution/some-solution-id/submitForModeration',
         returnToDashboardUrl: '/supplier/solution/some-solution-id',
         errors: [
@@ -284,7 +284,7 @@ describe('createDashboardPageContext', () => {
 
     it('should create a context with sub sections from the manifest and validationErrors', () => {
       const expectedContext = {
-        previewUrl: '/solution/some-solution-id/preview',
+        previewUrl: '/supplier/solution/some-solution-id/preview',
         submitForModerationUrl: '/supplier/solution/some-solution-id/submitForModeration',
         returnToDashboardUrl: '/supplier/solution/some-solution-id',
         errors: [
@@ -386,7 +386,7 @@ describe('createDashboardPageContext', () => {
     it('should create a context with the url of the sub section containing the dashboard id', () => {
       const expectedContext = {
         title: 'Sub Dashboard',
-        previewUrl: '/solution/some-solution-id/preview',
+        previewUrl: '/supplier/solution/some-solution-id/preview',
         submitForModerationUrl: '/supplier/solution/some-solution-id/submitForModeration',
         returnToDashboardUrl: '/supplier/solution/some-solution-id',
         sectionGroups: [
@@ -449,7 +449,7 @@ describe('createDashboardPageContext', () => {
     it('should create a context with the url of the section without the dashboard id when not provided', () => {
       const expectedContext = {
         title: 'Dashboard',
-        previewUrl: '/solution/some-solution-id/preview',
+        previewUrl: '/supplier/solution/some-solution-id/preview',
         submitForModerationUrl: '/supplier/solution/some-solution-id/submitForModeration',
         returnToDashboardUrl: '/supplier/solution/some-solution-id',
         sectionGroups: [
@@ -514,7 +514,7 @@ describe('createDashboardPageContext', () => {
     it('should create a context from the manifest and the marketingData', () => {
       const expectedContext = {
         returnToDashboardUrl: '/authority/solution/some-solution-id',
-        previewUrl: '/solution/some-solution-id/preview',
+        previewUrl: '/authority/solution/some-solution-id/preview',
         sectionGroups: [
           {
             id: 'some-section-group-id',

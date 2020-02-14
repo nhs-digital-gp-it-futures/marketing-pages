@@ -3,8 +3,10 @@ import { getMarketingPageDashboardContext } from '../common/dashboard/controller
 import { getSectionPageContext, postSection, getSectionPageErrorContext } from '../common/section/controller';
 import logger from '../../logger';
 import { withCatch } from '../../common/helpers/routerHelper';
+import { getDocument, getPreviewPageContext } from '../common/preview/controller';
 
 const router = express.Router();
+const userContextType = 'authority';
 
 router.get('/solution/:solutionId', withCatch(async (req, res) => {
   const { solutionId } = req.params;
@@ -34,5 +36,19 @@ router.post('/solution/:solutionId/section/:sectionId', withCatch(async (req, re
   });
   return res.render('pages/common/section/template', context);
 }));
+
+router.get('/solution/:solutionId/preview', withCatch(async (req, res) => {
+  const { solutionId } = req.params;
+  logger.info(`navigating to Solution ${solutionId} preview`);
+  const context = await getPreviewPageContext({ solutionId, userContextType });
+  res.render('pages/common/preview/template', context);
+}));
+
+router.get('/solution/:solutionId/document/:documentName', async (req, res) => {
+  const { solutionId, documentName } = req.params;
+  logger.info(`downloading Solution ${solutionId} document ${documentName}`);
+  const response = await getDocument({ solutionId, documentName });
+  response.data.pipe(res);
+});
 
 module.exports = router;

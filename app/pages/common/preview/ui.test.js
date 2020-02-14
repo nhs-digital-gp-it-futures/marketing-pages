@@ -1,9 +1,9 @@
 import nock from 'nock';
 import { Selector } from 'testcafe';
-import previewWithNoMarketingData from '../../../fixtures/previewWithNoMarketingData.json';
-import previewWithMarketingData from '../../../fixtures/previewWithMarketingData.json';
-import { apiLocalhost, apiPath, clientLocalhost } from '../../test-utils/config';
-import { extractInnerText } from '../../test-utils/helper';
+import previewWithNoMarketingData from '../../../../fixtures/previewWithNoMarketingData.json';
+import previewWithMarketingData from '../../../../fixtures/previewWithMarketingData.json';
+import { apiLocalhost, apiPath, clientLocalhost } from '../../../test-utils/config';
+import { extractInnerText } from '../../../test-utils/helper';
 
 const mocks = (existingData) => {
   if (!existingData) {
@@ -19,7 +19,7 @@ const mocks = (existingData) => {
 
 const pageSetup = async (t, existingData = false) => {
   mocks(existingData);
-  await t.navigateTo(`${clientLocalhost}/solution/S100000-001/preview`);
+  await t.navigateTo(`${clientLocalhost}/supplier/solution/S100000-001/preview`);
 };
 
 fixture('Show marketing preview page - heading components');

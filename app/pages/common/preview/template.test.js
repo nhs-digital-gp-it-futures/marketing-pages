@@ -1,8 +1,8 @@
-import { createTestHarness } from '../../test-utils/testHarness';
+import { createTestHarness } from '../../../test-utils/testHarness';
 
 const setup = {
   template: {
-    path: 'pages/preview/template.njk',
+    path: 'pages/common/preview/template.njk',
   },
 };
 

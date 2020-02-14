@@ -1,7 +1,7 @@
 import { getPreviewPageContext, getDocument } from './controller';
-import { ApiProvider } from '../../apiProvider';
+import { ApiProvider } from '../../../apiProvider';
 
-jest.mock('../../apiProvider');
+jest.mock('../../../apiProvider');
 
 describe('preview controller', () => {
   const previewData = {
