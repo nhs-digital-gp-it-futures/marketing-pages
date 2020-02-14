@@ -20,7 +20,7 @@
     "description": {
       "mainAdvice": "Write a description about your Solution",
       "additionalAdvice": "The description will give the buyer more insight into your Solution and the qualities it can provide.",
-      "footerAdvice": "You can enter up to 1000 characters",
+      "footerAdvice": "You can enter up to 1,000 characters",
       "type": "textarea-field",
       "rows": 17,
       "errorResponse": {
