@@ -1,3 +1,4 @@
+// Components
 .bc-c-section-list__task-requirement {
   @include mq($until: tablet) {
     margin-left: nhsuk-spacing(3);
@@ -27,17 +28,6 @@
   }
 }
 
-.bc-c-inset-text {
-  border-left: $nhsuk-border-width-inset-text solid $color_nhsuk-blue;
-  margin-left: 0;
-  margin-top: nhsuk-spacing(3);
-  max-width: 100%;
-  padding: 0;
-  .bc-c-section-list__item:first-child {
-    border-top: 0;
-  }
-}
-
 .bc-c-section-list__item {
   list-style: none;
   padding-bottom: nhsuk-spacing(2);
@@ -60,4 +50,9 @@
     margin-bottom: 0;
     margin-top: 0;
   }
+}
+
+// Utilities
+.bc-u-max-width-full {
+  max-width: 100%;
 }
