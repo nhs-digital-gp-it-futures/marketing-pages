@@ -38,7 +38,8 @@
       {% endfor %}
 
       {% if (warningAdvice) %}
-        <div data-test-id="section-warning-advice" class="bc-c-inset-text nhsuk-u-padding-left-2">
+        <div data-test-id="section-warning-advice" class="nhsuk-inset-text">
+          <span class="nhsuk-u-visually-hidden">Information: </span>
           <p>{{ warningAdvice }}</p>
         </div>
       {% endif %}

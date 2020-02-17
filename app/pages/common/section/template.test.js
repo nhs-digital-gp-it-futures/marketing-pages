@@ -118,7 +118,8 @@ describe('section page', () => {
 
     harness.request(context, ($) => {
       expect($('[data-test-id="section-warning-advice"]').length).toEqual(1);
-      expect($('[data-test-id="section-warning-advice"]').text().trim()).toEqual('Some warning advice');
+      expect($('[data-test-id="section-warning-advice"] .nhsuk-u-visually-hidden').text().trim()).toEqual('Information:');
+      expect($('[data-test-id="section-warning-advice"] p').text().trim()).toEqual('Some warning advice');
     });
   }));
 
