@@ -275,12 +275,16 @@ test('Capabilities section should be rendered and the capabilities and epics dis
     .expect(mustEpics.exists).ok()
     .expect(await extractInnerText(mustEpics.find('[data-test-id="must-tag"]'))).eql('Must epics')
     .expect(mustEpics.find('[data-test-id="must-met-epic-list"] li').count).eql(2)
+    .expect(await extractInnerText(mustEpics.find('[data-test-id="must-met-epic-list"] li').nth(0))).eql('Must met epic 1 (C12E3)')
+    .expect(await extractInnerText(mustEpics.find('[data-test-id="must-met-epic-list"] li').nth(1))).eql('Must met epic 2 (C12E4)')
     .expect(mustEpics.find('[data-test-id="must-not-met-epic-list"] li').count).eql(1)
-
+    .expect(await extractInnerText(mustEpics.find('[data-test-id="must-not-met-epic-list"] li').nth(0))).eql('Must not-met epic 1 (C12E5)')
     .expect(mayEpics.exists).ok()
     .expect(await extractInnerText(mayEpics.find('[data-test-id="may-tag"]'))).eql('May epics')
     .expect(mayEpics.find('[data-test-id="may-met-epic-list"] li').count).eql(1)
-    .expect(mayEpics.find('[data-test-id="may-not-met-epic-list"] li').count).eql(1);
+    .expect(await extractInnerText(mayEpics.find('[data-test-id="may-met-epic-list"] li').nth(0))).eql('May met epic 1 (C12E1)')
+    .expect(mayEpics.find('[data-test-id="may-not-met-epic-list"] li').count).eql(1)
+    .expect(await extractInnerText(mayEpics.find('[data-test-id="may-not-met-epic-list"] li').nth(0))).eql('May not-met epic 1 (C12E2)');
 });
 
 test('Integrations section should be rendered', async (t) => {
