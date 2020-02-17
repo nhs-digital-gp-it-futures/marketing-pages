@@ -100,10 +100,10 @@ test('Features section should not be rendered', async (t) => {
 
 test('Capabilities section should not be rendered', async (t) => {
   await pageSetup(t);
-  const featuresSection = Selector('[data-test-id="view-capabilities"]');
+  const capabilitiesSection = Selector('[data-test-id="view-capabilities"]');
 
   await t
-    .expect(featuresSection.exists).notOk();
+    .expect(capabilitiesSection.exists).notOk();
 });
 
 test('Integrations section should not be rendered', async (t) => {
@@ -244,13 +244,16 @@ test('Features section should be rendered and the features displayed', async (t)
     .expect(await extractInnerText(featuresSection.find('[data-test-id="view-question-data-bulletlist"]').find('li:nth-child(3)'))).eql('Feature C');
 });
 
-test('Capabilities section should be rendered and the capabilities displayed', async (t) => {
+test('Capabilities section should be rendered and the capabilities and epics displayed', async (t) => {
   await pageSetup(t, true);
 
   const capabilitiesSection = Selector('[data-test-id="view-capabilities"]');
   const capabilitiesExpandableSection = Selector('[data-test-id="view-section-capabilities"]');
   const capabilitiesTitle = await extractInnerText(capabilitiesSection.find('[data-test-id="view-section-table-row-capabilities"]'));
   const capabilitiesTitleParts = capabilitiesTitle.split(/\n/);
+  const epicsSection = capabilitiesSection.find('[data-test-id="view-question-epic"]');
+  const mustEpics = epicsSection.find('[data-test-id="must-epics"]');
+  const mayEpics = epicsSection.find('[data-test-id="may-epics"]');
 
   await t
     .expect(capabilitiesSection.exists).ok()
@@ -261,11 +264,23 @@ test('Capabilities section should be rendered and the capabilities displayed', a
     .expect(capabilitiesTitleParts[2].trim()).eql('How this capability was met')
     .expect(capabilitiesSection.find('[data-test-id="view-question-data-text-description"]').exists).ok()
     .expect(await extractInnerText(capabilitiesSection.find('[data-test-id="view-question-data-text-description"]'))).eql('Describes the capability.')
+
     .expect(capabilitiesExpandableSection.exists).ok()
     .expect(capabilitiesExpandableSection.find('details[open]').exists).notOk()
     .click(capabilitiesExpandableSection.find('summary'))
     .expect(capabilitiesExpandableSection.find('details[open]').exists).ok()
-    .expect(await capabilitiesExpandableSection.find('[data-test-id="view-question-data-text-link"] > a').getAttribute('href')).eql('https://link-to-capability.com');
+    .expect(capabilitiesExpandableSection.find('[data-test-id="view-question-data-text-link"] > a').getAttribute('href')).eql('https://link-to-capability.com')
+
+    .expect(epicsSection.exists).ok()
+    .expect(mustEpics.exists).ok()
+    .expect(await extractInnerText(mustEpics.find('[data-test-id="must-tag"]'))).eql('Must epics')
+    .expect(mustEpics.find('[data-test-id="must-met-epic-list"] li').count).eql(2)
+    .expect(mustEpics.find('[data-test-id="must-not-met-epic-list"] li').count).eql(1)
+
+    .expect(mayEpics.exists).ok()
+    .expect(await extractInnerText(mayEpics.find('[data-test-id="may-tag"]'))).eql('May epics')
+    .expect(mayEpics.find('[data-test-id="may-met-epic-list"] li').count).eql(1)
+    .expect(mayEpics.find('[data-test-id="may-not-met-epic-list"] li').count).eql(1);
 });
 
 test('Integrations section should be rendered', async (t) => {
