@@ -60,13 +60,15 @@
         }) }}
       </div>
 
-      <div class="bc-c-border-box nhsuk-u-padding-4 nhsuk-u-margin-bottom-5">
-        <h3>{{ sectionsBox.title }}</h3>
-        <p>{{ sectionsBox.mainAdvice }}</p>
-        {{ viewDataBulletlist({
-          data: sectionsBox.sections
-        }) }}
-      </div>
+      {% if sectionsBox %}
+        <div class="bc-c-border-box nhsuk-u-padding-4 nhsuk-u-margin-bottom-5">
+          <h3>{{ sectionsBox.title }}</h3>
+          <p>{{ sectionsBox.mainAdvice }}</p>
+          {{ viewDataBulletlist({
+            data: sectionsBox.sections
+          }) }}
+        </div>
+      {% endif %}
 
     </div>
   </div>
