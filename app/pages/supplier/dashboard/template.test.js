@@ -11,7 +11,7 @@ describe('supplier - dashboard page', () => {
     const context = {};
 
     harness.request(context, ($) => {
-      expect($('h1').text().trim()).toEqual('Marketing Page - Dashboard');
+      expect($('h1').text().trim()).toEqual('<Catalogue Solution name> listing page – all sections');
     });
   }));
 
