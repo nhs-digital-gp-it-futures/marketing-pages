@@ -7,7 +7,7 @@
     "link": {
       "mainAdvice": "Link to supplier asserted integrations (optional)",
       "additionalAdvice": "Provide a URL to a page that gives information about your own integrations. They may only allow your Catalogue Solution to partially integrate with other systems.",
-      "footerAdvice": "You can enter up to 1,000 characters",
+      "footerAdvice": "(Maximum number of characters 1,000)",
       "type": "text-field",
       "errorResponse": {
         "maxLength": "Link is over the character limit"

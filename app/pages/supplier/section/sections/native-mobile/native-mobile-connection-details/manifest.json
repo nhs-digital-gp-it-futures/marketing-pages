@@ -43,7 +43,7 @@
     "connection-requirements-description": {
       "mainAdvice": "Description of connection requirements (optional)",
       "additionalAdvice": "Add further description of connectivity for your Solution.",
-      "footerAdvice": "You can enter up to 300 characters",
+      "footerAdvice": "(Maximum number of characters 300)",
       "type": "textarea-field",
       "errorResponse": {
         "maxLength": "Additional information is over the character limit"

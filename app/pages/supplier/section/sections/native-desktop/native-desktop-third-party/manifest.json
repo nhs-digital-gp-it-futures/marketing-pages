@@ -9,7 +9,7 @@
     "third-party-components": {
       "mainAdvice": "Describe any third party components (optional)",
       "additionalAdvice": "Add any information about the third party components required for your Solution to function.",
-      "footerAdvice": "You can enter up to 500 characters",
+      "footerAdvice": "(Maximum number of characters 500)",
       "type": "textarea-field",
       "errorResponse": {
         "maxLength": "Third party components is over the character limit"
@@ -18,7 +18,7 @@
     "device-capabilities": {
       "mainAdvice": "Describe any device capabilities (optional)",
       "additionalAdvice": "Add any information about the device capabilities required for your Solution to function.",
-      "footerAdvice": "You can enter up to 500 characters",
+      "footerAdvice": "(Maximum number of characters 500)",
       "type": "textarea-field",
       "errorResponse": {
         "maxLength": "Device capabilities is over the character limit"

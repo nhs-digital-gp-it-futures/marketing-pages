@@ -9,7 +9,7 @@
     "additional-information": {
       "mainAdvice": "Do you have any additional browser based information (optional)",
       "additionalAdvice": "Add any additional information or requirement your Solution needs to function",
-      "footerAdvice": "You can enter up to 500 characters",
+      "footerAdvice": "(Maximum number of characters 500)",
       "type": "textarea-field",
       "errorResponse": {
         "maxLength": "Additional information is over the character limit"

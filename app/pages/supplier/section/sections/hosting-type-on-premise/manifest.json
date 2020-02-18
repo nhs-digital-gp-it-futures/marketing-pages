@@ -9,7 +9,7 @@
     "summary": {
       "mainAdvice": "Summarise your requirements (optional)",
       "additionalAdvice": "Add a description of your Solutions on premise hosting requirements",
-      "footerAdvice": "You can enter up to 500 characters",
+      "footerAdvice": "(Maximum number of characters 500)",
       "type": "textarea-field",
       "errorResponse": {
         "maxLength": "Summarise your requirements is over the character limit"
@@ -26,7 +26,7 @@
     "hosting-model": {
       "mainAdvice": "Describe your data center hosting model (optional)",
       "additionalAdvice": "Add an overview of the data center hosting model for your Solution",
-      "footerAdvice": "You can enter up to 1,000 characters",
+      "footerAdvice": "(Maximum number of characters 1,000)",
       "type": "textarea-field",
       "errorResponse": {
         "maxLength": "Hosting model description is over the character limit"
