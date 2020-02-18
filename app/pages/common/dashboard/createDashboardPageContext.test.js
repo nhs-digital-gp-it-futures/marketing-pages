@@ -11,7 +11,7 @@ describe('createDashboardPageContext', () => {
           {
             id: 'some-section-group-id',
             title: 'Some section group',
-            mainAdvice: 'Some section group',
+            mainAdvice: 'Some section group main advice',
             sections: [
               {
                 URL: '/supplier/solution/some-solution-id/section/some-section-id',
@@ -31,7 +31,7 @@ describe('createDashboardPageContext', () => {
         sectionGroups: {
           'some-section-group-id': {
             title: 'Some section group',
-            mainAdvice: 'Some section group',
+            mainAdvice: 'Some section group main advice',
             sections: {
               'some-section-id': {
                 title: 'Some section',
@@ -63,7 +63,7 @@ describe('createDashboardPageContext', () => {
           {
             id: 'some-section-group-id',
             title: 'Some section group',
-            mainAdvice: 'Some section group',
+            mainAdvice: 'Some section group main advice',
             sections: [
               {
                 URL: '/supplier/solution/some-solution-id/section/some-section-id',
@@ -99,7 +99,7 @@ describe('createDashboardPageContext', () => {
         sectionGroups: {
           'some-section-group-id': {
             title: 'Some section group',
-            mainAdvice: 'Some section group',
+            mainAdvice: 'Some section group main advice',
             sections: {
               'some-section-id': {
                 title: 'Some section',
@@ -143,7 +143,7 @@ describe('createDashboardPageContext', () => {
           {
             id: 'some-section-group-id',
             title: 'Some section group',
-            mainAdvice: 'Some section group',
+            mainAdvice: 'Some section group main advice',
             sections: [
               {
                 URL: '/supplier/solution/some-solution-id/section/some-section-id',
@@ -181,7 +181,7 @@ describe('createDashboardPageContext', () => {
         sectionGroups: {
           'some-section-group-id': {
             title: 'Some section group',
-            mainAdvice: 'Some section group',
+            mainAdvice: 'Some section group main advice',
             sections: {
               'some-section-id': {
                 title: 'Some section',
@@ -237,7 +237,7 @@ describe('createDashboardPageContext', () => {
           {
             id: 'some-section-group-id',
             title: 'Some section group',
-            mainAdvice: 'Some section group',
+            mainAdvice: 'Some section group main advice',
             sections: [
               {
                 URL: '/supplier/solution/some-solution-id/section/some-section-id',
@@ -257,7 +257,7 @@ describe('createDashboardPageContext', () => {
         sectionGroups: {
           'some-section-group-id': {
             title: 'Some section group',
-            mainAdvice: 'Some section group',
+            mainAdvice: 'Some section group main advice',
             type: 'section',
             sections: {
               'some-section-id': {
@@ -305,7 +305,7 @@ describe('createDashboardPageContext', () => {
           {
             id: 'some-section-group-id',
             title: 'Some section group',
-            mainAdvice: 'Some section group',
+            mainAdvice: 'Some section group main advice',
             sections: [
               {
                 URL: '/supplier/solution/some-solution-id/section/some-section-id',
@@ -343,7 +343,7 @@ describe('createDashboardPageContext', () => {
         sectionGroups: {
           'some-section-group-id': {
             title: 'Some section group',
-            mainAdvice: 'Some section group',
+            mainAdvice: 'Some section group main advice',
             sections: {
               'some-section-id': {
                 title: 'Some section',
@@ -403,7 +403,7 @@ describe('createDashboardPageContext', () => {
           {
             id: 'sub-dashboard-sections',
             title: 'sub dashboard sections',
-            mainAdvice: 'Some section group',
+            mainAdvice: 'Some section group main advice',
             sections: [
               {
                 URL: '/supplier/solution/some-solution-id/dashboard/some-sub-dashboard/section/sub-section-one',
@@ -434,7 +434,7 @@ describe('createDashboardPageContext', () => {
         sectionGroups: {
           'sub-dashboard-sections': {
             title: 'sub dashboard sections',
-            mainAdvice: 'Some section group',
+            mainAdvice: 'Some section group main advice',
             sections: {
               'sub-section-one': {
                 title: 'Sub section one',
@@ -468,7 +468,7 @@ describe('createDashboardPageContext', () => {
           {
             id: 'dashboard-sections',
             title: 'dashboard sections',
-            mainAdvice: 'Some section group',
+            mainAdvice: 'Some section group main advice',
             sections: [
               {
                 URL: '/supplier/solution/some-solution-id/section/section-one',
@@ -499,7 +499,7 @@ describe('createDashboardPageContext', () => {
         sectionGroups: {
           'dashboard-sections': {
             title: 'dashboard sections',
-            mainAdvice: 'Some section group',
+            mainAdvice: 'Some section group main advice',
             sections: {
               'section-one': {
                 title: 'section one',
@@ -533,7 +533,7 @@ describe('createDashboardPageContext', () => {
           {
             id: 'some-section-group-id',
             title: 'Some section group',
-            mainAdvice: 'Some section group',
+            mainAdvice: 'Some section group main advice',
             sections: [
               {
                 URL: '/authority/solution/some-solution-id/section/some-section-id',
@@ -552,7 +552,7 @@ describe('createDashboardPageContext', () => {
         sectionGroups: {
           'some-section-group-id': {
             title: 'Some section group',
-            mainAdvice: 'Some section group',
+            mainAdvice: 'Some section group main advice',
             sections: {
               'some-section-id': {
                 title: 'Some section',
