@@ -10,5 +10,5 @@
       "footerAdvice": "CSV file headings required: 'Epic ID' and 'Epic Final Assessment Result'"
     }
   },
-  "submitText" : "Save and return to all sections"
+  "submitText" : "Save and return"
 }
