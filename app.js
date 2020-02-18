@@ -11,6 +11,7 @@ const dateFilter = require('nunjucks-date-filter');
 // Local dependencies
 const config = require('./app/config');
 const locals = require('./app/locals');
+const routes = require('./app/routes');
 
 class App {
   constructor() {
@@ -51,6 +52,9 @@ class App {
     });
 
     env.addFilter('dateTime', dateFilter);
+
+    this.app.use('/', routes);
+
     return this.app;
   }
 }
