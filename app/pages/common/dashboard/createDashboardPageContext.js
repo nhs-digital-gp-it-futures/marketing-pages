@@ -133,6 +133,8 @@ export const createDashboardPageContext = ({
     returnToDashboardUrl: `/${userContextType}/solution/${solutionId}`,
     errors: errors && errors.length > 0 ? errors : undefined,
     sectionGroups,
+    warningAdvice: dashboardManifest.warningAdvice,
+    sectionsBox: dashboardManifest.sectionsBox,
   };
 
   return context;

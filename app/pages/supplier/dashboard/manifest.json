@@ -1,5 +1,8 @@
 {
   "id":"marketing-page-dashboard",
+  "title": "<Catalogue Solution name> listing page – all sections",
+  "mainAdvice": "Explain what your Catalogue Solution is for and how it works. This information will be published on the Buying Catalogue to help buyers understand if it meets their needs.",
+  "additionalAdvice": "Provide as much information as possible for buyers. You can save your progress at any point, but a Catalogue Solution listing page cannot be published until all mandatory fields have been completed.",
   "sectionGroups": {
     "about-your-solution": {
       "title": "About Catalogue Solution",
@@ -110,5 +113,21 @@
         }
       }
     }
+  },
+  "warningAdvice": "All the information provided will be moderated by NHS Digital before it is published on the Buying Catalogue. Future updates to your page must also be submitted for moderation.",
+  "sectionsBox": {
+    "title": "Sections added by NHS Digital",
+    "mainAdvice": "The following sections of your Catalogue Solution page will be completed for you by NHS Digital. The information will be taken from your Catalogue Solution’s framework tender and capabilities assessment.",
+    "sections": [
+      "Price",
+      "Capabilities met",
+      "NHS standards met",
+      "Compliance work-off plans",
+      "Additional services",
+      "Associated services",
+      "Service level information",
+      "Transition timescales",
+      "Framework"
+    ]
   }
 }

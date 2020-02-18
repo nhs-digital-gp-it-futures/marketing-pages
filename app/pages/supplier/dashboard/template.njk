@@ -22,9 +22,9 @@
         classes: 'nhsuk-u-margin-bottom-4 bc-c-tag-outline'
       }) }}
 
-      <h1>&lt;Catalogue Solution name&gt; listing page – all sections</h1>
+      <h1>{{ title }}</h1>
 
-      <h2 class="nhsuk-u-margin-bottom-5">Explain what your Catalogue Solution is for and how it works. This information will be published on the Buying Catalogue to help buyers understand if it meets their needs.</h2>
+      <h2 class="nhsuk-u-margin-bottom-5">{{ mainAdvice }}</h2>
 
       <div data-test-id="dashboard-preview-button">
         {{ button({
@@ -34,7 +34,7 @@
         }) }}
       </div>
 
-      <p class="nhsuk-u-font-size-24 nhsuk-u-margin-bottom-0">Provide as much information as possible for buyers. You can save your progress at any point, but a Catalogue Solution listing page cannot be published until all mandatory fields have been completed.</p>
+      <p class="nhsuk-u-font-size-24 nhsuk-u-margin-bottom-0">{{ additionalAdvice }}</p>
 
     </div>
     <div class="nhsuk-grid-column-full">
@@ -50,7 +50,7 @@
 
       <div class="nhsuk-inset-text">
         <span class="nhsuk-u-visually-hidden">Information: </span>
-        <p>All the information provided will be moderated by NHS Digital before it is published on the Buying Catalogue. Future updates to your page must also be submitted for moderation.</p>
+        <p>{{ warningAdvice }}</p>
       </div>
 
       <div class="nhsuk-u-margin-bottom-5" data-test-id="dashboard-submit-for-moderation-button">
@@ -60,21 +60,11 @@
         }) }}
       </div>
 
-      <div class="nhsuk-u-padding-4 nhsuk-u-margin-bottom-5" style="border: 5px solid #005eb8; background: #fff">
-        <h3>Sections added by NHS Digital</h3>
-        <p>The following sections of your Catalogue Solution page will be completed for you by NHS Digital. The information will be taken from your Catalogue Solution’s framework tender and capabilities assessment.</p>
+      <div class="bc-c-border-box nhsuk-u-padding-4 nhsuk-u-margin-bottom-5">
+        <h3>{{ sectionsBox.title }}</h3>
+        <p>{{ sectionsBox.mainAdvice }}</p>
         {{ viewDataBulletlist({
-          data: [
-            "Price",
-            "Capabilities met",
-            "NHS standards met",
-            "Compliance work-off plans",
-            "Additional services",
-            "Associated services",
-            "Service level information",
-            "Transition timescales",
-            "Framework"
-          ]
+          data: sectionsBox.sections
         }) }}
       </div>
 

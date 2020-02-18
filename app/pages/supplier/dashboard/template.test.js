@@ -8,10 +8,12 @@ const setup = {
 
 describe('supplier - dashboard page', () => {
   it('should render the title of the dashboard page', createTestHarness(setup, (harness) => {
-    const context = {};
+    const context = {
+      title: 'some title',
+    };
 
     harness.request(context, ($) => {
-      expect($('h1').text().trim()).toEqual('<Catalogue Solution name> listing page – all sections');
+      expect($('h1').text().trim()).toEqual('some title');
     });
   }));
 
