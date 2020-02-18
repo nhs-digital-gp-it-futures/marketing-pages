@@ -27,7 +27,41 @@
             "name": "Example capability",
             "version": "1.0.1",
             "description": "Describes the capability.",
-            "link": "https://link-to-capability.com"
+            "link": "https://link-to-capability.com",
+            "epic": {
+              "may": {
+                "met": [
+                  {
+                    "id": "C12E1",
+                    "name": "May met epic 1"
+                  }
+                ],
+                "not-met": [
+                  {
+                    "id": "C12E2",
+                    "name": "May not-met epic 1"
+                  }
+                ]
+              },
+              "must": {
+                "met": [
+                  {
+                    "id": "C12E3",
+                    "name": "Must met epic 1"
+                  },
+                  {
+                    "id": "C12E4",
+                    "name": "Must met epic 2"
+                  }
+                ],
+                "not-met": [
+                  {
+                    "id": "C12E5",
+                    "name": "Must not-met epic 1"
+                  }
+                ]
+              }
+            }
           }]
       }
     },
