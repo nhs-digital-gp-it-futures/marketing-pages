@@ -22,9 +22,13 @@
         classes: 'nhsuk-u-margin-bottom-4 bc-c-tag-outline'
       }) }}
 
-      <h1>{{ title }}</h1>
+      {% if title %}
+        <h1 data-test-id="dashboard-title">{{ title }}</h1>
+      {% endif %}
 
-      <h2 class="nhsuk-u-margin-bottom-5">{{ mainAdvice }}</h2>
+      {% if mainAdvice %}
+        <h2 data-test-id="dashboard-main-advice" class="nhsuk-u-margin-bottom-5">{{ mainAdvice }}</h2>
+      {% endif %}
 
       <div data-test-id="dashboard-preview-button">
         {{ button({
@@ -34,7 +38,9 @@
         }) }}
       </div>
 
-      <p class="nhsuk-u-font-size-24 nhsuk-u-margin-bottom-0">{{ additionalAdvice }}</p>
+      {% if additionalAdvice %}
+        <p data-test-id="dashboard-additional-advice" class="nhsuk-u-font-size-24 nhsuk-u-margin-bottom-0">{{ additionalAdvice }}</p>
+      {% endif %}
 
     </div>
     <div class="nhsuk-grid-column-full">
@@ -48,10 +54,12 @@
     </div>
     <div class="nhsuk-grid-column-two-thirds">
 
-      <div class="nhsuk-inset-text">
-        <span class="nhsuk-u-visually-hidden">Information: </span>
-        <p>{{ warningAdvice }}</p>
-      </div>
+      {% if warningAdvice %}
+        <div data-test-id="dashboard-warning-advice" class="nhsuk-inset-text">
+          <span class="nhsuk-u-visually-hidden">Information: </span>
+          <p>{{ warningAdvice }}</p>
+        </div>
+      {% endif %}
 
       <div class="nhsuk-u-margin-bottom-5" data-test-id="dashboard-submit-for-moderation-button">
         {{ button({
@@ -61,7 +69,7 @@
       </div>
 
       {% if sectionsBox %}
-        <div class="bc-c-border-box nhsuk-u-padding-4 nhsuk-u-margin-bottom-5">
+        <div data-test-id="dashboard-sections-box" class="bc-c-border-box nhsuk-u-padding-4 nhsuk-u-margin-bottom-5">
           <h3>{{ sectionsBox.title }}</h3>
           <p>{{ sectionsBox.mainAdvice }}</p>
           {{ viewDataBulletlist({
