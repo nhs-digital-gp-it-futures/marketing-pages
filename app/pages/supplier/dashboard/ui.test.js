@@ -46,7 +46,7 @@ test('should render the preview page button', async (t) => {
   const previewButton = Selector('[data-test-id="dashboard-preview-button"] a');
 
   await t
-    .expect(await extractInnerText(previewButton)).eql('Preview Marketing page')
+    .expect(await extractInnerText(previewButton)).eql('Preview your page')
     .click(previewButton)
     .expect(getLocation()).contains('/solution/S100000-001/preview');
 });

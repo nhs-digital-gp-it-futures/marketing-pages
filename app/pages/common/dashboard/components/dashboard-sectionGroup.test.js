@@ -10,6 +10,7 @@ const aSectionGroupContext = (sections = []) => ({
     sectionGroup: {
       id: 'some-sectionGroup-group-id',
       title: 'sectionGroup Group Title',
+      mainAdvice: 'sectionGroup Group Main Advice',
       sections,
     },
   },
@@ -28,6 +29,14 @@ describe('dashboard-sectionGroup', () => {
 
     harness.request(context, ($) => {
       expect($('h2').text().trim()).toEqual('sectionGroup Group Title');
+    });
+  }));
+
+  it('should render the main advice of the sectionGroup group', createTestHarness(setup, (harness) => {
+    const context = aSectionGroupContext();
+
+    harness.request(context, ($) => {
+      expect($('p').text().trim()).toEqual('sectionGroup Group Main Advice');
     });
   }));
 

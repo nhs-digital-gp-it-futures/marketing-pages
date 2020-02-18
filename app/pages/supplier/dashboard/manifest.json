@@ -2,7 +2,8 @@
   "id":"marketing-page-dashboard",
   "sectionGroups": {
     "about-your-solution": {
-      "title": "About your Solution",
+      "title": "About Catalogue Solution",
+      "mainAdvice": "Tell buyers about your Catalogue Solution, describe its features and provide information on how it integrates with NHS systems.",
       "sections": {
         "solution-description": {
           "title": "Solution description",
@@ -27,6 +28,7 @@
     },
     "client-application-type": {
       "title": "Client application type",
+      "mainAdvice": "Let buyers know which types of application will work with your Catalogue Solution.",
       "sections": {
         "client-application-types": {
           "title": "Client application type",
@@ -65,6 +67,7 @@
     },
     "hosting-type": {
       "title": "Hosting type",
+      "mainAdvice": "Provide information to buyers about how your Catalogue Solution can be hosted.",
       "sections": {
         "hosting-type-public-cloud": {
           "title": "Public cloud",
@@ -94,7 +97,8 @@
       }
     },
     "about-your-organisation": {
-      "title": "About your Organisation",
+      "title": "About organisation",
+      "mainAdvice": "Give details about your organisation and let buyers know how to get in touch.",
       "sections": {
         "about-supplier": {
           "title": "About supplier",

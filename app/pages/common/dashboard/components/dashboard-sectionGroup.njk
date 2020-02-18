@@ -6,6 +6,11 @@
       <h2 class="nhsuk-u-font-size-24">
         {{ params.sectionGroup.title }}
       </h2>
+      {% if params.sectionGroup.mainAdvice %}
+        <p>
+          {{ params.sectionGroup.mainAdvice }}
+        </p>
+      {% endif %}
     </div>
     <ul class="bc-c-section-list__items">
       {% for section in params.sectionGroup.sections %}

@@ -33,7 +33,7 @@ describe('supplier - dashboard page', () => {
 
     harness.request(context, ($) => {
       expect($('[data-test-id="dashboard-preview-button"] a').length).toEqual(1);
-      expect($('[data-test-id="dashboard-preview-button"] a').text().trim()).toEqual('Preview Marketing page');
+      expect($('[data-test-id="dashboard-preview-button"] a').text().trim()).toEqual('Preview your page');
       expect($('[data-test-id="dashboard-preview-button"] a').attr('href')).toEqual('/solution/S100000-001/preview');
     });
   }));

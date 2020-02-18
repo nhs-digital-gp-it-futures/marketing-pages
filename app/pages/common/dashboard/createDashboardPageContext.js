@@ -93,6 +93,7 @@ const createSectionGroupsContext = ({
       const sectionGroupContext = {
         id: sectionGroupId,
         title: sectionGroup.title,
+        mainAdvice: sectionGroup.mainAdvice,
         sections,
       };
 
