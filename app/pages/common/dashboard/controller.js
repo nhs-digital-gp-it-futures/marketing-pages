@@ -14,6 +14,7 @@ export const getMarketingPageDashboardContext = async ({
     const dashboardData = dashboardDataRaw.data;
     const context = createDashboardPageContext({
       solutionId,
+      solutionName: dashboardData.name,
       dashboardManifest,
       marketingDataSections: dashboardData.sections,
       validationErrors,
