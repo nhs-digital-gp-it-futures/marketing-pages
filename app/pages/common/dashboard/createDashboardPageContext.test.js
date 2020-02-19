@@ -4,6 +4,7 @@ describe('createDashboardPageContext', () => {
   describe('when the userContextType is supplier', () => {
     it('should create a context from the manifest and the marketingData', () => {
       const expectedContext = {
+        name: 'some solution name',
         previewUrl: '/supplier/solution/some-solution-id/preview',
         submitForModerationUrl: '/supplier/solution/some-solution-id/submitForModeration',
         returnToDashboardUrl: '/supplier/solution/some-solution-id',
@@ -49,13 +50,19 @@ describe('createDashboardPageContext', () => {
         },
       };
 
-      const context = createDashboardPageContext({ solutionId: 'some-solution-id', dashboardManifest, marketingDataSections });
+      const context = createDashboardPageContext({
+        solutionId: 'some-solution-id',
+        solutionName: 'some solution name',
+        dashboardManifest,
+        marketingDataSections,
+      });
 
       expect(context).toEqual(expectedContext);
     });
 
     it('should create a context with sub sections from the manifest and no existing marketingData', () => {
       const expectedContext = {
+        name: 'some solution name',
         previewUrl: '/supplier/solution/some-solution-id/preview',
         submitForModerationUrl: '/supplier/solution/some-solution-id/submitForModeration',
         returnToDashboardUrl: '/supplier/solution/some-solution-id',
@@ -129,13 +136,19 @@ describe('createDashboardPageContext', () => {
         },
       };
 
-      const context = createDashboardPageContext({ solutionId: 'some-solution-id', dashboardManifest, marketingDataSections });
+      const context = createDashboardPageContext({
+        solutionId: 'some-solution-id',
+        solutionName: 'some solution name',
+        dashboardManifest,
+        marketingDataSections
+      });
 
       expect(context).toEqual(expectedContext);
     });
 
     it('should create a context with sub sections from the manifest and with existing marketingData', () => {
       const expectedContext = {
+        name: 'some solution name',
         previewUrl: '/supplier/solution/some-solution-id/preview',
         submitForModerationUrl: '/supplier/solution/some-solution-id/submitForModeration',
         returnToDashboardUrl: '/supplier/solution/some-solution-id',
@@ -217,13 +230,19 @@ describe('createDashboardPageContext', () => {
         },
       };
 
-      const context = createDashboardPageContext({ solutionId: 'some-solution-id', dashboardManifest, marketingDataSections });
+      const context = createDashboardPageContext({
+        solutionId: 'some-solution-id',
+        solutionName: 'some solution name',
+        dashboardManifest,
+        marketingDataSections,
+      });
 
       expect(context).toEqual(expectedContext);
     });
 
     it('should create a context from the manifest, marketingData and any validationErrors', () => {
       const expectedContext = {
+        name: 'some solution name',
         previewUrl: '/supplier/solution/some-solution-id/preview',
         submitForModerationUrl: '/supplier/solution/some-solution-id/submitForModeration',
         returnToDashboardUrl: '/supplier/solution/some-solution-id',
@@ -284,7 +303,11 @@ describe('createDashboardPageContext', () => {
       };
 
       const context = createDashboardPageContext({
-        solutionId: 'some-solution-id', dashboardManifest, marketingDataSections, validationErrors,
+        solutionId: 'some-solution-id',
+        solutionName: 'some solution name',
+        dashboardManifest,
+        marketingDataSections,
+        validationErrors,
       });
 
       expect(context).toEqual(expectedContext);
@@ -292,6 +315,7 @@ describe('createDashboardPageContext', () => {
 
     it('should create a context with sub sections from the manifest and validationErrors', () => {
       const expectedContext = {
+        name: 'some solution name',
         previewUrl: '/supplier/solution/some-solution-id/preview',
         submitForModerationUrl: '/supplier/solution/some-solution-id/submitForModeration',
         returnToDashboardUrl: '/supplier/solution/some-solution-id',
@@ -387,7 +411,11 @@ describe('createDashboardPageContext', () => {
       };
 
       const context = createDashboardPageContext({
-        solutionId: 'some-solution-id', dashboardManifest, marketingDataSections, validationErrors,
+        solutionId: 'some-solution-id',
+        solutionName: 'some solution name',
+        dashboardManifest,
+        marketingDataSections,
+        validationErrors,
       });
 
       expect(context).toEqual(expectedContext);
@@ -395,6 +423,7 @@ describe('createDashboardPageContext', () => {
 
     it('should create a context with the url of the sub section containing the dashboard id', () => {
       const expectedContext = {
+        name: 'some solution name',
         title: 'Sub Dashboard',
         previewUrl: '/supplier/solution/some-solution-id/preview',
         submitForModerationUrl: '/supplier/solution/some-solution-id/submitForModeration',
@@ -453,13 +482,19 @@ describe('createDashboardPageContext', () => {
         },
       };
 
-      const context = createDashboardPageContext({ solutionId: 'some-solution-id', dashboardManifest, dashboardId: 'some-sub-dashboard' });
+      const context = createDashboardPageContext({
+        solutionId: 'some-solution-id',
+        solutionName: 'some solution name',
+        dashboardManifest,
+        dashboardId: 'some-sub-dashboard',
+      });
 
       expect(context).toEqual(expectedContext);
     });
 
     it('should create a context with the url of the section without the dashboard id when not provided', () => {
       const expectedContext = {
+        name: 'some solution name',
         title: 'Dashboard',
         previewUrl: '/supplier/solution/some-solution-id/preview',
         submitForModerationUrl: '/supplier/solution/some-solution-id/submitForModeration',
@@ -518,7 +553,11 @@ describe('createDashboardPageContext', () => {
         },
       };
 
-      const context = createDashboardPageContext({ solutionId: 'some-solution-id', dashboardManifest });
+      const context = createDashboardPageContext({
+        solutionId: 'some-solution-id',
+        solutionName: 'some solution name',
+        dashboardManifest,
+      });
 
       expect(context).toEqual(expectedContext);
     });
@@ -527,6 +566,7 @@ describe('createDashboardPageContext', () => {
   describe('when the userContextType is authority', () => {
     it('should create a context from the manifest and the marketingData', () => {
       const expectedContext = {
+        name: 'some solution name',
         returnToDashboardUrl: '/authority/solution/some-solution-id',
         previewUrl: '/authority/solution/some-solution-id/preview',
         sectionGroups: [
@@ -571,7 +611,11 @@ describe('createDashboardPageContext', () => {
       };
 
       const context = createDashboardPageContext({
-        solutionId: 'some-solution-id', dashboardManifest, marketingDataSections, userContextType: 'authority',
+        solutionId: 'some-solution-id',
+        solutionName: 'some solution name',
+        dashboardManifest,
+        marketingDataSections,
+        userContextType: 'authority',
       });
 
       expect(context).toEqual(expectedContext);
