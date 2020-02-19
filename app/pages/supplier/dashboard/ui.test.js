@@ -33,7 +33,7 @@ test('should render the marketing dashboard page title', async (t) => {
   const title = Selector('h1');
 
   await t
-    .expect(await extractInnerText(title)).eql('Marketing Page - Dashboard');
+    .expect(await extractInnerText(title)).eql('<Catalogue Solution name> listing page – all sections');
 });
 
 test('should render the preview page button', async (t) => {
@@ -46,7 +46,7 @@ test('should render the preview page button', async (t) => {
   const previewButton = Selector('[data-test-id="dashboard-preview-button"] a');
 
   await t
-    .expect(await extractInnerText(previewButton)).eql('Preview Marketing page')
+    .expect(await extractInnerText(previewButton)).eql('Preview your page')
     .click(previewButton)
     .expect(getLocation()).contains('/solution/S100000-001/preview');
 });
@@ -76,7 +76,7 @@ test('should render the About your solution section group', async (t) => {
   const aboutYourSolutionSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-about-your-solution"]');
 
   await t
-    .expect(await extractInnerText(aboutYourSolutionSectionGroup.find('h2'))).eql('About your Solution');
+    .expect(await extractInnerText(aboutYourSolutionSectionGroup.find('h2'))).eql('About Catalogue Solution');
 });
 
 test('should render the Client application type section group', async (t) => {
@@ -112,7 +112,7 @@ test('should render the About your Organisation section group', async (t) => {
   const aboutYourOrganisationSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-about-your-organisation"]');
 
   await t
-    .expect(await extractInnerText(aboutYourOrganisationSectionGroup.find('h2'))).eql('About your Organisation');
+    .expect(await extractInnerText(aboutYourOrganisationSectionGroup.find('h2'))).eql('About organisation');
 });
 
 

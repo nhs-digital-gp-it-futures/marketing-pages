@@ -9,7 +9,7 @@
     "summary": {
       "mainAdvice": "Summarise your requirements (optional)",
       "additionalAdvice": "Add a description of your Solutions public cloud requirements",
-      "footerAdvice": "You can enter up to 500 characters",
+      "footerAdvice": "(Maximum number of characters 500)",
       "type": "textarea-field",
       "errorResponse": {
         "maxLength": "Summarise your requirements is over the character limit"
@@ -32,5 +32,5 @@
       }
     }
   },
-  "submitText" : "Save and return to all sections"
+  "submitText" : "Save and return"
 }

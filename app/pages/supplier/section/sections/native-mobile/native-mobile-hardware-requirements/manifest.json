@@ -9,7 +9,7 @@
     "hardware-requirements": {
       "mainAdvice": "Do you have any hardware requirements? (optional)",
       "additionalAdvice": "A description of any hardware requirements for your Solution.",
-      "footerAdvice": "You can enter up to 500 characters",
+      "footerAdvice": "(Maximum number of characters 500)",
       "type": "textarea-field",
       "errorResponse": {
         "maxLength": "Hardware requirements is over the character limit"

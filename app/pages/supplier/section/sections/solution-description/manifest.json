@@ -10,7 +10,7 @@
     "summary": {
       "mainAdvice": "Summarise your Solution *",
       "additionalAdvice": "Your text from Stage 1, Solution registration has been automatically inserted but can be edited.",
-      "footerAdvice": "You can enter up to 300 characters",
+      "footerAdvice": "(Maximum number of characters 300)",
       "type": "textarea-field",
       "errorResponse": {
         "maxLength": "Solution Summary is over the character limit",
@@ -20,7 +20,7 @@
     "description": {
       "mainAdvice": "Write a description about your Solution",
       "additionalAdvice": "The description will give the buyer more insight into your Solution and the qualities it can provide.",
-      "footerAdvice": "You can enter up to 1,000 characters",
+      "footerAdvice": "(Maximum number of characters 1,000)",
       "type": "textarea-field",
       "rows": 17,
       "errorResponse": {
@@ -36,5 +36,5 @@
       }
     }
   },
-  "submitText" : "Save and return to all sections"
+  "submitText" : "Save and return"
 }

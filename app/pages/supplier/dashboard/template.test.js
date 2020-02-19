@@ -7,11 +7,107 @@ const setup = {
 };
 
 describe('supplier - dashboard page', () => {
-  it('should render the title of the dashboard page', createTestHarness(setup, (harness) => {
+  it('should render the title on the dashboard page if provided', createTestHarness(setup, (harness) => {
+    const context = {
+      title: 'some title',
+    };
+
+    harness.request(context, ($) => {
+      expect($('[data-test-id="dashboard-title"]').text().trim()).toEqual('some title');
+    });
+  }));
+
+  it('should not render the title on the dashboard page if not provided', createTestHarness(setup, (harness) => {
     const context = {};
 
     harness.request(context, ($) => {
-      expect($('h1').text().trim()).toEqual('Marketing Page - Dashboard');
+      expect($('[data-test-id="dashboard-title"]').length).toEqual(0);
+    });
+  }));
+
+  it('should render the main advice on the dashboard page if provided', createTestHarness(setup, (harness) => {
+    const context = {
+      mainAdvice: 'some main advice',
+    };
+
+    harness.request(context, ($) => {
+      expect($('[data-test-id="dashboard-main-advice"]').text().trim()).toEqual('some main advice');
+    });
+  }));
+
+  it('should not render the main advice on the dashboard page if not provided', createTestHarness(setup, (harness) => {
+    const context = {};
+
+    harness.request(context, ($) => {
+      expect($('[data-test-id="dashboard-main-advice"]').length).toEqual(0);
+    });
+  }));
+
+  it('should render the additional advice on the dashboard page if provided', createTestHarness(setup, (harness) => {
+    const context = {
+      additionalAdvice: 'some additional advice',
+    };
+
+    harness.request(context, ($) => {
+      expect($('[data-test-id="dashboard-additional-advice"]').text().trim()).toEqual('some additional advice');
+    });
+  }));
+
+  it('should not render the additional advice on the dashboard page if not provided', createTestHarness(setup, (harness) => {
+    const context = {};
+
+    harness.request(context, ($) => {
+      expect($('[data-test-id="dashboard-additional-advice"]').length).toEqual(0);
+    });
+  }));
+
+  it('should render the warning advice on the dashboard page if provided', createTestHarness(setup, (harness) => {
+    const context = {
+      warningAdvice: 'some warning advice',
+    };
+
+    harness.request(context, ($) => {
+      expect($('[data-test-id="dashboard-warning-advice"]').length).toEqual(1);
+      expect($('[data-test-id="dashboard-warning-advice"] .nhsuk-u-visually-hidden').text().trim()).toEqual('Information:');
+      expect($('[data-test-id="dashboard-warning-advice"] p').text().trim()).toEqual('some warning advice');
+    });
+  }));
+
+  it('should not render the warning advice on the dashboard page if not provided', createTestHarness(setup, (harness) => {
+    const context = {};
+
+    harness.request(context, ($) => {
+      expect($('[data-test-id="dashboard-warning-advice"]').length).toEqual(0);
+    });
+  }));
+
+  it('should render the sections box on the dashboard page if provided', createTestHarness(setup, (harness) => {
+    const context = {
+      sectionsBox: {
+        title: 'some title',
+        mainAdvice: 'some main advice',
+        sections: [
+          'some section 1',
+          'some section 2',
+          'some section 3',
+        ],
+      },
+    };
+
+    harness.request(context, ($) => {
+      expect($('[data-test-id="dashboard-sections-box"]').length).toEqual(1);
+      expect($('[data-test-id="dashboard-sections-box"] h3').text().trim()).toEqual('some title');
+      expect($('[data-test-id="dashboard-sections-box"] p').text().trim()).toEqual('some main advice');
+      expect($('[data-test-id="dashboard-sections-box"] ul').length).toEqual(1);
+      expect($('[data-test-id="dashboard-sections-box"] li').length).toEqual(3);
+    });
+  }));
+
+  it('should not render the sections box on the dashboard page if not provided', createTestHarness(setup, (harness) => {
+    const context = {};
+
+    harness.request(context, ($) => {
+      expect($('[data-test-id="dashboard-sections-box"]').length).toEqual(0);
     });
   }));
 
@@ -33,7 +129,7 @@ describe('supplier - dashboard page', () => {
 
     harness.request(context, ($) => {
       expect($('[data-test-id="dashboard-preview-button"] a').length).toEqual(1);
-      expect($('[data-test-id="dashboard-preview-button"] a').text().trim()).toEqual('Preview Marketing page');
+      expect($('[data-test-id="dashboard-preview-button"] a').text().trim()).toEqual('Preview your page');
       expect($('[data-test-id="dashboard-preview-button"] a').attr('href')).toEqual('/solution/S100000-001/preview');
     });
   }));

@@ -27,7 +27,7 @@
     "storage-requirements-description": {
       "mainAdvice": "Description of storage requirements",
       "additionalAdvice": "Add further information about the storage requirements needed for your Solution to function.",
-      "footerAdvice": "You can enter up to 300 characters",
+      "footerAdvice": "(Maximum number of characters 300)",
       "type": "textarea-field",
       "errorResponse": {
         "required": "Storage requirement description is a mandatory question",
@@ -37,7 +37,7 @@
     "minimum-cpu": {
       "mainAdvice": "Minimum necessary CPU power",
       "additionalAdvice": "Add further information about the minimum CPU power required for your Solution to function.",
-      "footerAdvice": "You can enter up to 300 characters",
+      "footerAdvice": "(Maximum number of characters 300)",
       "type": "textarea-field",
       "errorResponse": {
         "required": "Minimum necessary CPU power is a mandatory question",

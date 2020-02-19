@@ -2,39 +2,82 @@
 {% from 'components/button/macro.njk' import button %}
 {% from '../../common/dashboard/components/dashboard-sectionGroup.njk' import dashboardSectionGroup %}
 {% from '../../../common/components/error-summary/macro.njk' import errorSummary %}
+{% from 'components/tag/macro.njk' import tag %}
+{% from 'components/view-data-bulletlist/macro.njk' import viewDataBulletlist %}
 
 {% block body %}
-<div data-test-id="dashboard" class="nhsuk-grid-row">
-  <div class="nhsuk-grid-column-full">
-
-    {% if (errors.length > 0) %}
-      {{ errorSummary({
-        errors: errors
-      }) }}
-    {% endif %}
-
-    <h1>Marketing Page - Dashboard</h1>
-    <div data-test-id="dashboard-preview-button">
-      {{ button({
-        "text": "Preview Marketing page",
-        "classes": "nhsuk-button--secondary",
-        "href": previewUrl
-      }) }}
+<div data-test-id="dashboard">
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-full">
+      {% if (errors.length > 0) %}
+        {{ errorSummary({
+          errors: errors
+        }) }}
+      {% endif %}
     </div>
+    <div class="nhsuk-grid-column-two-thirds">
 
-    {% for sectionGroup in sectionGroups %}
-      {{ dashboardSectionGroup({
-        sectionGroup: sectionGroup
+      {{ tag({
+        text: 'Supplier name',
+        classes: 'nhsuk-u-margin-bottom-4 bc-c-tag-outline'
       }) }}
-    {% endfor %}
 
-    <br/>
-    <br/>
-    <div data-test-id="dashboard-submit-for-moderation-button">
-      {{ button({
-        "text": "Submit for moderation",
-        "href": submitForModerationUrl
-      }) }}
+      {% if title %}
+        <h1 data-test-id="dashboard-title">{{ title }}</h1>
+      {% endif %}
+
+      {% if mainAdvice %}
+        <h2 data-test-id="dashboard-main-advice" class="nhsuk-u-margin-bottom-5">{{ mainAdvice }}</h2>
+      {% endif %}
+
+      <div data-test-id="dashboard-preview-button">
+        {{ button({
+          "text": "Preview your page",
+          "classes": "nhsuk-button--secondary",
+          "href": previewUrl
+        }) }}
+      </div>
+
+      {% if additionalAdvice %}
+        <p data-test-id="dashboard-additional-advice" class="nhsuk-u-font-size-24 nhsuk-u-margin-bottom-0">{{ additionalAdvice }}</p>
+      {% endif %}
+
+    </div>
+    <div class="nhsuk-grid-column-full">
+
+      {% for sectionGroup in sectionGroups %}
+        {{ dashboardSectionGroup({
+          sectionGroup: sectionGroup
+        }) }}
+      {% endfor %}
+
+    </div>
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {% if warningAdvice %}
+        <div data-test-id="dashboard-warning-advice" class="nhsuk-inset-text">
+          <span class="nhsuk-u-visually-hidden">Information: </span>
+          <p>{{ warningAdvice }}</p>
+        </div>
+      {% endif %}
+
+      <div class="nhsuk-u-margin-bottom-5" data-test-id="dashboard-submit-for-moderation-button">
+        {{ button({
+          "text": "Submit for moderation",
+          "href": submitForModerationUrl
+        }) }}
+      </div>
+
+      {% if sectionsBox %}
+        <div data-test-id="dashboard-sections-box" class="bc-c-border-box nhsuk-u-padding-4 nhsuk-u-margin-bottom-5">
+          <h3>{{ sectionsBox.title }}</h3>
+          <p>{{ sectionsBox.mainAdvice }}</p>
+          {{ viewDataBulletlist({
+            data: sectionsBox.sections
+          }) }}
+        </div>
+      {% endif %}
+
     </div>
   </div>
 </div>

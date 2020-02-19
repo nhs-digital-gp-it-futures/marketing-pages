@@ -6,14 +6,14 @@
     "This information will be visible to buyers on your Solution page."
   ],
   "questions": {
-    "hardware-requirements-description": {   
+    "hardware-requirements-description": {
       "mainAdvice": "Do you have any hardware requirements?",
       "additionalAdvice": "Add a description of any hardware requirements for you Solution.",
       "type": "textarea-field",
       "errorResponse": {
         "maxLength": "Hardware requirement description is over the character limit"
       },
-      "footerAdvice": "You can enter up to 500 characters"
+      "footerAdvice": "(Maximum number of characters 500)"
     }
   },
   "submitText" : "Save and return",
