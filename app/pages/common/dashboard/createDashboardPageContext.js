@@ -111,7 +111,7 @@ const createSectionGroupsContext = ({
 
 
 export const createDashboardPageContext = ({
-  solutionId, dashboardManifest, marketingDataSections, validationErrors, dashboardId, userContextType = 'supplier',
+  solutionId, solutionName, dashboardManifest, marketingDataSections, validationErrors, dashboardId, userContextType = 'supplier',
 }) => {
   const { errors, sectionGroups } = createSectionGroupsContext({
     solutionId,
@@ -125,6 +125,7 @@ export const createDashboardPageContext = ({
   const isSupplierContextType = userContextType === 'supplier';
 
   const context = {
+    name: solutionName,
     title: dashboardManifest.title,
     mainAdvice: dashboardManifest.mainAdvice,
     additionalAdvice: dashboardManifest.additionalAdvice,

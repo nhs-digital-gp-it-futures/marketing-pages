@@ -23,6 +23,7 @@ describe('supplier - dashboard controller', () => {
 
     const dashboardData = {
       data: {
+        name: 'some solution name',
         sections: {
           'some-section-id': {
             status: 'INCOMPLETE',
@@ -34,6 +35,7 @@ describe('supplier - dashboard controller', () => {
 
     it('should return the context when the manifest and data from the api is provided', async () => {
       const expectedContext = {
+        name: 'some solution name',
         previewUrl: '/supplier/solution/some-solution-id/preview',
         submitForModerationUrl: '/supplier/solution/some-solution-id/submitForModeration',
         returnToDashboardUrl: '/supplier/solution/some-solution-id',

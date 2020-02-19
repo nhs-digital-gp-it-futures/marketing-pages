@@ -33,7 +33,7 @@ test('should render the marketing dashboard page title', async (t) => {
   const title = Selector('h1');
 
   await t
-    .expect(await extractInnerText(title)).eql('<Catalogue Solution name> listing page – all sections');
+    .expect(await extractInnerText(title)).eql('Write on Time listing page – all sections');
 });
 
 test('should render the preview page button', async (t) => {
