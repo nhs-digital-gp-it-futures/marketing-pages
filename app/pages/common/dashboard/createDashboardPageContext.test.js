@@ -140,7 +140,7 @@ describe('createDashboardPageContext', () => {
         solutionId: 'some-solution-id',
         solutionName: 'some solution name',
         dashboardManifest,
-        marketingDataSections
+        marketingDataSections,
       });
 
       expect(context).toEqual(expectedContext);
