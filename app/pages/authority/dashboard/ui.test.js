@@ -98,7 +98,7 @@ test('clicking on the capability section link should navigate the user to the ca
     .expect(getLocation()).contains('/authority/solution/S100000-001/section/capabilities');
 });
 
-test.skip('clicking on the epics section link should navigate the user to the epics page', async (t) => {
+test('clicking on the epics section link should navigate the user to the epics page', async (t) => {
   await pageSetup(t);
 
   nock(apiLocalhost)
