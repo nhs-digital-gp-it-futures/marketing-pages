@@ -17,7 +17,7 @@ router.use('/authority', authorityRoutes);
 
 router.get('*', (req, res, next) => next({
   status: 404,
-  message: 'Incorrect url - please check it is valid and try again',
+  message: `Incorrect url ${req.originalUrl} - please check it is valid and try again`,
 }));
 
 router.use((err, req, res, next) => {

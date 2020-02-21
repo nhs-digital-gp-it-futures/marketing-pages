@@ -1,5 +1,6 @@
 // Core dependencies
 const path = require('path');
+const favicon = require('serve-favicon');
 
 // External dependencies
 const compression = require('compression');
@@ -19,6 +20,9 @@ class App {
   }
 
   createApp() {
+    // Adds favicon to every page
+    this.app.use(favicon(path.join(__dirname, '/node_modules/nhsuk-frontend/packages/assets/favicons', 'favicon.ico')));
+
     // Use gzip compression to decrease the size of
     // the response body and increase the speed of web app
     this.app.use(compression());
