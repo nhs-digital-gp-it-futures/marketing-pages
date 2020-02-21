@@ -2,18 +2,27 @@
 {% from 'components/input/macro.njk' import input %}
 
 {% macro bulletpointList(params) %}
+
+  {% if params.isMultiQuestion %}
+    {% set labelClasses = 'nhsuk-u-font-size-19 nhsuk-u-font-weight-bold nhsuk-u-margin-bottom-2' %}
+  {% else %}
+    {% set labelClasses = 'nhsuk-u-font-size-24 nhsuk-u-font-weight-bold nhsuk-u-margin-bottom-2' %}
+  {% endif %}
+
   <div data-test-id="question-{{ params.question.id }}">
 
     <div data-test-id="bulletpoint-list-main-advice">
       {{ label({
         "text": params.question.mainAdvice,
-        "classes": 'nhsuk-u-font-size-24 nhsuk-u-font-weight-bold nhsuk-u-margin-bottom-2'
+        "classes": labelClasses
       }) }}
     </div>
 
-    <span data-test-id="bulletpoint-list-additional-advice" class="nhsuk-hint nhsuk-u-margin-bottom-3">
-      {{ params.question.additionalAdvice }}
-    </span>
+    {% if params.question.additionalAdvice %}
+      <span data-test-id="bulletpoint-list-additional-advice" class="nhsuk-hint nhsuk-u-margin-bottom-3">
+        {{ params.question.additionalAdvice }}
+      </span>
+    {% endif %}
 
     <div data-test-id="bulletpoint-list-fields">
       {% for field in params.question.fields %}
@@ -45,7 +54,7 @@
               }) }}
             </div>
           {% endif %}
-        <div data-test-id="textarea-field-footer">
+        <div data-test-id="bulletpoint-list-footer">
           {{ label({
             "text": params.question.footerAdvice,
             "classes": "bc-c-field-footer nhsuk-u-margin-bottom-3"

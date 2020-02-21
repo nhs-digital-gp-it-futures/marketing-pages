@@ -2,6 +2,24 @@
 {% from 'components/input/macro.njk' import input %}
 
 {% macro textField(params) %}
+
+  {% if params.isMultiQuestion %}
+    {% set labelClasses = 'nhsuk-u-font-size-19 nhsuk-u-font-weight-bold nhsuk-u-margin-bottom-2' %}
+  {% else %}
+    {% set labelClasses = 'nhsuk-u-font-size-24 nhsuk-u-font-weight-bold nhsuk-u-margin-bottom-2' %}
+  {% endif %}
+
+  {% if params.question.additionalAdvice %}
+    {% set errorHint = {
+      "text": params.question.additionalAdvice,
+      "classes": 'nhsuk-u-margin-bottom-1'
+    } %}
+    {% set hint = {
+      "text": params.question.additionalAdvice,
+      "classes": 'nhsuk-u-margin-bottom-3'
+    } %}
+  {% endif %}
+
   <div data-test-id="question-{{ params.question.id }}">
     {% if (params.question.error) %}
       <div data-test-id="text-field-input-error">
@@ -10,12 +28,9 @@
           "name": params.question.id,
           "label": {
             "text": params.question.mainAdvice,
-            "classes": 'nhsuk-u-font-size-24 nhsuk-u-font-weight-bold nhsuk-u-margin-bottom-2'
+            "classes": labelClasses
           },
-          "hint": {
-            "text": params.question.additionalAdvice,
-            "classes": 'nhsuk-u-margin-bottom-1'
-          },
+          "hint": errorHint,
           "value": params.question.data,
           "errorMessage": {
             "text": params.question.error.message
@@ -32,12 +47,9 @@
           "name": params.question.id,
           "label": {
             "text": params.question.mainAdvice,
-            "classes": 'nhsuk-u-font-size-24 nhsuk-u-font-weight-bold nhsuk-u-margin-bottom-2'
+            "classes": labelClasses
           },
-          "hint": {
-            "text": params.question.additionalAdvice,
-            "classes": 'nhsuk-u-margin-bottom-3'
-          },
+          "hint": hint,
           "value": params.question.data,
           "formGroup": {
             "classes": "nhsuk-u-margin-bottom-2"

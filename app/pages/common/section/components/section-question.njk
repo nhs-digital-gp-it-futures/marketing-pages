@@ -6,7 +6,7 @@
 {% from './fields/combobox-options.njk' import comboboxOptions %}
 
 {% macro sectionQuestion(params) %}
-  <div data-test-id="section-question-{{ params.question.type }}">
+  <div data-test-id="section-question-{{ params.question.type }}" class="nhsuk-u-margin-bottom-3">
     {% if (params.question.type === 'bulletpoint-list') %}
       {{ bulletpointList(params) }}
     {% endif %}
