@@ -49,7 +49,8 @@ describe('supplier - dashboard page', () => {
     };
 
     harness.request(context, ($) => {
-      expect($('[data-test-id="dashboard-additional-advice"]').text().trim()).toEqual('some additional advice');
+      expect($('[data-test-id="dashboard-additional-advice"] .nhsuk-u-visually-hidden').text().trim()).toEqual('Information:');
+      expect($('[data-test-id="dashboard-additional-advice"] p').text().trim()).toEqual('some additional advice');
     });
   }));
 

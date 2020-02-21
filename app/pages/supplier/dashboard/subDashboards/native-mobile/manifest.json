@@ -1,32 +1,30 @@
 {
   "id":"native-mobile-dashboard-page",
-  "title": "Native mobile or tablet",
-  "mainAdvice": "Add further detail about your native mobile or tablet application.",
-  "additionalAdvice": [
-    "If your application is designed for native or tablet, please complete the sections below to provide information to the user about your client application"
-  ],
+  "title": "Native mobile or tablet application – all sections",
+  "mainAdvice": "Provide information about your native mobile or tablet Catalogue Solution.",
   "sectionGroups": {
     "native-mobile-sections": {
       "title": "Native mobile or tablet sections",
+      "mainAdvice": "Let buyers know the minimum recommended technical specification to implement your Catalogue Solution effectively.",
       "sections": {
         "native-mobile-operating-systems": {
           "title": "Supported operating systems",
           "type": "section"
         },
         "native-mobile-first": {
-          "title": "Mobile first",
+          "title": "Mobile first approach",
+          "type": "section"
+        },
+        "native-mobile-connection-details": {
+          "title": "Connectivity",
           "type": "section"
         },
         "native-mobile-memory-and-storage": {
           "title": "Memory and storage",
           "type": "section"
         },
-        "native-mobile-connection-details": {
-          "title": "Connection details",
-          "type": "section"
-        },
         "native-mobile-third-party": {
-          "title": "Third party components and device capabilities",
+          "title": "Third-party components and device capabilities",
           "type": "section"
         },
         "native-mobile-hardware-requirements": {

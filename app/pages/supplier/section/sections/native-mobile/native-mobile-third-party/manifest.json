@@ -1,27 +1,24 @@
 {
   "id": "native-mobile-third-party",
-  "title": "Native mobile or tablet - third party components and device capabilities",
-  "mainAdvice": "Answer the following questions about your mobile or tablet based Solution",
-  "additionalAdvice": [
-    "This information will be visible to buyers on your Solution page."
-  ],
+  "title": "Native mobile or tablet application – third-party components and device capabilities",
+  "mainAdvice": "Let buyers know about any third-party components or device capabilities needed for your Catalogue Solution.",
   "questions": {
     "third-party-components": {
-      "mainAdvice": "Describe any third party components (optional)",
-      "additionalAdvice": "Add any information about the third party components required for your Solution to function.",
+      "mainAdvice": "Third-party components (optional)",
+      "additionalAdvice": "Provide information on any third-party components required for your Catalogue Solution to function, for example integration software, such as a QR code scanner, or Google search.",
       "footerAdvice": "(Maximum number of characters 500)",
       "type": "textarea-field",
       "errorResponse": {
-        "maxLength": "Third party components is over the character limit"
+        "maxLength": "Third-party components response must be 500 characters or fewer"
       }
     },
     "device-capabilities": {
-      "mainAdvice": "Describe any device capabilities (optional)",
-      "additionalAdvice": "Add any information about the device capabilities required for your Solution to function.",
+      "mainAdvice": "Device capabilities (optional)",
+      "additionalAdvice": "Provide information on any device capabilities required for your Catalogue Solution to function, for example a camera or a certain type of connection port.",
       "footerAdvice": "(Maximum number of characters 500)",
       "type": "textarea-field",
       "errorResponse": {
-        "maxLength": "Device capabilities is over the character limit"
+        "maxLength": "Device capabilities response must be 500 characters or fewer"
       }
     }
   },

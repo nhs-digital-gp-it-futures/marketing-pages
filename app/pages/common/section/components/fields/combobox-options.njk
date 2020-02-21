@@ -8,15 +8,20 @@
           "id": params.question.id,
           "name": params.question.id,
           "label": {
-            "text": params.question.mainAdvice
+            "text": params.question.mainAdvice,
+            "classes": 'nhsuk-u-font-size-24 nhsuk-u-font-weight-bold nhsuk-u-margin-bottom-2'
           },
           "hint": {
-            "text": params.question.additionalAdvice
+            "text": params.question.additionalAdvice,
+            "classes": 'nhsuk-u-margin-bottom-1'
           },
           "errorMessage": {
             "text": params.question.error.message
           },
-          "items": params.question.options
+          "items": params.question.options,
+          "formGroup": {
+            "classes": "nhsuk-u-margin-bottom-2"
+          }
         }) }}
       </div>
     {% else %}
@@ -25,12 +30,17 @@
           "id": params.question.id,
           "name": params.question.id,
           "label": {
-            "text": params.question.mainAdvice
+            "text": params.question.mainAdvice,
+            "classes": 'nhsuk-u-font-size-24 nhsuk-u-font-weight-bold nhsuk-u-margin-bottom-2'
           },
           "hint": {
-            "text": params.question.additionalAdvice
+            "text": params.question.additionalAdvice,
+            "classes": 'nhsuk-u-margin-bottom-3'
           },
-          "items": params.question.options
+          "items": params.question.options,
+          "formGroup": {
+            "classes": "nhsuk-u-margin-bottom-2"
+          }
         }) }}
       </div>
     {% endif %}

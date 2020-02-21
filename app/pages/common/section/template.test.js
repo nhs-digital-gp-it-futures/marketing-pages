@@ -13,7 +13,7 @@ describe('section page', () => {
     };
 
     harness.request(context, ($) => {
-      expect($('h2[data-test-id="section-title"]').text().trim()).toEqual('Title of the section');
+      expect($('h1[data-test-id="section-title"]').text().trim()).toEqual('Title of the section');
     });
   }));
 
@@ -24,7 +24,7 @@ describe('section page', () => {
     };
 
     harness.request(context, ($) => {
-      expect($('h4[data-test-id="section-main-advice"]').text().trim()).toEqual('This is the main advice for this section');
+      expect($('h2[data-test-id="section-main-advice"]').text().trim()).toEqual('This is the main advice for this section');
     });
   }));
 
@@ -130,7 +130,7 @@ describe('section page', () => {
 
     harness.request(context, ($) => {
       expect($('[data-test-id="section-back-link"] a').length).toEqual(1);
-      expect($('[data-test-id="section-back-link"] a').text().trim()).toEqual('Return to all sections');
+      expect($('[data-test-id="section-back-link"] a').text().trim()).toEqual('Return to adding a Solution');
     });
   }));
 });

@@ -26,7 +26,7 @@ test('should render the browser based dashboard page title', async (t) => {
   const title = Selector('[data-test-id="sub-dashboard-title"]');
 
   await t
-    .expect(await extractInnerText(title)).eql('Browser based');
+    .expect(await extractInnerText(title)).eql('Browser-based application – all sections');
 });
 
 test('should render the browser based dashboard main advice', async (t) => {
@@ -35,7 +35,7 @@ test('should render the browser based dashboard main advice', async (t) => {
   const mainAdvice = Selector('[data-test-id="sub-dashboard-main-advice"]');
 
   await t
-    .expect(await extractInnerText(mainAdvice)).eql('Add further detail about your browser based application.');
+    .expect(await extractInnerText(mainAdvice)).eql('Provide information about your browser-based Catalogue Solution.');
 });
 
 test('should render the Browser based section group', async (t) => {
@@ -44,7 +44,7 @@ test('should render the Browser based section group', async (t) => {
   const browserBasedSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-browser-based-sections"]');
 
   await t
-    .expect(await extractInnerText(browserBasedSectionGroup.find('h2'))).eql('Browser based sections');
+    .expect(await extractInnerText(browserBasedSectionGroup.find('h2'))).eql('Browser-based information');
 });
 
 test('should render all the sections for the Browser based sections section group', async (t) => {
@@ -60,7 +60,7 @@ test('should render all the sections for the Browser based sections section grou
 
   await t
     .expect(await extractInnerText(browsersSupportedSection.find('[data-test-id="dashboard-section-title"]')))
-    .eql('Browsers supported')
+    .eql('Supported browsers')
     .expect(browsersSupportedSection.find('[data-test-id="dashboard-section-title"] a').getAttribute('href'))
     .eql('/supplier/solution/S100000-001/dashboard/browser-based/section/browser-browsers-supported')
     .expect(await extractInnerText(browsersSupportedSection.find('[data-test-id="dashboard-section-requirement"]')))
@@ -69,7 +69,7 @@ test('should render all the sections for the Browser based sections section grou
     .eql('INCOMPLETE')
 
     .expect(await extractInnerText(mobileFirstSection.find('[data-test-id="dashboard-section-title"]')))
-    .eql('Mobile first')
+    .eql('Mobile first approach')
     .expect(mobileFirstSection.find('[data-test-id="dashboard-section-title"] a').getAttribute('href'))
     .eql('/supplier/solution/S100000-001/dashboard/browser-based/section/browser-mobile-first')
     .expect(await extractInnerText(mobileFirstSection.find('[data-test-id="dashboard-section-requirement"]')))
@@ -78,7 +78,7 @@ test('should render all the sections for the Browser based sections section grou
     .eql('INCOMPLETE')
 
     .expect(await extractInnerText(pluginsOrExtensionsSection.find('[data-test-id="dashboard-section-title"]')))
-    .eql('Plug-ins or extensions')
+    .eql('Plug-ins or extensions required')
     .expect(pluginsOrExtensionsSection.find('[data-test-id="dashboard-section-title"] a').getAttribute('href'))
     .eql('/supplier/solution/S100000-001/dashboard/browser-based/section/browser-plug-ins-or-extensions')
     .expect(await extractInnerText(pluginsOrExtensionsSection.find('[data-test-id="dashboard-section-requirement"]')))

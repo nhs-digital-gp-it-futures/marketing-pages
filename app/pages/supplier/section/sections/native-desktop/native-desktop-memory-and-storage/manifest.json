@@ -1,14 +1,11 @@
 {
   "id": "native-desktop-memory-and-storage",
-  "title": "Native desktop - memory, storage, processing and aspect ratio",
-  "mainAdvice": "Answer the following questions about your desktop based Solution",
-  "additionalAdvice": [
-    "This information will be visible to buyers on your Solution page."
-  ],
+  "title": "Native desktop application – memory, storage, processing and resolution",
+  "mainAdvice": "Let buyers know the minimum requirements for your Catalogue Solution to function.",
   "questions": {
     "minimum-memory-requirement": {
-      "mainAdvice": "Select the minimum memory requirement for your Solution to function?",
-      "additionalAdvice": "Please select below the minimum memory requirement.",
+      "mainAdvice": "Memory size",
+      "additionalAdvice": "Select the minimum memory size required for your Catalogue Solution to function.",
       "type": "combobox-options",
       "options": {
         "": "Please select",
@@ -21,32 +18,32 @@
         "16GB or higher": "16GB or higher"
       },
       "errorResponse": {
-        "required": "Minimum memory requirement is a mandatory question"
+        "required": "Select a minimum memory size"
       }
     },
     "storage-requirements-description": {
-      "mainAdvice": "Description of storage requirements",
-      "additionalAdvice": "Add further information about the storage requirements needed for your Solution to function.",
+      "mainAdvice": "Storage space",
+      "additionalAdvice": "Provide information about how much storage space a device will need to use your Catalogue Solution.",
       "footerAdvice": "(Maximum number of characters 300)",
       "type": "textarea-field",
       "errorResponse": {
-        "required": "Storage requirement description is a mandatory question",
-        "maxLength": "Storage requirement description is over the character limit"
+        "required": "Enter storage space information",
+        "maxLength": "Storage space response must be 300 characters or fewer"
       }
     },
     "minimum-cpu": {
-      "mainAdvice": "Minimum necessary CPU power",
-      "additionalAdvice": "Add further information about the minimum CPU power required for your Solution to function.",
+      "mainAdvice": "Processing power",
+      "additionalAdvice": "Provide information on the minimum CPU power required for your Catalogue Solution to function on desktop.",
       "footerAdvice": "(Maximum number of characters 300)",
       "type": "textarea-field",
       "errorResponse": {
-        "required": "Minimum necessary CPU power is a mandatory question",
-        "maxLength": "Minimum necessary CPU power is over the character limit"
+        "required": "Enter processing power information",
+        "maxLength": "Processing power response must be 300 characters or fewer"
       }
     },
     "recommended-resolution": {
-      "mainAdvice": "What is the recommended desktop aspect ratio and screen resolution? (optional)",
-      "additionalAdvice": "Please select below the minimum resolution required for your Solution to function on desktop.",
+      "mainAdvice": "Screen resolution and aspect ratio (optional)",
+      "additionalAdvice": "Select the minimum recommended screen resolution and aspect ratio for your Catalogue Solution to function on desktop.",
       "type": "combobox-options",
       "options": {
         "": "Please select",

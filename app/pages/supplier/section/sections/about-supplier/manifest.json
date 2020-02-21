@@ -11,15 +11,16 @@
       "type": "textarea-field",
       "rows": 17,
       "errorResponse": {
-        "maxLength": "Description is over the character limit"
+        "maxLength": "Description must be 1,000 characters or fewer"
       }
     },
     "link": {
       "mainAdvice": "Link to more information (optional)",
       "additionalAdvice": "Provide a URL to a page that gives buyers further information about your organisation.",
+      "footerAdvice": "(Maximum number of characters 1,000)",
       "type": "text-field",
       "errorResponse": {
-        "maxLength": "Link is over the character limit"
+        "maxLength": "Link to more information must be 1,000 characters or fewer"
       }
     }
   },

@@ -1,14 +1,11 @@
 {
   "id": "native-mobile-operating-systems",
-  "title": "Native mobile or tablet - supported operating systems",
-  "mainAdvice": "Answer the following questions about your native mobile or tablet Solution",
-  "additionalAdvice": [
-    "This information is displayed on the Marketing page for buyers to view."
-  ],
+  "title": "Native mobile or tablet application – supported operating systems",
+  "mainAdvice": "Let buyers know which operating systems will work with your Catalogue Solution.",
   "questions": {
     "operating-systems": {
-      "mainAdvice": "What devices or operating systems are supported? Select all that apply",
-      "additionalAdvice": "If your Solution is mobile or tablet based, please select below all the operating systems your Solution supports.",
+      "mainAdvice": "Supported operating systems",
+      "additionalAdvice": "Select the operating systems supported by your Catalogue Solution.",
       "type": "checkbox-options",
       "options": {
         "Apple IOS": "Apple IOS",
@@ -16,16 +13,16 @@
         "Other": "Other"
       },
       "errorResponse": {
-        "required": "Supported devices or operating systems is a mandatory question"
+        "required": "Select at least one supported operating system"
       }
     },
     "operating-systems-description": {
       "mainAdvice": "Description of supported operating systems (optional)",
-      "additionalAdvice": "Add further description of any context, exceptions or devices your Solution supports.",
+      "additionalAdvice": "Provide any additional information that may be helpful to buyers, for example which version of the operating system is supported.",
       "footerAdvice": "(Maximum number of characters 1,000)",
       "type": "textarea-field",
       "errorResponse": {
-        "maxLength": "Description of supported operating systems is over the character limit"
+        "maxLength": "Supported operating systems response must be 1,000 characters or fewer"
       }
     }
   },

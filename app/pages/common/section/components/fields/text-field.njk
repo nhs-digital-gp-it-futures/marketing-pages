@@ -9,14 +9,19 @@
           "id": params.question.id,
           "name": params.question.id,
           "label": {
-            "text": params.question.mainAdvice
+            "text": params.question.mainAdvice,
+            "classes": 'nhsuk-u-font-size-24 nhsuk-u-font-weight-bold nhsuk-u-margin-bottom-2'
           },
           "hint": {
-            "text": params.question.additionalAdvice
+            "text": params.question.additionalAdvice,
+            "classes": 'nhsuk-u-margin-bottom-1'
           },
           "value": params.question.data,
           "errorMessage": {
             "text": params.question.error.message
+          },
+          "formGroup": {
+            "classes": "nhsuk-u-margin-bottom-2"
           }
         }) }}
       </div>
@@ -26,18 +31,24 @@
           "id": params.question.id,
           "name": params.question.id,
           "label": {
-            "text": params.question.mainAdvice
+            "text": params.question.mainAdvice,
+            "classes": 'nhsuk-u-font-size-24 nhsuk-u-font-weight-bold nhsuk-u-margin-bottom-2'
           },
           "hint": {
-            "text": params.question.additionalAdvice
+            "text": params.question.additionalAdvice,
+            "classes": 'nhsuk-u-margin-bottom-3'
           },
-          "value": params.question.data
+          "value": params.question.data,
+          "formGroup": {
+            "classes": "nhsuk-u-margin-bottom-2"
+          }
         }) }}
       </div>
     {% endif %}
     <div data-test-id="text-field-footer">
       {{ label({
-        "text": params.question.footerAdvice
+        "text": params.question.footerAdvice,
+        "classes": "bc-c-field-footer"
       }) }}
     </div>
   </div>

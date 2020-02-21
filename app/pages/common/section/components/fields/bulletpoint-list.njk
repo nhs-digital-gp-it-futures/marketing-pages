@@ -6,16 +6,14 @@
 
     <div data-test-id="bulletpoint-list-main-advice">
       {{ label({
-        "classes": "nhsuk-label--s",
-        "text": params.question.mainAdvice
+        "text": params.question.mainAdvice,
+        "classes": 'nhsuk-u-font-size-24 nhsuk-u-font-weight-bold nhsuk-u-margin-bottom-2'
       }) }}
     </div>
 
-    <div data-test-id="bulletpoint-list-additional-advice">
-      {{ label({
-        "text": params.question.additionalAdvice
-      }) }}
-    </div>
+    <span data-test-id="bulletpoint-list-additional-advice" class="nhsuk-hint nhsuk-u-margin-bottom-3">
+      {{ params.question.additionalAdvice }}
+    </span>
 
     <div data-test-id="bulletpoint-list-fields">
       {% for field in params.question.fields %}
@@ -28,6 +26,9 @@
                 "classes": "nhsuk-input--width-30",
                 "errorMessage": {
                   "text": field.error.message
+                },
+                "formGroup": {
+                  "classes": "nhsuk-u-margin-bottom-2"
                 }
               }) }}
             </div>
@@ -37,10 +38,19 @@
                 "id": field.id,
                 "name": params.question.id,
                 "value": field.data,
-                "classes": "nhsuk-input--width-30"
+                "classes": "nhsuk-input--width-30",
+                "formGroup": {
+                  "classes": "nhsuk-u-margin-bottom-2"
+                }
               }) }}
             </div>
           {% endif %}
+        <div data-test-id="textarea-field-footer">
+          {{ label({
+            "text": params.question.footerAdvice,
+            "classes": "bc-c-field-footer nhsuk-u-margin-bottom-3"
+          }) }}
+        </div>
       {% endfor %}
     </div>
   </div>

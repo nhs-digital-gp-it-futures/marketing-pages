@@ -118,7 +118,7 @@ describe('GET /supplier/solution/:solutionId/section/:sectionId', () => {
       .get('/supplier/solution/1/section/a-section')
       .expect(200)
       .then((res) => {
-        expect(res.text.includes(`<h2 data-test-id="section-title">${mockSectionContext.title}</h2>`)).toEqual(true);
+        expect(res.text.includes(`<h1 data-test-id="section-title" class="nhsuk-u-margin-bottom-3">${mockSectionContext.title}</h1>`)).toEqual(true);
         expect(res.text.includes('data-test-id="error-page-title"')).toEqual(false);
       });
   });
@@ -157,7 +157,7 @@ describe('POST /supplier/solution/:solutionId/section/:sectionId', () => {
       .expect(200)
       .then((res) => {
         expect(res.text.includes('<div data-test-id="error-summary">')).toEqual(true);
-        expect(res.text.includes(`<h2 data-test-id="section-title">${mockSectionErrorContext.title}</h2>`)).toEqual(true);
+        expect(res.text.includes(`<h1 data-test-id="section-title" class="nhsuk-u-margin-bottom-3">${mockSectionErrorContext.title}</h1>`)).toEqual(true);
         expect(res.text.includes('data-test-id="error-page-title"')).toEqual(false);
         sectionControllers.getSectionPageErrorContext.mockReset();
       });
@@ -174,7 +174,7 @@ describe('GET /supplier/solution/:solutionId/dashboard/:dashboardId', () => {
       .get('/supplier/solution/1/dashboard/a-dashboard')
       .expect(200)
       .then((res) => {
-        expect(res.text.includes(`<h2 data-test-id="sub-dashboard-title">${mockDashboardContext.title}</h2>`)).toEqual(true);
+        expect(res.text.includes(`<h1 data-test-id="sub-dashboard-title">${mockDashboardContext.title}</h1>`)).toEqual(true);
         expect(res.text.includes('data-test-id="error-page-title"')).toEqual(false);
       });
   });
@@ -193,7 +193,7 @@ describe('GET /supplier/solution/:solutionId/dashboard/:dashboardId/section/:sec
       .get('/supplier/solution/1/dashboard/a-dashboard/section/a-section')
       .expect(200)
       .then((res) => {
-        expect(res.text.includes(`<h2 data-test-id="section-title">${mockSectionContext.title}</h2>`)).toEqual(true);
+        expect(res.text.includes(`<h1 data-test-id="section-title" class="nhsuk-u-margin-bottom-3">${mockSectionContext.title}</h1>`)).toEqual(true);
         expect(res.text.includes('data-test-id="error-page-title"')).toEqual(false);
       });
   });
@@ -232,7 +232,7 @@ describe('POST /supplier/solution/:solutionId/dashboard/:dashboardId/section/:se
       .expect(200)
       .then((res) => {
         expect(res.text.includes('<div data-test-id="error-summary">')).toEqual(true);
-        expect(res.text.includes(`<h2 data-test-id="section-title">${mockSectionErrorContext.title}</h2>`)).toEqual(true);
+        expect(res.text.includes(`<h1 data-test-id="section-title" class="nhsuk-u-margin-bottom-3">${mockSectionErrorContext.title}</h1>`)).toEqual(true);
         expect(res.text.includes('data-test-id="error-page-title"')).toEqual(false);
         sectionControllers.getSectionPageErrorContext.mockReset();
       });

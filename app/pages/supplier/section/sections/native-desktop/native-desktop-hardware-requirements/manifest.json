@@ -1,18 +1,15 @@
 {
   "id": "native-desktop-hardware-requirements",
-  "title": "Native desktop - hardware requirements",
-  "mainAdvice": "Answer the following questions about your desktop based Solution",
-  "additionalAdvice": [
-    "This information will be visible to buyers on your Solution page."
-  ],
+  "title": "Native desktop application – hardware requirements",
+  "mainAdvice": "Let buyers know about any hardware requirements for your Catalogue Solution.",
   "questions": {
     "hardware-requirements": {
-      "mainAdvice": "Do you have any hardware requirements? (optional)",
-      "additionalAdvice": "A description of any hardware requirements for your Solution.",
+      "mainAdvice": "Hardware requirements (optional)",
+      "additionalAdvice": "Provide information on any additional hardware that is required for your native desktop Catalogue Solution to function.",
       "footerAdvice": "(Maximum number of characters 500)",
       "type": "textarea-field",
       "errorResponse": {
-        "maxLength": "Hardware requirements is over the character limit"
+        "maxLength": "Hardware requirements response must be 500 characters or fewer"
       }
     }
   },

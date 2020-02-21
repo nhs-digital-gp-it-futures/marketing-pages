@@ -1,18 +1,16 @@
 {
   "id": "features",
-  "title": "Features",
-  "mainAdvice": "Add up to 10 features that describe your Solution.",
-  "additionalAdvice": [
-    "Each feature will be displayed as a bulleted list item. For example:",
-    "- Create and change appointment entries",
-    "You can enter up to 100 characters per feature"
-  ],
+  "title": "Catalogue Solution features",
+  "mainAdvice": "Highlight to buyers the key features of your Catalogue Solution.",
   "questions": {
     "listing": {
+      "mainAdvice": "Features list (optional)",
+      "additionalAdvice": "List up to 10 key features provided by your Catalogue Solution that meet needs in primary care, for example how it can help manage information and resources.",
+      "footerAdvice": "(Maximum number of characters 100)",
       "type": "bulletpoint-list",
       "maxItems": 10,
       "errorResponse": {
-        "maxLength": "This feature is over the character limit"
+        "maxLength": "Feature description must be 100 characters or fewer"
       }
     }
   },

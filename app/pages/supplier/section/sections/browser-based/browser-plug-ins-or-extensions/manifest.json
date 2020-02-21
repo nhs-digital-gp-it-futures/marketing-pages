@@ -1,30 +1,26 @@
 {
   "id": "browser-plug-ins-or-extensions",
-  "title": "Browser based - plug-ins or extensions",
-  "mainAdvice": "Answer the following questions about your browser based Solution",
-  "additionalAdvice": [
-    "This information will be visible to buyers on your Solution page.",
-    "* indicates required field."
-  ],
+  "title": "Browser-based application – plug-ins or extensions",
+  "mainAdvice": "Let buyers know if any plug-ins or extensions are needed to use your Catalogue Solution.",
   "questions": {
     "plugins-required": {
-      "mainAdvice": "Are any plug-ins or browser extensions required?*",
-      "additionalAdvice": "Please select below if your Solution requires any plug-ins or browser extensions.",
+      "mainAdvice": "Plug-ins or extensions required",
+      "additionalAdvice": "Does a device using your Catalogue Solution require plug-ins or extensions that customise its browsers or software to function?",
       "type": "radiobutton-options",
       "options": {
         "Yes": "Yes",
         "No": "No"
       },
       "errorResponse": {
-        "required": "Please select whether or not plug-ins or browser extensions are required"
+        "required": "Select yes if any plug-ins or extensions are required"
       }
     },
     "plugins-detail": {
-      "mainAdvice": "If any plug-ins or browser extensions are required, provide more detail or constraints",
-      "additionalAdvice": "Tell buyers more information about the plug-ins or extensions required.",
+      "mainAdvice": "Additional information (optional)",
+      "additionalAdvice": "If your Catalogue Solution uses plug-ins or extensions, provide more information about them for buyers.",
       "type": "textarea-field",
       "errorResponse": {
-        "maxLength": "Plug-ins or browser extensions detail is over the character limit"
+        "maxLength": "Additional information must be 500 characters or fewer"
       },
       "footerAdvice": "(Maximum number of characters 500)"
     }

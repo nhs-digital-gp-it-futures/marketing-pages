@@ -1,15 +1,11 @@
 {
   "id": "browser-browsers-supported",
-  "title": "Browser based - browsers supported",
-  "mainAdvice": "Answer the following questions about your browser based Solution",
-  "additionalAdvice": [
-    "This information will be visible to buyers on your Solution page.",
-    "* indicates required field."
-  ],
+  "title": "Browser-based application – supported browsers",
+  "mainAdvice": "Let buyers know which types of browser will work with your Catalogue Solution.",
   "questions": {
     "supported-browsers": {
-      "mainAdvice": "What browsers are supported? Select all that apply*",
-      "additionalAdvice": "If your Solution is browser based, please select below all the browsers your Solution supports.",
+      "mainAdvice": "Supported browser types",
+      "additionalAdvice": "Select all the types of browser that are supported by your Catalogue Solution.",
       "type": "checkbox-options",
       "options": {
         "Google Chrome": "Google Chrome",
@@ -22,19 +18,19 @@
         "Internet Explorer 10": "Internet Explorer 10"
       },
       "errorResponse": {
-        "required": "Please select what browsers are supported"
+        "required": "Select at least one browser type"
       }
     },
     "mobile-responsive": {
-      "mainAdvice": "Is your Solution mobile responsive?*",
-      "additionalAdvice": "Please select below if the design responds and adapts to mobile or tablet devices.",
+      "mainAdvice": "Mobile responsive",
+      "additionalAdvice": "Does the design of your Catalogue Solution adapt for use on mobile or tablet devices?",
       "type": "radiobutton-options",
       "options": {
         "Yes": "Yes",
         "No": "No"
       },
       "errorResponse": {
-        "required": "Please select if your solution is mobile responsive"
+        "required": "Select yes if you followed a mobile responsive approach"
       }
     }
   },

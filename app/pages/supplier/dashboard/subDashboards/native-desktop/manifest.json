@@ -1,28 +1,26 @@
 {
   "id":"native-desktop-dashboard-page",
-  "title": "Native desktop",
-  "mainAdvice": "Add further detail about your native desktop application.",
-  "additionalAdvice": [
-    "If your application is designed for native desktop, please complete the sections below to provide information to the user about your client application."
-  ],
+  "title": "Native desktop application – all sections",
+  "mainAdvice": "Provide information about your native desktop Catalogue Solution.",
   "sectionGroups": {
     "native-desktop-sections": {
-      "title": "Native desktop sections",
+      "title": "Native desktop information",
+      "mainAdvice": "Let buyers know the minimum recommended technical specification to implement your Catalogue Solution effectively.",
       "sections": {
         "native-desktop-operating-systems": {
           "title": "Supported operating systems",
           "type": "section"
         },
         "native-desktop-connection-details": {
-          "title": "Connection details",
+          "title": "Connectivity",
           "type": "section"
         },
         "native-desktop-memory-and-storage": {
-          "title": "Memory, storage, processing and aspect ratio",
+          "title": "Memory, storage, processing and resolution",
           "type": "section"
         },
         "native-desktop-third-party": {
-          "title": "Third party components and device capabilities",
+          "title": "Third-party components and device capabilities",
           "type": "section"
         },
         "native-desktop-hardware-requirements": {

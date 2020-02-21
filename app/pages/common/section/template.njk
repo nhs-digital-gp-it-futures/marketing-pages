@@ -7,21 +7,31 @@
 
 {% block body %}
 <div class="nhsuk-grid-row">
-  <div class="nhsuk-grid-column-full">
+  <div class="nhsuk-grid-column-full nhsuk-u-margin-bottom-3">
+    <div data-test-id="section-back-link">
+      {{ backLink({
+        "href": returnToDashboardUrl,
+        "text": "Return to adding a Solution"
+      }) }}
+    </div>
+  </div>
+  <div class="nhsuk-grid-column-two-thirds">
     {% if (errors.length > 0) %}
       {{ errorSummary({
         errors: errors
       }) }}
     {% endif %}
 
-    <h2 data-test-id="section-title">{{ title }}</h2>
-    <h4 data-test-id="section-main-advice">{{ mainAdvice }}</h4>
-    <div data-test-id="section-additional-advice">
-      {% for advice in additionalAdvice %}
-        <p class="nhsuk-body-l">
-          {{ advice }}
-        </p>
-      {% endfor %}
+    <div class="nhsuk-u-margin-top-4 nhsuk-u-margin-bottom-6">
+      <h1 data-test-id="section-title" class="nhsuk-u-margin-bottom-3">{{ title }}</h1>
+      <h2 data-test-id="section-main-advice" class="nhsuk-u-font-size-22">{{ mainAdvice }}</h2>
+      <div data-test-id="section-additional-advice">
+        {% for advice in additionalAdvice %}
+          <p>
+            {{ advice }}
+          </p>
+        {% endfor %}
+      </div>
     </div>
 
     <form method="post" action="{{ submitActionUrl }}">
@@ -44,19 +54,12 @@
         </div>
       {% endif %}
 
-      <div data-test-id="section-submit-button">
+      <div data-test-id="section-submit-button" class="nhsuk-u-margin-top-7">
         {{ button({
           "text": submitText
         }) }}
       </div>
     </form>
-
-    <div data-test-id="section-back-link">
-      {{ backLink({
-        "href": returnToDashboardUrl,
-        "text": "Return to all sections"
-      }) }}
-    </div>
 
   </div>
 </div>

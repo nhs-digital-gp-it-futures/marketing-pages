@@ -1,14 +1,11 @@
 {
   "id": "native-mobile-connection-details",
-  "title": "Native mobile or tablet - connection details",
-  "mainAdvice": "Answer the following questions about your mobile or tablet based Solution",
-  "additionalAdvice": [
-    "This information will be visible to buyers on your Solution page."
-  ],
+  "title": "Native mobile or tablet application – connectivity",
+  "mainAdvice": "Let buyers know about your Catalogue Solution’s connection requirements.",
   "questions": {
     "minimum-connection-speed": {
-      "mainAdvice": "Select the minimum connection speed required for your Solution to function? (optional)",
-      "additionalAdvice": "Please select below the minimum bandwidth requirement.",
+      "mainAdvice": "Connection speed (optional)",
+      "additionalAdvice": "Select the minimum bandwidth required for your Catalogue Solution to function.",
       "type": "combobox-options",
       "options": {
         "": "Please select",
@@ -27,8 +24,8 @@
       }
     },
     "connection-types": {
-      "mainAdvice": "What connection types are supported? (optional)",
-      "additionalAdvice": "Please select below all the connection types your solution supports",
+      "mainAdvice": "Connection types supported (optional)",
+      "additionalAdvice": "Select all of the connection types that will work with your Catalogue Solution.",
       "type": "checkbox-options",
       "options": {
         "GPRS": "GPRS",
@@ -41,12 +38,12 @@
       }
     },
     "connection-requirements-description": {
-      "mainAdvice": "Description of connection requirements (optional)",
-      "additionalAdvice": "Add further description of connectivity for your Solution.",
+      "mainAdvice": "Connection requirements (optional)",
+      "additionalAdvice": "Provide information on any connection requirements for your Catalogue Solution.",
       "footerAdvice": "(Maximum number of characters 300)",
       "type": "textarea-field",
       "errorResponse": {
-        "maxLength": "Additional information is over the character limit"
+        "maxLength": "Connection requirements must be 300 characters or fewer"
       }
     }
   },
