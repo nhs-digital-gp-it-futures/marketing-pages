@@ -132,4 +132,58 @@ describe('radiobuttonOptions', () => {
       expect(question.find('div[data-test-id="radiobutton-options-error"]').length).toEqual(1);
     });
   }));
+
+  it('should render the correct label classes if is part of a multi question', createTestHarness(setup, (harness) => {
+    const context = {
+      params: {
+        question: {
+          id: 'fieldId',
+          mainAdvice: 'main advice for question',
+        },
+        isMultiQuestion: true,
+      },
+    };
+
+    harness.request(context, ($) => {
+      const mainAdviceLabel = $('div[data-test-id="radiobutton-options"] legend');
+
+      expect(mainAdviceLabel.hasClass('nhsuk-u-font-size-19')).toEqual(true);
+      expect(mainAdviceLabel.hasClass('nhsuk-u-font-weight-bold')).toEqual(true);
+      expect(mainAdviceLabel.hasClass('nhsuk-u-margin-bottom-2')).toEqual(true);
+    });
+  }));
+
+  it('should render the correct label classes if is not part of a multi question', createTestHarness(setup, (harness) => {
+    const context = {
+      params: {
+        question: {
+          id: 'fieldId',
+          mainAdvice: 'main advice for question',
+        },
+      },
+    };
+
+    harness.request(context, ($) => {
+      const mainAdviceLabel = $('div[data-test-id="radiobutton-options"] legend');
+
+      expect(mainAdviceLabel.hasClass('nhsuk-u-font-size-24')).toEqual(true);
+      expect(mainAdviceLabel.hasClass('nhsuk-u-font-weight-bold')).toEqual(true);
+      expect(mainAdviceLabel.hasClass('nhsuk-u-margin-bottom-2')).toEqual(true);
+    });
+  }));
+
+  it('should not render any additional advice if not provided', createTestHarness(setup, (harness) => {
+    const context = {
+      params: {
+        question: {
+          id: 'fieldId',
+          mainAdvice: 'main advice for question',
+        },
+      },
+    };
+
+    harness.request(context, ($) => {
+      expect($('div[data-test-id="radiobutton-options"] .nhsuk-hint').length).toEqual(0);
+    });
+  }));
 });
