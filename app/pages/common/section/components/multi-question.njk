@@ -2,25 +2,24 @@
 {% from './section-question.njk' import sectionQuestion %}
 
 {% macro multiQuestion(params) %}
-  <div data-test-id="question-{{ params.parentQuestion.id }}">
+  <div data-test-id="question-{{ params.parentQuestion.id }}" class="nhsuk-u-margin-bottom-8">
 
     <div data-test-id="multi-question-main-advice">
       {{ label({
-        "classes": "nhsuk-label--s",
+        "classes": "nhsuk-label nhsuk-u-font-size-24 nhsuk-u-font-weight-bold nhsuk-u-margin-bottom-2",
         "text": params.parentQuestion.mainAdvice
       }) }}
     </div>
 
-    <div data-test-id="multi-question-additional-advice">
-      {{ label({
-        "text": params.parentQuestion.additionalAdvice
-      }) }}
-    </div>
+    <span data-test-id="multi-question-additional-advice" class="nhsuk-hint nhsuk-u-margin-bottom-3">
+      {{ params.parentQuestion.additionalAdvice }}
+    </span>
 
     <div data-test-id="multi-question-questions">
       {% for question in params.parentQuestion.questions %}
         {{ sectionQuestion({
-          question: question
+          question: question,
+          isMultiQuestion: true
         }) }}
       {% endfor %}
     </div>

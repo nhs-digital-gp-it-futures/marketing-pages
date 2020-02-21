@@ -174,7 +174,7 @@ describe('GET /supplier/solution/:solutionId/dashboard/:dashboardId', () => {
       .get('/supplier/solution/1/dashboard/a-dashboard')
       .expect(200)
       .then((res) => {
-        expect(res.text.includes(`<h1 data-test-id="sub-dashboard-title">${mockDashboardContext.title}</h1>`)).toEqual(true);
+        expect(res.text.includes(`<h1 data-test-id="sub-dashboard-title" class="nhsuk-u-margin-bottom-3">${mockDashboardContext.title}</h1>`)).toEqual(true);
         expect(res.text.includes('data-test-id="error-page-title"')).toEqual(false);
       });
   });

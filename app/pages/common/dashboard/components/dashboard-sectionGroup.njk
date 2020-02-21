@@ -1,15 +1,19 @@
 {% from './dashboard-section-row.njk' import dashboardSectionRow %}
 
 {% macro dashboardSectionGroup(params) %}
-  <div data-test-id="dashboard-sectionGroup-{{params.sectionGroup.id}}" class="nhsuk-u-padding-bottom-2">
+  <div data-test-id="dashboard-sectionGroup-{{params.sectionGroup.id}}" class="nhsuk-u-padding-bottom-7">
     <div class="bc-c-title">
       <h2 class="nhsuk-u-font-size-24">
         {{ params.sectionGroup.title }}
       </h2>
       {% if params.sectionGroup.mainAdvice %}
-        <p>
-          {{ params.sectionGroup.mainAdvice }}
-        </p>
+        <div class="nhsuk-grid-row">
+          <div class="nhsuk-grid-column-two-thirds">
+            <p>
+              {{ params.sectionGroup.mainAdvice }}
+            </p>
+          </div>
+        </div>
       {% endif %}
     </div>
     <ul class="bc-c-section-list__items">

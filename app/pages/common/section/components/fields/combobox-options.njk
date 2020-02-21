@@ -1,6 +1,24 @@
 {% from 'components/select/macro.njk' import select %}
 
 {% macro comboboxOptions(params) %}
+
+  {% if params.isMultiQuestion %}
+    {% set labelClasses = 'nhsuk-u-font-size-19 nhsuk-u-font-weight-bold nhsuk-u-margin-bottom-2' %}
+  {% else %}
+    {% set labelClasses = 'nhsuk-u-font-size-24 nhsuk-u-font-weight-bold nhsuk-u-margin-bottom-2' %}
+  {% endif %}
+
+  {% if params.question.additionalAdvice %}
+    {% set errorHint = {
+      "text": params.question.additionalAdvice,
+      "classes": 'nhsuk-u-margin-bottom-1'
+    } %}
+    {% set hint = {
+      "text": params.question.additionalAdvice,
+      "classes": 'nhsuk-u-margin-bottom-3'
+    } %}
+  {% endif %}
+
   <div id="{{ params.question.id }}" data-test-id="question-{{ params.question.id }}">
     {% if (params.question.error) %}
       <div data-test-id="combobox-options-error">
@@ -9,12 +27,9 @@
           "name": params.question.id,
           "label": {
             "text": params.question.mainAdvice,
-            "classes": 'nhsuk-u-font-size-24 nhsuk-u-font-weight-bold nhsuk-u-margin-bottom-2'
+            "classes": labelClasses
           },
-          "hint": {
-            "text": params.question.additionalAdvice,
-            "classes": 'nhsuk-u-margin-bottom-1'
-          },
+          "hint": errorHint,
           "errorMessage": {
             "text": params.question.error.message
           },
@@ -31,12 +46,9 @@
           "name": params.question.id,
           "label": {
             "text": params.question.mainAdvice,
-            "classes": 'nhsuk-u-font-size-24 nhsuk-u-font-weight-bold nhsuk-u-margin-bottom-2'
+            "classes": labelClasses
           },
-          "hint": {
-            "text": params.question.additionalAdvice,
-            "classes": 'nhsuk-u-margin-bottom-3'
-          },
+          "hint": hint,
           "items": params.question.options,
           "formGroup": {
             "classes": "nhsuk-u-margin-bottom-2"

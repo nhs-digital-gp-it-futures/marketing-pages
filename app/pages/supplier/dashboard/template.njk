@@ -19,30 +19,33 @@
 
       {{ tag({
         text: 'Supplier name',
-        classes: 'nhsuk-u-margin-bottom-4 bc-c-tag-outline'
+        classes: 'nhsuk-u-margin-bottom-5 bc-c-tag-outline'
       }) }}
 
-      {% if title %}
-        <h1 data-test-id="dashboard-title">{{ name }} {{ title }}</h1>
-      {% endif %}
+      <div class="nhsuk-u-margin-top-5 nhsuk-u-margin-bottom-7">
+        {% if title %}
+          <h1 data-test-id="dashboard-title" class="nhsuk-u-margin-bottom-3">{{ name }} {{ title }}</h1>
+        {% endif %}
 
-      {% if mainAdvice %}
-        <h2 data-test-id="dashboard-main-advice" class="nhsuk-u-font-size-22 nhsuk-u-margin-bottom-5">{{ mainAdvice }}</h2>
-      {% endif %}
+        {% if mainAdvice %}
+          <h2 data-test-id="dashboard-main-advice" class="nhsuk-u-font-size-22 nhsuk-u-margin-bottom-5">{{ mainAdvice }}</h2>
+        {% endif %}
 
-      {% if additionalAdvice %}
-        <div data-test-id="dashboard-additional-advice" class="nhsuk-inset-text">
-          <span class="nhsuk-u-visually-hidden">Information: </span>
-          <p>{{ additionalAdvice }}</p>
+        {% if additionalAdvice %}
+          <div data-test-id="dashboard-additional-advice" class="nhsuk-inset-text nhsuk-u-padding-top-2 nhsuk-u-padding-right-4 nhsuk-u-padding-bottom-2 nhsuk-u-padding-left-4 nhsuk-u-margin-top-5 nhsuk-u-margin-bottom-6">
+            <span class="nhsuk-u-visually-hidden">Information: </span>
+            <p class="nhsuk-u-font-size-14">{{ additionalAdvice }}</p>
+          </div>
+        {% endif %}
+
+        <div data-test-id="dashboard-preview-button">
+          {{ button({
+            "text": "Preview your page",
+            "classes": "nhsuk-button--secondary",
+            "href": previewUrl
+          }) }}
         </div>
-      {% endif %}
 
-      <div data-test-id="dashboard-preview-button">
-        {{ button({
-          "text": "Preview your page",
-          "classes": "nhsuk-button--secondary",
-          "href": previewUrl
-        }) }}
       </div>
 
     </div>
@@ -58,9 +61,9 @@
     <div class="nhsuk-grid-column-two-thirds">
 
       {% if warningAdvice %}
-        <div data-test-id="dashboard-warning-advice" class="nhsuk-inset-text">
+        <div data-test-id="dashboard-warning-advice" class="nhsuk-inset-text nhsuk-u-padding-top-2 nhsuk-u-padding-right-4 nhsuk-u-padding-bottom-2 nhsuk-u-padding-left-4 nhsuk-u-margin-top-5 nhsuk-u-margin-bottom-6">
           <span class="nhsuk-u-visually-hidden">Information: </span>
-          <p>{{ warningAdvice }}</p>
+          <p class="nhsuk-u-font-size-14">{{ warningAdvice }}</p>
         </div>
       {% endif %}
 
