@@ -10,7 +10,7 @@
       "footerAdvice": "(Maximum number of characters 1,000)",
       "type": "text-field",
       "errorResponse": {
-        "maxLength": "Link is over the character limit"
+        "maxLength": "Link to supplier asserted integrations must be 1,000 characters or fewer"
       }
     }
   },

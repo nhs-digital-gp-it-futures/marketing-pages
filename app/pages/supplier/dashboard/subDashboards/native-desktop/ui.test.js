@@ -26,7 +26,7 @@ test('should render the native desktop dashboard page title', async (t) => {
   const title = Selector('[data-test-id="sub-dashboard-title"]');
 
   await t
-    .expect(await extractInnerText(title)).eql('Native desktop');
+    .expect(await extractInnerText(title)).eql('Native desktop application – all sections');
 });
 
 test('should render the native desktop dashboard main advice', async (t) => {
@@ -35,7 +35,7 @@ test('should render the native desktop dashboard main advice', async (t) => {
   const mainAdvice = Selector('[data-test-id="sub-dashboard-main-advice"]');
 
   await t
-    .expect(await extractInnerText(mainAdvice)).eql('Add further detail about your native desktop application.');
+    .expect(await extractInnerText(mainAdvice)).eql('Provide information about your native desktop Catalogue Solution.');
 });
 
 test('should render native desktop section group', async (t) => {
@@ -44,7 +44,7 @@ test('should render native desktop section group', async (t) => {
   const nativeDesktopSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-native-desktop-sections"]');
 
   await t
-    .expect(await extractInnerText(nativeDesktopSectionGroup.find('h2'))).eql('Native desktop sections');
+    .expect(await extractInnerText(nativeDesktopSectionGroup.find('h2'))).eql('Native desktop information');
 });
 
 test('should render all the sections for native mobile sections section group', async (t) => {
@@ -69,7 +69,7 @@ test('should render all the sections for native mobile sections section group', 
     .eql('INCOMPLETE')
 
     .expect(await extractInnerText(connectionDetails.find('[data-test-id="dashboard-section-title"]')))
-    .eql('Connection details')
+    .eql('Connectivity')
     .expect(connectionDetails.find('[data-test-id="dashboard-section-title"] a').getAttribute('href'))
     .eql('/supplier/solution/S100000-001/dashboard/native-desktop/section/native-desktop-connection-details')
     .expect(await extractInnerText(connectionDetails.find('[data-test-id="dashboard-section-requirement"]')))
@@ -78,7 +78,7 @@ test('should render all the sections for native mobile sections section group', 
     .eql('INCOMPLETE')
 
     .expect(await extractInnerText(memoryAndStorage.find('[data-test-id="dashboard-section-title"]')))
-    .eql('Memory, storage, processing and aspect ratio')
+    .eql('Memory, storage, processing and resolution')
     .expect(memoryAndStorage.find('[data-test-id="dashboard-section-title"] a').getAttribute('href'))
     .eql('/supplier/solution/S100000-001/dashboard/native-desktop/section/native-desktop-memory-and-storage')
     .expect(await extractInnerText(memoryAndStorage.find('[data-test-id="dashboard-section-requirement"]')))
@@ -87,7 +87,7 @@ test('should render all the sections for native mobile sections section group', 
     .eql('INCOMPLETE')
 
     .expect(await extractInnerText(thirdParty.find('[data-test-id="dashboard-section-title"]')))
-    .eql('Third party components and device capabilities')
+    .eql('Third-party components and device capabilities')
     .expect(thirdParty.find('[data-test-id="dashboard-section-title"] a').getAttribute('href'))
     .eql('/supplier/solution/S100000-001/dashboard/native-desktop/section/native-desktop-third-party')
     .expect(await extractInnerText(thirdParty.find('[data-test-id="dashboard-section-requirement"]')))

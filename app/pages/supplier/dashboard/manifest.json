@@ -26,6 +26,10 @@
         "implementation-timescales": {
           "title": "Implementation timescales",
           "type": "section"
+        },
+        "roadmap": {
+          "title": "Roadmap",
+          "type": "section"
         }
       }
     },
@@ -86,15 +90,6 @@
         },
         "hosting-type-on-premise": {
           "title": "On premise",
-          "type": "section"
-        }
-      }
-    },
-    "product-roadmap": {
-      "title": "Your product roadmap",
-      "sections": {
-        "roadmap": {
-          "title": "Roadmap",
           "type": "section"
         }
       }

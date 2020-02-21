@@ -1,16 +1,11 @@
 {
   "id": "client-application-types",
   "title": "Client application type",
-  "mainAdvice": "Select all client application types your Solution supports",
-  "additionalAdvice": [
-    "This information will be visible to buyers on your Solution page.",
-    "* indicates required field."
-  ],
-  "warningAdvice": "When revisiting this section please be aware that if you choose to deselect an application type, any data that has been added to that application type will be deleted.",
+  "mainAdvice": "Let buyers know which types of application will work with your Catalogue Solution.",
   "questions": {
     "client-application-types": {
-      "mainAdvice": "Select the client application types your Solution supports *",
-      "additionalAdvice": "Check all the options that are relevant to you. You will be required to provide further information for each client application type you select.",
+      "mainAdvice": "Client application types supported",
+      "additionalAdvice": "Select at least one client application type. You’ll need to provide further information for each type you select.",
       "type": "checkbox-options",
       "options": {
         "browser-based": "Browser based",
@@ -18,7 +13,7 @@
         "native-desktop": "Native desktop"
       },
       "errorResponse": {
-        "required": "You must select at least one client application type"
+        "required": "Select at least one client application type"
       }
     }
   },

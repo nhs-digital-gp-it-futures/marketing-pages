@@ -1,18 +1,15 @@
 {
   "id": "native-mobile-additional-information",
-  "title": "Native mobile or tablet - additional information",
-  "mainAdvice": "Answer the following questions about your mobile or tablet based Solution",
-  "additionalAdvice": [
-    "This information will be visible to buyers on your Solution page."
-  ],
+  "title": "Native mobile or tablet application – additional information",
+  "mainAdvice": "Let buyers know any additional information about your Catalogue Solution.",
   "questions": {
     "additional-information": {
-      "mainAdvice": "Do you have any additional native mobile or tablet application information? (optional)",
-      "additionalAdvice": "Add additional information or requirements your Solution needs to function.",
+      "mainAdvice": "Additional information (optional)",
+      "additionalAdvice": "Provide additional information about your native mobile or tablet Catalogue Solution.",
       "footerAdvice": "(Maximum number of characters 500)",
       "type": "textarea-field",
       "errorResponse": {
-        "maxLength": "Additional information is over the character limit"
+        "maxLength": "Additional information must be 500 characters or fewer"
       }
     }
   },

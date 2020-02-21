@@ -1,14 +1,11 @@
 {
   "id": "native-mobile-memory-and-storage",
-  "title": "Native mobile or tablet - memory and storage requirements",
-  "mainAdvice": "Answer the following questions about your mobile or tablet based Solution",
-  "additionalAdvice": [
-    "This information will be visible to buyers on your Solution page."
-  ],
+  "title": "Native mobile and tablet application – memory and storage",
+  "mainAdvice": "Let buyers know the minimum requirements for your Catalogue Solution to function.",
   "questions": {
     "minimum-memory-requirement": {
-      "mainAdvice": "Select the minimum memory requirement for your Solution to function?",
-      "additionalAdvice": "Please select below the minimum memory requirement.",
+      "mainAdvice": "Memory size",
+      "additionalAdvice": "Select the minimum memory size required for your Catalogue Solution to function.",
       "type": "combobox-options",
       "options": {
         "": "Please select",
@@ -21,17 +18,17 @@
         "16GB or higher": "16GB or higher"
       },
       "errorResponse": {
-        "required": "Minimum memory requirement is a mandatory question"
+        "required": "Select a minimum memory size"
       }
     },
     "storage-requirements-description": {
-      "mainAdvice": "Description of storage requirements",
-      "additionalAdvice": "Add further information about the storage requirements needed for your Solution to function.",
+      "mainAdvice": "Storage space",
+      "additionalAdvice": "Provide information about how much storage space a device will need to use your Catalogue Solution.",
       "footerAdvice": "(Maximum number of characters 300)",
       "type": "textarea-field",
       "errorResponse": {
-        "required": "Storage requirement description is a mandatory question",
-        "maxLength": "Storage requirement description is over the character limit"
+        "required": "Enter storage space information",
+        "maxLength": "Storage space response must be 300 characters or fewer"
       }
     }
   },

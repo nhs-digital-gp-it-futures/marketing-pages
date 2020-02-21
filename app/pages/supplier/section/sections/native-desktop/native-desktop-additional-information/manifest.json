@@ -1,18 +1,15 @@
 {
   "id": "native-desktop-additional-information",
-  "title": "Native desktop - additional information",
-  "mainAdvice": "Answer the following questions about your desktop based Solution",
-  "additionalAdvice": [
-    "This information will be visible to buyers on your Solution page."
-  ],
+  "title": "Native desktop application – additional information",
+  "mainAdvice": "Let buyers know any additional information about your Catalogue Solution.",
   "questions": {
     "additional-information": {
-      "mainAdvice": "Do you have any additional native desktop application information? (optional)",
-      "additionalAdvice": "Add additional information or requirements your Solution needs to function.",
+      "mainAdvice": "Additional information (optional)",
+      "additionalAdvice": "Provide additional information about your native desktop Catalogue Solution.",
       "footerAdvice": "(Maximum number of characters 500)",
       "type": "textarea-field",
       "errorResponse": {
-        "maxLength": "Additional information is over the character limit"
+        "maxLength": "Additional information must be 500 characters or fewer"
       }
     }
   },

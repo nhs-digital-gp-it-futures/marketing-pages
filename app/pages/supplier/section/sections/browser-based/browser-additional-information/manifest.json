@@ -1,18 +1,15 @@
 {
   "id": "browser-additional-information",
-  "title": "Browser based - additional information",
-  "mainAdvice": "Answer the following questions about your browser based solution",
-  "additionalAdvice": [
-    "This information is diplayed on the Marketing page for buyers to view"
-  ],
+  "title": "Browser-based application – additional information",
+  "mainAdvice": "Let buyers know any additional information about your Catalogue Solution.",
   "questions": {
     "additional-information": {
-      "mainAdvice": "Do you have any additional browser based information (optional)",
-      "additionalAdvice": "Add any additional information or requirement your Solution needs to function",
+      "mainAdvice": "Additional information (optional)",
+      "additionalAdvice": "Provide additional information about your browser-based Catalogue Solution",
       "footerAdvice": "(Maximum number of characters 500)",
       "type": "textarea-field",
       "errorResponse": {
-        "maxLength": "Additional information is over the character limit"
+        "maxLength": "Additional information must be 500 characters or fewer"
       }
     }
   },

@@ -1,24 +1,22 @@
 {
   "id":"browser-based-dashboard-page",
-  "title": "Browser based",
-  "mainAdvice": "Add further detail about your browser based application.",
-  "additionalAdvice": [
-    "If your application is browser based, please complete the sections below to provide information to the user about your client application."
-  ],
+  "title": "Browser-based application – all sections",
+  "mainAdvice": "Provide information about your browser-based Catalogue Solution.",
   "sectionGroups": {
     "browser-based-sections": {
-      "title": "Browser based sections",
+      "title": "Browser-based information",
+      "mainAdvice": "Let buyers know the minimum recommended technical specification to implement your Catalogue Solution effectively.",
       "sections": {
         "browser-browsers-supported": {
-          "title": "Browsers supported",
+          "title": "Supported browsers",
           "type": "section"
         },
         "browser-mobile-first": {
-          "title": "Mobile first",
+          "title": "Mobile first approach",
           "type": "section"
         },
         "browser-plug-ins-or-extensions": {
-          "title": "Plug-ins or extensions",
+          "title": "Plug-ins or extensions required",
           "type": "section"
         },
         "browser-connectivity-and-resolution": {

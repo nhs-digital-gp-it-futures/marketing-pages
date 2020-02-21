@@ -1,15 +1,11 @@
 {
   "id": "browser-connectivity-and-resolution",
-  "title": "Browser based - connectivity and resolution",
-  "mainAdvice": "Answer the following questions about your browser based Solution",
-  "additionalAdvice": [
-    "This information will be visible to buyers on your Solution page.",
-    "* indicates required field."
-  ],
+  "title": "Browser-based application – connectivity and resolution",
+  "mainAdvice": "Let buyers know the connection speed and screen resolution needed to use your Catalogue Solution.",
   "questions": {
     "minimum-connection-speed": {
-      "mainAdvice": "Select the minimum connection speed required for your Solution to function?*",
-      "additionalAdvice": "Please select below the minimum bandwidth requirement.",
+      "mainAdvice": "Connection speed",
+      "additionalAdvice": "Select the minimum bandwidth required for your Catalogue Solution to function.",
       "type": "combobox-options",
       "options": {
         "": "Please select",
@@ -27,12 +23,12 @@
         "Higher than 30Mbps": "Higher than 30Mbps"
       },
       "errorResponse": {
-        "required": "Please select the minimum connection speed required"
+        "required": "Select a connection speed"
       }
     },
     "minimum-desktop-resolution": {
-      "mainAdvice": "Select the minimum desktop aspect ratio and screen resolution?",
-      "additionalAdvice": "Please select below the minimum resolution required for your Solution to function on desktop.",
+      "mainAdvice": "Screen resolution and aspect ratio (optional)",
+      "additionalAdvice": "Select the minimum recommended screen resolution and aspect ratio for your Catalogue Solution to function on desktop.",
       "type": "combobox-options",
       "options": {
         "": "Please select",

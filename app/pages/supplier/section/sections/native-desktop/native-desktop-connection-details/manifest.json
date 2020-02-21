@@ -1,14 +1,11 @@
 {
   "id": "native-desktop-connection-details",
-  "title": "Native desktop - connection details",
-  "mainAdvice": "Answer the following questions about your desktop based Solution",
-  "additionalAdvice": [
-    "This information will be visible to buyers on your Solution page."
-  ],
+  "title": "Native desktop application – connectivity",
+  "mainAdvice": "Let buyers know about your Catalogue Solution’s connection requirements.",
   "questions": {
     "minimum-connection-speed": {
-      "mainAdvice": "Select the minimum connection speed required for your Solution to function?",
-      "additionalAdvice": "Please select below the minimum bandwidth requirement.",
+      "mainAdvice": "Connection speed",
+      "additionalAdvice": "Select the minimum bandwidth required for your Catalogue Solution to function.",
       "type": "combobox-options",
       "options": {
         "": "Please select",
@@ -26,7 +23,7 @@
         "Higher than 30Mbps": "Higher than 30Mbps"
       },
       "errorResponse": {
-        "required": "Minimum connection speed is a mandatory question"
+        "required": "Select a connection speed"
       }
     }
   },

@@ -97,15 +97,6 @@ test('should render the Hosting type section group', async (t) => {
     .expect(await extractInnerText(hostingTypeSectionGroup.find('h2'))).eql('Hosting type');
 });
 
-test('should render the Your Product roadmap section group', async (t) => {
-  await pageSetup(t);
-
-  const productRoadmapSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-product-roadmap"]');
-
-  await t
-    .expect(await extractInnerText(productRoadmapSectionGroup.find('h2'))).eql('Your product roadmap');
-});
-
 test('should render the About your Organisation section group', async (t) => {
   await pageSetup(t);
 
@@ -124,6 +115,7 @@ test('should render all the sections for the About your solution section group',
   const featuresSection = aboutYourSolutionSectionGroup.find('[data-test-id="dashboard-section-features"]');
   const integrationsSection = aboutYourSolutionSectionGroup.find('[data-test-id="dashboard-section-integrations"]');
   const implementationTimescalesSection = aboutYourSolutionSectionGroup.find('[data-test-id="dashboard-section-implementation-timescales"]');
+  const roadmapSection = aboutYourSolutionSectionGroup.find('[data-test-id="dashboard-section-roadmap"]');
 
   await t
     .expect(await extractInnerText(solutionDescriptionSection.find('[data-test-id="dashboard-section-title"]')))
@@ -152,6 +144,13 @@ test('should render all the sections for the About your solution section group',
     .expect(await extractInnerText(implementationTimescalesSection.find('[data-test-id="dashboard-section-requirement"]')))
     .eql('Optional')
     .expect(await extractInnerText(implementationTimescalesSection.find('[data-test-id="dashboard-section-status"]')))
+    .eql('INCOMPLETE')
+
+    .expect(await extractInnerText(roadmapSection.find('[data-test-id="dashboard-section-title"]')))
+    .eql('Roadmap')
+    .expect(await extractInnerText(roadmapSection.find('[data-test-id="dashboard-section-requirement"]')))
+    .eql('Optional')
+    .expect(await extractInnerText(roadmapSection.find('[data-test-id="dashboard-section-status"]')))
     .eql('INCOMPLETE');
 });
 
@@ -268,21 +267,6 @@ test('should render all the sections for the Hosting type section group', async 
     .eql('INCOMPLETE');
 });
 
-test('should render all the sections for the Your product roadmap section group', async (t) => {
-  await pageSetup(t);
-
-  const productRoadmapSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-product-roadmap"]');
-  const roadmapSection = productRoadmapSectionGroup.find('[data-test-id="dashboard-section-roadmap"]');
-
-  await t
-    .expect(await extractInnerText(roadmapSection.find('[data-test-id="dashboard-section-title"]')))
-    .eql('Roadmap')
-    .expect(await extractInnerText(roadmapSection.find('[data-test-id="dashboard-section-requirement"]')))
-    .eql('Optional')
-    .expect(await extractInnerText(roadmapSection.find('[data-test-id="dashboard-section-status"]')))
-    .eql('INCOMPLETE');
-});
-
 test('should render all the sections for the About your organisation section group', async (t) => {
   await pageSetup(t);
 
@@ -366,6 +350,21 @@ test('clicking on the implementation timescales section link should navigate the
     .expect(getLocation()).contains('/solution/S100000-001/section/implementation-timescales');
 });
 
+test('clicking on the roadmap section link should navigate the user to roadmap page', async (t) => {
+  await pageSetup(t);
+
+  nock(apiLocalhost)
+    .get(`${apiPath}/sections/roadmap`)
+    .reply(200, {});
+
+  const aboutYourSolutionSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-about-your-solution"]');
+  const roadmapSection = aboutYourSolutionSectionGroup.find('[data-test-id="dashboard-section-roadmap"]');
+
+  await t
+    .click(roadmapSection.find('a'))
+    .expect(getLocation()).contains('/supplier/solution/S100000-001/section/roadmap');
+});
+
 test('clicking on the client application type section link should navigate the user to the client application type page', async (t) => {
   await pageSetup(t);
 
@@ -439,21 +438,6 @@ test('clicking on the hosting type on premise section link should navigate the u
   await t
     .click(hostingTypeOnPremiseSection.find('a'))
     .expect(getLocation()).contains('/supplier/solution/S100000-001/section/hosting-type-on-premise');
-});
-
-test('clicking on the roadmap section link should navigate the user to roadmap page', async (t) => {
-  await pageSetup(t);
-
-  nock(apiLocalhost)
-    .get(`${apiPath}/sections/roadmap`)
-    .reply(200, {});
-
-  const productRoadmapSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-product-roadmap"]');
-  const roadmapSection = productRoadmapSectionGroup.find('[data-test-id="dashboard-section-roadmap"]');
-
-  await t
-    .click(roadmapSection.find('a'))
-    .expect(getLocation()).contains('/supplier/solution/S100000-001/section/roadmap');
 });
 
 test('clicking on the About supplier section link should navigate the user to About supplier page', async (t) => {

@@ -10,7 +10,7 @@
       "footerAdvice": "(Maximum number of characters 1,000)",
       "type": "textarea-field",
       "errorResponse": {
-        "maxLength": "Summary is over the character limit"
+        "maxLength": "Summary must be 1,000 characters or fewer"
       }
     }
   },
