@@ -3,9 +3,9 @@
 {% macro radiobuttonOptions(params) %}
 
   {% if params.isMultiQuestion %}
-    {% set labelClasses = 'nhsuk-u-font-size-19 nhsuk-u-font-weight-bold nhsuk-u-margin-bottom-2' %}
+    {% set mainAdviceClasses = 'nhsuk-u-font-size-19 nhsuk-u-font-weight-bold nhsuk-u-margin-bottom-2' %}
   {% else %}
-    {% set labelClasses = 'nhsuk-u-font-size-24 nhsuk-u-font-weight-bold nhsuk-u-margin-bottom-2' %}
+    {% set mainAdviceClasses = 'nhsuk-u-font-size-24 nhsuk-u-font-weight-bold nhsuk-u-margin-bottom-2' %}
   {% endif %}
 
   {% if params.question.additionalAdvice %}
@@ -31,7 +31,7 @@
           "fieldset": {
             "legend": {
               "text": params.question.mainAdvice,
-              "classes": labelClasses
+              "classes": mainAdviceClasses
             }
           },
           "hint": errorHint,
@@ -46,7 +46,7 @@
           "fieldset": {
             "legend": {
               "text": params.question.mainAdvice,
-              "classes": labelClasses
+              "classes": mainAdviceClasses
             }
           },
           "hint": hint,
