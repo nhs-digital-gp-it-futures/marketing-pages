@@ -180,4 +180,36 @@ describe('bulletpoint-list', () => {
       expect($('[data-test-id="bulletpoint-list-additional-advice"]').length).toEqual(0);
     });
   }));
+
+  it('should render the accessibility label for listing inputs', createTestHarness(setup, (harness) => {
+    const context = {
+      params: {
+        question: {
+          id: 'field',
+          fields: [
+            {
+              id: 'field-1',
+              data: '',
+            },
+            {
+              id: 'field-2',
+              data: '',
+              error: true,
+            },
+            {
+              id: 'field-3',
+              data: '',
+            },
+          ],
+        },
+      },
+    };
+
+    harness.request(context, ($) => {
+      expect($('[data-test-id="bulletpoint-list-fields"] label.nhsuk-u-visually-hidden').length).toEqual(3);
+      expect($('[data-test-id="bulletpoint-list-fields"] label.nhsuk-u-visually-hidden')[0].children[0].data.trim()).toEqual('field 1');
+      expect($('[data-test-id="bulletpoint-list-fields"] label.nhsuk-u-visually-hidden')[1].children[0].data.trim()).toEqual('field 2');
+      expect($('[data-test-id="bulletpoint-list-fields"] label.nhsuk-u-visually-hidden')[2].children[0].data.trim()).toEqual('field 3');
+    });
+  }));
 });

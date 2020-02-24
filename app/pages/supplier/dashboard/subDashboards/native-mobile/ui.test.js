@@ -184,7 +184,7 @@ test('should navigate the user to the connection details page when clicking on t
     .expect(getLocation()).contains('/supplier/solution/S100000-001/dashboard/native-mobile/section/native-mobile-connection-details');
 });
 
-test('should navigate the user to third party page when clicking on third party dashboard row', async (t) => {
+test('should navigate the user to third-party page when clicking on third-party dashboard row', async (t) => {
   await pageSetup(t);
 
   nock(apiLocalhost)

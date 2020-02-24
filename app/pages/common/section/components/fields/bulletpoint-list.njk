@@ -28,6 +28,10 @@
       {% for field in params.question.fields %}
           {% if (field.error) %}
             <div data-test-id="field-error-{{ field.id }}">
+              {{ label({
+                "text": params.question.id + ' ' + loop.index,
+                "classes": "nhsuk-u-visually-hidden"
+              }) }}
               {{ input({
                 "id": field.id,
                 "name": params.question.id,
@@ -43,6 +47,10 @@
             </div>
           {% else %}
             <div data-test-id="field-{{ field.id }}">
+              {{ label({
+                "text": params.question.id + ' ' + loop.index,
+                "classes": "nhsuk-u-visually-hidden"
+              }) }}
               {{ input({
                 "id": field.id,
                 "name": params.question.id,
@@ -55,10 +63,9 @@
             </div>
           {% endif %}
         <div data-test-id="bulletpoint-list-footer">
-          {{ label({
-            "text": params.question.footerAdvice,
-            "classes": "bc-c-field-footer nhsuk-u-margin-bottom-3"
-          }) }}
+          <span class="nhsuk-label bc-c-field-footer nhsuk-u-margin-bottom-3">
+            {{ params.question.footerAdvice }}
+          </span>
         </div>
       {% endfor %}
     </div>

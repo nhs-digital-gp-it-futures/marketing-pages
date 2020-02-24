@@ -181,7 +181,7 @@ test('should render all the sub sections for the client application type section
   await t
     .expect(browserBasedSubSection.count).eql(1)
     .expect(browserBasedSubSection.find('a').exists).notOk()
-    .expect(await extractInnerText(browserBasedSubSection.find('[data-test-id="dashboard-section-title"]'))).eql('Browser based')
+    .expect(await extractInnerText(browserBasedSubSection.find('[data-test-id="dashboard-section-title"]'))).eql('Browser-based')
     .expect(await extractInnerText(browserBasedSubSection.find('[data-test-id="dashboard-section-default-message"]'))).eql('Select from client application types')
 
     .expect(nativeMobileSubSection.count).eql(1)
@@ -209,7 +209,7 @@ test('should render all the sub sections for the client application type section
     .expect(browserBasedSubSection.count).eql(1)
     .expect(browserBasedSubSection.find('a').exists).ok()
     .expect(browserBasedSubSection.find('[data-test-id="dashboard-section-default-message"]').exists).notOk()
-    .expect(await extractInnerText(browserBasedSubSection.find('[data-test-id="dashboard-section-title"]'))).eql('Browser based')
+    .expect(await extractInnerText(browserBasedSubSection.find('[data-test-id="dashboard-section-title"]'))).eql('Browser-based')
     .expect(await extractInnerText(browserBasedSubSection.find('[data-test-id="dashboard-section-requirement"]'))).eql('Mandatory')
     .expect(await extractInnerText(browserBasedSubSection.find('[data-test-id="dashboard-section-status"]'))).eql('COMPLETE')
 
@@ -498,11 +498,11 @@ test('should render the Error summary containing all the sections that failed th
   const clientApplicationTypeError = errorSummary.find('li:nth-child(2)');
 
   await t
-    .expect(await extractInnerText(solutionDescriptionError)).eql('Solution description is a mandatory section')
+    .expect(await extractInnerText(solutionDescriptionError)).eql('Enter a solution description')
     .click(solutionDescriptionError.find('a'))
     .expect(getLocation()).contains('/solution/S100000-001/submitForModeration#solution-description')
 
-    .expect(await extractInnerText(clientApplicationTypeError)).eql('Client application type is a mandatory section')
+    .expect(await extractInnerText(clientApplicationTypeError)).eql('Select at least one client application type')
     .click(clientApplicationTypeError.find('a'))
     .expect(getLocation()).contains('/solution/S100000-001/submitForModeration#client-application-types');
 });

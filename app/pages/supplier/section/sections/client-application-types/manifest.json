@@ -8,7 +8,7 @@
       "additionalAdvice": "Select at least one client application type. You’ll need to provide further information for each type you select.",
       "type": "checkbox-options",
       "options": {
-        "browser-based": "Browser based",
+        "browser-based": "Browser-based",
         "native-mobile": "Native mobile or tablet",
         "native-desktop": "Native desktop"
       },
