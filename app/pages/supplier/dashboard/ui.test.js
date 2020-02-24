@@ -181,7 +181,7 @@ test('should render all the sub sections for the client application type section
   await t
     .expect(browserBasedSubSection.count).eql(1)
     .expect(browserBasedSubSection.find('a').exists).notOk()
-    .expect(await extractInnerText(browserBasedSubSection.find('[data-test-id="dashboard-section-title"]'))).eql('Browser based')
+    .expect(await extractInnerText(browserBasedSubSection.find('[data-test-id="dashboard-section-title"]'))).eql('Browser-based')
     .expect(await extractInnerText(browserBasedSubSection.find('[data-test-id="dashboard-section-default-message"]'))).eql('Select from client application types')
 
     .expect(nativeMobileSubSection.count).eql(1)
@@ -209,7 +209,7 @@ test('should render all the sub sections for the client application type section
     .expect(browserBasedSubSection.count).eql(1)
     .expect(browserBasedSubSection.find('a').exists).ok()
     .expect(browserBasedSubSection.find('[data-test-id="dashboard-section-default-message"]').exists).notOk()
-    .expect(await extractInnerText(browserBasedSubSection.find('[data-test-id="dashboard-section-title"]'))).eql('Browser based')
+    .expect(await extractInnerText(browserBasedSubSection.find('[data-test-id="dashboard-section-title"]'))).eql('Browser-based')
     .expect(await extractInnerText(browserBasedSubSection.find('[data-test-id="dashboard-section-requirement"]'))).eql('Mandatory')
     .expect(await extractInnerText(browserBasedSubSection.find('[data-test-id="dashboard-section-status"]'))).eql('COMPLETE')
 

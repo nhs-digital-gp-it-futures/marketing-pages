@@ -18,9 +18,9 @@ const pageSetup = async (t) => {
 
 const getLocation = ClientFunction(() => document.location.href);
 
-fixture('Show browser based dashboard page');
+fixture('Show browser-based dashboard page');
 
-test('should render the browser based dashboard page title', async (t) => {
+test('should render the browser-based dashboard page title', async (t) => {
   await pageSetup(t);
 
   const title = Selector('[data-test-id="sub-dashboard-title"]');
@@ -29,7 +29,7 @@ test('should render the browser based dashboard page title', async (t) => {
     .expect(await extractInnerText(title)).eql('Browser-based application – all sections');
 });
 
-test('should render the browser based dashboard main advice', async (t) => {
+test('should render the browser-based dashboard main advice', async (t) => {
   await pageSetup(t);
 
   const mainAdvice = Selector('[data-test-id="sub-dashboard-main-advice"]');
@@ -38,7 +38,7 @@ test('should render the browser based dashboard main advice', async (t) => {
     .expect(await extractInnerText(mainAdvice)).eql('Provide information about your browser-based Catalogue Solution.');
 });
 
-test('should render the Browser based section group', async (t) => {
+test('should render the browser-based section group', async (t) => {
   await pageSetup(t);
 
   const browserBasedSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-browser-based-sections"]');
@@ -47,7 +47,7 @@ test('should render the Browser based section group', async (t) => {
     .expect(await extractInnerText(browserBasedSectionGroup.find('h2'))).eql('Browser-based information');
 });
 
-test('should render all the sections for the Browser based sections section group', async (t) => {
+test('should render all the sections for the browser-based sections section group', async (t) => {
   await pageSetup(t);
 
   const browserBasedSectionGroup = Selector('[data-test-id="dashboard-sectionGroup-browser-based-sections"]');

@@ -28,6 +28,10 @@
       {% for field in params.question.fields %}
           {% if (field.error) %}
             <div data-test-id="field-error-{{ field.id }}">
+              {{ label({
+                "text": params.question.id + ' ' + loop.index,
+                "classes": "nhsuk-u-visually-hidden"
+              }) }}
               {{ input({
                 "id": field.id,
                 "name": params.question.id,

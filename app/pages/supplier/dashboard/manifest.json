@@ -12,7 +12,7 @@
           "title": "Solution description",
           "type": "section",
           "errorResponse": {
-            "required": "Solution description is a mandatory section"
+            "required": "Enter a solution description"
           }
         },
         "features": {
@@ -41,15 +41,15 @@
           "title": "Client application type",
           "type": "section",
           "errorResponse": {
-            "required": "Client application type is a mandatory section"
+            "required": "Select at least one client application type"
           },
           "sections": {
             "browser-based": {
-              "title": "Browser based",
+              "title": "Browser-based",
               "defaultMessage": "Select from client application types",
               "type": "dashboard",
               "errorResponse": {
-                "required": "Browser based is a mandatory section"
+                "required": "Provide mandatory information for browser-based application"
               }
             },
             "native-mobile": {
@@ -57,7 +57,7 @@
               "defaultMessage": "Select from client application types",
               "type": "dashboard",
               "errorResponse": {
-                "required": "Native mobile or tablet is a mandatory section"
+                "required": "Provide mandatory information for native mobile or tablet application"
               }
             },
             "native-desktop": {
@@ -65,7 +65,7 @@
               "defaultMessage": "Select from client application types",
               "type": "dashboard",
               "errorResponse": {
-                "required": "Native desktop is a mandatory section"
+                "required": "Provide mandatory information for native desktop application"
               }
             }
           }

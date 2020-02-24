@@ -159,7 +159,7 @@ test('should navigate the user to memory and storage page when clicking on memor
     .expect(getLocation()).contains('/supplier/solution/S100000-001/dashboard/native-desktop/section/native-desktop-memory-and-storage');
 });
 
-test('should navigate the user to third party page when clicking on third party dashboard row', async (t) => {
+test('should navigate the user to third-party page when clicking on third-party dashboard row', async (t) => {
   await pageSetup(t);
 
   nock(apiLocalhost)
