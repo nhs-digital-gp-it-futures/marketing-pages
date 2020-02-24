@@ -498,11 +498,11 @@ test('should render the Error summary containing all the sections that failed th
   const clientApplicationTypeError = errorSummary.find('li:nth-child(2)');
 
   await t
-    .expect(await extractInnerText(solutionDescriptionError)).eql('Enter a solution description')
+    .expect(await extractInnerText(solutionDescriptionError)).eql('Section contains mandatory information')
     .click(solutionDescriptionError.find('a'))
     .expect(getLocation()).contains('/solution/S100000-001/submitForModeration#solution-description')
 
-    .expect(await extractInnerText(clientApplicationTypeError)).eql('Select at least one client application type')
+    .expect(await extractInnerText(clientApplicationTypeError)).eql('Section contains mandatory information')
     .click(clientApplicationTypeError.find('a'))
     .expect(getLocation()).contains('/solution/S100000-001/submitForModeration#client-application-types');
 });
