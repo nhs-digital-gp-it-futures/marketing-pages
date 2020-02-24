@@ -139,7 +139,7 @@ describe('bulletpoint-list', () => {
     };
 
     harness.request(context, ($) => {
-      const mainAdviceLabel = $('div[data-test-id="bulletpoint-list-main-advice"] label');
+      const mainAdviceLabel = $('div[data-test-id="bulletpoint-list-main-advice"] span');
 
       expect(mainAdviceLabel.hasClass('nhsuk-u-font-size-19')).toEqual(true);
       expect(mainAdviceLabel.hasClass('nhsuk-u-font-weight-bold')).toEqual(true);
@@ -158,7 +158,7 @@ describe('bulletpoint-list', () => {
     };
 
     harness.request(context, ($) => {
-      const mainAdviceLabel = $('div[data-test-id="bulletpoint-list-main-advice"] label');
+      const mainAdviceLabel = $('div[data-test-id="bulletpoint-list-main-advice"] span');
 
       expect(mainAdviceLabel.hasClass('nhsuk-u-font-size-24')).toEqual(true);
       expect(mainAdviceLabel.hasClass('nhsuk-u-font-weight-bold')).toEqual(true);
