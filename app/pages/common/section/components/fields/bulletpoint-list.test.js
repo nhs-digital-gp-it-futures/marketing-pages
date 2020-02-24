@@ -181,7 +181,7 @@ describe('bulletpoint-list', () => {
     });
   }));
 
-  it('should not render the accessibility label for listing inputs', createTestHarness(setup, (harness) => {
+  it('should render the accessibility label for listing inputs', createTestHarness(setup, (harness) => {
     const context = {
       params: {
         question: {
