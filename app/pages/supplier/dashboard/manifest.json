@@ -12,7 +12,7 @@
           "title": "Solution description",
           "type": "section",
           "errorResponse": {
-            "required": "Enter a solution description"
+            "required": "Section contains mandatory information"
           }
         },
         "features": {
@@ -41,7 +41,7 @@
           "title": "Client application type",
           "type": "section",
           "errorResponse": {
-            "required": "Select at least one client application type"
+            "required": "Section contains mandatory information"
           },
           "sections": {
             "browser-based": {
