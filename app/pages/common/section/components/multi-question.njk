@@ -5,10 +5,9 @@
   <div data-test-id="question-{{ params.parentQuestion.id }}" class="nhsuk-u-margin-bottom-6">
 
     <div data-test-id="multi-question-main-advice">
-      {{ label({
-        "classes": "nhsuk-label nhsuk-u-font-size-24 nhsuk-u-font-weight-bold nhsuk-u-margin-bottom-2",
-        "text": params.parentQuestion.mainAdvice
-      }) }}
+      <span class="nhsuk-label nhsuk-u-font-size-24 nhsuk-u-font-weight-bold bc-u-inline-block nhsuk-u-margin-bottom-2">
+        {{ params.parentQuestion.mainAdvice }}
+      </span>
     </div>
 
     <span data-test-id="multi-question-additional-advice" class="nhsuk-hint nhsuk-u-margin-bottom-3">

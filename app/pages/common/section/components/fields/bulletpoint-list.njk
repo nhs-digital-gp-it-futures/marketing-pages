@@ -4,18 +4,17 @@
 {% macro bulletpointList(params) %}
 
   {% if params.isMultiQuestion %}
-    {% set labelClasses = 'nhsuk-u-font-size-19 nhsuk-u-font-weight-bold nhsuk-u-margin-bottom-2' %}
+    {% set labelClasses = 'nhsuk-u-font-size-19 nhsuk-u-font-weight-bold bc-u-inline-block nhsuk-u-margin-bottom-2' %}
   {% else %}
-    {% set labelClasses = 'nhsuk-u-font-size-24 nhsuk-u-font-weight-bold nhsuk-u-margin-bottom-2' %}
+    {% set labelClasses = 'nhsuk-u-font-size-24 nhsuk-u-font-weight-bold bc-u-inline-block nhsuk-u-margin-bottom-2' %}
   {% endif %}
 
   <div data-test-id="question-{{ params.question.id }}">
 
     <div data-test-id="bulletpoint-list-main-advice">
-      {{ label({
-        "text": params.question.mainAdvice,
-        "classes": labelClasses
-      }) }}
+      <span class="{{ labelClasses }}">
+        {{ params.question.mainAdvice }}
+      </span>
     </div>
 
     {% if params.question.additionalAdvice %}
@@ -30,7 +29,8 @@
             <div data-test-id="field-error-{{ field.id }}">
               {{ label({
                 "text": params.question.id + ' ' + loop.index,
-                "classes": "nhsuk-u-visually-hidden"
+                "classes": "nhsuk-u-visually-hidden",
+                "for": field.id
               }) }}
               {{ input({
                 "id": field.id,
@@ -49,7 +49,8 @@
             <div data-test-id="field-{{ field.id }}">
               {{ label({
                 "text": params.question.id + ' ' + loop.index,
-                "classes": "nhsuk-u-visually-hidden"
+                "classes": "nhsuk-u-visually-hidden",
+                "for": field.id
               }) }}
               {{ input({
                 "id": field.id,

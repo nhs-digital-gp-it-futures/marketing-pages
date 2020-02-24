@@ -19,7 +19,7 @@
     } %}
   {% endif %}
 
-  <div id="{{ params.question.id }}" data-test-id="question-{{ params.question.id }}">
+  <div data-test-id="question-{{ params.question.id }}">
     {% if (params.question.error) %}
       <div data-test-id="combobox-options-error">
         {{ select({
