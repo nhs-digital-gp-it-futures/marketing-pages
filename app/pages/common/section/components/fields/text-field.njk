@@ -58,10 +58,9 @@
       </div>
     {% endif %}
     <div data-test-id="text-field-footer">
-      {{ label({
-        "text": params.question.footerAdvice,
-        "classes": "bc-c-field-footer"
-      }) }}
+      <span class="nhsuk-label bc-c-field-footer">
+        {{ params.question.footerAdvice }}
+      </span>
     </div>
   </div>
 {% endmacro %}

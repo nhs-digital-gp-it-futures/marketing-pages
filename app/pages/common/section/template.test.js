@@ -130,7 +130,7 @@ describe('section page', () => {
 
     harness.request(context, ($) => {
       expect($('[data-test-id="section-back-link"] a').length).toEqual(1);
-      expect($('[data-test-id="section-back-link"] a').text().trim()).toEqual('Return to adding a Solution');
+      expect($('[data-test-id="section-back-link"] a').text().trim()).toEqual('Return to all sections');
     });
   }));
 });

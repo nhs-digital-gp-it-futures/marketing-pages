@@ -4,8 +4,8 @@
   "mainAdvice": "Help buyers get in touch about your Catalogue Solution.",
   "questions": {
     "contact-1": {
-      "mainAdvice": "Contact 1",
-      "additionalAdvice": "Help buyers get in touch about your Catalogue Solution.",
+      "mainAdvice": "Contact 1 (optional)",
+      "additionalAdvice": "Provide some or all of the following information about an individual or department at your organisation.",
       "type": "multi-question",
       "questions": {
         "first-name": {
@@ -51,8 +51,8 @@
       }
     },
     "contact-2": {
-      "mainAdvice": "Contact 2",
-      "additionalAdvice": "Provide the details you would like to be point of contact for this Solution.",
+      "mainAdvice": "Contact 2 (optional)",
+      "additionalAdvice": "Provide some or all of the following information about an individual or department at your organisation.",
       "type": "multi-question",
       "questions": {
         "first-name": {

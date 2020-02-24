@@ -86,7 +86,7 @@ const sectionsLinkTest = async ({ pageSetup }) => {
     const link = Selector('[data-test-id="section-back-link"] a');
 
     await t
-      .expect(await extractInnerText(link)).eql('Return to adding a Solution');
+      .expect(await extractInnerText(link)).eql('Return to all sections');
   });
 };
 
