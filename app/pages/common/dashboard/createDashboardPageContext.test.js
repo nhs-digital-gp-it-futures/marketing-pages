@@ -5,6 +5,7 @@ describe('createDashboardPageContext', () => {
     it('should create a context from the manifest and the marketingData', () => {
       const expectedContext = {
         name: 'some solution name',
+        supplierName: 'a supplier',
         previewUrl: '/supplier/solution/some-solution-id/preview',
         submitForModerationUrl: '/supplier/solution/some-solution-id/submitForModeration',
         returnToDashboardUrl: '/supplier/solution/some-solution-id',
@@ -53,6 +54,7 @@ describe('createDashboardPageContext', () => {
       const context = createDashboardPageContext({
         solutionId: 'some-solution-id',
         solutionName: 'some solution name',
+        supplierName: 'a supplier',
         dashboardManifest,
         marketingDataSections,
       });
@@ -63,6 +65,7 @@ describe('createDashboardPageContext', () => {
     it('should create a context with sub sections from the manifest and no existing marketingData', () => {
       const expectedContext = {
         name: 'some solution name',
+        supplierName: 'a supplier',
         previewUrl: '/supplier/solution/some-solution-id/preview',
         submitForModerationUrl: '/supplier/solution/some-solution-id/submitForModeration',
         returnToDashboardUrl: '/supplier/solution/some-solution-id',
@@ -139,6 +142,7 @@ describe('createDashboardPageContext', () => {
       const context = createDashboardPageContext({
         solutionId: 'some-solution-id',
         solutionName: 'some solution name',
+        supplierName: 'a supplier',
         dashboardManifest,
         marketingDataSections,
       });
@@ -149,6 +153,7 @@ describe('createDashboardPageContext', () => {
     it('should create a context with sub sections from the manifest and with existing marketingData', () => {
       const expectedContext = {
         name: 'some solution name',
+        supplierName: 'a supplier',
         previewUrl: '/supplier/solution/some-solution-id/preview',
         submitForModerationUrl: '/supplier/solution/some-solution-id/submitForModeration',
         returnToDashboardUrl: '/supplier/solution/some-solution-id',
@@ -233,6 +238,7 @@ describe('createDashboardPageContext', () => {
       const context = createDashboardPageContext({
         solutionId: 'some-solution-id',
         solutionName: 'some solution name',
+        supplierName: 'a supplier',
         dashboardManifest,
         marketingDataSections,
       });
@@ -243,6 +249,7 @@ describe('createDashboardPageContext', () => {
     it('should create a context from the manifest, marketingData and any validationErrors', () => {
       const expectedContext = {
         name: 'some solution name',
+        supplierName: 'a supplier',
         previewUrl: '/supplier/solution/some-solution-id/preview',
         submitForModerationUrl: '/supplier/solution/some-solution-id/submitForModeration',
         returnToDashboardUrl: '/supplier/solution/some-solution-id',
@@ -305,6 +312,7 @@ describe('createDashboardPageContext', () => {
       const context = createDashboardPageContext({
         solutionId: 'some-solution-id',
         solutionName: 'some solution name',
+        supplierName: 'a supplier',
         dashboardManifest,
         marketingDataSections,
         validationErrors,
@@ -316,6 +324,7 @@ describe('createDashboardPageContext', () => {
     it('should create a context with sub sections from the manifest and validationErrors', () => {
       const expectedContext = {
         name: 'some solution name',
+        supplierName: 'a supplier',
         previewUrl: '/supplier/solution/some-solution-id/preview',
         submitForModerationUrl: '/supplier/solution/some-solution-id/submitForModeration',
         returnToDashboardUrl: '/supplier/solution/some-solution-id',
@@ -413,6 +422,7 @@ describe('createDashboardPageContext', () => {
       const context = createDashboardPageContext({
         solutionId: 'some-solution-id',
         solutionName: 'some solution name',
+        supplierName: 'a supplier',
         dashboardManifest,
         marketingDataSections,
         validationErrors,
