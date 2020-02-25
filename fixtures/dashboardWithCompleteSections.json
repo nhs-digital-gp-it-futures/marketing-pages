@@ -1,6 +1,7 @@
 {
   "id": "S100000-001",
   "name": "Write on Time",
+  "supplier-name": "Really Kool Corp.",
   "sections": {
     "solution-description": {
       "requirement": "Mandatory",
