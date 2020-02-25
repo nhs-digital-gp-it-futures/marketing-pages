@@ -17,10 +17,13 @@
     </div>
     <div class="nhsuk-grid-column-two-thirds">
 
-      {{ tag({
-        text: 'Supplier name',
-        classes: 'nhsuk-u-margin-bottom-5 bc-c-tag-outline'
-      }) }}
+      {% if supplierName %}
+        {{ tag({
+          text: supplierName,
+          dataTestId: 'supplier-name-tag',
+          classes: 'nhsuk-u-margin-bottom-5 bc-c-tag-outline'
+        }) }}
+      {% endif %}
 
       <div class="nhsuk-u-margin-top-5 nhsuk-u-margin-bottom-7">
         {% if title %}

@@ -9,12 +9,12 @@ export const getMarketingPageDashboardContext = async ({
   const dashboardDataRaw = await new ApiProvider().getMainDashboardData({
     solutionId, userContextType,
   });
-
   if (dashboardDataRaw && dashboardDataRaw.data) {
     const dashboardData = dashboardDataRaw.data;
     const context = createDashboardPageContext({
       solutionId,
       solutionName: dashboardData.name,
+      supplierName: dashboardData['supplier-name'],
       dashboardManifest,
       marketingDataSections: dashboardData.sections,
       validationErrors,

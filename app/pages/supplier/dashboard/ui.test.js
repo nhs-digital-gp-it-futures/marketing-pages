@@ -36,6 +36,15 @@ test('should render the marketing dashboard page title', async (t) => {
     .expect(await extractInnerText(title)).eql('Write on Time listing page – all sections');
 });
 
+test('should render the marketing dashboard page supplier name tag', async (t) => {
+  await pageSetup(t);
+
+  const tag = Selector('[data-test-id="supplier-name-tag"]');
+
+  await t
+    .expect(await extractInnerText(tag)).eql('Really Kool Corp.');
+});
+
 test('should render the preview page button', async (t) => {
   await pageSetup(t);
 
@@ -105,7 +114,6 @@ test('should render the About your Organisation section group', async (t) => {
   await t
     .expect(await extractInnerText(aboutYourOrganisationSectionGroup.find('h2'))).eql('About organisation');
 });
-
 
 test('should render all the sections for the About your solution section group', async (t) => {
   await pageSetup(t);
@@ -290,7 +298,6 @@ test('should render all the sections for the About your organisation section gro
     .eql('INCOMPLETE');
 });
 
-
 test('clicking on the solution description section link should navigate the user to the solution description page', async (t) => {
   await pageSetup(t);
 
@@ -469,7 +476,6 @@ test('clicking on the contact details section link should navigate the user to c
     .click(contactDetailsSection.find('a'))
     .expect(getLocation()).contains('/supplier/solution/S100000-001/section/contact-details');
 });
-
 
 test('should render the Error summary containing all the sections that failed the SubmitForReview', async (t) => {
   await pageSetup(t);

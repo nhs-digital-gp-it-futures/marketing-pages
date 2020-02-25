@@ -25,6 +25,24 @@ describe('supplier - dashboard page', () => {
     });
   }));
 
+  it('should render the supplier name tag on the dashboard page if provided', createTestHarness(setup, (harness) => {
+    const context = {
+      supplierName: 'some supplier',
+    };
+
+    harness.request(context, ($) => {
+      expect($('[data-test-id="supplier-name-tag"]').text().trim()).toEqual('some supplier');
+    });
+  }));
+
+  it('should not render the supplier name tag on the dashboard page if not provided', createTestHarness(setup, (harness) => {
+    const context = {};
+
+    harness.request(context, ($) => {
+      expect($('[data-test-id="supplier-name-tag"]').length).toEqual(0);
+    });
+  }));
+
   it('should render the main advice on the dashboard page if provided', createTestHarness(setup, (harness) => {
     const context = {
       mainAdvice: 'some main advice',
