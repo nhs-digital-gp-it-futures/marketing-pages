@@ -5,27 +5,12 @@ $footer-color: #4c6272;
   margin: 0 0 nhsuk-spacing(3);
 }
 
-.bc-c-border-box {
+.bc-c-section-box-border {
   background-color: $color_nhsuk-white;
   border: 5px solid $color_nhsuk-blue;
-}
-
-.bc-u-block-float-left {
-  display: block;
-  @media (min-width: 641px) {
-    float: left;
-  }
-}
-
-.bc-u-max-width-full {
-  max-width: 100%;
 }
 
 .bc-c-field-footer {
   color: $footer-color;
   font-size: 16px;
-}
-
-.bc-u-inline-block {
-  display: inline-block;
 }
