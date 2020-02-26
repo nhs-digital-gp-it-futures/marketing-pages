@@ -9,10 +9,10 @@ module.exports = {
   port: process.env.PORT || 3002,
 
   // API_HOST
-  apiHost: process.env.API_HOST || 'http://localhost:8080',
+  apiHost: process.env.API_HOST || 'http://localhost:5100',
 
   // DOCUMENT_HOST
-  documentHost: process.env.DOCUMENT_HOST || 'http://localhost:8090',
+  documentHost: process.env.DOCUMENT_HOST || 'http://localhost:5101',
 
   // LOGGER_LEVEL options are info, warn, error, off
   loggerLevel: process.env.LOGGER_LEVEL || 'error',
