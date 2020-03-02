@@ -129,7 +129,6 @@ describe('section page', () => {
     };
 
     harness.request(context, ($) => {
-      console.log($.html())
       expect($('[data-test-id="section-back-link"] a').length).toEqual(1);
       expect($('[data-test-id="section-back-link"] a').text().trim()).toEqual('Return to all sections');
     });
