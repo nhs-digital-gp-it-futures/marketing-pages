@@ -11,57 +11,57 @@ describe('GET /health', () => {
   });
 
   describe('GET /ready', () => {
-    it('should return \'Healthy\' when BAPI and DAPI are both \'Healthy\'', testHealthStatus('/ready', {
-      BAPI: status.healthy,
-      DAPI: status.healthy,
+    it('should return \'Healthy\' when BuyingCatalogueApi and DocumentApi are both \'Healthy\'', testHealthStatus('/ready', {
+      BuyingCatalogueApi: status.healthy,
+      DocumentApi: status.healthy,
       expected: status.healthy,
     }));
 
-    it('should return \'Degraded\' when BAPI is \'Healthy\' and DAPI is \'Degraded\'', testHealthStatus('/ready', {
-      BAPI: status.healthy,
-      DAPI: status.degraded,
+    it('should return \'Degraded\' when BuyingCatalogueApi is \'Healthy\' and DocumentApi is \'Degraded\'', testHealthStatus('/ready', {
+      BuyingCatalogueApi: status.healthy,
+      DocumentApi: status.degraded,
       expected: status.degraded,
     }));
 
-    it('should return \'Degraded\' when BAPI is \'Healthy\' and DAPI is \'Unhealthy\'', testHealthStatus('/ready', {
-      BAPI: status.healthy,
-      DAPI: status.unhealthy,
+    it('should return \'Degraded\' when BuyingCatalogueApi is \'Healthy\' and DocumentApi is \'Unhealthy\'', testHealthStatus('/ready', {
+      BuyingCatalogueApi: status.healthy,
+      DocumentApi: status.unhealthy,
       expected: status.degraded,
     }));
 
-    it('should return \'Degraded\' when BAPI is \'Degraded\' and DAPI is \'Healthy\'', testHealthStatus('/ready', {
-      BAPI: status.degraded,
-      DAPI: status.healthy,
+    it('should return \'Degraded\' when BuyingCatalogueApi is \'Degraded\' and DocumentApi is \'Healthy\'', testHealthStatus('/ready', {
+      BuyingCatalogueApi: status.degraded,
+      DocumentApi: status.healthy,
       expected: status.degraded,
     }));
 
-    it('should return \'Degraded\' when BAPI is \'Degraded\' and DAPI is \'Degraded\'', testHealthStatus('/ready', {
-      BAPI: status.degraded,
-      DAPI: status.degraded,
+    it('should return \'Degraded\' when BuyingCatalogueApi is \'Degraded\' and DocumentApi is \'Degraded\'', testHealthStatus('/ready', {
+      BuyingCatalogueApi: status.degraded,
+      DocumentApi: status.degraded,
       expected: status.degraded,
     }));
 
-    it('should return \'Degraded\' when BAPI is \'Degraded\' and DAPI is \'Unhealthy\'', testHealthStatus('/ready', {
-      BAPI: status.degraded,
-      DAPI: status.unhealthy,
+    it('should return \'Degraded\' when BuyingCatalogueApi is \'Degraded\' and DocumentApi is \'Unhealthy\'', testHealthStatus('/ready', {
+      BuyingCatalogueApi: status.degraded,
+      DocumentApi: status.unhealthy,
       expected: status.degraded,
     }));
 
-    it('should return \'Unhealthy\' when BAPI is \'Unhealthy\' and DAPI is \'Healthy\'', testHealthStatus('/ready', {
-      BAPI: status.unhealthy,
-      DAPI: status.healthy,
+    it('should return \'Unhealthy\' when BuyingCatalogueApi is \'Unhealthy\' and DocumentApi is \'Healthy\'', testHealthStatus('/ready', {
+      BuyingCatalogueApi: status.unhealthy,
+      DocumentApi: status.healthy,
       expected: status.unhealthy,
     }));
 
-    it('should return \'Unhealthy\' when BAPI is \'Unhealthy\' and DAPI is \'Degraded\'', testHealthStatus('/ready', {
-      BAPI: status.unhealthy,
-      DAPI: status.degraded,
+    it('should return \'Unhealthy\' when BuyingCatalogueApi is \'Unhealthy\' and DocumentApi is \'Degraded\'', testHealthStatus('/ready', {
+      BuyingCatalogueApi: status.unhealthy,
+      DocumentApi: status.degraded,
       expected: status.unhealthy,
     }));
 
-    it('should return \'Unhealthy\' when BAPI is \'Unhealthy\' and DAPI is \'Unhealthy\'', testHealthStatus('/ready', {
-      BAPI: status.unhealthy,
-      DAPI: status.unhealthy,
+    it('should return \'Unhealthy\' when BuyingCatalogueApi is \'Unhealthy\' and DocumentApi is \'Unhealthy\'', testHealthStatus('/ready', {
+      BuyingCatalogueApi: status.unhealthy,
+      DocumentApi: status.unhealthy,
       expected: status.unhealthy,
     }));
   });

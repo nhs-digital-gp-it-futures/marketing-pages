@@ -2,17 +2,17 @@ import { ApiProvider } from '../../../apiProvider';
 import { status } from '../status';
 
 export async function getReadyStatus() {
-  const BAPI = (await new ApiProvider().getApiReadyHealth()).data;
-  const DAPI = (await new ApiProvider().getDocumentApiReadyHealth()).data;
+  const buyingCatalogueApi = (await new ApiProvider().getBuyingCatalogueApiHealth()).data;
+  const documentApi = (await new ApiProvider().getDocumentApiHealth()).data;
 
-  const isHealthy = API => API === status.healthy.message;
-  const isUnhealthy = API => API === status.unhealthy.message;
+  const isHealthy = Api => Api === status.healthy.message;
+  const isUnhealthy = Api => Api === status.unhealthy.message;
 
-  if (isHealthy(BAPI) && isHealthy(DAPI)) {
+  if (isHealthy(buyingCatalogueApi) && isHealthy(documentApi)) {
     return status.healthy;
   }
 
-  if (isUnhealthy(BAPI)) {
+  if (isUnhealthy(buyingCatalogueApi)) {
     return status.unhealthy;
   }
 
