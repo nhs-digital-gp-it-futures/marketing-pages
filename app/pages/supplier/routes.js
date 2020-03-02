@@ -2,7 +2,7 @@ import express from 'express';
 import { getMarketingPageDashboardContext, postSubmitForModeration } from '../common/dashboard/controller';
 import { getSubDashboardPageContext } from './dashboard/subDashboards/controller';
 import { getSectionPageContext, getSectionPageErrorContext, postSection } from '../common/section/controller';
-import logger from '../../logger';
+import { logger } from '../../logger';
 import { withCatch } from '../../common/helpers/routerHelper';
 import { getDocument, getPreviewPageContext } from '../common/preview/controller';
 

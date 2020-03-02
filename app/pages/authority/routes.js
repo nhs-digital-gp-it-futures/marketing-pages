@@ -1,7 +1,7 @@
 import express from 'express';
 import { getMarketingPageDashboardContext } from '../common/dashboard/controller';
 import { getSectionPageContext, postSection, getSectionPageErrorContext } from '../common/section/controller';
-import logger from '../../logger';
+import { logger } from '../../logger';
 import { withCatch } from '../../common/helpers/routerHelper';
 import { getDocument, getPreviewPageContext } from '../common/preview/controller';
 
