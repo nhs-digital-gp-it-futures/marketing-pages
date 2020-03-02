@@ -1,68 +1,34 @@
+import request from 'supertest';
 import { status } from './status';
-import { testHealthStatus } from '../../test-utils/testFunctions/testHealthStatus';
-
-jest.mock('../../apiProvider');
+import * as liveControllers from './live/getLiveStatus';
+import * as readyControllers from './ready/getReadyStatus';
+import { App } from '../../../app';
+import routes from './routes';
 
 describe('GET /health', () => {
-  describe('GET /live', () => {
-    it('should return \'Healthy\' when app is running', testHealthStatus('/live', {
-      expected: status.healthy,
-    }));
+  it('GET /live', () => {
+    liveControllers.getLiveStatus = jest.fn()
+      .mockImplementation(() => Promise.resolve(status.healthy));
+
+    const app = new App().createApp();
+    app.use('/health', routes);
+
+    return request(app).get('/health/live').expect(status.healthy.code)
+      .then((res) => {
+        expect(res.text).toBe(status.healthy.message);
+      });
   });
 
-  describe('GET /ready', () => {
-    it('should return \'Healthy\' when BuyingCatalogueApi and DocumentApi are both \'Healthy\'', testHealthStatus('/ready', {
-      BuyingCatalogueApi: status.healthy,
-      DocumentApi: status.healthy,
-      expected: status.healthy,
-    }));
+  it('GET /ready', () => {
+    readyControllers.getReadyStatus = jest.fn()
+      .mockImplementation(() => Promise.resolve(status.healthy));
 
-    it('should return \'Degraded\' when BuyingCatalogueApi is \'Healthy\' and DocumentApi is \'Degraded\'', testHealthStatus('/ready', {
-      BuyingCatalogueApi: status.healthy,
-      DocumentApi: status.degraded,
-      expected: status.degraded,
-    }));
+    const app = new App().createApp();
+    app.use('/health', routes);
 
-    it('should return \'Degraded\' when BuyingCatalogueApi is \'Healthy\' and DocumentApi is \'Unhealthy\'', testHealthStatus('/ready', {
-      BuyingCatalogueApi: status.healthy,
-      DocumentApi: status.unhealthy,
-      expected: status.degraded,
-    }));
-
-    it('should return \'Degraded\' when BuyingCatalogueApi is \'Degraded\' and DocumentApi is \'Healthy\'', testHealthStatus('/ready', {
-      BuyingCatalogueApi: status.degraded,
-      DocumentApi: status.healthy,
-      expected: status.degraded,
-    }));
-
-    it('should return \'Degraded\' when BuyingCatalogueApi is \'Degraded\' and DocumentApi is \'Degraded\'', testHealthStatus('/ready', {
-      BuyingCatalogueApi: status.degraded,
-      DocumentApi: status.degraded,
-      expected: status.degraded,
-    }));
-
-    it('should return \'Degraded\' when BuyingCatalogueApi is \'Degraded\' and DocumentApi is \'Unhealthy\'', testHealthStatus('/ready', {
-      BuyingCatalogueApi: status.degraded,
-      DocumentApi: status.unhealthy,
-      expected: status.degraded,
-    }));
-
-    it('should return \'Unhealthy\' when BuyingCatalogueApi is \'Unhealthy\' and DocumentApi is \'Healthy\'', testHealthStatus('/ready', {
-      BuyingCatalogueApi: status.unhealthy,
-      DocumentApi: status.healthy,
-      expected: status.unhealthy,
-    }));
-
-    it('should return \'Unhealthy\' when BuyingCatalogueApi is \'Unhealthy\' and DocumentApi is \'Degraded\'', testHealthStatus('/ready', {
-      BuyingCatalogueApi: status.unhealthy,
-      DocumentApi: status.degraded,
-      expected: status.unhealthy,
-    }));
-
-    it('should return \'Unhealthy\' when BuyingCatalogueApi is \'Unhealthy\' and DocumentApi is \'Unhealthy\'', testHealthStatus('/ready', {
-      BuyingCatalogueApi: status.unhealthy,
-      DocumentApi: status.unhealthy,
-      expected: status.unhealthy,
-    }));
+    return request(app).get('/health/ready').expect(status.healthy.code)
+      .then((res) => {
+        expect(res.text).toBe(status.healthy.message);
+      });
   });
 });
