@@ -8,6 +8,18 @@ export class ApiProvider {
     this.documentHost = documentHost;
   }
 
+  async getApiReadyHealth() {
+    const endpoint = `${this.apiHost}/health/ready`;
+    logger.info(`api called: [GET] ${endpoint}`);
+    return axios.get(endpoint);
+  }
+
+  async getDocumentApiReadyHealth() {
+    const endpoint = `${this.documentHost}/health/ready`;
+    logger.info(`api called: [GET] ${endpoint}`);
+    return axios.get(endpoint);
+  }
+
   async getSectionData({ solutionId, sectionId }) {
     const endpoint = `${this.apiHost}/api/v1/Solutions/${solutionId}/sections/${sectionId}`;
     logger.info(`api called: [GET] ${endpoint}`);
