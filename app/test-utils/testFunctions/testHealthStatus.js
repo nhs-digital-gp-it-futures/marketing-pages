@@ -5,10 +5,14 @@ import routes from '../../pages/health/routes';
 
 export const testHealthStatus = (route, { BuyingCatalogueApi, DocumentApi, expected }) => () => {
   if (BuyingCatalogueApi) {
-    ApiProvider.prototype.getBuyingCatalogueApiHealth.mockResolvedValue({ data: BuyingCatalogueApi.message });
+    ApiProvider.prototype.getBuyingCatalogueApiHealth.mockResolvedValue({
+      data: BuyingCatalogueApi.message,
+    });
   }
   if (DocumentApi) {
-    ApiProvider.prototype.getDocumentApiHealth.mockResolvedValue({ data: DocumentApi.message });
+    ApiProvider.prototype.getDocumentApiHealth.mockResolvedValue({
+      data: DocumentApi.message,
+    });
   }
 
   const app = new App().createApp();
