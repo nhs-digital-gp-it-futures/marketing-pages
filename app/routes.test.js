@@ -5,20 +5,6 @@ import * as dashboardControllers from './pages/common/dashboard/controller';
 
 jest.mock('./logger');
 
-describe('GET /healthcheck', () => {
-  it('should return the correct status and text', () => {
-    const app = new App().createApp();
-    app.use('/', routes);
-
-    return request(app)
-      .get('/healthcheck')
-      .expect(200)
-      .then((res) => {
-        expect(res.text).toBe('Marketing pages is Running!!!');
-      });
-  });
-});
-
 describe('/supplier route', () => {
   it('should call the supplier route when navigating to /supplier', () => {
     dashboardControllers.getMarketingPageDashboardContext = jest.fn()

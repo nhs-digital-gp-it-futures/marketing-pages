@@ -1,15 +1,13 @@
 import express from 'express';
 import { logger } from './logger';
 import { errorHandler } from './pages/error/errorHandler';
+import healthRoutes from './pages/health/routes';
 import supplierRoutes from './pages/supplier/routes';
 import authorityRoutes from './pages/authority/routes';
 
 const router = express.Router();
 
-router.get('/healthcheck', async (req, res) => {
-  logger.info('navigating to healthcheck page');
-  res.send('Marketing pages is Running!!!');
-});
+router.use('/health', healthRoutes);
 
 router.use('/supplier', supplierRoutes);
 
