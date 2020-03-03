@@ -13,5 +13,14 @@
       }
     }
   },
+  "expandableAdvice": {
+    "title": "How do I describe implementation timescales?",
+    "description": [
+      "The following is an example of a good answer:",
+      "Implementations without transition from another Catalogue Solution typically take 3-5 working days, the average is 4. The extent of your configuration requirements will have the greatest impact on these timescales. Your main responsibility will be configuration planning and approval.",
+      "Implementations with transition from another Catalogue Solution typically take 6-10 working days, the average is 7. The data structures and format will have the greatest impact on these timescales, as will the extent of local configuration.",
+      "If we have previously completed a transition from your outgoing supplier for another service recipient, the timescales are more likely to be shorter. We will expect you to cleanse your data before migration and to participate in testing."
+    ]
+  },
   "submitText" : "Save and return"
 }
