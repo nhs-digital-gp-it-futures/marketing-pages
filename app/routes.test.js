@@ -1,5 +1,5 @@
 import request from 'supertest';
-import { App } from '../app';
+import { App } from './app';
 import routes from './routes';
 import * as dashboardControllers from './pages/common/dashboard/controller';
 
