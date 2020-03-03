@@ -46,7 +46,7 @@ const expandableAdviceTest = async ({ pageSetup, sectionManifest }) => {
     await test('should render all the expandable advice of the section', async (t) => {
       await pageSetup({ t });
       const expectedExpandableAdviceTitle = sectionManifest.expandableAdvice.title;
-      const expectedExpandableAdviceDescription = sectionManifest.expandableAdvice.description.join('\n\n');
+      const expectedExpandableAdviceDescription = sectionManifest.expandableAdvice.description.join('');
       const expandableAdvice = Selector('[data-test-id="section-expandable-advice"]');
       const expandableAdviceTitle = expandableAdvice.find('.nhsuk-details__summary-text');
       const expandableAdviceDescription = expandableAdvice.find('.nhsuk-details__text');
