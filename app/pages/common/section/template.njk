@@ -56,11 +56,13 @@
       {% endif %}
 
       {% if (expandableAdvice) %}
-        {{ viewExpandableSection({
-            title: expandableAdvice.title,
-            innerComponent: expandableAdvice.description | stringArrayToParagraphs,
-            classes: 'bc-c-expandable__text--border-left-blue'
-          }) }}
+        <div data-test-id="section-expandable-advice">
+          {{ viewExpandableSection({
+              title: expandableAdvice.title,
+              innerComponent: expandableAdvice.description | stringArrayToParagraphs,
+              classes: 'bc-c-expandable__text--border-left-blue'
+            }) }}
+        </div>
       {% endif %}
 
       <div data-test-id="section-submit-button" class="nhsuk-u-margin-top-7">

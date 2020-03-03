@@ -41,6 +41,22 @@ const allAdviceTest = async ({ pageSetup, sectionManifest }) => {
   }
 };
 
+const expandableAdviceTest = async ({ pageSetup, sectionManifest }) => {
+  if (sectionManifest.expandableAdvice) {
+    await test('should render all the expandable advice of the section', async (t) => {
+      await pageSetup({ t });
+      const expectedExpandableAdviceTitle = sectionManifest.expandableAdvice.title;
+      const expectedExpandableAdviceDescription = sectionManifest.expandableAdvice.description.join('\n\n');
+      const expandableAdvice = Selector('[data-test-id="section-expandable-advice"]');
+      const expandableAdviceTitle = expandableAdvice.find('.nhsuk-details__summary-text');
+      const expandableAdviceDescription = expandableAdvice.find('.nhsuk-details__text');
+      await t
+        .expect(await extractInnerText(expandableAdviceTitle)).eql(expectedExpandableAdviceTitle)
+        .expect(await extractInnerText(expandableAdviceDescription)).eql(expectedExpandableAdviceDescription);
+    });
+  }
+};
+
 const submitButtonTest = async ({ pageSetup, sectionManifest }) => {
   await test('should render the submit button', async (t) => {
     await pageSetup({ t });
@@ -123,6 +139,7 @@ export const runCommonComponentsTests = async ({
     titleTest({ pageSetup, sectionManifest }),
     mainAdviceTest({ pageSetup, sectionManifest }),
     allAdviceTest({ pageSetup, sectionManifest }),
+    expandableAdviceTest({ pageSetup, sectionManifest }),
     submitButtonTest({ pageSetup, sectionManifest }),
     submitButtonClickedTest({
       pageSetup,
