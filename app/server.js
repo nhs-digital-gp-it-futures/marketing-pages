@@ -1,9 +1,9 @@
 require('dotenv').config();
-const browserSync = require('browser-sync');
-const routes = require('./app/routes');
-const config = require('./app/config');
+const browserSync = require('browser-sync'); // eslint-disable-line import/no-extraneous-dependencies
+const routes = require('./routes');
+const config = require('./config');
 const { App } = require('./app');
-const { logger } = require('./app/logger');
+const { logger } = require('./logger');
 
 Object.keys(config).map((configKey) => {
   if (config[configKey]) {
@@ -21,7 +21,7 @@ app.use('/', routes);
 if (config.env === 'development') {
   app.listen(config.port, () => {
     browserSync({
-      files: ['app/views/**/*.*', 'public/**/*.*'],
+      files: ['./views/**/*.*', '../public/**/*.*'],
       notify: true,
       open: false,
       port: config.port,
