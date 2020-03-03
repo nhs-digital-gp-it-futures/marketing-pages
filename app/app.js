@@ -55,6 +55,7 @@ class App {
     });
 
     env.addFilter('dateTime', dateFilter);
+    env.addFilter('stringArrayToParagraphs', array => array.map(item => `<p>${item}</p>`).join(''));
     return this.app;
   }
 }

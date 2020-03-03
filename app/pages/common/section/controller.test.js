@@ -18,6 +18,14 @@ describe('section controller', () => {
     questions: {
       'some-question-id': {},
     },
+    expandableAdvice: {
+      title: 'Some expandable advice title.',
+      description: [
+        'Some first bit of expandable advice.',
+        'Some second bit of expandable advice.',
+        'Some third bit of expandable advice.',
+      ],
+    },
     submitText: 'some-submit-text',
   };
 
@@ -42,6 +50,14 @@ describe('section controller', () => {
             id: 'some-question-id',
           },
         ],
+        expandableAdvice: {
+          title: 'Some expandable advice title.',
+          description: [
+            'Some first bit of expandable advice.',
+            'Some second bit of expandable advice.',
+            'Some third bit of expandable advice.',
+          ],
+        },
         returnToDashboardUrl: '/supplier/solution/some-solution-id',
         submitText: 'some-submit-text',
       };
@@ -82,6 +98,14 @@ describe('section controller', () => {
             id: 'some-question-id',
           },
         ],
+        expandableAdvice: {
+          title: 'Some expandable advice title.',
+          description: [
+            'Some first bit of expandable advice.',
+            'Some second bit of expandable advice.',
+            'Some third bit of expandable advice.',
+          ],
+        },
         returnToDashboardUrl: '/supplier/solution/some-solution-id',
         submitText: 'some-submit-text',
       };
