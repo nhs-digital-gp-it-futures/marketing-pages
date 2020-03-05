@@ -2,8 +2,18 @@ import { ApiProvider } from '../../../apiProvider';
 import { status } from '../status';
 
 export async function getReadyStatus() {
-  const buyingCatalogueApi = (await new ApiProvider().getBuyingCatalogueApiHealth()).data;
-  const documentApi = (await new ApiProvider().getDocumentApiHealth()).data;
+  let buyingCatalogueApi;
+  let documentApi;
+  try {
+    buyingCatalogueApi = (await new ApiProvider().getBuyingCatalogueApiHealth()).data;
+  } catch (e) {
+    buyingCatalogueApi = status.unhealthy.message;
+  }
+  try {
+    documentApi = (await new ApiProvider().getDocumentApiHealth()).data;
+  } catch (e) {
+    documentApi = status.unhealthy.message;
+  }
 
   const isHealthy = Api => Api === status.healthy.message;
   const isUnhealthy = Api => Api === status.unhealthy.message;
