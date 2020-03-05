@@ -4,11 +4,13 @@ import { status } from '../status';
 export async function getReadyStatus() {
   let buyingCatalogueApi;
   let documentApi;
+  // TODO: Global fix for unavailable endpoints.
   try {
     buyingCatalogueApi = (await new ApiProvider().getBuyingCatalogueApiHealth()).data;
   } catch (e) {
     buyingCatalogueApi = status.unhealthy.message;
   }
+  // TODO: Global fix for unavailable endpoints.
   try {
     documentApi = (await new ApiProvider().getDocumentApiHealth()).data;
   } catch (e) {
