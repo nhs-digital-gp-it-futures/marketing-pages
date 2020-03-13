@@ -1,5 +1,4 @@
 require('dotenv').config();
-const browserSync = require('browser-sync'); // eslint-disable-line import/no-extraneous-dependencies
 const routes = require('./routes');
 const config = require('./config');
 const { App } = require('./app');
@@ -16,19 +15,9 @@ Object.keys(config).map((configKey) => {
 // Routes
 const app = new App().createApp();
 app.use('/', routes);
-
-// Run application on configured port
 if (config.env === 'development') {
-  app.listen(config.port, () => {
-    browserSync({
-      files: ['./views/**/*.*', '../public/**/*.*'],
-      notify: true,
-      open: false,
-      port: config.port,
-      proxy: `localhost:${config.port}`,
-      ui: false,
-    });
-  });
+  logger.info(` Marketing Pages - \x1b[35m${config.appBaseUri}\x1b[0m`);
 } else {
-  app.listen(config.port);
+  logger.info(`App listening on port ${config.port} - Marketing Pages`);
 }
+app.listen(config.port);
