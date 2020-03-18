@@ -2,6 +2,9 @@ module.exports = {
   // App name
   appName: 'NHSD Marketing Pages',
 
+  // Base URL
+  baseUrl: '/marketing',
+
   // Environment
   env: process.env.NODE_ENV || 'development',
 
