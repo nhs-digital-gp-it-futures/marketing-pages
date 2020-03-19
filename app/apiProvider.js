@@ -17,13 +17,6 @@ export class ApiProvider {
     return true;
   }
 
-  async getSubDashboardData({ solutionId, dashboardId }) {
-    const endpoint = `${this.buyingCatalogueApiHost}/api/v1/Solutions/${solutionId}/dashboards/${dashboardId}`;
-    logger.info(`api called: [GET] ${endpoint}`);
-
-    return axios.get(endpoint);
-  }
-
   async getPreviewData({ solutionId }) {
     const endpoint = `${this.buyingCatalogueApiHost}/api/v1/Solutions/${solutionId}/preview`;
     logger.info(`api called: [GET] ${endpoint}`);

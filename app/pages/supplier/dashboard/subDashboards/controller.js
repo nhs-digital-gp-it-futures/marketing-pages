@@ -1,17 +1,16 @@
 import { ManifestProvider } from '../../../../manifestProvider';
-import { ApiProvider } from '../../../../apiProvider';
+import { getData } from '../../../../apiProvider2';
 import { createDashboardPageContext } from '../../../common/dashboard/createDashboardPageContext';
 
 export const getSubDashboardPageContext = async ({ solutionId, dashboardId }) => {
   const dashboardManifest = new ManifestProvider().getSubDashboardManifest({ dashboardId });
-  const sectionData = await new ApiProvider().getSubDashboardData({ solutionId, dashboardId });
+  const sectionData = await getData({ endpointLocator: 'getSubDashboardData', options: { solutionId, dashboardId } });
 
-  if (sectionData && sectionData.data) {
-    const { sections } = sectionData.data;
+  if (sectionData) {
     const context = createDashboardPageContext({
       solutionId,
       dashboardManifest,
-      marketingDataSections: sections,
+      marketingDataSections: sectionData.sections,
       dashboardId,
     });
     return context;

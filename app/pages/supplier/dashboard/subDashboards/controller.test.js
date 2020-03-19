@@ -1,9 +1,11 @@
 import { getSubDashboardPageContext } from './controller';
 import { ManifestProvider } from '../../../../manifestProvider';
-import { ApiProvider } from '../../../../apiProvider';
+import * as apiProvider from '../../../../apiProvider2';
 
 jest.mock('../../../../manifestProvider');
-jest.mock('../../../../apiProvider');
+jest.mock('../../../../apiProvider2', () => ({
+  getData: jest.fn(),
+}));
 
 describe('subDashboards controller', () => {
   const subDashboardManifest = {
@@ -21,12 +23,10 @@ describe('subDashboards controller', () => {
   };
 
   const subDashboardData = {
-    data: {
-      sections: {
-        'some-section-id': {
-          status: 'INCOMPLETE',
-          requirement: 'Mandatory',
-        },
+    sections: {
+      'some-section-id': {
+        status: 'INCOMPLETE',
+        requirement: 'Mandatory',
       },
     },
   };
@@ -55,16 +55,16 @@ describe('subDashboards controller', () => {
     };
 
     ManifestProvider.prototype.getSubDashboardManifest.mockReturnValue(subDashboardManifest);
-    ApiProvider.prototype.getSubDashboardData.mockResolvedValue(subDashboardData);
+    apiProvider.getData.mockResolvedValueOnce(subDashboardData);
 
     const context = await getSubDashboardPageContext({ solutionId: 'some-solution-id', dashboardId: 'some-dashboard-id' });
-
+    console.log(context)
     expect(context).toEqual(expectedContext);
   });
 
   it('should throw an error when no data is returned from the ApiProvider', async () => {
     ManifestProvider.prototype.getSubDashboardManifest.mockReturnValue(subDashboardManifest);
-    ApiProvider.prototype.getSubDashboardData.mockResolvedValue({});
+    apiProvider.getData.mockResolvedValueOnce({});
 
     try {
       await getSubDashboardPageContext({ solutionId: 'some-solution-id', dashboardId: 'some-dashboard-id' });
