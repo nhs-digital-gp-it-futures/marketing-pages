@@ -1,4 +1,4 @@
-export const createPreviewPageContext = ({ previewData, userContextType = 'supplier' }) => ({
+export const createPreviewPageContext = ({ previewData }) => ({
   solutionHeader: {
     id: previewData.id,
     name: previewData.name,
@@ -6,7 +6,7 @@ export const createPreviewPageContext = ({ previewData, userContextType = 'suppl
     isFoundation: previewData.isFoundation,
     lastUpdated: previewData.lastUpdated,
   },
-  returnToDashboardUrl: `/${userContextType}/solution/${previewData.id}`,
+  returnToDashboardUrl: `../${previewData.id}`,
   sections: Object.fromEntries(
     Object.entries(previewData.sections).map(([key, sectionValue]) => {
       if (sectionValue.answers && sectionValue.answers['document-name']) {

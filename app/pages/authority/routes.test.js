@@ -21,7 +21,6 @@ const mockDashboardContext = {
 
 const mockSectionContext = {
   title: 'Section Title',
-  submitActionUrl: '/',
   mainAdvice: 'Section Main Advice',
   additionalAdvice: [
     'Section additional advice',
@@ -43,7 +42,6 @@ const mockSectionPostData = {
 
 const mockPostSectionContext = {
   title: 'Post Section Title',
-  submitActionUrl: '/',
   mainAdvice: 'post section main advice',
   additionalAdvice: [
     'post section additional advice',
