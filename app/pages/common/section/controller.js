@@ -1,6 +1,5 @@
 import { ManifestProvider } from '../../../manifestProvider';
-import { ApiProvider } from '../../../apiProvider';
-import { getData } from '../../../apiProvider2';
+import { getData, putData } from '../../../apiProvider2';
 import { createSectionPageContext } from './createSectionPageContext';
 import { transformSectionData } from './helpers/transformSectionData';
 import { createPostSectionResponse } from './helpers/createPostSectionResponse';
@@ -53,9 +52,7 @@ export const postSection = async ({
   });
   const transformedSectionData = await transformSectionData({ sectionManifest, sectionData });
   try {
-    await new ApiProvider().putSectionData({
-      solutionId, sectionId, sectionData: transformedSectionData,
-    });
+    await putData({ endpointLocator: 'putSectionData', options: { solutionId, sectionId }, body: transformedSectionData });
 
     const response = createPostSectionResponse({ solutionId, sectionManifest, userContextType });
     return response;
@@ -63,7 +60,8 @@ export const postSection = async ({
     if (err.response.status === 400) {
       return err.response.data;
     }
-    logger.error(err);
+
+    logger.error(err.response.data);
     throw err;
   }
 };

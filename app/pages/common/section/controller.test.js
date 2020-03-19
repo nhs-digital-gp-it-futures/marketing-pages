@@ -1,13 +1,13 @@
 import { getSectionPageContext, getSectionPageErrorContext, postSection } from './controller';
 import { ManifestProvider } from '../../../manifestProvider';
-import { ApiProvider } from '../../../apiProvider';
 import * as apiProvider from '../../../apiProvider2';
 
 jest.mock('../../../manifestProvider');
-jest.mock('../../../apiProvider');
+jest.mock('../../../logger');
 
 jest.mock('../../../apiProvider2', () => ({
   getData: jest.fn(),
+  putData: jest.fn(),
 }));
 
 describe('section controller', () => {
@@ -136,7 +136,8 @@ describe('section controller', () => {
 
 
       ManifestProvider.prototype.getSectionManifest.mockReturnValue(sectionManifest);
-      ApiProvider.prototype.putSectionData.mockResolvedValue(true);
+      apiProvider.putData
+        .mockReturnValueOnce(true);
 
       const context = await postSection({ solutionId: 'some-solution-id' });
 
@@ -154,9 +155,8 @@ describe('section controller', () => {
       };
 
       ManifestProvider.prototype.getSectionManifest.mockReturnValue(sectionManifest);
-      ApiProvider.prototype.putSectionData.mockImplementation(
-        () => Promise.reject(errorResponse),
-      );
+      apiProvider.putData
+        .mockRejectedValueOnce(errorResponse);
 
       const response = await postSection({ solutionId: 'some-solution-id' });
       expect(response).toEqual(errorResponse.response.data);
@@ -173,9 +173,8 @@ describe('section controller', () => {
       };
 
       ManifestProvider.prototype.getSectionManifest.mockReturnValue(sectionManifest);
-      ApiProvider.prototype.putSectionData.mockImplementation(
-        () => Promise.reject(errorResponse),
-      );
+      apiProvider.putData
+        .mockRejectedValueOnce(errorResponse);
 
       try {
         await postSection({ solutionId: 'some-solution-id' });

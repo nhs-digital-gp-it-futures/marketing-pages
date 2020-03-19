@@ -14,6 +14,7 @@ const endpoints = {
   getSubDashboardData: options => `${buyingCatalogueApiHost}/api/v1/Solutions/${options.solutionId}/dashboards/${options.dashboardId}`,
   getPreviewData: options => `${buyingCatalogueApiHost}/api/v1/Solutions/${options.solutionId}/preview`,
   getDocument: options => `${documentApiHost}/api/v1/Solutions/${options.solutionId}/documents/${options.documentName}`,
+  putSectionData: options => `${buyingCatalogueApiHost}/api/v1/Solutions/${options.solutionId}/sections/${options.sectionId}`,
 };
 
 export const getData = async ({ endpointLocator, options, accessToken }) => {
@@ -30,8 +31,11 @@ export const getDocument = (options) => {
   return axios.get(endpoint, { responseType: 'stream' });
 };
 
-export const postData = async ({ endpointLocator, options, body }) => {
+export const putData = async ({ endpointLocator, options, body }) => {
   const endpoint = endpoints[endpointLocator](options);
-  logger.info(`api called: [POST] ${endpoint}: ${JSON.stringify(body)}`);
-  return axios.post(endpoint, body);
+  logger.info(`api called: [PUT] ${endpoint}: ${JSON.stringify(body)}`);
+
+  axios.put(endpoint, body);
+
+  return true;
 };
