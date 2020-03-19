@@ -1,4 +1,3 @@
-import { ApiProvider } from '../../../apiProvider';
 import { getData } from '../../../apiProvider2';
 import { createPreviewPageContext } from './createPreviewPageContext';
 
@@ -11,7 +10,3 @@ export const getPreviewPageContext = async ({ solutionId, userContextType }) => 
   }
   throw new Error('No data returned');
 };
-
-export const getDocument = async ({ solutionId, documentName }) => (
-  new ApiProvider().getDocument({ solutionId, documentName })
-);

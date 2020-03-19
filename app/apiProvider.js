@@ -24,10 +24,4 @@ export class ApiProvider {
 
     return true;
   }
-
-  async getDocument({ solutionId, documentName }) {
-    const endpoint = `${this.documentApiHost}/api/v1/Solutions/${solutionId}/documents/${documentName}`;
-    logger.info(`api called: [GET] ${endpoint}`);
-    return axios.get(endpoint, { responseType: 'stream' });
-  }
 }

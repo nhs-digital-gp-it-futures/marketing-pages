@@ -3,7 +3,8 @@ import { getMarketingPageDashboardContext } from '../common/dashboard/controller
 import { getSectionPageContext, postSection, getSectionPageErrorContext } from '../common/section/controller';
 import { logger } from '../../logger';
 import { withCatch } from '../../common/helpers/routerHelper';
-import { getDocument, getPreviewPageContext } from '../common/preview/controller';
+import { getPreviewPageContext } from '../common/preview/controller';
+import { getDocument } from '../../apiProvider2';
 
 const router = express.Router();
 const userContextType = 'authority';

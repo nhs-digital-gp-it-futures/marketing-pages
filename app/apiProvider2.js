@@ -13,6 +13,7 @@ const endpoints = {
     : `${buyingCatalogueApiHost}/api/v1/Solutions/${options.solutionId}/dashboard/authority`),
   getSubDashboardData: options => `${buyingCatalogueApiHost}/api/v1/Solutions/${options.solutionId}/dashboards/${options.dashboardId}`,
   getPreviewData: options => `${buyingCatalogueApiHost}/api/v1/Solutions/${options.solutionId}/preview`,
+  getDocument: options => `${documentApiHost}/api/v1/Solutions/${options.solutionId}/documents/${options.documentName}`,
 };
 
 export const getData = async ({ endpointLocator, options, accessToken }) => {
@@ -23,8 +24,8 @@ export const getData = async ({ endpointLocator, options, accessToken }) => {
   return response.data || null;
 };
 
-export const getDocument = ({ solutionId, documentName }) => {
-  const endpoint = endpoints.getDocument({ options: { solutionId, documentName } });
+export const getDocument = (options) => {
+  const endpoint = endpoints.getDocument(options);
   logger.info(`api called: [GET] ${endpoint}`);
   return axios.get(endpoint, { responseType: 'stream' });
 };
