@@ -6,6 +6,12 @@ import supplierRoutes from './pages/supplier/routes';
 import authorityRoutes from './pages/authority/routes';
 
 const router = express.Router();
+const config = require('./config');
+
+const addContext = ({ context }) => ({
+  ...context,
+  config,
+});
 
 router.use('/health', healthRoutes);
 
@@ -22,7 +28,7 @@ router.use((err, req, res, next) => {
   if (err) {
     const context = errorHandler(err);
     logger.error(context.message);
-    return res.render('pages/error/template.njk', context);
+    return res.render('pages/error/template.njk', addContext({ context }));
   }
   return next();
 });

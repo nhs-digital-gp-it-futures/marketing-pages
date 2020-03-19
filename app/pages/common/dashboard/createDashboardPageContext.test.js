@@ -6,9 +6,9 @@ describe('createDashboardPageContext', () => {
       const expectedContext = {
         name: 'some solution name',
         supplierName: 'a supplier',
-        previewUrl: '/supplier/solution/some-solution-id/preview',
+        previewUrl: 'some-solution-id/preview',
         submitForModerationUrl: '/supplier/solution/some-solution-id/submitForModeration',
-        returnToDashboardUrl: '/supplier/solution/some-solution-id',
+        returnToDashboardUrl: '../',
         sectionGroups: [
           {
             id: 'some-section-group-id',
@@ -16,7 +16,7 @@ describe('createDashboardPageContext', () => {
             mainAdvice: 'Some section group main advice',
             sections: [
               {
-                URL: '/supplier/solution/some-solution-id/section/some-section-id',
+                URL: 'some-solution-id/section/some-section-id',
                 id: 'some-section-id',
                 title: 'Some section',
                 requirement: 'Mandatory',
@@ -66,9 +66,9 @@ describe('createDashboardPageContext', () => {
       const expectedContext = {
         name: 'some solution name',
         supplierName: 'a supplier',
-        previewUrl: '/supplier/solution/some-solution-id/preview',
+        previewUrl: 'some-solution-id/preview',
         submitForModerationUrl: '/supplier/solution/some-solution-id/submitForModeration',
-        returnToDashboardUrl: '/supplier/solution/some-solution-id',
+        returnToDashboardUrl: '../',
         sectionGroups: [
           {
             id: 'some-section-group-id',
@@ -76,7 +76,7 @@ describe('createDashboardPageContext', () => {
             mainAdvice: 'Some section group main advice',
             sections: [
               {
-                URL: '/supplier/solution/some-solution-id/section/some-section-id',
+                URL: 'some-solution-id/section/some-section-id',
                 id: 'some-section-id',
                 title: 'Some section',
                 requirement: 'Mandatory',
@@ -84,14 +84,14 @@ describe('createDashboardPageContext', () => {
                 isActive: true,
                 sections: [
                   {
-                    URL: '/supplier/solution/some-solution-id/dashboard/some-first-sub-section-id',
+                    URL: 'some-solution-id/dashboard/some-first-sub-section-id',
                     id: 'some-first-sub-section-id',
                     title: 'Some first sub section',
                     defaultMessage: 'some default message',
                     isActive: false,
                   },
                   {
-                    URL: '/supplier/solution/some-solution-id/dashboard/some-second-sub-section-id',
+                    URL: 'some-solution-id/dashboard/some-second-sub-section-id',
                     id: 'some-second-sub-section-id',
                     title: 'Some second sub section',
                     defaultMessage: 'some default message',
@@ -154,9 +154,9 @@ describe('createDashboardPageContext', () => {
       const expectedContext = {
         name: 'some solution name',
         supplierName: 'a supplier',
-        previewUrl: '/supplier/solution/some-solution-id/preview',
+        previewUrl: 'some-solution-id/preview',
         submitForModerationUrl: '/supplier/solution/some-solution-id/submitForModeration',
-        returnToDashboardUrl: '/supplier/solution/some-solution-id',
+        returnToDashboardUrl: '../',
         sectionGroups: [
           {
             id: 'some-section-group-id',
@@ -164,7 +164,7 @@ describe('createDashboardPageContext', () => {
             mainAdvice: 'Some section group main advice',
             sections: [
               {
-                URL: '/supplier/solution/some-solution-id/section/some-section-id',
+                URL: 'some-solution-id/section/some-section-id',
                 id: 'some-section-id',
                 title: 'Some section',
                 requirement: 'Mandatory',
@@ -172,14 +172,14 @@ describe('createDashboardPageContext', () => {
                 isActive: true,
                 sections: [
                   {
-                    URL: '/supplier/solution/some-solution-id/dashboard/some-first-sub-section-id',
+                    URL: 'some-solution-id/dashboard/some-first-sub-section-id',
                     id: 'some-first-sub-section-id',
                     title: 'Some first sub section',
                     defaultMessage: 'some default message',
                     isActive: false,
                   },
                   {
-                    URL: '/supplier/solution/some-solution-id/dashboard/some-second-sub-section-id',
+                    URL: 'some-solution-id/dashboard/some-second-sub-section-id',
                     id: 'some-second-sub-section-id',
                     title: 'Some second sub section',
                     defaultMessage: 'some default message',
@@ -250,9 +250,9 @@ describe('createDashboardPageContext', () => {
       const expectedContext = {
         name: 'some solution name',
         supplierName: 'a supplier',
-        previewUrl: '/supplier/solution/some-solution-id/preview',
+        previewUrl: 'some-solution-id/preview',
         submitForModerationUrl: '/supplier/solution/some-solution-id/submitForModeration',
-        returnToDashboardUrl: '/supplier/solution/some-solution-id',
+        returnToDashboardUrl: '../',
         errors: [
           {
             text: 'some-section-id is a required section',
@@ -266,7 +266,7 @@ describe('createDashboardPageContext', () => {
             mainAdvice: 'Some section group main advice',
             sections: [
               {
-                URL: '/supplier/solution/some-solution-id/section/some-section-id',
+                URL: 'some-solution-id/section/some-section-id',
                 id: 'some-section-id',
                 title: 'Some section',
                 requirement: 'Mandatory',
@@ -325,9 +325,9 @@ describe('createDashboardPageContext', () => {
       const expectedContext = {
         name: 'some solution name',
         supplierName: 'a supplier',
-        previewUrl: '/supplier/solution/some-solution-id/preview',
+        previewUrl: 'some-solution-id/preview',
         submitForModerationUrl: '/supplier/solution/some-solution-id/submitForModeration',
-        returnToDashboardUrl: '/supplier/solution/some-solution-id',
+        returnToDashboardUrl: '../',
         errors: [
           {
             text: 'some-first-sub-section-id is a required sub section',
@@ -341,7 +341,7 @@ describe('createDashboardPageContext', () => {
             mainAdvice: 'Some section group main advice',
             sections: [
               {
-                URL: '/supplier/solution/some-solution-id/section/some-section-id',
+                URL: 'some-solution-id/section/some-section-id',
                 id: 'some-section-id',
                 title: 'Some section',
                 requirement: 'Mandatory',
@@ -349,7 +349,7 @@ describe('createDashboardPageContext', () => {
                 isActive: true,
                 sections: [
                   {
-                    URL: '/supplier/solution/some-solution-id/dashboard/some-first-sub-section-id',
+                    URL: 'some-solution-id/dashboard/some-first-sub-section-id',
                     id: 'some-first-sub-section-id',
                     title: 'Some first sub section',
                     defaultMessage: 'some default message',
@@ -358,7 +358,7 @@ describe('createDashboardPageContext', () => {
                     status: 'INCOMPLETE',
                   },
                   {
-                    URL: '/supplier/solution/some-solution-id/dashboard/some-second-sub-section-id',
+                    URL: 'some-solution-id/dashboard/some-second-sub-section-id',
                     id: 'some-second-sub-section-id',
                     title: 'Some second sub section',
                     defaultMessage: 'some default message',
@@ -435,9 +435,9 @@ describe('createDashboardPageContext', () => {
       const expectedContext = {
         name: 'some solution name',
         title: 'Sub Dashboard',
-        previewUrl: '/supplier/solution/some-solution-id/preview',
+        previewUrl: 'some-solution-id/preview',
         submitForModerationUrl: '/supplier/solution/some-solution-id/submitForModeration',
-        returnToDashboardUrl: '/supplier/solution/some-solution-id',
+        returnToDashboardUrl: '../',
         sectionGroups: [
           {
             id: 'sub-dashboard-sections',
@@ -445,19 +445,19 @@ describe('createDashboardPageContext', () => {
             mainAdvice: 'Some section group main advice',
             sections: [
               {
-                URL: '/supplier/solution/some-solution-id/dashboard/some-sub-dashboard/section/sub-section-one',
+                URL: 'some-sub-dashboard/section/sub-section-one',
                 id: 'sub-section-one',
                 title: 'Sub section one',
                 isActive: false,
               },
               {
-                URL: '/supplier/solution/some-solution-id/dashboard/some-sub-dashboard/section/sub-section-two',
+                URL: 'some-sub-dashboard/section/sub-section-two',
                 id: 'sub-section-two',
                 title: 'Sub section two',
                 isActive: false,
               },
               {
-                URL: '/supplier/solution/some-solution-id/dashboard/some-sub-dashboard/section/sub-section-three',
+                URL: 'some-sub-dashboard/section/sub-section-three',
                 id: 'sub-section-three',
                 title: 'Sub section three',
                 isActive: false,
@@ -506,9 +506,9 @@ describe('createDashboardPageContext', () => {
       const expectedContext = {
         name: 'some solution name',
         title: 'Dashboard',
-        previewUrl: '/supplier/solution/some-solution-id/preview',
+        previewUrl: 'some-solution-id/preview',
         submitForModerationUrl: '/supplier/solution/some-solution-id/submitForModeration',
-        returnToDashboardUrl: '/supplier/solution/some-solution-id',
+        returnToDashboardUrl: '../',
         sectionGroups: [
           {
             id: 'dashboard-sections',
@@ -516,19 +516,19 @@ describe('createDashboardPageContext', () => {
             mainAdvice: 'Some section group main advice',
             sections: [
               {
-                URL: '/supplier/solution/some-solution-id/section/section-one',
+                URL: 'some-solution-id/section/section-one',
                 id: 'section-one',
                 title: 'section one',
                 isActive: false,
               },
               {
-                URL: '/supplier/solution/some-solution-id/section/section-two',
+                URL: 'some-solution-id/section/section-two',
                 id: 'section-two',
                 title: 'section two',
                 isActive: false,
               },
               {
-                URL: '/supplier/solution/some-solution-id/section/section-three',
+                URL: 'some-solution-id/section/section-three',
                 id: 'section-three',
                 title: 'section three',
                 isActive: false,
@@ -577,8 +577,8 @@ describe('createDashboardPageContext', () => {
     it('should create a context from the manifest and the marketingData', () => {
       const expectedContext = {
         name: 'some solution name',
-        returnToDashboardUrl: '/authority/solution/some-solution-id',
-        previewUrl: '/authority/solution/some-solution-id/preview',
+        returnToDashboardUrl: '../',
+        previewUrl: 'some-solution-id/preview',
         sectionGroups: [
           {
             id: 'some-section-group-id',
@@ -586,7 +586,7 @@ describe('createDashboardPageContext', () => {
             mainAdvice: 'Some section group main advice',
             sections: [
               {
-                URL: '/authority/solution/some-solution-id/section/some-section-id',
+                URL: 'some-solution-id/section/some-section-id',
                 id: 'some-section-id',
                 title: 'Some section',
                 requirement: 'Mandatory',

@@ -39,16 +39,16 @@ describe('supplier - dashboard controller', () => {
       const expectedContext = {
         name: 'some solution name',
         supplierName: 'a supplier',
-        previewUrl: '/supplier/solution/some-solution-id/preview',
+        previewUrl: 'some-solution-id/preview',
         submitForModerationUrl: '/supplier/solution/some-solution-id/submitForModeration',
-        returnToDashboardUrl: '/supplier/solution/some-solution-id',
+        returnToDashboardUrl: '../',
         sectionGroups: [
           {
             id: 'some-section-group-id',
             title: 'Some section group',
             sections: [
               {
-                URL: '/supplier/solution/some-solution-id/section/some-section-id',
+                URL: 'some-solution-id/section/some-section-id',
                 id: 'some-section-id',
                 title: 'Some section',
                 requirement: 'Mandatory',

@@ -4,7 +4,6 @@ describe('createSectionPageContext', () => {
   it('should create a context with for the section', () => {
     const expectedContext = {
       title: 'Some section title',
-      submitActionUrl: '/supplier/solution/some-solution-id/section/some-section-id',
       mainAdvice: 'Some main advice.',
       additionalAdvice: [
         'Some first bit of additional advice.',
@@ -16,7 +15,7 @@ describe('createSectionPageContext', () => {
           id: 'some-question-id',
         },
       ],
-      returnToDashboardUrl: '/supplier/solution/some-solution-id',
+      returnToDashboardUrl: '../',
       submitText: 'some-submit-text',
     };
 
@@ -44,7 +43,6 @@ describe('createSectionPageContext', () => {
 
   it('should create a context with errors for the section', () => {
     const expectedContext = {
-      submitActionUrl: '/supplier/solution/some-solution-id/section/some-section-id',
       errors: [
         {
           text: 'some really helpful error message',
@@ -61,7 +59,7 @@ describe('createSectionPageContext', () => {
           },
         },
       ],
-      returnToDashboardUrl: '/supplier/solution/some-solution-id',
+      returnToDashboardUrl: '../',
     };
 
     const formData = {
@@ -93,13 +91,12 @@ describe('createSectionPageContext', () => {
 
   it('should create submitActionPath with the dashboardId provided', () => {
     const expectedContext = {
-      submitActionUrl: '/supplier/solution/some-solution-id/dashboard/some-dashboard-id/section/some-section-id',
       questions: [
         {
           id: 'some-question-id',
         },
       ],
-      returnToDashboardUrl: '/supplier/solution/some-solution-id',
+      returnToDashboardUrl: '../',
     };
 
     const sectionManifest = {

@@ -14,7 +14,14 @@ Object.keys(config).map((configKey) => {
 
 // Routes
 const app = new App().createApp();
-app.use('/', routes);
+app.use(config.baseUrl ? config.baseUrl : '/', routes);
+if (config.baseUrl) {
+  app.use('/', (req, res) => {
+    res.redirect(config.baseUrl);
+  });
+}
+
+// Run application on configured port
 if (config.env === 'development') {
   logger.info(` Marketing Pages - \x1b[35m${config.appBaseUri}/supplier/solution/100000-001\x1b[0m`);
 } else {

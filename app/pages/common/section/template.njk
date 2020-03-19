@@ -35,7 +35,7 @@
       </div>
     </div>
 
-    <form method="post" action="{{ submitActionUrl }}">
+    <form method="post">
       {% for question in questions %}
         {% if question.type === 'multi-question' %}
           {{ multiQuestion({

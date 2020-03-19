@@ -8,6 +8,7 @@ const express = require('express');
 const nunjucks = require('nunjucks');
 const bodyParser = require('body-parser');
 const dateFilter = require('nunjucks-date-filter');
+const connectSlashes = require('connect-slashes');
 
 // Local dependencies
 const config = require('./config');
@@ -32,14 +33,17 @@ class App {
     this.app.use(express.json());
 
     // Middleware to serve static assets
-    this.app.use(express.static(path.join(__dirname, '/../public/')));
-    this.app.use('/nhsuk-frontend', express.static(path.join(__dirname, '/../node_modules/nhsuk-frontend/packages')));
+    this.app.use(config.baseUrl ? config.baseUrl : '/', express.static(path.join(__dirname, '/../public/')));
+    this.app.use(`${config.baseUrl}/nhsuk-frontend`, express.static(path.join(__dirname, '/../node_modules/nhsuk-frontend/packages')));
 
     // View engine (Nunjucks)
     this.app.set('view engine', 'njk');
 
     // Use local variables
     this.app.use(locals(config));
+
+    // Remove trailing slashes from url
+    this.app.use(connectSlashes(false));
 
     // Nunjucks configuration
     const appViews = [

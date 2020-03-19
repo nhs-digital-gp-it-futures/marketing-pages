@@ -29,7 +29,7 @@ describe('preview controller', () => {
         isFoundation: true,
         lastUpdated: '1996-03-15T10:00:00',
       },
-      returnToDashboardUrl: '/supplier/solution/100000-001',
+      returnToDashboardUrl: '../100000-001',
       sections: {
         'some-section': {
           answers: {},

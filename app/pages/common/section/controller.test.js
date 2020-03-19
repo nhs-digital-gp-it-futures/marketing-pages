@@ -43,7 +43,6 @@ describe('section controller', () => {
     it('should return the context when the manifest and data from the api is provided', async () => {
       const expectedContext = {
         title: 'Some section title',
-        submitActionUrl: '/supplier/solution/some-solution-id/section/some-section-id',
         mainAdvice: 'Some main advice.',
         additionalAdvice: [
           'Some first bit of additional advice.',
@@ -63,7 +62,7 @@ describe('section controller', () => {
             'Some third bit of expandable advice.',
           ],
         },
-        returnToDashboardUrl: '/supplier/solution/some-solution-id',
+        returnToDashboardUrl: '../',
         submitText: 'some-submit-text',
       };
 
@@ -93,7 +92,6 @@ describe('section controller', () => {
     it('should return the context when the manifest is provided', async () => {
       const expectedContext = {
         title: 'Some section title',
-        submitActionUrl: '/supplier/solution/some-solution-id/section/some-section-id',
         mainAdvice: 'Some main advice.',
         additionalAdvice: [
           'Some first bit of additional advice.',
@@ -113,7 +111,7 @@ describe('section controller', () => {
             'Some third bit of expandable advice.',
           ],
         },
-        returnToDashboardUrl: '/supplier/solution/some-solution-id',
+        returnToDashboardUrl: '../',
         submitText: 'some-submit-text',
       };
 
@@ -131,7 +129,7 @@ describe('section controller', () => {
     it('should return the response indicating success and the redirectUrl', async () => {
       const expectedContext = {
         success: true,
-        redirectUrl: '/supplier/solution/some-solution-id',
+        redirectUrl: '../',
       };
 
 
