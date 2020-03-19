@@ -1,4 +1,5 @@
 import { ManifestProvider } from '../../../manifestProvider';
+import { getData } from '../../../apiProvider2';
 import { ApiProvider } from '../../../apiProvider';
 import { createDashboardPageContext } from './createDashboardPageContext';
 
@@ -6,11 +7,9 @@ export const getMarketingPageDashboardContext = async ({
   solutionId, validationErrors, userContextType = 'supplier',
 }) => {
   const dashboardManifest = new ManifestProvider().getDashboardManifest({ userContextType });
-  const dashboardDataRaw = await new ApiProvider().getMainDashboardData({
-    solutionId, userContextType,
-  });
-  if (dashboardDataRaw && dashboardDataRaw.data) {
-    const dashboardData = dashboardDataRaw.data;
+  const dashboardData = await getData({ endpointLocator: 'getMainDashboardData', options: { solutionId, userContextType } });
+
+  if (dashboardData) {
     const context = createDashboardPageContext({
       solutionId,
       solutionName: dashboardData.name,

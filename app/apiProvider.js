@@ -17,15 +17,6 @@ export class ApiProvider {
     return true;
   }
 
-  async getMainDashboardData({ solutionId, userContextType }) {
-    const endpoint = userContextType === 'supplier'
-      ? `${this.buyingCatalogueApiHost}/api/v1/Solutions/${solutionId}/dashboard`
-      : `${this.buyingCatalogueApiHost}/api/v1/Solutions/${solutionId}/dashboard/authority`;
-    logger.info(`api called: [GET] ${endpoint}`);
-
-    return axios.get(endpoint);
-  }
-
   async getSubDashboardData({ solutionId, dashboardId }) {
     const endpoint = `${this.buyingCatalogueApiHost}/api/v1/Solutions/${solutionId}/dashboards/${dashboardId}`;
     logger.info(`api called: [GET] ${endpoint}`);

@@ -1,9 +1,13 @@
 import { getMarketingPageDashboardContext, postSubmitForModeration } from './controller';
 import { ManifestProvider } from '../../../manifestProvider';
+import * as apiProvider from '../../../apiProvider2';
 import { ApiProvider } from '../../../apiProvider';
 
 jest.mock('../../../manifestProvider');
 jest.mock('../../../apiProvider');
+jest.mock('../../../apiProvider2', () => ({
+  getData: jest.fn(),
+}));
 
 describe('supplier - dashboard controller', () => {
   describe('getMarketingPageDashboardContext', () => {
@@ -22,14 +26,12 @@ describe('supplier - dashboard controller', () => {
     };
 
     const dashboardData = {
-      data: {
-        name: 'some solution name',
-        'supplier-name': 'a supplier',
-        sections: {
-          'some-section-id': {
-            status: 'INCOMPLETE',
-            requirement: 'Mandatory',
-          },
+      name: 'some solution name',
+      'supplier-name': 'a supplier',
+      sections: {
+        'some-section-id': {
+          status: 'INCOMPLETE',
+          requirement: 'Mandatory',
         },
       },
     };
@@ -60,7 +62,7 @@ describe('supplier - dashboard controller', () => {
       };
 
       ManifestProvider.prototype.getDashboardManifest.mockReturnValue(dashboardManifest);
-      ApiProvider.prototype.getMainDashboardData.mockResolvedValue(dashboardData);
+      apiProvider.getData.mockResolvedValueOnce(dashboardData);
 
       const context = await getMarketingPageDashboardContext({ solutionId: 'some-solution-id', dashboardId: 'some-dashboard-id' });
 
@@ -69,7 +71,7 @@ describe('supplier - dashboard controller', () => {
 
     it('should throw an error when no data is returned from the ApiProvider', async () => {
       ManifestProvider.prototype.getDashboardManifest.mockReturnValue(dashboardManifest);
-      ApiProvider.prototype.getMainDashboardData.mockResolvedValue({});
+      apiProvider.getData.mockResolvedValueOnce({});
 
       try {
         await getMarketingPageDashboardContext({ solutionId: 'some-solution-id', dashboardId: 'some-dashboard-id' });

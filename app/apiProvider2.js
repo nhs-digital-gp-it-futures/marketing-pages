@@ -8,6 +8,9 @@ const endpoints = {
   getBuyingCatalogueApiHealth: () => `${buyingCatalogueApiHost}/health/ready`,
   getDocumentApiHealth: () => `${documentApiHost}/health/ready`,
   getSectionData: options => `${buyingCatalogueApiHost}/api/v1/Solutions/${options.solutionId}/sections/${options.sectionId}`,
+  getMainDashboardData: options => (options.userContextType === 'supplier'
+    ? `${buyingCatalogueApiHost}/api/v1/Solutions/${options.solutionId}/dashboard`
+    : `${buyingCatalogueApiHost}/api/v1/Solutions/${options.solutionId}/dashboard/authority`),
 };
 
 export const getData = async ({ endpointLocator, options, accessToken }) => {
@@ -29,8 +32,10 @@ export const postData = async ({ endpointLocator, options, body }) => {
   logger.info(`api called: [POST] ${endpoint}: ${JSON.stringify(body)}`);
   return axios.post(endpoint, body);
 };
-// async getSectionData({ solutionId, sectionId }) {
-//   const endpoint = `${this.buyingCatalogueApiHost}/api/v1/Solutions/
+// async ) {
+//   const endpoint = userContextType === 'supplier'
+//     ? `${this.buyingCatalogueApiHost}/api/v1/Solutions/${solutionId}/dashboard`
+//     : `${this.buyingCatalogueApiHost}/api/v1/Solutions/${solutionId}/dashboard/authority`;
 //   logger.info(`api called: [GET] ${endpoint}`);
 
 //   return axios.get(endpoint);
