@@ -58,7 +58,6 @@ describe('subDashboards controller', () => {
     apiProvider.getData.mockResolvedValueOnce(subDashboardData);
 
     const context = await getSubDashboardPageContext({ solutionId: 'some-solution-id', dashboardId: 'some-dashboard-id' });
-    console.log(context)
     expect(context).toEqual(expectedContext);
   });
 

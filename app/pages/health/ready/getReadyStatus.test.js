@@ -79,4 +79,3 @@ describe('getReadyStatus', () => {
     expect(await getReadyStatus()).toBe(status.unhealthy);
   });
 });
-
