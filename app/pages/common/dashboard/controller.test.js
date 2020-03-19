@@ -7,6 +7,7 @@ jest.mock('../../../manifestProvider');
 jest.mock('../../../apiProvider');
 jest.mock('../../../apiProvider2', () => ({
   getData: jest.fn(),
+  putData: jest.fn(),
 }));
 
 describe('supplier - dashboard controller', () => {
@@ -83,14 +84,10 @@ describe('supplier - dashboard controller', () => {
 
   describe('postSubmitForModeration', () => {
     it('should return a response indicating the submit for moderation was successful', async () => {
-      const expectedResponse = {
-        success: true,
-      };
-
-      ApiProvider.prototype.putSubmitForModeration.mockResolvedValue(true);
+      const expectedResponse = { success: true };
+      apiProvider.putData.mockResolvedValueOnce(true);
 
       const response = await postSubmitForModeration({ solutionId: 'some-solution-id' });
-
       expect(response).toEqual(expectedResponse);
     });
 
@@ -102,10 +99,7 @@ describe('supplier - dashboard controller', () => {
           },
         },
       };
-
-      ApiProvider.prototype.putSubmitForModeration.mockImplementation(
-        () => Promise.reject(errorResponse),
-      );
+      apiProvider.putData.mockRejectedValueOnce(errorResponse);
 
       const response = await postSubmitForModeration({ solutionId: 'some-solution-id' });
       expect(response).toEqual(errorResponse.response.data);

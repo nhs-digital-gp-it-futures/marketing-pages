@@ -5,6 +5,7 @@ import { buyingCatalogueApiHost, documentApiHost } from './config';
 const getHeaders = accessToken => (accessToken ? { headers: { Authorization: `Bearer ${accessToken}` } } : {});
 
 const endpoints = {
+  // GET endpoints
   getBuyingCatalogueApiHealth: () => `${buyingCatalogueApiHost}/health/ready`,
   getDocumentApiHealth: () => `${documentApiHost}/health/ready`,
   getSectionData: options => `${buyingCatalogueApiHost}/api/v1/Solutions/${options.solutionId}/sections/${options.sectionId}`,
@@ -13,8 +14,11 @@ const endpoints = {
     : `${buyingCatalogueApiHost}/api/v1/Solutions/${options.solutionId}/dashboard/authority`),
   getSubDashboardData: options => `${buyingCatalogueApiHost}/api/v1/Solutions/${options.solutionId}/dashboards/${options.dashboardId}`,
   getPreviewData: options => `${buyingCatalogueApiHost}/api/v1/Solutions/${options.solutionId}/preview`,
+  // GET Document endpoints
   getDocument: options => `${documentApiHost}/api/v1/Solutions/${options.solutionId}/documents/${options.documentName}`,
+  // PUT endpoints
   putSectionData: options => `${buyingCatalogueApiHost}/api/v1/Solutions/${options.solutionId}/sections/${options.sectionId}`,
+  putSubmitForModeration: options => `${this.buyingCatalogueApiHost}/api/v1/Solutions/${options.solutionId}/SubmitForReview`,
 };
 
 export const getData = async ({ endpointLocator, options, accessToken }) => {
@@ -31,11 +35,9 @@ export const getDocument = (options) => {
   return axios.get(endpoint, { responseType: 'stream' });
 };
 
-export const putData = async ({ endpointLocator, options, body }) => {
+export const putData = async ({ endpointLocator, options, body = {} }) => {
   const endpoint = endpoints[endpointLocator](options);
   logger.info(`api called: [PUT] ${endpoint}: ${JSON.stringify(body)}`);
-
   axios.put(endpoint, body);
-
   return true;
 };

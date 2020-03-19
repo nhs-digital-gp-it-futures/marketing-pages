@@ -1,6 +1,5 @@
 import { ManifestProvider } from '../../../manifestProvider';
-import { getData } from '../../../apiProvider2';
-import { ApiProvider } from '../../../apiProvider';
+import { getData, putData } from '../../../apiProvider2';
 import { createDashboardPageContext } from './createDashboardPageContext';
 
 export const getMarketingPageDashboardContext = async ({
@@ -26,7 +25,7 @@ export const getMarketingPageDashboardContext = async ({
 
 export const postSubmitForModeration = async ({ solutionId }) => {
   try {
-    await new ApiProvider().putSubmitForModeration({ solutionId });
+    await putData({ endpointLocator: 'putSubmitForModeration', options: { solutionId } });
     return {
       success: true,
     };
