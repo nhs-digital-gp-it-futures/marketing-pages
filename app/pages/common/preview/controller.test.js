@@ -1,20 +1,22 @@
 import { getPreviewPageContext, getDocument } from './controller';
 import { ApiProvider } from '../../../apiProvider';
+import * as apiProvider from '../../../apiProvider2';
 
 jest.mock('../../../apiProvider');
+jest.mock('../../../apiProvider2', () => ({
+  getData: jest.fn(),
+}));
 
 describe('preview controller', () => {
   const previewData = {
-    data: {
-      id: '100000-001',
-      name: 'Write on Time',
-      supplierName: 'Really Kool Corporation',
-      isFoundation: true,
-      lastUpdated: '1996-03-15T10:00:00',
-      sections: {
-        'some-section': {
-          answers: {},
-        },
+    id: '100000-001',
+    name: 'Write on Time',
+    supplierName: 'Really Kool Corporation',
+    isFoundation: true,
+    lastUpdated: '1996-03-15T10:00:00',
+    sections: {
+      'some-section': {
+        answers: {},
       },
     },
   };
@@ -36,7 +38,7 @@ describe('preview controller', () => {
       },
     };
 
-    ApiProvider.prototype.getPreviewData.mockResolvedValue(previewData);
+    apiProvider.getData.mockResolvedValueOnce(previewData);
 
     const context = await getPreviewPageContext({ solutionId: '100000-001' });
 
@@ -44,7 +46,7 @@ describe('preview controller', () => {
   });
 
   it('should throw an error when no data is returned from the ApiProvider', async () => {
-    ApiProvider.prototype.getPreviewData.mockResolvedValue({});
+    apiProvider.getData.mockResolvedValueOnce();
 
     try {
       await getPreviewPageContext({ solutionId: 'some-solution-id' });

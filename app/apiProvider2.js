@@ -12,6 +12,7 @@ const endpoints = {
     ? `${buyingCatalogueApiHost}/api/v1/Solutions/${options.solutionId}/dashboard`
     : `${buyingCatalogueApiHost}/api/v1/Solutions/${options.solutionId}/dashboard/authority`),
   getSubDashboardData: options => `${buyingCatalogueApiHost}/api/v1/Solutions/${options.solutionId}/dashboards/${options.dashboardId}`,
+  getPreviewData: options => `${buyingCatalogueApiHost}/api/v1/Solutions/${options.solutionId}/preview`,
 };
 
 export const getData = async ({ endpointLocator, options, accessToken }) => {

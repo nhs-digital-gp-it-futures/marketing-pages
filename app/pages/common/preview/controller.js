@@ -1,11 +1,11 @@
 import { ApiProvider } from '../../../apiProvider';
+import { getData } from '../../../apiProvider2';
 import { createPreviewPageContext } from './createPreviewPageContext';
 
 export const getPreviewPageContext = async ({ solutionId, userContextType }) => {
-  const previewDataRaw = await new ApiProvider().getPreviewData({ solutionId });
+  const previewData = await getData({ endpointLocator: 'getPreviewData', options: { solutionId } });
 
-  if (previewDataRaw && previewDataRaw.data) {
-    const previewData = previewDataRaw.data;
+  if (previewData) {
     const context = createPreviewPageContext({ previewData, userContextType });
     return context;
   }
