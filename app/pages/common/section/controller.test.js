@@ -1,11 +1,11 @@
 import { getSectionPageContext, getSectionPageErrorContext, postSection } from './controller';
 import { ManifestProvider } from '../../../manifestProvider';
-import * as apiProvider from '../../../apiProvider2';
+import * as apiProvider from '../../../apiProvider';
 
 jest.mock('../../../manifestProvider');
 jest.mock('../../../logger');
 
-jest.mock('../../../apiProvider2', () => ({
+jest.mock('../../../apiProvider', () => ({
   getData: jest.fn(),
   putData: jest.fn(),
 }));

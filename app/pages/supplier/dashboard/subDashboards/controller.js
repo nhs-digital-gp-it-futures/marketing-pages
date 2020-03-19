@@ -1,5 +1,5 @@
 import { ManifestProvider } from '../../../../manifestProvider';
-import { getData } from '../../../../apiProvider2';
+import { getData } from '../../../../apiProvider';
 import { createDashboardPageContext } from '../../../common/dashboard/createDashboardPageContext';
 
 export const getSubDashboardPageContext = async ({ solutionId, dashboardId }) => {

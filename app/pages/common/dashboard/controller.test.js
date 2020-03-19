@@ -1,11 +1,9 @@
 import { getMarketingPageDashboardContext, postSubmitForModeration } from './controller';
 import { ManifestProvider } from '../../../manifestProvider';
-import * as apiProvider from '../../../apiProvider2';
-import { ApiProvider } from '../../../apiProvider';
+import * as apiProvider from '../../../apiProvider';
 
 jest.mock('../../../manifestProvider');
-jest.mock('../../../apiProvider');
-jest.mock('../../../apiProvider2', () => ({
+jest.mock('../../../apiProvider', () => ({
   getData: jest.fn(),
   putData: jest.fn(),
 }));

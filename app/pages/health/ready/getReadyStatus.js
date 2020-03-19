@@ -1,4 +1,4 @@
-import { getData } from '../../../apiProvider2';
+import { getData } from '../../../apiProvider';
 import { status } from '../status';
 
 export async function getReadyStatus() {

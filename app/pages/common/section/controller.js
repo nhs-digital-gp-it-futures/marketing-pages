@@ -1,5 +1,5 @@
 import { ManifestProvider } from '../../../manifestProvider';
-import { getData, putData } from '../../../apiProvider2';
+import { getData, putData } from '../../../apiProvider';
 import { createSectionPageContext } from './createSectionPageContext';
 import { transformSectionData } from './helpers/transformSectionData';
 import { createPostSectionResponse } from './helpers/createPostSectionResponse';

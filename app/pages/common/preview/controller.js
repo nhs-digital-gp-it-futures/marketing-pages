@@ -1,4 +1,4 @@
-import { getData } from '../../../apiProvider2';
+import { getData } from '../../../apiProvider';
 import { createPreviewPageContext } from './createPreviewPageContext';
 
 export const getPreviewPageContext = async ({ solutionId, userContextType }) => {

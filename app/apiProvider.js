@@ -18,7 +18,7 @@ const endpoints = {
   getDocument: options => `${documentApiHost}/api/v1/Solutions/${options.solutionId}/documents/${options.documentName}`,
   // PUT endpoints
   putSectionData: options => `${buyingCatalogueApiHost}/api/v1/Solutions/${options.solutionId}/sections/${options.sectionId}`,
-  putSubmitForModeration: options => `${this.buyingCatalogueApiHost}/api/v1/Solutions/${options.solutionId}/SubmitForReview`,
+  putSubmitForModeration: options => `${buyingCatalogueApiHost}/api/v1/Solutions/${options.solutionId}/SubmitForReview`,
 };
 
 export const getData = async ({ endpointLocator, options, accessToken }) => {
@@ -38,6 +38,6 @@ export const getDocument = (options) => {
 export const putData = async ({ endpointLocator, options, body = {} }) => {
   const endpoint = endpoints[endpointLocator](options);
   logger.info(`api called: [PUT] ${endpoint}: ${JSON.stringify(body)}`);
-  axios.put(endpoint, body);
+  await axios.put(endpoint, body);
   return true;
 };

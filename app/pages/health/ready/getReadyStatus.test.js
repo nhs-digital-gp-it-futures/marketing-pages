@@ -1,8 +1,8 @@
 import { status } from '../status';
 import { getReadyStatus } from './getReadyStatus';
-import * as apiProvider from '../../../apiProvider2';
+import * as apiProvider from '../../../apiProvider';
 
-jest.mock('../../../apiProvider2', () => ({
+jest.mock('../../../apiProvider', () => ({
   getData: jest.fn(),
 }));
 

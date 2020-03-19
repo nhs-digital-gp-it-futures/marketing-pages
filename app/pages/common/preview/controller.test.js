@@ -1,8 +1,7 @@
 import { getPreviewPageContext } from './controller';
-import * as apiProvider from '../../../apiProvider2';
+import * as apiProvider from '../../../apiProvider';
 
-jest.mock('../../../apiProvider');
-jest.mock('../../../apiProvider2', () => ({
+jest.mock('../../../apiProvider', () => ({
   getData: jest.fn(),
   getDocument: jest.fn(),
 }));

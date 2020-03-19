@@ -1,5 +1,5 @@
 import { ManifestProvider } from '../../../manifestProvider';
-import { getData, putData } from '../../../apiProvider2';
+import { getData, putData } from '../../../apiProvider';
 import { createDashboardPageContext } from './createDashboardPageContext';
 
 export const getMarketingPageDashboardContext = async ({
