@@ -1,5 +1,6 @@
 import { ManifestProvider } from '../../../manifestProvider';
 import { ApiProvider } from '../../../apiProvider';
+import { getData } from '../../../apiProvider2';
 import { createSectionPageContext } from './createSectionPageContext';
 import { transformSectionData } from './helpers/transformSectionData';
 import { createPostSectionResponse } from './helpers/createPostSectionResponse';
@@ -13,9 +14,10 @@ export const getSectionPageContext = async ({
     sectionId,
     userContextType,
   });
-  const sectionData = await new ApiProvider().getSectionData({ solutionId, sectionId });
-  if (sectionData && sectionData.data) {
-    const formData = sectionData.data;
+
+  const sectionData = await getData({ endpointLocator: 'getSectionData', options: { solutionId, sectionId } });
+  if (sectionData) {
+    const formData = sectionData;
     const context = createSectionPageContext({
       solutionId, sectionManifest, formData, dashboardId, userContextType,
     });

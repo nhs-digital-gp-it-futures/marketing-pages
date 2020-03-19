@@ -8,25 +8,6 @@ export class ApiProvider {
     this.documentApiHost = documentApiHost;
   }
 
-  async getBuyingCatalogueApiHealth() {
-    const endpoint = `${this.buyingCatalogueApiHost}/health/ready`;
-    logger.info(`api called: [GET] ${endpoint}`);
-    return axios.get(endpoint);
-  }
-
-  async getDocumentApiHealth() {
-    const endpoint = `${this.documentApiHost}/health/ready`;
-    logger.info(`api called: [GET] ${endpoint}`);
-    return axios.get(endpoint);
-  }
-
-  async getSectionData({ solutionId, sectionId }) {
-    const endpoint = `${this.buyingCatalogueApiHost}/api/v1/Solutions/${solutionId}/sections/${sectionId}`;
-    logger.info(`api called: [GET] ${endpoint}`);
-
-    return axios.get(endpoint);
-  }
-
   async putSectionData({ solutionId, sectionId, sectionData }) {
     const endpoint = `${this.buyingCatalogueApiHost}/api/v1/Solutions/${solutionId}/sections/${sectionId}`;
     logger.info(`api called: [PUT] ${endpoint}: ${JSON.stringify(sectionData)}`);

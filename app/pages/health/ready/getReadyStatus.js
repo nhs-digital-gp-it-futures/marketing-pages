@@ -1,16 +1,16 @@
-import { ApiProvider } from '../../../apiProvider';
+import { getData } from '../../../apiProvider2';
 import { status } from '../status';
 
 export async function getReadyStatus() {
   let buyingCatalogueApi;
   let documentApi;
   try {
-    buyingCatalogueApi = (await new ApiProvider().getBuyingCatalogueApiHealth()).data;
+    buyingCatalogueApi = await getData({ endpointLocator: 'getBuyingCatalogueApiHealth' }).data;
   } catch (e) {
     buyingCatalogueApi = status.unhealthy.message;
   }
   try {
-    documentApi = (await new ApiProvider().getDocumentApiHealth()).data;
+    documentApi = await getData({ endpointLocator: 'getDocumentApiHealth' }).data;
   } catch (e) {
     documentApi = status.unhealthy.message;
   }
