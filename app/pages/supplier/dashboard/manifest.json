@@ -1,0 +1,128 @@
+{
+  "id":"marketing-page-dashboard",
+  "title": "listing page – all sections",
+  "mainAdvice": "Explain what your Catalogue Solution is for and how it works. This information will be published on the Buying Catalogue to help buyers understand if it meets their needs.",
+  "additionalAdvice": "Provide as much information as possible for buyers. You can save your progress at any point, but a Catalogue Solution listing page cannot be published until all mandatory fields have been completed.",
+  "sectionGroups": {
+    "about-your-solution": {
+      "title": "About Catalogue Solution",
+      "mainAdvice": "Tell buyers about your Catalogue Solution, describe its features and provide information on how it integrates with NHS systems.",
+      "sections": {
+        "solution-description": {
+          "title": "Solution description",
+          "type": "section",
+          "errorResponse": {
+            "required": "Section contains mandatory information"
+          }
+        },
+        "features": {
+          "title": "Features",
+          "type": "section"
+        },
+        "integrations": {
+          "title": "Integrations",
+          "type": "section"
+        },
+        "implementation-timescales": {
+          "title": "Implementation timescales",
+          "type": "section"
+        },
+        "roadmap": {
+          "title": "Roadmap",
+          "type": "section"
+        }
+      }
+    },
+    "client-application-type": {
+      "title": "Client application type",
+      "mainAdvice": "Let buyers know which types of application will work with your Catalogue Solution.",
+      "sections": {
+        "client-application-types": {
+          "title": "Client application type",
+          "type": "section",
+          "errorResponse": {
+            "required": "Section contains mandatory information"
+          },
+          "sections": {
+            "browser-based": {
+              "title": "Browser-based",
+              "defaultMessage": "Select from client application types",
+              "type": "dashboard",
+              "errorResponse": {
+                "required": "Provide mandatory information for browser-based application"
+              }
+            },
+            "native-mobile": {
+              "title": "Native mobile or tablet",
+              "defaultMessage": "Select from client application types",
+              "type": "dashboard",
+              "errorResponse": {
+                "required": "Provide mandatory information for native mobile or tablet application"
+              }
+            },
+            "native-desktop": {
+              "title": "Native desktop",
+              "defaultMessage": "Select from client application types",
+              "type": "dashboard",
+              "errorResponse": {
+                "required": "Provide mandatory information for native desktop application"
+              }
+            }
+          }
+        }
+      }
+    },
+    "hosting-type": {
+      "title": "Hosting type",
+      "mainAdvice": "Provide information to buyers about how your Catalogue Solution can be hosted.",
+      "sections": {
+        "hosting-type-public-cloud": {
+          "title": "Public cloud",
+          "type": "section"
+        },
+        "hosting-type-private-cloud": {
+          "title": "Private cloud",
+          "type": "section"
+        },
+        "hosting-type-hybrid": {
+          "title": "Hybrid",
+          "type": "section"
+        },
+        "hosting-type-on-premise": {
+          "title": "On premise",
+          "type": "section"
+        }
+      }
+    },
+    "about-your-organisation": {
+      "title": "About organisation",
+      "mainAdvice": "Give details about your organisation and let buyers know how to get in touch.",
+      "sections": {
+        "about-supplier": {
+          "title": "About supplier",
+          "type": "section"
+        },
+        "contact-details": {
+          "title": "Contact details",
+          "type": "section"
+        }
+      }
+    }
+  },
+  "warningAdvice": "All the information provided will be moderated by NHS Digital before it is published on the Buying Catalogue. Future updates to your page must also be submitted for moderation.",
+  "sectionsBox": {
+    "title": "Sections added by NHS Digital",
+    "mainAdvice": "The following sections of your Catalogue Solution page will be completed for you by NHS Digital. The information will be taken from your Catalogue Solution’s framework tender and capabilities assessment.",
+    "sections": [
+      "Price",
+      "Capabilities met",
+      "NHS standards met",
+      "Compliance work-off plans",
+      "Additional services",
+      "Associated services",
+      "Service level information",
+      "Transition timescales",
+      "Framework"
+    ]
+  }
+}

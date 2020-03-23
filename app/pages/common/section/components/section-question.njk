@@ -1,0 +1,45 @@
+{% from 'components/textarea-field/macro.njk' import textareaField %}
+{% from 'components/text-field/macro.njk' import textField %}
+{% from './fields/bulletpoint-list.njk' import bulletpointList %}
+{% from './fields/checkbox-options.njk' import checkboxOptions %}
+{% from './fields/radiobutton-options.njk' import radiobuttonOptions %}
+{% from './fields/combobox-options.njk' import comboboxOptions %}
+
+{% macro sectionQuestion(params) %}
+
+  {% if params.isMultiQuestion %}
+    {% set questionClass = 'nhsuk-u-margin-bottom-3' %}
+  {% else %}
+    {% set questionClass = 'nhsuk-u-margin-bottom-6' %}
+  {% endif %}
+
+  <div data-test-id="section-question-{{ params.question.type }}" class="{{ questionClass }}">
+    {% if (params.question.type === 'bulletpoint-list') %}
+      {{ bulletpointList(params) }}
+    {% endif %}
+
+    {% if (params.question.type === 'textarea-field') %}
+      {{ textareaField(params) }}
+    {% endif %}
+
+    {% if (params.question.type === 'textarea-field-csv') %}
+      {{ textareaField(params) }}
+    {% endif %}
+
+    {% if (params.question.type === 'text-field') %}
+      {{ textField(params) }}
+    {% endif %}
+
+    {% if (params.question.type === 'checkbox-options') %}
+      {{ checkboxOptions(params) }}
+    {% endif %}
+
+    {% if (params.question.type === 'radiobutton-options') %}
+      {{ radiobuttonOptions(params) }}
+    {% endif %}
+
+    {% if (params.question.type === 'combobox-options') %}
+      {{ comboboxOptions(params) }}
+    {% endif %}
+  </div>
+{% endmacro %}

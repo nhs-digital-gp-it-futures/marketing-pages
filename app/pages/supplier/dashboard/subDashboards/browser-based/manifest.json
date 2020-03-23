@@ -1,0 +1,37 @@
+{
+  "id":"browser-based-dashboard-page",
+  "title": "Browser-based application – all sections",
+  "mainAdvice": "Provide information about your browser-based Catalogue Solution.",
+  "sectionGroups": {
+    "browser-based-sections": {
+      "title": "Browser-based information",
+      "mainAdvice": "Let buyers know the minimum recommended technical specification to implement your Catalogue Solution effectively.",
+      "sections": {
+        "browser-browsers-supported": {
+          "title": "Supported browsers",
+          "type": "section"
+        },
+        "browser-mobile-first": {
+          "title": "Mobile first approach",
+          "type": "section"
+        },
+        "browser-plug-ins-or-extensions": {
+          "title": "Plug-ins or extensions required",
+          "type": "section"
+        },
+        "browser-connectivity-and-resolution": {
+          "title": "Connectivity and resolution",
+          "type": "section"
+        },
+        "browser-hardware-requirements": {
+          "title": "Hardware requirements",
+          "type": "section"
+        },
+        "browser-additional-information": {
+          "title": "Additional information",
+          "type": "section"
+        }
+      }
+    }
+  }
+}

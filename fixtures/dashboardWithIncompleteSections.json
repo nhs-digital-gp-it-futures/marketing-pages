@@ -1,6 +1,7 @@
 {
   "id": "S100000-001",
   "name": "Write on Time",
+  "supplier-name": "Really Kool Corp.",
   "sections": {
     "solution-description": {
       "requirement": "Mandatory",
@@ -10,24 +11,40 @@
       "requirement": "Optional",
       "status": "INCOMPLETE"
     },
+    "integrations": {
+      "requirement": "Optional",
+      "status": "INCOMPLETE"
+    },
+    "implementation-timescales": {
+      "requirement": "Optional",
+      "status": "INCOMPLETE"
+    },
     "client-application-types": {
       "requirement": "Mandatory",
       "status": "INCOMPLETE",
       "sections": {}
     },
-    "public-cloud": {
+    "hosting-type-public-cloud": {
       "requirement": "Optional",
       "status": "INCOMPLETE"
     },
-    "private-cloud": {
+    "hosting-type-private-cloud": {
       "requirement": "Optional",
       "status": "INCOMPLETE"
     },
-    "hybrid": {
+    "hosting-type-hybrid": {
       "requirement": "Optional",
       "status": "INCOMPLETE"
     },
-    "on-premise": {
+    "hosting-type-on-premise": {
+      "requirement": "Optional",
+      "status": "INCOMPLETE"
+    },
+    "roadmap": {
+      "requirement": "Optional",
+      "status": "INCOMPLETE"
+    },
+    "about-supplier": {
       "requirement": "Optional",
       "status": "INCOMPLETE"
     },

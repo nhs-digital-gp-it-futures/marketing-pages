@@ -1,0 +1,21 @@
+{
+  "id": "browser-mobile-first",
+  "title": "Browser-based application – mobile first approach",
+  "mainAdvice": "Let buyers know about the design concepts of your Catalogue Solution.",
+  "questions": {
+    "mobile-first-design": {
+      "mainAdvice": "Mobile first approach",
+      "additionalAdvice": "Is your Catalogue Solution designed with a mobile first approach?",
+      "type": "radiobutton-options",
+      "options": {
+        "Yes": "Yes",
+        "No": "No"
+      },
+      "errorResponse": {
+        "required": "Select yes if you followed a mobile first approach"
+      }
+    }
+  },
+  "submitText" : "Save and return",
+  "successfulSubmitResponsePath" : "dashboard/browser-based"
+}

@@ -1,0 +1,37 @@
+{
+  "id": "native-mobile-memory-and-storage",
+  "title": "Native mobile and tablet application – memory and storage",
+  "mainAdvice": "Let buyers know the minimum requirements for your Catalogue Solution to function.",
+  "questions": {
+    "minimum-memory-requirement": {
+      "mainAdvice": "Memory size",
+      "additionalAdvice": "Select the minimum memory size required for your Catalogue Solution to function.",
+      "type": "combobox-options",
+      "options": {
+        "": "Please select",
+        "256MB": "256MB",
+        "512MB": "512MB",
+        "1GB": "1GB",
+        "2GB": "2GB",
+        "4GB": "4GB",
+        "8GB": "8GB",
+        "16GB or higher": "16GB or higher"
+      },
+      "errorResponse": {
+        "required": "Select a minimum memory size"
+      }
+    },
+    "storage-requirements-description": {
+      "mainAdvice": "Storage space",
+      "additionalAdvice": "Provide information about how much storage space a device will need to use your Catalogue Solution.",
+      "footerAdvice": "(Maximum number of characters 300)",
+      "type": "textarea-field",
+      "errorResponse": {
+        "required": "Enter storage space information",
+        "maxLength": "Storage space response must be 300 characters or fewer"
+      }
+    }
+  },
+  "submitText" : "Save and return",
+  "successfulSubmitResponsePath" : "dashboard/native-mobile"
+}

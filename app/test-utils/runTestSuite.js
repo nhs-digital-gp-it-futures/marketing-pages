@@ -9,9 +9,10 @@ export const runTestSuite = async ({
   sectionId,
   dashboardId,
   errorPostBodyData,
+  userContextType = 'supplier',
 }) => {
-  const clientUrl = dashboardId ? `${clientLocalhost}/dashboard/${dashboardId}/section/${sectionId}`
-    : `${clientLocalhost}/section/${sectionId}`;
+  const clientUrl = dashboardId ? `${clientLocalhost}/${userContextType}/solution/S100000-001/dashboard/${dashboardId}/section/${sectionId}`
+    : `${clientLocalhost}/${userContextType}/solution/S100000-001/section/${sectionId}`;
 
   const mocks = async (responseStatus, responseBody) => {
     await nock(apiLocalhost)
@@ -28,7 +29,7 @@ export const runTestSuite = async ({
     await t.navigateTo(clientUrl);
   };
 
-  const sectionManifest = new ManifestProvider().getSectionManifest({ sectionId, dashboardId });
+  const sectionManifest = new ManifestProvider().getSectionManifest({ sectionId, dashboardId, userContextType });
 
   fixture(`Show ${sectionManifest.title} page`);
 
@@ -39,6 +40,7 @@ export const runTestSuite = async ({
       sectionId,
       data,
       dashboardId,
+      userContextType,
     }),
     runQuestionTests({
       pageSetup,

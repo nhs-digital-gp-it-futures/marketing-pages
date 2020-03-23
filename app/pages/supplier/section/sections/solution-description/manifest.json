@@ -1,0 +1,37 @@
+{
+  "id": "solution-description",
+  "title": "Catalogue Solution description",
+  "mainAdvice": "Give buyers as much detail as possible about your Catalogue Solution.",
+  "questions": {
+    "summary": {
+      "mainAdvice": "Summary",
+      "additionalAdvice": "Provide a brief overview of your Catalogue Solution.",
+      "footerAdvice": "(Maximum number of characters 300)",
+      "type": "textarea-field",
+      "errorResponse": {
+        "maxLength": "Summary must be 300 characters or fewer",
+        "required": "Enter a summary"
+      }
+    },
+    "description": {
+      "mainAdvice": "Full description (optional)",
+      "additionalAdvice": "Provide a more detailed description of your Catalogue Solution, for example how it can be used and how it benefits users.",
+      "footerAdvice": "(Maximum number of characters 1,000)",
+      "type": "textarea-field",
+      "rows": 17,
+      "errorResponse": {
+        "maxLength": "Full description must be 1,000 characters or fewer"
+      }
+    },
+    "link": {
+      "mainAdvice": "Link to more information (optional)",
+      "additionalAdvice": "Provide a URL to a page that gives buyers further information about your Catalogue Solution.",
+      "footerAdvice": "(Maximum number of characters 1,000)",
+      "type": "text-field",
+      "errorResponse": {
+        "maxLength": "Link to more information must be 1,000 characters or fewer"
+      }
+    }
+  },
+  "submitText" : "Save and return"
+}

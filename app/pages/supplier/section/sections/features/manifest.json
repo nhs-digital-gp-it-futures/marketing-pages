@@ -1,0 +1,18 @@
+{
+  "id": "features",
+  "title": "Catalogue Solution features",
+  "mainAdvice": "Highlight to buyers the key features of your Catalogue Solution.",
+  "questions": {
+    "listing": {
+      "mainAdvice": "Features list (optional)",
+      "additionalAdvice": "List up to 10 key features provided by your Catalogue Solution that meet needs in primary care, for example how it can help manage information and resources.",
+      "footerAdvice": "(Maximum number of characters 100)",
+      "type": "bulletpoint-list",
+      "maxItems": 10,
+      "errorResponse": {
+        "maxLength": "Feature description must be 100 characters or fewer"
+      }
+    }
+  },
+  "submitText" : "Save and return"
+}

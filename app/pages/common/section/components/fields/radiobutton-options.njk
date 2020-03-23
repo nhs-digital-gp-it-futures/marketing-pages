@@ -1,0 +1,58 @@
+{% from 'components/radios/macro.njk' import radios %}
+
+{% macro radiobuttonOptions(params) %}
+
+  {% if params.isMultiQuestion %}
+    {% set mainAdviceClasses = 'nhsuk-u-font-size-19 nhsuk-u-font-weight-bold nhsuk-u-margin-bottom-2' %}
+  {% else %}
+    {% set mainAdviceClasses = 'nhsuk-u-font-size-24 nhsuk-u-font-weight-bold nhsuk-u-margin-bottom-2' %}
+  {% endif %}
+
+  {% if params.question.additionalAdvice %}
+    {% set errorHint = {
+      "text": params.question.additionalAdvice,
+      "classes": 'nhsuk-u-margin-bottom-1 nhsuk-u-margin-top-0'
+    } %}
+    {% set hint = {
+      "text": params.question.additionalAdvice,
+      "classes": 'nhsuk-u-margin-bottom-3 nhsuk-u-margin-top-0'
+    } %}
+  {% endif %}
+
+  <div id="{{ params.question.id }}" data-test-id="question-{{ params.question.id }}">
+    {% if (params.question.error) %}
+      <div data-test-id="radiobutton-options-error">
+        {{ radios({
+          "idPrefix": params.question.id,
+          "name": params.question.id,
+          "errorMessage": {
+            "text": params.question.error.message
+          },
+          "fieldset": {
+            "legend": {
+              "text": params.question.mainAdvice,
+              "classes": mainAdviceClasses
+            }
+          },
+          "hint": errorHint,
+          "items": params.question.options
+        }) }}
+      </div>
+    {% else %}
+      <div data-test-id="radiobutton-options">
+        {{ radios({
+          "idPrefix": params.question.id,
+          "name": params.question.id,
+          "fieldset": {
+            "legend": {
+              "text": params.question.mainAdvice,
+              "classes": mainAdviceClasses
+            }
+          },
+          "hint": hint,
+          "items": params.question.options
+        }) }}
+      </div>
+    {% endif %}
+  </div>
+{% endmacro %}

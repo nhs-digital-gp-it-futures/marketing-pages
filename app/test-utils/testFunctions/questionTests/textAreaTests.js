@@ -1,18 +1,20 @@
 import { Selector } from 'testcafe';
+import { extractInnerText } from '../../helper';
 
 const textAreaTest = async ({ pageSetup, sectionManifest, questionId }) => {
   await test(`should render the ${questionId} text area question`, async (t) => {
     await pageSetup({ t });
     const renderedQuestion = Selector(`[data-test-id="question-${questionId}"]`);
     const expectedQuestion = sectionManifest.questions[questionId];
-    const labelText = await renderedQuestion.find('label.nhsuk-label').innerText;
-    const hintText = await renderedQuestion.find('span.nhsuk-hint').innerText;
-    const footerText = await renderedQuestion.find('[data-test-id="textarea-field-footer"]').innerText;
+    const label = renderedQuestion.find('label.nhsuk-label');
+    const hint = await renderedQuestion.find('span.nhsuk-hint');
+    const footer = await renderedQuestion.find('[data-test-id="textarea-field-footer"]');
+
     await t
-      .expect(labelText.trim()).eql(expectedQuestion.mainAdvice)
-      .expect(hintText.trim()).eql(expectedQuestion.additionalAdvice)
+      .expect(await extractInnerText(label)).eql(expectedQuestion.mainAdvice)
+      .expect(await extractInnerText(hint)).eql(expectedQuestion.additionalAdvice)
       .expect(renderedQuestion.find('textarea').count).eql(1)
-      .expect(footerText.trim()).eql(expectedQuestion.footerAdvice);
+      .expect(await extractInnerText(footer)).eql(expectedQuestion.footerAdvice);
   });
 };
 

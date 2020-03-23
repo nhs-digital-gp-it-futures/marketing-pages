@@ -1,0 +1,74 @@
+{% from 'components/label/macro.njk' import label %}
+{% from 'components/input/macro.njk' import input %}
+
+{% macro bulletpointList(params) %}
+
+  {% if params.isMultiQuestion %}
+    {% set mainAdviceClasses = 'nhsuk-u-font-size-19 nhsuk-u-font-weight-bold bc-u-inline-block nhsuk-u-margin-bottom-2' %}
+  {% else %}
+    {% set mainAdviceClasses = 'nhsuk-u-font-size-24 nhsuk-u-font-weight-bold bc-u-inline-block nhsuk-u-margin-bottom-2' %}
+  {% endif %}
+
+  <div data-test-id="question-{{ params.question.id }}">
+
+    <div data-test-id="bulletpoint-list-main-advice">
+      <span class="{{ mainAdviceClasses }}">
+        {{ params.question.mainAdvice }}
+      </span>
+    </div>
+
+    {% if params.question.additionalAdvice %}
+      <span data-test-id="bulletpoint-list-additional-advice" class="nhsuk-hint nhsuk-u-margin-bottom-3">
+        {{ params.question.additionalAdvice }}
+      </span>
+    {% endif %}
+
+    <div data-test-id="bulletpoint-list-fields">
+      {% for field in params.question.fields %}
+          {% if (field.error) %}
+            <div data-test-id="field-error-{{ field.id }}">
+              {{ label({
+                "text": params.question.id + ' ' + loop.index,
+                "classes": "nhsuk-u-visually-hidden",
+                "for": field.id
+              }) }}
+              {{ input({
+                "id": field.id,
+                "name": params.question.id,
+                "value": field.data,
+                "classes": "nhsuk-input--width-30",
+                "errorMessage": {
+                  "text": field.error.message
+                },
+                "formGroup": {
+                  "classes": "nhsuk-u-margin-bottom-2"
+                }
+              }) }}
+            </div>
+          {% else %}
+            <div data-test-id="field-{{ field.id }}">
+              {{ label({
+                "text": params.question.id + ' ' + loop.index,
+                "classes": "nhsuk-u-visually-hidden",
+                "for": field.id
+              }) }}
+              {{ input({
+                "id": field.id,
+                "name": params.question.id,
+                "value": field.data,
+                "classes": "nhsuk-input--width-30",
+                "formGroup": {
+                  "classes": "nhsuk-u-margin-bottom-2"
+                }
+              }) }}
+            </div>
+          {% endif %}
+        <div data-test-id="bulletpoint-list-footer">
+          <span class="nhsuk-label bc-t-font-color--grey-1 nhsuk-u-font-size-16 nhsuk-u-margin-bottom-3">
+            {{ params.question.footerAdvice }}
+          </span>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endmacro %}

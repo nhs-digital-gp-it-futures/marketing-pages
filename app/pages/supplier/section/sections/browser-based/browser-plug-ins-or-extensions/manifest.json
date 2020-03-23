@@ -1,0 +1,30 @@
+{
+  "id": "browser-plug-ins-or-extensions",
+  "title": "Browser-based application – plug-ins or extensions required",
+  "mainAdvice": "Let buyers know if any plug-ins or extensions are needed to use your Catalogue Solution.",
+  "questions": {
+    "plugins-required": {
+      "mainAdvice": "Plug-ins or extensions required",
+      "additionalAdvice": "Does a device using your Catalogue Solution require plug-ins or extensions that customise its browsers or software to function?",
+      "type": "radiobutton-options",
+      "options": {
+        "Yes": "Yes",
+        "No": "No"
+      },
+      "errorResponse": {
+        "required": "Select yes if any plug-ins or extensions are required"
+      }
+    },
+    "plugins-detail": {
+      "mainAdvice": "Additional information (optional)",
+      "additionalAdvice": "If your Catalogue Solution uses plug-ins or extensions, provide more information about them for buyers.",
+      "type": "textarea-field",
+      "errorResponse": {
+        "maxLength": "Additional information must be 500 characters or fewer"
+      },
+      "footerAdvice": "(Maximum number of characters 500)"
+    }
+  },
+  "submitText" : "Save and return",
+  "successfulSubmitResponsePath" : "dashboard/browser-based"
+}

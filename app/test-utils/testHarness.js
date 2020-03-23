@@ -1,26 +1,40 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import express from 'express';
+import request from 'supertest';
+import cheerio from 'cheerio';
 import nunjucks from 'nunjucks';
-import { App } from '../../app';
+import { App } from '../app';
 
-export const testHarness = () => {
+const testFunction = ({ setup, done }) => {
   const app = new App().createApp();
   const router = express.Router();
 
+  const macroWrapper = setup.component ? `{% from '${setup.component.path}' import ${setup.component.name} %}
+                      {{ ${setup.component.name}(params) }}` : '';
+
   return {
-    createComponentDummyApp(template, context) {
+    request: (context, callback) => {
       const dummyRouter = router.get('/', (req, res) => {
-        res.render(template, context);
+        if (setup.template) {
+          res.render(setup.template.path, context);
+        } else {
+          const viewToTest = nunjucks.renderString(macroWrapper, context);
+          res.send(viewToTest);
+        }
       });
       app.use(dummyRouter);
-      return app;
-    },
-    createTemplateDummyApp(template, context) {
-      const dummyRouter = router.get('/', (req, res) => {
-        const viewToTest = nunjucks.renderString(template, context);
-        res.send(viewToTest);
+
+      request(app).get('/').then((response) => {
+        callback(cheerio.load(response.text));
+        done();
       });
-      app.use(dummyRouter);
-      return app;
     },
   };
+};
+
+export const createTestHarness = (setup, callback) => (done) => {
+  callback(testFunction({
+    setup,
+    done,
+  }));
 };

@@ -1,5 +1,5 @@
 import createTestcafe from 'testcafe';
-import { App } from './app';
+import { App } from './app/app';
 import routes from './app/routes';
 import { env } from './app/config';
 
@@ -23,6 +23,7 @@ if (env === 'pipeline' || browserFromArgs.length > 0) {
   quarantineMode = false;
 }
 
+// eslint-disable-next-line no-console
 console.log(`Running tests in ${concurrency} threads\nstopOnFirstFail is ${stopOnFirstFail}\nquarantineMode is ${quarantineMode}`);
 
 createTestcafe('localhost')

@@ -1,0 +1,60 @@
+{% from 'components/select/macro.njk' import select %}
+
+{% macro comboboxOptions(params) %}
+
+  {% if params.isMultiQuestion %}
+    {% set mainAdviceClasses = 'nhsuk-u-font-size-19 nhsuk-u-font-weight-bold nhsuk-u-margin-bottom-2' %}
+  {% else %}
+    {% set mainAdviceClasses = 'nhsuk-u-font-size-24 nhsuk-u-font-weight-bold nhsuk-u-margin-bottom-2' %}
+  {% endif %}
+
+  {% if params.question.additionalAdvice %}
+    {% set errorHint = {
+      "text": params.question.additionalAdvice,
+      "classes": 'nhsuk-u-margin-bottom-1'
+    } %}
+    {% set hint = {
+      "text": params.question.additionalAdvice,
+      "classes": 'nhsuk-u-margin-bottom-3'
+    } %}
+  {% endif %}
+
+  <div data-test-id="question-{{ params.question.id }}">
+    {% if (params.question.error) %}
+      <div data-test-id="combobox-options-error">
+        {{ select({
+          "id": params.question.id,
+          "name": params.question.id,
+          "label": {
+            "text": params.question.mainAdvice,
+            "classes": mainAdviceClasses
+          },
+          "hint": errorHint,
+          "errorMessage": {
+            "text": params.question.error.message
+          },
+          "items": params.question.options,
+          "formGroup": {
+            "classes": "nhsuk-u-margin-bottom-2"
+          }
+        }) }}
+      </div>
+    {% else %}
+      <div data-test-id="combobox-options">
+        {{ select({
+          "id": params.question.id,
+          "name": params.question.id,
+          "label": {
+            "text": params.question.mainAdvice,
+            "classes": mainAdviceClasses
+          },
+          "hint": hint,
+          "items": params.question.options,
+          "formGroup": {
+            "classes": "nhsuk-u-margin-bottom-2"
+          }
+        }) }}
+      </div>
+    {% endif %}
+  </div>
+{% endmacro %}

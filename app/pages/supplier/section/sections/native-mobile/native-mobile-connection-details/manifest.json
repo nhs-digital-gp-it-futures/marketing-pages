@@ -1,0 +1,52 @@
+{
+  "id": "native-mobile-connection-details",
+  "title": "Native mobile or tablet application – connectivity",
+  "mainAdvice": "Let buyers know about your Catalogue Solution’s connection requirements.",
+  "questions": {
+    "minimum-connection-speed": {
+      "mainAdvice": "Connection speed (optional)",
+      "additionalAdvice": "Select the minimum bandwidth required for your Catalogue Solution to function.",
+      "type": "combobox-options",
+      "options": {
+        "": "Please select",
+        "0.5Mbps": "0.5Mbps",
+        "1Mbps": "1Mbps",
+        "1.5Mbps": "1.5Mbps",
+        "2Mbps": "2Mbps",
+        "3Mbps": "3Mbps",
+        "5Mbps": "5Mbps",
+        "8Mbps": "8Mbps",
+        "10Mbps": "10Mbps",
+        "15Mbps": "15Mbps",
+        "20Mbps": "20Mbps",
+        "30Mbps": "30Mbps",
+        "Higher than 30Mbps": "Higher than 30Mbps"
+      }
+    },
+    "connection-types": {
+      "mainAdvice": "Connection types supported (optional)",
+      "additionalAdvice": "Select all of the connection types that will work with your Catalogue Solution.",
+      "type": "checkbox-options",
+      "options": {
+        "GPRS": "GPRS",
+        "3G": "3G",
+        "LTE": "LTE",
+        "4G": "4G",
+        "5G": "5G",
+        "Bluetooth": "Bluetooth",
+        "Wifi": "Wifi"
+      }
+    },
+    "connection-requirements-description": {
+      "mainAdvice": "Connection requirements (optional)",
+      "additionalAdvice": "Provide information on any connection requirements for your Catalogue Solution.",
+      "footerAdvice": "(Maximum number of characters 300)",
+      "type": "textarea-field",
+      "errorResponse": {
+        "maxLength": "Connection requirements must be 300 characters or fewer"
+      }
+    }
+  },
+  "submitText" : "Save and return",
+  "successfulSubmitResponsePath" : "dashboard/native-mobile"
+}

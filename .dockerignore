@@ -1,0 +1,15 @@
+coverage
+node_modules
+fixtures
+public
+npm-debug.log
+Dockerfile
+**/*.test.js
+**/test-utils
+**/testcafeRunner.js
+**/*.md
+**/webpack.config.js
+**/*docker**
+**/*.xml
+*.yml
+*.yaml

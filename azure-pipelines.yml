@@ -3,25 +3,28 @@
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
+variables:
+  dockerVersion: '19.03.5'
+
 trigger:
 - master
 - development
 
-# no PR builds on this file
+# PR builds only when against these branches
 pr:
 - master
 - development
 
 pool:
-  vmImage: 'ubuntu-latest'
+  name: GP IT Futures AKS Build Agents
 
-jobs: 
+jobs:
 - job: buildAndTest
   displayName: Build app and run tests
   steps:
   - task: NodeTool@0
     inputs:
-      versionSpec: '10.x'
+      versionSpec: '12.x'
     displayName: 'Install Node.js'
 
   - script: |
@@ -65,9 +68,10 @@ jobs:
   condition: and(succeeded(), not(eq(variables['build.reason'], 'PullRequest')))
   dependsOn: buildAndTest
   steps:
+
   - task: DockerInstaller@0
     inputs:
-      dockerVersion: '18.09.9'
+      dockerVersion: $(dockerVersion)
 
   - task: DockerCompose@0
     displayName: 'Build: Dev'
@@ -75,8 +79,9 @@ jobs:
       containerregistrytype: 'Azure Container Registry'
       azureSubscription: 'NHSAPP-BuyingCatalogue (Non-Prod)'
       azureContainerRegistry: '{"loginServer":"gpitfuturesdevacr.azurecr.io", "id" : "/subscriptions/7b12a8a2-f06f-456f-b6f9-aa2d92e0b2ec/resourceGroups/gpitfutures-dev-rg-acr/providers/Microsoft.ContainerRegistry/registries/gpitfuturesdevacr"}'
-      dockerComposeFile: '**/docker-compose.yml'
+      dockerComposeFile: '**/docker-compose-build.yml'
       action: 'Build services'
+      includeSourceTags: true
 
   - task: DockerCompose@0
     displayName: 'Push: Dev'
@@ -84,59 +89,55 @@ jobs:
       containerregistrytype: 'Azure Container Registry'
       azureSubscription: 'NHSAPP-BuyingCatalogue (Non-Prod)'
       azureContainerRegistry: '{"loginServer":"gpitfuturesdevacr.azurecr.io", "id" : "/subscriptions/7b12a8a2-f06f-456f-b6f9-aa2d92e0b2ec/resourceGroups/gpitfutures-dev-rg-acr/providers/Microsoft.ContainerRegistry/registries/gpitfuturesdevacr"}'
-      dockerComposeFile: '**/docker-compose.yml'
+      dockerComposeFile: '**/docker-compose-build.yml'
       action: 'Push services'
+      includeSourceTags: true
 
   - task: DockerCompose@0
     displayName: 'Build: Test'
+    condition: and(succeeded(), ne(variables['build.reason'], 'PullRequest'))
     inputs:
       containerregistrytype: 'Azure Container Registry'
       azureSubscription: 'NHSAPP-BuyingCatalogue (Non-Prod)'
       azureContainerRegistry: '{"loginServer":"gpitfuturestestacr.azurecr.io", "id" : "/subscriptions/7b12a8a2-f06f-456f-b6f9-aa2d92e0b2ec/resourceGroups/gpitfutures-test-rg-acr/providers/Microsoft.ContainerRegistry/registries/gpitfuturestestacr"}'
-      dockerComposeFile: '**/docker-compose.yml'
+      dockerComposeFile: '**/docker-compose-build.yml'
       action: 'Build services'
+      additionalImageTags: '$(Build.BuildNumber)'
+      includeSourceTags: true
 
   - task: DockerCompose@0
     displayName: 'Push: Test'
+    condition: and(succeeded(), ne(variables['build.reason'], 'PullRequest'))
     inputs:
       containerregistrytype: 'Azure Container Registry'
       azureSubscription: 'NHSAPP-BuyingCatalogue (Non-Prod)'
       azureContainerRegistry: '{"loginServer":"gpitfuturestestacr.azurecr.io", "id" : "/subscriptions/7b12a8a2-f06f-456f-b6f9-aa2d92e0b2ec/resourceGroups/gpitfutures-test-rg-acr/providers/Microsoft.ContainerRegistry/registries/gpitfuturestestacr"}'
-      dockerComposeFile: '**/docker-compose.yml'
+      dockerComposeFile: '**/docker-compose-build.yml'
       action: 'Push services'
+      additionalImageTags: '$(Build.BuildNumber)'
+      includeSourceTags: true
 
-  - task: DockerCompose@0
-    displayName: 'Build: PreProd'
-    inputs:
-      containerregistrytype: 'Azure Container Registry'
-      azureSubscription: 'NHSAPP-BuyingCatalogue (Non-Prod)'
-      azureContainerRegistry: '{"loginServer":"gpitfuturespprodacr.azurecr.io", "id" : "/subscriptions/7b12a8a2-f06f-456f-b6f9-aa2d92e0b2ec/resourceGroups/gpitfutures-pprod-rg-acr/providers/Microsoft.ContainerRegistry/registries/gpitfuturespprodacr"}'
-      dockerComposeFile: '**/docker-compose.yml'
-      action: 'Build services'
-
-  - task: DockerCompose@0
-    displayName: 'Push: PreProd'
-    inputs:
-      containerregistrytype: 'Azure Container Registry'
-      azureSubscription: 'NHSAPP-BuyingCatalogue (Non-Prod)'
-      azureContainerRegistry: '{"loginServer":"gpitfuturespprodacr.azurecr.io", "id" : "/subscriptions/7b12a8a2-f06f-456f-b6f9-aa2d92e0b2ec/resourceGroups/gpitfutures-pprod-rg-acr/providers/Microsoft.ContainerRegistry/registries/gpitfuturespprodacr"}'
-      dockerComposeFile: '**/docker-compose.yml'
-      action: 'Push services'
 
   - task: DockerCompose@0
     displayName: 'Build: Prod'
+    condition: and(succeeded(), ne(variables['build.reason'], 'PullRequest'))
     inputs:
       containerregistrytype: 'Azure Container Registry'
       azureSubscription: 'NHSAPP-BuyingCatalogue (Prod)'
       azureContainerRegistry: '{"loginServer":"gpitfuturesprodacr.azurecr.io", "id" : "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-acr/providers/Microsoft.ContainerRegistry/registries/gpitfuturesprodacr"}'
-      dockerComposeFile: '**/docker-compose.yml'
+      dockerComposeFile: '**/docker-compose-build.yml'
       action: 'Build services'
+      additionalImageTags: '$(Build.BuildNumber)'
+      includeSourceTags: true
 
   - task: DockerCompose@0
     displayName: 'Push: Prod'
+    condition: and(succeeded(), ne(variables['build.reason'], 'PullRequest'))
     inputs:
       containerregistrytype: 'Azure Container Registry'
       azureSubscription: 'NHSAPP-BuyingCatalogue (Prod)'
       azureContainerRegistry: '{"loginServer":"gpitfuturesprodacr.azurecr.io", "id" : "/subscriptions/d1be8dbc-1a9f-4b7b-ba51-037116110e00/resourceGroups/gpitfutures-prod-rg-acr/providers/Microsoft.ContainerRegistry/registries/gpitfuturesprodacr"}'
-      dockerComposeFile: '**/docker-compose.yml'
+      dockerComposeFile: '**/docker-compose-build.yml'
       action: 'Push services'
+      additionalImageTags: '$(Build.BuildNumber)'
+      includeSourceTags: true

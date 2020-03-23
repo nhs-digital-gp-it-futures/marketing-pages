@@ -1,0 +1,77 @@
+{% extends 'includes/layout.njk' %}
+{% from 'components/back-link/macro.njk' import backLink %}
+{% from 'components/button/macro.njk' import button %}
+{% from './components/section-question.njk' import sectionQuestion %}
+{% from './components/multi-question.njk' import multiQuestion %}
+{% from '../../../common/components/error-summary/macro.njk' import errorSummary %}
+{% from 'components/view-expandable-section/macro.njk' import viewExpandableSection %}
+
+{% block body %}
+<div class="nhsuk-grid-row">
+  <div class="nhsuk-grid-column-full nhsuk-u-margin-bottom-3">
+    <div data-test-id="section-back-link">
+      {{ backLink({
+        "href": returnToDashboardUrl,
+        "text": "Return to all sections"
+      }) }}
+    </div>
+  </div>
+  <div class="nhsuk-grid-column-two-thirds">
+    {% if (errors.length > 0) %}
+      {{ errorSummary({
+        errors: errors
+      }) }}
+    {% endif %}
+
+    <div class="nhsuk-u-margin-top-5 nhsuk-u-margin-bottom-7">
+      <h1 data-test-id="section-title" class="nhsuk-u-margin-bottom-3">{{ title }}</h1>
+      <h2 data-test-id="section-main-advice" class="nhsuk-u-font-size-22">{{ mainAdvice }}</h2>
+      <div data-test-id="section-additional-advice">
+        {% for advice in additionalAdvice %}
+          <p>
+            {{ advice }}
+          </p>
+        {% endfor %}
+      </div>
+    </div>
+
+    <form method="post">
+      {% for question in questions %}
+        {% if question.type === 'multi-question' %}
+          {{ multiQuestion({
+            parentQuestion: question
+          }) }}
+        {% else %}
+          {{ sectionQuestion({
+            question: question
+          }) }}
+        {% endif %}
+      {% endfor %}
+
+      {% if (warningAdvice) %}
+        <div data-test-id="section-warning-advice" class="nhsuk-inset-text nhsuk-u-padding-top-2 nhsuk-u-padding-right-4 nhsuk-u-padding-bottom-2 nhsuk-u-padding-left-4 nhsuk-u-margin-top-5 nhsuk-u-margin-bottom-6">
+          <span class="nhsuk-u-visually-hidden">Information: </span>
+          <p class="nhsuk-u-font-size-14">{{ warningAdvice }}</p>
+        </div>
+      {% endif %}
+
+      {% if (expandableAdvice) %}
+        <div data-test-id="section-expandable-advice">
+          {{ viewExpandableSection({
+              title: expandableAdvice.title,
+              innerComponent: expandableAdvice.description | stringArrayToParagraphs,
+              classes: 'bc-c-expandable__text--border-left-blue'
+            }) }}
+        </div>
+      {% endif %}
+
+      <div data-test-id="section-submit-button" class="nhsuk-u-margin-top-7">
+        {{ button({
+          "text": submitText
+        }) }}
+      </div>
+    </form>
+
+  </div>
+</div>
+{% endblock %}

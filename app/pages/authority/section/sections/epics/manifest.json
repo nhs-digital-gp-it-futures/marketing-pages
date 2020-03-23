@@ -1,0 +1,14 @@
+{
+  "id": "epics",
+  "title": "Epics",
+  "mainAdvice": "Epics this solution meets.",
+  "questions": {
+    "epics": {
+      "mainAdvice": "Paste the csv here",
+      "additionalAdvice": "If you paste nothing you get nothing",
+      "type": "textarea-field-csv",
+      "footerAdvice": "CSV file headings required: 'Epic ID' and 'Epic Final Assessment Result'"
+    }
+  },
+  "submitText" : "Save and return"
+}

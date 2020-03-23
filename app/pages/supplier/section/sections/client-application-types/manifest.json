@@ -1,0 +1,21 @@
+{
+  "id": "client-application-types",
+  "title": "Client application type",
+  "mainAdvice": "Let buyers know which types of application will work with your Catalogue Solution.",
+  "questions": {
+    "client-application-types": {
+      "mainAdvice": "Client application types supported",
+      "additionalAdvice": "Select at least one client application type. You’ll need to provide further information for each type you select.",
+      "type": "checkbox-options",
+      "options": {
+        "browser-based": "Browser-based",
+        "native-mobile": "Native mobile or tablet",
+        "native-desktop": "Native desktop"
+      },
+      "errorResponse": {
+        "required": "Select at least one client application type"
+      }
+    }
+  },
+  "submitText" : "Save and return"
+}

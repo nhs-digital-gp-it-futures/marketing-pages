@@ -1,0 +1,102 @@
+{
+  "id": "contact-details",
+  "title": "Contact details",
+  "mainAdvice": "Help buyers get in touch about your Catalogue Solution.",
+  "questions": {
+    "contact-1": {
+      "mainAdvice": "Contact 1 (optional)",
+      "additionalAdvice": "Provide some or all of the following information about an individual or department at your organisation.",
+      "type": "multi-question",
+      "questions": {
+        "first-name": {
+          "mainAdvice": "First name",
+          "footerAdvice": "(Maximum number of characters 35)",
+          "type": "text-field",
+          "errorResponse": {
+            "maxLength": "First name must be 35 characters or fewer"
+          }
+        },
+        "last-name": {
+          "mainAdvice": "Last name",
+          "footerAdvice": "(Maximum number of characters 35)",
+          "type": "text-field",
+          "errorResponse": {
+            "maxLength": "Last name must be 35 characters or fewer"
+          }
+        },
+        "department-name": {
+          "mainAdvice": "Department name",
+          "footerAdvice": "(Maximum number of characters 50)",
+          "type": "text-field",
+          "errorResponse": {
+            "maxLength": "Department name must be 50 characters or fewer"
+          }
+        },
+        "phone-number": {
+          "mainAdvice": "Phone number",
+          "footerAdvice": "(Maximum number of characters 35)",
+          "type": "text-field",
+          "errorResponse": {
+            "maxLength": "Phone number must be 35 characters or fewer"
+          }
+        },
+        "email-address": {
+          "mainAdvice": "Email address",
+          "footerAdvice": "(Maximum number of characters 255)",
+          "type": "text-field",
+          "errorResponse": {
+            "maxLength": "Email address must be 255 characters or fewer"
+          }
+        }
+      }
+    },
+    "contact-2": {
+      "mainAdvice": "Contact 2 (optional)",
+      "additionalAdvice": "Provide some or all of the following information about an individual or department at your organisation.",
+      "type": "multi-question",
+      "questions": {
+        "first-name": {
+          "mainAdvice": "First name",
+          "footerAdvice": "(Maximum number of characters 35)",
+          "type": "text-field",
+          "errorResponse": {
+            "maxLength": "First name must be 35 characters or fewer"
+          }
+        },
+        "last-name": {
+          "mainAdvice": "Last name",
+          "footerAdvice": "(Maximum number of characters 35)",
+          "type": "text-field",
+          "errorResponse": {
+            "maxLength": "Last name must be 35 characters or fewer"
+          }
+        },
+        "department-name": {
+          "mainAdvice": "Department name",
+          "footerAdvice": "(Maximum number of characters 50)",
+          "type": "text-field",
+          "errorResponse": {
+            "maxLength": "Department name must be 50 characters or fewer"
+          }
+        },
+        "phone-number": {
+          "mainAdvice": "Phone number",
+          "footerAdvice": "(Maximum number of characters 35)",
+          "type": "text-field",
+          "errorResponse": {
+            "maxLength": "Phone number must be 35 characters or fewer"
+          }
+        },
+        "email-address": {
+          "mainAdvice": "Email address",
+          "footerAdvice": "(Maximum number of characters 255)",
+          "type": "text-field",
+          "errorResponse": {
+            "maxLength": "Email address must be 255 characters or fewer"
+          }
+        }
+      }
+    }
+  },
+  "submitText" : "Save and return"
+}

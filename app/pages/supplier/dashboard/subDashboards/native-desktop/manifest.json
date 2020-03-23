@@ -1,0 +1,37 @@
+{
+  "id":"native-desktop-dashboard-page",
+  "title": "Native desktop application – all sections",
+  "mainAdvice": "Provide information about your native desktop Catalogue Solution.",
+  "sectionGroups": {
+    "native-desktop-sections": {
+      "title": "Native desktop information",
+      "mainAdvice": "Let buyers know the minimum recommended technical specification to implement your Catalogue Solution effectively.",
+      "sections": {
+        "native-desktop-operating-systems": {
+          "title": "Supported operating systems",
+          "type": "section"
+        },
+        "native-desktop-connection-details": {
+          "title": "Connectivity",
+          "type": "section"
+        },
+        "native-desktop-memory-and-storage": {
+          "title": "Memory, storage, processing and resolution",
+          "type": "section"
+        },
+        "native-desktop-third-party": {
+          "title": "Third-party components and device capabilities",
+          "type": "section"
+        },
+        "native-desktop-hardware-requirements": {
+          "title": "Hardware requirements",
+          "type": "section"
+        },
+        "native-desktop-additional-information": {
+          "title": "Additional information",
+          "type": "section"
+        }
+      }
+    }
+  }
+}

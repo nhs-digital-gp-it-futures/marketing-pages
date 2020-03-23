@@ -1,8 +1,9 @@
 {
-  "id": "Sln1",
-  "name": "MedicOnline",
-  "orgName": "Whateve",
+  "id": "100000-001",
+  "name": "Write on Time",
+  "supplierName": "Really Kool Corporation",
   "isFoundation": true,
+  "lastUpdated": "1996-03-15T10:00:00",
   "sections": {
     "solution-description": {
       "answers": {
@@ -18,6 +19,61 @@
           "Feature B",
           "Feature C"
         ]
+      }
+    },
+    "capabilities": {
+      "answers": {
+        "capabilities-met": [{
+            "name": "Example capability",
+            "version": "1.0.1",
+            "description": "Describes the capability.",
+            "link": "https://link-to-capability.com",
+            "epic": {
+              "may": {
+                "met": [
+                  {
+                    "id": "C12E1",
+                    "name": "May met epic 1"
+                  }
+                ],
+                "not-met": [
+                  {
+                    "id": "C12E2",
+                    "name": "May not-met epic 1"
+                  }
+                ]
+              },
+              "must": {
+                "met": [
+                  {
+                    "id": "C12E3",
+                    "name": "Must met epic 1"
+                  },
+                  {
+                    "id": "C12E4",
+                    "name": "Must met epic 2"
+                  }
+                ],
+                "not-met": [
+                  {
+                    "id": "C12E5",
+                    "name": "Must not-met epic 1"
+                  }
+                ]
+              }
+            }
+          }]
+      }
+    },
+    "integrations": {
+      "answers": {
+        "link": "http://www.link.com",
+        "document-name": "integration.pdf"
+      }
+    },
+    "implementation-timescales": {
+      "answers": {
+        "description": "Implementations without transition from another Catalogue Solution typically take 3-5 working days, the average is 4. The extent of your configuration requirements will have the greatest impact on these timescales. Your main responsibility will be configuration planning and approval."
       }
     },
     "client-application-types": {
@@ -143,6 +199,70 @@
               }
             }
           }
+        }
+      }
+    },
+    "hosting-type-public-cloud": {
+      "answers": {
+        "summary": "Our solution uses a combination of private and public cloud suppliers. We store all of our patient confidential data in a data center that we own and manage. We leverage the power of [Public cloud provider] to run our analytical suite and only transfer anonymised or pseudonymised to that provider to support this.",
+        "link": "www.healthcare-pro.co.uk/healthcare-system-1/hybrid-hosting",
+        "requires-hscn": "This Solution requires a HSCN/N3 connection"
+      }
+    },
+    "hosting-type-private-cloud": {
+      "answers": {
+        "summary": "Our solution uses a combination of private and public cloud suppliers. We store all of our patient confidential data in a data center that we own and manage. We leverage the power of [Public cloud provider] to run our analytical suite and only transfer anonymised or pseudonymised to that provider to support this.",
+        "link": "www.healthcare-pro.co.uk/healthcare-system-1/hybrid-hosting",
+        "hosting-model": "Our managed data center is hosted in two separate geographical locations, they both comply to the highest standards to ensure that even if one of our data centers suffers an outage, we can ensure that your daily activities are not interrupted. We also create a back up of all of our data every evening and store it separately, so in the result of any catastrophic failure, we can ensure that patient confidential information is kept secure.",
+        "requires-hscn": "This Solution requires a HSCN/N3 connection"
+      }
+    },
+    "hosting-type-hybrid": {
+      "answers": {
+        "summary": "Our solution uses a combination of private and public cloud suppliers. We store all of our patient confidential data in a data center that we own and manage. We leverage the power of [Public cloud provider] to run our analytical suite and only transfer anonymised or pseudonymised to that provider to support this.",
+        "link": "www.healthcare-pro.co.uk/healthcare-system-1/hybrid-hosting",
+        "hosting-model": "Our managed data center is hosted in two separate geographical locations, they both comply to the highest standards to ensure that even if one of our data centers suffers an outage, we can ensure that your daily activities are not interrupted. We also create a back up of all of our data every evening and store it separately, so in the result of any catastrophic failure, we can ensure that patient confidential information is kept secure.",
+        "requires-hscn": "This Solution requires a HSCN/N3 connection"
+      }
+    },
+    "hosting-type-on-premise": {
+      "answers": {
+        "summary": "Our solution uses a combination of private and public cloud suppliers. We store all of our patient confidential data in a data center that we own and manage. We leverage the power of [Public cloud provider] to run our analytical suite and only transfer anonymised or pseudonymised to that provider to support this.",
+        "link": "www.healthcare-pro.co.uk/healthcare-system-1/hybrid-hosting",
+        "hosting-model": "Our managed data center is hosted in two separate geographical locations, they both comply to the highest standards to ensure that even if one of our data centers suffers an outage, we can ensure that your daily activities are not interrupted. We also create a back up of all of our data every evening and store it separately, so in the result of any catastrophic failure, we can ensure that patient confidential information is kept secure.",
+        "requires-hscn": "This Solution requires a HSCN/N3 connection"
+      }
+    },
+    "roadmap": {
+      "answers": {
+        "summary": "The roadmap summary details",
+        "document-name": "roadmap.pdf"
+      }
+    },
+    "about-supplier": {
+      "answers": {
+        "description": "The supplier description data",
+        "link": "http://www.supplier.com"
+      }
+    },
+    "learn-more": {
+      "answers": {
+        "document-name": "solution.pdf"
+      }
+    },
+    "contact-details": {
+      "answers": {
+        "contact-1": {
+          "department-name": "One Department",
+          "contact-name": "Contact One",
+          "phone-number": "111111111",
+          "email-address": "contact@one.com"
+        },
+        "contact-2": {
+          "department-name": "Two Department",
+          "contact-name": "Contact Two",
+          "phone-number": "222222222",
+          "email-address": "contact@two.com"
         }
       }
     }

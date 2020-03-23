@@ -1,0 +1,39 @@
+{
+  "id": "browser-browsers-supported",
+  "title": "Browser-based application – supported browsers",
+  "mainAdvice": "Let buyers know which types of browser will work with your Catalogue Solution.",
+  "questions": {
+    "supported-browsers": {
+      "mainAdvice": "Supported browser types",
+      "additionalAdvice": "Select all the types of browser that are supported by your Catalogue Solution.",
+      "type": "checkbox-options",
+      "options": {
+        "Google Chrome": "Google Chrome",
+        "Microsoft Edge": "Microsoft Edge",
+        "Mozilla Firefox": "Mozilla Firefox",
+        "Opera": "Opera",
+        "Safari": "Safari",
+        "Chromium": "Chromium",
+        "Internet Explorer 11": "Internet Explorer 11",
+        "Internet Explorer 10": "Internet Explorer 10"
+      },
+      "errorResponse": {
+        "required": "Select at least one browser type"
+      }
+    },
+    "mobile-responsive": {
+      "mainAdvice": "Mobile responsive",
+      "additionalAdvice": "Does the design of your Catalogue Solution adapt for use on mobile or tablet devices?",
+      "type": "radiobutton-options",
+      "options": {
+        "Yes": "Yes",
+        "No": "No"
+      },
+      "errorResponse": {
+        "required": "Select yes if you followed a mobile responsive approach"
+      }
+    }
+  },
+  "submitText" : "Save and return",
+  "successfulSubmitResponsePath" : "dashboard/browser-based"
+}

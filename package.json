@@ -13,20 +13,23 @@
     "lint:js": "eslint \"**/*.js\" --ignore-pattern node_modules/",
     "lint:css": "sass-lint 'app/**/*.scss' -v -q",
     "nuke": "npm run clean && rm -rf node_modules/",
-    "start": "npm run build && babel-node server",
+    "start:dev": "cross-env LOGGER_LEVEL=info babel-node ./app/server",
+    "start:dev-local": "cross-env LOGGER_LEVEL=info API_HOST=http://localhost:57772 DOCUMENT_HOST=http://localhost:63600 babel-node ./app/server",
+    "start": "cross-env NODE_ENV=production npm run build && cross-env NODE_ENV=production babel-node ./app/server",
     "test:ui": "cross-env NODE_ENV=test LOGGER_LEVEL=off babel-node testcafeRunner.js",
     "test:integration": "cross-env NODE_ENV=pipeline LOGGER_LEVEL=off babel-node testcafeRunner.js",
     "test": "jest --coverage",
     "prewatch": "npm run build:css",
-    "watch": "concurrently \"npm run watch:scss\" \"npm run watch:js\"  \"npm start\"",
+    "watch": "concurrently \"npm run watch:scss\" \"npm run watch:js\"  \"npm start:dev\"",
     "watch:scss": "npm run build:css -- -w",
     "watch:js": "webpack --w",
     "webpack": "webpack",
-    "debug": "babel-node server --inspect"
+    "debug": "babel-node ./app/server --inspect"
   },
   "author": "Fawad Ali",
   "contributors": [
-    "Katie Armstrong (https://github.com/kat1906)"
+    "Katie Armstrong (https://github.com/kat1906)",
+    "Adrian Soomro (https://github.com/assoomro)"
   ],
   "repository": {
     "type": "git",
@@ -36,13 +39,17 @@
   "dependencies": {
     "axios": "^0.19.0",
     "body-parser": "^1.19.0",
-    "browser-sync": "^2.26.7",
-    "buying-catalogue-components": "^1.0.61",
+    "buying-catalogue-components": "^1.1.40",
     "compression": "^1.7.4",
+    "connect-slashes": "^1.4.0",
+    "csvtojson": "^2.0.10",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "nhsuk-frontend": "^3.0.2",
     "nunjucks": "^3.2.0",
+    "nunjucks-date-filter": "^0.1.1",
     "path": "^0.12.7",
+    "serve-favicon": "^2.5.0",
     "winston": "^3.2.1"
   },
   "devDependencies": {
@@ -61,13 +68,13 @@
     "jest": "^24.8.0",
     "jest-nunit-reporter": "^1.3.1",
     "nock": "^10.0.6",
-    "node-sass": "^4.12.0",
+    "node-sass": "^4.13.1",
     "sass-lint": "^1.13.1",
     "supertest": "^4.0.2",
     "testcafe": "^1.5.0",
     "testcafe-reporter-nunit": "^0.1.2",
     "webpack": "^4.41.0",
-    "webpack-cli": "^3.3.9"
+    "webpack-cli": "^3.3.10"
   },
   "jest": {
     "testPathIgnorePatterns": [

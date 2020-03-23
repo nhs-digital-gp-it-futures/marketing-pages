@@ -1,11 +1,9 @@
 .bc-c-title {
   border-bottom: 2px solid $color_nhsuk-blue;
-  margin: nhsuk-spacing(5) 0;
+  margin: 0 0 nhsuk-spacing(3);
 }
 
-.bc-u-block-float-left {
-  display: block;
-  @media (min-width: 641px) {
-    float: left;
-  }
+.bc-c-section-box-border {
+  background-color: $color_nhsuk-white;
+  border: 5px solid $color_nhsuk-blue;
 }

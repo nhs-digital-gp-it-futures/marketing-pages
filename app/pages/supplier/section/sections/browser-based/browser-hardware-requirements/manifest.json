@@ -1,0 +1,18 @@
+{
+  "id": "browser-hardware-requirements",
+  "title": "Browser-based application – hardware requirements",
+  "mainAdvice": "Let buyers know about any hardware requirements for your Catalogue Solution.",
+  "questions": {
+    "hardware-requirements-description": {
+      "mainAdvice": "Hardware requirements (optional)",
+      "additionalAdvice": "Provide information on any hardware that is required for your browser-based Catalogue Solution to function.",
+      "type": "textarea-field",
+      "errorResponse": {
+        "maxLength": "Hardware requirements response must be 500 characters or fewer"
+      },
+      "footerAdvice": "(Maximum number of characters 500)"
+    }
+  },
+  "submitText" : "Save and return",
+  "successfulSubmitResponsePath" : "dashboard/browser-based"
+}

@@ -1,0 +1,40 @@
+{% extends 'includes/layout.njk' %}
+{% from 'components/back-link/macro.njk' import backLink %}
+{% from '../../../common/dashboard/components/dashboard-sectionGroup.njk' import dashboardSectionGroup %}
+
+{% block body %}
+<div class="nhsuk-grid-row">
+  <div class="nhsuk-grid-column-full">
+    <div data-test-id="sub-dashboard-back-link">
+      {{ backLink({
+        "href": returnToDashboardUrl,
+        "text": "Return to all sections"
+      }) }}
+    </div>
+  </div>
+  <div class="nhsuk-grid-column-two-thirds">
+
+    <div class="nhsuk-u-margin-top-5 nhsuk-u-margin-bottom-7">
+      <h1 data-test-id="sub-dashboard-title" class="nhsuk-u-margin-bottom-3">{{ title }}</h1>
+      <h2 data-test-id="sub-dashboard-main-advice" class="nhsuk-u-font-size-22">{{ mainAdvice }}</h2>
+      <div data-test-id="sub-dashboard-additional-advice">
+        {% for advice in additionalAdvice %}
+          <p>
+            {{ advice }}
+          </p>
+        {% endfor %}
+      </div>
+    </div>
+
+  </div>
+  <div class="nhsuk-grid-column-full">
+
+    {% for sectionGroup in sectionGroups %}
+      {{ dashboardSectionGroup({
+        sectionGroup: sectionGroup
+      }, loop.index) }}
+    {% endfor %}
+
+  </div>
+</div>
+{% endblock %}
