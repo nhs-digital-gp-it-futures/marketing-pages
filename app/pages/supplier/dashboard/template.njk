@@ -1,16 +1,16 @@
 {% extends 'includes/layout.njk' %}
 {% from 'components/button/macro.njk' import button %}
-{% from '../../common/dashboard/components/dashboard-sectionGroup.njk' import dashboardSectionGroup %}
-{% from '../../../common/components/error-summary/macro.njk' import errorSummary %}
+{% from 'components/bc-error-summary/macro.njk' import bcErrorSummary %}
 {% from 'components/tag/macro.njk' import tag %}
 {% from 'components/view-data-bulletlist/macro.njk' import viewDataBulletlist %}
+{% from '../../common/dashboard/components/dashboard-sectionGroup.njk' import dashboardSectionGroup %}
 
 {% block body %}
 <div data-test-id="dashboard">
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-full">
       {% if (errors.length > 0) %}
-        {{ errorSummary({
+        {{ bcErrorSummary({
           errors: errors
         }) }}
       {% endif %}
