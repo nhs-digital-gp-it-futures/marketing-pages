@@ -23,7 +23,7 @@ if (config.baseUrl) {
 
 // Run application on configured port
 if (config.env === 'development') {
-  logger.info(` Marketing Pages - \x1b[35m${config.appBaseUri}/supplier/solution/100000-001\x1b[0m`);
+  logger.info(` Marketing Pages - \x1b[35m${config.appBaseUri}${config.baseUrl}/supplier/solution/100000-001\x1b[0m`);
 } else {
   logger.info(`App listening on port ${config.port} - Marketing Pages`);
 }
