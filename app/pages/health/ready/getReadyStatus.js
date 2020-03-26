@@ -1,28 +1,28 @@
-import { ApiProvider } from '../../../apiProvider';
+import { getData } from '../../../apiProvider';
 import { status } from '../status';
 
 export async function getReadyStatus() {
-  let buyingCatalogueApi;
-  let documentApi;
+  let buyingCatalogueApiStatusMessage;
+  let documentApiStatusMessage;
   try {
-    buyingCatalogueApi = (await new ApiProvider().getBuyingCatalogueApiHealth()).data;
+    buyingCatalogueApiStatusMessage = await getData({ endpointLocator: 'getBuyingCatalogueApiHealth' }).data;
   } catch (e) {
-    buyingCatalogueApi = status.unhealthy.message;
+    buyingCatalogueApiStatusMessage = status.unhealthy.message;
   }
   try {
-    documentApi = (await new ApiProvider().getDocumentApiHealth()).data;
+    documentApiStatusMessage = await getData({ endpointLocator: 'getDocumentApiHealth' }).data;
   } catch (e) {
-    documentApi = status.unhealthy.message;
+    documentApiStatusMessage = status.unhealthy.message;
   }
 
-  const isHealthy = Api => Api === status.healthy.message;
-  const isUnhealthy = Api => Api === status.unhealthy.message;
+  const isHealthy = apiStatusMessage => apiStatusMessage === status.healthy.message;
+  const isUnhealthy = apiStatusMessage => apiStatusMessage === status.unhealthy.message;
 
-  if (isHealthy(buyingCatalogueApi) && isHealthy(documentApi)) {
+  if (isHealthy(buyingCatalogueApiStatusMessage) && isHealthy(documentApiStatusMessage)) {
     return status.healthy;
   }
 
-  if (isUnhealthy(buyingCatalogueApi)) {
+  if (isUnhealthy(buyingCatalogueApiStatusMessage)) {
     return status.unhealthy;
   }
 

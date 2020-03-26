@@ -4,7 +4,8 @@ import { getSubDashboardPageContext } from './dashboard/subDashboards/controller
 import { getSectionPageContext, getSectionPageErrorContext, postSection } from '../common/section/controller';
 import { logger } from '../../logger';
 import { withCatch } from '../../common/helpers/routerHelper';
-import { getDocument, getPreviewPageContext } from '../common/preview/controller';
+import { getPreviewPageContext } from '../common/preview/controller';
+import { getDocument } from '../../apiProvider';
 
 const router = express.Router();
 const config = require('../../config');

@@ -1,20 +1,21 @@
-import { getPreviewPageContext, getDocument } from './controller';
-import { ApiProvider } from '../../../apiProvider';
+import { getPreviewPageContext } from './controller';
+import * as apiProvider from '../../../apiProvider';
 
-jest.mock('../../../apiProvider');
+jest.mock('../../../apiProvider', () => ({
+  getData: jest.fn(),
+  getDocument: jest.fn(),
+}));
 
 describe('preview controller', () => {
   const previewData = {
-    data: {
-      id: '100000-001',
-      name: 'Write on Time',
-      supplierName: 'Really Kool Corporation',
-      isFoundation: true,
-      lastUpdated: '1996-03-15T10:00:00',
-      sections: {
-        'some-section': {
-          answers: {},
-        },
+    id: '100000-001',
+    name: 'Write on Time',
+    supplierName: 'Really Kool Corporation',
+    isFoundation: true,
+    lastUpdated: '1996-03-15T10:00:00',
+    sections: {
+      'some-section': {
+        answers: {},
       },
     },
   };
@@ -36,7 +37,7 @@ describe('preview controller', () => {
       },
     };
 
-    ApiProvider.prototype.getPreviewData.mockResolvedValue(previewData);
+    apiProvider.getData.mockResolvedValueOnce(previewData);
 
     const context = await getPreviewPageContext({ solutionId: '100000-001' });
 
@@ -44,7 +45,7 @@ describe('preview controller', () => {
   });
 
   it('should throw an error when no data is returned from the ApiProvider', async () => {
-    ApiProvider.prototype.getPreviewData.mockResolvedValue({});
+    apiProvider.getData.mockResolvedValueOnce();
 
     try {
       await getPreviewPageContext({ solutionId: 'some-solution-id' });
@@ -56,9 +57,9 @@ describe('preview controller', () => {
   it('should return the document when a document is returned by the ApiProvider', async () => {
     const expectedDocument = 'Hello';
 
-    ApiProvider.prototype.getDocument.mockResolvedValue(expectedDocument);
+    apiProvider.getDocument.mockResolvedValueOnce(expectedDocument);
 
-    const document = await getDocument({ solutionId: 'some-solution-id', documentName: 'some-document-name' });
+    const document = await apiProvider.getDocument({ solutionId: 'some-solution-id', documentName: 'some-document-name' });
 
     expect(document).toEqual(expectedDocument);
   });

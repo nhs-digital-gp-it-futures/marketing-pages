@@ -1,16 +1,14 @@
 import { ManifestProvider } from '../../../manifestProvider';
-import { ApiProvider } from '../../../apiProvider';
+import { getData, putData } from '../../../apiProvider';
 import { createDashboardPageContext } from './createDashboardPageContext';
 
 export const getMarketingPageDashboardContext = async ({
   solutionId, validationErrors, userContextType = 'supplier',
 }) => {
   const dashboardManifest = new ManifestProvider().getDashboardManifest({ userContextType });
-  const dashboardDataRaw = await new ApiProvider().getMainDashboardData({
-    solutionId, userContextType,
-  });
-  if (dashboardDataRaw && dashboardDataRaw.data) {
-    const dashboardData = dashboardDataRaw.data;
+  const dashboardData = await getData({ endpointLocator: 'getMainDashboardData', options: { solutionId, userContextType } });
+
+  if (dashboardData) {
     const context = createDashboardPageContext({
       solutionId,
       solutionName: dashboardData.name,
@@ -27,7 +25,7 @@ export const getMarketingPageDashboardContext = async ({
 
 export const postSubmitForModeration = async ({ solutionId }) => {
   try {
-    await new ApiProvider().putSubmitForModeration({ solutionId });
+    await putData({ endpointLocator: 'putSubmitForModeration', options: { solutionId } });
     return {
       success: true,
     };

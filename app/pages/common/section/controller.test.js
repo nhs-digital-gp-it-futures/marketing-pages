@@ -1,9 +1,14 @@
 import { getSectionPageContext, getSectionPageErrorContext, postSection } from './controller';
 import { ManifestProvider } from '../../../manifestProvider';
-import { ApiProvider } from '../../../apiProvider';
+import * as apiProvider from '../../../apiProvider';
 
 jest.mock('../../../manifestProvider');
-jest.mock('../../../apiProvider');
+jest.mock('../../../logger');
+
+jest.mock('../../../apiProvider', () => ({
+  getData: jest.fn(),
+  putData: jest.fn(),
+}));
 
 describe('section controller', () => {
   const sectionManifest = {
@@ -62,7 +67,8 @@ describe('section controller', () => {
       };
 
       ManifestProvider.prototype.getSectionManifest.mockReturnValue(sectionManifest);
-      ApiProvider.prototype.getSectionData.mockResolvedValue(sectionData);
+      apiProvider.getData
+        .mockResolvedValueOnce(sectionData);
 
       const context = await getSectionPageContext({ solutionId: 'some-solution-id' });
 
@@ -71,7 +77,8 @@ describe('section controller', () => {
 
     it('should throw an error when no data is returned from the ApiProvider', async () => {
       ManifestProvider.prototype.getSubDashboardManifest.mockReturnValue(sectionManifest);
-      ApiProvider.prototype.getSubDashboardData.mockResolvedValue({});
+      apiProvider.getData
+        .mockResolvedValueOnce({});
 
       try {
         await getSectionPageContext({ solutionId: 'some-solution-id' });
@@ -109,7 +116,8 @@ describe('section controller', () => {
       };
 
       ManifestProvider.prototype.getSectionManifest.mockReturnValue(sectionManifest);
-      ApiProvider.prototype.getSectionData.mockResolvedValue(sectionData);
+      apiProvider.getData
+        .mockResolvedValueOnce(sectionData);
 
       const context = await getSectionPageErrorContext({ solutionId: 'some-solution-id' });
 
@@ -126,7 +134,8 @@ describe('section controller', () => {
 
 
       ManifestProvider.prototype.getSectionManifest.mockReturnValue(sectionManifest);
-      ApiProvider.prototype.putSectionData.mockResolvedValue(true);
+      apiProvider.putData
+        .mockResolvedValueOnce(true);
 
       const context = await postSection({ solutionId: 'some-solution-id' });
 
@@ -144,9 +153,8 @@ describe('section controller', () => {
       };
 
       ManifestProvider.prototype.getSectionManifest.mockReturnValue(sectionManifest);
-      ApiProvider.prototype.putSectionData.mockImplementation(
-        () => Promise.reject(errorResponse),
-      );
+      apiProvider.putData
+        .mockRejectedValueOnce(errorResponse);
 
       const response = await postSection({ solutionId: 'some-solution-id' });
       expect(response).toEqual(errorResponse.response.data);
@@ -163,9 +171,8 @@ describe('section controller', () => {
       };
 
       ManifestProvider.prototype.getSectionManifest.mockReturnValue(sectionManifest);
-      ApiProvider.prototype.putSectionData.mockImplementation(
-        () => Promise.reject(errorResponse),
-      );
+      apiProvider.putData
+        .mockRejectedValueOnce(errorResponse);
 
       try {
         await postSection({ solutionId: 'some-solution-id' });

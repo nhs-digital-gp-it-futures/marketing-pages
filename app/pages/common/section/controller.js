@@ -1,5 +1,5 @@
 import { ManifestProvider } from '../../../manifestProvider';
-import { ApiProvider } from '../../../apiProvider';
+import { getData, putData } from '../../../apiProvider';
 import { createSectionPageContext } from './createSectionPageContext';
 import { transformSectionData } from './helpers/transformSectionData';
 import { createPostSectionResponse } from './helpers/createPostSectionResponse';
@@ -13,9 +13,10 @@ export const getSectionPageContext = async ({
     sectionId,
     userContextType,
   });
-  const sectionData = await new ApiProvider().getSectionData({ solutionId, sectionId });
-  if (sectionData && sectionData.data) {
-    const formData = sectionData.data;
+
+  const sectionData = await getData({ endpointLocator: 'getSectionData', options: { solutionId, sectionId } });
+  if (sectionData) {
+    const formData = sectionData;
     const context = createSectionPageContext({
       solutionId, sectionManifest, formData, dashboardId, userContextType,
     });
@@ -51,9 +52,7 @@ export const postSection = async ({
   });
   const transformedSectionData = await transformSectionData({ sectionManifest, sectionData });
   try {
-    await new ApiProvider().putSectionData({
-      solutionId, sectionId, sectionData: transformedSectionData,
-    });
+    await putData({ endpointLocator: 'putSectionData', options: { solutionId, sectionId }, body: transformedSectionData });
 
     const response = createPostSectionResponse({ solutionId, sectionManifest, userContextType });
     return response;
@@ -61,7 +60,8 @@ export const postSection = async ({
     if (err.response.status === 400) {
       return err.response.data;
     }
-    logger.error(err);
+
+    logger.error(err.response.data);
     throw err;
   }
 };

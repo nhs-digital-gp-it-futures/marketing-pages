@@ -1,9 +1,12 @@
 import { getMarketingPageDashboardContext, postSubmitForModeration } from './controller';
 import { ManifestProvider } from '../../../manifestProvider';
-import { ApiProvider } from '../../../apiProvider';
+import * as apiProvider from '../../../apiProvider';
 
 jest.mock('../../../manifestProvider');
-jest.mock('../../../apiProvider');
+jest.mock('../../../apiProvider', () => ({
+  getData: jest.fn(),
+  putData: jest.fn(),
+}));
 
 describe('supplier - dashboard controller', () => {
   describe('getMarketingPageDashboardContext', () => {
@@ -22,14 +25,12 @@ describe('supplier - dashboard controller', () => {
     };
 
     const dashboardData = {
-      data: {
-        name: 'some solution name',
-        'supplier-name': 'a supplier',
-        sections: {
-          'some-section-id': {
-            status: 'INCOMPLETE',
-            requirement: 'Mandatory',
-          },
+      name: 'some solution name',
+      'supplier-name': 'a supplier',
+      sections: {
+        'some-section-id': {
+          status: 'INCOMPLETE',
+          requirement: 'Mandatory',
         },
       },
     };
@@ -60,7 +61,7 @@ describe('supplier - dashboard controller', () => {
       };
 
       ManifestProvider.prototype.getDashboardManifest.mockReturnValue(dashboardManifest);
-      ApiProvider.prototype.getMainDashboardData.mockResolvedValue(dashboardData);
+      apiProvider.getData.mockResolvedValueOnce(dashboardData);
 
       const context = await getMarketingPageDashboardContext({ solutionId: 'some-solution-id', dashboardId: 'some-dashboard-id' });
 
@@ -69,7 +70,7 @@ describe('supplier - dashboard controller', () => {
 
     it('should throw an error when no data is returned from the ApiProvider', async () => {
       ManifestProvider.prototype.getDashboardManifest.mockReturnValue(dashboardManifest);
-      ApiProvider.prototype.getMainDashboardData.mockResolvedValue({});
+      apiProvider.getData.mockResolvedValueOnce({});
 
       try {
         await getMarketingPageDashboardContext({ solutionId: 'some-solution-id', dashboardId: 'some-dashboard-id' });
@@ -81,14 +82,10 @@ describe('supplier - dashboard controller', () => {
 
   describe('postSubmitForModeration', () => {
     it('should return a response indicating the submit for moderation was successful', async () => {
-      const expectedResponse = {
-        success: true,
-      };
-
-      ApiProvider.prototype.putSubmitForModeration.mockResolvedValue(true);
+      const expectedResponse = { success: true };
+      apiProvider.putData.mockResolvedValueOnce(true);
 
       const response = await postSubmitForModeration({ solutionId: 'some-solution-id' });
-
       expect(response).toEqual(expectedResponse);
     });
 
@@ -100,10 +97,7 @@ describe('supplier - dashboard controller', () => {
           },
         },
       };
-
-      ApiProvider.prototype.putSubmitForModeration.mockImplementation(
-        () => Promise.reject(errorResponse),
-      );
+      apiProvider.putData.mockRejectedValueOnce(errorResponse);
 
       const response = await postSubmitForModeration({ solutionId: 'some-solution-id' });
       expect(response).toEqual(errorResponse.response.data);
