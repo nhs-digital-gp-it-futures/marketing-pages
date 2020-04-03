@@ -2,27 +2,27 @@ import { getData } from '../../../apiProvider';
 import { status } from '../status';
 
 export const getReadyStatus = async () => {
-  let buyingCatalogueApiStatusMessage;
-  let documentApiStatusMessage;
+  let buyingCatalogueApi;
+  let documentApi;
   try {
-    buyingCatalogueApiStatusMessage = await getData({ endpointLocator: 'getBuyingCatalogueApiHealth' });
+    buyingCatalogueApi = await getData({ endpointLocator: 'getBuyingCatalogueApiHealth' });
   } catch (e) {
-    buyingCatalogueApiStatusMessage = status.unhealthy.message;
+    buyingCatalogueApi = status.unhealthy.message;
   }
   try {
-    documentApiStatusMessage = await getData({ endpointLocator: 'getDocumentApiHealth' });
+    documentApi = await getData({ endpointLocator: 'getDocumentApiHealth' });
   } catch (e) {
-    documentApiStatusMessage = status.unhealthy.message;
+    documentApi = status.unhealthy.message;
   }
 
-  const isHealthy = apiStatusMessage => apiStatusMessage === status.healthy.message;
-  const isUnhealthy = apiStatusMessage => apiStatusMessage === status.unhealthy.message;
+  const isHealthy = healthcheckResponse => healthcheckResponse === status.healthy.message;
+  const isUnhealthy = healthcheckResponse => healthcheckResponse === status.unhealthy.message;
 
-  if (isHealthy(buyingCatalogueApiStatusMessage) && isHealthy(documentApiStatusMessage)) {
+  if (isHealthy(buyingCatalogueApi) && isHealthy(documentApi)) {
     return status.healthy;
   }
 
-  if (isUnhealthy(buyingCatalogueApiStatusMessage)) {
+  if (isUnhealthy(buyingCatalogueApi)) {
     return status.unhealthy;
   }
 
