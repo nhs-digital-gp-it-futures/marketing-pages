@@ -1,16 +1,16 @@
 import { getData } from '../../../apiProvider';
 import { status } from '../status';
 
-export async function getReadyStatus() {
+export const getReadyStatus = async () => {
   let buyingCatalogueApiStatusMessage;
   let documentApiStatusMessage;
   try {
-    buyingCatalogueApiStatusMessage = await getData({ endpointLocator: 'getBuyingCatalogueApiHealth' }).data;
+    buyingCatalogueApiStatusMessage = await getData({ endpointLocator: 'getBuyingCatalogueApiHealth' });
   } catch (e) {
     buyingCatalogueApiStatusMessage = status.unhealthy.message;
   }
   try {
-    documentApiStatusMessage = await getData({ endpointLocator: 'getDocumentApiHealth' }).data;
+    documentApiStatusMessage = await getData({ endpointLocator: 'getDocumentApiHealth' });
   } catch (e) {
     documentApiStatusMessage = status.unhealthy.message;
   }
@@ -27,4 +27,4 @@ export async function getReadyStatus() {
   }
 
   return status.degraded;
-}
+};
