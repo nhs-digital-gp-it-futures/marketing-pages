@@ -3,7 +3,7 @@ import { getData } from '../../../../apiProvider';
 import { createDashboardPageContext } from '../../../common/dashboard/createDashboardPageContext';
 
 export const getSubDashboardPageContext = async ({ solutionId, dashboardId }) => {
-  const dashboardManifest = await getSubDashboardManifest({ dashboardId });
+  const dashboardManifest = getSubDashboardManifest({ dashboardId });
   const sectionData = await getData({ endpointLocator: 'getSubDashboardData', options: { solutionId, dashboardId } });
 
   if (sectionData) {

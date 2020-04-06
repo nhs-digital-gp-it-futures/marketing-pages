@@ -5,7 +5,7 @@ import { createDashboardPageContext } from './createDashboardPageContext';
 export const getMarketingPageDashboardContext = async ({
   solutionId, validationErrors, userContextType = 'supplier',
 }) => {
-  const dashboardManifest = await getDashboardManifest({ userContextType });
+  const dashboardManifest = getDashboardManifest({ userContextType });
   const dashboardData = await getData({ endpointLocator: 'getMainDashboardData', options: { solutionId, userContextType } });
 
   if (dashboardData) {
