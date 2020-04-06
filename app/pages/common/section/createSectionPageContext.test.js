@@ -1,7 +1,7 @@
 import { createSectionPageContext } from './createSectionPageContext';
 
 describe('createSectionPageContext', () => {
-  it('should create a context with for the section', () => {
+  it('should create a context for the section', () => {
     const expectedContext = {
       title: 'Some section title',
       mainAdvice: 'Some main advice.',

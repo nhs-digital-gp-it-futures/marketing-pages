@@ -30,7 +30,6 @@ export const runTestSuite = async ({
   };
 
   const sectionManifest = getSectionManifest({ sectionId, dashboardId, userContextType });
-  console.log('sectionManifest', sectionManifest)
 
   fixture(`Show ${sectionManifest.title} page`);
 

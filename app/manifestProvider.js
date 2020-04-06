@@ -1,8 +1,5 @@
 import fs from 'fs';
 import path from 'path';
-import util from 'util';
-
-const readFile = util.promisify(fs.readFile);
 
 export const getDashboardManifest = ({ userContextType }) => {
   const dashboardManifestRaw = fs.readFileSync(path.join(__dirname, `/pages/${userContextType}/dashboard/manifest.json`));

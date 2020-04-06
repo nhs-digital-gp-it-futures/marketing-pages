@@ -13,7 +13,6 @@ export const getSectionPageContext = async ({
     sectionId,
     userContextType,
   });
-
   const sectionData = await getData({ endpointLocator: 'getSectionData', options: { solutionId, sectionId } });
   if (sectionData) {
     const formData = sectionData;
