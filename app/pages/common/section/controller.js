@@ -1,4 +1,4 @@
-import { ManifestProvider } from '../../../manifestProvider';
+import { getSectionManifest } from '../../../manifestProvider';
 import { getData, putData } from '../../../apiProvider';
 import { createSectionPageContext } from './createSectionPageContext';
 import { transformSectionData } from './helpers/transformSectionData';
@@ -8,7 +8,7 @@ import { logger } from '../../../logger';
 export const getSectionPageContext = async ({
   solutionId, dashboardId, sectionId, userContextType = 'supplier',
 }) => {
-  const sectionManifest = new ManifestProvider().getSectionManifest({
+  const sectionManifest = await getSectionManifest({
     dashboardId,
     sectionId,
     userContextType,
@@ -28,7 +28,7 @@ export const getSectionPageContext = async ({
 export const getSectionPageErrorContext = async ({
   solutionId, sectionId, sectionData, validationErrors, dashboardId, userContextType = 'supplier',
 }) => {
-  const sectionManifest = new ManifestProvider().getSectionManifest({
+  const sectionManifest = await getSectionManifest({
     dashboardId, sectionId, userContextType,
   });
 
@@ -47,7 +47,7 @@ export const getSectionPageErrorContext = async ({
 export const postSection = async ({
   solutionId, sectionId, sectionData, dashboardId, userContextType = 'supplier',
 }) => {
-  const sectionManifest = new ManifestProvider().getSectionManifest({
+  const sectionManifest = await getSectionManifest({
     dashboardId, sectionId, userContextType,
   });
   const transformedSectionData = await transformSectionData({ sectionManifest, sectionData });

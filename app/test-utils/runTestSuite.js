@@ -1,5 +1,5 @@
 import nock from 'nock';
-import { ManifestProvider } from '../manifestProvider';
+import { getSectionManifest } from '../manifestProvider';
 import { runCommonComponentsTests } from './testFunctions/commonComponentsTests';
 import { runQuestionTests } from './testFunctions/questionTests';
 import { apiLocalhost, apiPath, clientLocalhost } from './config';
@@ -29,7 +29,7 @@ export const runTestSuite = async ({
     await t.navigateTo(clientUrl);
   };
 
-  const sectionManifest = new ManifestProvider().getSectionManifest({ sectionId, dashboardId, userContextType });
+  const sectionManifest = await getSectionManifest({ sectionId, dashboardId, userContextType });
 
   fixture(`Show ${sectionManifest.title} page`);
 

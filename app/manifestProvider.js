@@ -1,24 +1,21 @@
 import fs from 'fs';
+import path from 'path';
+import util from 'util';
 
-const path = require('path');
+const readFile = util.promisify(fs.readFile);
 
-export class ManifestProvider {
-  getDashboardManifest({ userContextType }) {
-    this.dashboardManifestRaw = fs.readFileSync(path.join(__dirname, `/pages/${userContextType}/dashboard/manifest.json`));
-    this.dashboardManifest = JSON.parse(this.dashboardManifestRaw);
-    return this.dashboardManifest;
-  }
+export const getDashboardManifest = async ({ userContextType }) => {
+  const dashboardManifestRaw = await readFile(path.join(__dirname, `/pages/${userContextType}/dashboard/manifest.json`));
+  return JSON.parse(dashboardManifestRaw);
+};
 
-  getSubDashboardManifest({ dashboardId }) {
-    this.subDashboardManifestRaw = fs.readFileSync(path.join(__dirname, `/pages/supplier/dashboard/subDashboards/${dashboardId}/manifest.json`));
-    this.subDashboardManifest = JSON.parse(this.subDashboardManifestRaw);
-    return this.subDashboardManifest;
-  }
+export const getSubDashboardManifest = async ({ dashboardId }) => {
+  const subDashboardManifestRaw = await readFile(path.join(__dirname, `/pages/supplier/dashboard/subDashboards/${dashboardId}/manifest.json`));
+  return JSON.parse(subDashboardManifestRaw);
+};
 
-  getSectionManifest({ dashboardId, sectionId, userContextType }) {
-    const pathToSectionManifest = dashboardId ? `${dashboardId}/${sectionId}` : `${sectionId}`;
-    this.sectionManifestRaw = fs.readFileSync(path.join(__dirname, `/pages/${userContextType}/section/sections/${pathToSectionManifest}/manifest.json`));
-    this.sectionManifest = JSON.parse(this.sectionManifestRaw);
-    return this.sectionManifest;
-  }
-}
+export const getSectionManifest = async ({ dashboardId, sectionId, userContextType }) => {
+  const pathToSectionManifest = dashboardId ? `${dashboardId}/${sectionId}` : `${sectionId}`;
+  const sectionManifestRaw = await readFile(path.join(__dirname, `/pages/${userContextType}/section/sections/${pathToSectionManifest}/manifest.json`));
+  return JSON.parse(sectionManifestRaw);
+};

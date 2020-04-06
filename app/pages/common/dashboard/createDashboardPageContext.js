@@ -109,7 +109,6 @@ const createSectionGroupsContext = ({
   };
 };
 
-
 export const createDashboardPageContext = ({
   solutionId,
   solutionName,

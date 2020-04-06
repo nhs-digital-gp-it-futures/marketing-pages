@@ -1,11 +1,14 @@
 import { getMarketingPageDashboardContext, postSubmitForModeration } from './controller';
-import { ManifestProvider } from '../../../manifestProvider';
+import * as manifestProvider from '../../../manifestProvider';
 import * as apiProvider from '../../../apiProvider';
 
 jest.mock('../../../manifestProvider');
 jest.mock('../../../apiProvider', () => ({
   getData: jest.fn(),
   putData: jest.fn(),
+}));
+jest.mock('../../../manifestProvider', () => ({
+  getDashboardManifest: jest.fn(),
 }));
 
 describe('supplier - dashboard controller', () => {
@@ -60,7 +63,7 @@ describe('supplier - dashboard controller', () => {
         ],
       };
 
-      ManifestProvider.prototype.getDashboardManifest.mockReturnValue(dashboardManifest);
+      manifestProvider.getDashboardManifest.mockReturnValue(dashboardManifest);
       apiProvider.getData.mockResolvedValueOnce(dashboardData);
 
       const context = await getMarketingPageDashboardContext({ solutionId: 'some-solution-id', dashboardId: 'some-dashboard-id' });
@@ -69,7 +72,7 @@ describe('supplier - dashboard controller', () => {
     });
 
     it('should throw an error when no data is returned from the ApiProvider', async () => {
-      ManifestProvider.prototype.getDashboardManifest.mockReturnValue(dashboardManifest);
+      manifestProvider.getDashboardManifest.mockReturnValue(dashboardManifest);
       apiProvider.getData.mockResolvedValueOnce({});
 
       try {

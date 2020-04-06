@@ -1,10 +1,14 @@
 import { getSectionPageContext, getSectionPageErrorContext, postSection } from './controller';
-import { ManifestProvider } from '../../../manifestProvider';
+import * as manifestProvider from '../../../manifestProvider';
 import * as apiProvider from '../../../apiProvider';
 
 jest.mock('../../../manifestProvider');
 jest.mock('../../../logger');
 
+jest.mock('../../../manifestProvider', () => ({
+  getSectionManifest: jest.fn(),
+  getSubDashboardManifest: jest.fn(),
+}));
 jest.mock('../../../apiProvider', () => ({
   getData: jest.fn(),
   putData: jest.fn(),
@@ -66,7 +70,7 @@ describe('section controller', () => {
         submitText: 'some-submit-text',
       };
 
-      ManifestProvider.prototype.getSectionManifest.mockReturnValue(sectionManifest);
+      manifestProvider.getSectionManifest.mockReturnValue(sectionManifest);
       apiProvider.getData
         .mockResolvedValueOnce(sectionData);
 
@@ -76,7 +80,7 @@ describe('section controller', () => {
     });
 
     it('should throw an error when no data is returned from the ApiProvider', async () => {
-      ManifestProvider.prototype.getSubDashboardManifest.mockReturnValue(sectionManifest);
+      manifestProvider.getSubDashboardManifest.mockReturnValue(sectionManifest);
       apiProvider.getData
         .mockResolvedValueOnce({});
 
@@ -115,7 +119,7 @@ describe('section controller', () => {
         submitText: 'some-submit-text',
       };
 
-      ManifestProvider.prototype.getSectionManifest.mockReturnValue(sectionManifest);
+      manifestProvider.getSectionManifest.mockReturnValue(sectionManifest);
       apiProvider.getData
         .mockResolvedValueOnce(sectionData);
 
@@ -133,7 +137,7 @@ describe('section controller', () => {
       };
 
 
-      ManifestProvider.prototype.getSectionManifest.mockReturnValue(sectionManifest);
+      manifestProvider.getSectionManifest.mockReturnValue(sectionManifest);
       apiProvider.putData
         .mockResolvedValueOnce(true);
 
@@ -152,7 +156,7 @@ describe('section controller', () => {
         },
       };
 
-      ManifestProvider.prototype.getSectionManifest.mockReturnValue(sectionManifest);
+      manifestProvider.getSectionManifest.mockReturnValue(sectionManifest);
       apiProvider.putData
         .mockRejectedValueOnce(errorResponse);
 
@@ -170,7 +174,7 @@ describe('section controller', () => {
         },
       };
 
-      ManifestProvider.prototype.getSectionManifest.mockReturnValue(sectionManifest);
+      manifestProvider.getSectionManifest.mockReturnValue(sectionManifest);
       apiProvider.putData
         .mockRejectedValueOnce(errorResponse);
 
