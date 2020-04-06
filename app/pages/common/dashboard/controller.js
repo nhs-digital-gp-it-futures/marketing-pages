@@ -1,11 +1,11 @@
-import { ManifestProvider } from '../../../manifestProvider';
+import { getDashboardManifest } from '../../../manifestProvider';
 import { getData, putData } from '../../../apiProvider';
 import { createDashboardPageContext } from './createDashboardPageContext';
 
 export const getMarketingPageDashboardContext = async ({
   solutionId, validationErrors, userContextType = 'supplier',
 }) => {
-  const dashboardManifest = new ManifestProvider().getDashboardManifest({ userContextType });
+  const dashboardManifest = getDashboardManifest({ userContextType });
   const dashboardData = await getData({ endpointLocator: 'getMainDashboardData', options: { solutionId, userContextType } });
 
   if (dashboardData) {
