@@ -29,7 +29,8 @@ export const runTestSuite = async ({
     await t.navigateTo(clientUrl);
   };
 
-  const sectionManifest = await getSectionManifest({ sectionId, dashboardId, userContextType });
+  const sectionManifest = getSectionManifest({ sectionId, dashboardId, userContextType });
+  console.log('sectionManifest', sectionManifest)
 
   fixture(`Show ${sectionManifest.title} page`);
 

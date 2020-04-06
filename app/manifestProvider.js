@@ -4,18 +4,18 @@ import util from 'util';
 
 const readFile = util.promisify(fs.readFile);
 
-export const getDashboardManifest = async ({ userContextType }) => {
-  const dashboardManifestRaw = await readFile(path.join(__dirname, `/pages/${userContextType}/dashboard/manifest.json`));
+export const getDashboardManifest = ({ userContextType }) => {
+  const dashboardManifestRaw = fs.readFileSync(path.join(__dirname, `/pages/${userContextType}/dashboard/manifest.json`));
   return JSON.parse(dashboardManifestRaw);
 };
 
-export const getSubDashboardManifest = async ({ dashboardId }) => {
-  const subDashboardManifestRaw = await readFile(path.join(__dirname, `/pages/supplier/dashboard/subDashboards/${dashboardId}/manifest.json`));
+export const getSubDashboardManifest = ({ dashboardId }) => {
+  const subDashboardManifestRaw = fs.readFileSync(path.join(__dirname, `/pages/supplier/dashboard/subDashboards/${dashboardId}/manifest.json`));
   return JSON.parse(subDashboardManifestRaw);
 };
 
-export const getSectionManifest = async ({ dashboardId, sectionId, userContextType }) => {
+export const getSectionManifest = ({ dashboardId, sectionId, userContextType }) => {
   const pathToSectionManifest = dashboardId ? `${dashboardId}/${sectionId}` : `${sectionId}`;
-  const sectionManifestRaw = await readFile(path.join(__dirname, `/pages/${userContextType}/section/sections/${pathToSectionManifest}/manifest.json`));
+  const sectionManifestRaw = fs.readFileSync(path.join(__dirname, `/pages/${userContextType}/section/sections/${pathToSectionManifest}/manifest.json`));
   return JSON.parse(sectionManifestRaw);
 };
