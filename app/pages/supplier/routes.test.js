@@ -11,7 +11,7 @@ import * as apiProvider from '../../apiProvider';
 
 jest.mock('../../logger');
 apiProvider.getDocument = jest.fn()
-  .mockImplementation(() => Promise.resolve({ data: createReadStream(path.resolve(__dirname, 'data.txt'), 'utf8') }));
+  .mockImplementation(() => Promise.resolve({ data: createReadStream(path.resolve(__dirname, 'data.pdf')) }));
 
 const mockDashboardContext = {
   title: 'Dashboard title',
@@ -270,7 +270,7 @@ describe('GET /solution/:solutionId/document/:documentName', () => {
       .get('/supplier/solution/1/document/somedoc')
       .expect(200)
       .then((res) => {
-        expect(res.text).toEqual(readFileSync(path.resolve(__dirname, 'data.txt'), 'utf8'));
+        expect(res.text).toEqual(readFileSync(path.resolve(__dirname, 'data.pdf'), 'utf8'));
         expect(res.text.includes('data-test-id="error-page-title"')).toEqual(false);
       });
   });
