@@ -8,7 +8,7 @@ Object.keys(config).map((configKey) => {
   if (config[configKey]) {
     logger.info(`${configKey} set to ${config[configKey]}`);
   } else {
-    logger.error(`${configKey} not set`);
+    logger.error(`${configKey} not set.`);
   }
 });
 
