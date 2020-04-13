@@ -80,9 +80,10 @@ describe('supplier - dashboard page', () => {
     });
   }));
 
-  it('should render the warning advice on the dashboard page if provided', createTestHarness(setup, (harness) => {
+  it('should render the warning advice on the dashboard page if provided and showSubmitForModerationButton is true', createTestHarness(setup, (harness) => {
     const context = {
       warningAdvice: 'some warning advice',
+      config: { showSubmitForModerationButton: 'true' },
     };
 
     harness.request(context, ($) => {
@@ -92,8 +93,19 @@ describe('supplier - dashboard page', () => {
     });
   }));
 
+  it('should notrender the warning advice on the dashboard page if provided and showSubmitForModerationButton is false', createTestHarness(setup, (harness) => {
+    const context = {
+      warningAdvice: 'some warning advice',
+      config: { showSubmitForModerationButton: 'false' },
+    };
+
+    harness.request(context, ($) => {
+      expect($('[data-test-id="dashboard-warning-advice"]').length).toEqual(0);
+    });
+  }));
+
   it('should not render the warning advice on the dashboard page if not provided', createTestHarness(setup, (harness) => {
-    const context = {};
+    const context = { config: { showSubmitForModerationButton: 'true' } };
 
     harness.request(context, ($) => {
       expect($('[data-test-id="dashboard-warning-advice"]').length).toEqual(0);
@@ -168,15 +180,31 @@ describe('supplier - dashboard page', () => {
     });
   }));
 
-  it('should render the Submit for moderation button at the bottom of the page', createTestHarness(setup, (harness) => {
+  it('should render the Submit for moderation button at the bottom of the page if showSubmitForModerationButton is true', createTestHarness(setup, (harness) => {
     const context = {
       submitForModerationUrl: '/supplier/solution/S100000-001/submitForModeration',
+      config: {
+        showSubmitForModerationButton: 'true',
+      },
     };
 
     harness.request(context, ($) => {
       expect($('[data-test-id="dashboard-submit-for-moderation-button"] a').length).toEqual(1);
       expect($('[data-test-id="dashboard-submit-for-moderation-button"] a').text().trim()).toEqual('Submit for moderation');
       expect($('[data-test-id="dashboard-submit-for-moderation-button"] a').attr('href')).toEqual('/supplier/solution/S100000-001/submitForModeration');
+    });
+  }));
+
+  it('should not render the Submit for moderation button at the bottom of the page if showSubmitForModerationButton is false', createTestHarness(setup, (harness) => {
+    const context = {
+      submitForModerationUrl: '/supplier/solution/S100000-001/submitForModeration',
+      config: {
+        showSubmitForModerationButton: 'false',
+      },
+    };
+
+    harness.request(context, ($) => {
+      expect($('[data-test-id="dashboard-submit-for-moderation-button"] a').length).toEqual(0);
     });
   }));
 });
