@@ -23,6 +23,6 @@ module.exports = {
   // LOGGER_LEVEL options are info, warn, error, off
   loggerLevel: process.env.LOGGER_LEVEL || 'error',
 
-  // SHOW_SUBMIT_FOR_MODERATION_BUTTON
-  showSubmitForModerationButton: process.env.SHOW_SUBMIT_FOR_MODERATION_BUTTON || 'false',
+  // SHOW_SUBMIT_FOR_MODERATION
+  showSubmitForModerationButton: process.env.SHOW_SUBMIT_FOR_MODERATION || 'false',
 };
