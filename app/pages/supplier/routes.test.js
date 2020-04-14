@@ -1,12 +1,17 @@
 import request from 'supertest';
+import { createReadStream, readFileSync } from 'fs';
+import path from 'path';
 import { App } from '../../app';
 import routes from './routes';
 import * as dashboardControllers from '../common/dashboard/controller';
 import * as sectionControllers from '../common/section/controller';
 import * as subsectionControllers from './dashboard/subDashboards/controller';
 import * as previewControllers from '../common/preview/controller';
+import * as apiProvider from '../../apiProvider';
 
 jest.mock('../../logger');
+apiProvider.getDocument = jest.fn()
+  .mockImplementation(() => Promise.resolve({ data: createReadStream(path.resolve(__dirname, 'data.pdf')) }));
 
 const mockDashboardContext = {
   title: 'Dashboard title',
@@ -252,6 +257,20 @@ describe('GET /solution/:solutionId/preview', () => {
       .expect(200)
       .then((res) => {
         expect(res.text.includes('<h1 data-test-id="view-solution-page-solution-name" class="nhsuk-u-margin-bottom-2">Write on Time</h1>')).toEqual(true);
+        expect(res.text.includes('data-test-id="error-page-title"')).toEqual(false);
+      });
+  });
+});
+
+describe('GET /solution/:solutionId/document/:documentName', () => {
+  it('should return the correct status and text if there is no error', () => {
+    const app = new App().createApp();
+    app.use('/supplier', routes);
+    return request(app)
+      .get('/supplier/solution/1/document/somedoc')
+      .expect(200)
+      .then((res) => {
+        expect(res.text).toEqual(readFileSync(path.resolve(__dirname, 'data.pdf'), 'utf8'));
         expect(res.text.includes('data-test-id="error-page-title"')).toEqual(false);
       });
   });
