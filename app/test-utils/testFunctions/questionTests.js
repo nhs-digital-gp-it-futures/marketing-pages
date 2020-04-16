@@ -1,6 +1,6 @@
 import { runRadioButtonTests } from './questionTests/radioButtonTests';
 import { runtextAreaTests } from './questionTests/textAreaTests';
-import { runtextAreaNoCountTests } from './questionTests/textAreaNoCountTests'
+import { runtextAreaNoCountTests } from './questionTests/textAreaNoCountTests';
 import { runCheckboxTests } from './questionTests/checkboxTests';
 import { runTextFieldTests } from './questionTests/textFieldTests';
 import { runBulletpointListTests } from './questionTests/bulletpointListTests';
