@@ -4,7 +4,6 @@ import * as context from './createPreviewPageContext';
 
 jest.mock('../../../apiProvider', () => ({
   getData: jest.fn(),
-  getDocument: jest.fn(),
 }));
 jest.mock('./createPreviewPageContext', () => ({
   createPreviewPageContext: jest.fn(),
