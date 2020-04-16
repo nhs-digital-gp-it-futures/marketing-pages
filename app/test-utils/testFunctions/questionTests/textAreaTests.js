@@ -8,13 +8,12 @@ const textAreaTest = async ({ pageSetup, sectionManifest, questionId }) => {
     const expectedQuestion = sectionManifest.questions[questionId];
     const label = renderedQuestion.find('label.nhsuk-label');
     const hint = await renderedQuestion.find('span.nhsuk-hint');
-    const footer = await renderedQuestion.find('[data-test-id="textarea-field-footer"]');
-
+    const charCountMessage = await renderedQuestion.find('.govuk-character-count__message');
     await t
       .expect(await extractInnerText(label)).eql(expectedQuestion.mainAdvice)
       .expect(await extractInnerText(hint)).eql(expectedQuestion.additionalAdvice)
       .expect(renderedQuestion.find('textarea').count).eql(1)
-      .expect(await extractInnerText(footer)).eql(expectedQuestion.footerAdvice);
+      .expect(await extractInnerText(charCountMessage)).eql(`You have ${expectedQuestion.maxlength} characters remaining`);
   });
 };
 

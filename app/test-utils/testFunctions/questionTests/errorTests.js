@@ -93,10 +93,6 @@ const errorTests = ({
       .expect(await extractInnerText(renderedQuestion.find('.nhsuk-error-message'))).contains('Error:')
       .expect(await extractInnerText(renderedQuestion.find('.nhsuk-error-message'))).contains(expectedErrorMessage);
 
-    if (questionType === 'textarea-field') {
-      await t
-        .expect(renderedQuestion.find('.nhsuk-textarea--error').exists).ok();
-    }
     if (questionType === 'text-field') {
       await t
         .expect(renderedQuestion.find('.nhsuk-input--error').exists).ok();
