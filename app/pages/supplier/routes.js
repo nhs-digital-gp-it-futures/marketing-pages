@@ -96,7 +96,7 @@ router.get('/solution/:solutionId/document/:documentName', async (req, res) => {
   const { solutionId, documentName } = req.params;
   logger.info(`downloading Solution ${solutionId} document ${documentName}`);
   const response = await getDocument({ solutionId, documentName });
-  return response.data.pipe(res);
+  response.data.pipe(res);
 });
 
 module.exports = router;
