@@ -6,7 +6,7 @@
     "hardware-requirements": {
       "mainAdvice": "Hardware requirements (optional)",
       "additionalAdvice": "Provide information on any additional hardware that is required for your native mobile or tablet Catalogue Solution to function.",
-      "footerAdvice": "(Maximum number of characters 500)",
+      "maxlength": "300",
       "type": "textarea-field",
       "errorResponse": {
         "maxLength": "Hardware requirements response must be 500 characters or fewer"

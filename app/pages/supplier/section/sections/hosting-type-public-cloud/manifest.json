@@ -6,7 +6,7 @@
     "summary": {
       "mainAdvice": "Summary (optional)",
       "additionalAdvice": "Provide information on how your Catalogue Solution can be hosted.",
-      "footerAdvice": "(Maximum number of characters 500)",
+      "maxlength": "500",
       "type": "textarea-field",
       "errorResponse": {
         "maxLength": "Summary must be 500 characters or fewer"

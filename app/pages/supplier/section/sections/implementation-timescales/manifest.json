@@ -6,7 +6,7 @@
     "description": {
       "mainAdvice": "Implementation timescales (optional)",
       "additionalAdvice": "Detail the minimum, average and maximum number of working days required to implement your Catalogue Solution. Provide any information that could influence the timescales and any responsibilities expected of a buyer.",
-      "footerAdvice": "(Maximum number of characters 1,000)",
+      "maxlength": "1000",
       "type": "textarea-field",
       "errorResponse": {
         "maxLength": "Implementation timescales response must be 1,000 characters or fewer"
