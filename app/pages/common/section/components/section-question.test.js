@@ -44,19 +44,19 @@ describe('section-question', () => {
     }));
   });
 
-  describe('when question type is textarea-field-csv', () => {
+  describe('when question type is textarea-field-no-count', () => {
     it('should render the textarea-field component', createTestHarness(setup, (harness) => {
       const context = {
         params: {
           question: {
             id: 'question-id',
-            type: 'textarea-field-csv',
+            type: 'textarea-field-no-count',
           },
         },
       };
 
       harness.request(context, ($) => {
-        const question = $('div[data-test-id="section-question-textarea-field-csv"] > div');
+        const question = $('div[data-test-id="section-question-textarea-field-no-count"] > div');
         expect(question.length).toEqual(1);
       });
     }));
