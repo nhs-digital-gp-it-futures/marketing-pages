@@ -8,12 +8,13 @@ const textAreaTest = async ({ pageSetup, sectionManifest, questionId }) => {
     const expectedQuestion = sectionManifest.questions[questionId];
     const label = renderedQuestion.find('label.nhsuk-label');
     const hint = await renderedQuestion.find('span.nhsuk-hint');
-    const charCountMessage = await renderedQuestion.find('.govuk-character-count__message');
+    const footer = await renderedQuestion.find('[data-test-id="textarea-field-footer"]');
+
     await t
       .expect(await extractInnerText(label)).eql(expectedQuestion.mainAdvice)
       .expect(await extractInnerText(hint)).eql(expectedQuestion.additionalAdvice)
       .expect(renderedQuestion.find('textarea').count).eql(1)
-      .expect(await extractInnerText(charCountMessage)).eql(`You have ${expectedQuestion.maxlength} characters remaining`);
+      .expect(await extractInnerText(footer)).eql(expectedQuestion.footerAdvice);
   });
 };
 
@@ -26,7 +27,7 @@ const populateTextAreaTest = async ({ pageSetup, questionId, data }) => {
   });
 };
 
-export const runtextAreaTests = async ({
+export const runtextAreaNoCountTests = async ({
   pageSetup,
   sectionManifest,
   questionId,

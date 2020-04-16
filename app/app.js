@@ -53,6 +53,7 @@ class App {
       path.join(__dirname, '/../node_modules/buying-catalogue-components/app/components/input/'),
       path.join(__dirname, '/../node_modules/buying-catalogue-components/app/components/view/'),
       path.join(__dirname, '/../node_modules/nhsuk-frontend/packages/'),
+      path.join(__dirname, '/../node_modules/govuk-frontend/govuk/'),
     ];
 
     const env = nunjucks.configure(appViews, {

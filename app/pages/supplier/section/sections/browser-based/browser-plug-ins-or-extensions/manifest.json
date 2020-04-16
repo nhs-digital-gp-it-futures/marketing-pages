@@ -22,7 +22,7 @@
       "errorResponse": {
         "maxLength": "Additional information must be 500 characters or fewer"
       },
-      "footerAdvice": "(Maximum number of characters 500)"
+      "maxlength": "500"
     }
   },
   "submitText" : "Save and return",

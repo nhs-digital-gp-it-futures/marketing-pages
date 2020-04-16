@@ -1,3 +1,4 @@
+{% from 'components/textarea-field-no-count/macro.njk' import textareaFieldNoCount %}
 {% from 'components/textarea-field/macro.njk' import textareaField %}
 {% from 'components/text-field/macro.njk' import textField %}
 {% from './fields/bulletpoint-list.njk' import bulletpointList %}
@@ -22,8 +23,8 @@
       {{ textareaField(params) }}
     {% endif %}
 
-    {% if (params.question.type === 'textarea-field-csv') %}
-      {{ textareaField(params) }}
+    {% if (params.question.type === 'textarea-field-no-count') %}
+      {{ textareaFieldNoCount(params) }}
     {% endif %}
 
     {% if (params.question.type === 'text-field') %}

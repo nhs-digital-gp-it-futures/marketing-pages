@@ -6,7 +6,7 @@
     "epics": {
       "mainAdvice": "Paste the csv here",
       "additionalAdvice": "If you paste nothing you get nothing",
-      "type": "textarea-field-csv",
+      "type": "textarea-field-no-count",
       "footerAdvice": "CSV file headings required: 'Epic ID' and 'Epic Final Assessment Result'"
     }
   },

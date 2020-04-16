@@ -6,7 +6,7 @@
     "additional-information": {
       "mainAdvice": "Additional information (optional)",
       "additionalAdvice": "Provide additional information about your native desktop Catalogue Solution.",
-      "footerAdvice": "(Maximum number of characters 500)",
+      "maxlength": "500",
       "type": "textarea-field",
       "errorResponse": {
         "maxLength": "Additional information must be 500 characters or fewer"
