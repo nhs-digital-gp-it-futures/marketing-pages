@@ -35,6 +35,7 @@ class App {
     // Middleware to serve static assets
     this.app.use(config.baseUrl ? config.baseUrl : '/', express.static(path.join(__dirname, '/../public/')));
     this.app.use(`${config.baseUrl}/nhsuk-frontend`, express.static(path.join(__dirname, '/../node_modules/nhsuk-frontend/packages')));
+    this.app.use(`${config.baseUrl}/govuk-frontend`, express.static(path.join(__dirname, '/../node_modules/govuk-frontend/govuk')));
 
     // View engine (Nunjucks)
     this.app.set('view engine', 'njk');
