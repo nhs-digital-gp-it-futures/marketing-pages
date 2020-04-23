@@ -1,4 +1,5 @@
 export const createPreviewPageContext = ({ previewData }) => ({
+  title: previewData.name,
   solutionHeader: {
     id: previewData.id,
     name: previewData.name,

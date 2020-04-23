@@ -1,6 +1,7 @@
 import { createPreviewPageContext } from './createPreviewPageContext';
 
 const expectedContext = {
+  title: 'Write on Time',
   solutionHeader: {
     id: '100000-001',
     name: 'Write on Time',
