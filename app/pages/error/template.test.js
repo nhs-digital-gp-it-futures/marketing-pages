@@ -1,4 +1,4 @@
-import { createTestHarness } from '../../test-utils/testHarness';
+import { componentTester } from '../../test-utils/componentTester';
 
 const setup = {
   template: {
@@ -7,7 +7,7 @@ const setup = {
 };
 
 describe('error page', () => {
-  it('should render the error title', createTestHarness(setup, (harness) => {
+  it('should render the error title', componentTester(setup, (harness) => {
     const context = { message: 'an error message' };
 
     harness.request(context, ($) => {
@@ -17,7 +17,7 @@ describe('error page', () => {
     });
   }));
 
-  it('should render a backLink to the home page', createTestHarness(setup, (harness) => {
+  it('should render a backLink to the home page', componentTester(setup, (harness) => {
     const context = {};
 
     harness.request(context, ($) => {

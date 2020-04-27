@@ -1,4 +1,4 @@
-import { createTestHarness } from '../../../../../test-utils/testHarness';
+import { componentTester } from '../../../../../test-utils/componentTester';
 
 const setup = {
   component: {
@@ -8,7 +8,7 @@ const setup = {
 };
 
 describe('radiobuttonOptions', () => {
-  it('should render the main advice', createTestHarness(setup, (harness) => {
+  it('should render the main advice', componentTester(setup, (harness) => {
     const context = {
       params: {
         question: {
@@ -24,7 +24,7 @@ describe('radiobuttonOptions', () => {
     });
   }));
 
-  it('should render the additional advice', createTestHarness(setup, (harness) => {
+  it('should render the additional advice', componentTester(setup, (harness) => {
     const context = {
       params: {
         question: {
@@ -41,7 +41,7 @@ describe('radiobuttonOptions', () => {
     });
   }));
 
-  it('should render the radio button options', createTestHarness(setup, (harness) => {
+  it('should render the radio button options', componentTester(setup, (harness) => {
     const context = {
       params: {
         question: {
@@ -70,7 +70,7 @@ describe('radiobuttonOptions', () => {
     });
   }));
 
-  it('should render the checked radio button option', createTestHarness(setup, (harness) => {
+  it('should render the checked radio button option', componentTester(setup, (harness) => {
     const context = {
       params: {
         question: {
@@ -102,7 +102,7 @@ describe('radiobuttonOptions', () => {
     });
   }));
 
-  it('should render the radiobutton option as an error if the context provided contains an error', createTestHarness(setup, (harness) => {
+  it('should render the radiobutton option as an error if the context provided contains an error', componentTester(setup, (harness) => {
     const context = {
       params: {
         question: {
@@ -133,7 +133,7 @@ describe('radiobuttonOptions', () => {
     });
   }));
 
-  it('should render the correct label classes if is part of a multi question', createTestHarness(setup, (harness) => {
+  it('should render the correct label classes if is part of a multi question', componentTester(setup, (harness) => {
     const context = {
       params: {
         question: {
@@ -153,7 +153,7 @@ describe('radiobuttonOptions', () => {
     });
   }));
 
-  it('should render the correct label classes if is not part of a multi question', createTestHarness(setup, (harness) => {
+  it('should render the correct label classes if is not part of a multi question', componentTester(setup, (harness) => {
     const context = {
       params: {
         question: {
@@ -172,7 +172,7 @@ describe('radiobuttonOptions', () => {
     });
   }));
 
-  it('should not render any additional advice if not provided', createTestHarness(setup, (harness) => {
+  it('should not render any additional advice if not provided', componentTester(setup, (harness) => {
     const context = {
       params: {
         question: {

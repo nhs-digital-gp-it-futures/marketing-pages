@@ -1,4 +1,4 @@
-import { createTestHarness } from '../../../../../test-utils/testHarness';
+import { componentTester } from '../../../../../test-utils/componentTester';
 
 const setup = {
   component: {
@@ -8,7 +8,7 @@ const setup = {
 };
 
 describe('comboboxOptions', () => {
-  it('should render the main advice', createTestHarness(setup, (harness) => {
+  it('should render the main advice', componentTester(setup, (harness) => {
     const context = {
       params: {
         question: {
@@ -24,7 +24,7 @@ describe('comboboxOptions', () => {
     });
   }));
 
-  it('should render the additional advice', createTestHarness(setup, (harness) => {
+  it('should render the additional advice', componentTester(setup, (harness) => {
     const context = {
       params: {
         question: {
@@ -40,7 +40,7 @@ describe('comboboxOptions', () => {
     });
   }));
 
-  it('should render the combo box', createTestHarness(setup, (harness) => {
+  it('should render the combo box', componentTester(setup, (harness) => {
     const context = {
       params: {
         question: {
@@ -61,7 +61,7 @@ describe('comboboxOptions', () => {
     });
   }));
 
-  it('should render the combo box with options', createTestHarness(setup, (harness) => {
+  it('should render the combo box with options', componentTester(setup, (harness) => {
     const context = {
       params: {
         question: {
@@ -94,7 +94,7 @@ describe('comboboxOptions', () => {
     });
   }));
 
-  it('should render the combo box with a selected option', createTestHarness(setup, (harness) => {
+  it('should render the combo box with a selected option', componentTester(setup, (harness) => {
     const context = {
       params: {
         question: {
@@ -128,7 +128,7 @@ describe('comboboxOptions', () => {
     });
   }));
 
-  it('should render the combo box with a disabled option', createTestHarness(setup, (harness) => {
+  it('should render the combo box with a disabled option', componentTester(setup, (harness) => {
     const context = {
       params: {
         question: {
@@ -162,7 +162,7 @@ describe('comboboxOptions', () => {
     });
   }));
 
-  it('should render the combo box with an error if the context provided contains an error', createTestHarness(setup, (harness) => {
+  it('should render the combo box with an error if the context provided contains an error', componentTester(setup, (harness) => {
     const context = {
       params: {
         question: {
@@ -196,7 +196,7 @@ describe('comboboxOptions', () => {
     });
   }));
 
-  it('should render the correct label classes if is part of a multi question', createTestHarness(setup, (harness) => {
+  it('should render the correct label classes if is part of a multi question', componentTester(setup, (harness) => {
     const context = {
       params: {
         question: {
@@ -216,7 +216,7 @@ describe('comboboxOptions', () => {
     });
   }));
 
-  it('should render the correct label classes if is not part of a multi question', createTestHarness(setup, (harness) => {
+  it('should render the correct label classes if is not part of a multi question', componentTester(setup, (harness) => {
     const context = {
       params: {
         question: {
@@ -235,7 +235,7 @@ describe('comboboxOptions', () => {
     });
   }));
 
-  it('should not render any additional advice if not provided', createTestHarness(setup, (harness) => {
+  it('should not render any additional advice if not provided', componentTester(setup, (harness) => {
     const context = {
       params: {
         question: {

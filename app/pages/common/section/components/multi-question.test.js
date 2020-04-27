@@ -1,4 +1,4 @@
-import { createTestHarness } from '../../../../test-utils/testHarness';
+import { componentTester } from '../../../../test-utils/componentTester';
 
 const setup = {
   component: {
@@ -8,7 +8,7 @@ const setup = {
 };
 
 describe('multi-question', () => {
-  it('should render the main advice of the question', createTestHarness(setup, (harness) => {
+  it('should render the main advice of the question', componentTester(setup, (harness) => {
     const context = {
       params: {
         parentQuestion: {
@@ -24,7 +24,7 @@ describe('multi-question', () => {
     });
   }));
 
-  it('should render any additional advice', createTestHarness(setup, (harness) => {
+  it('should render any additional advice', componentTester(setup, (harness) => {
     const context = {
       params: {
         parentQuestion: {
@@ -41,7 +41,7 @@ describe('multi-question', () => {
     });
   }));
 
-  it('should render a single inner question', createTestHarness(setup, (harness) => {
+  it('should render a single inner question', componentTester(setup, (harness) => {
     const context = {
       params: {
         parentQuestion: {
@@ -61,7 +61,7 @@ describe('multi-question', () => {
     });
   }));
 
-  it('should render multiple inner question', createTestHarness(setup, (harness) => {
+  it('should render multiple inner question', componentTester(setup, (harness) => {
     const context = {
       params: {
         parentQuestion: {

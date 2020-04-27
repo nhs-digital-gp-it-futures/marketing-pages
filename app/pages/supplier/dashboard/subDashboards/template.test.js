@@ -1,4 +1,4 @@
-import { createTestHarness } from '../../../../test-utils/testHarness';
+import { componentTester } from '../../../../test-utils/componentTester';
 
 const setup = {
   template: {
@@ -7,7 +7,7 @@ const setup = {
 };
 
 describe('sub dashboard page', () => {
-  it('should render the title of the sub dashboard', createTestHarness(setup, (harness) => {
+  it('should render the title of the sub dashboard', componentTester(setup, (harness) => {
     const context = {
       title: 'Title of the sub dashboard',
     };
@@ -17,7 +17,7 @@ describe('sub dashboard page', () => {
     });
   }));
 
-  it('should render the main advice of the sub dashboard', createTestHarness(setup, (harness) => {
+  it('should render the main advice of the sub dashboard', componentTester(setup, (harness) => {
     const context = {
       title: 'Title of the sub dashboard',
       mainAdvice: 'This is the main advice for this sub dashboard',
@@ -28,7 +28,7 @@ describe('sub dashboard page', () => {
     });
   }));
 
-  it('should render any additional advice of the sub dashboard', createTestHarness(setup, (harness) => {
+  it('should render any additional advice of the sub dashboard', componentTester(setup, (harness) => {
     const context = {
       title: 'Title of the sub dashboard',
       additionalAdvice: [
@@ -44,7 +44,7 @@ describe('sub dashboard page', () => {
     });
   }));
 
-  it('should render the sectionGroups on the sub dashboard page', createTestHarness(setup, (harness) => {
+  it('should render the sectionGroups on the sub dashboard page', componentTester(setup, (harness) => {
     const context = {
       sectionGroups: [
         {
@@ -59,7 +59,7 @@ describe('sub dashboard page', () => {
     });
   }));
 
-  it('should render the return to all sections link', createTestHarness(setup, (harness) => {
+  it('should render the return to all sections link', componentTester(setup, (harness) => {
     const context = {
       title: 'Title of the section',
     };
