@@ -1,4 +1,4 @@
-import { createTestHarness } from '../../../../test-utils/testHarness';
+import { componentTester } from '../../../../test-utils/componentTester';
 
 const setup = {
   component: {
@@ -9,7 +9,7 @@ const setup = {
 
 describe('section-question', () => {
   describe('when question type is bulletpoint-list', () => {
-    it('should render the bullepoint-list component', createTestHarness(setup, (harness) => {
+    it('should render the bullepoint-list component', componentTester(setup, (harness) => {
       const context = {
         params: {
           question: {
@@ -27,7 +27,7 @@ describe('section-question', () => {
   });
 
   describe('when question type is textarea-field', () => {
-    it('should render the textarea-field component', createTestHarness(setup, (harness) => {
+    it('should render the textarea-field component', componentTester(setup, (harness) => {
       const context = {
         params: {
           question: {
@@ -45,7 +45,7 @@ describe('section-question', () => {
   });
 
   describe('when question type is textarea-field-no-count', () => {
-    it('should render the textarea-field component', createTestHarness(setup, (harness) => {
+    it('should render the textarea-field component', componentTester(setup, (harness) => {
       const context = {
         params: {
           question: {
@@ -63,7 +63,7 @@ describe('section-question', () => {
   });
 
   describe('when question type is text-field', () => {
-    it('should render the text-field component', createTestHarness(setup, (harness) => {
+    it('should render the text-field component', componentTester(setup, (harness) => {
       const context = {
         params: {
           question: {
@@ -81,7 +81,7 @@ describe('section-question', () => {
   });
 
   describe('when question type is checkbox-options', () => {
-    it('should render the checkbox-options component', createTestHarness(setup, (harness) => {
+    it('should render the checkbox-options component', componentTester(setup, (harness) => {
       const context = {
         params: {
           question: {
@@ -99,7 +99,7 @@ describe('section-question', () => {
   });
 
   describe('when question type is radiobutton-options', () => {
-    it('should render the radiobutton-options component', createTestHarness(setup, (harness) => {
+    it('should render the radiobutton-options component', componentTester(setup, (harness) => {
       const context = {
         params: {
           question: {
@@ -117,7 +117,7 @@ describe('section-question', () => {
   });
 
   describe('when question type is combobox-options', () => {
-    it('should render the combobox-options component', createTestHarness(setup, (harness) => {
+    it('should render the combobox-options component', componentTester(setup, (harness) => {
       const context = {
         params: {
           question: {

@@ -1,4 +1,4 @@
-import { createTestHarness } from '../../../test-utils/testHarness';
+import { componentTester } from '../../../test-utils/componentTester';
 
 const setup = {
   template: {
@@ -7,7 +7,7 @@ const setup = {
 };
 
 describe('preview page', () => {
-  it('should render the backLink component', createTestHarness(setup, (harness) => {
+  it('should render the backLink component', componentTester(setup, (harness) => {
     const context = {
       returnToDashboardUrl: '/supplier/solution/100000-001',
     };
@@ -20,7 +20,7 @@ describe('preview page', () => {
     });
   }));
 
-  it('should render the viewSolution component', createTestHarness(setup, (harness) => {
+  it('should render the viewSolution component', componentTester(setup, (harness) => {
     const context = {
       solutionHeader: {
         id: '100000-001',

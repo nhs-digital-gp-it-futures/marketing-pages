@@ -1,4 +1,4 @@
-import { createTestHarness } from '../../../../test-utils/testHarness';
+import { componentTester } from '../../../../test-utils/componentTester';
 
 const aSectionContext = (
   title, requirement = 'Mandatory', status = 'INCOMPLETE', isActive = true, defaultMessage = undefined,
@@ -23,7 +23,7 @@ const setup = {
 };
 
 describe('dashboard-section', () => {
-  it('should render the section title', createTestHarness(setup, (harness) => {
+  it('should render the section title', componentTester(setup, (harness) => {
     const context = aSectionContext('Some section Title');
 
     harness.request(context, ($) => {
@@ -31,7 +31,7 @@ describe('dashboard-section', () => {
     });
   }));
 
-  it('should render the requirement of the section', createTestHarness(setup, (harness) => {
+  it('should render the requirement of the section', componentTester(setup, (harness) => {
     const context = aSectionContext('Some section Title');
 
     harness.request(context, ($) => {
@@ -39,7 +39,7 @@ describe('dashboard-section', () => {
     });
   }));
 
-  it('should render status of the section as INCOMPLETE', createTestHarness(setup, (harness) => {
+  it('should render status of the section as INCOMPLETE', componentTester(setup, (harness) => {
     const context = aSectionContext('Some section Title');
 
     harness.request(context, ($) => {
@@ -47,7 +47,7 @@ describe('dashboard-section', () => {
     });
   }));
 
-  it('should render status of the section as COMPLETE', createTestHarness(setup, (harness) => {
+  it('should render status of the section as COMPLETE', componentTester(setup, (harness) => {
     const context = aSectionContext('Some section Title', 'Mandatory', 'COMPLETE');
 
     harness.request(context, ($) => {
@@ -55,7 +55,7 @@ describe('dashboard-section', () => {
     });
   }));
 
-  it('should render defaultMessage for the section if the showDetaultMessage flag is true', createTestHarness(setup, (harness) => {
+  it('should render defaultMessage for the section if the showDetaultMessage flag is true', componentTester(setup, (harness) => {
     const context = aSectionContext('Some section Title', undefined, undefined, false, 'some default message');
 
     harness.request(context, ($) => {
@@ -63,7 +63,7 @@ describe('dashboard-section', () => {
     });
   }));
 
-  it('should not render the section title as a link when not active', createTestHarness(setup, (harness) => {
+  it('should not render the section title as a link when not active', componentTester(setup, (harness) => {
     const context = aSectionContext('Some section Title', undefined, undefined, false, 'some default message');
 
     harness.request(context, ($) => {

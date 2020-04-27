@@ -1,4 +1,4 @@
-import { createTestHarness } from '../../../../../test-utils/testHarness';
+import { componentTester } from '../../../../../test-utils/componentTester';
 
 const setup = {
   component: {
@@ -8,7 +8,7 @@ const setup = {
 };
 
 describe('checkboxOptions', () => {
-  it('should render the main advice', createTestHarness(setup, (harness) => {
+  it('should render the main advice', componentTester(setup, (harness) => {
     const context = {
       params: {
         question: {
@@ -25,7 +25,7 @@ describe('checkboxOptions', () => {
     });
   }));
 
-  it('should render the additional advice', createTestHarness(setup, (harness) => {
+  it('should render the additional advice', componentTester(setup, (harness) => {
     const context = {
       params: {
         question: {
@@ -42,7 +42,7 @@ describe('checkboxOptions', () => {
     });
   }));
 
-  it('should render the checkbox options', createTestHarness(setup, (harness) => {
+  it('should render the checkbox options', componentTester(setup, (harness) => {
     const context = {
       params: {
         question: {
@@ -71,7 +71,7 @@ describe('checkboxOptions', () => {
     });
   }));
 
-  it('should render the checked checkbox option', createTestHarness(setup, (harness) => {
+  it('should render the checked checkbox option', componentTester(setup, (harness) => {
     const context = {
       params: {
         question: {
@@ -103,7 +103,7 @@ describe('checkboxOptions', () => {
     });
   }));
 
-  it('should render the checkbox option as an error if the context provided contains an error', createTestHarness(setup, (harness) => {
+  it('should render the checkbox option as an error if the context provided contains an error', componentTester(setup, (harness) => {
     const context = {
       params: {
         question: {
@@ -135,7 +135,7 @@ describe('checkboxOptions', () => {
     });
   }));
 
-  it('should render the correct label classes if is part of a multi question', createTestHarness(setup, (harness) => {
+  it('should render the correct label classes if is part of a multi question', componentTester(setup, (harness) => {
     const context = {
       params: {
         question: {
@@ -155,7 +155,7 @@ describe('checkboxOptions', () => {
     });
   }));
 
-  it('should render the correct label classes if is not part of a multi question', createTestHarness(setup, (harness) => {
+  it('should render the correct label classes if is not part of a multi question', componentTester(setup, (harness) => {
     const context = {
       params: {
         question: {
@@ -174,7 +174,7 @@ describe('checkboxOptions', () => {
     });
   }));
 
-  it('should not render any additional advice if not provided', createTestHarness(setup, (harness) => {
+  it('should not render any additional advice if not provided', componentTester(setup, (harness) => {
     const context = {
       params: {
         question: {
