@@ -6,12 +6,14 @@ import { logger } from '../../logger';
 import { withCatch } from '../../common/helpers/routerHelper';
 import { getPreviewPageContext } from '../common/preview/controller';
 import { getDocument } from '../../apiProvider';
+import includesContext from '../../includes/manifest.json';
 
 const router = express.Router();
 const config = require('../../config');
 
 const addContext = ({ context }) => ({
   ...context,
+  ...includesContext,
   config,
 });
 
