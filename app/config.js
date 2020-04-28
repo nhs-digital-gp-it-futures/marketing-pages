@@ -11,6 +11,8 @@ module.exports = {
   // Port to run local development server on
   port: process.env.PORT || 3002,
 
+  publicBrowseBaseUrl: process.env.PUBLIC_BROWSE_BASE_URL || '/',
+
   // The base uri the app is running on
   appBaseUri: process.env.APP_BASE_URI || 'http://localhost:3002',
 

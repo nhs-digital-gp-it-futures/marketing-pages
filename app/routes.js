@@ -4,12 +4,14 @@ import { errorHandler } from './pages/error/errorHandler';
 import healthRoutes from './pages/health/routes';
 import supplierRoutes from './pages/supplier/routes';
 import authorityRoutes from './pages/authority/routes';
+import includesContext from './includes/manifest.json';
 
 const router = express.Router();
 const config = require('./config');
 
 const addContext = ({ context }) => ({
   ...context,
+  ...includesContext,
   config,
 });
 
