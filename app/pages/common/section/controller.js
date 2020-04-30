@@ -1,3 +1,4 @@
+import { ErrorContext } from 'buying-catalogue-library';
 import { getSectionManifest } from '../../../manifestProvider';
 import { getData, putData } from '../../../apiProvider';
 import { createSectionPageContext } from './createSectionPageContext';
@@ -21,7 +22,10 @@ export const getSectionPageContext = async ({
     });
     return context;
   }
-  throw new Error('No data returned');
+  throw new ErrorContext({
+    status: 404,
+    description: 'No data returned',
+  });
 };
 
 export const getSectionPageErrorContext = async ({

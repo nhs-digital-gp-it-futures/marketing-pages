@@ -15,11 +15,6 @@ Object.keys(config).map((configKey) => {
 // Routes
 const app = new App().createApp();
 app.use(config.baseUrl ? config.baseUrl : '/', routes);
-if (config.baseUrl) {
-  app.use('/', (req, res) => {
-    res.redirect(config.baseUrl);
-  });
-}
 
 // Run application on configured port
 if (config.env === 'development') {
