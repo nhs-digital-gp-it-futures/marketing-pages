@@ -1,3 +1,4 @@
+import { ErrorContext } from 'buying-catalogue-library';
 import { getDashboardManifest } from '../../../manifestProvider';
 import { getData, putData } from '../../../apiProvider';
 import { createDashboardPageContext } from './createDashboardPageContext';
@@ -20,7 +21,10 @@ export const getMarketingPageDashboardContext = async ({
     });
     return context;
   }
-  throw new Error('No data returned');
+  throw new ErrorContext({
+    status: 404,
+    description: 'No data returned',
+  });
 };
 
 export const postSubmitForModeration = async ({ solutionId }) => {

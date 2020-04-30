@@ -1,3 +1,4 @@
+import { ErrorContext } from 'buying-catalogue-library';
 import { getSubDashboardManifest } from '../../../../manifestProvider';
 import { getData } from '../../../../apiProvider';
 import { createDashboardPageContext } from '../../../common/dashboard/createDashboardPageContext';
@@ -15,5 +16,8 @@ export const getSubDashboardPageContext = async ({ solutionId, dashboardId }) =>
     });
     return context;
   }
-  throw new Error('No data returned');
+  throw new ErrorContext({
+    status: 404,
+    description: 'No data returned',
+  });
 };
