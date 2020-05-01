@@ -1,12 +1,13 @@
 import express from 'express';
+import { getDocument } from 'buying-catalogue-library';
 import { getMarketingPageDashboardContext, postSubmitForModeration } from '../common/dashboard/controller';
 import { getSubDashboardPageContext } from './dashboard/subDashboards/controller';
 import { getSectionPageContext, getSectionPageErrorContext, postSection } from '../common/section/controller';
 import { logger } from '../../logger';
 import { withCatch } from '../../common/helpers/routerHelper';
 import { getPreviewPageContext } from '../common/preview/controller';
-import { getDocument } from '../../apiProvider';
 import includesContext from '../../includes/manifest.json';
+import { getEndpoint } from '../../endpoints';
 
 const router = express.Router();
 const config = require('../../config');
@@ -94,11 +95,12 @@ router.get('/solution/:solutionId/preview', withCatch(async (req, res) => {
   res.render('pages/common/preview/template', addContext({ context }));
 }));
 
-router.get('/solution/:solutionId/document/:documentName', async (req, res) => {
+router.get('/solution/:solutionId/document/:documentName', withCatch(async (req, res) => {
   const { solutionId, documentName } = req.params;
   logger.info(`downloading Solution ${solutionId} document ${documentName}`);
-  const response = await getDocument({ solutionId, documentName });
-  response.data.pipe(res);
-});
+  const endpoint = getEndpoint({ endpointLocator: 'getDocument', options: { solutionId, documentName } });
+  const response = await getDocument({ endpoint, logger });
+  if (response.data) response.data.pipe(res);
+}));
 
 module.exports = router;

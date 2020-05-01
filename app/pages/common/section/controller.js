@@ -1,10 +1,10 @@
-import { ErrorContext } from 'buying-catalogue-library';
+import { ErrorContext, getData, putData } from 'buying-catalogue-library';
 import { getSectionManifest } from '../../../manifestProvider';
-import { getData, putData } from '../../../apiProvider';
 import { createSectionPageContext } from './createSectionPageContext';
 import { transformSectionData } from './helpers/transformSectionData';
 import { createPostSectionResponse } from './helpers/createPostSectionResponse';
 import { logger } from '../../../logger';
+import { getEndpoint } from '../../../endpoints';
 
 export const getSectionPageContext = async ({
   solutionId, dashboardId, sectionId, userContextType = 'supplier',
@@ -14,7 +14,8 @@ export const getSectionPageContext = async ({
     sectionId,
     userContextType,
   });
-  const sectionData = await getData({ endpointLocator: 'getSectionData', options: { solutionId, sectionId } });
+  const endpoint = getEndpoint({ endpointLocator: 'getSectionData', options: { solutionId, sectionId } });
+  const sectionData = await getData({ endpoint, logger });
   if (sectionData) {
     const formData = sectionData;
     const context = createSectionPageContext({
@@ -55,7 +56,8 @@ export const postSection = async ({
   });
   const transformedSectionData = await transformSectionData({ sectionManifest, sectionData });
   try {
-    await putData({ endpointLocator: 'putSectionData', options: { solutionId, sectionId }, body: transformedSectionData });
+    const endpoint = getEndpoint({ endpointLocator: 'putSectionData', options: { solutionId, sectionId } });
+    await putData({ endpoint, body: transformedSectionData, logger });
 
     const response = createPostSectionResponse({ solutionId, sectionManifest, userContextType });
     return response;

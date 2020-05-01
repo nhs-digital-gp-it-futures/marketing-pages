@@ -1,11 +1,13 @@
-import { ErrorContext } from 'buying-catalogue-library';
+import { ErrorContext, getData } from 'buying-catalogue-library';
 import { getSubDashboardManifest } from '../../../../manifestProvider';
-import { getData } from '../../../../apiProvider';
 import { createDashboardPageContext } from '../../../common/dashboard/createDashboardPageContext';
+import { logger } from '../../../../logger';
+import { getEndpoint } from '../../../../endpoints';
 
 export const getSubDashboardPageContext = async ({ solutionId, dashboardId }) => {
   const dashboardManifest = getSubDashboardManifest({ dashboardId });
-  const sectionData = await getData({ endpointLocator: 'getSubDashboardData', options: { solutionId, dashboardId } });
+  const endpoint = getEndpoint({ endpointLocator: 'getSubDashboardData', options: { solutionId, dashboardId } });
+  const sectionData = await getData({ endpoint, logger });
 
   if (sectionData) {
     const context = createDashboardPageContext({

@@ -1,14 +1,12 @@
+import { getData } from 'buying-catalogue-library';
 import { status } from '../status';
 import { getReadyStatus } from './getReadyStatus';
-import * as apiProvider from '../../../apiProvider';
 
-jest.mock('../../../apiProvider', () => ({
-  getData: jest.fn(),
-}));
+jest.mock('buying-catalogue-library');
 
 describe('getReadyStatus', () => {
   it('should return "Healthy" when BuyingCatalogueApi and DocumentApi are both "Healthy"', async () => {
-    apiProvider.getData
+    getData
       .mockReturnValueOnce(status.healthy.message)
       .mockReturnValueOnce(status.healthy.message);
 
@@ -16,7 +14,7 @@ describe('getReadyStatus', () => {
   });
 
   it('should return "Degraded" when BuyingCatalogueApi is "Healthy" and DocumentApi is "Degraded"', async () => {
-    apiProvider.getData
+    getData
       .mockReturnValueOnce(status.healthy.message)
       .mockReturnValueOnce(status.degraded.message);
 
@@ -24,7 +22,7 @@ describe('getReadyStatus', () => {
   });
 
   it('should return "Degraded" when BuyingCatalogueApi is "Healthy" and DocumentApi is "Unhealthy"', async () => {
-    apiProvider.getData
+    getData
       .mockReturnValueOnce(status.healthy.message)
       .mockReturnValueOnce(status.unhealthy.message);
 
@@ -32,7 +30,7 @@ describe('getReadyStatus', () => {
   });
 
   it('should return "Degraded" when BuyingCatalogueApi is "Degraded" and DocumentApi is "Healthy"', async () => {
-    apiProvider.getData
+    getData
       .mockReturnValueOnce(status.degraded.message)
       .mockReturnValueOnce(status.healthy.message);
 
@@ -40,7 +38,7 @@ describe('getReadyStatus', () => {
   });
 
   it('should return "Degraded" when BuyingCatalogueApi is "Degraded" and DocumentApi is "Degraded"', async () => {
-    apiProvider.getData
+    getData
       .mockReturnValueOnce(status.degraded.message)
       .mockReturnValueOnce(status.degraded.message);
 
@@ -48,7 +46,7 @@ describe('getReadyStatus', () => {
   });
 
   it('should return "Degraded" when BuyingCatalogueApi is "Degraded" and DocumentApi is "Unhealthy"', async () => {
-    apiProvider.getData
+    getData
       .mockReturnValueOnce(status.degraded.message)
       .mockReturnValueOnce(status.unhealthy.message);
 
@@ -56,7 +54,7 @@ describe('getReadyStatus', () => {
   });
 
   it('should return "Unhealthy" when BuyingCatalogueApi is "Unhealthy" and DocumentApi is "Healthy"', async () => {
-    apiProvider.getData
+    getData
       .mockReturnValueOnce(status.unhealthy.message)
       .mockReturnValueOnce(status.healthy.message);
 
@@ -64,7 +62,7 @@ describe('getReadyStatus', () => {
   });
 
   it('should return "Unhealthy" when BuyingCatalogueApi is "Unhealthy" and DocumentApi is "Degraded"', async () => {
-    apiProvider.getData
+    getData
       .mockReturnValueOnce(status.unhealthy.message)
       .mockReturnValueOnce(status.degraded.message);
 
@@ -72,7 +70,7 @@ describe('getReadyStatus', () => {
   });
 
   it('should return "Unhealthy" when BuyingCatalogueApi is "Unhealthy" and DocumentApi is "Unhealthy"', async () => {
-    apiProvider.getData
+    getData
       .mockReturnValueOnce(status.unhealthy.message)
       .mockReturnValueOnce(status.unhealthy.message);
 

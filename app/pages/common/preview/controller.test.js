@@ -1,10 +1,10 @@
+import { getData } from 'buying-catalogue-library';
 import { getPreviewPageContext } from './controller';
-import * as apiProvider from '../../../apiProvider';
 import * as context from './createPreviewPageContext';
+import { logger } from '../../../logger';
+import { buyingCatalogueApiHost } from '../../../config';
 
-jest.mock('../../../apiProvider', () => ({
-  getData: jest.fn(),
-}));
+jest.mock('buying-catalogue-library');
 jest.mock('./createPreviewPageContext', () => ({
   createPreviewPageContext: jest.fn(),
 }));
@@ -24,24 +24,24 @@ const previewData = {
 
 describe('preview controller', () => {
   afterEach(() => {
-    apiProvider.getData.mockReset();
+    getData.mockReset();
     context.createPreviewPageContext.mockReset();
   });
 
   it('should call getData with the correct params', async () => {
-    apiProvider.getData.mockResolvedValueOnce(previewData);
+    getData.mockResolvedValueOnce(previewData);
 
     await getPreviewPageContext({ solutionId: 'some-solution-id', dashboardId: 'some-dashboard-id' });
 
-    expect(apiProvider.getData.mock.calls.length).toEqual(1);
-    expect(apiProvider.getData).toHaveBeenCalledWith({
-      endpointLocator: 'getPreviewData',
-      options: { solutionId: 'some-solution-id' },
+    expect(getData.mock.calls.length).toEqual(1);
+    expect(getData).toHaveBeenCalledWith({
+      endpoint: `${buyingCatalogueApiHost}/api/v1/Solutions/some-solution-id/preview`,
+      logger,
     });
   });
 
   it('should call createPreviewPageContext with the correct params when preview data is returned by the ApiProvider', async () => {
-    apiProvider.getData.mockResolvedValueOnce(previewData);
+    getData.mockResolvedValueOnce(previewData);
 
     await getPreviewPageContext({ solutionId: 'some-solution-id' });
 
@@ -52,7 +52,7 @@ describe('preview controller', () => {
   it('should return the context', async () => {
     const mockReturnData = { data: {} };
     const mockContext = { section: 'context' };
-    apiProvider.getData.mockReturnValueOnce(mockReturnData);
+    getData.mockReturnValueOnce(mockReturnData);
     context.createPreviewPageContext.mockReturnValueOnce(mockContext);
 
     const response = await getPreviewPageContext({ solutionId: 'some-solution-id' });
@@ -61,7 +61,7 @@ describe('preview controller', () => {
   });
 
   it('should throw an error when no data is returned from the ApiProvider', async () => {
-    apiProvider.getData.mockResolvedValueOnce({});
+    getData.mockResolvedValueOnce({});
 
     try {
       await getPreviewPageContext({ solutionId: 'some-solution-id' });

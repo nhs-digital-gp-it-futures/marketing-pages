@@ -1,9 +1,11 @@
-import { ErrorContext } from 'buying-catalogue-library';
-import { getData } from '../../../apiProvider';
+import { ErrorContext, getData } from 'buying-catalogue-library';
 import { createPreviewPageContext } from './createPreviewPageContext';
+import { logger } from '../../../logger';
+import { getEndpoint } from '../../../endpoints';
 
 export const getPreviewPageContext = async ({ solutionId }) => {
-  const previewData = await getData({ endpointLocator: 'getPreviewData', options: { solutionId } });
+  const endpoint = getEndpoint({ endpointLocator: 'getPreviewData', options: { solutionId } });
+  const previewData = await getData({ endpoint, logger });
 
   if (previewData) {
     const context = createPreviewPageContext({ previewData });

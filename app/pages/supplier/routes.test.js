@@ -1,5 +1,6 @@
 import request from 'supertest';
 import { createReadStream, readFileSync } from 'fs';
+import { getDocument } from 'buying-catalogue-library';
 import path from 'path';
 import { App } from '../../app';
 import routes from './routes';
@@ -7,11 +8,11 @@ import * as dashboardControllers from '../common/dashboard/controller';
 import * as sectionControllers from '../common/section/controller';
 import * as subsectionControllers from './dashboard/subDashboards/controller';
 import * as previewControllers from '../common/preview/controller';
-import * as apiProvider from '../../apiProvider';
 
-jest.mock('../../logger');
-apiProvider.getDocument = jest.fn()
+jest.mock('buying-catalogue-library');
+getDocument
   .mockImplementation(() => Promise.resolve({ data: createReadStream(path.resolve(__dirname, 'data.pdf')) }));
+jest.mock('../../logger');
 
 const mockDashboardContext = {
   title: 'Dashboard title',

@@ -1,19 +1,17 @@
+import { getData, putData } from 'buying-catalogue-library';
 import { getSectionPageContext, getSectionPageErrorContext, postSection } from './controller';
 import * as manifestProvider from '../../../manifestProvider';
-import * as apiProvider from '../../../apiProvider';
 import * as context from './createSectionPageContext';
 import * as transform from './helpers/transformSectionData';
 import * as postResponse from './helpers/createPostSectionResponse';
+import { logger } from '../../../logger';
+import { buyingCatalogueApiHost } from '../../../config';
 
+jest.mock('buying-catalogue-library');
 jest.mock('../../../logger');
-
 jest.mock('../../../manifestProvider', () => ({
   getSectionManifest: jest.fn(),
   getSubDashboardManifest: jest.fn(),
-}));
-jest.mock('../../../apiProvider', () => ({
-  getData: jest.fn(),
-  putData: jest.fn(),
 }));
 jest.mock('./createSectionPageContext', () => ({
   createSectionPageContext: jest.fn(),
@@ -59,18 +57,18 @@ describe('section controller', () => {
   describe('getSectionPageContext', () => {
     afterEach(() => {
       manifestProvider.getSectionManifest.mockReset();
-      apiProvider.getData.mockReset();
+      getData.mockReset();
     });
 
     describe('userContextType not supplied', () => {
       afterEach(() => {
         manifestProvider.getSectionManifest.mockReset();
-        apiProvider.getData.mockReset();
+        getData.mockReset();
         context.createSectionPageContext.mockReset();
       });
 
       it('should call getSectionManifest with the correct params', async () => {
-        apiProvider.getData.mockReturnValueOnce({ data: {} });
+        getData.mockReturnValueOnce({ data: {} });
 
         await getSectionPageContext({
           solutionId: 'some-solution-id',
@@ -88,7 +86,7 @@ describe('section controller', () => {
 
       it('should call createSectionPageContext with the correct params', async () => {
         const mockReturnData = { data: {} };
-        apiProvider.getData.mockReturnValueOnce(mockReturnData);
+        getData.mockReturnValueOnce(mockReturnData);
         manifestProvider.getSectionManifest.mockReturnValueOnce(sectionManifest);
 
         await getSectionPageContext({
@@ -111,12 +109,12 @@ describe('section controller', () => {
     describe('userContextType supplied', () => {
       afterEach(() => {
         manifestProvider.getSectionManifest.mockReset();
-        apiProvider.getData.mockReset();
+        getData.mockReset();
         context.createSectionPageContext.mockReset();
       });
 
       it('should call getSectionManifest with the correct params', async () => {
-        apiProvider.getData.mockReturnValueOnce({ data: {} });
+        getData.mockReturnValueOnce({ data: {} });
 
         await getSectionPageContext({
           solutionId: 'some-solution-id',
@@ -135,7 +133,7 @@ describe('section controller', () => {
 
       it('should call createSectionPageContext with the correct params', async () => {
         const mockReturnData = { data: {} };
-        apiProvider.getData.mockReturnValueOnce(mockReturnData);
+        getData.mockReturnValueOnce(mockReturnData);
         manifestProvider.getSectionManifest.mockReturnValueOnce(sectionManifest);
 
         await getSectionPageContext({
@@ -157,7 +155,7 @@ describe('section controller', () => {
     });
 
     it('should call getData with the correct params', async () => {
-      apiProvider.getData.mockReturnValueOnce({ data: {} });
+      getData.mockReturnValueOnce({ data: {} });
 
       await getSectionPageContext({
         solutionId: 'some-solution-id',
@@ -165,19 +163,16 @@ describe('section controller', () => {
         sectionId: 'some-section-id',
       });
 
-      expect(apiProvider.getData.mock.calls.length).toEqual(1);
-      expect(apiProvider.getData).toHaveBeenCalledWith({
-        endpointLocator: 'getSectionData',
-        options: {
-          solutionId: 'some-solution-id',
-          sectionId: 'some-section-id',
-        },
+      expect(getData.mock.calls.length).toEqual(1);
+      expect(getData).toHaveBeenCalledWith({
+        endpoint: `${buyingCatalogueApiHost}/api/v1/Solutions/some-solution-id/sections/some-section-id`,
+        logger,
       });
     });
 
     it('should return the context', async () => {
       const mockReturnData = { data: {} };
-      apiProvider.getData.mockReturnValueOnce(mockReturnData);
+      getData.mockReturnValueOnce(mockReturnData);
       manifestProvider.getSectionManifest.mockReturnValueOnce(sectionManifest);
       context.createSectionPageContext.mockReturnValueOnce(mockContext);
 
@@ -192,7 +187,7 @@ describe('section controller', () => {
 
     it('should throw an error when no data is returned from the ApiProvider', async () => {
       manifestProvider.getSubDashboardManifest.mockReturnValueOnce(sectionManifest);
-      apiProvider.getData
+      getData
         .mockResolvedValueOnce({});
 
       try {
@@ -260,7 +255,7 @@ describe('section controller', () => {
     describe('userContextType supplied', () => {
       afterEach(() => {
         manifestProvider.getSectionManifest.mockReset();
-        apiProvider.getData.mockReset();
+        getData.mockReset();
         context.createSectionPageContext.mockReset();
       });
 
@@ -311,7 +306,7 @@ describe('section controller', () => {
 
     it('should return the context', async () => {
       const mockReturnData = { data: {} };
-      apiProvider.getData.mockReturnValueOnce(mockReturnData);
+      getData.mockReturnValueOnce(mockReturnData);
       manifestProvider.getSectionManifest.mockReturnValueOnce(sectionManifest);
       context.createSectionPageContext.mockReturnValueOnce(mockContext);
 
@@ -331,7 +326,7 @@ describe('section controller', () => {
     afterEach(() => {
       manifestProvider.getSectionManifest.mockReset();
       context.createSectionPageContext.mockReset();
-      apiProvider.putData.mockReset();
+      putData.mockReset();
       postResponse.createPostSectionResponse.mockReset();
     });
 
@@ -339,7 +334,7 @@ describe('section controller', () => {
       afterEach(() => {
         manifestProvider.getSectionManifest.mockReset();
         context.createSectionPageContext.mockReset();
-        apiProvider.putData.mockReset();
+        putData.mockReset();
         transform.transformSectionData.mockReset();
       });
 
@@ -365,7 +360,7 @@ describe('section controller', () => {
       it('should call createPostSectionResponse with the correct params', async () => {
         const mockTransformedData = { transformedData: 'some transformed data' };
         manifestProvider.getSectionManifest.mockReturnValueOnce(sectionManifest);
-        apiProvider.putData.mockReturnValueOnce({ data: {} });
+        putData.mockReturnValueOnce({ data: {} });
         transform.transformSectionData.mockReturnValueOnce(mockTransformedData);
 
         await postSection({
@@ -387,7 +382,7 @@ describe('section controller', () => {
       afterEach(() => {
         manifestProvider.getSectionManifest.mockReset();
         context.createSectionPageContext.mockReset();
-        apiProvider.putData.mockReset();
+        putData.mockReset();
         transform.transformSectionData.mockReset();
       });
 
@@ -414,7 +409,7 @@ describe('section controller', () => {
       it('should call createPostSectionResponse with the correct params', async () => {
         const mockTransformedData = { transformedData: 'some transformed data' };
         manifestProvider.getSectionManifest.mockReturnValueOnce(sectionManifest);
-        apiProvider.putData.mockReturnValueOnce({ data: {} });
+        putData.mockReturnValueOnce({ data: {} });
         transform.transformSectionData.mockReturnValueOnce(mockTransformedData);
 
         await postSection({
@@ -455,7 +450,7 @@ describe('section controller', () => {
 
     it('should call putData with the correct params', async () => {
       const mockTransformedData = { transformedData: 'some transformed data' };
-      apiProvider.putData.mockReturnValueOnce({ data: {} });
+      putData.mockReturnValueOnce({ data: {} });
       transform.transformSectionData.mockReturnValueOnce(mockTransformedData);
 
       await postSection({
@@ -464,19 +459,16 @@ describe('section controller', () => {
         sectionId: 'some-section-id',
       });
 
-      expect(apiProvider.putData.mock.calls.length).toEqual(1);
-      expect(apiProvider.putData).toHaveBeenCalledWith({
-        endpointLocator: 'putSectionData',
-        options: {
-          solutionId: 'some-solution-id',
-          sectionId: 'some-section-id',
-        },
+      expect(putData.mock.calls.length).toEqual(1);
+      expect(putData).toHaveBeenCalledWith({
+        endpoint: `${buyingCatalogueApiHost}/api/v1/Solutions/some-solution-id/sections/some-section-id`,
         body: mockTransformedData,
+        logger,
       });
     });
 
     it('should return the context', async () => {
-      apiProvider.putData.mockReturnValueOnce({ data: {} });
+      putData.mockReturnValueOnce({ data: {} });
       manifestProvider.getSectionManifest.mockReturnValueOnce(sectionManifest);
       postResponse.createPostSectionResponse.mockReturnValueOnce(mockContext);
 
@@ -500,7 +492,7 @@ describe('section controller', () => {
       };
 
       manifestProvider.getSectionManifest.mockReturnValueOnce(sectionManifest);
-      apiProvider.putData
+      putData
         .mockRejectedValueOnce(errorResponse);
 
       const response = await postSection({ solutionId: 'some-solution-id' });
@@ -518,7 +510,7 @@ describe('section controller', () => {
       };
 
       manifestProvider.getSectionManifest.mockReturnValueOnce(sectionManifest);
-      apiProvider.putData
+      putData
         .mockRejectedValueOnce(errorResponse);
 
       try {
