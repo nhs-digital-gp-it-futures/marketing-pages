@@ -1,10 +1,11 @@
 import express from 'express';
+import { getDocument } from 'buying-catalogue-library';
 import { getMarketingPageDashboardContext } from '../common/dashboard/controller';
 import { getSectionPageContext, postSection, getSectionPageErrorContext } from '../common/section/controller';
 import { logger } from '../../logger';
+import { getEndpoint } from '../../endpoints';
 import { withCatch } from '../../common/helpers/routerHelper';
 import { getPreviewPageContext } from '../common/preview/controller';
-import { getDocument } from '../../apiProvider';
 import includesContext from '../../includes/manifest.json';
 
 const router = express.Router();
@@ -56,7 +57,8 @@ router.get('/solution/:solutionId/preview', withCatch(async (req, res) => {
 router.get('/solution/:solutionId/document/:documentName', async (req, res) => {
   const { solutionId, documentName } = req.params;
   logger.info(`downloading Solution ${solutionId} document ${documentName}`);
-  const response = await getDocument({ solutionId, documentName });
+  const endpoint = getEndpoint({ endpointLocator: 'getDocument', options: { solutionId, documentName } });
+  const response = await getDocument({ endpoint, logger });
   response.data.pipe(res);
 });
 

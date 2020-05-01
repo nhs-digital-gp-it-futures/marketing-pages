@@ -1,13 +1,15 @@
-import { ErrorContext } from 'buying-catalogue-library';
+import { ErrorContext, getData, putData } from 'buying-catalogue-library';
 import { getDashboardManifest } from '../../../manifestProvider';
-import { getData, putData } from '../../../apiProvider';
 import { createDashboardPageContext } from './createDashboardPageContext';
+import { logger } from '../../../logger';
+import { getEndpoint } from '../../../endpoints';
 
 export const getMarketingPageDashboardContext = async ({
   solutionId, validationErrors, userContextType = 'supplier',
 }) => {
   const dashboardManifest = getDashboardManifest({ userContextType });
-  const dashboardData = await getData({ endpointLocator: 'getMainDashboardData', options: { solutionId, userContextType } });
+  const endpoint = getEndpoint({ endpointLocator: 'getMainDashboardData', options: { solutionId, userContextType } });
+  const dashboardData = await getData({ endpoint, logger });
 
   if (dashboardData) {
     const context = createDashboardPageContext({
@@ -29,7 +31,8 @@ export const getMarketingPageDashboardContext = async ({
 
 export const postSubmitForModeration = async ({ solutionId }) => {
   try {
-    await putData({ endpointLocator: 'putSubmitForModeration', options: { solutionId } });
+    const endpoint = getEndpoint({ endpointLocator: 'putSubmitForModeration', options: { solutionId } });
+    await putData({ endpoint, logger });
     return {
       success: true,
     };

@@ -1,12 +1,11 @@
+import { getData, putData } from 'buying-catalogue-library';
 import { getMarketingPageDashboardContext, postSubmitForModeration } from './controller';
 import * as manifestProvider from '../../../manifestProvider';
-import * as apiProvider from '../../../apiProvider';
 import * as context from './createDashboardPageContext';
+import { logger } from '../../../logger';
+import { buyingCatalogueApiHost } from '../../../config';
 
-jest.mock('../../../apiProvider', () => ({
-  getData: jest.fn(),
-  putData: jest.fn(),
-}));
+jest.mock('buying-catalogue-library');
 jest.mock('../../../manifestProvider', () => ({
   getDashboardManifest: jest.fn(),
 }));
@@ -44,13 +43,13 @@ describe('supplier - dashboard controller', () => {
     describe('userContextType not specified', () => {
       afterEach(() => {
         manifestProvider.getDashboardManifest.mockReset();
-        apiProvider.getData.mockReset();
+        getData.mockReset();
         context.createDashboardPageContext.mockReset();
       });
 
       it('should call getDashboardManifest with the correct params', async () => {
         manifestProvider.getDashboardManifest.mockReturnValueOnce(dashboardManifest);
-        apiProvider.getData.mockResolvedValueOnce(dashboardData);
+        getData.mockResolvedValueOnce(dashboardData);
 
         await getMarketingPageDashboardContext({ solutionId: 'some-solution-id', dashboardId: 'some-dashboard-id' });
 
@@ -59,23 +58,20 @@ describe('supplier - dashboard controller', () => {
       });
 
       it('should call getData with the correct params', async () => {
-        apiProvider.getData.mockResolvedValueOnce(dashboardData);
+        getData.mockResolvedValueOnce(dashboardData);
 
         await getMarketingPageDashboardContext({ solutionId: 'some-solution-id', dashboardId: 'some-dashboard-id' });
 
-        expect(apiProvider.getData.mock.calls.length).toEqual(1);
-        expect(apiProvider.getData).toHaveBeenCalledWith({
-          endpointLocator: 'getMainDashboardData',
-          options: {
-            solutionId: 'some-solution-id',
-            userContextType: 'supplier',
-          },
+        expect(getData.mock.calls.length).toEqual(1);
+        expect(getData).toHaveBeenCalledWith({
+          endpoint: `${buyingCatalogueApiHost}/api/v1/Solutions/some-solution-id/dashboard`,
+          logger,
         });
       });
 
       it('should call createDashboardPageContext with the correct params', async () => {
         manifestProvider.getDashboardManifest.mockReturnValueOnce(dashboardManifest);
-        apiProvider.getData.mockResolvedValueOnce(dashboardData);
+        getData.mockResolvedValueOnce(dashboardData);
 
         await getMarketingPageDashboardContext({ solutionId: 'some-solution-id', dashboardId: 'some-dashboard-id' });
 
@@ -95,12 +91,12 @@ describe('supplier - dashboard controller', () => {
     describe('userContextType specified', () => {
       afterEach(() => {
         manifestProvider.getDashboardManifest.mockReset();
-        apiProvider.getData.mockReset();
+        getData.mockReset();
         context.createDashboardPageContext.mockReset();
       });
 
       it('should call getDashboardManifest with the correct params when userContextType is specified', async () => {
-        apiProvider.getData.mockResolvedValueOnce(dashboardData);
+        getData.mockResolvedValueOnce(dashboardData);
 
         await getMarketingPageDashboardContext({
           solutionId: 'some-solution-id',
@@ -114,7 +110,7 @@ describe('supplier - dashboard controller', () => {
 
       it('should call getData with the correct params', async () => {
         manifestProvider.getDashboardManifest.mockReturnValueOnce(dashboardManifest);
-        apiProvider.getData.mockResolvedValueOnce(dashboardData);
+        getData.mockResolvedValueOnce(dashboardData);
 
         await getMarketingPageDashboardContext({
           solutionId: 'some-solution-id',
@@ -122,19 +118,16 @@ describe('supplier - dashboard controller', () => {
           userContextType: 'anotherUserContextType',
         });
 
-        expect(apiProvider.getData.mock.calls.length).toEqual(1);
-        expect(apiProvider.getData).toHaveBeenCalledWith({
-          endpointLocator: 'getMainDashboardData',
-          options: {
-            solutionId: 'some-solution-id',
-            userContextType: 'anotherUserContextType',
-          },
+        expect(getData.mock.calls.length).toEqual(1);
+        expect(getData).toHaveBeenCalledWith({
+          endpoint: `${buyingCatalogueApiHost}/api/v1/Solutions/some-solution-id/dashboard/authority`,
+          logger,
         });
       });
 
       it('should call createDashboardPageContext with the correct params', async () => {
         manifestProvider.getDashboardManifest.mockReturnValueOnce(dashboardManifest);
-        apiProvider.getData.mockResolvedValueOnce(dashboardData);
+        getData.mockResolvedValueOnce(dashboardData);
 
         await getMarketingPageDashboardContext({
           solutionId: 'some-solution-id',
@@ -158,7 +151,7 @@ describe('supplier - dashboard controller', () => {
     it('should return the context', async () => {
       const mockReturnData = { data: {} };
       const mockContext = { section: 'context' };
-      apiProvider.getData.mockReturnValueOnce(mockReturnData);
+      getData.mockReturnValueOnce(mockReturnData);
       manifestProvider.getDashboardManifest.mockReturnValueOnce(dashboardManifest);
       context.createDashboardPageContext.mockReturnValueOnce(mockContext);
 
@@ -173,7 +166,7 @@ describe('supplier - dashboard controller', () => {
 
     it('should throw an error when no data is returned from the ApiProvider', async () => {
       manifestProvider.getDashboardManifest.mockReturnValue(dashboardManifest);
-      apiProvider.getData.mockResolvedValueOnce({});
+      getData.mockResolvedValueOnce({});
 
       try {
         await getMarketingPageDashboardContext({ solutionId: 'some-solution-id', dashboardId: 'some-dashboard-id' });
@@ -185,25 +178,23 @@ describe('supplier - dashboard controller', () => {
 
   describe('postSubmitForModeration', () => {
     afterEach(() => {
-      apiProvider.putData.mockRestore();
+      putData.mockRestore();
     });
 
     it('should call putData with the correct params', async () => {
-      apiProvider.putData.mockResolvedValueOnce(true);
+      putData.mockResolvedValueOnce(true);
 
       await postSubmitForModeration({ solutionId: 'some-solution-id' });
 
-      expect(apiProvider.putData.mock.calls.length).toEqual(1);
-      expect(apiProvider.putData).toHaveBeenCalledWith({
-        endpointLocator: 'putSubmitForModeration',
-        options: {
-          solutionId: 'some-solution-id',
-        },
+      expect(putData.mock.calls.length).toEqual(1);
+      expect(putData).toHaveBeenCalledWith({
+        endpoint: `${buyingCatalogueApiHost}/api/v1/Solutions/some-solution-id/SubmitForReview`,
+        logger,
       });
     });
 
     it('should return success true if api call is successful', async () => {
-      apiProvider.putData.mockResolvedValueOnce(true);
+      putData.mockResolvedValueOnce(true);
 
       const response = await postSubmitForModeration({ solutionId: 'some-solution-id' });
       expect(response).toEqual({ success: true });
@@ -217,7 +208,7 @@ describe('supplier - dashboard controller', () => {
           },
         },
       };
-      apiProvider.putData.mockRejectedValueOnce(errorResponse);
+      putData.mockRejectedValueOnce(errorResponse);
 
       const response = await postSubmitForModeration({ solutionId: 'some-solution-id' });
       expect(response).toEqual(errorResponse.response.data);
