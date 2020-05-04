@@ -1,10 +1,11 @@
 import express from 'express';
-import { ErrorContext, errorHandler } from 'buying-catalogue-library';
+import { ErrorContext, errorHandler, healthRoutes } from 'buying-catalogue-library';
 import { logger } from './logger';
-import healthRoutes from './pages/health/routes';
 import supplierRoutes from './pages/supplier/routes';
 import authorityRoutes from './pages/authority/routes';
 import includesContext from './includes/manifest.json';
+import { getHealthCheckDependencies } from './common/helpers/routerHelper';
+
 
 const router = express.Router();
 const config = require('./config');
@@ -15,7 +16,7 @@ const addContext = ({ context }) => ({
   config,
 });
 
-router.use('/health', healthRoutes);
+healthRoutes({ router, dependencies: getHealthCheckDependencies(), logger });
 
 router.use('/supplier', supplierRoutes);
 
