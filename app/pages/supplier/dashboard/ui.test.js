@@ -1,10 +1,10 @@
 import nock from 'nock';
+import { extractInnerText } from 'buying-catalogue-library';
 import { Selector, ClientFunction } from 'testcafe';
 import dashboardWithIncompleteSections from '../../../../fixtures/dashboardWithIncompleteSections.json';
 import dashboardWithCompleteSections from '../../../../fixtures/dashboardWithCompleteSections.json';
 import previewWithMarketingData from '../../../../fixtures/previewWithMarketingData.json';
 import { apiLocalhost, apiPath, clientLocalhost } from '../../../test-utils/config';
-import { extractInnerText } from '../../../test-utils/helper';
 
 const mocks = (initalDashboard) => {
   if (initalDashboard) {

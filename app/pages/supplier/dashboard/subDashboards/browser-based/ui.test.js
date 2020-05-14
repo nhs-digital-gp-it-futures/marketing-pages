@@ -1,9 +1,9 @@
 import nock from 'nock';
+import { extractInnerText } from 'buying-catalogue-library';
 import { Selector, ClientFunction } from 'testcafe';
 import dashboardWithCompleteSections from '../../../../../../fixtures/dashboardWithCompleteSections.json';
 import browserBasedFixture from './fixtureData.json';
 import { apiLocalhost, apiPath, clientLocalhost } from '../../../../../test-utils/config';
-import { extractInnerText } from '../../../../../test-utils/helper';
 
 const mocks = () => {
   nock(apiLocalhost)

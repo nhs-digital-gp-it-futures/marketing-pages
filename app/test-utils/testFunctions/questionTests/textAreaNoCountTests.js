@@ -1,5 +1,5 @@
 import { Selector } from 'testcafe';
-import { extractInnerText } from '../../helper';
+import { extractInnerText } from 'buying-catalogue-library';
 
 const textAreaTest = async ({ pageSetup, sectionManifest, questionId }) => {
   await test(`should render the ${questionId} text area question`, async (t) => {
