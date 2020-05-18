@@ -11,7 +11,7 @@ const endpoints = {
   getSubDashboardData: options => `${buyingCatalogueApiHost}/api/v1/Solutions/${options.solutionId}/dashboards/${options.dashboardId}`,
   getPreviewData: options => `${buyingCatalogueApiHost}/api/v1/Solutions/${options.solutionId}/preview`,
   // GET Document endpoints
-  getDocument: options => `${documentApiHost}/api/v1/Solutions/${options.solutionId}/documents/v${options.documentName}`,
+  getDocument: options => `${documentApiHost}/api/v1/Solutions/${options.solutionId}/documents/${options.documentName}`,
   // PUT endpoints
   putSectionData: options => `${buyingCatalogueApiHost}/api/v1/Solutions/${options.solutionId}/sections/${options.sectionId}`,
   putSubmitForModeration: options => `${buyingCatalogueApiHost}/api/v1/Solutions/${options.solutionId}/SubmitForReview`,
