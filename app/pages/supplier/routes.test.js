@@ -8,6 +8,7 @@ import * as dashboardControllers from '../common/dashboard/controller';
 import * as sectionControllers from '../common/section/controller';
 import * as subsectionControllers from './dashboard/subDashboards/controller';
 import * as previewControllers from '../common/preview/controller';
+import { logger } from '../../logger';
 
 jest.mock('buying-catalogue-library');
 getDocument
@@ -265,6 +266,10 @@ describe('supplier routes', () => {
   });
 
   describe('GET /solution/:solutionId/document/:documentName', () => {
+    afterEach(() => {
+      getDocument.mockClear();
+    });
+
     it('should return the correct status and text if there is no error', () => {
       const app = new App().createApp();
       app.use('/supplier', routes);
@@ -274,6 +279,21 @@ describe('supplier routes', () => {
         .then((res) => {
           expect(res.text).toEqual(readFileSync(path.resolve(__dirname, 'data.pdf'), 'utf8'));
           expect(res.text.includes('data-test-id="error-page-title"')).toEqual(false);
+        });
+    });
+
+    it('should call getDocument with the correct endpoint', () => {
+      const app = new App().createApp();
+      app.use('/supplier', routes);
+      return request(app)
+        .get('/supplier/solution/1/document/somedoc')
+        .expect(200)
+        .then(() => {
+          expect(getDocument.mock.calls.length).toEqual(1);
+          expect(getDocument).toHaveBeenCalledWith({
+            endpoint: 'http://localhost:5101/api/v1/Solutions/1/documents/somedoc',
+            logger,
+          });
         });
     });
   });
