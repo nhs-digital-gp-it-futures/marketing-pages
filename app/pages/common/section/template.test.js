@@ -1,4 +1,4 @@
-import { createTestHarness } from '../../../test-utils/testHarness';
+import { componentTester } from '../../../test-utils/componentTester';
 
 const setup = {
   template: {
@@ -7,7 +7,7 @@ const setup = {
 };
 
 describe('section page', () => {
-  it('should render the title of the section', createTestHarness(setup, (harness) => {
+  it('should render the title of the section', componentTester(setup, (harness) => {
     const context = {
       title: 'Title of the section',
     };
@@ -17,7 +17,7 @@ describe('section page', () => {
     });
   }));
 
-  it('should render the main advice of the section', createTestHarness(setup, (harness) => {
+  it('should render the main advice of the section', componentTester(setup, (harness) => {
     const context = {
       title: 'Title of the section',
       mainAdvice: 'This is the main advice for this section',
@@ -28,7 +28,7 @@ describe('section page', () => {
     });
   }));
 
-  it('should render any additional advice of the section', createTestHarness(setup, (harness) => {
+  it('should render any additional advice of the section', componentTester(setup, (harness) => {
     const context = {
       title: 'Title of the section',
       additionalAdvice: [
@@ -44,7 +44,7 @@ describe('section page', () => {
     });
   }));
 
-  it('should render the error summary if errors', createTestHarness(setup, (harness) => {
+  it('should render the error summary if errors', componentTester(setup, (harness) => {
     const context = {
       title: 'Title of the section',
       errors: [{}],
@@ -55,7 +55,7 @@ describe('section page', () => {
     });
   }));
 
-  it('should not render the error summary if no errors', createTestHarness(setup, (harness) => {
+  it('should not render the error summary if no errors', componentTester(setup, (harness) => {
     const context = {
       title: 'Title of the section',
     };
@@ -65,7 +65,7 @@ describe('section page', () => {
     });
   }));
 
-  it('should render all the questions for the section', createTestHarness(setup, (harness) => {
+  it('should render all the questions for the section', componentTester(setup, (harness) => {
     const context = {
       title: 'Title of the section',
       questions: [
@@ -80,7 +80,7 @@ describe('section page', () => {
     });
   }));
 
-  it('should render a multi-question', createTestHarness(setup, (harness) => {
+  it('should render a multi-question', componentTester(setup, (harness) => {
     const context = {
       questions: [
         {
@@ -100,7 +100,7 @@ describe('section page', () => {
     });
   }));
 
-  it('should render a button to submit the form', createTestHarness(setup, (harness) => {
+  it('should render a button to submit the form', componentTester(setup, (harness) => {
     const context = {
       title: 'Title of the section',
     };
@@ -110,7 +110,7 @@ describe('section page', () => {
     });
   }));
 
-  it('should render the warning advise', createTestHarness(setup, (harness) => {
+  it('should render the warning advise', componentTester(setup, (harness) => {
     const context = {
       title: 'Title of the section',
       warningAdvice: 'Some warning advice',
@@ -123,7 +123,7 @@ describe('section page', () => {
     });
   }));
 
-  it('should render the return to all sections link', createTestHarness(setup, (harness) => {
+  it('should render the return to all sections link', componentTester(setup, (harness) => {
     const context = {
       title: 'Title of the section',
     };

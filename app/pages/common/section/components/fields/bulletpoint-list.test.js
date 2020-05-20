@@ -1,4 +1,4 @@
-import { createTestHarness } from '../../../../../test-utils/testHarness';
+import { componentTester } from '../../../../../test-utils/componentTester';
 
 const setup = {
   component: {
@@ -8,7 +8,7 @@ const setup = {
 };
 
 describe('bulletpoint-list', () => {
-  it('should render the main advice of the question', createTestHarness(setup, (harness) => {
+  it('should render the main advice of the question', componentTester(setup, (harness) => {
     const context = {
       params: {
         question: {
@@ -24,7 +24,7 @@ describe('bulletpoint-list', () => {
     });
   }));
 
-  it('should render any additional advice', createTestHarness(setup, (harness) => {
+  it('should render any additional advice', componentTester(setup, (harness) => {
     const context = {
       params: {
         question: {
@@ -41,7 +41,7 @@ describe('bulletpoint-list', () => {
     });
   }));
 
-  it('should render a single text field if context only contains a single field', createTestHarness(setup, (harness) => {
+  it('should render a single text field if context only contains a single field', componentTester(setup, (harness) => {
     const context = {
       params: {
         question: {
@@ -62,7 +62,7 @@ describe('bulletpoint-list', () => {
     });
   }));
 
-  it('should render multiple text if the context contains multiple fields', createTestHarness(setup, (harness) => {
+  it('should render multiple text if the context contains multiple fields', componentTester(setup, (harness) => {
     const context = {
       params: {
         question: {
@@ -93,7 +93,7 @@ describe('bulletpoint-list', () => {
     });
   }));
 
-  it('should render the text field as error if the context contains an error for the field', createTestHarness(setup, (harness) => {
+  it('should render the text field as error if the context contains an error for the field', componentTester(setup, (harness) => {
     const context = {
       params: {
         question: {
@@ -127,7 +127,7 @@ describe('bulletpoint-list', () => {
     });
   }));
 
-  it('should render the correct label classes if is part of a multi question', createTestHarness(setup, (harness) => {
+  it('should render the correct label classes if is part of a multi question', componentTester(setup, (harness) => {
     const context = {
       params: {
         question: {
@@ -147,7 +147,7 @@ describe('bulletpoint-list', () => {
     });
   }));
 
-  it('should render the correct label classes if is not part of a multi question', createTestHarness(setup, (harness) => {
+  it('should render the correct label classes if is not part of a multi question', componentTester(setup, (harness) => {
     const context = {
       params: {
         question: {
@@ -166,7 +166,7 @@ describe('bulletpoint-list', () => {
     });
   }));
 
-  it('should not render any additional advice if not provided', createTestHarness(setup, (harness) => {
+  it('should not render any additional advice if not provided', componentTester(setup, (harness) => {
     const context = {
       params: {
         question: {
@@ -181,7 +181,7 @@ describe('bulletpoint-list', () => {
     });
   }));
 
-  it('should render the accessibility label for listing inputs', createTestHarness(setup, (harness) => {
+  it('should render the accessibility label for listing inputs', componentTester(setup, (harness) => {
     const context = {
       params: {
         question: {

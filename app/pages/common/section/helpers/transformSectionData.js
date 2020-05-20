@@ -24,7 +24,7 @@ const transformationStrategy = {
   'textarea-field': {
     transform: ({ questionValue }) => questionValue.trim(),
   },
-  'textarea-field-csv': {
+  'textarea-field-no-count': {
     transform: ({ questionId, questionValue: csv }) => transformCsv({ questionId, csv }),
   },
   'text-field': {

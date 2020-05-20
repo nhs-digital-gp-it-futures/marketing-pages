@@ -1,5 +1,5 @@
 import { Selector } from 'testcafe';
-import { extractInnerText } from '../../helper';
+import { extractInnerText } from 'buying-catalogue-library';
 
 export const comboboxTest = async ({
   pageSetup,

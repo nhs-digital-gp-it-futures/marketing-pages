@@ -7,7 +7,7 @@
     "summary": {
       "mainAdvice": "Summary (optional)",
       "additionalAdvice": "Provide information on how and when you plan to enhance your Catalogue Solution.",
-      "footerAdvice": "(Maximum number of characters 1,000)",
+      "maxlength": "1000",
       "type": "textarea-field",
       "errorResponse": {
         "maxLength": "Summary must be 1,000 characters or fewer"

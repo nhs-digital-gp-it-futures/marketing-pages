@@ -1,9 +1,9 @@
 import nock from 'nock';
+import { extractInnerText } from 'buying-catalogue-library';
 import { Selector } from 'testcafe';
 import previewWithNoMarketingData from '../../../../fixtures/previewWithNoMarketingData.json';
 import previewWithMarketingData from '../../../../fixtures/previewWithMarketingData.json';
 import { apiLocalhost, apiPath, clientLocalhost } from '../../../test-utils/config';
-import { extractInnerText } from '../../../test-utils/helper';
 
 const mocks = (existingData) => {
   if (!existingData) {

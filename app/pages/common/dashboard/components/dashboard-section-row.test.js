@@ -1,4 +1,4 @@
-import { createTestHarness } from '../../../../test-utils/testHarness';
+import { componentTester } from '../../../../test-utils/componentTester';
 
 const aSectionContext = (
   id, sections = undefined,
@@ -19,7 +19,7 @@ const setup = {
 };
 
 describe('dashboard-section-row', () => {
-  it('should render the dashboard section', createTestHarness(setup, (harness) => {
+  it('should render the dashboard section', componentTester(setup, (harness) => {
     const context = aSectionContext('some-section-id');
 
     harness.request(context, ($) => {
@@ -27,14 +27,14 @@ describe('dashboard-section-row', () => {
     });
   }));
 
-  it('should not render the dashboard sub sections if no sections are provided', createTestHarness(setup, (harness) => {
+  it('should not render the dashboard sub sections if no sections are provided', componentTester(setup, (harness) => {
     const context = aSectionContext('some-section-id');
     harness.request(context, ($) => {
       expect($('[data-test-id^="dashboard-sub-section"]').length).toEqual(0);
     });
   }));
 
-  it('should render the all the section and all the sub sections', createTestHarness(setup, (harness) => {
+  it('should render the all the section and all the sub sections', componentTester(setup, (harness) => {
     const context = aSectionContext('some-section-id', [
       aSectionContext('first-sub-section-id'),
       aSectionContext('second-sub-section-id'),

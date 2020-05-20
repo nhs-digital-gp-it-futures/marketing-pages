@@ -1,9 +1,12 @@
+import { getData } from 'buying-catalogue-library';
 import { getSubDashboardPageContext } from './controller';
-import { ManifestProvider } from '../../../../manifestProvider';
-import { ApiProvider } from '../../../../apiProvider';
+import * as manifestProvider from '../../../../manifestProvider';
 
+jest.mock('buying-catalogue-library');
 jest.mock('../../../../manifestProvider');
-jest.mock('../../../../apiProvider');
+jest.mock('../../../../manifestProvider', () => ({
+  getSubDashboardManifest: jest.fn(),
+}));
 
 describe('subDashboards controller', () => {
   const subDashboardManifest = {
@@ -21,12 +24,10 @@ describe('subDashboards controller', () => {
   };
 
   const subDashboardData = {
-    data: {
-      sections: {
-        'some-section-id': {
-          status: 'INCOMPLETE',
-          requirement: 'Mandatory',
-        },
+    sections: {
+      'some-section-id': {
+        status: 'INCOMPLETE',
+        requirement: 'Mandatory',
       },
     },
   };
@@ -54,17 +55,16 @@ describe('subDashboards controller', () => {
       ],
     };
 
-    ManifestProvider.prototype.getSubDashboardManifest.mockReturnValue(subDashboardManifest);
-    ApiProvider.prototype.getSubDashboardData.mockResolvedValue(subDashboardData);
+    manifestProvider.getSubDashboardManifest.mockReturnValue(subDashboardManifest);
+    getData.mockResolvedValueOnce(subDashboardData);
 
     const context = await getSubDashboardPageContext({ solutionId: 'some-solution-id', dashboardId: 'some-dashboard-id' });
-
     expect(context).toEqual(expectedContext);
   });
 
   it('should throw an error when no data is returned from the ApiProvider', async () => {
-    ManifestProvider.prototype.getSubDashboardManifest.mockReturnValue(subDashboardManifest);
-    ApiProvider.prototype.getSubDashboardData.mockResolvedValue({});
+    manifestProvider.getSubDashboardManifest.mockReturnValue(subDashboardManifest);
+    getData.mockResolvedValueOnce({});
 
     try {
       await getSubDashboardPageContext({ solutionId: 'some-solution-id', dashboardId: 'some-dashboard-id' });

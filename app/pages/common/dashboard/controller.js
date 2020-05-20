@@ -1,16 +1,17 @@
-import { ManifestProvider } from '../../../manifestProvider';
-import { ApiProvider } from '../../../apiProvider';
+import { ErrorContext, getData, putData } from 'buying-catalogue-library';
+import { getDashboardManifest } from '../../../manifestProvider';
 import { createDashboardPageContext } from './createDashboardPageContext';
+import { logger } from '../../../logger';
+import { getEndpoint } from '../../../endpoints';
 
 export const getMarketingPageDashboardContext = async ({
   solutionId, validationErrors, userContextType = 'supplier',
 }) => {
-  const dashboardManifest = new ManifestProvider().getDashboardManifest({ userContextType });
-  const dashboardDataRaw = await new ApiProvider().getMainDashboardData({
-    solutionId, userContextType,
-  });
-  if (dashboardDataRaw && dashboardDataRaw.data) {
-    const dashboardData = dashboardDataRaw.data;
+  const dashboardManifest = getDashboardManifest({ userContextType });
+  const endpoint = getEndpoint({ endpointLocator: 'getMainDashboardData', options: { solutionId, userContextType } });
+  const dashboardData = await getData({ endpoint, logger });
+
+  if (dashboardData) {
     const context = createDashboardPageContext({
       solutionId,
       solutionName: dashboardData.name,
@@ -22,12 +23,16 @@ export const getMarketingPageDashboardContext = async ({
     });
     return context;
   }
-  throw new Error('No data returned');
+  throw new ErrorContext({
+    status: 404,
+    description: 'No data returned',
+  });
 };
 
 export const postSubmitForModeration = async ({ solutionId }) => {
   try {
-    await new ApiProvider().putSubmitForModeration({ solutionId });
+    const endpoint = getEndpoint({ endpointLocator: 'putSubmitForModeration', options: { solutionId } });
+    await putData({ endpoint, logger });
     return {
       success: true,
     };

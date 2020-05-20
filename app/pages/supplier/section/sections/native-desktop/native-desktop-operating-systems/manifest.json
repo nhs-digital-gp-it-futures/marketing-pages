@@ -6,7 +6,7 @@
     "operating-systems-description": {
       "mainAdvice": "Supported operating systems",
       "additionalAdvice": "Provide information on the operating systems supported by your Catalogue Solution.",
-      "footerAdvice": "(Maximum number of characters 1,000)",
+      "maxlength": "1000",
       "type": "textarea-field",
       "errorResponse": {
         "required": "Enter supported operating systems information",

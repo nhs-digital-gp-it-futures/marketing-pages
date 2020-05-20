@@ -19,7 +19,7 @@
     "operating-systems-description": {
       "mainAdvice": "Description of supported operating systems (optional)",
       "additionalAdvice": "Provide any additional information that may be helpful to buyers, for example which version of the operating system is supported.",
-      "footerAdvice": "(Maximum number of characters 1,000)",
+      "maxlength": "1000",
       "type": "textarea-field",
       "errorResponse": {
         "maxLength": "Supported operating systems response must be 1,000 characters or fewer"

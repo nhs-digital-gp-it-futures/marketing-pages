@@ -8,8 +8,8 @@ Dockerfile
 **/test-utils
 **/testcafeRunner.js
 **/*.md
-**/webpack.config.js
 **/*docker**
 **/*.xml
 *.yml
 *.yaml
+*.pdf

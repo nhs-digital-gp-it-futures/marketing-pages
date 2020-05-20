@@ -7,7 +7,7 @@
     "description": {
       "mainAdvice": "Description (optional)",
       "additionalAdvice": "Provide information about your organisation, for example its ethos, experience and plans for the future.",
-      "footerAdvice": "(Maximum number of characters 1,000)",
+      "maxlength": "1000",
       "type": "textarea-field",
       "rows": 10,
       "errorResponse": {

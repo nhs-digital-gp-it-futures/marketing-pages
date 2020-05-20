@@ -1,9 +1,9 @@
 import { Selector, ClientFunction } from 'testcafe';
 import nock from 'nock';
+import { extractInnerText } from 'buying-catalogue-library';
 import dashboardWithCompleteSections from '../../../fixtures/dashboardWithCompleteSections.json';
 import authorityDashboardWithCompleteSections from '../../pages/authority/fixtures/dashboardWithCompleteSections.json';
 import { apiLocalhost, apiPath } from '../config';
-import { extractInnerText } from '../helper';
 
 const getLocation = ClientFunction(() => document.location.href);
 

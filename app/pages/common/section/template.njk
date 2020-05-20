@@ -1,9 +1,9 @@
 {% extends 'includes/layout.njk' %}
 {% from 'components/back-link/macro.njk' import backLink %}
 {% from 'components/button/macro.njk' import button %}
+{% from 'components/bc-error-summary/macro.njk' import bcErrorSummary %}
 {% from './components/section-question.njk' import sectionQuestion %}
 {% from './components/multi-question.njk' import multiQuestion %}
-{% from '../../../common/components/error-summary/macro.njk' import errorSummary %}
 {% from 'components/view-expandable-section/macro.njk' import viewExpandableSection %}
 
 {% block body %}
@@ -18,7 +18,7 @@
   </div>
   <div class="nhsuk-grid-column-two-thirds">
     {% if (errors.length > 0) %}
-      {{ errorSummary({
+      {{ bcErrorSummary({
         errors: errors
       }) }}
     {% endif %}

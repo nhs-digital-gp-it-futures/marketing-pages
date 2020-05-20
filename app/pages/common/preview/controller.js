@@ -1,17 +1,18 @@
-import { ApiProvider } from '../../../apiProvider';
+import { ErrorContext, getData } from 'buying-catalogue-library';
 import { createPreviewPageContext } from './createPreviewPageContext';
+import { logger } from '../../../logger';
+import { getEndpoint } from '../../../endpoints';
 
 export const getPreviewPageContext = async ({ solutionId }) => {
-  const previewDataRaw = await new ApiProvider().getPreviewData({ solutionId });
+  const endpoint = getEndpoint({ endpointLocator: 'getPreviewData', options: { solutionId } });
+  const previewData = await getData({ endpoint, logger });
 
-  if (previewDataRaw && previewDataRaw.data) {
-    const previewData = previewDataRaw.data;
+  if (previewData) {
     const context = createPreviewPageContext({ previewData });
     return context;
   }
-  throw new Error('No data returned');
+  throw new ErrorContext({
+    status: 404,
+    description: 'No data returned',
+  });
 };
-
-export const getDocument = async ({ solutionId, documentName }) => (
-  new ApiProvider().getDocument({ solutionId, documentName })
-);

@@ -35,6 +35,7 @@ class App {
     // Middleware to serve static assets
     this.app.use(config.baseUrl ? config.baseUrl : '/', express.static(path.join(__dirname, '/../public/')));
     this.app.use(`${config.baseUrl}/nhsuk-frontend`, express.static(path.join(__dirname, '/../node_modules/nhsuk-frontend/packages')));
+    this.app.use(`${config.baseUrl}/govuk-frontend`, express.static(path.join(__dirname, '/../node_modules/govuk-frontend/govuk')));
 
     // View engine (Nunjucks)
     this.app.set('view engine', 'njk');
@@ -49,7 +50,11 @@ class App {
     const appViews = [
       __dirname,
       path.join(__dirname, '/../node_modules/buying-catalogue-components/app/'),
+      path.join(__dirname, '/../node_modules/buying-catalogue-components/app/components/general/'),
+      path.join(__dirname, '/../node_modules/buying-catalogue-components/app/components/input/'),
+      path.join(__dirname, '/../node_modules/buying-catalogue-components/app/components/view/'),
       path.join(__dirname, '/../node_modules/nhsuk-frontend/packages/'),
+      path.join(__dirname, '/../node_modules/govuk-frontend/govuk/'),
     ];
 
     const env = nunjucks.configure(appViews, {
