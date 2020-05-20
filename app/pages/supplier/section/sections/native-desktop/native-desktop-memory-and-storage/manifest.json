@@ -24,7 +24,7 @@
     "storage-requirements-description": {
       "mainAdvice": "Storage space",
       "additionalAdvice": "Provide information about how much storage space a device will need to use your Catalogue Solution.",
-      "footerAdvice": "(Maximum number of characters 300)",
+      "maxlength": "300",
       "type": "textarea-field",
       "errorResponse": {
         "required": "Enter storage space information",
@@ -34,7 +34,7 @@
     "minimum-cpu": {
       "mainAdvice": "Processing power",
       "additionalAdvice": "Provide information on the minimum CPU power required for your Catalogue Solution to function on desktop.",
-      "footerAdvice": "(Maximum number of characters 300)",
+      "maxlength": "300",
       "type": "textarea-field",
       "errorResponse": {
         "required": "Enter processing power information",

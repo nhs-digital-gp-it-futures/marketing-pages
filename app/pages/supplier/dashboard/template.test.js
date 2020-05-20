@@ -1,4 +1,4 @@
-import { createTestHarness } from '../../../test-utils/testHarness';
+import { componentTester } from '../../../test-utils/componentTester';
 
 const setup = {
   template: {
@@ -7,7 +7,7 @@ const setup = {
 };
 
 describe('supplier - dashboard page', () => {
-  it('should render the title on the dashboard page if provided', createTestHarness(setup, (harness) => {
+  it('should render the title on the dashboard page if provided', componentTester(setup, (harness) => {
     const context = {
       title: 'some title',
     };
@@ -17,7 +17,7 @@ describe('supplier - dashboard page', () => {
     });
   }));
 
-  it('should not render the title on the dashboard page if not provided', createTestHarness(setup, (harness) => {
+  it('should not render the title on the dashboard page if not provided', componentTester(setup, (harness) => {
     const context = {};
 
     harness.request(context, ($) => {
@@ -25,7 +25,7 @@ describe('supplier - dashboard page', () => {
     });
   }));
 
-  it('should render the supplier name tag on the dashboard page if provided', createTestHarness(setup, (harness) => {
+  it('should render the supplier name tag on the dashboard page if provided', componentTester(setup, (harness) => {
     const context = {
       supplierName: 'some supplier',
     };
@@ -35,7 +35,7 @@ describe('supplier - dashboard page', () => {
     });
   }));
 
-  it('should not render the supplier name tag on the dashboard page if not provided', createTestHarness(setup, (harness) => {
+  it('should not render the supplier name tag on the dashboard page if not provided', componentTester(setup, (harness) => {
     const context = {};
 
     harness.request(context, ($) => {
@@ -43,7 +43,7 @@ describe('supplier - dashboard page', () => {
     });
   }));
 
-  it('should render the main advice on the dashboard page if provided', createTestHarness(setup, (harness) => {
+  it('should render the main advice on the dashboard page if provided', componentTester(setup, (harness) => {
     const context = {
       mainAdvice: 'some main advice',
     };
@@ -53,7 +53,7 @@ describe('supplier - dashboard page', () => {
     });
   }));
 
-  it('should not render the main advice on the dashboard page if not provided', createTestHarness(setup, (harness) => {
+  it('should not render the main advice on the dashboard page if not provided', componentTester(setup, (harness) => {
     const context = {};
 
     harness.request(context, ($) => {
@@ -61,7 +61,7 @@ describe('supplier - dashboard page', () => {
     });
   }));
 
-  it('should render the additional advice on the dashboard page if provided', createTestHarness(setup, (harness) => {
+  it('should render the additional advice on the dashboard page if provided', componentTester(setup, (harness) => {
     const context = {
       additionalAdvice: 'some additional advice',
     };
@@ -72,7 +72,7 @@ describe('supplier - dashboard page', () => {
     });
   }));
 
-  it('should not render the additional advice on the dashboard page if not provided', createTestHarness(setup, (harness) => {
+  it('should not render the additional advice on the dashboard page if not provided', componentTester(setup, (harness) => {
     const context = {};
 
     harness.request(context, ($) => {
@@ -80,9 +80,10 @@ describe('supplier - dashboard page', () => {
     });
   }));
 
-  it('should render the warning advice on the dashboard page if provided', createTestHarness(setup, (harness) => {
+  it('should render the warning advice on the dashboard page if provided and showSubmitForModerationButton is true', componentTester(setup, (harness) => {
     const context = {
       warningAdvice: 'some warning advice',
+      config: { showSubmitForModerationButton: 'true' },
     };
 
     harness.request(context, ($) => {
@@ -92,15 +93,26 @@ describe('supplier - dashboard page', () => {
     });
   }));
 
-  it('should not render the warning advice on the dashboard page if not provided', createTestHarness(setup, (harness) => {
-    const context = {};
+  it('should notrender the warning advice on the dashboard page if provided and showSubmitForModerationButton is false', componentTester(setup, (harness) => {
+    const context = {
+      warningAdvice: 'some warning advice',
+      config: { showSubmitForModerationButton: 'false' },
+    };
 
     harness.request(context, ($) => {
       expect($('[data-test-id="dashboard-warning-advice"]').length).toEqual(0);
     });
   }));
 
-  it('should render the sections box on the dashboard page if provided', createTestHarness(setup, (harness) => {
+  it('should not render the warning advice on the dashboard page if not provided', componentTester(setup, (harness) => {
+    const context = { config: { showSubmitForModerationButton: 'true' } };
+
+    harness.request(context, ($) => {
+      expect($('[data-test-id="dashboard-warning-advice"]').length).toEqual(0);
+    });
+  }));
+
+  it('should render the sections box on the dashboard page if provided', componentTester(setup, (harness) => {
     const context = {
       sectionsBox: {
         title: 'some title',
@@ -122,7 +134,7 @@ describe('supplier - dashboard page', () => {
     });
   }));
 
-  it('should not render the sections box on the dashboard page if not provided', createTestHarness(setup, (harness) => {
+  it('should not render the sections box on the dashboard page if not provided', componentTester(setup, (harness) => {
     const context = {};
 
     harness.request(context, ($) => {
@@ -130,7 +142,7 @@ describe('supplier - dashboard page', () => {
     });
   }));
 
-  it('should render the error summary if errors', createTestHarness(setup, (harness) => {
+  it('should render the error summary if errors', componentTester(setup, (harness) => {
     const context = {
       title: 'Title of the section',
       errors: [{}],
@@ -141,7 +153,7 @@ describe('supplier - dashboard page', () => {
     });
   }));
 
-  it('should render the preview button at the top of the page', createTestHarness(setup, (harness) => {
+  it('should render the preview button at the top of the page', componentTester(setup, (harness) => {
     const context = {
       previewUrl: '/solution/S100000-001/preview',
     };
@@ -153,7 +165,7 @@ describe('supplier - dashboard page', () => {
     });
   }));
 
-  it('should render the sectionGroups on the dashboard page', createTestHarness(setup, (harness) => {
+  it('should render the sectionGroups on the dashboard page', componentTester(setup, (harness) => {
     const context = {
       sectionGroups: [
         {
@@ -168,15 +180,31 @@ describe('supplier - dashboard page', () => {
     });
   }));
 
-  it('should render the Submit for moderation button at the bottom of the page', createTestHarness(setup, (harness) => {
+  it('should render the Submit for moderation button at the bottom of the page if showSubmitForModerationButton is true', componentTester(setup, (harness) => {
     const context = {
       submitForModerationUrl: '/supplier/solution/S100000-001/submitForModeration',
+      config: {
+        showSubmitForModerationButton: 'true',
+      },
     };
 
     harness.request(context, ($) => {
       expect($('[data-test-id="dashboard-submit-for-moderation-button"] a').length).toEqual(1);
       expect($('[data-test-id="dashboard-submit-for-moderation-button"] a').text().trim()).toEqual('Submit for moderation');
       expect($('[data-test-id="dashboard-submit-for-moderation-button"] a').attr('href')).toEqual('/supplier/solution/S100000-001/submitForModeration');
+    });
+  }));
+
+  it('should not render the Submit for moderation button at the bottom of the page if showSubmitForModerationButton is false', componentTester(setup, (harness) => {
+    const context = {
+      submitForModerationUrl: '/supplier/solution/S100000-001/submitForModeration',
+      config: {
+        showSubmitForModerationButton: 'false',
+      },
+    };
+
+    harness.request(context, ($) => {
+      expect($('[data-test-id="dashboard-submit-for-moderation-button"] a').length).toEqual(0);
     });
   }));
 });

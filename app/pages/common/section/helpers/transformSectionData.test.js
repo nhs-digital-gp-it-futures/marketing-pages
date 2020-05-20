@@ -209,7 +209,7 @@ describe('transformSectionData', () => {
       });
     });
 
-    describe('textarea-field-csv', () => {
+    describe('textarea-field-no-count', () => {
       it('should transform capabilities csv to array of capabilities', async () => {
         const sectionData = {
           capabilities: 'SolutionID,Capability ID\r\n10000-001,C20\r\n10000-001,C17',
@@ -218,7 +218,7 @@ describe('transformSectionData', () => {
         const sectionManifest = {
           questions: {
             capabilities: {
-              type: 'textarea-field-csv',
+              type: 'textarea-field-no-count',
             },
           },
         };

@@ -6,7 +6,7 @@
     "summary": {
       "mainAdvice": "Summary",
       "additionalAdvice": "Provide a brief overview of your Catalogue Solution.",
-      "footerAdvice": "(Maximum number of characters 300)",
+      "maxlength": "300",
       "type": "textarea-field",
       "errorResponse": {
         "maxLength": "Summary must be 300 characters or fewer",
@@ -16,7 +16,7 @@
     "description": {
       "mainAdvice": "Full description (optional)",
       "additionalAdvice": "Provide a more detailed description of your Catalogue Solution, for example how it can be used and how it benefits users.",
-      "footerAdvice": "(Maximum number of characters 1,000)",
+      "maxlength": "1000",
       "type": "textarea-field",
       "rows": 17,
       "errorResponse": {

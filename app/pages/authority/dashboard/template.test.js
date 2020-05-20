@@ -1,4 +1,4 @@
-import { createTestHarness } from '../../../test-utils/testHarness';
+import { componentTester } from '../../../test-utils/componentTester';
 
 const setup = {
   template: {
@@ -7,7 +7,7 @@ const setup = {
 };
 
 describe('authority - dashboard page', () => {
-  it('should render the title of the authority dashboard page', createTestHarness(setup, (harness) => {
+  it('should render the title of the authority dashboard page', componentTester(setup, (harness) => {
     const context = {};
 
     harness.request(context, ($) => {
@@ -15,7 +15,7 @@ describe('authority - dashboard page', () => {
     });
   }));
 
-  it('should render the sectionGroups on the dashboard page', createTestHarness(setup, (harness) => {
+  it('should render the sectionGroups on the dashboard page', componentTester(setup, (harness) => {
     const context = {
       sectionGroups: [
         {

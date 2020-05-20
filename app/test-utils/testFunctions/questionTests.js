@@ -1,5 +1,6 @@
 import { runRadioButtonTests } from './questionTests/radioButtonTests';
 import { runtextAreaTests } from './questionTests/textAreaTests';
+import { runtextAreaNoCountTests } from './questionTests/textAreaNoCountTests';
 import { runCheckboxTests } from './questionTests/checkboxTests';
 import { runTextFieldTests } from './questionTests/textFieldTests';
 import { runBulletpointListTests } from './questionTests/bulletpointListTests';
@@ -25,8 +26,15 @@ export const runQuestionTests = async ({
         questionId,
         data,
       });
-    } else if (questionType === 'textarea-field' || questionType === 'textarea-field-csv') {
+    } else if (questionType === 'textarea-field') {
       runtextAreaTests({
+        pageSetup,
+        sectionManifest,
+        questionId,
+        data,
+      });
+    } else if (questionType === 'textarea-field-no-count') {
+      runtextAreaNoCountTests({
         pageSetup,
         sectionManifest,
         questionId,

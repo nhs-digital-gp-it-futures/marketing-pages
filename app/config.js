@@ -3,13 +3,15 @@ module.exports = {
   appName: 'NHSD Marketing Pages',
 
   // Base URL
-  baseUrl: '/marketing',
+  baseUrl: process.env.BASE_URL || '/marketing',
 
   // Environment
   env: process.env.NODE_ENV || 'development',
 
   // Port to run local development server on
   port: process.env.PORT || 3002,
+
+  publicBrowseBaseUrl: process.env.PUBLIC_BROWSE_BASE_URL || '/',
 
   // The base uri the app is running on
   appBaseUri: process.env.APP_BASE_URI || 'http://localhost:3002',
@@ -22,4 +24,7 @@ module.exports = {
 
   // LOGGER_LEVEL options are info, warn, error, off
   loggerLevel: process.env.LOGGER_LEVEL || 'error',
+
+  // SHOW_SUBMIT_FOR_MODERATION
+  showSubmitForModerationButton: process.env.SHOW_SUBMIT_FOR_MODERATION || 'false',
 };

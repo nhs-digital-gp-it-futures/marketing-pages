@@ -1,20 +1,25 @@
-import { ManifestProvider } from '../../../../manifestProvider';
-import { ApiProvider } from '../../../../apiProvider';
+import { ErrorContext, getData } from 'buying-catalogue-library';
+import { getSubDashboardManifest } from '../../../../manifestProvider';
 import { createDashboardPageContext } from '../../../common/dashboard/createDashboardPageContext';
+import { logger } from '../../../../logger';
+import { getEndpoint } from '../../../../endpoints';
 
 export const getSubDashboardPageContext = async ({ solutionId, dashboardId }) => {
-  const dashboardManifest = new ManifestProvider().getSubDashboardManifest({ dashboardId });
-  const sectionData = await new ApiProvider().getSubDashboardData({ solutionId, dashboardId });
+  const dashboardManifest = getSubDashboardManifest({ dashboardId });
+  const endpoint = getEndpoint({ endpointLocator: 'getSubDashboardData', options: { solutionId, dashboardId } });
+  const sectionData = await getData({ endpoint, logger });
 
-  if (sectionData && sectionData.data) {
-    const { sections } = sectionData.data;
+  if (sectionData) {
     const context = createDashboardPageContext({
       solutionId,
       dashboardManifest,
-      marketingDataSections: sections,
+      marketingDataSections: sectionData.sections,
       dashboardId,
     });
     return context;
   }
-  throw new Error('No data returned');
+  throw new ErrorContext({
+    status: 404,
+    description: 'No data returned',
+  });
 };

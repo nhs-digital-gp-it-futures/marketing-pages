@@ -1,65 +1,73 @@
-import { getPreviewPageContext, getDocument } from './controller';
-import { ApiProvider } from '../../../apiProvider';
+import { getData } from 'buying-catalogue-library';
+import { getPreviewPageContext } from './controller';
+import * as context from './createPreviewPageContext';
+import { logger } from '../../../logger';
+import { buyingCatalogueApiHost } from '../../../config';
 
-jest.mock('../../../apiProvider');
+jest.mock('buying-catalogue-library');
+jest.mock('./createPreviewPageContext', () => ({
+  createPreviewPageContext: jest.fn(),
+}));
+
+const previewData = {
+  id: '100000-001',
+  name: 'Write on Time',
+  supplierName: 'Really Kool Corporation',
+  isFoundation: true,
+  lastUpdated: '1996-03-15T10:00:00',
+  sections: {
+    'some-section': {
+      answers: {},
+    },
+  },
+};
 
 describe('preview controller', () => {
-  const previewData = {
-    data: {
-      id: '100000-001',
-      name: 'Write on Time',
-      supplierName: 'Really Kool Corporation',
-      isFoundation: true,
-      lastUpdated: '1996-03-15T10:00:00',
-      sections: {
-        'some-section': {
-          answers: {},
-        },
-      },
-    },
-  };
+  afterEach(() => {
+    getData.mockReset();
+    context.createPreviewPageContext.mockReset();
+  });
 
-  it('should return the context when preview data is returned by the ApiProvider', async () => {
-    const expectedContext = {
-      solutionHeader: {
-        id: '100000-001',
-        name: 'Write on Time',
-        supplierName: 'Really Kool Corporation',
-        isFoundation: true,
-        lastUpdated: '1996-03-15T10:00:00',
-      },
-      returnToDashboardUrl: '../100000-001',
-      sections: {
-        'some-section': {
-          answers: {},
-        },
-      },
-    };
+  it('should call getData with the correct params', async () => {
+    getData.mockResolvedValueOnce(previewData);
 
-    ApiProvider.prototype.getPreviewData.mockResolvedValue(previewData);
+    await getPreviewPageContext({ solutionId: 'some-solution-id', dashboardId: 'some-dashboard-id' });
 
-    const context = await getPreviewPageContext({ solutionId: '100000-001' });
+    expect(getData.mock.calls.length).toEqual(1);
+    expect(getData).toHaveBeenCalledWith({
+      endpoint: `${buyingCatalogueApiHost}/api/v1/Solutions/some-solution-id/preview`,
+      logger,
+    });
+  });
 
-    expect(context).toEqual(expectedContext);
+  it('should call createPreviewPageContext with the correct params when preview data is returned by the ApiProvider', async () => {
+    getData.mockResolvedValueOnce(previewData);
+
+    await getPreviewPageContext({ solutionId: 'some-solution-id' });
+
+    expect(context.createPreviewPageContext.mock.calls.length).toEqual(1);
+    expect(context.createPreviewPageContext).toHaveBeenCalledWith({ previewData });
+  });
+
+  it('should return the context', async () => {
+    const mockReturnData = { data: {} };
+    const mockContext = { section: 'context' };
+    getData.mockReturnValueOnce(mockReturnData);
+    context.createPreviewPageContext.mockReturnValueOnce(mockContext);
+
+    const response = await getPreviewPageContext({ solutionId: 'some-solution-id' });
+
+    expect(response).toEqual(mockContext);
   });
 
   it('should throw an error when no data is returned from the ApiProvider', async () => {
-    ApiProvider.prototype.getPreviewData.mockResolvedValue({});
+    getData.mockResolvedValueOnce({});
 
     try {
       await getPreviewPageContext({ solutionId: 'some-solution-id' });
     } catch (err) {
       expect(err).toEqual(new Error('No data returned'));
+      expect(context.createPreviewPageContext).not.toHaveBeenCalled();
     }
-  });
-
-  it('should return the document when a document is returned by the ApiProvider', async () => {
-    const expectedDocument = 'Hello';
-
-    ApiProvider.prototype.getDocument.mockResolvedValue(expectedDocument);
-
-    const document = await getDocument({ solutionId: 'some-solution-id', documentName: 'some-document-name' });
-
-    expect(document).toEqual(expectedDocument);
   });
 });

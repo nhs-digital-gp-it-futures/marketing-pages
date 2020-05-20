@@ -6,7 +6,7 @@
     "capabilities": {
       "mainAdvice": "Paste the csv this solution meets",
       "additionalAdvice": "If you paste nothing you get nothing",
-      "type": "textarea-field-csv",
+      "type": "textarea-field-no-count",
       "footerAdvice": "CSV file headings required: 'Capability ID'"
     }
   },

@@ -40,7 +40,7 @@
     "connection-requirements-description": {
       "mainAdvice": "Connection requirements (optional)",
       "additionalAdvice": "Provide information on any connection requirements for your Catalogue Solution.",
-      "footerAdvice": "(Maximum number of characters 300)",
+      "maxlength": "300",
       "type": "textarea-field",
       "errorResponse": {
         "maxLength": "Connection requirements must be 300 characters or fewer"
