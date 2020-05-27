@@ -28,7 +28,7 @@ spec:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          {{- include "image.properties" . | nindent 10 }}
+          {{- include "mp.image.properties" . | nindent 10 }}
           ports:
             - name: http
               containerPort: 3002
