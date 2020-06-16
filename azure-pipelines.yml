@@ -100,7 +100,7 @@ jobs:
       dockerComposeFile: '**/docker-compose.yml'
       action: 'Build services'
       additionalImageTags: '$(semVer)'
-      includeSourceTags: true
+      includeSourceTags: false
 
   - task: DockerCompose@0
     displayName: 'Push: Dev'
@@ -112,7 +112,7 @@ jobs:
       dockerComposeFile: '**/docker-compose.yml'
       action: 'Push services'
       additionalImageTags: '$(semVer)'
-      includeSourceTags: true
+      includeSourceTags: false
 
   - task: HelmInstaller@1
     displayName: 'Install helm'
@@ -148,7 +148,8 @@ jobs:
       dockerComposeFile: '**/docker-compose.yml'
       action: 'Build services'
       additionalImageTags: '$(semVer)'
-      includeSourceTags: true
+      includeSourceTags: false
+      includeLatestTag: false
 
   - task: DockerCompose@0
     displayName: 'Push: Test'
@@ -160,7 +161,8 @@ jobs:
       dockerComposeFile: '**/docker-compose.yml'
       action: 'Push services'
       additionalImageTags: '$(semVer)'
-      includeSourceTags: true
+      includeSourceTags: false
+      includeLatestTag: false
 
   - task: DockerCompose@0
     displayName: 'Build: Prod'
@@ -172,7 +174,8 @@ jobs:
       dockerComposeFile: '**/docker-compose.yml'
       action: 'Build services'
       additionalImageTags: '$(semVer)'
-      includeSourceTags: true
+      includeSourceTags: false
+      includeLatestTag: false
 
   - task: DockerCompose@0
     displayName: 'Push: Prod'
@@ -184,5 +187,6 @@ jobs:
       dockerComposeFile: '**/docker-compose.yml'
       action: 'Push services'
       additionalImageTags: '$(semVer)'
-      includeSourceTags: true
+      includeSourceTags: false
+      includeLatestTag: false
 
