@@ -36,4 +36,4 @@ You should now be able to view the dashboard at [http://localhost:3002/supplier/
 
 ## Dependencies
 ### Buying Catalogue API
-In order for the app to function properly, make sure you have an instance of the Buying Catalogue API in dev. environment running. How to set up the [Buying Catalogue API](https://github.com/nhs-digital-gp-it-futures/BuyingCatalogueService/blob/master/README.md "Buying Catalogue API setup").
+In order for the app to function properly, make sure you have an instance of the Buying Catalogue API in dev. environment running. How to set up the [Buying Catalogue API](https://github.com/nhs-digital-gp-it-futures/BuyingCatalogueService/blob/master/README.md "Buying Catalogue API setup")..
