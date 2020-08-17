@@ -13,6 +13,9 @@ module.exports = {
 
   publicBrowseBaseUrl: process.env.PUBLIC_BROWSE_BASE_URL || '/',
 
+  // feedback link URL
+  feedbackLinkUrl: process.env.FEEDBACK_LINK_URL || 'https://forms.office.com/Pages/ResponsePage.aspx?id=Hwf2UP67GkCIA2c3SOYp4nDHKEWnXcFHiqdJhf0fCJtUNDNFRUFZVFU5RkRQTEpWU0RQVlVXMUpRQi4u',
+
   // The base uri the app is running on
   appBaseUri: process.env.APP_BASE_URI || 'http://localhost:3002',
 
