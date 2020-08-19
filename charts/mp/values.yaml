@@ -66,6 +66,7 @@ affinity: {}
 appBaseUri:
   name: 
   key:
+feedbackLinkUrl:
 serviceDependencies:
   dapiUrlConfig:
     name: 
