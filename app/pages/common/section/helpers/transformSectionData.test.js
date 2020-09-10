@@ -173,6 +173,20 @@ describe('transformSectionData', () => {
         const transformedSectionData = await transformSectionData({ sectionManifest, sectionData });
         expect(transformedSectionData).toEqual({ 'some-question-id-1': 'some value' });
       });
+      it('should replace \r\n to \n', async () => {
+        const sectionData = {
+          'some-question-id-1': 'some \r\n value',
+        };
+        const sectionManifest = {
+          questions: {
+            'some-question-id-1': {
+              type: 'textarea-field',
+            },
+          },
+        };
+        const transformedSectionData = await transformSectionData({ sectionManifest, sectionData });
+        expect(transformedSectionData).toEqual({ 'some-question-id-1': 'some \n value' });
+      });
     });
 
     describe('text-field', () => {
