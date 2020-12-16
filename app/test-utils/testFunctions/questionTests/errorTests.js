@@ -137,7 +137,7 @@ export const runErrorTests = async ({
   dashboardId,
   errorPostBodyData,
 }) => {
-  const getErrorPostBody = manifest => Object.keys(manifest.questions).reduce((acc, question) => {
+  const getErrorPostBody = (manifest) => Object.keys(manifest.questions).reduce((acc, question) => {
     const questionType = manifest.questions[question].type;
     if (questionType === 'radiobutton-options') acc[question] = null;
     else if (questionType === 'checkbox-options') acc[question] = [];

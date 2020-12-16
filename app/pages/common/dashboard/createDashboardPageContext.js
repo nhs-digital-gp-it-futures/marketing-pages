@@ -3,7 +3,7 @@ const addErrors = ({ manifestSectionId, manifestSection, validationErrors }) => 
 
   if (validationErrors) {
     Object.entries(validationErrors).map(([errorType, erroredSections]) => {
-      if (erroredSections.some(erroredSectionId => manifestSectionId === erroredSectionId)) {
+      if (erroredSections.some((erroredSectionId) => manifestSectionId === erroredSectionId)) {
         const error = {
           text: manifestSection.errorResponse[errorType],
           href: `#${manifestSectionId}`,

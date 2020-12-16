@@ -1,7 +1,7 @@
 import { ErrorContext } from 'buying-catalogue-library';
 import { getEndpoint } from '../../endpoints';
 
-export const withCatch = route => async (req, res, next) => {
+export const withCatch = (route) => async (req, res, next) => {
   try {
     return await route(req, res, next);
   } catch (err) {

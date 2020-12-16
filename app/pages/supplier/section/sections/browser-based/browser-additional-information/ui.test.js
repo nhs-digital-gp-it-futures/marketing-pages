@@ -1,4 +1,3 @@
-
 import { runTestSuite } from '../../../../../../test-utils/runTestSuite';
 
 const sectionId = 'browser-additional-information';

@@ -1,6 +1,6 @@
 import { componentTester } from '../../../../test-utils/componentTester';
 
-const aSectionContext = title => ({
+const aSectionContext = (title) => ({
   URL: 'someUrl',
   title,
 });

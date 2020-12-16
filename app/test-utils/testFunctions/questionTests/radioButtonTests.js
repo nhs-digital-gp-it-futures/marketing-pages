@@ -1,7 +1,6 @@
 import { Selector } from 'testcafe';
 import { extractInnerText } from 'buying-catalogue-library';
 
-
 const radioButtonsTest = async ({ pageSetup, sectionManifest, questionId }) => {
   await test(`should render the ${questionId} radio buttons question`, async (t) => {
     await pageSetup({ t });

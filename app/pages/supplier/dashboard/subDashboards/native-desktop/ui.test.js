@@ -121,7 +121,6 @@ test('should navigate the user to supported operating systems page when clicking
     .get(`${apiPath}/sections/native-desktop-operating-systems`)
     .reply(200, {});
 
-
   const supportedOperatingSystemsSection = Selector('[data-test-id="dashboard-section-native-desktop-operating-systems"]');
 
   await t
@@ -135,7 +134,6 @@ test('should navigate the user to the connection details page when clicking on t
   nock(apiLocalhost)
     .get(`${apiPath}/sections/native-desktop-connection-details`)
     .reply(200, {});
-
 
   const connectionDetailsSection = Selector('[data-test-id="dashboard-section-native-desktop-connection-details"]');
 
@@ -151,7 +149,6 @@ test('should navigate the user to memory and storage page when clicking on memor
     .get(`${apiPath}/sections/native-desktop-memory-and-storage`)
     .reply(200, {});
 
-
   const memoryAndStorageSection = Selector('[data-test-id="dashboard-section-native-desktop-memory-and-storage"]');
 
   await t
@@ -165,7 +162,6 @@ test('should navigate the user to third-party page when clicking on third-party 
   nock(apiLocalhost)
     .get(`${apiPath}/sections/native-desktop-third-party`)
     .reply(200, {});
-
 
   const thirdPartySection = Selector('[data-test-id="dashboard-section-native-desktop-third-party"]');
 
@@ -181,7 +177,6 @@ test('should navigate the user to hardware requirements page when clicking on ha
     .get(`${apiPath}/sections/native-desktop-hardware-requirements`)
     .reply(200, {});
 
-
   const hardwareRequirementsSection = Selector('[data-test-id="dashboard-section-native-desktop-hardware-requirements"]');
 
   await t
@@ -195,7 +190,6 @@ test('should navigate the user to additional information page when clicking on a
   nock(apiLocalhost)
     .get(`${apiPath}/sections/native-desktop-additional-information`)
     .reply(200, {});
-
 
   const additionalInformationSection = Selector('[data-test-id="dashboard-section-native-desktop-additional-information"]');
 
@@ -219,7 +213,6 @@ test('should return to the marketing data dashboard when the return to all secti
   nock(apiLocalhost)
     .get(`${apiPath}/dashboard`)
     .reply(200, dashboardWithCompleteSections);
-
 
   const link = Selector('[data-test-id="sub-dashboard-back-link"] div a');
 

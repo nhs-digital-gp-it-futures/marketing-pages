@@ -78,7 +78,6 @@ test('should render the marketing preview page last updated date', async (t) => 
     .expect(await extractInnerText(lastUpdated)).eql('Solution information last updated: 15 March 1996');
 });
 
-
 fixture('Show marketing preview page - no existing marketing data');
 
 test('Solution description section should not be rendered', async (t) => {
@@ -202,7 +201,6 @@ test('Learn More section should not be rendered', async (t) => {
   await t
     .expect(learnMoreSection.exists).notOk();
 });
-
 
 fixture('Show marketing preview page - with existing marketing data');
 

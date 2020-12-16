@@ -12,7 +12,7 @@ const arrayTransformation = (questionValue) => {
   return [questionValue];
 };
 
-const emptyValueTransformation = questionValue => (questionValue || null);
+const emptyValueTransformation = (questionValue) => (questionValue || null);
 
 const transformationStrategy = {
   'checkbox-options': {
@@ -31,7 +31,7 @@ const transformationStrategy = {
     transform: ({ questionValue }) => questionValue.trim(),
   },
   'bulletpoint-list': {
-    transform: ({ questionValue }) => questionValue.map(s => s.trim()),
+    transform: ({ questionValue }) => questionValue.map((s) => s.trim()),
   },
 };
 
