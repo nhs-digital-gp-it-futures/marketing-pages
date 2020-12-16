@@ -10,12 +10,10 @@ variables:
 
 trigger:
 - master
-- development
 
 # PR builds only when against these branches
 pr:
 - master
-- development
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -100,7 +98,7 @@ jobs:
       dockerComposeFile: '**/docker-compose.yml'
       action: 'Build services'
       additionalImageTags: '$(semVer)'
-      includeSourceTags: true
+      includeSourceTags: false
 
   - task: DockerCompose@0
     displayName: 'Push: Dev'
@@ -112,7 +110,7 @@ jobs:
       dockerComposeFile: '**/docker-compose.yml'
       action: 'Push services'
       additionalImageTags: '$(semVer)'
-      includeSourceTags: true
+      includeSourceTags: false
 
   - task: HelmInstaller@1
     displayName: 'Install helm'
@@ -140,7 +138,7 @@ jobs:
 
   - task: DockerCompose@0
     displayName: 'Build: Test'
-    condition: and(succeeded(), ne(variables['build.reason'], 'PullRequest'), or(eq(variables['Build.SourceBranch'], 'refs/heads/master'), eq(variables['Build.SourceBranch'], 'refs/heads/development')))
+    condition: and(succeeded(), ne(variables['build.reason'], 'PullRequest'), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
     inputs:
       containerregistrytype: 'Azure Container Registry'
       azureSubscription: 'NHSAPP-BuyingCatalogue (Non-Prod)'
@@ -148,11 +146,12 @@ jobs:
       dockerComposeFile: '**/docker-compose.yml'
       action: 'Build services'
       additionalImageTags: '$(semVer)'
-      includeSourceTags: true
+      includeSourceTags: false
+      includeLatestTag: false
 
   - task: DockerCompose@0
     displayName: 'Push: Test'
-    condition: and(succeeded(), ne(variables['build.reason'], 'PullRequest'), or(eq(variables['Build.SourceBranch'], 'refs/heads/master'), eq(variables['Build.SourceBranch'], 'refs/heads/development')))
+    condition: and(succeeded(), ne(variables['build.reason'], 'PullRequest'), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
     inputs:
       containerregistrytype: 'Azure Container Registry'
       azureSubscription: 'NHSAPP-BuyingCatalogue (Non-Prod)'
@@ -160,7 +159,8 @@ jobs:
       dockerComposeFile: '**/docker-compose.yml'
       action: 'Push services'
       additionalImageTags: '$(semVer)'
-      includeSourceTags: true
+      includeSourceTags: false
+      includeLatestTag: false
 
   - task: DockerCompose@0
     displayName: 'Build: Prod'
@@ -172,7 +172,8 @@ jobs:
       dockerComposeFile: '**/docker-compose.yml'
       action: 'Build services'
       additionalImageTags: '$(semVer)'
-      includeSourceTags: true
+      includeSourceTags: false
+      includeLatestTag: false
 
   - task: DockerCompose@0
     displayName: 'Push: Prod'
@@ -184,5 +185,6 @@ jobs:
       dockerComposeFile: '**/docker-compose.yml'
       action: 'Push services'
       additionalImageTags: '$(semVer)'
-      includeSourceTags: true
+      includeSourceTags: false
+      includeLatestTag: false
 

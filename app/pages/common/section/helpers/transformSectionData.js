@@ -22,7 +22,7 @@ const transformationStrategy = {
     transform: ({ questionValue }) => emptyValueTransformation(questionValue),
   },
   'textarea-field': {
-    transform: ({ questionValue }) => questionValue.trim(),
+    transform: ({ questionValue }) => questionValue.trim().replace(/(\r\n|\n|\r)/gm, '\n'),
   },
   'textarea-field-no-count': {
     transform: ({ questionId, questionValue: csv }) => transformCsv({ questionId, csv }),

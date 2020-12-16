@@ -38,7 +38,7 @@ describe('section-question', () => {
       };
 
       harness.request(context, ($) => {
-        const question = $('div[data-test-id="section-question-textarea-field"] > div');
+        const question = $('div[data-test-id="section-question-textarea-field"]');
         expect(question.length).toEqual(1);
       });
     }));
