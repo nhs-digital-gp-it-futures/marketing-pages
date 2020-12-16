@@ -16,11 +16,11 @@
     "description": {
       "mainAdvice": "Full description (optional)",
       "additionalAdvice": "Provide a more detailed description of your Catalogue Solution, for example how it can be used and how it benefits users.",
-      "maxlength": "1000",
+      "maxlength": "1100",
       "type": "textarea-field",
       "rows": 17,
       "errorResponse": {
-        "maxLength": "Full description must be 1,000 characters or fewer"
+        "maxLength": "Full description must be 1,100 characters or fewer"
       }
     },
     "link": {
