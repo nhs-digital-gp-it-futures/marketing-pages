@@ -22,7 +22,7 @@ const populateQuestionOption = (
   return populatedOption;
 };
 
-const createOptions = options => options
+const createOptions = (options) => options
       && Object.entries(options).map(([optionId, optionValue]) => ({
         text: optionValue,
         value: optionId,
@@ -34,9 +34,11 @@ export const generateOptions = ({
   if (options) {
     const createdOptions = createOptions(options);
 
-    const populatedOptions = createdOptions && createdOptions.map(option => populateQuestionOption(
-      questionId, option, formData, questionType,
-    ));
+    const populatedOptions = createdOptions && createdOptions.map(
+      (option) => populateQuestionOption(
+        questionId, option, formData, questionType,
+      ),
+    );
 
     return populatedOptions;
   }

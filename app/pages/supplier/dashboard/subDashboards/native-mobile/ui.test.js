@@ -131,7 +131,6 @@ test('should navigate the user to supported operating systems page when clicking
     .get(`${apiPath}/sections/native-mobile-operating-systems`)
     .reply(200, {});
 
-
   const supportedOperatingSystemsSection = Selector('[data-test-id="dashboard-section-native-mobile-operating-systems"]');
 
   await t
@@ -145,7 +144,6 @@ test('should navigate the user to the mobile first page when clicking on the mob
   nock(apiLocalhost)
     .get(`${apiPath}/sections/native-mobile-first`)
     .reply(200, {});
-
 
   const mobileFirstSection = Selector('[data-test-id="dashboard-section-native-mobile-first"] a');
 
@@ -161,7 +159,6 @@ test('should navigate the user to memory and storage page when clicking on memor
     .get(`${apiPath}/sections/native-mobile-memory-and-storage`)
     .reply(200, {});
 
-
   const memoryAndStorageSection = Selector('[data-test-id="dashboard-section-native-mobile-memory-and-storage"]');
 
   await t
@@ -175,7 +172,6 @@ test('should navigate the user to the connection details page when clicking on t
   nock(apiLocalhost)
     .get(`${apiPath}/sections/native-mobile-connection-details`)
     .reply(200, {});
-
 
   const connectionDetailsSection = Selector('[data-test-id="dashboard-section-native-mobile-connection-details"]');
 
@@ -191,7 +187,6 @@ test('should navigate the user to third-party page when clicking on third-party 
     .get(`${apiPath}/sections/native-mobile-third-party`)
     .reply(200, {});
 
-
   const thirdPartySection = Selector('[data-test-id="dashboard-section-native-mobile-third-party"]');
 
   await t
@@ -206,7 +201,6 @@ test('should navigate the user to hardware requirements page when clicking on ha
     .get(`${apiPath}/sections/native-mobile-hardware-requirements`)
     .reply(200, {});
 
-
   const hardwareRequirementsSection = Selector('[data-test-id="dashboard-section-native-mobile-hardware-requirements"]');
 
   await t
@@ -220,7 +214,6 @@ test('should navigate the user to additional information page when clicking on a
   nock(apiLocalhost)
     .get(`${apiPath}/sections/native-mobile-additional-information`)
     .reply(200, {});
-
 
   const additionalInformationSection = Selector('[data-test-id="dashboard-section-native-mobile-additional-information"]');
 
@@ -244,7 +237,6 @@ test('should return to the marketing data dashboard when the return to all secti
   nock(apiLocalhost)
     .get(`${apiPath}/dashboard`)
     .reply(200, dashboardWithCompleteSections);
-
 
   const link = Selector('[data-test-id="sub-dashboard-back-link"] div a');
 

@@ -1,8 +1,8 @@
 import csvtojson from 'csvtojson';
 
 const formatStrategy = {
-  capabilities: csvRow => csvRow['Capability ID'],
-  epics: csvRow => (csvRow['Epic ID'] && csvRow['Epic Final Assessment Result'] ? ({
+  capabilities: (csvRow) => csvRow['Capability ID'],
+  epics: (csvRow) => (csvRow['Epic ID'] && csvRow['Epic Final Assessment Result'] ? ({
     'epic-id': csvRow['Epic ID'],
     'assessment-result': csvRow['Epic Final Assessment Result'],
   }) : undefined),

@@ -60,7 +60,6 @@ test('should render the Capabilities section group', async (t) => {
     .expect(await extractInnerText(capabilitiesSectionGroup.find('h2'))).eql('Solution Capabilities');
 });
 
-
 test('should render all the sections for the Capabilities section group', async (t) => {
   await pageSetup(t);
 

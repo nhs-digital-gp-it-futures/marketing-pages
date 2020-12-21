@@ -35,7 +35,6 @@ describe('createContextForMultiQuestion', () => {
       },
     };
 
-
     const context = createContextForMultiQuestion({
       questionId: 'some-parent-id', questionManifest,
     });

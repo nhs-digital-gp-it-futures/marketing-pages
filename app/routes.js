@@ -6,7 +6,6 @@ import authorityRoutes from './pages/authority/routes';
 import includesContext from './includes/manifest.json';
 import { getHealthCheckDependencies } from './common/helpers/routerHelper';
 
-
 const router = express.Router();
 const config = require('./config');
 

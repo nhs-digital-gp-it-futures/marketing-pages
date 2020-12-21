@@ -23,7 +23,6 @@ jest.mock('./helpers/createPostSectionResponse', () => ({
   createPostSectionResponse: jest.fn(),
 }));
 
-
 const sectionManifest = {
   id: 'some-section-id',
   title: 'Some section title',

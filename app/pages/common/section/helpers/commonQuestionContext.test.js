@@ -17,7 +17,6 @@ describe('commonQuestionContext', () => {
       footerAdvice: 'some footer advice',
     };
 
-
     const context = commonQuestionContext({
       questionId: 'some-question-id', questionManifest,
     });
@@ -40,7 +39,6 @@ describe('commonQuestionContext', () => {
       additionalAdvice: 'some additional advice',
       footerAdvice: 'some footer advice',
     };
-
 
     const context = commonQuestionContext({
       questionId: 'some-question-id',

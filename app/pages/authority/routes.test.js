@@ -46,7 +46,6 @@ const mockSectionPostData = {
   'a-question': '',
 };
 
-
 const mockPostSectionContext = {
   title: 'Post Section Title',
   mainAdvice: 'post section main advice',
