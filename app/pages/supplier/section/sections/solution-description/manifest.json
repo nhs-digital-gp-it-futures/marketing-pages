@@ -6,10 +6,10 @@
     "summary": {
       "mainAdvice": "Summary",
       "additionalAdvice": "Provide a brief overview of your Catalogue Solution.",
-      "maxlength": "300",
+      "maxlength": "350",
       "type": "textarea-field",
       "errorResponse": {
-        "maxLength": "Summary must be 300 characters or fewer",
+        "maxLength": "Summary must be 350 characters or fewer",
         "required": "Enter a summary"
       }
     },
