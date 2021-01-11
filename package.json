@@ -1,6 +1,6 @@
 {
   "name": "marketing-pages",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Nodejs express app for Buying Catalogue - Marketing Pages",
   "main": "server.js",
   "scripts": {
