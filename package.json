@@ -42,7 +42,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "body-parser": "^1.19.0",
-    "buying-catalogue-components": "^3.3.1",
+    "buying-catalogue-components": "^3.3.2",
     "buying-catalogue-library": "^1.2.3",
     "compression": "^1.7.4",
     "connect-slashes": "^1.4.0",
@@ -79,7 +79,7 @@
     "supertest": "^6.0.1",
     "testcafe": "^1.10.1",
     "testcafe-reporter-nunit": "^0.1.2",
-    "webpack": "^5.11.1",
+    "webpack": "^5.12.3",
     "webpack-cli": "^4.3.1"
   },
   "jest": {
