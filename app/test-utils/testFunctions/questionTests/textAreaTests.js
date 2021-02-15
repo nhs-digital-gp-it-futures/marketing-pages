@@ -7,7 +7,7 @@ const textAreaTest = async ({ pageSetup, sectionManifest, questionId }) => {
     const renderedQuestion = Selector(`[data-test-id="question-${questionId}"]`);
     const expectedQuestion = sectionManifest.questions[questionId];
     const label = renderedQuestion.find('label.nhsuk-label');
-    const hint = await renderedQuestion.find('span.nhsuk-hint');
+    const hint = await renderedQuestion.find('.nhsuk-hint');
     const charCountMessage = await renderedQuestion.find('.govuk-character-count__message');
     await t
       .expect(await extractInnerText(label)).eql(expectedQuestion.mainAdvice)

@@ -14,7 +14,7 @@ const textFieldTest = async ({
     const renderedQuestion = Selector(`[data-test-id="question-${modifiedQuestionId}"]`);
     const expectedQuestion = sectionManifest.questions[questionId];
     const label = renderedQuestion.find('label.nhsuk-label');
-    const hint = renderedQuestion.find('span.nhsuk-hint');
+    const hint = renderedQuestion.find('.nhsuk-hint');
 
     if (expectedQuestion.mainAdvice) {
       await t
