@@ -23,7 +23,7 @@ npm run build
 - Unit Tests - `npm run test`
 - Integration Tests - `npm run test:integration`
 
-You should now be able to view the dashboard at <http://localhost:3002/supplier/solution/100000-001>.
+You should now be able to view the dashboard at <http://localhost:3002/marketing/supplier/solution/100000-001>.
 
 ## Debugging the application
 
