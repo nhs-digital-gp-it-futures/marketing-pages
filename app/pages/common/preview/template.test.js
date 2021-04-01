@@ -1,4 +1,6 @@
-import { componentTester } from '../../../test-utils/componentTester';
+import { componentTester, snapshotTest } from '../../../test-utils/componentTester';
+import previewWithNoMarketingData from '../../../../fixtures/previewWithNoMarketingData.json';
+import previewWithMarketingData from '../../../../fixtures/previewWithMarketingData.json';
 
 const setup = {
   template: {
@@ -7,6 +9,20 @@ const setup = {
 };
 
 describe('preview page', () => {
+  it('should render the page with data', componentTester(setup, (harness) => {
+    harness.request(previewWithMarketingData, ($) => {
+      const snapshot = snapshotTest($, '[data-test-id="main-content"]');
+      expect(snapshot).toMatchSnapshot();
+    });
+  }));
+
+  it('should render the page without data', componentTester(setup, (harness) => {
+    harness.request(previewWithNoMarketingData, ($) => {
+      const snapshot = snapshotTest($, '[data-test-id="main-content"]');
+      expect(snapshot).toMatchSnapshot();
+    });
+  }));
+
   it('should render the backLink component', componentTester(setup, (harness) => {
     const context = {
       returnToDashboardUrl: '/supplier/solution/100000-001',
