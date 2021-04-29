@@ -31,7 +31,11 @@ router.get('*', (req) => {
 
 errorHandler(router, (error, req, res) => {
   logger.error(`${error.title} - ${error.description}`);
-  return res.render('pages/error/template.njk', addContext({ context: error }));
+  const context = {
+    ...error,
+    isDevelopment: config.isDevelopment(),
+  };
+  return res.render('pages/error/template.njk', addContext({ context }));
 });
 
 module.exports = router;

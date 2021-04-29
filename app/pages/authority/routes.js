@@ -18,21 +18,21 @@ const addContext = ({ context }) => ({
   config,
 });
 
-router.get('/solution/:solutionId', withCatch(async (req, res) => {
+router.get('/solution/:solutionId', withCatch(logger, async (req, res) => {
   const { solutionId } = req.params;
   logger.info(`navigating to Solution ${solutionId} authority dashboard`);
   const context = await getMarketingPageDashboardContext({ solutionId, userContextType: 'authority' });
   res.render('pages/authority/dashboard/template', addContext({ context }));
 }));
 
-router.get('/solution/:solutionId/section/:sectionId', withCatch(async (req, res) => {
+router.get('/solution/:solutionId/section/:sectionId', withCatch(logger, async (req, res) => {
   const { solutionId, sectionId } = req.params;
   logger.info(`navigating to Solution ${solutionId}: section ${sectionId}`);
   const context = await getSectionPageContext({ solutionId, sectionId, userContextType: 'authority' });
   res.render('pages/common/section/template', addContext({ context }));
 }));
 
-router.post('/solution/:solutionId/section/:sectionId', withCatch(async (req, res) => {
+router.post('/solution/:solutionId/section/:sectionId', withCatch(logger, async (req, res) => {
   const { solutionId, sectionId } = req.params;
   const sectionData = req.body;
   const response = await postSection({
@@ -47,7 +47,7 @@ router.post('/solution/:solutionId/section/:sectionId', withCatch(async (req, re
   return res.render('pages/common/section/template', addContext({ context }));
 }));
 
-router.get('/solution/:solutionId/preview', withCatch(async (req, res) => {
+router.get('/solution/:solutionId/preview', withCatch(logger, async (req, res) => {
   const { solutionId } = req.params;
   logger.info(`navigating to Solution ${solutionId} preview`);
   const context = await getPreviewPageContext({ solutionId, userContextType });

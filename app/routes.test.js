@@ -39,7 +39,7 @@ describe('/authority route', () => {
 describe('Error handler', () => {
   it('should return error page if there is an error from the /supplier route', () => {
     dashboardControllers.getMarketingPageDashboardContext = jest.fn()
-      .mockImplementation(() => Promise.reject());
+      .mockImplementation(() => Promise.reject(new Error()));
     const app = new App().createApp();
     app.use('/', routes);
     return request(app)
@@ -53,7 +53,7 @@ describe('Error handler', () => {
 
   it('should return error page if there is an error from the /authority route', () => {
     dashboardControllers.getMarketingPageDashboardContext = jest.fn()
-      .mockImplementation(() => Promise.reject());
+      .mockImplementation(() => Promise.reject(new Error()));
     const app = new App().createApp();
     app.use('/', routes);
     return request(app)
