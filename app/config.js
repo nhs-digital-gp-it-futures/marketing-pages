@@ -1,3 +1,7 @@
+const development = 'development';
+const env = process.env.NODE_ENV || development;
+const isDevelopment = () => env === development;
+
 module.exports = {
   // App name
   appName: 'NHSD Marketing Pages',
@@ -6,7 +10,8 @@ module.exports = {
   baseUrl: process.env.BASE_URL || '/marketing',
 
   // Environment
-  env: process.env.NODE_ENV || 'development',
+  env,
+  isDevelopment,
 
   // Port to run local development server on
   port: process.env.PORT || 3002,
