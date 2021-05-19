@@ -1,5 +1,7 @@
 import express from 'express';
-import { ErrorContext, errorHandler, healthRoutes } from 'buying-catalogue-library';
+import {
+  ErrorContext, errorHandler, healthRoutes, cookiePolicyAgreed, cookiePolicyExists,
+} from 'buying-catalogue-library';
 import { logger } from './logger';
 import supplierRoutes from './pages/supplier/routes';
 import authorityRoutes from './pages/authority/routes';
@@ -9,13 +11,19 @@ import { getHealthCheckDependencies } from './common/helpers/routerHelper';
 const router = express.Router();
 const config = require('./config');
 
-const addContext = ({ context }) => ({
+const addContext = ({ context, req }) => ({
   ...context,
   ...includesContext,
   config,
+  showCookieBanner: !cookiePolicyExists({ req, logger }),
 });
 
 healthRoutes({ router, dependencies: getHealthCheckDependencies(), logger });
+
+router.get('/dismiss-cookie-banner', (req, res) => {
+  cookiePolicyAgreed({ res, logger });
+  res.redirect(req.headers.referer);
+});
 
 router.use('/supplier', supplierRoutes);
 
@@ -35,7 +43,7 @@ errorHandler(router, (error, req, res) => {
     ...error,
     isDevelopment: config.isDevelopment(),
   };
-  return res.render('pages/error/template.njk', addContext({ context }));
+  return res.render('pages/error/template.njk', addContext({ context, req }));
 });
 
 module.exports = router;

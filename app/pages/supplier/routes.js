@@ -1,5 +1,5 @@
 import express from 'express';
-import { getDocument } from 'buying-catalogue-library';
+import { getDocument, cookiePolicyExists } from 'buying-catalogue-library';
 import { getMarketingPageDashboardContext, postSubmitForModeration } from '../common/dashboard/controller';
 import { getSubDashboardPageContext } from './dashboard/subDashboards/controller';
 import { getSectionPageContext, getSectionPageErrorContext, postSection } from '../common/section/controller';
@@ -12,24 +12,25 @@ import { getEndpoint } from '../../endpoints';
 const router = express.Router();
 const config = require('../../config');
 
-const addContext = ({ context }) => ({
+const addContext = ({ context, req }) => ({
   ...context,
   ...includesContext,
   config,
+  showCookieBanner: !cookiePolicyExists({ req, logger }),
 });
 
 router.get('/solution/:solutionId', withCatch(logger, async (req, res) => {
   const { solutionId } = req.params;
   logger.info(`navigating to Solution ${solutionId} dashboard`);
   const context = await getMarketingPageDashboardContext({ solutionId });
-  res.render('pages/supplier/dashboard/template', addContext({ context }));
+  res.render('pages/supplier/dashboard/template', addContext({ context, req }));
 }));
 
 router.get('/solution/:solutionId/section/:sectionId', withCatch(logger, async (req, res) => {
   const { solutionId, sectionId } = req.params;
   logger.info(`navigating to Solution ${solutionId}: section ${sectionId}`);
   const context = await getSectionPageContext({ solutionId, sectionId });
-  res.render('pages/common/section/template', addContext({ context }));
+  res.render('pages/common/section/template', addContext({ context, req }));
 }));
 
 router.post('/solution/:solutionId/section/:sectionId', withCatch(logger, async (req, res) => {
@@ -44,21 +45,21 @@ router.post('/solution/:solutionId/section/:sectionId', withCatch(logger, async 
   const context = await getSectionPageErrorContext({
     solutionId, sectionId, sectionData, validationErrors: response,
   });
-  return res.render('pages/common/section/template', addContext({ context }));
+  return res.render('pages/common/section/template', addContext({ context, req }));
 }));
 
 router.get('/solution/:solutionId/dashboard/:dashboardId', withCatch(logger, async (req, res) => {
   const { solutionId, dashboardId } = req.params;
   logger.info(`navigating to Solution ${solutionId} dashboard: ${dashboardId}`);
   const context = await getSubDashboardPageContext({ solutionId, dashboardId });
-  res.render('pages/supplier/dashboard/subDashboards/template', addContext({ context }));
+  res.render('pages/supplier/dashboard/subDashboards/template', addContext({ context, req }));
 }));
 
 router.get('/solution/:solutionId/dashboard/:dashboardId/section/:sectionId', withCatch(logger, async (req, res) => {
   const { solutionId, dashboardId, sectionId } = req.params;
   logger.info(`navigating to Solution ${solutionId}: dashboard ${dashboardId}: section ${sectionId}`);
   const context = await getSectionPageContext({ solutionId, dashboardId, sectionId });
-  res.render('pages/common/section/template', addContext({ context }));
+  res.render('pages/common/section/template', addContext({ context, req }));
 }));
 
 router.post('/solution/:solutionId/dashboard/:dashboardId/section/:sectionId', withCatch(logger, async (req, res) => {
@@ -73,7 +74,7 @@ router.post('/solution/:solutionId/dashboard/:dashboardId/section/:sectionId', w
   const context = await getSectionPageErrorContext({
     solutionId, sectionId, sectionData, validationErrors: response, dashboardId,
   });
-  return res.render('pages/common/section/template', addContext({ context }));
+  return res.render('pages/common/section/template', addContext({ context, req }));
 }));
 
 router.get('/solution/:solutionId/submitForModeration', withCatch(logger, async (req, res) => {
@@ -85,14 +86,14 @@ router.get('/solution/:solutionId/submitForModeration', withCatch(logger, async 
   const context = await getMarketingPageDashboardContext({
     solutionId, validationErrors: response,
   });
-  return res.render('pages/supplier/dashboard/template', addContext({ context }));
+  return res.render('pages/supplier/dashboard/template', addContext({ context, req }));
 }));
 
 router.get('/solution/:solutionId/preview', withCatch(logger, async (req, res) => {
   const { solutionId } = req.params;
   logger.info(`navigating to Solution ${solutionId} preview`);
   const context = await getPreviewPageContext({ solutionId });
-  res.render('pages/common/preview/template', addContext({ context }));
+  res.render('pages/common/preview/template', addContext({ context, req }));
 }));
 
 router.get('/solution/:solutionId/document/:documentName', withCatch(logger, async (req, res) => {
