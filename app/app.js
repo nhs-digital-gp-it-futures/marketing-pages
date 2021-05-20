@@ -1,6 +1,7 @@
 // Core dependencies
 const path = require('path');
 const favicon = require('serve-favicon');
+const cookieParser = require('cookie-parser');
 
 // External dependencies
 const compression = require('compression');
@@ -29,6 +30,8 @@ class App {
     this.app.use(compression());
 
     this.app.use(bodyParser.urlencoded({ extended: true }));
+
+    this.app.use(cookieParser());
 
     this.app.use(express.json());
 
