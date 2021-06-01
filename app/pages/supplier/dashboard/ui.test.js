@@ -34,7 +34,7 @@ test('should render cookie policy banner and it should not re-render again after
   await t
     .expect(cookieBanner.exists).ok()
     .click(dismissButton);
-  // TODO: fix cookie banner not disappearing issue
+  // TODO: fix cookie banner not disappearing issue when dismissed button is clicked
   // await pageSetup(t)
   //   .expect(cookieBanner.exists).notOk();
 });
