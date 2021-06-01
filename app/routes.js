@@ -1,6 +1,7 @@
 import express from 'express';
 import {
   ErrorContext, errorHandler, healthRoutes, cookiePolicyAgreed, cookiePolicyExists,
+  consentCookieExpiration,
 } from 'buying-catalogue-library';
 import { logger } from './logger';
 import supplierRoutes from './pages/supplier/routes';
@@ -19,6 +20,8 @@ const addContext = ({ context, req }) => ({
 });
 
 healthRoutes({ router, dependencies: getHealthCheckDependencies(), logger });
+
+consentCookieExpiration({ router, logger });
 
 router.get('/dismiss-cookie-banner', (req, res) => {
   cookiePolicyAgreed({ res, logger });
