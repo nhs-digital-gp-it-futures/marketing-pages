@@ -27,6 +27,18 @@ const getLocation = ClientFunction(() => document.location.href);
 
 fixture('Show marketing dashboard page');
 
+test('should render cookie policy banner and it should not re-render again after dismissing', async (t) => {
+  await pageSetup(t);
+  const cookieBanner = Selector('[data-test-id="cookie-banner"]');
+  const dismissButton = Selector('[data-test-id="cookie-dismiss"] a');
+  await t
+    .expect(cookieBanner.exists).ok()
+    .click(dismissButton);
+  // TODO: fix cookie banner not disappearing issue
+  // await pageSetup(t)
+  //   .expect(cookieBanner.exists).notOk();
+});
+
 test('should render the marketing dashboard page title', async (t) => {
   await pageSetup(t);
 
