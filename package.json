@@ -53,7 +53,7 @@
     "csvtojson": "^2.0.10",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
-    "govuk-frontend": "^3.13.0",
+    "govuk-frontend": "^3.13.1",
     "nhsuk-frontend": "^5.1.0",
     "nunjucks": "^3.2.3",
     "nunjucks-date-filter": "^0.1.1",
