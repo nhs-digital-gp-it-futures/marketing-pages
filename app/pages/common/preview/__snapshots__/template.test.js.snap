@@ -90,7 +90,7 @@ exports[`preview page should render the page with data 1`] = `
       
     
     <div data-test-id=\\"view-question-data-link\\" class=\\"bc-c-data-link \\">
-      <a href=\\"The solution link\\" target=\\"_blank\\">
+      <a href=\\"The solution link\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">
         The solution link
       </a>
     </div>
@@ -226,7 +226,7 @@ exports[`preview page should render the page with data 1`] = `
       
     
     <div data-test-id=\\"view-question-data-text-link\\" class=\\"bc-c-data-link nhsuk-u-padding-left-0 nhsuk-u-padding-right-0 nhsuk-u-margin-bottom-5 nhsuk-grid-column-two-thirds\\">
-      <a href=\\"https://link-to-capability.com\\" target=\\"_blank\\">
+      <a href=\\"https://link-to-capability.com\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">
         View more details including acceptance criteria for all epics
       </a>
     </div>
@@ -457,7 +457,7 @@ exports[`preview page should render the page with data 1`] = `
       
     
     <div data-test-id=\\"view-question-data-text-link-supplier-integrations\\" class=\\"bc-c-data-link \\">
-      <a href=\\"http://www.link.com\\" target=\\"_blank\\">
+      <a href=\\"http://www.link.com\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">
         http://www.link.com
       </a>
     </div>
@@ -1079,7 +1079,7 @@ exports[`preview page should render the page with data 1`] = `
       
     
     <div data-test-id=\\"view-question-data-text-link\\" class=\\"bc-c-data-link \\">
-      <a href=\\"www.healthcare-pro.co.uk/healthcare-system-1/hybrid-hosting\\" target=\\"_blank\\">
+      <a href=\\"www.healthcare-pro.co.uk/healthcare-system-1/hybrid-hosting\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">
         www.healthcare-pro.co.uk/healthcare-system-1/hybrid-hosting
       </a>
     </div>
@@ -1160,7 +1160,7 @@ exports[`preview page should render the page with data 1`] = `
       
     
     <div data-test-id=\\"view-question-data-text-link\\" class=\\"bc-c-data-link \\">
-      <a href=\\"www.healthcare-pro.co.uk/healthcare-system-1/hybrid-hosting\\" target=\\"_blank\\">
+      <a href=\\"www.healthcare-pro.co.uk/healthcare-system-1/hybrid-hosting\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">
         www.healthcare-pro.co.uk/healthcare-system-1/hybrid-hosting
       </a>
     </div>
@@ -1268,7 +1268,7 @@ exports[`preview page should render the page with data 1`] = `
       
     
     <div data-test-id=\\"view-question-data-text-link\\" class=\\"bc-c-data-link \\">
-      <a href=\\"www.healthcare-pro.co.uk/healthcare-system-1/hybrid-hosting\\" target=\\"_blank\\">
+      <a href=\\"www.healthcare-pro.co.uk/healthcare-system-1/hybrid-hosting\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">
         www.healthcare-pro.co.uk/healthcare-system-1/hybrid-hosting
       </a>
     </div>
@@ -1376,7 +1376,7 @@ exports[`preview page should render the page with data 1`] = `
       
     
     <div data-test-id=\\"view-question-data-text-link\\" class=\\"bc-c-data-link \\">
-      <a href=\\"www.healthcare-pro.co.uk/healthcare-system-1/hybrid-hosting\\" target=\\"_blank\\">
+      <a href=\\"www.healthcare-pro.co.uk/healthcare-system-1/hybrid-hosting\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">
         www.healthcare-pro.co.uk/healthcare-system-1/hybrid-hosting
       </a>
     </div>
@@ -1515,7 +1515,7 @@ exports[`preview page should render the page with data 1`] = `
       
     
     <div data-test-id=\\"view-question-data-link\\" class=\\"bc-c-data-link \\">
-      <a href=\\"http://www.supplier.com\\" target=\\"_blank\\">
+      <a href=\\"http://www.supplier.com\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">
         http://www.supplier.com
       </a>
     </div>
